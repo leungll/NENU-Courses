@@ -1,7 +1,7 @@
 <!--
  * @Author: Lili Liang
  * @Date: 2021-03-12 12:12:18
- * @LastEditTime: 2021-03-12 17:43:55
+ * @LastEditTime: 2021-03-13 00:16:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \NENU-Courses\README.md
@@ -127,7 +127,10 @@ Guidance for courses in School of Information Science and Technology, NENU
 - 感谢对本项目贡献的同学（排名按照 commit 先后顺序）：[leungll](https://github.com/leungll)（17级软件） …… 以及在电脑前的您！
 
 ## 许可
-由贡献者编写部分的许可：[CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
+由贡献者编写部分的许可：
+
+[CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
+
 >资料仅供参考，请自行判断其适用性
 
 其他部分的版权归属于其各自的作者
