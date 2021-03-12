@@ -1,0 +1,24 @@
+<HTML><HEAD><TITLE>5.6 An Example of a Derived Facet Class</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.6 An Example of a Derived Facet Class</H2>
+<A NAME="idx133"><!></A>
+<P>As mentioned previously, the phone number facet class is intended to serve as a base class. Let's now present an example of a derived facet class, the US phone number formatting facet. It works by default with the static country code table and "US" as its own locality. It also knows the prefix for dialing foreign numbers from the US. Here is the class declaration for the facet:</P>
+<UL>
+<PRE>
+class US_phone_put : public phone_put {
+public:
+   US_phone_put( const prefixMap_t* tab=0
+               , const string_t&amp; myCod = "US"
+               , bool del = false
+               , size_t refs = 0)
+               : phone_put(myCod,"011",tab,del,refs)
+   { }
+};</PRE>
+</UL>
+<P>Other concrete facet classes are built similarly.</P>
+
+<HR>
+<A HREF="5-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

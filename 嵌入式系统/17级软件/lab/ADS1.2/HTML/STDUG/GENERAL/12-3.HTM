@@ -1,0 +1,36 @@
+<HTML><HEAD><TITLE>12.3  Example Function: Split a Line into Words</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="12-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="IV.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>12.3  Example Function: Split a Line into Words</H2>
+
+<A NAME="idx233"><!></A>
+<P>In this section we illustrate the use of some of the <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> functions by defining a function to split a line of text into individual words. We have already made use of this function in the concordance example program in <A HREF="9-3.htm#933">Section 9.3.3</A>.</P>
+<BLOCKQUOTE><HR>
+<B>NOTE: The split function is in the concordance program in file concord.cpp.
+</B><HR></BLOCKQUOTE>
+<P>There are three arguments to this function. The first two are <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B>s, describing the line of text and the separators to be used to differentiate words, respectively. The third argument is a <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> of <B><I>string</I></B>s, used to return the individual words in the line.</P>
+<UL>
+<PRE>
+void split 
+   (string &amp; text, string &amp; separators, list&lt;string&gt; &amp; words)
+{
+   int n = text.length();
+   int start, stop;
+
+   start = text.find_first_not_of(separators);
+   while ((start &gt;= 0) &amp;&amp; (start &lt; n)) {
+      stop = text.find_first_of(separators, start);
+      if ((stop &lt; 0) || (stop &gt; n)) stop = n;
+      words.push_back(text.substr(start, stop - start));
+      start = text.find_first_not_of(separators, stop+1);
+      }
+}</PRE>
+</UL>
+<P>The program begins by finding the first character that is <I>not</I> a separator. The loop then looks for the next following character that <I>is</I> a separator, or uses the end of the string if no such value is found. The difference between these two is then a word, which is copied out of the text using a substring operation and inserted into the <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> of words. A search is then made to discover the start of the next word, and the loop continues. When the index value exceeds the limits of the <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B>, execution stops.</P>
+
+
+<BR>
+<HR>
+<A HREF="12-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="IV.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

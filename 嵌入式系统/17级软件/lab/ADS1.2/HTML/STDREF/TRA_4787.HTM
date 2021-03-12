@@ -1,0 +1,121 @@
+<HTML><HEAD><TITLE>transform</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="tou_9908.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="una_4659.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>transform</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Applies an operation to a range of values in a collection and stores the result.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator, class OutputIterator,
+          class UnaryOperation&gt;
+  OutputIterator 
+    <B>transform</B> (InputIterator first, InputIterator last,
+               OutputIterator result, UnaryOperation op);
+template &lt;class InputIterator1, class InputIterator2,
+          class OutputIterator, class BinaryOperation&gt;
+  OutputIterator 
+    <B>transform</B> (InputIterator1 first1, InputIterator1 last1,
+               InputIterator2 first2, OutputIterator result,
+               BinaryOperation binary_op);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>transform</I></B> algorithm has two forms. The first form applies unary operation <SAMP>op</SAMP> to each element of the range <SAMP>[first, last)</SAMP>, and sends the result to the output iterator <SAMP>result</SAMP>. For example, this version of <B><I>transform</I></B> could be used to square each element in a vector. If the output iterator (<SAMP>result</SAMP>) is the same as the input iterator used to traverse the range, <B><I>transform</I></B> performs its transformation in place.</P>
+<P>The second form of <B><I>transform</I></B> applies a binary operation, <SAMP>binary_op</SAMP>, to corresponding elements in the range <SAMP>[first1, last1)</SAMP> and the range that begins at <SAMP>first2</SAMP>, and sends the result to <SAMP>result</SAMP>.   For example, <B><I>transform</I></B> can be used to add corresponding elements in two sequences, and store the set of sums in a third. The algorithm assumes, but does not check, that the second sequence has at least as many elements as the first sequence. Note that the output iterator <SAMP>result</SAMP> can be a third sequence, or either of the two input sequences.</P>
+<P>Formally, <B><I>transform</I></B> assigns through every iterator <SAMP>i</SAMP> in the range <SAMP>[result, result + (last1 - first1))</SAMP> a new corresponding value equal to:</P>
+<P><SAMP>op(*(first1 + (i - result))</SAMP></P>
+<P>or </P>
+<P><SAMP>binary_op(*(first1 + (i - result), *(first2 + (i - result)))</SAMP></P>
+<P><B><I>transform</I></B> returns <SAMP>result + (last1 - first1)</SAMP>.   <SAMP>op</SAMP> and <SAMP>binary_op</SAMP> must not have any side effects. <SAMP>result</SAMP> may be equal to <SAMP>first</SAMP> in case of unary transform, or to <SAMP>first1</SAMP> or <SAMP>first2</SAMP> in case of binary transform. </P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>Exactly <SAMP>last1 - first1</SAMP> applications of <SAMP>op</SAMP> or <SAMP>binary_op</SAMP> are performed. </P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// trnsform.cpp
+//
+#include &lt;functional&gt;
+#include &lt;deque&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+int main()
+ {
+
+//Initialize a deque with an array of ints
+int arr1[5] = {99, 264, 126, 330, 132};
+int arr2[5] = {280, 105, 220, 84, 210};
+deque&lt;int&gt; d1(arr1+0, arr1+5), d2(arr2+0, arr2+5);
+
+//Print the original values
+cout &lt;&lt; "The following pairs of numbers: " 
+     &lt;&lt; endl &lt;&lt; "     ";
+deque&lt;int&gt;::iterator i1;
+for(i1 = d1.begin(); i1 != d1.end(); i1++)
+  cout &lt;&lt; setw(6) &lt;&lt; *i1 &lt;&lt; " ";
+cout &lt;&lt; endl &lt;&lt; "     ";
+for(i1 = d2.begin(); i1 != d2.end(); i1++)
+  cout &lt;&lt; setw(6) &lt;&lt; *i1 &lt;&lt; " ";
+
+// Transform the numbers in the deque to their 
+// factorials and store in the vector
+<B>transform</B>(d1.begin(), d1.end(), d2.begin(), 
+          d1.begin(), multiplies&lt;int&gt;());
+
+//Display the results
+cout &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; "Have the products: " &lt;&lt; endl &lt;&lt; "     ";
+for(i1 = d1.begin(); i1 != d1.end(); i1++)
+  cout &lt;&lt; setw(6) &lt;&lt; *i1 &lt;&lt; " ";
+return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The following pairs of numbers:
+         99    264    126    330    132
+        280    105    220     84    210
+Have the products:
+27720  27720  27720  27720  27720</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>deque&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>deque&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="tou_9908.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="una_4659.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

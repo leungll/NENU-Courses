@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>12.1 A Recap of Manipulators</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="12.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>12.1 A Recap of Manipulators</H2>
+<A NAME="idx318"><!></A>
+<P>We showed examples of manipulators in <A HREF="7-3.htm">Section 7.3</A>. There we learned that:</P>
+<UL>
+<LI><P>Manipulators are objects that can be inserted into or extracted from a stream.</P>
+</LI>
+<LI><P>Such insertions and extractions have specific desirable side effects.</P>
+</LI>
+</UL>
+<P>As a recap, here is a typical example of two manipulators:</P>
+<UL>
+<PRE>
+cout &lt;&lt; setw(10) &lt;&lt; 10.55 &lt;&lt; endl;</PRE>
+</UL>
+<P>The inserted objects <SAMP>setw(10)</SAMP> and <SAMP>endl</SAMP> are the manipulators. As a side effect, the manipulator <SAMP>setw(10)</SAMP> sets the stream's field width to <SAMP>10</SAMP>. Similarly, the manipulator <SAMP>endl</SAMP> inserts the end of line character and flushes the output. </P>
+<A NAME="idx319"><!></A>
+<P>As we mentioned previously, extensibility is a major advantage of iostreams. We've seen in the previous <A HREF="11-3.htm">Section 11.3</A> how you can implement inserters and extractors for user-defined types that behave like the built-in input and output operations. Additionally, you can add user-defined manipulators that fit seamlessly into the iostreams framework. In this section, we show how to do this.</P>
+<A NAME="idx320"><!></A>
+<P>First of all, to be extracted or inserted, a manipulator must be an object of a type that we call <SAMP>manipT</SAMP>, for which overloaded versions of the shift operators exist. (Associated with the manipulator type <SAMP>manipT,</SAMP> there is usually a function called <SAMP>f</SAMP><SUB>manipT</SUB><SAMP>()</SAMP>that we explain in detail later.) Here's the pattern for the manipulator extractor:</P>
+<UL>
+<PRE>
+template &lt;class charT, class Traits&gt;
+basic istream&lt;charT,Traits&gt;&amp;
+operator&gt;&gt; (basic istream&lt;charT,Traits&gt;&amp; istr
+           ,const manipT&amp; manip)
+{   return f<SUB>manipT</SUB>(istr, ...);   }</PRE>
+</UL>
+<A NAME="idx321"><!></A>
+<P>With this extractor defined, you can extract a manipulator <SAMP>Manip</SAMP>, which is an object of type <SAMP>manipT</SAMP>, by simply saying: </P>
+<UL>
+<PRE>
+cin &gt;&gt; Manip;</PRE>
+</UL>
+<P>This results in a call to the <SAMP>operator&gt;&gt;()</SAMP> sketched out above. The manipulator inserter is analogous.</P>
+<P>A manipulator's side effect is often created by calling an associated function <SAMP>f</SAMP><SUB>manipT</SUB><SAMP>()</SAMP> that takes a stream and returns the stream. There are several ways to associate the manipulator type <SAMP>manipT</SAMP> to the function <SAMP>f</SAMP><SUB>manipT</SUB><SAMP>()</SAMP>, which we explore in the following sections. The iostream framework does not specify a way to implement manipulators, but there is a base class called <SAMP>smanip</SAMP> that you can use for deriving your own manipulators. We explain this technique along with other useful approaches. </P>
+<P>It turns out that there is a major difference between manipulators with parameters like <SAMP>width(10)</SAMP> and manipulators without parameters like <SAMP>endl</SAMP>. Let's start with the simpler case of manipulators without parameters.</P>
+
+<HR>
+<A HREF="12.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

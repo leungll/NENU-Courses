@@ -1,0 +1,437 @@
+<HTML><HEAD><TITLE>ctype</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="cou_4514.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cty_2787.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ctype</H2>
+<PRE><HR>         <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>  ctype_base
+ctype...
+         <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet  
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Specializations">Specializations</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A facet that includes character classification facilities.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_is()">do_is()</A><BR>
+ <A HREF="#Protected Member Functionsdo_narrow()">do_narrow()</A><BR>
+ <A HREF="#Protected Member Functionsdo_scan_is()">do_scan_is()</A><BR>
+ <A HREF="#Protected Member Functionsdo_scan_not()">do_scan_not()</A><BR>
+ <A HREF="#Protected Member Functionsdo_tolower()">do_tolower()</A><BR>
+ <A HREF="#Protected Member Functionsdo_toupper()">do_toupper()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionsdo_widen()">do_widen()</A><BR>
+ <A HREF="#Public Member Functionsis()">is()</A><BR>
+ <A HREF="#Public Member Functionsnarrow()">narrow()</A><BR>
+ <A HREF="#Public Member Functionsscan_is()">scan_is()</A><BR>
+ <A HREF="#Public Member Functionsscan_not()">scan_not()</A><BR>
+ <A HREF="#Public Member Functionstolower()">tolower()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionstoupper()">toupper()</A><BR>
+ <A HREF="#Public Member Functionswiden()">widen()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+class ctype_base;
+template &lt;class charT&gt; class ctype;</PRE>
+
+</PRE>
+
+<A NAME="Specializations"><H3>Specializations</H3></A>
+<PRE>
+<PRE>class ctype&lt;char&gt;; </PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>ctype&lt;charT&gt;</I></B> is a facet that allows you to classify characters and perform simple conversions. <B><I>ctype&lt;charT&gt;</I></B> also converts upper to lower and lower to upper case, and converts between <SAMP>charT</SAMP> and <SAMP>char</SAMP>. <B><I>ctype&lt;charT&gt;</I></B> relies on <SAMP>ctype_base</SAMP> for a set of masks that identify the various classes of characters. These classes are:</P>
+<UL><B><I>alnum</I></B><BR>
+<B><I>alpha</I></B><BR>
+<B><I>cntrl</I></B><BR>
+<B><I>digit</I></B><BR>
+<B><I>graph</I></B><BR>
+<B><I>lower</I></B><BR>
+<B><I>print</I></B><BR>
+<B><I>punct</I></B><BR>
+<B><I>space</I></B><BR>
+<B><I>upper</I></B><BR>
+<B><I>xdigit</I></B></UL>
+<P>The masks are passed to member functions of <B><I>ctype</I></B> to obtain the classifications of a character or range of characters.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class ctype_base {
+public:
+  enum mask {  
+    space, print, cntrl, upper, lower,
+    alpha, digit, punct, xdigit,
+    alnum=alpha|digit, graph
+  };
+};
+
+template &lt;class charT&gt;
+class ctype : public locale::facet, public ctype_base {
+  public:
+    typedef charT char_type;
+    explicit ctype(size_t refs = 0);
+    bool         is(mask, charT) const;
+    const charT* is(const charT*, 
+                    const charT*, mask*) const;
+    const charT* scan_is(mask, const charT*, 
+                         const charT*) const;
+    const charT* scan_not(mask, const charT*, 
+                          const charT*) const;
+    charT        toupper(charT) const;
+    const charT* toupper(charT*, const charT*) const;
+    charT        tolower(charT) const;
+    const charT* tolower(charT*, const charT*) const;
+    charT        widen(char) const;
+    const char*  widen(const char*, 
+                     const char*, charT*) const;
+    char         narrow(charT, char) const;
+    const charT* narrow(const charT*, const charT*, 
+                        char, char*) const;
+    static locale::id id;
+
+  protected:
+     ~ctype();  // virtual
+    virtual bool         do_is(mask, charT) const;
+    virtual const charT* do_is(const charT*, 
+                               const charT*,
+                               mask*) const;
+    virtual const charT* do_scan_is(mask,
+                                    const charT*, 
+                                    const charT*) const;
+    virtual const charT* do_scan_not(mask,
+                                     const charT*, 
+                                     const charT*) const;
+    virtual charT        do_toupper(charT) const;
+    virtual const charT* do_toupper(charT*, 
+                                    const charT*) const;
+    virtual charT        do_tolower(charT) const;
+    virtual const charT* do_tolower(charT*, 
+                                    const charT*) const;
+    virtual charT        do_widen(char) const;
+    virtual const char*  do_widen(const char*, 
+                                  const char*,
+                                  charT*) const;
+    virtual char         do_narrow(charT, char) const;
+    virtual const charT* do_narrow(const charT*, 
+                                   const charT*,
+                                   char, char*) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>ctype</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>ctype</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~ctype</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroy the facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>ctype</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the public <SAMP>widen</SAMP> function simply calls its protected cousin <SAMP>do_widen</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsis()"></A><PRE>bool         
+<B>is</B>(mask m, charT c) const; 
+const charT* 
+<B>is</B>(const charT* low, 
+   const charT* high, mask* vec) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>do_is(m,c)</SAMP> or <SAMP>do_is(low,high,vec).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsnarrow()"></A><PRE>char
+<B>narrow</B>(charT c, char dfault) const;
+const charT* 
+<B>narrow</B>(const charT* low, const charT*, char dfault,
+       char* to) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_narrow(c,dfault)</SAMP> or <SAMP>do_narrow(low,high,dfault,to).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsscan_is()"></A><PRE>const charT* 
+<B>scan_is</B>(mask m, const charT*, const charT* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_scan_is(m,low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsscan_not()"></A><PRE>const charT* 
+<B>scan_not</B>(mask m, const charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_scan_not(m,low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionstolower()"></A><PRE>charT        
+<B>tolower</B>(charT c) const;
+const charT* 
+<B>tolower</B>(charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_tolower(c)</SAMP> or <SAMP>do_tolower(low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionstoupper()"></A><PRE>charT        
+<B>toupper</B>(charT) const;
+const charT* 
+<B>toupper</B>(charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_toupper(c)</SAMP> or <SAMP>do_toupper(low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionswiden()"></A><PRE>charT        
+<B>widen</B>(char c) const;
+const char*  
+<B>widen</B>(const char* low, const char* high, charT* to) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_widen(c)</SAMP> or <SAMP>do_widen(low,high,to).</SAMP></P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_is()"></A><PRE>virtual bool         
+<B>do_is</B>(mask m, charT c) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>c</SAMP> matches the classification indicated by the mask <SAMP>m</SAMP>, where <SAMP>m</SAMP> is one of the values available from <B><I>ctype_base</I></B>. For instance, the following call returns <SAMP>true</SAMP> since <SAMP>`a'</SAMP> is an alphabetic character: </P>
+<P><SAMP>ctype&lt;char&gt;().is(ctype_base::alpha,'a');</SAMP></P>
+<P>See <B><I>ctype_base</I></B> for a description of the masks.</P>
+</UL>
+
+
+
+<PRE>virtual const charT* 
+<B>do_is</B>(const charT* low, const charT* high,
+      mask* vec) const; </PRE>
+
+<UL>
+<P>Fills <SAMP>vec</SAMP> with every mask from <B><I>ctype_base</I></B> that applies to the range of characters indicated by <SAMP>[low,high)</SAMP>.   See <B><I>ctype_base</I></B> for a description of the masks. For instance, after the following call, the first five entries in the array <SAMP>v</SAMP> would each contain the <SAMP>mask</SAMP> value: <SAMP>alpha|lower|print|alnum|graph</SAMP>:</P>
+<UL>
+<PRE>char a[] = "abcde";
+ctype_base::mask v[12];
+ctype&lt;char&gt;().is(a,a+5,v);</PRE>
+
+</UL>
+<P>Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_narrow()"></A><PRE>virtual char
+<B>do_narrow</B>(charT, char dfault) const; </PRE>
+
+<UL>
+<P>Returns the appropriate <SAMP>char</SAMP> representation for <SAMP>c</SAMP>, if such exists. Otherwise <SAMP>do_narrow</SAMP> returns <SAMP>dfault</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const charT* 
+<B>do_narrow</B>(const charT* low, const charT* high,
+          char dfault, char* dest) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its <SAMP>char</SAMP> representation, if such exists. If a <SAMP>char</SAMP> representation is not available, then the character is converted to <SAMP>dfault</SAMP>. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_scan_is()"></A><PRE>virtual const charT* 
+<B>do_scan_is</B>(mask m, const charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Finds the first character in the range <SAMP>[low,high)</SAMP> that matches the classification indicated by the mask <SAMP>m</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_scan_not()"></A><PRE>virtual const charT* 
+<B>do_scan_not</B>(mask m, const charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Finds the first character in the range <SAMP>[low,high)</SAMP> that does not match the classification indicated by the mask <SAMP>m</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_tolower()"></A><PRE>virtual charT        
+<B>do_tolower</B>(charT) const; </PRE>
+
+<UL>
+<P>Returns the lower case representation of <SAMP>c,</SAMP> if such exists. Otherwise returns <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const charT* 
+<B>do_tolower</B>(charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its lower case representation, if such exists. If a lower case representation does not exist, then the character is not changed. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_toupper()"></A><PRE>virtual charT       
+<B>do_toupper</B>(charT c) const; </PRE>
+
+<UL>
+<P>Returns the upper case representation of <SAMP>c,</SAMP> if such exists. Otherwise returns <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const charT* 
+<B>do_toupper</B>(charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its upper case representation, if such exists. If an upper case representation does not exist, then the character is not changed. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_widen()"></A><PRE>virtual charT        
+<B>do_widen</B>(char c) const; </PRE>
+
+<UL>
+<P>Returns the appropriate <SAMP>charT</SAMP> representation for <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const char*  
+<B>do_widen</B>(const char* low, const char* high, charT* dest) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its <SAMP>charT</SAMP> representation. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// ctype.cpp
+//
+
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  locale loc;
+  string s1("blues Power");
+
+  // Get a reference to the ctype&lt;char&gt; facet
+  const ctype&lt;char&gt;&amp; ct =
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+      use_facet&lt;ctype&lt;char&gt; &gt;(loc);
+#else
+      use_facet(loc,(ctype&lt;char&gt;*)0);
+#endif
+
+  // Check the classification of the 'a' character
+  cout &lt;&lt; ct.is(ctype_base::alpha,'a') &lt;&lt; endl;
+  cout &lt;&lt; ct.is(ctype_base::punct,'a') &lt;&lt; endl;
+
+  // Scan for the first upper case character
+  cout &lt;&lt; (char)*(ct.scan_is(ctype_base::upper,
+                          s1.begin(),s1.end())) &lt;&lt; endl;
+
+  // Convert characters to upper case
+  ct.toupper(s1.begin(),s1.end());
+  cout &lt;&lt; s1 &lt;&lt; endl;
+  
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="col_9822.htm">collate</A></I></B>, <B><I><A HREF="cty_2787.htm">ctype&lt;char&gt;</A></I></B>, <B><I><A HREF="cty_1366.htm">ctype_byname</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="cou_4514.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cty_2787.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

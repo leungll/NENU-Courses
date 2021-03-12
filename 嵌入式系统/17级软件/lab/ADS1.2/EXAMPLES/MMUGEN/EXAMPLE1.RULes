@@ -1,0 +1,14 @@
+/*
+        This is the simplest possible memory map, a straight one-to-one virtual
+        to physical mapping covering the complete 4 gigabyte address space.
+*/
+
+
+BASE_ADDRESS    0x00004000      /* table generated to this base address */
+
+/* MMU Level 1 Table generation data */
+
+LEVEL 1
+
+/* Virtual space */                     
+/* 4GB mapped 1->1   */ VIRTUAL 0x00000000 TO 0xFFFFFFFF PHYSICAL 0x00000000  SECTION  FULL_ACCESS  CACHEABLE AND BUFFERABLE

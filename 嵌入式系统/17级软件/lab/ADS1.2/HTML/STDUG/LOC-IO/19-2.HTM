@@ -1,0 +1,32 @@
+<HTML><HEAD><TITLE>19.2 Categories of Code Conversions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="19-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>19.2 Categories of Code Conversions</H2>
+<A NAME="idx458"><!></A>
+<P>Code conversions fall into various categories depending on the properties of the character encodings involved. There are:</P>
+<UL>
+<LI><P>Constant-size conversions</P>
+</LI>
+<LI><P>Multibyte conversions, which again fall into the categories of:</P>
+</LI>
+<UL>
+<LI><P>State-independent conversions</P>
+</LI>
+<LI><P>State-dependent conversions</P>
+</LI>
+</UL>
+</UL>
+<A NAME="idx459"><!></A>
+<P><I>Constant-size conversions</I> are between character encodings where all characters are of equal size. All single- or wide-character encodings are examples of such character encodings. Each single character stands for itself and can be recognized and translated independently of its context. Conversions between ASCII and EBCDIC, or Unicode and ISO10646, are examples of constant-size conversions.</P>
+<A NAME="idx460"><!></A>
+<P><I>Multibyte conversions</I> involve multibyte encodings. In multibyte encodings, characters have varying size. Some mulitbyte characters consist of two or more bytes, while others are represented by just one byte.</P>
+<P>There is a substantial difference between code conversions involving state-dependent character encodings, and conversions between state-independent encodings. (Again, see <A HREF="2-3.htm">Section 2.3</A>.)</P>
+<A NAME="idx461"><!></A>
+<P><I>State-dependent multibyte conversions</I> involve one character encoding that is state-dependent. In state-dependent character encodings, character sequences can have different meanings depending on the current context. State-dependent encodings typically have <I>modes</I> and escape sequences that allow switching between modes. An example of a state-dependent character conversion is the conversion between the state-dependent JIS encoding for Japanese characters and the Unicode wide-character encoding.</P>
+<A NAME="idx462"><!></A>
+<P><I>State-independent multibyte conversions</I> do not have modes. A sequence of characters can always be interpreted independently of its context. An example of a state-independent mulitbyte conversion is the conversion between EUC, which a state-independent multibyte encoding, and Unicode.</P>
+
+<HR>
+<A HREF="19-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

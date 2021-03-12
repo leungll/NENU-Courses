@@ -1,0 +1,29 @@
+<HTML><HEAD><TITLE>8.1 The set Data Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>8.1 The set Data Abstraction</H2>
+<A NAME="idx121"><!></A>
+<P>A <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> is a collection of values. Although the abstract concept of a <B><I>set</I></B> does not necessarily imply an ordered collection, the <B><I>set</I></B> datatype is always ordered. </P>
+<BLOCKQUOTE><HR>
+<B>NOTE:  If necessary, a collection of values that cannot be ordered can be maintained in an alternative data structure, such as a list.
+</B><HR></BLOCKQUOTE>
+<A NAME="idx122"><!></A>
+<P>Because the container used to implement the <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> data structure maintains values in an ordered representation, <B><I>set</I></B>s are optimized for insertion and removal of elements, and for testing to see whether a particular value is contained in the collection. Each of these operations can be performed in a logarithmic number of steps, whereas for a <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B>, <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, or <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>, each operation requires in the worst case an examination of every element held by the container. For this reason, <B><I>set</I></B>s should be the data structure of choice in any problem that emphasizes insertion, removal, and test for inclusion of values. Like a <B><I>list</I></B>, a <B><I>set</I></B> is not limited in size, but rather expands and contracts as elements are added to or removed from the collection.</P>
+<A NAME="idx123"><!></A>
+<P>There are two varieties of <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B>s provided by the Standard C++ Library. In the <B><I>set</I></B> container, every element is unique, and insertions of values that are already contained in the <B><I>set</I></B> are ignored. In the <B><I><A HREF="../../stdref/mul_0958.htm">multiset</A></I></B> container, on the other hand, multiple occurrences of the same value are permitted.</P>
+<BLOCKQUOTE><HR>
+<B>NOTE: In other programming languages, a multiset is sometimes referred to as a bag.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="811"><H3>8.1.1 Include Files</H3></A>
+<A NAME="idx124"><!></A>
+<P>Whenever you use a <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> or a <B><I><A HREF="../../stdref/mul_0958.htm">multiset</A></I></B>, you must include the set header file:</P>
+<UL>
+<PRE>
+# include &lt;set&gt;</PRE>
+</UL>
+
+<HR>
+<A HREF="8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

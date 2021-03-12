@@ -1,0 +1,91 @@
+<HTML><HEAD><TITLE>12.2 Manipulators without Parameters</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="12-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>12.2 Manipulators without Parameters</H2>
+<A NAME="idx322"><!></A>
+<P>Manipulators that do not have any parameters, like <SAMP>endl</SAMP>, are the simplest form of manipulator. The manipulator type <SAMP>manipT</SAMP> is a function pointer type, the manipulator <SAMP>Manip</SAMP> is the function pointer, and the associated function <SAMP>f</SAMP><SUB>manipT</SUB><SAMP>()</SAMP> is the function pointed to.</P>
+<A NAME="idx323"><!></A>
+<P>In iostreams, the following function pointer types serve as manipulators:</P>
+<UL>
+<PRE>
+(1) ios_base&amp;                    (*pf)(ios_base&amp;)
+(2) basic_ios&lt;charT,Traits&gt;&amp;     (*pf)(basic_ios&lt;charT,Traits&gt;)
+(3) basic_istream&lt;charT,Traits&gt;&amp; (*pf)(basic_istream&lt;charT,Traits&gt;)
+(4) basic_ostream&lt;charT,Traits&gt;&amp; (*pf)(basic_ostream&lt;charT,Traits&gt;)</PRE>
+</UL>
+<P>The signature of a manipulator function is not limited to the examples above. If you have created your own stream types, you will certainly want to use additional signatures as manipulators.</P>
+<A NAME="idx324"><!></A>
+<P>For the four manipulator types listed above, the stream classes already offer the required overloaded inserters and member functions. For input streams, extractors take the following form:</P>
+<UL>
+<PRE>
+template&lt;class charT, class traits&gt;
+basic_istream&lt;charT, traits&gt;&amp;
+basic_istream&lt;charT, traits&gt;::operator&gt;&gt;
+(basic_istream&lt;charT,traits&gt;&amp; (*pf)(<B><I>input_stream_type</I></B>&amp;) )
+{  return (*pf)(*this);..}</PRE>
+</UL>
+<P>where <B><I>input_stream_type</I></B> is one of the function pointer types (1)-(3).</P>
+<A NAME="idx325"><!></A>
+<P>Similarly, for output streams we have:</P>
+<UL>
+<PRE>
+template&lt;class charT, class traits&gt;
+basic_ostream&lt;charT, traits&gt;&amp;
+basic_ostream&lt;charT, traits&gt;::operator&lt;&lt;
+(basic_ostream&lt;charT, traits&gt;&amp; (*pf)(<B><I>output_stream_type</I></B>&amp; ))
+{  return (*pf)(*this);  }</PRE>
+</UL>
+<P>where <B><I>output_stream_type</I></B> is one of the function pointer types (1), (2), or (4).</P>
+
+<A NAME="1221"><H3>12.2.1 Examples of Manipulators without Parameters</H3></A>
+<A NAME="idx326"><!></A>
+<P>Let's look at the manipulator <SAMP>endl</SAMP> as an example of a manipulator without parameters. The manipulator <SAMP>endl</SAMP>, which can be applied solely to output streams, is a pointer to the following function of type (4):</P>
+<UL>
+<PRE>
+template&lt;class charT, class traits&gt;
+inline basic_ostream&lt;charT, traits&gt;&amp;
+endl(basic_ostream&lt;charT, traits&gt;&amp; os)
+{
+  os.put( os.widen('\n') );
+  os.flush();
+ 
+  return os;
+}</PRE>
+</UL>
+<P>Hence an expression like: </P>
+<UL>
+<PRE>
+cout &lt;&lt; endl; </PRE>
+</UL>
+<P>results in a call to the inserter:</P>
+<UL><PRE>ostream&amp; ostream::operator&lt;&lt; (ostream&amp; (*pf)(ostream&amp;))</PRE></UL>
+<P>with <SAMP>endl</SAMP> as the actual argument for <SAMP>pf</SAMP>. In other words, <SAMP>cout &lt;&lt; endl;</SAMP> is equal to <SAMP>cout.operator&lt;&lt;(endl);</SAMP></P>
+<A NAME="idx327"><!></A>
+<P>Here is another manipulator, <SAMP>boolalpha</SAMP>, that can be applied to input <I>and</I> output streams. The manipulator <SAMP>boolalpha</SAMP> is a pointer to a function of type <SAMP>(1)</SAMP>:</P>
+<UL>
+<PRE>
+ios_base&amp; boolalpha(ios_base&amp; strm)
+{
+  strm.setf(ios_base::boolalpha);
+ 
+  return strm;
+}</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B><A NAME="idx328"><!></A>
+NOTE:  Every function that takes a reference to an ios_base, a basic_ios, a basic_ostream, or a basic_istream, and returns a reference to the same stream, can be used as a parameter-less manipulator.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="1222"><H3>12.2.2 A Remark on the Manipulator endl</H3></A>
+<A NAME="idx329"><!></A>
+<P>The manipulator <SAMP>endl</SAMP> is often used for inserting the end-of-line character into a stream. However, <SAMP>endl</SAMP> does additionally flush the output stream, as you can see from the implementation of <SAMP>endl</SAMP> shown above. Flushing a stream, a time-consuming operation that decreases performance, is unnecessary in most common situations. In the standard example:</P>
+<UL>
+<PRE>
+cout &lt;&lt; "Hello world" &lt;&lt; endl;</PRE>
+</UL>
+<P>flushing is not necessary because the standard output stream <SAMP>cout</SAMP> is tied to the standard input stream <SAMP>cin</SAMP>, so input and output to the standard streams are synchronized anyway. Since no flush is required, the intent is probably to insert the end-of-line character. If you consider typing <SAMP>'\n'</SAMP> more trouble than typing <SAMP>endl</SAMP>, you can easily add a simple manipulator <SAMP>nl</SAMP> that inserts the end-of-line character, but refrains from flushing the stream.</P>
+
+<HR>
+<A HREF="12-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

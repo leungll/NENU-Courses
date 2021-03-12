@@ -1,0 +1,137 @@
+<HTML><HEAD><TITLE>search, search_n</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="rot_3525.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Seq_6405.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>search, search_n</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Finds a sub-sequence within a sequence of values that is element-wise equal to the values in an indicated range.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator1, class ForwardIterator2&gt;
+ ForwardIterator1 <B>search</B> (ForwardIterator1 first1,
+                          ForwardIterator1 last1,
+                          ForwardIterator2 first2,
+                          ForwardIterator2 last2);
+
+template &lt;class ForwardIterator1,
+          class ForwardIterator2,
+          class BinaryPredicate&gt;
+ ForwardIterator1 <B>search</B> (ForwardIterator1 first1,
+                          ForwardIterator1 last1,
+                          ForwardIterator2 first2,
+                          ForwardIterator2 last2,
+                          BinaryPredicate binary_pred);
+
+template &lt;class ForwardIterator, 
+          class Size, 
+          class T&gt;
+ ForwardIterator <B>search_n</B> (ForwardIterator first, 
+                          ForwardIterator last,
+                          Size count, const T&amp; value);
+
+template &lt;class ForwardIterator, 
+          class Size, 
+          class T, 
+          class BinaryPredicate&gt;
+ ForwardIterator <B>search_n</B> (ForwardIterator first, 
+                          ForwardIterator last,
+                          Size count, const T&amp; value,
+                          BinaryPredicate pred)</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>search</I></B> and <B><I><A HREF="sea_5086.htm">search_n</A></I></B> algorithms search for a sub-sequence within a sequence. The <B><I>search</I></B> algorithm searches for a sub-sequence <SAMP>[first2, last2)</SAMP> within a sequence <SAMP>[first1, last1)</SAMP>, and returns the beginning location of the sub-sequence.   If it does not find the sub-sequence, <B><I>search</I></B> returns <SAMP>last1</SAMP>. The first version of <B><I>search</I></B> uses the equality (<SAMP>==</SAMP>) operator as a default, and the second version allows you to specify a binary predicate to perform the comparison.</P>
+<P>The <B><I><A HREF="sea_5086.htm">search_n</A> </I></B>algorithm searches for the sub-sequence composed of <SAMP>count</SAMP> occurrences of <SAMP>value</SAMP> within a sequence <SAMP>[first, last)</SAMP>, and returns <SAMP>first</SAMP> if this sub-sequence is found. If it does not find the sub-sequence, <B><I>search_n</I></B> returns <SAMP>last</SAMP>. The first version of <B><I><A HREF="sea_5086.htm">search_n</A></I></B> uses the equality (<SAMP>==</SAMP>) operator as a default, and the second version allows you to specify a binary predicate to perform the comparison.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>search</I></B> performs at most <SAMP>(last1 - first1)*(last2-first2)</SAMP> applications of the corresponding predicate.</P>
+<P><B><I><A HREF="sea_5086.htm">search_n</A></I></B> performs at most <SAMP>(last - first)* count</SAMP> applications of the corresponding predicate.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// search.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;list&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   // Initialize a list sequence and 
+   // sub-sequence with characters
+   char seq[40] = "Here's a string with a substring in it";
+   char subseq[10] = "substring";
+   list&lt;char&gt; sequence(seq, seq+39);
+   list&lt;char&gt; subseqnc(subseq, subseq+9);
+
+   //Print out the original sequence
+   cout &lt;&lt; endl &lt;&lt; "The sub-sequence, " &lt;&lt; subseq 
+        &lt;&lt; ", was found at the ";
+   cout &lt;&lt; endl &lt;&lt; "location identified by a '*'" 
+        &lt;&lt; endl &lt;&lt; "     ";
+
+   // Create an iterator to identify the location of 
+   // sub-sequence within sequence
+   list&lt;char&gt;::iterator place;
+
+   //Do search
+   place = <B>search</B>(sequence.begin(), sequence.end(),
+                  subseqnc.begin(), subseqnc.end());
+
+   //Identify result by marking first character with a '*'
+   *place = '*';
+
+   //Output sequence to display result
+   for(list&lt;char&gt;::iterator i = sequence.begin(); 
+           i != sequence.end(); i++)
+     cout &lt;&lt; *i;
+   cout &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The sub-sequence, substring, was found at the
+location identified by a '*'
+     Here's a string with a *substring in it</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>list&lt;char, allocator&lt;char&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>list&lt;char&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+
+
+<BR>
+<HR>
+<A HREF="rot_3525.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Seq_6405.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

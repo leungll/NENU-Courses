@@ -1,0 +1,313 @@
+<HTML><HEAD><TITLE>stack</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="sta_5767.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Str_6304.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>stack</H2>
+<PRE><HR>Container Adapter
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Non-member Operators">Non-member Operators</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A container adapter that behaves like a stack (last in, first out).</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsempty()">empty()</A><BR>
+ <A HREF="#Non-member Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;()">operator&gt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;=()">operator&gt;=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;()">operator&lt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;=()">operator&lt;=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Operatorsoperator==()">operator==()</A><BR>
+ <A HREF="#Member Functionspop()">pop()</A><BR>
+ <A HREF="#Member Functionspush()">push()</A><BR>
+ <A HREF="#Member Functionssize()">size()</A><BR>
+ <A HREF="#Member Functionstop()">top()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;stack&gt;
+template &lt;class T, class Container = deque&lt;T&gt; &gt;
+class <B>stack</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>stack</I></B> container adapter causes a container to behave like a "last in, first out" (LIFO) stack. The last item that was put ("pushed") onto the stack is the first item removed ("popped" off). The stack can adapt to any container that includes the operations <SAMP>back()</SAMP>, <SAMP>push_back()</SAMP>, and <SAMP>pop_back()</SAMP>. In particular, <B><I><A HREF="deq_4164.htm">deque</A></I></B>, <B><I><A HREF="lis_3222.htm">list</A></I></B>, and <B><I><A HREF="vec_0251.htm">vector</A></I></B> can be used. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T, class Container = deque&lt;T&gt; &gt;
+class stack {
+public:
+// typedefs
+typedef typename Container::value_type value_type;
+typedef typename Container::size_type size_type;
+typedef Container container_type;
+// Construct
+explicit stack (const Container&amp; = Container());
+// Accessors
+bool empty () const;
+size_type size () const;
+value_type&amp; top ();
+const value_type&amp; top () const;
+void push (const value_type&amp;);
+void pop ();
+};
+
+// Non-member Operators
+template &lt;class T, class Container&gt;
+bool operator== (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);
+template &lt;class T, class Container&gt;
+bool operator!= (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);
+template &lt;class T, class Container&gt;
+bool operator&lt; (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);
+template &lt;class T, class Container&gt;
+bool operator&gt; (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);
+template &lt;class T, class Container&gt;
+bool operator&lt;= (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);
+template &lt;class T, class Container&gt;
+bool operator&gt;= (const stack&lt;T, Container&gt;&amp;, 
+const stack&lt;T, Container&gt;&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit
+<B>stack</B>(const Container&amp; = Container());</PRE>
+
+<UL>
+<P>Constructs an empty stack. The stack uses the allocator <SAMP>alloc</SAMP> for all storage management.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsempty()"></A><PRE>bool 
+<B>empty</B>() const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the stack is empty, otherwise <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspop()"></A><PRE>void 
+<B>pop</B>();</PRE>
+
+<UL>
+<P>Removes the item at the top of the stack.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspush()"></A><PRE>void 
+<B>push</B>(const value_type&amp; x);</PRE>
+
+<UL>
+<P>Pushes <SAMP>x</SAMP> onto the stack.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssize()"></A><PRE>size_type 
+<B>size</B>() const;</PRE>
+
+<UL>
+<P>Returns the number of elements on the stack.</P>
+</UL>
+
+
+
+<A NAME="Member Functionstop()"></A><PRE>value_type&amp; 
+<B>top</B>();</PRE>
+
+<UL>
+<P>Returns a reference to the item at the top of the stack. This is the last item pushed onto the stack unless <SAMP>pop()</SAMP> has been called since then.</P>
+</UL>
+
+
+
+<PRE>const value_type&amp; 
+<B>top</B>() const;</PRE>
+
+<UL>
+<P>Returns a constant reference to the item at the top of the stack as a <SAMP>const value_type</SAMP>.</P>
+</UL>
+
+
+<A NAME="Non-member Operators"><H3>Non-member Operators</H3></A>
+
+
+<A NAME="Non-member Operatorsoperator==()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator==</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>x</SAMP> is the same as <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator!=()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator!=</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x==y)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator&lt;</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the stack defined by the elements contained in <SAMP>x</SAMP> is lexicographically less than the stack defined by the elements of <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator&gt;</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>y &lt; x</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;=()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator&lt;=</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(y &lt; x)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;=()"></A><PRE>template &lt;class T, class Container&gt;
+bool <B>operator&gt;=</B>(const stack&lt;T, Container&gt;&amp; x,
+const stack&lt;T, Container&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x &lt; y)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// stack.cpp
+//
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+#include &lt;deque&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main(void)
+ {
+// Make a stack using a vector container
+<B>stack</B>&lt;int,vector&lt;int&gt; &gt; s;
+// Push a couple of values on the stack 
+s.push(1);
+s.push(2);
+cout &lt;&lt; s.top() &lt;&lt; endl;
+
+// Now pop them off
+s.pop();
+cout &lt;&lt; s.top() &lt;&lt; endl;
+s.pop();
+
+// Make a stack of strings using a deque
+<B>stack</B>&lt;string,deque&lt;string&gt; &gt; ss;
+// Push a bunch of strings on then pop them off
+int i;
+for (i = 0; i &lt; 10; i++)
+   {
+    ss.push(string(i+1,'a'));
+    cout &lt;&lt; ss.top() &lt;&lt; endl;
+   }
+for (i = 0; i &lt; 10; i++)
+   {
+    cout &lt;&lt; ss.top() &lt;&lt; endl;
+    ss.pop();
+   }
+
+return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+2
+1
+a
+aa
+aaa
+aaaa
+aaaaa
+aaaaaa
+aaaaaaa
+aaaaaaaa
+aaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaa
+aaaaaaaa
+aaaaaaa
+aaaaaa
+aaaaa
+aaaa
+aaa
+aa
+a</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support template parameter defaults, you are required to supply a template parameter for <SAMP>Container</SAMP>. For example: </P>
+<P>You would not be able to write,</P>
+<P><SAMP>stack&lt;int&gt; var;</SAMP></P>
+<P>Instead, you would have to write,</P>
+<P><SAMP>stack&lt;int, deque&lt;int&gt; &gt; var;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="all_7029.htm">allocator</A></I></B>, <B><I><A HREF="Con_2487.htm">Containers</A></I></B>, <B><I><A HREF="deq_4164.htm">deque</A></I></B>, <B><I><A HREF="lis_3222.htm">list</A></I></B>, <B><I><A HREF="vec_0251.htm">vector</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="sta_5767.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Str_6304.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

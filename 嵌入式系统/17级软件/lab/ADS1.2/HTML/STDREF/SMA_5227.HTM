@@ -1,0 +1,244 @@
+<HTML><HEAD><TITLE>smanip, smanip_fill</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="sli_1044.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sor_1439.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>smanip, smanip_fill</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Class smanip Constructor">Class smanip Constructor</A></LI>
+<LI><A HREF="#Class smanip_fill Constructor">Class smanip_fill Constructor</A></LI>
+<LI><A HREF="#Manipulators">Manipulators</A></LI>
+<LI><A HREF="#Extractors">Extractors</A></LI>
+<LI><A HREF="#Inserters">Inserters</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Helper classes used to implement parameterized manipulators.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Extractorsoperator&gt;&gt;()">operator&gt;&gt;()</A><BR>
+ <A HREF="#Insertersoperator&lt;&lt;()">operator&lt;&lt;()</A><BR>
+ <A HREF="#Manipulatorsresetiosflag()">resetiosflag()</A><BR>
+ <A HREF="#Manipulatorssetbase()">setbase()</A><BR>
+ <A HREF="#Manipulatorssetfill()">setfill()</A><BR>
+ <A HREF="#Manipulatorssetiosflag()">setiosflag()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Manipulatorssetprecision()">setprecision()</A><BR>
+ <A HREF="#Manipulatorssetw()">setw()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iomanip&gt; 
+template&lt;class T&gt; class smanip;
+template&lt;class T, class traits&gt; class smanip_fill; </PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template classes <B><I>smanip</I></B> and <B><I>smanip_fill </I></B>are helper classes used to implement parameterized manipulators. The class <B><I>smanip</I></B> is used as the return type for manipulators that do not need to carry information about the character type of the stream they are applied to. This is the case for <SAMP>resetiosflags</SAMP>, <SAMP>setiosflags</SAMP>, <SAMP>setbase</SAMP>, <SAMP>setprecision</SAMP>, and <SAMP>setw.</SAMP> The class <B><I>smanip_fill</I></B> is used as the return type for manipulators that do need to carry information about the character type of the streamto which they are applied. This is the case for <SAMP>setfill.</SAMP></P>
+<P>smanip_fill is not described in the C++ standard, and is included as an extension.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class T&gt;
+class smanip {
+ 
+ public:
+  smanip(ios_base&amp; (*pf) (ios_base&amp;, T), T manarg);
+};
+
+template&lt;class T, class traits&gt;
+class smanip_fill {
+
+ public:
+  smanip_fill(basic_ios&lt;T, traits&gt;&amp; (*pf) 
+             (basic_ios&lt;T, traits&gt;&amp;, T), T manarg);
+};
+
+// parameterized manipulators
+
+smanip&lt;ios_base::fmtflags&gt; 
+   resetiosflag(ios_base::fmtflags mask);
+smanip&lt;ios_base::fmtflags&gt; 
+   setiosflag(ios_base::fmtflags mask);
+smanip&lt;int&gt;                setbase(int base);
+smanip&lt;int&gt;                setprecision(int n);
+smanip&lt;int&gt;                setw(int n);
+
+template &lt;class charT&gt;
+smanip_fill&lt;charT, char_traits&lt;charT&gt; &gt; setfill(charT c);
+
+// overloaded extractors
+
+template &lt;class charT, class traits, class T&gt;
+basic_istream&lt;charT,traits&gt;&amp;
+operator&gt;&gt;(basic_istream&lt;charT,traits&gt;&amp; is, 
+   const smanip&lt;T&gt;&amp; a);
+
+template &lt;class charT, class traits&gt;
+basic_istream&lt;charT,traits&gt;&amp;
+operator&gt;&gt;(basic_istream&lt;charT,traits&gt;&amp; is, 
+   const smanip_fill&lt;charT,char_traits&lt;charT&gt; &gt;&amp; a);
+
+// overloaded inserters
+
+template &lt;class charT, class traits, class T&gt;
+basic_ostream&lt;charT,traits&gt;&amp;
+operator&lt;&lt;(basic_ostream&lt;charT,traits&gt;&amp; is, 
+   const smanip&lt;T&gt;&amp; a);
+
+template &lt;class charT, class traits&gt;
+basic_ostream&lt;charT,traits&gt;&amp;
+operator&gt;&gt;(basic_ostream&lt;charT,traits&gt;&amp; is, 
+const smanip_fill&lt;charT,char_traits&lt;charT&gt; &gt;&amp; a);</PRE>
+
+</UL>
+
+<A NAME="Class smanip Constructor"><H3>Class smanip Constructor</H3></A>
+
+
+<PRE><B>smanip</B>(ios_base&amp; (*pf) (ios_base&amp;, T), T manarg); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>smanip</SAMP> that stores a function pointer <SAMP>pf</SAMP> that is called with argument <SAMP>manarg,</SAMP> in order to perform the manipulator task. The call to <SAMP>pf</SAMP> is performed in the inserter or extractor overloaded on type <SAMP>smanip</SAMP>.</P>
+</UL>
+
+
+<A NAME="Class smanip_fill Constructor"><H3>Class smanip_fill Constructor</H3></A>
+
+
+<PRE><B>smanip_fill</B>(basic_ios&lt;T, traits&gt;&amp; (*pf) (basic_ios&lt;T, traits&gt;&amp;, T), T manarg); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>smanip_fill</SAMP> that stores a function pointer <SAMP>pf,</SAMP> that is called with argument <SAMP>manarg,</SAMP> in order to perform the manipulator task. The call to <SAMP>pf</SAMP> is performed in the inserter or extractor overloaded on type <SAMP>smanip_fill</SAMP>.</P>
+</UL>
+
+
+<A NAME="Manipulators"><H3>Manipulators</H3></A>
+
+
+<A NAME="Manipulatorsresetiosflag()"></A><PRE>smanip&lt;ios_base::fmtflags&gt; 
+<B>resetiosflag</B>(ios_base::fmtflags mask); </PRE>
+
+<UL>
+<P>Resets the <SAMP>ios_base::fmtflags</SAMP> designated by <SAMP>mask</SAMP> in the stream to which it is applied.</P>
+</UL>
+
+
+
+<A NAME="Manipulatorssetbase()"></A><PRE>smanip&lt;int&gt; 
+<B>setbase</B>(int base); </PRE>
+
+<UL>
+<P>Sets the base for the output or input of integer values in the stream to which it is applied. The valid values for <SAMP>mask</SAMP> are 8, 10, 16.</P>
+</UL>
+
+
+
+<PRE>template &lt;class charT&gt;
+<A NAME="Manipulatorssetfill()"></A>smanip_fill&lt;charT, char_traits&lt;charT&gt; &gt; 
+<B>setfill</B>(charT c); </PRE>
+
+<UL>
+<P>Sets the fill character in the stream to which it is applied.</P>
+</UL>
+
+
+
+<A NAME="Manipulatorssetiosflag()"></A><PRE>smanip&lt;ios_base::fmtflags&gt; 
+<B>setiosflag</B>(ios_base::fmtflags mask); </PRE>
+
+<UL>
+<P>Sets the <SAMP>ios_base::fmtflags</SAMP> designated by <SAMP>mask</SAMP> in the stream to which it is applied.</P>
+</UL>
+
+
+
+<A NAME="Manipulatorssetprecision()"></A><PRE>smanip&lt;int&gt; 
+<B>setprecision</B>(int n); </PRE>
+
+<UL>
+<P>Sets the precision for the output of floating point values in the stream to which it is applied.</P>
+</UL>
+
+
+
+<A NAME="Manipulatorssetw()"></A><PRE>smanip&lt;int&gt; 
+<B>setw</B>(int n); </PRE>
+
+<UL>
+<P>Set the field width in the stream to which it is applied.</P>
+</UL>
+
+
+<A NAME="Extractors"><H3>Extractors</H3></A>
+
+
+<PRE>template &lt;class charT, class traits, class T&gt;
+<A NAME="Extractorsoperator&gt;&gt;()"></A>basic_istream&lt;charT,traits&gt;&amp;
+<B>operator&gt;&gt;</B>(basic_istream&lt;charT,traits&gt;&amp; is, const smanip&lt;T&gt;&amp; a); </PRE>
+
+<UL>
+<P>Applies the function stored in the parameter of type <SAMP>smanip&lt;T&gt;,</SAMP> on the stream <SAMP>is</SAMP>. </P>
+</UL>
+
+
+
+<PRE>template &lt;class charT, class traits&gt;
+basic_istream&lt;charT,traits&gt;&amp;
+<B>operator&gt;&gt;</B>(basic_istream&lt;charT,traits&gt;&amp; is,
+         const smanip_fill&lt;charT,char_traits&lt;charT&gt; &gt;&amp; a); </PRE>
+
+<UL>
+<P>Applies the function stored in the parameter of type <SAMP>smanip_fill&lt;charT, char_traits&lt;charT&gt; &gt;</SAMP> on the stream <SAMP>is</SAMP>.</P>
+</UL>
+
+
+<A NAME="Inserters"><H3>Inserters</H3></A>
+
+
+<PRE>template &lt;class charT, class traits, class T&gt;
+<A NAME="Insertersoperator&lt;&lt;()"></A>basic_ostream&lt;charT,traits&gt;&amp;
+<B>operator&lt;&lt;</B>(basic_ostream&lt;charT,traits&gt;&amp; os, 
+           const smanip&lt;T&gt;&amp; a); </PRE>
+
+<UL>
+<P>Applies the function stored in the parameter of type <SAMP>smanip&lt;T&gt;</SAMP> on the stream <SAMP>os</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template &lt;class charT, class traits&gt;
+basic_ostream&lt;charT,traits&gt;&amp;
+<B>operator&lt;&lt;</B>(basic_ostream&lt;charT,traits&gt;&amp; os,
+           const smanip_fill&lt;charT,char_traits&lt;charT&gt; &gt;&amp; a); </PRE>
+
+<UL>
+<P>Applies the function stored in the parameter of type <SAMP>smanip_fill&lt;charT, char_traits&lt;charT&gt; &gt;</SAMP> on the stream <SAMP>os</SAMP>.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.6.3</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="sli_1044.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sor_1439.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

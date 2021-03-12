@@ -1,0 +1,514 @@
+<HTML><HEAD><TITLE>codecvt</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="clo_8238.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cod_7392.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>codecvt</H2>
+<PRE><HR>              ...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>codecvt_base
+   codecvt...  
+              ...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A code conversion facet.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typesextern_type">extern_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesintern_type">intern_type</A><BR>
+ <A HREF="#Typesstate_type">state_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsalways_noconv()">always_noconv()</A><BR>
+ <A HREF="#Protected Member Functionsdo_always_noconv()">do_always_noconv()</A><BR>
+ <A HREF="#Protected Member Functionsdo_encoding()">do_encoding()</A><BR>
+ <A HREF="#Protected Member Functionsdo_in()">do_in()</A><BR>
+ <A HREF="#Protected Member Functionsdo_length()">do_length()</A><BR>
+ <A HREF="#Protected Member Functionsdo_max_length()">do_max_length()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionsdo_out()">do_out()</A><BR>
+ <A HREF="#Public Member Functionsencoding()">encoding()</A><BR>
+ <A HREF="#Public Member Functionsin()">in()</A><BR>
+ <A HREF="#Public Member Functionslength()">length()</A><BR>
+ <A HREF="#Public Member Functionsmax_length()">max_length()</A><BR>
+ <A HREF="#Public Member Functionsout()">out()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsunshift()">unshift()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+class codecvt_base;
+template &lt;class internT, class externT, class stateT&gt;
+class codecvt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>codecvt&lt;internT,externT,stateT&gt;</I></B> template has code conversion facilities. Default implementations of <B><I>codecvt&lt;char,wchar_t,mbstate_t&gt;</I></B> and <B><I>codecvt&lt;wchar_t,char,mbstate_t&gt;</I></B> use <SAMP>ctype&lt;wchar_t&gt;::widen</SAMP> and <SAMP>ctype&lt;wchar_t&gt;::narrow</SAMP> respectively. The default implementation of <B><I>codecvt&lt;wchar_t,wchar_t,mbstate_t&gt;</I></B> simply uses <SAMP>memcpy</SAMP> (no particular conversion applied).</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class codecvt_base {
+public:
+  enum result { ok, partial, error, noconv };
+};
+
+template &lt;class internT, class externT, class stateT&gt;
+class codecvt : public locale::facet, public codecvt_base {
+public:
+  typedef internT  intern_type;
+  typedef externT  extern_type;
+  typedef stateT   state_type;
+
+  explicit codecvt(size_t = 0)
+  result out(stateT&amp;, const internT*, 
+             const internT*, const internT*&amp;,
+             externT*, externT*, externT*&amp;) const;
+  result unshift(stateT&amp;, externT*, externT*, extern*&amp;)
+                 const;
+  result in(stateT&amp;, const externT*, 
+            const externT*, const externT*&amp;,
+            internT*, internT*, internT*&amp;) const;
+
+  int encoding() const throw();
+  bool always_noconv() const throw();
+
+  int length(const stateT&amp;, const externT*, const externT*,
+             size_t) const;
+
+  int max_length() const throw();
+  static locale::id id;
+
+protected:
+  ~codecvt();  // virtual
+  virtual result do_out(stateT&amp;,
+                        const internT*, 
+                        const internT*, 
+                        const internT*&amp;,
+                        externT*, externT*,
+                        externT*&amp;) const;
+  virtual result do_in(stateT&amp;,
+                       const externT*, 
+                       const externT*, 
+                       const externT*&amp;,
+                       internT*, internT*,
+                       internT*&amp;) const;
+  virtual result do_unshift(stateT&amp;,
+                            externT*, externT*,
+                            externT*&amp;) const;
+
+  virtual int do_encoding() const throw();
+  virtual bool do_always_noconv() const throw();
+  virtual int do_length(const stateT&amp;, const internT*, 
+                        const internT*,
+                        size_t) const;
+
+  virtual int do_max_length() const throw();
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesintern_type"></A><PRE><B>intern_type</B></PRE>
+
+<UL>
+<P>Type of character to convert from.</P>
+</UL>
+
+
+
+<A NAME="Typesextern_type"></A><PRE><B>extern_type</B></PRE>
+
+<UL>
+<P>Type of character to convert to.</P>
+</UL>
+
+
+
+<A NAME="Typesstate_type"></A><PRE><B>state_type</B></PRE>
+
+<UL>
+<P>Type to keep track of state and determine the codeset(s) to be converted.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>codecvt</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>codecvt</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP> (default), then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~codecvt</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroy the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>; </PRE>
+
+<UL>
+<P>Unique identifier for this type of facet.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>codecvt</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the public <SAMP>length</SAMP> function simply calls its protected cousin <SAMP>do_length</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsalways_noconv()"></A><PRE>bool 
+<B>always_noconv</B>() const 
+  throw();
+<A NAME="Public Member Functionsencoding()"></A>int
+<B>encoding</B>() const
+  throw();
+<A NAME="Public Member Functionsin()"></A>result 
+<B>in</B>(stateT&amp; state, const externT* from, 
+   const externT* from_end, const externT*&amp; from_next,
+   internT* to, internT* to_limit, internT*&amp; to_next) const; 
+<A NAME="Public Member Functionslength()"></A>int 
+<B>length</B>(const stateT&amp; state, const internT* from, 
+       const internT* end,
+       size_t max) const; 
+<A NAME="Public Member Functionsmax_length()"></A>int 
+<B>max_length</B>() const 
+  throw();
+<A NAME="Public Member Functionsout()"></A>result 
+<B>out</B>(stateT&amp; state, const internT* from, 
+    const internT* from_end, const internT*&amp; from_next,
+    externT* to, externT* to_limit, externT*&amp; to_next)
+    const; 
+<A NAME="Public Member Functionsunshift()"></A>result 
+<B>unshift</B>(stateT&amp; state, externT* to, externT* to_limit, 
+        externT*&amp; to) const;</PRE>
+
+<UL>
+<P>Each of these public member functions <SAMP>xxx</SAMP> simply calls the corresponding protected <SAMP>do_xxx</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_always_noconv()"></A><PRE>virtual bool 
+<B>do_always_noconv</B>() const 
+  throw();</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if no conversion is required. This is the case if <SAMP>do_in</SAMP> and <SAMP>do_out</SAMP> return <SAMP>noconv</SAMP> for all valid arguments. The instantiation <SAMP>codecvt&lt;char,char,mbstate_t&gt;</SAMP> returns <SAMP>true</SAMP>, while all other default instantiations return <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_encoding()"></A><PRE>virtual int 
+<B>do_encoding</B>() const 
+  throw();</PRE>
+
+<UL>
+<P>Returns one of the following</P>
+</UL>
+
+<UL><UL>
+<LI><P><SAMP>-1</SAMP> if the encoding on the external character sequence is dependent on state. </P>
+</LI>
+<LI><P>A constant number representing the number of external characters per internal character in a fixed width encoding.</P>
+</LI>
+<LI><P><SAMP>0</SAMP> if the encoding is uses a variable width.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Protected Member Functionsdo_in()"></A><PRE>virtual result 
+<B>do_in</B>(stateT&amp; state,
+      const externT* from, 
+      const externT* from_end, 
+      const externT*&amp; from_next,
+      internT* to, internT* to_limit,
+      internT*&amp; to_next) const; 
+<A NAME="Protected Member Functionsdo_out()"></A>virtual result 
+<B>do_out</B>(stateT&amp; state,
+       const internT* from, 
+       const internT* from_end, 
+       const internT*&amp; from_next,
+       externT* to, externT* to_limit,
+       externT*&amp; to_next) const; </PRE>
+
+<UL>
+<P>Both functions take characters in the range of <SAMP>[from,from_end)</SAMP>, apply an appropriate conversion, and place the resulting characters in the buffer starting at <SAMP>to</SAMP>. Each function converts at most <SAMP>from_end-from internT</SAMP> characters, and stores no more than <SAMP>to_limit-to externT</SAMP> characters. Both <SAMP>do_out</SAMP> and <SAMP>do_in</SAMP> stop if they find a character they cannot convert. In any case, <SAMP>from_next</SAMP> and <SAMP>to_next</SAMP> are always left pointing to the next character beyond the last one successfully converted.</P>
+<P><SAMP>do_out</SAMP> and <SAMP>do_in</SAMP> must be called under the following pre-conditions:</P>
+</UL>
+
+<UL><UL>
+<LI><P><SAMP>from &lt;= from_end</SAMP></P>
+</LI>
+<LI><P><SAMP>to &lt;= to_end</SAMP></P>
+</LI>
+<LI><P><SAMP>state</SAMP> is either initialized to the beginning of a sequence or equal to the result of the previous conversion on the sequence.</P>
+</LI>
+</UL></UL>
+<UL>
+<P>In the case where no conversion is required, <SAMP>from_next</SAMP> is set to <SAMP>from</SAMP> and <SAMP>to_next</SAMP> set to <SAMP>to</SAMP>.</P>
+<P><SAMP>do_out</SAMP> and <SAMP>do_in</SAMP> return one the following:
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Return Value<B></TH>
+<TH><B>Meaning<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ok</SAMP><BR>
+</TD>
+<TD>
+<SAMP>completed the conversion</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>partial</SAMP><BR>
+</TD>
+<TD>
+<SAMP>not all source characters converted</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>error</SAMP><BR>
+</TD>
+<TD>
+<SAMP>encountered a source character it could not convert</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noconv</SAMP><BR>
+</TD>
+<TD>
+<SAMP>no conversion was needed</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+<P>If either function returns <SAMP>partial</SAMP> and <SAMP>(from == from_end)</SAMP>, then one of two conditions prevail:</P>
+</UL>
+
+<UL><UL>
+<LI><P>The destination sequence has not accepted all the converted characters, or</P>
+</LI>
+<LI><P>Additional source characters are needed before another destination element can be assembled.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Protected Member Functionsdo_length()"></A><PRE>virtual int 
+<B>do_length</B>(const stateT&amp;, const externT* from, 
+          const externT* end,
+          size_t max) const; </PRE>
+
+<UL>
+<P>Determines the largest number <SAMP>&lt;= max</SAMP> of <SAMP>internT</SAMP> characters that can be produced from the sequence <SAMP>[from,end)</SAMP>, and returns the number of <SAMP>externT</SAMP> characters that would be consumed from <SAMP>[from,end)</SAMP> in order to produce this number of <SAMP>internT</SAMP> characters.</P>
+<P><SAMP>do_length</SAMP> must be called under the following pre-conditions:</P>
+</UL>
+
+<UL><UL>
+<LI><P><SAMP>from &lt;= from_end</SAMP></P>
+</LI>
+<LI><P><SAMP>state</SAMP> is either initialized to the beginning of a sequence or equal to the result of the previous conversion on the sequence.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Protected Member Functionsdo_max_length()"></A><PRE>virtual int 
+<B>do_max_length</B>() const throw();</PRE>
+
+<UL>
+<P>Returns the maximum value that <SAMP>do_length</SAMP> can return for any valid combination of its first three arguments, with the fourth argument (<SAMP>max</SAMP>) set to <SAMP>1</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual result 
+<B>do_out</B>(stateT&amp; state,
+       const internT* from, 
+       const internT* from_end, 
+       const internT*&amp; from_next,
+       externT* to, externT* to_limit,
+       externT*&amp; to_next) const; </PRE>
+
+<UL>
+<P>See <SAMP>do_in</SAMP> above.</P>
+</UL>
+
+
+
+<PRE>virtual result
+<SAMP>do_unshift</SAMP>(stateT&amp; state, externT* to, externT* to_limit,
+           externT*&amp; to_next) const;</PRE>
+
+<UL>
+<P>Determines the sequence of <SAMP>externT</SAMP> characters that should be appended to a sequence whose state is given by <SAMP>state</SAMP>, in order to terminate the sequence (that is, to return it to the default or initial or unshifted state). Stores the terminating sequence starting at <SAMP>to</SAMP>, proceeding no farther than <SAMP>to_limit</SAMP>. Sets <SAMP>to_end</SAMP> to point past the last <SAMP>externT</SAMP> character stored.</P>
+<P><SAMP>do_unshift</SAMP> must be called under the following pre-conditions:</P>
+</UL>
+
+<UL><UL>
+<LI><P><SAMP>from &lt;= from_end</SAMP></P>
+</LI>
+<LI><P><SAMP>state</SAMP> is either initialized to the beginning of a sequence or equal to the result of the previous conversion on the sequence.</P>
+</LI>
+</UL></UL>
+<UL>
+<P>The return value from <SAMP>do_unshift</SAMP> is as follows:
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Return Value<B></TH>
+<TH><B>Meaning<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ok</SAMP><BR>
+</TD>
+<TD>
+<SAMP>terminating sequence was stored successfully</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>partial</SAMP><BR>
+</TD>
+<TD>
+<SAMP>only part of the sequence was stored</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>error</SAMP><BR>
+</TD>
+<TD>
+<SAMP>the state is invalid</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noconv</SAMP><BR>
+</TD>
+<TD>
+<SAMP>no terminating sequence is needed for this state</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// codecvt.cpp
+//
+#include &lt;sstream&gt;
+#include "codecvte.h"
+
+int main ()
+{
+  using namespace std;
+
+  mbstate_t state;
+
+  // A string of ISO characters and buffers to hold 
+  // conversions
+  string ins("\xfc \xcc \xcd \x61 \xe1 \xd9 \xc6 \xf5");
+  string ins2(ins.size(),'.');
+  string outs(ins.size(),'.');
+
+  // Print initial contents of buffers
+  cout &lt;&lt; "Before:\n" &lt;&lt; ins &lt;&lt; endl;
+  cout &lt;&lt; ins2 &lt;&lt; endl;
+  cout &lt;&lt; outs &lt;&lt; endl &lt;&lt; endl;
+
+  // Initialize buffers
+  string::iterator in_it = ins.begin();
+  string::iterator out_it = outs.begin();
+
+  // Create a user defined codecvt fact
+  // This facet converts from ISO Latin 
+  // Alphabet No. 1 (ISO 8859-1) to 
+  // U.S. ASCII code page 437
+  // This facet replaces the default for
+  // codecvt&lt;char,char,mbstate_t&gt;
+  locale loc(locale(),new ex_codecvt);
+
+  // Now get the facet from the locale 
+  const codecvt&lt;char,char,mbstate_t&gt;&amp; cdcvt = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+    use_facet&lt;codecvt&lt;char,char,mbstate_t&gt; &gt;(loc);
+#else
+    use_facet(loc,(codecvt&lt;char,char,mbstate_t&gt;*)0);
+#endif
+
+  // convert the buffer
+  cdcvt.in(state,ins.begin(),ins.end(),in_it,
+           outs.begin(),outs.end(),out_it);
+   
+  cout &lt;&lt; "After in:\n" &lt;&lt; ins &lt;&lt; endl;
+  cout &lt;&lt; ins2 &lt;&lt; endl;
+  cout &lt;&lt; outs &lt;&lt; endl &lt;&lt; endl;
+
+  // Lastly, convert back to the original codeset
+  in_it = ins.begin();
+  out_it = outs.begin();
+  cdcvt.out(state, outs.begin(),outs.end(),out_it,
+            ins2.begin(),ins2.end(),in_it);
+   
+  cout &lt;&lt; "After out:\n" &lt;&lt; ins &lt;&lt; endl;
+  cout &lt;&lt; ins2 &lt;&lt; endl;
+  cout &lt;&lt; outs &lt;&lt; endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="cod_7392.htm">codecvt_byname</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="clo_8238.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cod_7392.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

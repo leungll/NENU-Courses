@@ -1,0 +1,49 @@
+#
+# Fast Fourier Transform test files
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+#
+
+Fast Fourier Transform Test Data
+____ _______ _________ ____ ____
+
+
+File:			line64
+Description:	64 point straight line in the complex plane
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			sin64_1
+Description:	64 point sine wave in the complex plane
+				input in bin 1.0
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			line256
+Description:	256 point straight line in the complex plane
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			sin256_1
+Description:	256 point sine wave in the complex plane
+				input in bin 1.0
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+
+Viewer Applications
+====== ============
+
+Windows 95/NT
+------- -----
+
+Any text capable application.
+
+
+UNIX
+----
+
+Any text capable application.

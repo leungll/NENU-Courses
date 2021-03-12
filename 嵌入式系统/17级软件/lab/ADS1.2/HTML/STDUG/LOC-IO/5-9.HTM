@@ -1,0 +1,134 @@
+<HTML><HEAD><TITLE>5.9 Improving the Inserter Function</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="III.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.9 Improving the Inserter Function</H2>
+<A NAME="idx136"><!></A>
+<P>Let's turn here to improving our inserter function. Consider that the country code table might be huge, and access to a country code might turn out to be a time-consuming operation. We can optimize the inserter function's performance by caching the country code table, so that we can access it directly and thus reduce performance overhead. </P>
+
+<A NAME="idx137"><!></A>
+<A NAME="591"><H3>5.9.1 Primitive Caching</H3></A>
+<A NAME="idx138"><!></A>
+<P>The code below does some primitive caching. It takes the phone facet object from the stream's locale object and copies the country code table into a static variable.</P>
+<UL>
+<PRE>
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const phoneNo&amp; pn)
+{
+   locale loc = os.getloc();
+   const phone_put&amp; ppFacet = use_facet&lt;phone_put&gt; (loc);
+  
+   // primitive caching
+   static prefixMap_t codes = *(ppFacet.country_codes());
+
+   // some sophisticated output using the cached codes
+   ...
+   return (os);
+}</PRE>
+</UL>
+<P>Now consider that the locale object imbued on a stream might change, but the cached static country code table does not. The cache is filled once, and all changes to the stream's locale object have no effect on this inserter function's cache. That's probably not what we want. What we do need is some kind of notification each time a new locale object is imbued, so that we can update the cache.</P>
+
+<A NAME="idx139"><!></A>
+<A NAME="592"><H3>5.9.2  Registration of a Callback Function</H3></A>
+<A NAME="idx140"><!></A>
+<P>In the following example, notification is provided by a callback function. The iostreams allow registration of callback functions. Class ios_base declares:</P>
+<UL>
+<PRE>
+enum event { erase_event, imbue_event, copyfmt_event };       //1
+typedef void (*event_callback) (event, ios_base&amp;, int index);
+void register_callback (event_callback fn, int index);        //2</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Registered callback functions are called for three events:
+<UL>
+<LI><P>Destruction of a stream </P>
+</LI>
+<LI><P>Imbuing a new locale</P>
+</LI>
+<LI><P>Copying the stream state.</P>
+</LI>
+</UL>
+<A NAME="idx141"><!></A>
+<TR VALIGN="top"><TD>//2</TD><TD>The register_callback() function registers a callback function and an index to the stream's parray. During calls to imbue(), copyfmt(), or ~ios_base(), the function fn is called with argument index. Functions registered are called when an event occurs, in opposite order of registration.
+<A NAME="idx142"><!></A>
+<BR><BR>The parray is a static array in base class ios_base. One can obtain an index to this array via xalloc(), and access the array via pword(index) or iword(index), as shown in <A HREF="#Figure 16">Figure 16</A>:
+
+<A NAME="idx143"><!></A>
+<H4><A NAME="Figure 16">Figure 16 -- The static array parray</A></H4>
+<IMG SRC="images/locfig17.gif">
+ 
+
+</TABLE>
+<A NAME="idx144"><!></A>
+<P>In order to install a callback function that updates our cache, we implement a class that retrieves an index to parray and creates the cache, then registers the callback function in its constructor. The procedure is shown in the following code:</P>
+<UL>
+<PRE>
+class registerCallback_t {
+public:
+registerCallback_t(ostream&amp; os
+                  ,ios_base::event_callback fct
+                  ,prefixMap_t* codes)
+  {
+   int index = os.xalloc();                                   //1
+   os.pword(index) = codes;                                   //2
+   os.register_callback(fct,index);                           //3
+  }
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>An index to the array is obtained via xalloc().
+<TR VALIGN="top"><TD>//2</TD><TD>The pointer to the code table is stored in the array via pword().
+<TR VALIGN="top"><TD>//3</TD><TD>The callback function and the index are registered.
+</TABLE>
+<A NAME="idx145"><!></A>
+<P>The actual callback function will later have access to the cache via the index to parray. At this point, we still need a callback function that updates the cache each time the stream's locale is replaced. Such a callback function could look like this:</P>
+<UL>
+<PRE>
+void cacheCountryCodes(ios_base::event event
+                      ,ios_base&amp; str,int cache)
+{  if (event == ios_base::imbue_event)                        //1
+   {
+      locale loc = str.getloc();
+      const phone_put&lt;char&gt;&amp; ppFacet = 
+                   use_facet&lt;phone_put&lt;char&gt; &gt; (loc);         //2
+
+      *((phone_put::prefixMap_t*) str.pword(cache)) = 
+                   *(ppFacet.country_codes());                //3
+   }
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>It checks whether the event was a change of the imbued locale,
+<TR VALIGN="top"><TD>//2</TD><TD>retrieves the phone number facet from the stream's locale, and
+<TR VALIGN="top"><TD>//3</TD><TD>stores the country code table in the cache. The cache is accessible via the stream's parray.
+</TABLE>
+
+<A NAME="593"><H3>5.9.3 Improving the Inserter</H3></A>
+<A NAME="idx146"><!></A>
+<P>We now have everything we need to improve our inserter. It registers a callback function that updates the cache whenever necessary. Registration is done only once, by declaring a static variable of class registerCallback_t.</P>
+<UL>
+<PRE>
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const phoneNo&amp; pn)
+{
+ static phone_put::prefixMap_t codes =
+    *(use_facet&lt;phone_put&gt;(os.getloc()).country_codes());     //1
+
+ static registerCallback_t cache(os,cacheCountryCodes,&amp;codes);//2
+
+  // some sophisticated output using the cached codes
+  ...
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The current country code table is cached.
+<TR VALIGN="top"><TD>//2</TD><TD>The callback function cacheCountryCodes is registered.
+</TABLE>
+
+
+<BR>
+<HR>
+<A HREF="5-8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="III.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

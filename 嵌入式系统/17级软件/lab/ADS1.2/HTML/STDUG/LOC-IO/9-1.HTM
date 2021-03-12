@@ -1,0 +1,48 @@
+<HTML><HEAD><TITLE>9.1 About File Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="9.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>9.1 About File Streams</H2>
+<A NAME="idx263"><!></A>
+<A NAME="fn8"><!></A>
+<P>File streams allow input and output to files. Unlike the C stdio functions for file I/O, however, file streams follow Stroustrup's idiom: "Resource acquisition is initialization."<SUP><A HREF="endnotes.htm#fn8">8</A></SUP> In other words, file streams provide an advantage in that you can open a file on construction of a stream, and the file is closed automatically on destruction of the stream. Consider the following code:</P>
+<UL>
+<PRE>
+void use_file(const char* fileName)
+{
+   FILE* f = fopen("fileName", "w");
+   // use file
+   fclose(f);
+}</PRE>
+</UL>
+<P>If an exception is thrown while the file is in use here, the file is never closed. With a file stream, however, the file is closed whenever the file stream goes out of scope, as in the following example:</P>
+<UL>
+<PRE>
+void use_file(const char* fileName)
+{
+   ofstream f("fileName");
+   // use file
+}</PRE>
+</UL>
+<P>Here the file is closed even if an exception occurs during use of the open file.</P>
+<A NAME="idx264"><!></A>
+<P>There are three class templates that implement file streams: <B><I>basic_ifstream &lt;charT,traits&gt;</I></B>, <B><I>basic_ofstream &lt;charT,traits&gt;</I></B>, and <B><I>basic_fstream &lt;charT,traits&gt;</I></B>. These templates are derived from the stream base class <B><I>basic_ios &lt;charT, traits&gt;</I></B>. Therefore, they inherit all the functions for formatted input and output described in <A HREF="7.htm">Chapter 7</A>, as well as the stream state. They also have functions for opening and closing files, and a constructor that allows opening a file and connecting it to the stream. For convenience, there are the regular typedefs <SAMP>ifstream</SAMP>, <SAMP>ofstream</SAMP>, and <SAMP>fstream</SAMP>, with <SAMP>wifstream</SAMP>, <SAMP>wofstream</SAMP>, and <SAMP>wfstream</SAMP> for the respective tiny and wide character file streams.</P>
+<P>The buffering is done through a specialized stream buffer class, <B><I>basic_filebuf &lt;charT,traits&gt;</I></B>.</P>
+
+<A NAME="idx265"><!></A>
+<A NAME="911"><H3>9.1.1 The Difference between Predefined Streams and File Streams</H3></A>
+<P>The main differences between a predefined standard stream and a file stream are:</P>
+<UL>
+<LI><P>A file stream needs to be connected to a file before it can be used. The predefined streams can be used right away, even in static constructors that are executed before the <SAMP>main()</SAMP> function is called.</P>
+</LI>
+<LI><P>You can reposition a file stream to arbitrary file positions. This usually does not make any sense with the predefined streams, as they are connected to the terminal by default.</P>
+</LI>
+</UL>
+
+<A NAME="idx266"><!></A>
+<A NAME="912"><H3>9.1.2 Code Conversion in Wide Character Streams</H3></A>
+<P>In a large character set environment, a file is assumed to contain multibyte characters. To provide the contents of a such a file as a wide character sequence for internal processing, <SAMP>wifstream</SAMP> and <SAMP>wofstream</SAMP> perform corresponding conversions. The actual conversion is delegated to the file buffer, which relays the task to the imbued locale's code conversion facet.</P>
+
+<HR>
+<A HREF="9.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

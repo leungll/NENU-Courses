@@ -1,0 +1,4 @@
+# ARM Applications Library
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+
+There are no test files for this component.

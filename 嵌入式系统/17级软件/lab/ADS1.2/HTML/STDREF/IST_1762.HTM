@@ -1,0 +1,304 @@
+<HTML><HEAD><TITLE>istreambuf_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ist_4337.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ist_1286.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>istreambuf_iterator</H2>
+<PRE><HR>istreambuf_iterator<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>input_iterator
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Nested Class Proxy">Nested Class Proxy</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Member Operators">Member Operators</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Non-member Functions">Non-member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Reads successive characters from the stream buffer for which it was constructed.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesistream_type">istream_type</A><BR>
+ <A HREF="#Typesstreambuf_type">streambuf_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typestraits_type">traits_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsequal()">equal()</A><BR>
+ <A HREF="#Member Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Member Operatorsoperator++()">operator++()</A><BR>
+ <A HREF="#Non-member Functionsoperator==()">operator==()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;streambuf&gt; 
+template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class istreambuf_iterator
+: public input_iterator</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>istreambuf_iterator</I></B> reads successive characters from the stream buffer for which it was constructed. <SAMP>operator*</SAMP> gives access to the current input character, if any, and <SAMP>operator++</SAMP> advances to the next input character. If the end of stream is reached, the iterator becomes equal to the end of stream iterator value, which is constructed by the default constructor, <SAMP>istreambuf_iterator()</SAMP>. An <B><I>istreambuf_iterator</I></B> object can be used only for one-pass-algorithms. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class istreambuf_iterator
+: public input_iterator {
+
+ public:
+
+  typedef charT                          char_type;
+  typedef typename traits::int_type      int_type;
+  typedef traits                         traits_type;
+  typedef basic_streambuf&lt;charT, traits&gt; streambuf_type;
+  typedef basic_istream&lt;charT, traits&gt;   istream_type;
+
+  class proxy;  
+  
+  istreambuf_iterator() throw();
+  istreambuf_iterator(istream_type&amp; s)  throw();
+  istreambuf_iterator(streambuf_type *s) throw();
+  istreambuf_iterator(const proxy&amp; p) throw();
+
+  char_type operator*();
+  istreambuf_iterator&lt;charT, traits&gt;&amp; operator++();
+  proxy operator++(int);
+  bool equal(istreambuf_iterator&lt;charT, traits&gt;&amp; b);
+
+};
+
+
+
+template&lt;class charT, class traits&gt;
+bool operator==(istreambuf_iterator&lt;charT, traits&gt;&amp; a,
+                istreambuf_iterator&lt;charT, traits&gt;&amp; b);
+
+template&lt;class charT, class traits&gt;
+bool operator !=(istreambuf_iterator&lt;charT, traits&gt;&amp; a,
+                istreambuf_iterator&lt;charT, traits&gt;&amp; b);</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesistream_type"></A><PRE><B>istream_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>istream_type</SAMP> is an instantiation of class <SAMP>basic_istream</SAMP> on types <SAMP>charT</SAMP> and <SAMP>traits</SAMP>:</P>
+<P><SAMP>typedef basic_istream&lt;charT, traits&gt;   istream_type;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typesstreambuf_type"></A><PRE><B>streambuf_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>streambuf_type</SAMP> is an instantiation of class <SAMP>basic_streambuf</SAMP> on types <SAMP>charT</SAMP> and <SAMP>traits</SAMP>: </P>
+<P><SAMP>typedef basic_streambuf&lt;charT, traits&gt; streambuf_type;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+<A NAME="Nested Class Proxy"><H3>Nested Class Proxy</H3></A>
+<P>Class <B><I>istreambuf_iterator&lt;charT,traits&gt;::proxy</I></B> is a temporary placeholder for the return value of the post-increment operator. It keeps the character pointed to by the previous value of the iterator for some possible future access. </P>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>istreambuf_iterator</B>()
+  throw();</PRE>
+
+<UL>
+<P>Constructs the end of stream iterator.</P>
+</UL>
+
+
+
+<PRE><B>istreambuf_iterator</B>(istream_type&amp; s) 
+  throw();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>istreambuf_iterator</SAMP> that inputs characters using the <SAMP>basic_streambuf</SAMP> object pointed to by <SAMP>s.rdbuf()</SAMP>. If <SAMP>s.rdbuf()</SAMP> is a null pointer, the <SAMP>istreambuf_iterator</SAMP> is the end-of-stream iterator.</P>
+</UL>
+
+
+
+<PRE><B>istreambuf_iterator</B>(streambuf_type *s) 
+  throw();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>istreambuf_iterator</SAMP> that inputs characters using the <SAMP>basic_streambuf</SAMP> object pointed to by <SAMP>s</SAMP>. If <SAMP>s</SAMP> is a null pointer, the <SAMP>istreambuf_iterator</SAMP> is the end-of-stream iterator.</P>
+</UL>
+
+
+
+<PRE><B>istreambuf_iterator</B>(const proxy&amp; p) 
+  throw();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>istreambuf_iterator</SAMP> that uses the <SAMP>basic_streambuf</SAMP> object embedded in the proxy object.</P>
+</UL>
+
+
+<A NAME="Member Operators"><H3>Member Operators</H3></A>
+
+
+<A NAME="Member Operatorsoperator*()"></A><PRE>char_type 
+<B>operator*</B>();</PRE>
+
+<UL>
+<P>Returns the character pointed to by the input sequence of the attached stream buffer. If no character is available, the iterator becomes equal to the end-of-stream iterator.</P>
+</UL>
+
+
+
+<A NAME="Member Operatorsoperator++()"></A><PRE>istreambuf_iterator&lt;charT, traits&gt;&amp; 
+<B>operator++</B>();</PRE>
+
+<UL>
+<P>Increments the input sequence of the attached stream buffer to point to the next character. If the current character is the last one, the iterator becomes equal to the end-of-stream iterator.</P>
+</UL>
+
+
+
+<PRE>proxy 
+<B>operator++</B>(int); </PRE>
+
+<UL>
+<P>Increments the input sequence of the attached stream buffer to point to the next character. If the current character is the last one, the iterator becomes equal to the end-of-stream iterator. The proxy object returned contains the character pointed to before carrying out the post-increment operator.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsequal()"></A><PRE>bool 
+<B>equal</B>(istreambuf_iterator&lt;charT, traits&gt;&amp; b); </PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if and only if both iterators are at end of stream, or neither is at end of stream, regardless of what stream buffer object they are using.</P>
+</UL>
+
+
+<A NAME="Non-member Functions"><H3>Non-member Functions</H3></A>
+
+
+<PRE>template&lt;class charT, class traits&gt;
+<A NAME="Non-member Functionsoperator==()"></A>bool 
+<B>operator==</B>(istreambuf_iterator&lt;charT, traits&gt;&amp; a,
+                istreambuf_iterator&lt;charT, traits&gt;&amp; b); </PRE>
+
+<UL>
+<P>Returns <SAMP>a.equal(b)</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template&lt;class charT, class traits&gt;
+bool 
+<B>operator==</B>(istreambuf_iterator&lt;charT, traits&gt;&amp; a,
+                istreambuf_iterator&lt;charT, traits&gt;&amp; b); </PRE>
+
+<UL>
+<P>Returns !(<SAMP>a.equal(b))</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// stdlib/examples/manual/istreambuf_iterator.cpp
+//
+#include&lt;iostream&gt;
+#include&lt;fstream&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  // open the file is_iter.out for reading and writing
+  ofstream out("is_iter.out", 
+                ios_base::out | ios_base::in );
+
+  // output the example sentence into the file
+  out &lt;&lt; "Ceci est un simple example pour demontrer le" 
+      &lt;&lt; endl;
+  out &lt;&lt; "fonctionement de istreambuf_iterator";
+
+  // seek to the beginning of the file
+  out.seekp(0);
+
+  // construct an istreambuf_iterator pointing to
+  // the ofstream object underlying stream buffer
+  istreambuf_iterator&lt;char&gt; iter(out.rdbuf());
+
+  // construct an end of stream iterator
+  istreambuf_iterator&lt;char&gt; end_of_stream_iterator;
+
+  cout &lt;&lt; endl;
+
+  // output the content of the file
+  while( !iter.equal(end_of_stream_iterator) )
+
+  // use both operator++ and operator*
+  cout &lt;&lt; *iter++;
+
+  cout &lt;&lt; endl;
+
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I><A HREF="ost_2389.htm">ostreambuf_iterator</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 24.5.3</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="ist_4337.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ist_1286.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

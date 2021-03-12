@@ -1,0 +1,81 @@
+<HTML><HEAD><TITLE>time_get_byname</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="tim_0622.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_8525.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>time_get_byname</H2>
+<PRE><HR>                               <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>time_get_base
+time_get_byname<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>time_get   
+                               <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A time formatting facet for input, based on the named locales.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT, class InputIterator = 
+          istreambuf_iterator&lt;charT&gt; &gt;
+class time_get_byname;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>time_get_byname</I></B> template has the same function as the <B><I><A HREF="tim_0622.htm"><A HREF="tim_0622.htm">time_get.</A></I></B></A>template, but is specific to a particular named locale. For a description of the member functions of <B><I>time_get_byname</I></B>, see the reference for <B><I>time_get.</I></B></P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT, class InputIterator =    
+          istreambuf_iterator&lt;charT&gt; &gt;
+class time_get_byname : public time_get&lt;charT, InputIterator&gt; {
+public:
+  explicit time_get_byname(const char*, size_t = 0);
+protected:
+  ~time_get_byname();  // virtual
+  virtual dateorder do_date_order()  const;
+  virtual iter_type do_get_time(iter_type, iter_type,
+          ios_base&amp;, ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_date(iter_type, iter_type,
+          ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_weekday(iter_type, iter_type,
+          ios_base&amp;, ios_base::iostate&amp; err, tm*) const;
+  virtual iter_type do_get_monthname(iter_type, iter_type,
+         ios_base&amp;, ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_year(iter_type, iter_type,
+          ios_base&amp;, ios_base::iostate&amp;, tm*) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>time_get_byname</B>(const char* name, 
+                           size_t refs = 0); </PRE>
+
+<UL>
+<P>Constructs a <B><I>time_get_byname</I></B> facet, which is a time formatting facet for input relative to the named locale specified by the <SAMP>name</SAMP> argument. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="tim_0622.htm">time_get</A></I></B>, <B><I><A HREF="tim_6283.htm">time_put_byname</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="tim_0622.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_8525.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,145 @@
+<HTML><HEAD><TITLE>Negators</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="neg_4682.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="nex_1756.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>Negators</H2>
+<PRE><HR>Function Object
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Function adaptors and function objects used to reverse the sense of predicate function objects.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;functional&gt;
+template &lt;class Predicate&gt;
+class <B>unary_negate</B>;
+
+template &lt;class Predicate&gt;
+unary_negate&lt;Predicate&gt; <B>not1</B>(const Predicate&amp;);
+
+template &lt;class Predicate&gt;
+class <B>binary_negate</B>;
+
+template &lt;class Predicate&gt;
+binary_negate&lt;Predicate&gt; <B>not2</B>(const Predicate&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Negators <B><I><A HREF="not_6483.htm">not1</A></I></B> and <B><I><A HREF="not_2978.htm">not2</A></I></B> are functions that take predicate function objects as arguments and return predicate function objects with the opposite sense. Negators work only with function objects defined as subclasses of the classes <B><I><A HREF="una_4659.htm">unary_function</A></I></B> and <B><I><A HREF="bin_7851.htm">binary_function</A></I></B>. <B><I>not1</I></B> accepts and returns unary predicate function objects. <B><I>not2</I></B> accepts and returns binary predicate function objects.</P>
+<P><B><I><A HREF="una_8062.htm">unary_negate</A></I></B> and <B><I><A HREF="bin_1825.htm">binary_negate</A></I></B> are function object classes that include return types for the negators, <B><I><A HREF="not_6483.htm">not1</A></I></B> and <B><I><A HREF="not_2978.htm">not2</A></I></B>.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class Predicate&gt;
+class unary_negate
+  : public unary_function
+           &lt;typename Predicate::argument_type, bool&gt; {
+
+public:
+  explicit unary_negate (const Predicate&amp;);
+  bool operator() (const argument_type&amp;) const;
+};
+
+template&lt;class Predicate&gt;
+unary_negate &lt;Predicate&gt; not1 (const Predicate&amp;);
+
+template&lt;class Predicate&gt;
+class binary_negate
+  : public binary_function
+           &lt;typename Predicate::first_argument_type,
+            typename Predicate::second_argument_type, bool&gt;
+{
+public:
+  explicit binary_negate (const Predicate&amp;);
+  bool operator() (const first_argument_type&amp;,
+                   const second_argument_type&amp;) const;
+};
+
+template &lt;class Predicate&gt;
+binary_negate&lt;Predicate&gt; not2 (const Predicate&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// negator.cpp
+//
+ #include&lt;functional&gt;
+ #include&lt;algorithm&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ //Create a new predicate from unary_function
+ template&lt;class Arg&gt;
+ class is_odd : public unary_function&lt;Arg, bool&gt;
+ {
+   public:
+   bool operator()(const Arg&amp; arg1) const
+   {
+     return (arg1 % 2 ? true : false);
+   }
+ };
+
+ int main()
+ {
+   less&lt;int&gt; less_func;
+
+   // Use not2 on less
+   cout &lt;&lt; (less_func(1,4) ? "TRUE" : "FALSE") &lt;&lt; endl;
+   cout &lt;&lt; (less_func(4,1) ? "TRUE" : "FALSE") &lt;&lt; endl;
+   cout &lt;&lt; (<B>not2</B>(less&lt;int&gt;())(1,4) ? "TRUE" : "FALSE") 
+        &lt;&lt; endl;
+   cout &lt;&lt; (<B>not2</B>(less&lt;int&gt;())(4,1) ? "TRUE" : "FALSE") 
+        &lt;&lt; endl;   
+
+   //Create an instance of our predicate
+   is_odd&lt;int&gt; odd;
+
+   // Use not1 on our user defined predicate
+   cout &lt;&lt; (odd(1) ? "TRUE" : "FALSE") &lt;&lt; endl;
+   cout &lt;&lt; (odd(4) ? "TRUE" : "FALSE") &lt;&lt; endl;
+   cout &lt;&lt; (<B>not1</B>(odd)(1) ? "TRUE" : "FALSE") &lt;&lt; endl;
+   cout &lt;&lt; (<B>not1</B>(odd)(4) ? "TRUE" : "FALSE") &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+TRUE
+FALSE
+FALSE
+TRUE
+TRUE
+FALSE
+FALSE
+TRUE</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Alg_5157.htm">Algorithms</A></I></B>, <B><I><A HREF="bin_7851.htm">binary_function</A></I></B>, <B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B>, <B><I><A HREF="una_4659.htm">unary_function</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="neg_4682.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="nex_1756.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

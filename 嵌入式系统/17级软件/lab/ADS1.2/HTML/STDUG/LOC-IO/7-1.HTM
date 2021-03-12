@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>7.1 The Predefined Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>7.1 The Predefined Streams</H2>
+
+<A NAME="idx220"><!></A>
+<P>There are eight predefined standard streams that are automatically created and initialized at program start. These standard streams are associated with the C standard files <SAMP>stdin</SAMP>, <SAMP>stdout</SAMP>, and <SAMP>stderr</SAMP>, as shown in <A HREF="#Table 5">Table 5</A>: </P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx221"><!></A>
+<H4><A NAME="Table 5">Table 5 -- Predefined standard streams with their associated C standard files</A></H4><tr><td valign=top><B>Narrow character<br> stream</B><td valign=top><B>Wide character<br> stream</B><td valign=top><B>Associated C standard<br> files</B>&nbsp;
+<tr><td valign=top>
+<SAMP>cin</SAMP><BR>
+<td valign=top>
+<SAMP>wcin</SAMP><BR>
+<td valign=top>
+<SAMP>stdin</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>cout</SAMP><BR>
+<td valign=top>
+<SAMP>wcout</SAMP><BR>
+<td valign=top>
+<SAMP>stdout</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>cerr</SAMP><BR>
+<td valign=top>
+<SAMP>wcerr</SAMP><BR>
+<td valign=top>
+<SAMP>stderr</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>clog</SAMP><BR>
+<td valign=top>
+<SAMP>wclog</SAMP><BR>
+<td valign=top>
+<SAMP>stderr</SAMP><BR>
+
+
+</TABLE>
+
+
+</P>
+<P>Like the C standard files, these streams are all associated by default with the terminal.</P>
+<P>The difference between <SAMP>clog</SAMP> and <SAMP>cerr</SAMP> is that <SAMP>clog</SAMP> is fully buffered, whereas output to <SAMP>cerr</SAMP> is written to the external device after each formatting. With a fully buffered stream, output to the actual external device is written only when the buffer is full. Thus <SAMP>clog</SAMP> is more efficient for redirecting output to a file, while <SAMP>cerr</SAMP> is mainly useful for terminal I/O. Writing to the external device after every formatting, to the terminal in the case of <SAMP>cerr</SAMP>, serves the purpose of synchronizing output to and input from the terminal.</P>
+<P>The standard streams are initialized in such a way that they can be used in constructors and destructors of static objects. Also, the predefined streams are synchronized with their associated C standard files. See <A HREF="14-6.htm">Section 14.6</A> for details.</P>
+
+<HR>
+<A HREF="7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

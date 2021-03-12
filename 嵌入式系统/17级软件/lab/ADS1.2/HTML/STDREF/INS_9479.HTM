@@ -1,0 +1,114 @@
+<HTML><HEAD><TITLE>Insert Iterators</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Inp_2368.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ins_0081.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>Insert Iterators</H2>
+<PRE><HR>Insert Iterator
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>An iterator adaptor that allows an iterator to insert into a container rather than overwrite elements in the container.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iterator&gt;
+template &lt;class Container&gt;
+class insert_iterator :
+      iterator&lt;output_iterator_tag,void,void,void,void&gt; ;
+
+template &lt;class Container&gt;
+class <B>back_insert_iterator</B>;
+
+template &lt;class Container&gt;
+class <B>front_insert_iterator</B>;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Insert iterators are iterator adaptors that let an iterator <I>insert</I> new elements into a collection rather than overwrite existing elements when copying to a container. There are several types of insert iterator classes.</P>
+<UL>
+<LI><P>The class<B><I> <A HREF="bac_0189.htm">back_insert_iterator</A></I></B> is used to insert items at the end of a collection. The function <SAMP>back_inserter</SAMP> can be used with an iterator inline, to create an instance of a <B><I>back_insert_iterator</I></B> for a particular collection type.</P>
+</LI>
+<LI><P>The class <B><I><A HREF="fro_0713.htm">front_insert_iterator</A></I></B> is used to insert items at the start of a collection. The function <SAMP>front_inserter</SAMP> creates an instance of a <B><I>front_insert_iterator</I></B> for a particular collection type. </P>
+</LI>
+<LI><P>An <B><I><A HREF="ins_0081.htm">insert_iterator</A></I></B> inserts new items into a collection at a location defined by an iterator supplied to the constructor. Like the other insert iterators, <B><I>insert_iterator</I></B> has a helper function called <SAMP>inserter</SAMP>, which takes a collection and an iterator into that collection, and creates an instance of the <B><I>insert_iterator</I></B>. </P>
+</LI>
+</UL>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class Container&gt;
+ class insert_iterator : public
+       iterator&lt;output_iterator_tag,void,void,void,void&gt; ; {
+
+public:
+   typedef Container container_type;
+   insert_iterator (Container&amp;, typename
+                    Container::iterator);
+   insert_iterator&lt;Container&gt;&amp;
+    operator= (const typename Container::value_type&amp;);
+   insert_iterator&lt;Container&gt;&amp; operator* ();
+   insert_iterator&lt;Container&gt;&amp; operator++ ();
+   insert_iterator&lt;Container&gt;&amp; operator++ (int);
+};
+
+template &lt;class Container&gt;
+ class back_insert_iterator : public
+       iterator&lt;output_iterator_tag,void,void,void,void&gt; ; {
+
+public:
+   typedef Container container_type;
+   explicit back_insert_iterator (Container&amp;);
+   back_insert_iterator&lt;Container&gt;&amp;
+    operator= (const typename Container::value_type&amp;);
+   back_insert_iterator&lt;Container&gt;&amp; operator* ();
+   back_insert_iterator&lt;Container&gt;&amp; operator++ ();
+   back_insert_iterator&lt;Container&gt; operator++ (int);
+};
+
+template &lt;class Container&gt;
+ class front_insert_iterator : public
+       iterator&lt;output_iterator_tag,void,void,void,void&gt; ; {
+
+public:
+   typedef Container container_type;
+   explicit front_insert_iterator (Container&amp;);
+   front_insert_iterator&lt;Container&gt;&amp;
+    operator= (const typename Container::value_type&amp;);
+   front_insert_iterator&lt;Container&gt;&amp; operator* ();
+   front_insert_iterator&lt;Container&gt;&amp; operator++ ();
+   front_insert_iterator&lt;Container&gt; operator++ (int);
+};
+
+ template &lt;class Container, class Iterator&gt;
+ insert_iterator&lt;Container&gt; inserter (Container&amp;, Iterator);
+ 
+ template &lt;class Container&gt;
+ back_insert_iterator&lt;Container&gt; back_inserter (Container&amp;);
+
+ template &lt;class Container&gt;
+ front_insert_iterator&lt;Container&gt; 
+                       front_inserter (Container&amp;);</PRE>
+
+</PRE>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bac_0189.htm">back_insert_iterator</A></I></B>, <B><I><A HREF="fro_0713.htm">front_insert_iterator</A></I></B>, <B><I><A HREF="ins_0081.htm">insert_iterator</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="Inp_2368.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ins_0081.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

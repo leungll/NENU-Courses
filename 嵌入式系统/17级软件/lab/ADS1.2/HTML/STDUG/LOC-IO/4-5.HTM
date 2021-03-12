@@ -1,0 +1,104 @@
+<HTML><HEAD><TITLE>4.5 Modifying a Standard Facet's Behavior</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="4-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="4-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>4.5 Modifying a Standard Facet's Behavior</H2>
+<A NAME="idx110"><!></A>
+<P>At times you may need to replace a facet object in a locale by another kind of facet object. In the following example, let us derive from one of the standard facet classes, numpunct, and create a locale object in which the standard numpunct facet object is replaced by an instance of our new, derived facet class. </P>
+<P>Here is the problem we want to solve. When you print boolean values, you can choose between the numeric representation of the values "true" and "false", or their alphanumeric representation. </P>
+<UL>
+<PRE>
+int main(int argc, char** argv)
+{
+   bool any_arguments = (argc &gt; 1);                           //1
+   cout.setf(ios_base::boolalpha);                            //2
+   cout &lt;&lt; any_arguments &lt;&lt; '\n';                             //3
+   // ...
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A variable of type bool is defined. Its initial value is the boolean value of the logical expression (argc &gt; 1), so the variable any_arguments contains the information, whether the program was called with or without arguments.
+<TR VALIGN="top"><TD>//2</TD><TD>The format flag ios_base:: boolalpha is set in the predefined output stream cout. The effect is that the string representation of boolean values is printed, instead of their numerical representation 0 or 1, which is the default representation.
+<TR VALIGN="top"><TD>//3</TD><TD>Here either the string "true" or the string "false" are printed.
+</TABLE>
+<P>Of course, the string representation depends on the language. Hence, the alphanumeric representation of boolean values is provided by a locale. It is the numpunct facet of a locale that describes the cultural conventions for numerical formatting. It contains services that return the string representations of the boolean values true and false.</P>
+<A NAME="idx111"><!></A>
+<P>This is the interface of facet numpunct:</P>
+<UL>
+<PRE>
+template &lt;class charT&gt;
+    class numpunct : public locale::facet {
+    public:
+      typedef charT               char_type;
+      typedef basic_string&lt;charT&gt; string_type;
+      explicit numpunct(size_t refs = 0);
+      string_type  decimal_point()   const;
+      string_type  thousands_sep()   const;
+      vector&lt;char&gt; grouping()        const;
+      string_type  <I>truename</I>()        const;
+      string_type  <I>falsename</I>()       const;
+      static locale::id id;
+};</PRE>
+</UL>
+<A NAME="idx112"><!></A>
+<P>Now let us replace this facet. To make it more exciting, let's use not only a different language, but also different words for true and false, such as Yes! and No!. For just using another language, we would not need a new facet; we would simply use the right native locale, and it would contain the right facet.</P>
+<UL>
+<PRE>
+template &lt;class charT&gt;                                         //1
+class change_bool_names
+    : public numpunct_byname&lt;charT&gt;                            //2
+{
+ public:
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit change_bool_names (const char* name,                //3
+      const charT* t, const charT* f, size_t refs=0)
+      : numpunct_byname&lt;charT&gt; (name,refs),
+        true_string(t), false_string(f) { }
+ protected:
+  string_type do_truename () const { return true_string; }     //4
+  string_type do_falsename () const { return false_string; }
+ private:
+  string_type true_string, false_string;
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The new facet is a class template that takes the character type as a template parameter.
+<TR VALIGN="top"><TD>//2</TD><TD>The new facet is derived from the numpunct_byname&lt;charT&gt; facet.
+<BR><BR>The byname facets read the respective locale information from the external representation of a C locale. The name provided to construct a byname facet is the name of a locale, as you would use it in a call to setlocale().
+<TR VALIGN="top"><TD>//3</TD><TD>A constructor is provided that takes a locale name and the new values we want to display for the alpha versions of <SAMP>true</SAMP> and <SAMP>false</SAMP>. The fourth parameter, <SAMP>refs</SAMP>, controls the facet's lifetime, as described in an earlier section.
+<TR VALIGN="top"><TD>//4</TD><TD>The virtual member functions do_truename() and do_falsename() are reimplemented. They are called by the public member functions truename() and falsename(). See the <I>Class</I> <I>Reference</I> for further details.
+</TABLE>
+<P>Now let's create a German locale in which the <SAMP>numpunct&lt;char&gt;</SAMP> facet has been replaced by an object of our new derived facet type, as shown in <A HREF="#Figure 11">Figure 11</A>:</P>
+
+<A NAME="idx113"><!></A>
+<H4><A NAME="Figure 11">Figure 11 -- Replacing the numpunct&lt;char&gt; facet object</A></H4>
+<IMG SRC="images/locfig12.gif">
+ 
+
+<A NAME="idx114"><!></A>
+<P>The code looks like this:</P>
+<UL>
+<PRE>
+void main(int argc, char** argv)
+{
+  locale loc(locale("de_DE"),                                 //1
+       new change_bool_names&lt;char&gt;("de_DE","Ja.","Nein."));   //2
+  cout.imbue(loc);                                            //3
+  cout &lt;&lt; "Argumente vorhanden? "  //Any arguments?
+       &lt;&lt; boolalpha &lt;&lt; (argc &gt; 1) &lt;&lt; endl;                    //4
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A locale object is constructed with an instance of the new facet class. The locale object has all facet objects from a German locale object, except that the new facet object change_bool_names substitutes for the numpunct facet object.
+<TR VALIGN="top"><TD>//2</TD><TD>The new facet object takes all information from a German numpunct facet object, and replaces the default native names for true and false with the provided strings "Ja."("Yes.") and "Nein."("No.").
+<TR VALIGN="top"><TD>//3</TD><TD>The standard output stream cout is imbued with the newly created locale.
+<TR VALIGN="top"><TD>//4</TD><TD>The expression (argc &gt; 1) yields a boolean value, which indicates whether the program was called with arguments. This boolean value's alphanumeric representation is printed to the standard output stream. The output might be:
+<BR><BR><SAMP>Argument vorhanden? Ja.</SAMP>
+</TABLE>
+
+<HR>
+<A HREF="4-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="4-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

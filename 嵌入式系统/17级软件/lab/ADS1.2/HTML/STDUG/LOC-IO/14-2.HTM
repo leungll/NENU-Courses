@@ -1,0 +1,69 @@
+<HTML><HEAD><TITLE>14.2 Explicit Synchronization</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.2 Explicit Synchronization</H2>
+
+<A NAME="idx390"><!></A>
+<P>You can force the stream to empty its buffer into an output file, or to refill its buffer from an input file. This is done through the stream buffer's function <SAMP>pubsync()</SAMP>. Typically, you call <SAMP>pubsync()</SAMP> indirectly through functions of the stream layer. Input streams and output streams have different member functions that implicitly call <SAMP>pubsync()</SAMP>.</P>
+
+<A NAME="1421"><H3>14.2.1  Output Streams</H3></A>
+<A NAME="idx391"><!></A>
+<P>Output streams have a <SAMP>flush()</SAMP> function that writes the buffer content to the file. In case of failure, <SAMP>badbit</SAMP> is set or an exception thrown, depending on the exception mask.</P>
+<UL>
+<PRE>
+ofstream ofstr("/tmp/fil");
+ofstr &lt;&lt; "Hello ";                                            //1
+ofstr &lt;&lt; "World!\n";
+ofstr.flush();                                                //2</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The attempt to extract anything from the file <SAMP>/tmp/fil</SAMP> after this insertion will probably fail, because the string <SAMP>"Hello"</SAMP> is buffered and not yet written to the external file.
+<TR VALIGN="top"><TD>//2</TD><TD>After the call to <SAMP>flush()</SAMP>, however, the file contains "<SAMP>Hello World!\n"</SAMP>.  (Incidentally, the call to <SAMP>ostr.flush()</SAMP> can be replaced by the <SAMP>flush</SAMP> manipulator; that is, <SAMP>ostr &lt;&lt; flush;</SAMP>)
+</TABLE>
+<P>Keep in mind that flushing is a time-consuming operation. The function <SAMP>flush()</SAMP> not only writes the buffer content to the file; it may also reread the buffer in order to maintain the current file position. For the sake of performance, you should avoid inadvertent flushing, as when the <SAMP>endl</SAMP> manipulator calls <SAMP>flush()</SAMP> on inserting the end-of-line character. (See <A HREF="7-3.htm#732">Section 7.3.2</A>.)</P>
+
+<A NAME="1422"><H3>14.2.2  Input Streams</H3></A>
+<A NAME="idx392"><!></A>
+<A NAME="fn17"><!></A>
+<P>Input streams have a <SAMP>sync()</SAMP> function. It forces the stream to access the external device and refill its buffer, beginning with the current file position.<SUP><A HREF="endnotes.htm#fn17">17</A></SUP> The example below demonstrates the principle theoretically. In real life, however, the two streams would belong to two separate processes and could use the shared file to communicate.</P>
+<UL>
+<PRE>
+ofstream ofstr("/tmp/fil");
+ifstream ifstr("/tmp/fil");
+string s;
+
+ofstr &lt;&lt; "Hello "
+ofstream::pos_type p = ofstr.tellp();
+ofstr &lt;&lt; "World!\n" &lt;&lt; flush;
+ifstr &gt;&gt; s;                                                   //1
+ 
+ofstr.seekp(p);
+ofstr &lt;&lt; "Peter!" &lt;&lt; flush;                                   //2
+ifstr &gt;&gt; s;                                                   //3
+
+ofstr &lt;&lt; " Happy Birthday!\n" &lt;&lt; flush;                       //4
+ifstr &gt;&gt; s;                                                   //5
+
+ifstr.sync();                                                 //6
+ifstr &gt;&gt; s;</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Here the input stream extracts the first string from the shared file. In doing so, the input stream fills its buffer. It reads as many characters from the external file as needed to fill the internal buffer. For this reason, the number of characters to be extracted from the file is implementation-specific; it depends on the size of the internal stream buffer. 
+<TR VALIGN="top"><TD>//2</TD><TD>The output stream overwrites part of the file content. Now the file content and the content of the input stream's buffer are inconsistent. The file contains <SAMP>"Hello Peter!"</SAMP>; the input stream's buffer still contains <SAMP>"Hello World!"</SAMP>.
+<TR VALIGN="top"><TD>//3</TD><TD>This extraction takes the string <SAMP>"World!"</SAMP> from the buffer instead of yielding <SAMP>"Peter!"</SAMP>, which is the current file content.
+<TR VALIGN="top"><TD>//4</TD><TD>More characters are appended to the external file. The file now contains <SAMP>"Hello Peter! Happy Birthday!"</SAMP>, whereas the input stream's buffer is still unchanged.
+<TR VALIGN="top"><TD>//5</TD><TD>This extraction yields nothing. The input stream filled its buffer with the entire content of the file because the file is so small in our toy example. Subsequent extractions made the input stream hit the end of its buffer, which is regarded as the end of the file as well. The extraction results in <SAMP>eofbit</SAMP> set, and nothing is extracted. There is no reason to ever access the external file again.
+<TR VALIGN="top"><TD>//6</TD><TD>A call to <SAMP>sync()</SAMP> eventually forces the input stream to refill the buffer from the external device, beginning with the current file position. After the synchronization, the input stream's buffer contains <SAMP>"Happy Birthday!\n"</SAMP>. The next extraction yields <SAMP>"Happy"</SAMP>.
+<BR><BR>As the standard specifies the behavior of <SAMP>sync()</SAMP> as implementation-defined, you can alternatively try repositioning the input stream to the current position instead; for example, <SAMP>istr.seekg(ios_base::cur);</SAMP>.
+</TABLE>
+<BLOCKQUOTE><HR>
+<B><A NAME="idx393"><!></A>
+NOTE: If you must synchronize several streams that share a file, it is advisable to call the <SAMP>sync()</SAMP> function after each output operation and before each input operation.
+</B><HR></BLOCKQUOTE>
+
+<HR>
+<A HREF="14-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,33 @@
+<HTML><HEAD><TITLE>14.4 Implicit Synchronization by Tying Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.4 Implicit Synchronization by Tying Streams</H2>
+
+<A NAME="idx396"><!></A>
+<P>Another mechanism for automatic synchronization in certain cases is tying a stream to an output stream, as demonstrated in the code below. All input or output operations flush the tied stream's buffer before they perform the actual operation.</P>
+<UL>
+<PRE>
+ofstream ostr("/tmp/fil");
+ifstream istr("/tmp/fil");
+ostream* old_tie = istr.tie(&amp;ostr);                           //1
+ 
+while (some_condition)
+{ ostr &lt;&lt; " some output ";
+  string s;
+  while (istr &gt;&gt; s)                                           //2
+     // process input ;
+}
+
+istr.tie(old_tie);                                            //3</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The input stream <SAMP>istr</SAMP> is tied to the output stream <SAMP>ostr</SAMP>. The <SAMP>tie()</SAMP> function returns a pointer to the previously tied output stream, or <SAMP>0</SAMP> if no output stream is tied.
+<TR VALIGN="top"><TD>//2</TD><TD>Before any input is done, the tied output stream's buffer is flushed so that the result of previous output operations to <SAMP>ostr</SAMP> is available in the external file <SAMP>/tmp/fil</SAMP>.
+<TR VALIGN="top"><TD>//3</TD><TD>The previous tie is restored.
+</TABLE>
+
+<HR>
+<A HREF="14-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,375 @@
+<HTML><HEAD><TITLE>char_traits</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="cer_5818.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cin_0825.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>char_traits</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Types Default-Values">Types Default-Values</A></LI>
+<LI><A HREF="#Value Functions">Value Functions</A></LI>
+<LI><A HREF="#Test Functions">Test Functions</A></LI>
+<LI><A HREF="#Conversion Functions">Conversion Functions</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A traits class with types and operations for the <B><I><A HREF="bas_0007.htm">basic_string</A></I></B> container and <B><I>iostream</I></B> classes.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesstate_type">state_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Value Functionsassign()">assign()</A><BR>
+ <A HREF="#Test Functionscompare()">compare()</A><BR>
+ <A HREF="#Value Functionscopy()">copy()</A><BR>
+ <A HREF="#Value Functionseof()">eof()</A><BR>
+ <A HREF="#Test Functionseq()">eq()</A><BR>
+ <A HREF="#Test Functionseq_int_type()">eq_int_type()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Value Functionsfind()">find()</A><BR>
+ <A HREF="#Value Functionslength()">length()</A><BR>
+ <A HREF="#Test Functionslt()">lt()</A><BR>
+ <A HREF="#Value Functionsmove()">move()</A><BR>
+ <A HREF="#Value Functionsnot_eof()">not_eof()</A><BR>
+ <A HREF="#Conversion Functionsto_char_type()">to_char_type()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Conversion Functionsto_int_type()">to_int_type()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;string&gt;
+template&lt;class charT&gt;
+struct char_traits</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template structure <B><I>char_traits&lt;charT&gt;</I></B> defines the types and functions necessary to implement the <B><I>iostreams</I></B> and <B><I><A HREF="str_8586.htm">string</A> </I></B>template classes. It is templatized on <SAMP>charT</SAMP>, which represents the character container type. Each specialized version of <B><I>char_traits&lt;charT&gt;</I></B> includes the default definitions corresponding to the specialized character container type.</P>
+<P>Users have to provide specialization for <B><I>char_traits</I></B> if they use character types other than <SAMP>char</SAMP> and <SAMP>wchar_t</SAMP>. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT&gt; 
+struct char_traits {
+
+  typedef charT                     char_type;
+  typedef INT_T                     int_type;
+  typedef POS_T                     pos_type;
+  typedef OFF_T                     off_type;
+  typedef STATE_T                   state_type;
+
+  static char_type    to_char_type(const int_type&amp;); 
+  static int_type     to_int_type(const char_type&amp;);
+  static bool         eq(const char_type&amp;,const char_type&amp;);
+  static bool         eq_int_type(const int_type&amp;,
+                                  const int_type&amp;);
+
+  static int_type         eof();
+  static int_type         not_eof(const int_type&amp;);
+
+  static void             assign(char_type&amp;,
+                                 const char_type&amp;);
+  static bool             lt(const char_type&amp;,
+                             const char_type&amp;);
+  static int              compare(const char_type*,
+                                  const char_type*,size_t);
+  static size_t           length(const char_type*);
+  static const char_type* find(const char_type*,int n,
+                               const char_type&amp;);
+
+  static char_type*       move(char_type*,
+                               const char_type*,size_t);
+  static char_type*       copy(char_type*,const char_type*,
+                               size_t);
+  static char_type*       assign(char_type*,size_t,
+                                 const char_type&amp;);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> represents the character container type. It must be convertible to <SAMP>int_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is another character container type that can also hold an end-of-file value. It is used as the return type of some of the iostream class member functions. If <SAMP>char_type</SAMP> is either <SAMP>char</SAMP> or <SAMP>wchar_t</SAMP>, <SAMP>int_type</SAMP> is <SAMP>int</SAMP> or <SAMP>wint_t</SAMP>, respectively.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> represents offsets to positional information. It is used to represent:</P>
+</UL>
+
+<UL><UL>
+<LI><P>A signed displacement, measured in characters, from a specified position within a sequence.</P>
+</LI>
+<LI><P>An absolute position within a sequence.</P>
+</LI>
+</UL></UL>
+<UL>
+<P>The value <SAMP>off_type(-1)</SAMP> can be used as an error indicator. Value of type <SAMP>off_type</SAMP> can be converted to type <SAMP>pos_type,</SAMP> but no validity of the resulting <SAMP>pos_type</SAMP> value is ensured.</P>
+<P>If <SAMP>char_type</SAMP> is either <SAMP>char</SAMP> or <SAMP>wchar_t</SAMP>, <SAMP>off_type</SAMP> is <SAMP>streamoff</SAMP> or <SAMP>wstreamoff</SAMP>, respectively.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> describes an object that can store all the information necessary to restore an arbitrary sequence to a previous stream position and conversion state. The conversion <SAMP>pos_type(off_type(-1))</SAMP> constructs the invalid <SAMP>pos_type</SAMP> value to signal error.</P>
+<P>If <SAMP>char_type</SAMP> is either <SAMP>char</SAMP> or <SAMP>wchar_t</SAMP>, <SAMP>pos_type</SAMP> is <SAMP>streampos</SAMP> or <SAMP>wstreampos</SAMP>, respectively.</P>
+</UL>
+
+
+
+<A NAME="Typesstate_type"></A><PRE><B>state_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>state_type</SAMP> holds the conversion state, and is compatible with the function <SAMP>locale::codecvt()</SAMP>.</P>
+<P>If <SAMP>char_type</SAMP> is either <SAMP>char</SAMP> or <SAMP>wchar_t</SAMP>, <SAMP>state_type</SAMP> is <SAMP>mbstate_t</SAMP>.</P>
+</UL>
+
+
+<A NAME="Types Default-Values"><H3>Types Default-Values</H3></A>
+<P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>specialization type<B></TH>
+<TH><B>on char<B></TH>
+<TH><B>on wchar_t<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>char_type</SAMP><BR>
+</TD>
+<TD>
+<SAMP>char</SAMP><BR>
+</TD>
+<TD>
+<SAMP>wchar_t</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>int_type</SAMP><BR>
+</TD>
+<TD>
+<SAMP>int</SAMP><BR>
+</TD>
+<TD>
+<SAMP>wint_t</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>off_type</SAMP><BR>
+</TD>
+<TD>
+<SAMP>streamoff</SAMP><BR>
+</TD>
+<TD>
+<SAMP>wstreamoff</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>pos_type</SAMP><BR>
+</TD>
+<TD>
+<SAMP>streampos</SAMP><BR>
+</TD>
+<TD>
+<SAMP>wstreampos</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>state_type</SAMP><BR>
+</TD>
+<TD>
+<SAMP>mbstate_t</SAMP><BR>
+</TD>
+<TD>
+<SAMP>mbstate_t</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+
+<A NAME="Value Functions"><H3>Value Functions</H3></A>
+
+
+<A NAME="Value Functionsassign()"></A><PRE>void 
+<B>assign</B>(char_type&amp; c1, const char_type&amp; c2);</PRE>
+
+<UL>
+<P>Assigns one character value to another. The value of <SAMP>c2</SAMP> is assigned to <SAMP>c1</SAMP>.</P>
+</UL>
+
+
+
+<PRE>char_type*
+<B>assign</B>(char_type* s, size_t n, const char_type&amp; a);</PRE>
+
+<UL>
+<P>Assigns one character value to <SAMP>n</SAMP> elements of a character array. The value of <SAMP>a</SAMP> is assigned to <SAMP>n</SAMP> elements of <SAMP>s</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Value Functionscopy()"></A><PRE>char_type* 
+<B>copy</B>(char_type* s1, const char_type* s2, size_t n);</PRE>
+
+<UL>
+<P>Copies <SAMP>n</SAMP> characters from the object pointed to by <SAMP>s1</SAMP> into the object pointed to by <SAMP>s2</SAMP>. The ranges of <SAMP>(s1,s1+n)</SAMP> and <SAMP>(s2,s2+n)</SAMP> may not overlap.</P>
+</UL>
+
+
+
+<A NAME="Value Functionseof()"></A><PRE>int_type 
+<B>eof</B>();</PRE>
+
+<UL>
+<P>Returns an <SAMP>int_type</SAMP> value that represents the end-of-file. It is returned by several functions to indicate end-of-file state, or to indicate an invalid return value.</P>
+</UL>
+
+
+
+<A NAME="Value Functionsfind()"></A><PRE>const char_type* 
+<B>find</B>(const char_type* s, int n, const char_type&amp; a);</PRE>
+
+<UL>
+<P>Looks for the value of <SAMP>a</SAMP> in <SAMP>s</SAMP>. Only <SAMP>n</SAMP> elements of <SAMP>s</SAMP> are examined. Returns a pointer to the matched element if one is found. Otherwise returns <SAMP>0</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Value Functionslength()"></A><PRE>size_t 
+<B>length</B>(const char_type* s);</PRE>
+
+<UL>
+<P>Returns the length of a null terminated character string pointed to by <SAMP>s</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Value Functionsmove()"></A><PRE>char_type* 
+<B>move</B>(char_type* s1, const char_type* s2, size_t n);</PRE>
+
+<UL>
+<P>Moves <SAMP>n</SAMP> characters from the object pointed to by <SAMP>s1</SAMP> into the object pointed to by <SAMP>s2</SAMP>. The ranges of <SAMP>(s1,s1+n)</SAMP> and <SAMP>(s2,s2+n)</SAMP> may overlap.</P>
+</UL>
+
+
+
+<A NAME="Value Functionsnot_eof()"></A><PRE>int_type 
+<B>not_eof</B>(const int_type&amp; c);</PRE>
+
+<UL>
+<P>Returns <SAMP>c</SAMP> if <SAMP>c</SAMP> is not equal to the end-of-file value. Otherwise returns <SAMP>0</SAMP>.</P>
+</UL>
+
+
+<A NAME="Test Functions"><H3>Test Functions</H3></A>
+
+
+<A NAME="Test Functionscompare()"></A><PRE>int 
+<B>compare</B>(const char_type* s1,const char_type* s2,size_t n);</PRE>
+
+<UL>
+<P>Compares <SAMP>n</SAMP> values from <SAMP>s1</SAMP> with <SAMP>n</SAMP> values from <SAMP>s2</SAMP>. Returns <SAMP>1</SAMP> if <SAMP>s1</SAMP> is greater than <SAMP>s2</SAMP>, <SAMP>-1</SAMP> if <SAMP>s1</SAMP> is less than <SAMP>s2,</SAMP> or <SAMP>0</SAMP> if they are equal. </P>
+</UL>
+
+
+
+<A NAME="Test Functionseq()"></A><PRE>bool 
+<B>eq</B>(const char_type&amp; c1, const char_type&amp; c2);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>c1</SAMP> and <SAMP>c2</SAMP> represent the same character. </P>
+</UL>
+
+
+
+<A NAME="Test Functionseq_int_type()"></A><PRE>bool 
+<B>eq_int_type</B>(const int_type&amp; c1, const int_type&amp; c2);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>c1</SAMP> and <SAMP>c2</SAMP> are equal.</P>
+</UL>
+
+
+
+<A NAME="Test Functionslt()"></A><PRE>bool 
+<B>lt</B>(const char_type&amp; c1,const char_type&amp; c2);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>c1</SAMP> is less than <SAMP>c2</SAMP>.</P>
+</UL>
+
+
+<A NAME="Conversion Functions"><H3>Conversion Functions</H3></A>
+
+
+<A NAME="Conversion Functionsto_char_type()"></A><PRE>char_type 
+<B>to_char_type</B>(const int_type&amp; c);</PRE>
+
+<UL>
+<P>Converts a valid character represented by a value of type <SAMP>int_type</SAMP> to the corresponding <SAMP>char_type</SAMP> value. </P>
+</UL>
+
+
+
+<A NAME="Conversion Functionsto_int_type()"></A><PRE>int_type 
+<B>to_int_type</B>(const char_type&amp; c);</PRE>
+
+<UL>
+<P>Converts a valid character represented by a value of type <SAMP>char_type</SAMP> to the corresponding <SAMP>int_type</SAMP> value.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="ios_2665.htm">iosfwd</A></I></B>(3C++), <B><I><A HREF="fpo_1231.htm">fpos</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 21.1.4, 21.1.5, 27.1.2.</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="cer_5818.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cin_0825.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

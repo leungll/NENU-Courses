@@ -1,0 +1,54 @@
+<HTML><HEAD><TITLE>14.5 Merge Ordered Sequences</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.5 Merge Ordered Sequences</H2>
+<A NAME="idx353"><!></A>
+<P>The algorithm <SAMP>merge()</SAMP> combines two ordered sequences to form a new ordered sequence. The size of the result is the sum of the sizes of the two argument sequences. This should be contrasted with the <SAMP>set_union()</SAMP> operation, which eliminates elements that are duplicated in both sets. The <SAMP>set_union()</SAMP> function is described later in this chapter.</P>
+<P>The merge operation is stable. This means, for equal elements in the two ranges, not only is the relative ordering of values from each range preserved, but the values from the first range always precede the elements from the second. The two ranges are described by a pair of <B><I><A HREF="../../stdref/ite_5554.htm">iterator</A></I></B>s, whereas the result is defined by a single output <B><I>iterator</I></B>. The arguments are shown in the following declaration:</P>
+<UL>
+<PRE>
+OutputIterator merge (InputIterator first1, InputIterator last1,
+   InputIterator first2, InputIterator last2,
+   OutputIterator result [, Compare ]);</PRE>
+</UL>
+<P>The example program illustrates a simple merge, the use of a merge with an inserter, and the use of a merge with an output stream <B><I><A HREF="../../stdref/ite_5554.htm">iterator</A></I></B>.</P>
+<UL>
+<PRE>
+void merge_example ()</PRE>
+<A NAME="idx354"><!></A>
+<PRE>   // illustrates the use of the merge algorithm
+   // see alg7.cpp for complete source code
+
+{
+      // make a list and vector of 10 random integers
+   vector&lt;int&gt; aVec(10);
+   list&lt;int&gt; aList(10, 0);
+   generate (aVec.begin(), aVec.end(), randomValue);
+   sort (aVec.begin(), aVec.end());
+   generate_n (aList.begin(), 10, randomValue);
+   aList.sort();
+
+      // merge into a vector
+   vector&lt;int&gt; vResult (aVec.size() + aList.size());
+   merge (aVec.begin(), aVec.end(), aList.begin(), aList.end(),
+      vResult.begin());
+
+      // merge into a list
+   list&lt;int&gt; lResult;
+   merge (aVec.begin(), aVec.end(), aList.begin(), aList.end(),
+      inserter(lResult, lResult.begin()));
+
+      // merge into the output
+   merge (aVec.begin(), aVec.end(), aList.begin(), aList.end(),
+      ostream_iterator&lt;int,char&gt; (cout, " "));
+   cout &lt;&lt; endl;
+
+}</PRE>
+</UL>
+<A NAME="idx355"><!></A>
+<P>The algorithm <SAMP>inplace_merge()</SAMP> (<A HREF="13-4.htm#1346">Section 13.4.6</A>) can be used to merge two sections of a single sequence into one sequence.</P>
+
+<HR>
+<A HREF="14-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,254 @@
+<HTML><HEAD><TITLE>numpunct, numpunct_byname</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="num_5679.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Ope_8344.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>numpunct, numpunct_byname</H2>
+<PRE><HR>numpunct<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric punctuation facet. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsdecimal_point()">decimal_point()</A><BR>
+ <A HREF="#Protected Member Functionsdo_decimal_point()">do_decimal_point()</A><BR>
+ <A HREF="#Protected Member Functionsdo_falsename()">do_falsename()</A><BR>
+ <A HREF="#Protected Member Functionsdo_grouping()">do_grouping()</A><BR>
+ <A HREF="#Protected Member Functionsdo_thousands_sep()">do_thousands_sep()</A><BR>
+ <A HREF="#Protected Member Functionsdo_truename()">do_truename()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsfalsename()">falsename()</A><BR>
+ <A HREF="#Public Member Functionsgrouping()">grouping()</A><BR>
+ <A HREF="#Public Member Functionsthousands_sep()">thousands_sep()</A><BR>
+ <A HREF="#Public Member Functionstruename()">truename()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT&gt;  class numpunct;
+template &lt;class charT&gt;  class numpunct_byname;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>numpunct&lt;charT&gt;</I></B> facet specifies numeric punctuation. <B><I>numpunct</I></B> is used with the "C" locale, while the <B><I>numpunct_byname</I></B> facet is used with named locales.</P>
+<P>Both <B><I><A HREF="num_8322.htm">num_put</A></I></B> and <B><I><A HREF="num_6413.htm">num_get</A></I></B> make use of this facet. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT&gt;
+class numpunct : public locale::facet {
+public:
+  typedef charT               char_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit numpunct(size_t refs = 0);
+  char_type    decimal_point()   const;
+  char_type    thousands_sep()   const;
+  string       grouping()        const;
+  string_type  truename()        const;
+  string_type  falsename()       const;
+  static locale::id id;
+protected:
+  ~numpunct();  // virtual
+  virtual char_type    do_decimal_point() const;
+  virtual char_type    do_thousands_sep() const;
+  virtual string       do_grouping()      const;
+  virtual string_type  do_truename()     const;  // for bool
+  virtual string_type  do_falsename()    const;  // for bool
+};
+
+template &lt;class charT&gt;
+class numpunct_byname : public numpunct&lt;charT&gt; {
+public:
+  explicit numpunct_byname(const char*, size_t refs = 0);
+protected:
+  ~numpunct_byname();  // virtual
+  virtual char_type    do_decimal_point() const;
+  virtual char_type    do_thousands_sep() const;
+  virtual string       do_grouping()      const;
+  virtual string_type  do_truename()     const;  // for bool
+  virtual string_type  do_falsename()    const;  // for bool
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character upon which the facet is instantiated.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string returned by member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>numpunct</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Constructs a <B><I>numpunct</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+
+<PRE>explicit <B>numpunct_byname</B>(const char* name, 
+         size_t refs = 0); </PRE>
+
+<UL>
+<P>Constructs a <B><I>numpunct_byname</I></B> facet. Uses the named locale specified by the name argument. The <SAMP>refs</SAMP> argument serves the same purpose as it does for the <B><I>numpunct</I></B> constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~numpunct</B>();  // virtual and protected
+<B>~numpunct_byname</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+<PRE>
+<PRE>static locale::id <B>id</B>;</PRE>
+
+</PRE>
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>numpunct</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>grouping</SAMP> function simply calls its protected cousin <SAMP>do_grouping</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsdecimal_point()"></A><PRE>char_type    <B>decimal_point</B>()   const; 
+<A NAME="Public Member Functionsfalsename()"></A>string_type  <B>falsename</B>()       const; 
+<A NAME="Public Member Functionsgrouping()"></A>string       <B>grouping</B>()        const; 
+<A NAME="Public Member Functionsthousands_sep()"></A>char_type    <B>thousands_sep</B>()   const; 
+<A NAME="Public Member Functionstruename()"></A>string_type  <B>truename</B>()        const; </PRE>
+
+<UL>
+<P>Each of these public member functions <SAMP>xxx</SAMP> simply call the corresponding protected <SAMP>do_xxx</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_decimal_point()"></A><PRE>virtual char_type    
+<B>do_decimal_point</B>() const; </PRE>
+
+<UL>
+<P>Returns the decimal radix separator. <B><I>numpunct</I></B> returns `<SAMP>.</SAMP>'.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_falsename()"></A><PRE>virtual string_type  
+<B>do_falsename</B>()     const;  // for bool
+<A NAME="Protected Member Functionsdo_truename()"></A>virtual string_type  
+<B>do_truename</B>()      const;  // for bool</PRE>
+
+<UL>
+<P>Returns a string containing <SAMP>true</SAMP> or <SAMP>false</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_grouping()"></A><PRE>virtual string       
+<B>do_grouping</B>()      const; </PRE>
+
+<UL>
+<P>Returns a string in which each character is used as an integer value to represent the number of digits in a particular grouping, starting with the rightmost group. A group is simply the digits between adjacent thousands separators. Each group at a position larger than the size of the string gets the same value as the last element in the string. If a value is less than or equal to zero, or equal to <SAMP>CHAR_MAX</SAMP>, then the size of that group is unlimited. <B><I>numpunct</I></B> returns an empty string, indicating no grouping.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_thousands_sep()"></A><PRE>virtual char_type    
+<B>do_thousands_sep</B>() const; </PRE>
+
+<UL>
+<P>Returns the decimal digit group separator. <B><I>numpunct</I></B> returns `<SAMP>,</SAMP>'.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// numpunct.cpp
+//
+
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+  locale loc;
+
+  // Get a numpunct facet
+  const numpunct&lt;char&gt;&amp; np = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;numpunct&lt;char&gt; &gt;(loc);
+#else
+  use_facet(loc,(numpunct&lt;char&gt;*)0);
+#endif
+
+  cout &lt;&lt; "Decimal point       = " 
+       &lt;&lt; np.decimal_point() &lt;&lt; endl; 
+  cout &lt;&lt; "Thousands separator = " 
+       &lt;&lt; np.thousands_sep() &lt;&lt; endl; 
+  cout &lt;&lt; "True name           = " 
+       &lt;&lt; np.truename() &lt;&lt; endl; 
+  cout &lt;&lt; "False name          = " 
+       &lt;&lt; np.falsename() &lt;&lt; endl; 
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="num_8322.htm">num_put</A></I></B>, <B><I><A HREF="num_6413.htm">num_get</A></I></B>, <B><I><A HREF="cty_0953.htm">ctype</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="num_5679.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Ope_8344.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

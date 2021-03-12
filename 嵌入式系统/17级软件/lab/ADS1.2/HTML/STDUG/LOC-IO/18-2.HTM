@@ -1,0 +1,143 @@
+<HTML><HEAD><TITLE>18.2 Deriving New Stream Buffer Classes</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="18-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>18.2 Deriving New Stream Buffer Classes</H2>
+
+<A NAME="idx450"><!></A>
+<P>Deriving a new <B><I>streambuf</I></B> class is not commonly necessary, but it can be extraordinarily useful when specialized behavior is needed. For example, consider a log book stream that starts writing at the beginning after reaching a certain size, so that the log file does not grow infinitely. In order to implement this new class, we first need to derive a new stream buffer type. The easiest way to do this is to derive from <B><I>filebuf</I></B>, and then reimplement one of the protected virtual functions:</P>
+<UL>
+<PRE>
+template &lt;class charT, class traits&gt;
+class logbuffer : public std::basic_filebuf&lt;charT,traits&gt;
+{
+  
+  std::streamsize max_size;
+  
+public:
+  typedef charT            char_type;            // 1
+  typedef traits::int_type int_type;
+  typedef traits::off_type off_type;
+  typedef traits::pos_type pos_type;
+  typedef traits           traits_type;
+  
+  logbuffer(std::streamsize sz) : max_size(sz)   // 2
+  { ; }
+  
+protected:
+  int_type overflow(int_type c = traits::eof()); // 3
+
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>All streams should have these types defined.
+<TR VALIGN="top"><TD>//2</TD><TD>This constructor takes a size parameter that we'll use to limit the size of the log file.
+<TR VALIGN="top"><TD>//3</TD><TD>The protected virtual function <SAMP>overflow(char_type)</SAMP> is called whenever a stream attempts to write to the stream buffer when the <SAMP>put</SAMP> area is full. We re-implement the function in order to reset the file pointer to the beginning whenever the file gets too large.
+</TABLE>
+<A NAME="idx451"><!></A>
+<P>The <SAMP>overflow</SAMP> function is implemented as follows:</P>
+<UL>
+<PRE>
+template &lt;class charT, class traits&gt;
+logbuffer&lt;charT,traits&gt;::int_type
+logbuffer&lt;charT,traits&gt;::overflow(logbuffer&lt;charT,traits&gt;::int_type c)
+{
+  using std::ios_base;
+  using std::basic_filebuf;
+  std::streamsize len = epptr() - pbase();                  // 1
+  int_type ret = basic_filebuf&lt;charT,traits&gt;::overflow(c);  // 2
+  
+  if (seekoff(0,ios_base::cur) &gt; max_size - len)            // 3
+    seekoff(0,ios_base::beg);                               // 4
+  return ret;                                               // 5
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>First, retain the size of the <SAMP>put</SAMP> area of the buffer in a local variable. Both <SAMP>epptr()</SAMP> and <SAMP>pbase()</SAMP> are protected functions in <B><I><A HREF="../../stdref/bas_0582.htm">basic_streambuf</A></I></B> that return, respectively, the beginning and end of the <SAMP>put</SAMP> area. Other protected functions return the beginning and end of the <SAMP>get</SAMP> area, and also the current <SAMP>get</SAMP> and <SAMP>put</SAMP> positions. See the <I>Class Reference</I> for a full description of these functions.
+<TR VALIGN="top"><TD>//2</TD><TD>Next, call <B><I>filebuf</I></B>'s <SAMP>ovrflow</SAMP> to write the <SAMP>put</SAMP> area of the buffer out to the file.
+<TR VALIGN="top"><TD>//3</TD><TD>Now use <SAMP>seekoff</SAMP> to get the current stream position and see if the distance between that and our maximum file size is less than the size of the <SAMP>put</SAMP> buffer. If it is, the next flush of the <SAMP>put</SAMP> area will exceed the maximum size we've set for the file.
+<TR VALIGN="top"><TD>//4</TD><TD>Seek back to the beginning of the <SAMP>stream(file)</SAMP> when the log is getting too large. Future writes to the stream will overwrite the contents of the log file starting at the beginning.
+<TR VALIGN="top"><TD>//5</TD><TD>Finally, return the value we got from <B><I>filebuf</I></B>'s <SAMP>overflow</SAMP> function.
+</TABLE>
+<A NAME="idx452"><!></A>
+<P>In order to use this new <B><I>logbuf</I></B> class, we'll also need a new <B><I>logstream</I></B> class:</P>
+<UL>
+<PRE>
+template &lt;class charT, class traits&gt;
+class logstream : public std::basic_iostream&lt;charT,traits&gt;
+{
+  logbuffer&lt;charT,traits&gt; buf;               // 1
+public:
+  typedef charT            char_type;        // 2
+  typedef traits::int_type int_type;
+  typedef traits::off_type off_type;
+  typedef traits::pos_type pos_type;
+  typedef traits           traits_type;
+  
+  logstream(std::streamsize sz, char* file); // 3
+  logbuffer&lt;charT,traits&gt; *rdbuf() const     // 4
+  {
+    return (logbuffer&lt;charT,traits&gt;*)&amp;buf;
+  }
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>This private member provides us with a <B><I>logbuffer</I></B> object.
+<TR VALIGN="top"><TD>//2</TD><TD>Again, we want to define the standard set of types.
+<TR VALIGN="top"><TD>//3</TD><TD>This constructor creates a stream with the given maximum size and the given file name.
+<TR VALIGN="top"><TD>//4</TD><TD><SAMP>rdbuf</SAMP> returns a pointer to the <SAMP>logbuffer</SAMP>.
+</TABLE>
+<A NAME="idx453"><!></A>
+<P>Finally, we implement our new log stream class as shown here:</P>
+<UL>
+<PRE>
+template &lt;class charT, class traits&gt;
+logstream&lt;charT,traits&gt;::logstream(std::streamsize sz, char* file)
+    : buf(sz)
+{
+  using std::ios_base;
+  
+  init(&amp;buf);                                          // 1
+  if ( !buf.open(file, ios_base::out) )                // 2
+    setstate(ios_base::failbit);
+  buf.pubseekoff(0,ios_base::beg);                     // 3
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The <SAMP>ios_base::init()</SAMP> function initializes the base class. In part the initialization consists of installing a pointer to the <B><I>logbuffer</I></B> in the <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> so base classes have access to the buffer.
+<TR VALIGN="top"><TD>//2</TD><TD>Open the file for writing.
+<TR VALIGN="top"><TD>//3</TD><TD>Always start out writing at the beginning.
+</TABLE>
+<A NAME="idx454"><!></A>
+<P>We can use this new log buffer class as follows:</P>
+<UL>
+<PRE>
+int main ()
+{
+  using std::char_traits;
+  using std::endl;
+  
+  logstream&lt;char,char_traits&lt;char&gt; &gt; log(4000,"test.log"); // 1
+  for (int i = 0; i &lt; 1000; i++)                           // 2
+    log &lt;&lt; i &lt;&lt; ' ';                         
+  log.rdbuf()-&gt;pubseekoff(0,std::ios_base::beg);           // 3
+  int in = 0;
+  log &gt;&gt; in;                                               // 4
+  return 0;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Create a <B><I>logstream</I></B> object with a maximum size of 4000 characters and attach it to the file <SAMP>test.log</SAMP>.
+<TR VALIGN="top"><TD>//2</TD><TD>Write out the integers from 0 to 999 to the log file. The total number of characters required to represent these numbers along with the spaces between them will exceed the maximum size we've set.
+<TR VALIGN="top"><TD>//3</TD><TD>Seek to the beginning of the file. 
+<TR VALIGN="top"><TD>//4</TD><TD>Look at the first value in the file. If we had used an ordinary <B><I>fstream</I></B> then this value would be <SAMP>0</SAMP>, the first value we wrote out. Instead, we used a logstream and wrote out more than the log can hold, so we'll get a different number since the log has wrapped around to the beginning.
+</TABLE>
+
+<HR>
+<A HREF="18-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

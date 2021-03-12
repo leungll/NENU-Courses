@@ -1,0 +1,28 @@
+<HTML><HEAD><TITLE>5.8 Formatting Phone Numbers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-9.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.8 Formatting Phone Numbers</H2>
+<A NAME="idx135"><!></A>
+<P>Even now, however, the implementation of our facet class is incomplete. We still need to mention how the actual formatting of a phone number is implemented. In the example below, it is done by calling two virtual functions, put_country_code() and put_domestic_area_code():</P>
+<UL>
+<PRE>
+class phone_put: public locale::facet {
+public:
+  // ...
+  string put(const string&amp; ext, 
+             const string&amp; area, 
+             const string&amp; cnt) const;
+protected:
+  // ...
+  virtual string_t put_country_code
+          (const string_t&amp; country) const = 0;
+  virtual string_t put_domestic_area_code
+          (const string_t&amp; area) const = 0;
+};</PRE>
+</UL>
+<P>Note that the functions put_country_code() and put_domestic_area_code() are purely virtual in the base class, and thus must be provided by the derived facet classes. For the sake of brevity, we spare you here the details of the functions of the derived classes. For more information, please consult the directory of sample code delivered on disk with this product.</P>
+
+<HR>
+<A HREF="5-7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-9.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

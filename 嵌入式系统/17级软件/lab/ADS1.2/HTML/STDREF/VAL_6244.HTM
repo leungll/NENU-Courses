@@ -1,0 +1,951 @@
+<HTML><HEAD><TITLE>valarray</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="use_3346.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="vec_0251.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>valarray</H2>
+<PRE><HR>Container
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Assignment Operators">Assignment Operators</A></LI>
+<LI><A HREF="#Reference Operators">Reference Operators</A></LI>
+<LI><A HREF="#Subset Operators">Subset Operators</A></LI>
+<LI><A HREF="#Unary Operators">Unary Operators</A></LI>
+<LI><A HREF="#Computed Assignment Operators">Computed Assignment Operators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Non-member Binary Operators">Non-member Binary Operators</A></LI>
+<LI><A HREF="#Non-member Logical Operators">Non-member Logical Operators</A></LI>
+<LI><A HREF="#Non-member Transcen-dental Functions">Non-member Transcendental Functions</A></LI>
+<LI><A HREF="#Example">Example</A>
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>An optimized array class for numeric operations.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Non-member Transcen-dental Functionsabs()">abs()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionsacos()">acos()</A><BR>
+ <A HREF="#Member Functionsapply()">apply()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionsasin()">asin()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionsatan()">atan()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionsatan2()">atan2()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionscos()">cos()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionscosh()">cosh()</A><BR>
+ <A HREF="#Member Functionscshift()">cshift()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionsexp()">exp()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionslog()">log()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionslog10()">log10()</A><BR>
+ <A HREF="#Member Functionsmax()">max()</A><BR>
+ <A HREF="#Member Functionsmin()">min()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Unary Operatorsoperator!()">operator!()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator%()">operator%()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator%=()">operator%=()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator&amp;&amp;()">operator&amp;&amp;()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator&amp;()">operator&amp;()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&amp;=()">operator&amp;=()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator&gt;&gt;()">operator&gt;&gt;()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&gt;&gt;=()">operator&gt;&gt;=()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator&gt;()">operator&gt;()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator&gt;=()">operator&gt;=()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator&lt;&lt;()">operator&lt;&lt;()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&lt;&lt;=()">operator&lt;&lt;=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Logical Operatorsoperator&lt;()">operator&lt;()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator&lt;=()">operator&lt;=()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator*=()">operator*=()</A><BR>
+ <A HREF="#Unary Operatorsoperator+()">operator+()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator+=()">operator+=()</A><BR>
+ <A HREF="#Unary Operatorsoperator-()">operator-()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator-=()">operator-=()</A><BR>
+ <A HREF="#Non-member Binary Operatorsoperator/()">operator/()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator/=()">operator/=()</A><BR>
+ <A HREF="#Assignment Operatorsoperator=()">operator=()</A><BR>
+ <A HREF="#Non-member Logical Operatorsoperator==()">operator==()</A><BR>
+ <A HREF="#Reference Operatorsoperator[]()">operator[]()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Binary Operatorsoperator^()">operator^()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator^=()">operator^=()</A><BR>
+ <A HREF="#Unary Operatorsoperator~()">operator~()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionspow()">pow()</A><BR>
+ <A HREF="#Member Functionsresize()">resize()</A><BR>
+ <A HREF="#Member Functionsshift()">shift()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionssin()">sin()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionssinh()">sinh()</A><BR>
+ <A HREF="#Member Functionssize()">size()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionssqrt()">sqrt()</A><BR>
+ <A HREF="#Member Functionssum()">sum()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionstan()">tan()</A><BR>
+ <A HREF="#Non-member Transcen-dental Functionstanh()">tanh()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;valarray&gt;
+template &lt;class T &gt;
+class <B>valarray</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>valarray&lt;T&gt;</I></B> and associated classes (<B><I><A HREF="sli_1044.htm">slice_array</A></I></B>, <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B>, <B><I><A HREF="mas_2579.htm">mask_array</A></I></B>, and <B><I><A HREF="ind_9304.htm">indirect_array</A></I></B>) represent and manipulate one dimensional arrays of values.   Elements in a <B><I>valarray</I></B> are indexed sequentially beginning with zero. </P>
+<P>Unlike other classes in the Standard Library, <B><I>valarray&lt;T&gt;</I></B> can only be used with a fairly narrow range of types. This restriction ensures that numeric operations on a <B><I>valarray</I></B> can be as efficient as possible by avoiding aliasing ambiguities and excess temporaries.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T&gt; class valarray {
+public:
+
+// types
+typedef T value_type;
+
+// constructors
+valarray( );
+explicit valarray(size_t);
+valarray(const T&amp;, size_t);
+valarray(const T* , size_t);
+valarray(const valarray&lt;T&gt;&amp;);
+valarray(const slice_array&lt;T&gt;&amp;);
+valarray(const gslice_array&lt;T&gt;&amp;);
+valarray(const mask_array&lt;T&gt;&amp;);
+valarray(const indirect_array&lt;T&gt;&amp;);
+
+// destructor
+~valarray();
+
+// operator =
+valarray&lt;T&gt;&amp; operator= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator= (const slice_array&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator= (const gslice_array&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator= (const mask_array&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator= (const indirect_array&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator= (const T&amp;);
+// operator[]
+T operator[] (size_t) const;
+T&amp; operator[] (size_t);
+valarray&lt;T&gt; operator[](slice) const;
+inline slice_array&lt;T&gt; operator[](slice);
+valarray&lt;T&gt; operator[](const gslice&amp;) const;
+inline gslice_array&lt;T&gt; operator[](const gslice&amp;);
+valarray&lt;T&gt; operator[](const valarray&lt;bool&gt;&amp;) const;
+inline mask_array&lt;T&gt; operator[](const valarray&lt;bool&gt;&amp;);
+valarray&lt;T&gt; operator[](const valarray&lt;size_t&gt;&amp;) const;
+inline indirect_array&lt;T&gt; operator[](const valarray&lt;size_t&gt;&amp;);
+
+// unary operators
+valarray&lt;T&gt; operator+() const;
+valarray&lt;T&gt; operator-() const;
+valarray&lt;T&gt; operator~() const;
+valarray&lt;bool&gt; operator!() const;
+
+// computed assignment
+valarray&lt;T&gt;&amp; operator*= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator/= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator+= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator-= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator%= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator^= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator&amp;= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator|= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator&lt;&lt;= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator&gt;&gt;= (const valarray&lt;T&gt;&amp;);
+valarray&lt;T&gt;&amp; operator*= (const T&amp;);
+valarray&lt;T&gt;&amp; operator/= (const T&amp;);
+valarray&lt;T&gt;&amp; operator%= (const T&amp;);
+valarray&lt;T&gt;&amp; operator+= (const T&amp;);
+valarray&lt;T&gt;&amp; operator-= (const T&amp;);
+valarray&lt;T&gt;&amp; operator^= (const T&amp;);
+valarray&lt;T&gt;&amp; operator&amp;= (const T&amp;);
+valarray&lt;T&gt;&amp; operator|= (const T&amp;);
+valarray&lt;T&gt;&amp; operator&lt;&lt;= (const T&amp;);
+valarray&lt;T&gt;&amp; operator&gt;&gt;= (const T&amp;);
+
+
+// others
+size_t size() const;
+T sum() const;
+T min() const;
+T max() const;
+
+valarray&lt;T&gt; shift(int) const;
+valarray&lt;T&gt; cshift(int) const;
+
+valarray&lt;T&gt; apply(T func(T)) const;
+valarray&lt;T&gt; apply(T func(const T&amp;)) const;
+void free();
+void resize(size_t, const T&amp; = T() );
+};
+
+// Non-member binary operators
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator* (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp;  );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator/ (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator% (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator+ (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator- (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator^ (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&amp; (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator| (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&lt;&lt; (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&gt;&gt; (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator* (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator/ (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator% (const valarray&lt;T&gt;&amp;, const T&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator+ (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator- (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator^ (const valarray&lt;T&gt;&amp;, const T&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&amp; (const valarray&lt;T&gt;&amp;, const T&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator| (const valarray&lt;T&gt;&amp;, const T&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&lt;&lt; (const valarray&lt;T&gt;&amp;, const T&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&gt;&gt; (const valarray&lt;T&gt;&amp;, const T&amp;);
+
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator* (const T&amp; , const valarray&lt;T&gt;&amp; ); 
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator/ (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator% (const T&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator+ (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator- (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator^ (const T&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&amp; (const T&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator| (const T&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&lt;&lt; (const T&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; 
+operator&gt;&gt; (const T&amp;, const valarray&lt;T&gt;&amp;);
+
+// Non-member logical operators
+
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator== (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator!= (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt; (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt; (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt;= (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; ); 
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt;= (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator|| (const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&amp;&amp; (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator== (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator!= (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt; (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt; (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt;= (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt;= (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator|| (const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&amp;&amp; (const valarray&lt;T&gt;&amp;, const T&amp;);
+
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator== (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator!= (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt; (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt; (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&lt;= (const T&amp; , const valarray&lt;T&gt;&amp; ); 
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&gt;= (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator|| (const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;bool&gt; 
+operator&amp;&amp; (const T&amp;, const valarray&lt;T&gt;&amp;);
+
+// non-member transcendental functions
+
+template&lt;class T&gt; valarray&lt;T&gt; abs(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; acos(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; asin(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; atan(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; cos(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; cosh(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; exp(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; log(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; log10(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; sinh(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; sin(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; sqrt(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; tan(const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; tanh(const valarray&lt;T&gt;&amp; );
+
+template&lt;class T&gt; valarray&lt;T&gt; 
+atan2(const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+atan2(const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+atan2(const T&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+pow(const valarray&lt;T&gt;&amp; , const valarray&lt;T&gt;&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+pow(const valarray&lt;T&gt;&amp; , const T&amp; );
+template&lt;class T&gt; valarray&lt;T&gt; 
+pow(const T&amp; , const valarray&lt;T&gt;&amp; );</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>valarray</B>();</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> of length zero.</P>
+</UL>
+
+
+
+<PRE>explicit <B>valarray</B>(size_t n);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> of length <SAMP>n</SAMP>, containing <SAMP>n</SAMP> values initialized with the default value for type <SAMP>T</SAMP>. <SAMP>T</SAMP> must have a default constructor. </P>
+</UL>
+
+
+
+<PRE>explicit <B>valarray</B>(const T&amp; value, size_t n);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> of length <SAMP>n</SAMP>, containing <SAMP>n</SAMP> values initialized with <SAMP>value</SAMP>. </P>
+</UL>
+
+
+
+<PRE>explicit <B>valarray</B>(const T* value, size_t n);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> of length <SAMP>n</SAMP>, containing <SAMP>n</SAMP> values initialized with the first <SAMP>n</SAMP> elements pointed to by <SAMP>value</SAMP>. The array pointed to by <SAMP>value</SAMP> must contain at least <SAMP>n</SAMP> values.</P>
+</UL>
+
+
+
+<PRE><B>valarray</B>(const valarray&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Creates a copy of <SAMP>x</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>valarray</B>(const slice_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> from the <B><I><A HREF="sli_1044.htm">slice_array</A></I></B> <SAMP>x</SAMP>. </P>
+</UL>
+
+
+
+<PRE><B>valarray</B>(const gslice_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> from the <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B> <SAMP>x</SAMP>. </P>
+</UL>
+
+
+
+<PRE><B>valarray</B>(const mask_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> from the <B><I><A HREF="mas_2579.htm">mask_array</A></I></B> <SAMP>x</SAMP>. </P>
+</UL>
+
+
+
+<PRE><B>valarray</B>(const indirect_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Creates a <B><I>valarray</I></B> from the <B><I><A HREF="ind_9304.htm">indirect_array</A></I></B> <SAMP>x</SAMP>. </P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~valarray</B>();</PRE>
+
+<UL>
+<P>Applies <SAMP>~T()</SAMP> to every element in the <B><I>valarray</I></B> and returns all allocated memory. </P>
+</UL>
+
+
+<A NAME="Assignment Operators"><H3>Assignment Operators</H3></A>
+
+
+<A NAME="Assignment Operatorsoperator=()"></A><PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const valarray&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Assigns to each element of self the corresponding value from <SAMP>x</SAMP>. If self has more or fewer elements than <SAMP>x</SAMP>, then self is resized to match the size of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const T&amp; x);</PRE>
+
+<UL>
+<P>Assigns to each element of self the value of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const slice_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Copies elements from <SAMP>x</SAMP> into self by stepping through each slice consecutively. If self has more or fewer elements than <SAMP>x</SAMP>, then self is resized to match the size of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const gslice_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Copies elements from <SAMP>x</SAMP> into self by stepping through each slice consecutively. If self has more or fewer elements than <SAMP>x</SAMP>, then self is resized to match the size of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const mask&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Copies each consecutive element from <SAMP>x</SAMP> into self. If self has more or fewer elements than <SAMP>x</SAMP>, then self is resized to match the size of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; 
+<B>operator=</B>(const indirect_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Copies each consecutive element from <SAMP>x</SAMP> into self. If self has more or fewer elements than <SAMP>x</SAMP>, then self is resized to match the size of <SAMP>x</SAMP>. Returns a reference to self.</P>
+</UL>
+
+
+<A NAME="Reference Operators"><H3>Reference Operators</H3></A>
+
+
+<A NAME="Reference Operatorsoperator[]()"></A><PRE>T&amp; <B>operator[]</B>(size_type n);</PRE>
+
+<UL>
+<P>Returns a reference to element <SAMP>n</SAMP> of self. The result can be used as an <SAMP>lvalue</SAMP>. This reference is valid until the resize function is called or the array is destroyed. The index <SAMP>n</SAMP> must be between <SAMP>0</SAMP> and <SAMP>size</SAMP> less one.</P>
+</UL>
+
+
+
+<PRE>T <B>operator[]</B>(size_type n) const;</PRE>
+
+<UL>
+<P>Returns the value at element <SAMP>n</SAMP> of self. The index <SAMP>n</SAMP> must be between <SAMP>0</SAMP> and <SAMP>size</SAMP> less one.</P>
+</UL>
+
+
+<A NAME="Subset Operators"><H3>Subset Operators</H3></A>
+
+
+<PRE>valarray&lt;T&gt; <B>operator[]</B>(slice s) const;</PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a new <B><I>valarray</I></B> object. See <B><I><A HREF="sli_0626.htm">slice</A></I></B> for a description of a BLAS-like slice.</P>
+</UL>
+
+
+
+<PRE>slice_array&lt;T&gt; <B>operator[]</B>(slice s); </PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a <B><I><A HREF="sli_1044.htm">slice_array</A></I></B> referencing elements inside self. See <B><I><A HREF="sli_0626.htm">slice</A></I></B> and <B><I>slice_array</I></B>.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt; <B>operator[]</B>(const gslice&amp; s) const;</PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a new <B><I>valarray</I></B> object. See <B><I><A HREF="gsl_4121.htm">gslice</A></I></B> for a description of a generalized slice.</P>
+</UL>
+
+
+
+<PRE>gslice_array&lt;T&gt; <B>operator[]</B>(const gslice&amp; s); </PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B> referencing elements inside self. See <B><I><A HREF="gsl_4121.htm">gslice</A></I></B> and <B><I>gslice_array</I></B>.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt; <B>operator[]</B>(const valarray&lt;bool&gt;&amp; v) const;</PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a new <B><I>valarray</I></B> object.</P>
+</UL>
+
+
+
+<PRE>mask_array&lt;T&gt; <B>operator[]</B>(const valarray&lt;bool&gt;&amp; v);  </PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a <B><I><A HREF="mas_2579.htm">mask_array</A></I></B> referencing elements inside self. See <B><I>mask_array</I></B>.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt; <B>operator[]</B>(const valarray&lt;size_t&gt;&amp; v) const;</PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a new <B><I>valarray</I></B> object.</P>
+</UL>
+
+
+
+<PRE>Indirect_array&lt;T&gt; <B>operator[]</B>(const valarray&lt;size_t&gt;&amp; v); </PRE>
+
+<UL>
+<P>Returns a subset of the self as specified by <SAMP>s</SAMP>. The return value is a <B><I><A HREF="ind_9304.htm">indirect_array</A></I></B> referencing elements inside self. See <B><I>indirect_array</I></B>.</P>
+</UL>
+
+
+<A NAME="Unary Operators"><H3>Unary Operators</H3></A>
+
+
+<A NAME="Unary Operatorsoperator+()"></A><PRE>valarray&lt;T&gt; <B>operator+</B>() const;</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the array in self where each element has been initialized by applying <SAMP>operator+</SAMP> to the corresponding element in self.   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports an <SAMP>operator+</SAMP> that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Unary Operatorsoperator-()"></A><PRE>valarray&lt;T&gt; <B>operator-</B>() const;</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the array in self where each element has been initialized by applying <SAMP>operator-</SAMP> to the corresponding element in self.   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports an <SAMP>operator-</SAMP> returning <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Unary Operatorsoperator~()"></A><PRE>valarray&lt;T&gt; <B>operator~</B>() const;</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the array in self where each element has been initialized by applying <SAMP>operator~</SAMP> to the corresponding element in self.   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports an <SAMP>operator~</SAMP> returning <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Unary Operatorsoperator!()"></A><PRE>valarray&lt;bool&gt; <B>operator!</B>() const;</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the array in self where each element has been initialized by applying <SAMP>operator!</SAMP> to the corresponding element in self.   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports an <SAMP>operator!</SAMP>  returning <SAMP>bool</SAMP> or a type convertible to <SAMP>bool</SAMP>.</P>
+</UL>
+
+
+<A NAME="Computed Assignment Operators"><H3>Computed Assignment Operators</H3></A>
+
+
+<A NAME="Computed Assignment Operatorsoperator*=()"></A><PRE>valarray&lt;T&gt;&amp; <B>operator*=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator/=()"></A>valarray&lt;T&gt;&amp; <B>operator/=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator%=()"></A>valarray&lt;T&gt;&amp; <B>operator%=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator+=()"></A>valarray&lt;T&gt;&amp; <B>operator+=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator-=()"></A>valarray&lt;T&gt;&amp; <B>operator-=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator^=()"></A>valarray&lt;T&gt;&amp; <B>operator^=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator&amp;=()"></A>valarray&lt;T&gt;&amp; <B>operator&amp;=</B>(const valarray&lt;T&gt;&amp; val);
+valarray&lt;T&gt;&amp; <B>operator|=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator&lt;&lt;=()"></A>valarray&lt;T&gt;&amp; <B>operator&lt;&lt;=</B>(const valarray&lt;T&gt;&amp; val);
+<A NAME="Computed Assignment Operatorsoperator&gt;&gt;=()"></A>valarray&lt;T&gt;&amp; <B>operator&gt;&gt;=</B>(const valarray&lt;T&gt;&amp; val);</PRE>
+
+<UL>
+<P>Applies the indicated operation to each element in self, using the corresponding element from <SAMP>val</SAMP> as the right hand argument (for example, for all <SAMP>0 &lt;= n &lt; *this.size(), *this[n] += val[n]</SAMP>).   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports the indicated operation. The length of <SAMP>val</SAMP> must also equal the length of self. Returns self.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt;&amp; <B>operator*=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator/=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator%=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator+=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator-=</B>(const T&amp; val);
+<A NAME="Computed Assignment Operatorsoperator^=()"></A>valarray&lt;T&gt;&amp; <B>operator^=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator&amp;=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator|=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator&lt;&lt;=</B>(const T&amp; val);
+valarray&lt;T&gt;&amp; <B>operator&gt;&gt;=</B>(const T&amp; val);</PRE>
+
+<UL>
+<P>Applies the indicated operation to each element in self, using <SAMP>val</SAMP> as the right hand argument (for example, for all <SAMP>0 &lt;= n &lt; *this.size(), *this[n] += val</SAMP>).   This operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports the indicated operation. Returns self.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionssize()"></A><PRE>size_t <B>size</B>() const;</PRE>
+
+<UL>
+<P>Returns the number of elements.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssum()"></A><PRE>T <B>sum</B>() const;</PRE>
+
+<UL>
+<P>This function uses <SAMP>operator+=</SAMP> to sum all the elements of the array. Sum can only be called for a <B><I>valarray</I></B> instantiated on a type that supports <SAMP>operator+=</SAMP>. The array must also have at least one element.    Returns the sum of all elements in the array.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsmin()"></A><PRE>T <B>min</B>() const;</PRE>
+
+<UL>
+<P>This function uses <SAMP>operator&lt;</SAMP> to find the minimum element in the array. The array must have at least one element. Returns the minimum of all elements in the array.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsmax()"></A><PRE>T <B>max</B>() const;</PRE>
+
+<UL>
+<P>This function uses <SAMP>operator&gt;</SAMP> to find the maximum element in the array. The array must have at least one element. Returns the maximum of all elements in the array.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsshift()"></A><PRE>valarray&lt;T&gt; <B>shift</B>(int n) const;</PRE>
+
+<UL>
+<P>This function returns a new <B><I>valarray</I></B> object whose elements have all been shifted <SAMP>n</SAMP> places to left or right with respect to self. A positive value of <SAMP>n</SAMP> shifts the elements to the left, a negative value to the right. The default constructor for <SAMP>T</SAMP> is used to fill in behind the shifting elements. For example, applying <SAMP>shift(2)</SAMP> to an array corresponding to [3,4,5,6] results in [5,6,0,0], and applying <SAMP>shift(-1)</SAMP> to [3,4,5,6] results in [0,3,4,5].</P>
+</UL>
+
+
+
+<A NAME="Member Functionscshift()"></A><PRE>valarray&lt;T&gt; <B>cshift</B>(int n) const;</PRE>
+
+<UL>
+<P>This function returns a new <B><I>valarray</I></B> object whose elements have all been rotated <SAMP>n</SAMP> places to left or right with respect to self. A positive value of <SAMP>n</SAMP> shifts the elements to the left, a negative value to the right. For example, applying <SAMP>shift(2)</SAMP> to an array corresponding to [3,4,5,6] results in [5,6,3,4], and applying <SAMP>shift(-1)</SAMP> to [3,4,5,6] results in [6,3,4,5].</P>
+</UL>
+
+
+
+<A NAME="Member Functionsapply()"></A><PRE>valarray&lt;T&gt; <B>apply</B>(T func(T)) const;</PRE>
+
+<UL>
+<P>This function returns a new <B><I>valarray</I></B> object with the same length as the array in self but whose elements have all been initialized by applying the argument function <SAMP>func</SAMP> to the corresponding element in self (in other words, for all <SAMP>n &lt; *this.size()</SAMP>, the <SAMP>nth</SAMP> element of the returned array equals <SAMP>func(*this[n]))</SAMP>.</P>
+</UL>
+
+
+
+<PRE>valarray&lt;T&gt; <B>apply</B>(T func(const T&amp;)) const;</PRE>
+
+<UL>
+<P>This function returns a new <B><I>valarray</I></B> object with the same length as the array in self but whose elements have all been initialized by applying the argument function <SAMP>func</SAMP> to the corresponding element in self (in other words, for all <SAMP>0 &lt;=  n &lt; *this.size()</SAMP>, the <SAMP>nth</SAMP> element of the returned array equals <SAMP>func(*this[n]))</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsresize()"></A><PRE>void 
+<B>resize</B>(size_type sz, T c = T());</PRE>
+
+<UL>
+<P>Changes the length of self to <SAMP>sz</SAMP>, and assigns <SAMP>c</SAMP> to every element. This function also invalidates all outstanding references to self. </P>
+</UL>
+
+
+<A NAME="Non-member Binary Operators"><H3>Non-member Binary Operators</H3></A>
+
+
+<A NAME="Non-member Binary Operatorsoperator*()"></A><PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator*</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator/()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator/</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator%()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator%</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator+</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator-</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator^()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<A NAME="Non-member Binary Operatorsoperator^()"></A><B>operator^</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator&amp;()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&amp;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator|</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator&lt;&lt;()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&lt;&lt;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator&gt;&gt;()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&gt;&gt;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);</PRE>
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the argument arrays where each element has been initialized by applying the indicated operation to the corresponding elements in the argument arrays.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports a form of the indicated operation that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. The argument arrays must have the same length.</P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator*</B>(const valarray&lt;T&gt;&amp; lhs, T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator/</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator%</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator+</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator-</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator^()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<A NAME="Non-member Binary Operatorsoperator^()"></A><B>operator^</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&amp;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator|</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&lt;&lt;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&gt;&gt;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the <B><I>valarray</I></B> <SAMP>lhs</SAMP> where each element has been initialized by applying the indicated operation to the corresponding element in <SAMP>lhs</SAMP> and the value <SAMP>rhs</SAMP>.   The operation can only be used with a type <SAMP>T</SAMP> that supports a form of the indicated operation that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator*</B>(const T&amp; rhs, valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator/</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator%</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator+</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator-</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Binary Operatorsoperator^()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<A NAME="Non-member Binary Operatorsoperator^()"></A><B>operator^</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&amp;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator|</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&lt;&lt;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>operator&gt;&gt;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the <B><I>valarray</I></B> <SAMP>rhs</SAMP> where each element has been initialized by applying the indicated operation to the corresponding element in <SAMP>rhs</SAMP> and the value <SAMP>lhs</SAMP>.   The operation can only be used with a type <SAMP>T</SAMP> that supports a form of the indicated operation that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+<A NAME="Non-member Logical Operators"><H3>Non-member Logical Operators</H3></A>
+
+
+<A NAME="Non-member Logical Operatorsoperator==()"></A><PRE>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator==</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator!=()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator!=</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator&lt;()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator&gt;()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator&lt;=()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;=</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator&gt;=()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;=</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+<A NAME="Non-member Logical Operatorsoperator&amp;&amp;()"></A>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&amp;&amp;</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator||</B>(const valarray&lt;T&gt;&amp; lhs, const valarray&lt;T&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Returns a <B><I>valarray&lt;bool&gt;</I></B> object of the same size as the argument arrays where each element has been initialized by applying the indicated operation to the corresponding elements in the argument arrays.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that support a form of the indicated operation that returns <SAMP>bool</SAMP> or a type convertible to <SAMP>bool</SAMP>. The argument arrays must have the same length.</P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator==</B>(const valarray&lt;T&gt;&amp; lhs, T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator!=</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;=</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;=</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&amp;&amp;</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator||</B>(const valarray&lt;T&gt;&amp; lhs, const T&amp; rhs);</PRE>
+
+<UL>
+<P>Returns a <B><I>valarray&lt;bool&gt;</I></B> object of the same size as the <B><I>valarray</I></B> <SAMP>lhs</SAMP> where each element has been initialized by applying the indicated operation to the corresponding element in <SAMP>lhs</SAMP> and the value <SAMP>rhs</SAMP>.   The operation can only be used with a type <SAMP>T</SAMP> that supports a form of the indicated operation that returns <SAMP>bool</SAMP> or a type convertible to <SAMP>bool</SAMP>. </P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator==</B>(const T&amp; rhs, valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator!=</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&lt;=</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&gt;=</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator&amp;&amp;</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);
+template &lt;class T&gt; valarray&lt;bool&gt; 
+<B>operator||</B>(const T&amp; lhs, const valarray&lt;T&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Returns a <B><I>valarray&lt;bool&gt;</I></B> object of the same size as the valarray <SAMP>rhs</SAMP> where each element has been initialized by applying indicated operation to the corresponding element in <SAMP>rhs</SAMP> and the value <SAMP>lhs</SAMP>.   The operation can only be used with a type <SAMP>T</SAMP> that supports a form of the indicated operation that returns <SAMP>bool</SAMP> or a type convertible to <SAMP>bool</SAMP>. </P>
+</UL>
+
+
+<A NAME="Non-member Transcen-dental Functions"><H3>Non-member Transcendental Functions</H3></A>
+
+
+<A NAME="Non-member Transcen-dental Functionsabs()"></A><PRE>template &lt;class T&gt; valarray&lt;T&gt; <B>abs</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionsacos()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>acos</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionsasin()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>asin</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionsatan()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>atan</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionscos()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>cos</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionscosh()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>cosh</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionsexp()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>exp</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionslog()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>log</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionslog10()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>log10</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionssin()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>sin</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionssinh()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>sinh</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionssqrt()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>sqrt</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionstan()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>tan</B>(const valarray&lt;T&gt;&amp; v);
+<A NAME="Non-member Transcen-dental Functionstanh()"></A>template &lt;class T&gt; valarray&lt;T&gt; <B>tanh</B>(const valarray&lt;T&gt;&amp; v);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the argument array where each element has been initialized by applying the indicated transcendental function to the corresponding elements in the argument array.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports a unique form of the indicated function that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Non-member Transcen-dental Functionsatan2()"></A><PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>atan2</B>(const valarray&lt;T&gt;&amp; v, const valarray&lt;T&gt;&amp; v2);
+<A NAME="Non-member Transcen-dental Functionspow()"></A>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>pow</B>(const valarray&lt;T&gt;&amp; v, const valarray&lt;T&gt;&amp; v2);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the argument arrays where each element has been initialized by applying the indicated transcendental function to the corresponding elements in the argument arrays.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports a unique form of the indicated function that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>atan2</B>(const valarray&lt;T&gt;&amp; v, const T&amp; v2);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>pow</B>(const valarray&lt;T&gt;&amp; v, const T&amp; v2);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the argument array <SAMP>v</SAMP> where each element has been initialized by applying the indicated transcendental function to the corresponding elements in <SAMP>v</SAMP> along with the value <SAMP>v2</SAMP>.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports a unique form of the indicated function that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>. </P>
+</UL>
+
+
+
+<PRE>template &lt;class T&gt; valarray&lt;T&gt; 
+<B>atan2</B>(const T&amp; v, const valarray&lt;T&gt; v2);
+template &lt;class T&gt; valarray&lt;T&gt; 
+<B>pow</B>(const T&amp; v, const valarray&lt;T&gt; v2);</PRE>
+
+<UL>
+<P>Returns a new <B><I>valarray</I></B> object of the same size as the argument array <SAMP>v2</SAMP> where each element has been initialized by applying the indicated transcendental function to the corresponding elements in <SAMP>v2</SAMP> along with the value <SAMP>v</SAMP>.   The operation can only be applied to a <B><I>valarray</I></B> instantiated on a type <SAMP>T</SAMP> that supports a unique form of the indicated function that returns <SAMP>T</SAMP> or a type convertible to <SAMP>T</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// valarray.cpp
+//
+#include "valarray.h" // Contains a valarray stream inserter
+using namespace std;
+int main(void)
+{
+  int ibuf[10] = {0,1,2,3,4,5,6,7,8,9};  
+  int ibuf2[10] = {10,11,12,13,14,15,16,17,18,19};  
+
+  // create 2 valarrays of ints
+  <B>valarray</B>&lt;int&gt;         vi(ibuf,10);
+  <B>valarray</B>&lt;int&gt;         vi2(ibuf2,10);
+
+  // print them out
+  cout &lt;&lt; vi &lt;&lt; endl &lt;&lt; vi2 &lt;&lt; endl;
+
+  vi += vi2;
+  vi2 *= 2;
+  valarry&lt;int&gt; vi3 = vi2 % vi;
+
+  // print them out again
+  cout &lt;&lt; vi &lt;&lt; endl &lt;&lt; vi2 &lt;&lt; endl &lt;&lt; vi3 &lt;&lt; endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="use_3346.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="vec_0251.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

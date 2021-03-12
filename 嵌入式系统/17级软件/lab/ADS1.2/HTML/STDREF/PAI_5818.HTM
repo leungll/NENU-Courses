@@ -1,0 +1,227 @@
+<HTML><HEAD><TITLE>pair</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Out_2989.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="par_4963.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>pair</H2>
+<PRE><HR>Utility Class
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Non-member Operators">Non-member Operators</A></LI>
+<LI><A HREF="#Non-member Functions">Non-member Functions</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A template for heterogeneous pairs of values.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typesfirst_type">first_type</A><BR>
+ <A HREF="#Typessecond_type">second_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Non-member Functionsmake_pair()">make_pair()</A><BR>
+ <A HREF="#Non-member Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;()">operator&gt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;=()">operator&gt;=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;()">operator&lt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;=()">operator&lt;=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Operatorsoperator==()">operator==()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;utility&gt;
+template &lt;class T1, class T2&gt;
+struct <B>pair</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>pair</I></B> class is a template for encapsulating pairs of values that may be of different types.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T1, class T2&gt;
+ struct pair {
+        typedef T1 first_type;
+        typedef T2 second_type;
+        T1 first;
+        T2 second;
+        pair();
+        pair (const T1&amp;, const T2&amp;);
+        template &lt;class V, class U&gt;
+        pair (const pair &lt;V, U&gt;&amp; p);
+        ~pair();
+};
+
+template &lt;class T1, class T2&gt;
+ bool operator== (const pair&lt;T1, T2&gt;&amp;,
+                  const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ bool operator!= (const pair&lt;T1, T2&gt;&amp;,
+                  const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ bool operator&lt; (const pair&lt;T1, T2&gt;&amp;,
+                 const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ bool operator&gt; (const pair&lt;T1, T2&gt;&amp;,
+                 const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ bool operator&lt;= (const pair&lt;T1, T2&gt;&amp;,
+                 const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ bool operator&gt;= (const pair&lt;T1, T2&gt;&amp;,
+                 const pair T1, T2&gt;&amp;);
+
+template &lt;class T1, class T2&gt;
+ pair&lt;T1,T2&gt; make_pair (const T1&amp;, const T2&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesfirst_type"></A><PRE><B>first_type</B></PRE>
+
+<UL>
+<P>Type of the first element in a pair.</P>
+</UL>
+
+
+
+<A NAME="Typessecond_type"></A><PRE><B>second_type</B></PRE>
+
+<UL>
+<P>Type of the second element in a pair.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>pair</B> ();</PRE>
+
+<UL>
+<P>Default constructor. Initializes <SAMP>first</SAMP> and <SAMP>second</SAMP> using their default constructors.</P>
+</UL>
+
+
+
+<PRE><B>pair</B> (const T1&amp; x, const T2&amp; y);</PRE>
+
+<UL>
+<P>Creates a pair of types <SAMP>T1</SAMP> and <SAMP>T2</SAMP>, making the necessary conversions in <SAMP>x</SAMP> and <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template &lt;class V, class U&gt;
+<B>pair</B> (const pair &lt;V, U&gt;&amp; p);</PRE>
+
+<UL>
+<P>Copies <SAMP>first</SAMP> and <SAMP>second</SAMP> from the corresponding elements of <SAMP>p</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~pair</B> ();</PRE>
+
+
+<A NAME="Non-member Operators"><H3>Non-member Operators</H3></A>
+
+
+<A NAME="Non-member Operatorsoperator==()"></A><PRE>template &lt;class T1, class T2&gt;
+ bool <B>operator==</B> (const pair&lt;T1, T2&gt;&amp; x,
+                  const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>(x.first == y.first &amp;&amp; x.second == y.second</SAMP>) is <SAMP>true</SAMP>. Otherwise it returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator!=()"></A><PRE>template &lt;class T1, class T2&gt;
+ bool <B>operator!=</B> (const pair&lt;T1, T2&gt;&amp; x,
+                  const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x==y)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;()"></A><PRE>template &lt;class T1, class T2&gt;
+bool <B>operator&lt;</B> (const pair&lt;T1, T2&gt;&amp; x,
+                const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>(x.first &lt; y.first || (!(y.first &lt; x.first) &amp;&amp; x.second &lt; y.second))</SAMP> is <SAMP>true</SAMP>. Otherwise it returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;()"></A><PRE>template &lt;class T1, class T2&gt;
+bool <B>operator&gt;</B> (const pair&lt;T1, T2&gt;&amp; x,
+                const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>y &lt; x</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;=()"></A><PRE>template &lt;class T1, class T2&gt;
+bool <B>operator&lt;=</B> (const pair&lt;T1, T2&gt;&amp; x,
+                const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(y &lt; x)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;=()"></A><PRE>template &lt;class T1, class T2&gt;
+bool <B>operator&gt;=</B> (const pair&lt;T1, T2&gt;&amp; x,
+                const pair T1, T2&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x &lt; y)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Non-member Functions"><H3>Non-member Functions</H3></A>
+
+
+<PRE>template &lt;class T1, class T2&gt;
+<A NAME="Non-member Functionsmake_pair()"></A>pair&lt;T1,T2&gt;
+<B>make_pair</B>(x,y);</PRE>
+
+<UL>
+<P><SAMP>make_pair(x,y)</SAMP> creates a pair by deducing and returning the types of <SAMP>x</SAMP> and <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<BR>
+<HR>
+<A HREF="Out_2989.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="par_4963.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

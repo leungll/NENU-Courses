@@ -1,0 +1,28 @@
+#
+# Dual-Tone Multi-Frequency test files
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+#
+
+Dual-Tone Multi-Frequency Test Data
+____ ____ _____ _________ ____ ____
+
+File:			dtmfdata
+Description:	sinewave of dtmf stream '441223400400*#56789abcd'
+Data format:	binary
+Data size:		16-bit fixed-point, point between bits 14 and 15
+Endian:		little
+
+
+Viewer Applications
+====== ============
+
+Windows 95/NT
+------- -----
+
+Any text capable application.
+
+
+UNIX
+----
+
+Any text capable application.

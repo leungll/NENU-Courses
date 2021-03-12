@@ -1,0 +1,177 @@
+<HTML><HEAD><TITLE>bind1st, bind2nd, binder1st, binder2nd</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bin_2217.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bit_0857.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>bind1st, bind2nd, binder1st, binder2nd</H2>
+<PRE><HR>Function Object
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Templatized utilities to bind values to function objects.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;functional&gt;
+template &lt;class Operation&gt;
+class binder1st : public unary_function&lt;typename 
+                   Operation::second_argument_type,
+                   typename Operation::result_type&gt; ;
+
+template &lt;class Operation, class T&gt;
+binder1st&lt;Operation&gt; bind1st (const Operation&amp;, const T&amp;);
+template &lt;class Operation&gt;
+class binder2nd : public unary_function&lt;typename            
+                   Operation::first_argument_type,
+                   typename Operation::result_type&gt; ;
+
+template &lt;class Operation, class T&gt;
+binder2nd&lt;Operation&gt; bind2nd (const Operation&amp;, const T&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Because so many functions included in the standard library take other functions as arguments, the library includes classes that let you build new function objects out of old ones. Both <SAMP>bind1st()</SAMP> and <SAMP>bind2nd()</SAMP> are functions that take as arguments a binary function object <SAMP>f</SAMP> and a value <SAMP>x,</SAMP> and return, respectively, classes <B><I><A HREF="bin_0129.htm">binder1st</A></I></B> and <B><I><A HREF="bin_9217.htm">binder2nd</A></I></B>. The underlying function object must be a subclass of <B><I><A HREF="bin_7851.htm">binary_function</A></I></B>.</P>
+<P>Class <B><I><A HREF="bin_0129.htm">binder1st</A></I></B> binds the value to the first argument of the binary function, and <B><I><A HREF="bin_9217.htm">binder2nd</A></I></B> does the same thing for the second argument of the function. The resulting classes can be used in place of a unary predicate in other function calls.</P>
+<P>For example, you could use the <B><I><A HREF="cou_3676.htm">count_if</A></I></B> algorithm to count all elements in a vector that are less than or equal to 7, using the following:</P>
+<UL>
+<PRE><SAMP>count_if (v.begin, v.end, bind1st(greater&lt;int&gt; (),7),</SAMP>
+          <SAMP>littleNums)</SAMP></PRE>
+
+</UL>
+<P>This function adds one to <SAMP>littleNums</SAMP> each time the predicate is <SAMP>true</SAMP>, in other words, each time 7 is greater than the element.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>// Class binder1st 
+ template &lt;class Operation&gt;
+ class binder1st
+   : public unary_function&lt;typename 
+                           Operation::second_argument_type,
+                           typename Operation::result_type&gt;
+{
+public:
+
+   binder1st(const Operation&amp;,
+             const typename
+             Operation::first_argument_type&amp;);
+   typename Operation::result_type operator() 
+           (const typename Operation::second_argument_type&amp;)
+            const;
+};
+
+// Class binder2nd 
+ template &lt;class Operation&gt;
+ class binder2nd
+   : public unary_function&lt;typename 
+                           Operation::first_argument_type, 
+                           typename Operation::result_type&gt; 
+{
+public:
+
+   binder2nd(const Operation&amp;,
+             const typename
+             Operation::second_argument_type&amp;);
+   typename Operation::result_type operator() 
+           (const typename Operation::first_argument_type&amp;)
+            const;
+};
+
+// Creator bind1st
+
+   template &lt;class Operation, class T&gt;
+   binder1st&lt;Operation&gt; bind1st (const Operation&amp;, 
+                                 const T&amp;);
+
+// Creator bind2nd 
+ 
+   template&lt;class Operation, class T&gt;
+   binder2nd &lt;Operation&gt; bind2nd(const Operation&amp;, 
+                                 const T&amp;);</PRE>
+
+</UL>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// binders.cpp
+//
+ #include &lt;functional&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[4] = {1,2,3,4};
+   //
+   // Set up a vector
+   //
+   vector&lt;int&gt; v1(d1,d1 + 4);
+   //
+   // Create an 'equal to 3' unary predicate by binding 3 to
+   // the equal_to binary predicate.
+   //
+   binder1st&lt;equal_to&lt;int&gt; &gt; equal_to_3 = 
+      bind1st(equal_to&lt;int&gt;(),3);
+   //
+   // Now use this new predicate in a call to find_if
+   //
+   iterator it1 = find_if(v1.begin(),v1.end(),equal_to_3);
+   //
+   // Even better, construct the new predicate on the fly
+   //
+   iterator it2 = 
+      find_if(v1.begin(),v1.end(),bind1st(equal_to&lt;int&gt;(),3)); 
+   //
+   // And now the same thing using bind2nd
+   // Same result since == is commutative
+   //
+   iterator it3 = 
+      find_if(v1.begin(),v1.end(),bind2nd(equal_to&lt;int&gt;(),3)); 
+   //
+   // it3 = v1.begin() + 2
+   //
+   // Output results
+   //
+   cout &lt;&lt; *it1 &lt;&lt; " " &lt;&lt; *it2 &lt;&lt; " " &lt;&lt; *it3 &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+3 3 3</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int,allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="bin_2217.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bit_0857.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

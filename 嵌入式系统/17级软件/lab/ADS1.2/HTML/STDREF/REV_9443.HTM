@@ -1,0 +1,272 @@
+<HTML><HEAD><TITLE>__reverse_bi_iterator, reverse_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="rev_6652.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rev_6851.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>__reverse_bi_iterator, reverse_iterator</H2>
+<PRE><HR>Iterator
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>An iterator that traverses a collection backwards. <B><I>__reverse_bi_iterator</I></B> is included for those compilers that do not support partial specialization. The template signature for <B><I>reverse_iterator</I></B> matches that of <B><I>__reverse_bi_iterator</I></B> when partial specialization is not available (in other words, it has six template parameters rather than one).</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iterator&gt;
+template &lt;class Iterator,
+          class Category,
+          class T,
+          class Reference = T&amp;,
+          class Pointer = T*
+          class Distance = ptrdiff_t&gt;
+class __<B>reverse_bi_iterator</B> ;
+
+template &lt;class Iterator&gt;  
+class <B>reverse_iterator</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The iterators <B><I>reverse_iterator</I></B> and <B><I>__reverse_bi_iterator</I></B> correspond to <B><I>random_access_iterator</I></B> and <B><I>bidirectional_iterator</I></B>, except that they traverse collections in the opposite direction. The fundamental relationship between a reverse iterator and its corresponding iterator <SAMP>i</SAMP> is established by the identity: </P>
+<P><SAMP>&amp;*(reverse_iterator(i)) == &amp;*(i-1);</SAMP> </P>
+<P>This mapping is dictated by the fact that, while there is always a pointer past the end of a container, there might not be a valid pointer before its beginning. </P>
+<P>The following are true for <B><I>__reverse_bi_iterators</I></B>:</P>
+<UL>
+<LI><P>These iterators may be instantiated with the default constructor or by a single argument constructor that initializes the new <SAMP>__reverse_bi_iterator</SAMP> with a <SAMP>bidirectional_iterator</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator*</SAMP> returns a reference to the current value.</P>
+</LI>
+<LI><P><SAMP>operator++</SAMP> advances the iterator to the previous item (<SAMP>--current</SAMP>) and returns a reference to <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator++(int)</SAMP> advances the iterator to the previous item (<SAMP>--current</SAMP>) and returns the old value of <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator--</SAMP> advances the iterator to the following item (<SAMP>++current</SAMP>) and returns a reference to <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator--(int)</SAMP> advances the iterator to the following item (<SAMP>++current)</SAMP> and returns the old value of <SAMP>*this.</SAMP></P>
+</LI>
+<LI><P><SAMP>operator==</SAMP> is a non-member operator that returns <SAMP>true</SAMP> if the iterators <SAMP>x</SAMP> and <SAMP>y</SAMP> point to the same item.</P>
+</LI>
+</UL>
+<P>The following are true for <B><I>reverse_iterator</I></B>s:</P>
+<UL>
+<LI><P>These iterators may be instantiated with the default constructor or by a single argument constructor that initializes the new <SAMP>reverse_iterator</SAMP> with a <SAMP>random_access_iterator</SAMP>. </P>
+</LI>
+<LI><P><SAMP>operator*</SAMP> returns a reference to the current value.</P>
+</LI>
+<LI><P><SAMP>operator++</SAMP> advances the iterator to the previous item (<SAMP>--current</SAMP>) and returns a reference to <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator++(int)</SAMP> advances the iterator to the previous item (<SAMP>--current</SAMP>) and returns the old value of <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator--</SAMP> advances the iterator to the following item (<SAMP>++current</SAMP>) and returns a reference to <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator--(int)</SAMP> advances the iterator to the following item (<SAMP>++current</SAMP>) and returns the old value of <SAMP>*this</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator==</SAMP> is a non-member operator that returns <SAMP>true</SAMP> if the iterators <SAMP>x</SAMP> and <SAMP>y</SAMP> point to the same item.</P>
+</LI>
+<LI><P><SAMP>operator!=</SAMP> is a non-member operator that returns  <SAMP>!(x==y).</SAMP></P>
+</LI>
+<LI><P><SAMP>operator&lt;</SAMP> is a non-member operator that returns <SAMP>true</SAMP> if the iterator <SAMP>x</SAMP> precedes the iterator <SAMP>y</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator&gt;</SAMP> is a non-member operator that returns <SAMP>y &lt; x</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator&lt;=</SAMP> is a non-member operator that returns <SAMP>!(y &lt; x)</SAMP>.</P>
+</LI>
+<LI><P><SAMP>operator&gt;=</SAMP> is a non-member operator that returns <SAMP>!(x &lt; y)</SAMP>.</P>
+</LI>
+<LI><P>The remaining operators (<SAMP>&lt;, +, -, +=, -=</SAMP>) are redefined to behave exactly as they would in a <SAMP>random_access_iterator</SAMP>, except with the sense of direction reversed.</P>
+</LI>
+</UL>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>All iterator operations are required to take at most amortized constant time.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class Iterator,
+          class Category,
+          class T,
+          class Reference = T&amp;,
+          class Pointer = T*,
+          class Distance = ptrdiff_t&gt;
+class __reverse_bi_iterator
+   : public iterator&lt;bidirectional_iterator_tag, Category T,
+                     Distance&gt; {
+    typedef
+      __reverse_bi_iterator&lt;Iterator,
+      Category T, Reference, Pointer, Distance&gt; self;
+    friend bool operator== (const self&amp;, const self&amp;);
+  public:
+    __reverse_bi_iterator ();
+    explicit __reverse_bi_iterator
+      (Iterator);
+    Iterator base ();
+    Reference operator* ();
+    self&amp; operator++ ();
+    self operator++ (int);
+    self&amp; operator-- ();
+    self operator-- (int);
+  };
+
+// Non-member Operators
+
+  template &lt;class Iterator, class Category
+            class T, class Reference,
+            class Pointer, class Distance&gt;
+  bool operator== (
+    const __reverse_bi_iterator
+     &lt;Iterator,Category T,Reference,Pointer,Distance&gt;&amp;,
+     const __reverse_bi_iterator
+     &lt;Iterator,Category T,Reference,Pointer,Distance&gt;&amp;);
+
+template &lt;class Iterator,
+            class T, class Reference, class Category,
+            class Pointer, class Distance&gt;
+  bool operator!= (
+    const __reverse_bi_iterator
+     &lt;Iterator,Category T,Reference,Pointer,Distance&gt;&amp;,
+     const __reverse_bi_iterator
+     &lt;Iterator,Category T,Reference,Pointer,Distance&gt;&amp;);
+
+template &lt;class Iterator&gt;
+class reverse_iterator
+  : public iterator
+     &lt;typename iterator_traits&lt;iterator&gt;::iterator_category,
+     &lt;typename iterator_traits&lt;iterator&gt;::value_type,
+     &lt;typename iterator_traits&lt;iterator&gt;::difference_type,
+     &lt;typename iterator_traits&lt;iterator&gt;::pointer,
+     &lt;typename iterator_traits&lt;iterator&gt;::reference&gt;
+{
+
+    typedef reverse_iterator&lt;Iterator&gt; self;
+
+    friend bool operator==    (const self&amp;, const self&amp;);
+    friend bool operator&lt;     (const self&amp;, const self&amp;);
+    friend Distance operator- (const self&amp;, const self&amp;);
+    friend self operator+     (Distance, const self&amp;);
+ 
+public:
+    reverse_iterator ();
+    explicit reverse_iterator (Iterator);
+    Iterator base ();
+    Reference operator* ();
+    self&amp; operator++ ();
+    self operator++ (int);
+    self&amp; operator-- ();
+    self operator-- (int);
+
+    self  operator+ (Distance) const;
+    self&amp; operator+= (Distance);
+    self operator- (Distance) const;
+    self&amp; operator-= (Distance);
+    Reference operator[] (Distance);
+};
+
+// Non-member Operators
+
+    template &lt;class Iterator&gt; bool operator== 
+        const reverse_iterator&lt;Iterator&gt;&amp;,
+        const reverse_iterator&lt;Iterator&gt;&amp;);
+
+template &lt;class Iterator&gt; bool operator!= 
+        const reverse_iterator&lt;Iterator&gt;&amp;,
+        const reverse_iterator&lt;Iterator&gt;&amp;);
+
+     template &lt;class Iterator&gt; bool operator&lt; (
+         const reverse_iterator&lt;Iterator&gt;&amp;,
+         const reverse_iterator&lt;Iterator&gt;&amp;);
+
+template &lt;class Iterator&gt; bool operator&gt; 
+         const reverse_iterator&lt;Iterator&gt;&amp;,
+         const reverse_iterator&lt;Iterator&gt;&amp;);
+
+template &lt;class Iterator&gt; bool operator&lt;= 
+         const reverse_iterator&lt;Iterator&gt;&amp;,
+         const reverse_iterator&lt;Iterator&gt;&amp;);
+
+template &lt;class Iterator&gt; bool operator&gt;= 
+         const reverse_iterator&lt;Iterator&gt;&amp;,
+         const reverse_iterator&lt;Iterator&gt;&amp;);
+
+     template &lt;class Iterator&gt; Distance operator- 
+         const reverse_iterator&lt;Iterator&gt;&amp;,
+         const reverse_iterator&lt;Iterator&gt;&amp;);
+
+     template &lt;class Iterator&gt; 
+      reverse_iterator&lt;Iterator&gt; operator+ Distance, 
+         const reverse_iterator&lt;Iterator&gt;&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// rev_itr.cpp
+//
+ #include &lt;iterator&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   //Initialize a vector using an array
+   int arr[4] = {3,4,7,8};
+   vector&lt;int&gt; v(arr,arr+4);
+   //Output the original vector
+   cout &lt;&lt; "Traversing vector with iterator: " &lt;&lt; endl 
+        &lt;&lt; "     ";
+   for(vector&lt;int&gt;::iterator i = v.begin(); i != v.end();
+       i++)
+     cout &lt;&lt; *i &lt;&lt; " ";
+   //Declare the reverse_iterator
+   vector&lt;int&gt;::<B>reverse_iterator</B> rev(v.end());
+   vector&lt;int&gt;::<B>reverse_iterator</B> rev_end(v.begin());
+   //Output the vector backwards
+   cout &lt;&lt; endl &lt;&lt; endl;
+   cout &lt;&lt; "Same vector, same loop, reverse_iterator: " 
+         &lt;&lt; endl &lt;&lt; "     ";
+   for(; rev != rev_end; rev++)
+     cout &lt;&lt; *rev &lt;&lt; " ";
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+Traversing vector with iterator:
+     3 4 7 8
+Same vector, same loop, reverse_iterator:
+     8 7 4 3</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Ite_5295.htm">Iterators</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="rev_6652.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rev_6851.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

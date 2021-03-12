@@ -1,0 +1,214 @@
+<HTML><HEAD><TITLE>Endnotes</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=O></A><H2>Endnotes</H2>
+
+<DL><DT><A NAME="fn1">1</A></DT>
+<DD>This example assumes that you have created a class, <B><I>moneytype</I></B>, to represent monetary values, and that 
+you have written iostreams insertion <SAMP>&lt;&lt;</SAMP> and extraction <SAMP>&gt;&gt;</SAMP> operators for the class. Further, it assumes 
+that these operators format and parse values using the <SAMP>money_put</SAMP> and <SAMP>money_get</SAMP> facets of the locales
+imbued on the streams they're operating on.  See <A HREF="5.htm">Chapter 5</A> for a complete example of this technique,
+using phone numbers rather than monetary values. The <B><I>moneytype</I></B> class is not part of the 
+Standard C++ Library.
+
+<BR><BR><A HREF="3-3.htm#fn1">Return</A></DD>
+</DL>
+
+<DL><DT><A NAME="fn1">1</A></DT>
+<DD> The shift operators for the character types, like char and wchar_t, are an exception to this rule; they are 
+global functions in the standard library namespace ::std.
+
+<BR><BR><A HREF="7-2.htm#fn1">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn2">2</A></DT>
+<DD> Iostreams does not prevent you from setting other invalid combinations of these flags, however.
+
+<BR><BR><A HREF="7-3.htm#fn2">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn3">3</A></DT>
+<DD> The standard does not specify whether the grouping information, that is contained in a stream's locale's 
+numpunct facet, is ignored or taken into account if present. In any case, there are no manipulators that 
+allow to switch on and off the grouping.
+
+<BR><BR><A HREF="7-4.htm#fn3">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn4">4</A></DT>
+<DD> The classification of a character as a white space character depends on the character set used. The extractor
+takes the information from the locale's ctype facet.
+
+<BR><BR><A HREF="7-5.htm#fn4">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn5">5</A></DT>
+<DD> The stream buffer can be created as the stream's responsibility, or the buffer can be provided from outside
+the stream, so inadvertently the buffer could have 0 size.
+
+<BR><BR><A HREF="8-1.htm#fn5">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn6">6</A></DT>
+<DD> The streams layer catches bad_alloc exceptions thrown during allocation of its internal resources, 
+iword and pword. It would then set badbit or failbit. An exception would be thrown only if the respective
+bit in the exception mask asks for it. The exception is ios_failure.
+
+<BR><BR><A HREF="8-3.htm#fn6">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn7">7</A></DT>
+<DD>Note that each change of either the stream state or the exception mask can result in an exception thrown. 
+This is because the functions setstate() and exception() raise an exception in case the exception mask requires
+it.
+
+<BR><BR><A HREF="8-3.htm#fn7">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn8">8</A></DT>
+<DD> See Bjarne Stroustrup, The C++ Programming Language, 3rd Edition, p.366.
+
+<BR><BR><A HREF="9-1.htm#fn8">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn9">9</A></DT>
+<DD> The traditional iostreams supported a constructor, taking a file descriptor, that allowed connection of 
+a file stream to an already open file. This is not available in the standard iostreams. However, Rogue 
+Wave's implementation of the standard iostreams provides a corresponding extension (see the <I>Class 
+Reference</I> for file streams.).
+
+<BR><BR><A HREF="9-2.htm#fn9">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn10">10</A></DT>
+<DD> For output file streams the open mode out is equivalent to out|trunc, that is,  you can omit the trunc 
+flag. For bidirectional file streams, however, trunc must always be explicitly specified.
+
+<BR><BR><A HREF="9-3.htm#fn10">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn11">11</A></DT>
+<DD> Basically the binary mode flag is passed on to the respective operating system's service function, 
+which means that in principle all system-specific conversions are suppressed, not only the carriage return
+/ linefeed handling.
+
+<BR><BR><A HREF="9-4.htm#fn11">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn12">12</A></DT>
+<DD> This was different in the old iostreams, where you could have dynamic and static output streams. See 
+<A HREF="24-4.htm">Section 24.4</A> for further details.
+
+<BR><BR><A HREF="10-2.htm#fn12">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn13">13</A></DT>
+<DD> An alternative could be to provide Manip as a static or a global object at the user's convenience. Unfortunately,
+this approach would introduce the well-known order-of-initialization problems for global 
+and static objects.
+
+<BR><BR><A HREF="12-3.htm#fn13">Return</A></DD>
+</DL>
+
+<DL><DT><A NAME="fn14">14</A></DT>
+<DD> Traditional iostreams had classes called ostream_withassign that explicitly allowed copying and assignment
+of stream objects.
+
+<BR><BR><A HREF="13-2.htm#fn14">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn15">15</A></DT>
+<DD> This feature was available in the traditional iostreams, but is not offered by the standard iostreams. 
+Rogue Wave's implementation of the standard iostreams retains the old feature for backward compatibility
+with the traditional iostreams, but it is a nonstandard feature. Using it might make your application
+non-portable to other standard iostream libraries.
+
+<BR><BR><A HREF="13-2.htm#fn15">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn16">16</A></DT>
+<DD> The traditional iostreams' strstream allows you to obtain a pointer to the stream's internal buffer. Different
+from the standard iostreams' stringstream, it does not create a copy of the internal data. Hence, 
+<A NAME="idx514"><!></A>
+using the deprecated strstream instead of the standard stringstream spares you the overhead of creating
+a second copy of the data.
+
+<BR><BR><A HREF="13-4.htm#fn16">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn17">17</A></DT>
+<DD> In the case of input streams, the behavior of sync() is implementation-defined, that is, not standardized.
+The traditional iostreams had a sync() function that did the expected synchronization, that is, refilling
+the buffer beginning with the current file position.
+
+<BR><BR><A HREF="14-2.htm#fn17">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn18">18</A></DT>
+<DD> See functions strftime(), strptime(), and wcsftime() in X/Open for reference.
+
+<BR><BR><A HREF="15-2.htm#fn18">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn19">19</A></DT>
+<DD> According to the standard, they are two separate arrays. However, the Rogue Wave implementation 
+uses the old technique involving only one array, since that part of the document is suggested only.
+
+<BR><BR><A HREF="15-2.htm#fn19">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn20">20</A></DT>
+<DD> For brevity, error handling is omitted in the example. If allocation fails, then badbit is set.
+
+<BR><BR><A HREF="15-3.htm#fn20">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn21">21</A></DT>
+<DD> This, of course, is only an example. You would probably never derive a new class for adding only one 
+data member. However, it keeps the example simple and allows us to demonstrate the principle of deriving
+new stream classes.
+
+<BR><BR><A HREF="17-1.htm#fn21">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn22">22</A></DT>
+<DD> For a more detailed discussion of the problem and its solution, see Section 14.2, p. 306ff, of Bjarne 
+Stroustrup, "The Design and Evolution of C++," Addison-Wesley 1994.
+
+<BR><BR><A HREF="17-4.htm#fn22">Return</A></DD>
+</DL>
+
+
+<DL><DT><A NAME="fn23">23</A></DT>
+<DD> In our example of a conversion between ASCII and EBCDIC, we have no reason to ever return 
+<SAMP>partial</SAMP>, because this is a conversion of single byte characters. Either a character can be recognized 
+and converted, or the conversion fails; that is, <SAMP>error</SAMP> is returned. The <SAMP>partial</SAMP> return code only 
+makes sense in wide-character and multibyte conversions.
+
+<BR><BR><A HREF="19-4.htm#fn23">Return</A></DD>
+</DL>
+
+
+
+<P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

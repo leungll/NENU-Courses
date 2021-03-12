@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>22.7 Non-Member Functions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="22-6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=0>
+<H2>22.7 Non-Member Functions</H2>
+
+<A NAME="2271"><H3>22.7.1 Binary Operators</H3></A>
+<A NAME="idx456"><!></A>
+<P>Class <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> provides a large block of binary operators that allow a program to apply these operators to two <B><I>valarray</I></B>s or to a <B><I>valarray</I></B> and a <SAMP>T</SAMP> value, where the <SAMP>T</SAMP> can occur on the left- or right-hand side of the expression. As you'd expect, these operators do not modify either of their arguments, but instead return a new <B><I>valarray</I></B> containing the result of the operation. Each version that takes two <B><I>valarray</I></B> arguments returns the result of applying the operation to the corresponding elements of the arrays. The versions with a <SAMP>T&amp;</SAMP> argument return a <B><I>valarray</I></B> whose elements result from applying the operation to each element in the <B><I>valarray</I></B> argument along with the <SAMP>T&amp;</SAMP> argument. See the <B><I>valarray</I></B> entry in the <I>Class Reference</I> for a complete list of binary operators.</P>
+<P>Arithmetic and bitwise operators return a <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> of <SAMP>T</SAMP>. Logical operators return a <B><I><A HREF="../../stdref/val_6244.htm">valarray&lt;bool&gt;</A></I></B>, where each element represents the comparison of corresponding elements in two <B><I>valarray</I></B>s or the comparison of each element in an array with a particular value. For example:</P>
+<UL>
+<PRE>
+int a[3] = {1,2,3};
+int b[3] = {0,1,4};
+valarray&lt;int&gt; v1(a,3);
+valarray&lt;int&gt; v2(b,3); 
+valarray&lt;int&gt; v3(0,3);
+valarray&lt;bool&gt; v4(false,3);
+v3 = v1 + v2;                           // v3 = {1,3,7}
+v4 = v1 == v2;                          // v4 = {false,false,false}
+v4 = v1 &lt; v2;                           // v4 = {false,false,true}</PRE>
+</UL>
+
+<A NAME="2272"><H3>22.7.2 Transcendental Functions</H3></A>
+<A NAME="idx457"><!></A>
+<P>Class <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> also provides 20 transcendental functions, four of which are overloads. Each function returns a new <B><I>valarray</I></B> that contains elements resulting from the application of the transcendental function to each element in the <B><I>valarray</I></B> passed as an argument. See the <B><I>valarray</I></B> entry in the <I>Class Reference</I> for a complete list of transcendental functions. </P>
+<P>The following example squares each of the elements of an array:</P>
+<UL>
+<PRE>
+using std::pow;
+
+float a[3] = {2.0, 4.0, 16.0};
+valarray&lt;float&gt; v(a,3);              // v = {2.0, 4.0, 16.0}
+valarray&lt;float&gt; v2(0.0,3);           // v2 = {0.0, 0.0, 0.0}
+
+v2 = pow(v,2.0);                     // v2 = {4.0, 16.0, 256.0 } 
+</PRE>
+</UL>
+
+
+
+<HR>
+<A HREF="22-6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=O></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=O></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=O></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=O><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

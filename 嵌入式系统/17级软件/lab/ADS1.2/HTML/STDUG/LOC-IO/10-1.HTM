@@ -1,0 +1,42 @@
+<HTML><HEAD><TITLE>10.1 About String Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="10.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="10-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>10.1 About String Streams</H2>
+
+<A NAME="idx296"><!></A>
+<P>The iostreams facility supports not only input and output to external devices like files. It also allows in-memory parsing and formatting. Source and sink of the characters read or written becomes a string held somewhere in memory. You use in-memory I/O if the information to be read is already available in the form of a string, or if the formatted result is processed as a string. For example, to interpret the contents of the string <SAMP>argv[1]</SAMP> as an integer value, the code might look like this:</P>
+<UL>
+<PRE>
+int i;
+if (istringstream(argv[1]) &gt;&gt; i)                             //1
+   // use the value of i</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The parameter of the input string stream constructor is a string; here a character array, namely <SAMP>argv[1]</SAMP>, is provided as an argument and is implicitly converted to a string. From this newly constructed input string stream, which contains <SAMP>argv[1],</SAMP> an integer value is extracted.
+</TABLE>
+<P>The inverse operation, taking a value and converting it to characters that are stored in a string, might look like this:</P>
+<UL>
+<PRE>
+struct date {
+  int day,month,year;
+} today = {8,4,1996};
+ostringstream ostr;                                           //1
+ostr &lt;&lt; today.month &lt;&lt; '-' &lt;&lt; today.day &lt;&lt;'-' &lt;&lt; today.year;  //2
+if (ostr)
+   display(ostr.str());                                       //3</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>An output string stream is allocated.
+<TR VALIGN="top"><TD>//2</TD><TD>Values are inserted into the output string stream. 
+<TR VALIGN="top"><TD>//3</TD><TD>The result of the formatting can be retrieved in the form of a string, which is returned by <SAMP>str()</SAMP>.
+</TABLE>
+<A NAME="idx297"><!></A>
+<P>As with file streams, there are three class templates that implement string streams: <B><I>basic_istringstream &lt;charT,traits,Allocator&gt;</I></B>, <B><I>basic_ostringstream &lt;charT,traits,Allocator&gt;</I></B>, and <B><I>basic_stringstream &lt;charT,traits,Allocator&gt;</I></B>. These are derived from the stream base classes, <B><I>basic_istream &lt;charT, traits&gt;, basic_ostream &lt;charT, traits&gt;</I></B>, and <B><I>basic_iostream &lt;charT, traits&gt;</I></B>. Therefore they inherit all the functions for formatted input and output described in <A HREF="7.htm">Chapter 7</A>, as well as the stream state. They also have functions for setting and retrieving the string that serves as source or sink, and constructors that allow you to set the string before construction time. For convenience, there are the regular typedefs <SAMP>istringstream</SAMP>, <SAMP>ostringstream</SAMP>, and <SAMP>stringstream,</SAMP> with <SAMP>wistringstream</SAMP>, <SAMP>wostringstream</SAMP>, and <SAMP>wstringstream</SAMP> for the respective tiny and wide character string streams.</P>
+<P>The buffering is done through a specialized stream buffer class, <B><I>basic_stringbuf &lt;charT,traits,Allocator&gt;</I></B>. </P>
+
+<HR>
+<A HREF="10.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="10-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

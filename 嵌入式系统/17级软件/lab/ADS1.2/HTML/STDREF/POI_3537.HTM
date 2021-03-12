@@ -1,0 +1,61 @@
+<HTML><HEAD><TITLE>pointer_to_binary_function</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="plu_3223.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="poi_7375.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>pointer_to_binary_function</H2>
+<PRE><HR>Function Object
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A function object that adapts a pointer to a binary function, to take the place of a <B><I><A HREF="bin_7851.htm">binary_function</A></I></B>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;functional&gt;
+template &lt;class Arg1, class Arg2, class Result&gt;
+class <B>pointer_to_binary_function</B> : public
+      binary_function&lt;Arg1, Arg2, Result&gt; ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>pointer_to_binary_function</I></B> class encapsulates a pointer to a two-argument function. The class uses <SAMP>operator()</SAMP> so that the resulting object serves as a binary function object for that function. </P>
+<P>The <SAMP>ptr_fun</SAMP> function is overloaded to create instances of a <B><I>pointer_to_binary_function</I></B> when included with the appropriate pointer to a function. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class Arg1, class Arg2, class Result&gt;
+class pointer_to_binary_function : public
+      binary_function&lt;Arg1, Arg2, Result&gt; {
+ public:
+   explicit pointer_to_binary_function 
+            (Result (*f)(Arg1, Arg2));
+   Result operator() (const Arg1&amp;, const Arg2&amp;) const;
+};
+
+template&lt;class Arg1, class Arg2, class Result&gt;
+pointer_to_binary_function&lt;Arg1, Arg2, Result&gt;
+             ptr_fun (Result (*x)(Arg1, Arg2));</PRE>
+
+</PRE>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bin_7851.htm">binary_function</A></I></B>, <B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B>, <B><I><A HREF="poi_7375.htm">pointer_to_unary_function</A></I></B>, <B><I><A HREF="ptr_4059.htm">ptr_fun</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="plu_3223.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="poi_7375.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

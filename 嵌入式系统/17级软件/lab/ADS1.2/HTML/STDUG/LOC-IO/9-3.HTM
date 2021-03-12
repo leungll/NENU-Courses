@@ -1,0 +1,171 @@
+<HTML><HEAD><TITLE>9.3 The Open Mode</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="9-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>9.3 The Open Mode</H2>
+<A NAME="idx274"><!></A>
+<P>There may be times when you want to modify the way a file is opened or used in a program. For example, in some cases it is desirable that writes append to the end of a file rather than overwriting the existing values. The file stream constructor takes a second argument, the <I>open mode</I>, that allows such variations to be specified. Here is an example:</P>
+<UL>
+<PRE>
+fstream Str("inout.txt",
+            ios_base::in|ios_base::out|ios_base::app);</PRE>
+</UL>
+
+<A NAME="931"><H3>9.3.1 The Open Mode Flags</H3></A>
+<A NAME="idx275"><!></A>
+<P>The open mode argument is of type <SAMP>ios_base::openmode</SAMP>, which is a bitmask type like the format flags and the stream state. <A HREF="#Table 11">Table 11</A> defines the following bits:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx276"><!></A>
+<H4><A NAME="Table 11">Table 11 -- Flag names and effects</A></H4><tr><td valign=top><B><B>Flag Names</B></B><td valign=top><B><B>Effects</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>ios_base::in</SAMP><BR>
+<td valign=top>
+Open file for reading<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::out</SAMP><BR>
+<td valign=top>
+Open file for writing<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::ate</SAMP><BR>
+<td valign=top>
+Start position is at file end<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::app</SAMP><BR>
+<td valign=top>
+Append file; that is, always write to the end of the file<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::trunc</SAMP><BR>
+<td valign=top>
+Truncate file; that is, delete file content<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::binary</SAMP><BR>
+<td valign=top>
+Binary mode<BR>
+
+
+</TABLE>
+
+
+</P>
+
+<A NAME="9311"><H4>9.3.1.1 The in and out Open Modes</H4></A>
+<A NAME="idx277"><!></A>
+<P>Input (and output) file streams always have the <SAMP>in</SAMP> (or <SAMP>out</SAMP>) open mode flag set implicitly. An output file stream, for instance, knows that it is in output mode and you need not set the output mode explicitly. Instead of writing:</P>
+<UL>
+<PRE>
+ofstream Str("out.txt",ios_base::out|ios_base::app);</PRE>
+</UL>
+<P>you can simply say:</P>
+<UL>
+<PRE>
+ofstream Str("out.txt",ios_base::app);</PRE>
+</UL>
+<A NAME="idx278"><!></A>
+<P>Bidirectional file streams, on the other hand, do not have the flag set implicitly. This is because a bidirectional stream does not have to be in both input and output mode in all cases. You might want to open a bidirectional stream for reading only or writing only. Bidirectional file streams therefore have no implicit input or output mode. You must always set a bidirectional file stream's open mode explicitly.</P>
+
+<A NAME="idx279"><!></A>
+<A NAME="9312"><H4>9.3.1.2 The Open modes ate, app, and trunc</H4></A>
+<A NAME="idx280"><!></A>
+<P>Each file maintains a <I>file position</I> that indicates the position in the file where the next byte will be read or written. When a file is opened, the initial file position is usually at the beginning of the file. The open modes <SAMP>ate</SAMP> (meaning <I>at end</I>) and <SAMP>app</SAMP> (meaning <I>append</I>) change this default to the end of the file.</P>
+<A NAME="idx281"><!></A>
+<P>There is a subtle difference between <SAMP>ate</SAMP> and <SAMP>app</SAMP> mode. If the file is opened in append mode, all output to the file is done at the current end of the file, regardless of intervening repositioning. Even if you modify the file position to a position before the file's end, you cannot write there. With <SAMP>at-end</SAMP> mode, you can navigate to a position before the end of file and write to it.</P>
+<A NAME="idx282"><!></A>
+<A NAME="fn10"><!></A>
+<P>If you open an already existing file for writing, you usually want to overwrite the content of the output file. The open mode <SAMP>trunc</SAMP> (meaning <I>truncate</I>) has the effect of discarding the file content, in which case the initial file length is set to <SAMP>0</SAMP>. Therefore, if you want to replace a file's content rather than extend the file, you must open the file in <SAMP>out|trunc</SAMP>.<SUP><A HREF="endnotes.htm#fn10">10</A></SUP> Note that the file position is at the beginning of the file in this case, which is exactly what you expect for overwriting an output file.</P>
+<P>If you want to extend an output file, you open it with the logical <SAMP>or</SAMP> of <SAMP>at</SAMP> <SAMP>end</SAMP> and <SAMP>append</SAMP> mode. In this case, the file content is retained because the <SAMP>trunc</SAMP> flag is not set, and the initial file position is at the file's end. However, you may additionally set the <SAMP>trunc</SAMP> flag; the file content is discarded and the output is done at the end of an empty file.</P>
+<P>Input mode only works for files that already exist. Otherwise, the stream construction fails, as indicated by <SAMP>failbit</SAMP> set in the stream state. Files that are opened for writing are created if they do not yet exist. The constructor only fails if the file cannot be created.</P>
+
+<A NAME="idx283"><!></A>
+<A NAME="9313"><H4>9.3.1.3 The binary Open Mode</H4></A>
+<P>The <SAMP>binary</SAMP> open mode is discussed in <A HREF="9-4.htm">Section 9.4</A>.</P>
+
+<A NAME="932"><H3>9.3.2 Combining Open Modes</H3></A>
+<A NAME="idx284"><!></A>
+<P>The effect of combining these open modes is similar to the mode argument of the C library function <SAMP>fopen(name,mode)</SAMP>. <A HREF="#Table 12">Table 12</A> gives an overview of all permitted combinations of open modes for text files and their counterparts in C stdio. Combinations of modes that are not listed in the table (such as both <SAMP>trunc</SAMP> and <SAMP>app</SAMP>) are invalid, and the attempted <SAMP>open()</SAMP> operation fails.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx285"><!></A>
+<H4><A NAME="Table 12">Table 12 -- Open modes and their C stdio counterparts</A></H4><tr><td valign=top><B><B>Open Mode</B></B><td valign=top><B><B>C stdio Equivalent</B></B><td valign=top><B><B>Effect</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>in</SAMP><BR>
+<td valign=top>
+<SAMP>"r"</SAMP><BR>
+<td valign=top>
+Open text file for reading only<BR>
+
+<tr><td valign=top>
+<SAMP>out|trunc</SAMP><BR>
+<SAMP>out</SAMP><BR>
+<td valign=top>
+<SAMP>"w"</SAMP><BR>
+<td valign=top>
+Truncate to <SAMP>0</SAMP> length, if existent, or create text file for writing only<BR>
+
+<tr><td valign=top>
+<SAMP>out|app</SAMP><BR>
+<td valign=top>
+<SAMP>"a"</SAMP><BR>
+<td valign=top>
+Append; open or create text file only for writing at end of file<BR>
+
+<tr><td valign=top>
+<SAMP>in|out</SAMP><BR>
+<td valign=top>
+<SAMP>"r+"</SAMP><BR>
+<td valign=top>
+Open text file for update (reading and writing)<BR>
+
+<tr><td valign=top>
+<SAMP>in|out|trunc</SAMP><BR>
+<td valign=top>
+<SAMP>"w+"</SAMP><BR>
+<td valign=top>
+Truncate to <SAMP>0</SAMP> length, if existent, or create text file for update<BR>
+
+<tr><td valign=top>
+<SAMP>in|out|app</SAMP><BR>
+<td valign=top>
+<SAMP>"a+"</SAMP><BR>
+<td valign=top>
+Append; open or create text file for update, writing at end of file<BR>
+
+
+</TABLE>
+
+
+</P>
+
+<A NAME="933"><H3>9.3.3 Default Open Modes</H3></A>
+<A NAME="idx286"><!></A>
+<P>The open mode parameter in constructors and <SAMP>open()</SAMP> functions of file stream classes have a default value. The default open modes are listed in <A HREF="#Table 13">Table 13</A>. Note that abbreviations are used; for example, <SAMP>ifstream</SAMP> stands for <SAMP>basic_ifstream &lt;charT,traits&gt;</SAMP>.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx287"><!></A>
+<H4><A NAME="Table 13">Table 13 -- Default open modes</A> </H4><tr><td valign=top><B><B>File Stream</B></B><td valign=top><B><B>Default Open Mode</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>ifstream</SAMP><BR>
+<td valign=top>
+<SAMP>in</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>ofstream</SAMP><BR>
+<td valign=top>
+<SAMP>out</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>fstream</SAMP><BR>
+<td valign=top>
+<SAMP>in|out</SAMP><BR>
+
+
+</TABLE>
+
+
+</P>
+
+<HR>
+<A HREF="9-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

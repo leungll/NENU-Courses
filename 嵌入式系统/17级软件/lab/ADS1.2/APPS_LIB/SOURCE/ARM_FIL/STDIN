@@ -1,0 +1,7 @@
+1	tstfiles/firdata	n	n	tstfiles/fircoeff	n	n	variants/1testo	n	n
+2	tstfiles/firdata	n	n	tstfiles/fircoeff	n	n	variants/2testo	n	n
+3	tstfiles/iirdata	n	n	tstfiles/iircoeff	n	n	variants/3testo	n	n
+4	tstfiles/iirdata	n	n	tstfiles/iircoeff	n	n	variants/4testo	n	n
+5	tstfiles/lmsdata	n	n	tstfiles/lmscoeff	n	n	tstfiles/lmsdesir	n	n	0.3	variants/5testo	n	n	variants/5testc	n	n
+6	tstfiles/lmsdata	n	n	tstfiles/lmscoeff	n	n	tstfiles/lmsdesir	n	n	0.3	variants/6testo	n	n	variants/6testc	n	n
+0

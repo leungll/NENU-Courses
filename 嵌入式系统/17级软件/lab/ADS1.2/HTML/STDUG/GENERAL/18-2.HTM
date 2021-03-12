@@ -1,0 +1,25 @@
+<HTML><HEAD><TITLE>18.2 The Standard Exception Hierarchy</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="18-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>18.2 The Standard Exception Hierarchy</H2>
+<A NAME="idx409"><!></A>
+<P>The Standard C++ Library implements the two-category error model described in <A HREF="18-1.htm">Section 18.1</A> with a set of classes. These classes, which are defined in the <SAMP>stdexcept</SAMP> header file, can be used to catch exceptions thrown by the library and to throw exceptions from your own code.</P>
+<P>The exception handling classes are related through inheritance. The inheritance hierarchy looks like this:</P>
+<A NAME="idx410"><!></A>
+<PRE><B><I><A HREF="../../stdref/exc_9785.htm">exception</A></I></B>
+    <B><I>logic_error</I></B>
+       <B><I>domain_error</I></B>
+      <B><I>invalid_argument</I></B>
+      <B><I>length_error</I></B>
+      <B><I>out_of_range</I></B>
+   <B><I>runtime_error</I></B>
+      <B><I>range_error</I></B>
+      <B><I>overflow_error</I></B>
+      <B><I>underflow_error</I></B></PRE>
+<A NAME="idx411"><!></A>
+<P>Classes <B><I>logic_error</I></B> and <B><I>runtime_error</I></B> inherit from class <B><I><A HREF="../../stdref/exc_9785.htm">exception</A></I></B>. All other exception handling classes inherit from either <B><I>logic_error</I></B> or <B><I>runtime_error</I></B>.</P>
+
+<HR>
+<A HREF="18-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

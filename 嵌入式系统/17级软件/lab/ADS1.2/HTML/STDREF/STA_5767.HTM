@@ -1,0 +1,159 @@
+<HTML><HEAD><TITLE>stable_sort</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="sta_4791.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sta_9602.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>stable_sort</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A templatized algorithm for sorting collections of entities.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class RandomAccessIterator&gt;
+void <B>stable_sort</B> (RandomAccessIterator first, 
+                  RandomAccessIterator last);
+
+template &lt;class RandomAccessIterator, class Compare&gt;
+void <B>stable_sort</B> (RandomAccessIterator first,
+                  RandomAccessIterator last, Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>stable_sort</I></B> algorithm sorts the elements in the range <SAMP>[first, last)</SAMP>. The first version of the algorithm uses less than (<SAMP>&lt;</SAMP>) as the comparison operator for the sort. The second version uses the comparison function <SAMP>comp.</SAMP></P>
+<P>The <B><I>stable_sort</I></B> algorithm is considered stable because the relative order of the equal elements is preserved. </P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>stable_sort</I></B> does at most <SAMP>N(logN)2</SAMP> comparisons, where <SAMP>N</SAMP> equals          <SAMP>last - first</SAMP>. If enough extra memory is available, it does at most <SAMP>NlogN.</SAMP></P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// sort.cpp
+//
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+struct associate
+ {
+int num;
+char chr;
+
+associate(int n, char c) : num(n), chr(c) {};
+associate() : num(0), chr(`\0'){};
+ };
+
+
+bool operator&lt;(const associate &amp;x, const associate &amp;y)
+ {
+return x.num &lt; y.num;
+ }
+
+
+ostream&amp; operator&lt;&lt;(ostream &amp;s, const associate &amp;x)
+ {
+return s &lt;&lt; "&lt;" &lt;&lt; x.num &lt;&lt; ";" &lt;&lt; x.chr &lt;&lt; "&gt;";
+ }
+
+int main ()
+ {
+vector&lt;associate&gt;::iterator i, j, k;
+associate arr[20] = 
+  {associate(-4, ` `), associate(16, ` `),
+   associate(17, ` `), associate(-3, `s'),
+   associate(14, ` `), associate(-6, ` `),
+   associate(-1, ` `), associate(-3, `t'),
+   associate(23, ` `), associate(-3, `a'),
+   associate(-2, ` `), associate(-7, ` `),
+   associate(-3, `b'), associate(-8, ` `),
+   associate(11, ` `), associate(-3, `l'),
+   associate(15, ` `), associate(-5, ` `),
+   associate(-3, `e'), associate(15, ` `)};
+
+// Set up vectors
+vector&lt;associate&gt; v(arr, arr+20), v1((size_t)20), 
+                  v2((size_t)20);
+
+// Copy original vector to vectors #1 and #2
+copy(v.begin(), v.end(), v1.begin());
+copy(v.begin(), v.end(), v2.begin());
+
+// Sort vector #1
+sort(v1.begin(), v1.end());
+
+// Stable sort vector #2
+<B>stable_sort</B>(v2.begin(), v2.end());
+
+// Display the results
+cout &lt;&lt; "Original    sort      stable_sort" &lt;&lt; endl;
+for(i = v.begin(), j = v1.begin(), k = v2.begin();
+  i != v.end(); i++, j++, k++)
+  cout &lt;&lt; *i &lt;&lt; "     " &lt;&lt; *j &lt;&lt; "     " &lt;&lt; *k &lt;&lt; endl;
+
+
+return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+Original    sort      stable_sort
+&lt;-4; &gt;     &lt;-8; &gt;     &lt;-8; &gt;
+&lt;16; &gt;     &lt;-7; &gt;     &lt;-7; &gt;
+&lt;17; &gt;     &lt;-6; &gt;     &lt;-6; &gt;
+&lt;-3;s&gt;     &lt;-5; &gt;     &lt;-5; &gt;
+&lt;14; &gt;     &lt;-4; &gt;     &lt;-4; &gt;
+&lt;-6; &gt;     &lt;-3;e&gt;     &lt;-3;s&gt;
+&lt;-1; &gt;     &lt;-3;s&gt;     &lt;-3;t&gt;
+&lt;-3;t&gt;     &lt;-3;l&gt;     &lt;-3;a&gt;
+&lt;23; &gt;     &lt;-3;t&gt;     &lt;-3;b&gt;
+&lt;-3;a&gt;     &lt;-3;b&gt;     &lt;-3;l&gt;
+&lt;-2; &gt;     &lt;-3;a&gt;     &lt;-3;e&gt;
+&lt;-7; &gt;     &lt;-2; &gt;     &lt;-2; &gt;
+&lt;-3;b&gt;     &lt;-1; &gt;     &lt;-1; &gt;
+&lt;-8; &gt;     &lt;11; &gt;     &lt;11; &gt;
+&lt;11; &gt;     &lt;14; &gt;     &lt;14; &gt;
+&lt;-3;l&gt;     &lt;15; &gt;     &lt;15; &gt;
+&lt;15; &gt;     &lt;15; &gt;     &lt;15; &gt;
+&lt;-5; &gt;     &lt;16; &gt;     &lt;16; &gt;
+&lt;-3;e&gt;     &lt;17; &gt;     &lt;17; &gt;
+&lt;15; &gt;     &lt;23; &gt;     &lt;23; &gt;</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I> <A HREF="sor_1439.htm">sort</A></I></B>,<B><I><A HREF="par_4963.htm">partial_sort</A></I></B>, <B><I><A HREF="par_1563.htm">partial_sort_copy</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="sta_4791.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sta_9602.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

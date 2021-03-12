@@ -1,0 +1,96 @@
+<HTML><HEAD><TITLE>basic_iostream</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bas_6405.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_3074.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>basic_iostream</H2>
+<PRE><HR>                         ...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ostream...
+basic_iostream...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>                           ...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ios<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>ios_base
+                         ...<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_istream...
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Public Constructors">Public Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Assists in formatting and interpreting sequences of characters controlled by a stream buffer.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;istream&gt;
+template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class basic_iostream 
+: public basic_istream&lt;charT, traits&gt;,
+public basic_ostream&lt;charT, traits&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>basic_iostream</I></B> inherits a number of functions from classes <B><I>basic_ostream&lt;charT, traits&gt;</I></B> and <B><I>basic_istream&lt;charT, traits&gt;.</I></B> They assist in formatting and interpreting sequences of characters controlled by a stream buffer. Two groups of functions share common properties, the formatted functions and the unformatted functions. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits&gt;
+class basic_iostream 
+: public basic_istream&lt;charT, traits&gt;,
+  public basic_ostream&lt;charT, traits&gt; 
+
+{
+
+ public:
+
+  explicit basic_iostream(basic_streambuf&lt;charT, traits&gt;
+                        *sb);
+  virtual ~basic_iostream();
+};</PRE>
+
+</UL>
+
+<A NAME="Public Constructors"><H3>Public Constructors</H3></A>
+
+
+<PRE>explicit <B>basic_iostream</B>(basic_streambuf&lt;charT, traits&gt;
+                        *sb); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_iostream,</SAMP> assigning initial values to the base class by calling <SAMP>basic_istream&lt;charT, traits&gt;(sb)</SAMP> and <SAMP>basic_ostream&lt;charT, traits&gt;(sb)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~basic_iostream</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>basic_iostream</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<P>See <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B> and <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B> examples.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.6.1.5.</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="bas_6405.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_3074.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

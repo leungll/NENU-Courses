@@ -1,0 +1,124 @@
+<HTML><HEAD><TITLE>iosfwd</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ios_8948.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="isa_6169.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>iosfwd</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>The header <SAMP>iosfwd</SAMP> forward declares the input/output library template classes and specializes them for wide and tiny characters. It also defines the positional types used in class <SAMP>char_traits</SAMP> instantiated on tiny and wide characters.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<UL>
+<PRE>#include &lt;iosfwd&gt;
+// forward declare the traits class
+template&lt;class charT&gt; struct char_traits;
+
+// forward declare the positioning class
+template&lt;class stateT&gt; class fpos;
+
+// forward declare the state class
+class mbstate_t;
+
+// forward declare the allocator class
+template&lt;class T&gt; class allocator;
+
+// forward declare the iostreams template classes
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_ios;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_streambuf;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_istream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_ostream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+    class basic_stringbuf;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt; 
+    class basic_istringstream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+    class basic_ostringstream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_filebuf;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_ifstream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_ofstream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class ostreambuf_iterator;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class istreambuf_iterator;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_iostream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+    class basic_stringstream;
+template&lt;class charT,class traits=char_traits&lt;charT&gt;&gt; 
+    class basic_fstream;
+
+// specializations on tiny characters
+typedef basic_ios&lt;char&gt;              ios;
+typedef basic_streambuf&lt;char&gt;        streambuf;
+typedef basic_istream&lt;char&gt;          istream;
+typedef basic_ostream&lt;char&gt;          ostream;
+typedef basic_stringbuf&lt;char&gt;        stringbuf;
+typedef basic_istringstream&lt;char&gt;    istringstream;
+typedef basic_ostringstream&lt;char&gt;    ostringstream;
+typedef basic_filebuf&lt;char&gt;          filebuf;
+typedef basic_ifstream&lt;char&gt;         ifstream;
+typedef basic_ofstream&lt;char&gt;         ofstream;
+typedef basic_iostream&lt;char&gt;         iostream;
+typedef basic_stringstream&lt;char&gt;     stringstream;
+typedef basic_fstream&lt;char&gt;          fstream;
+
+// specializations on wide characters
+typedef basic_ios&lt;wchar_t&gt;           wios;
+typedef basic_streambuf&lt;wchar_t&gt;     wstreambuf;
+typedef basic_istream&lt;wchar_t&gt;       wistream;
+typedef basic_ostream&lt;wchar_t&gt;       wostream;
+typedef basic_stringbuf&lt;wchar_t&gt;     wstringbuf;
+typedef basic_istringstream&lt;wchar_t&gt; wistringstream;
+typedef basic_ostringstream&lt;wchar_t&gt; wostringstream;
+typedef basic_filebuf&lt;wchar_t&gt;       wfilebuf;
+typedef basic_ifstream&lt;wchar_t&gt;      wifstream;
+typedef basic_ofstream&lt;wchar_t&gt;      wofstream;
+typedef basic_iostream&lt;wchar_t&gt;      wiostream;
+typedef basic_stringstream&lt;wchar_t&gt;  wstringstream;
+typedef basic_fstream&lt;wchar_t&gt;       wfstream;
+
+// positional types used by char_traits
+typedef fpos&lt;mbstate_t&gt; streampos;
+typedef fpos&lt;mbstate_t&gt; wstreampos;
+
+typedef long            streamoff;
+typedef long            wstreamoff;</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="fpo_1231.htm">fpos</A></I></B>(3C++), <B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++), <B><I><A HREF="bas_3138.htm">basic_iostream</A></I></B>(3C++), <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B>(3C++), <B><I><A HREF="bas_2581.htm">basic_istringstream</A></I></B>(3C++), <B><I><A HREF="bas_8767.htm">basic_ostringstream</A></I></B>(3C++), <B><I><A HREF="bas_2565.htm">basic_stringstream</A></I></B>(3C++), <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B>(3C++), <B><I><A HREF="bas_7446.htm">basic_ifstream</A></I></B>(3C++), <B><I><A HREF="bas_4928.htm">basic_ofstream</A></I></B>(3C++), <B><I><A HREF="bas_9653.htm">basic_fstream</A></I></B>(3C++), <B><I><A HREF="ist_1762.htm">istreambuf_iterator</A></I></B>(3C++), <B><I><A HREF="ost_2389.htm">ostreambuf_iterator</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.2</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="ios_8948.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="isa_6169.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

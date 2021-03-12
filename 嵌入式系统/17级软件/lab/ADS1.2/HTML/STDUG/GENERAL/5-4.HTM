@@ -1,0 +1,39 @@
+<HTML><HEAD><TITLE>5.4 Example Program: The Sieve of Eratosthenes</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.4 Example Program: The Sieve of Eratosthenes</H2>
+
+<A NAME="idx94"><!></A>
+<P>An example program that illustrates the use of vectors is the classic algorithm called the <I>sieve of Eratosthenes</I>, used to discover prime numbers. </P>
+<BLOCKQUOTE><HR>
+<B>NOTE: Source code for this program is in the file sieve.cpp.
+</B><HR></BLOCKQUOTE>
+<P>In the sieve of Eratosthenes, a list of all the numbers up to some bound is represented by an integer vector. The basic idea is to strike out (set to zero) all values that cannot be primes; thus all the remaining values are prime numbers. To do this, a loop examines each value in turn; for those that are set to one and thus not yet excluded from the set of candidate primes, it strikes out all multiples of the number. When the outermost loop is finished, all remaining prime values have been discovered. Here is the program:</P>
+<UL>
+<PRE>
+void main() {
+      // create a sieve of integers, initially set
+   const int sievesize = 100;
+   std::vector&lt;int&gt; sieve(sievesize, 1);
+
+      // now search for 1 bit positions
+   for (int i = 2; i * i &lt; sievesize; i++)
+      if (sieve[i])
+         for (int j = i + i; j &lt; sievesize; j += i)
+            sieve[j] = 0;
+
+      // finally, output the values that are set
+   for (int j = 2; j &lt; sievesize; j++)
+      if (sieve[j])
+         std::cout &lt;&lt; j &lt;&lt; " ";
+   std::cout &lt;&lt; std::endl;
+}
+</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="5-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>14.3 Implicit Synchronization Using the unitbuf Format Flag</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.3 Implicit Synchronization Using the unitbuf Format Flag</H2>
+
+<A NAME="idx394"><!></A>
+<P>You can achieve a kind of automatic synchronization for output files by using the format flag <SAMP>ios_base::unitbuf</SAMP>. It causes an output stream to flush its buffer after each output operation as follows:</P>
+<UL>
+<PRE>
+ofstream ostr("/tmp/fil");
+ifstream istr("/tmp/fil");
+
+ostr &lt;&lt; unitbuf;                                              //1
+
+while (some_condition)
+{ ostr &lt;&lt; "... some output...";                                   //2
+  // process the output
+  istr &gt;&gt; s;
+  // ...
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Set the <SAMP>unitbuf</SAMP> format flag.
+<TR VALIGN="top"><TD>//2</TD><TD>After each insertion into the shared file <SAMP>/tmp/fil,</SAMP> the buffer is automatically flushed, and the output is available to other streams that read from the same file.
+</TABLE>
+<A NAME="idx395"><!></A>
+<P>Since it is not overly efficient to flush after every single token that is inserted, you might consider switching off the <SAMP>unitbuf</SAMP> flag for a lengthy output that is not supposed to be read partially.</P>
+<UL>
+<PRE>
+ostr.unsetf(ios_base::unitbuf);                               //1
+ostr &lt;&lt; " ... some lengthy and complicated output ...";
+ostr.flush().setf(ios_base::unitbuf);                         //2</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Switch off the <SAMP>unitbuf</SAMP> flag. Alternatively, using manipulators, you can say <SAMP>ostr &lt;&lt; nounitbuf;</SAMP>
+<TR VALIGN="top"><TD>//2</TD><TD>Flush the buffer and switch on the <SAMP>unitbuf</SAMP> flag again. Alternatively, you can say <SAMP>ostr &lt;&lt; flush &lt;&lt; unitbuf;</SAMP>
+</TABLE>
+
+<HR>
+<A HREF="14-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

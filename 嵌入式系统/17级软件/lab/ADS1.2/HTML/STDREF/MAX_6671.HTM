@@ -1,0 +1,96 @@
+<HTML><HEAD><TITLE>max</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="mas_2579.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="max_8656.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>max</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Finds and returns the maximum of a pair of values.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class T&gt;
+ const T&amp; <B>max</B>(const T&amp;, const T&amp;);
+
+template &lt;class T, class Compare&gt;
+ const T&amp; <B>max</B>(const T&amp;, const T&amp;, Compare);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>max</I></B> algorithm determines and returns the maximum of a pair of values. The optional argument <SAMP>Compare</SAMP> defines a comparison function that can be used in place of the default <SAMP>operator&lt;</SAMP>.</P>
+<P><B><I>max</I></B> returns the first argument when the arguments are equal.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// max.cpp
+//
+ #include &lt;algorithm&gt; 
+ #include &lt;iostream&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main(void)
+ { 
+   double d1 = 10.0, d2 = 20.0; 
+ 
+   // Find minimum 
+   double val1 = min(d1, d2);
+   // val1 = 10.0   
+ 
+   // the greater comparator returns the greater of the
+   // two values.     
+   double val2 = min(d1, d2, greater&lt;double&gt;());
+   // val2 = 20.0;
+ 
+   // Find maximum
+   double val3 = <B>max</B>(d1, d2);
+   // val3 = 20.0;
+ 
+   // the less comparator returns the smaller of 
+   // the two values.
+   // Note that, like every comparison in the STL, max is 
+   // defined in terms of the &lt; operator, so using less here
+   // is the same as using the max algorithm with a default
+   // comparator.
+   double val4 = <B>max</B>(d1, d2, less&lt;double&gt;());
+   // val4 = 20 
+
+   cout &lt;&lt; val1 &lt;&lt; " " &lt;&lt; val2 &lt;&lt; " " 
+        &lt;&lt; val3 &lt;&lt; " " &lt;&lt; val4 &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+10 20 20 20</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="max_8656.htm">max_element</A></I></B>, <B><I><A HREF="min_9233.htm">min</A></I></B>, <B><I><A HREF="min_9998.htm">min_element</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="mas_2579.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="max_8656.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>get_temporary_buffer</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="gen_0186.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gre_0376.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>get_temporary_buffer</H2>
+<PRE><HR>Memory Handling Primitive
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Pointer based primitive for handling memory</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;memory&gt;
+template &lt;class T&gt;
+pair&lt;T*, ptrdiff_t&gt; <B>get_temporary_buffer</B> (ptrdiff_t);
+template &lt;class T&gt;
+pair&lt;T*, ptrdiff_t&gt; <B>get_temporary_buffer</B> (ptrdiff_t, T*);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>get_temporary_buffer</I></B> templatized function reserves from system memory the largest possible buffer that is less than or equal to the size requested (<SAMP>n*sizeof(T)</SAMP>), and returns a <SAMP>pair&lt;T*, ptrdiff_t&gt;</SAMP> containing the address and size of that buffer. The units used to describe the capacity are in <SAMP>sizeof(T)</SAMP>.</P>
+<P>The first version of this function is not available if your compiler does not support functions templatized on return type only.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="all_7029.htm">allocator</A></I></B>, <B><I><A HREF="pai_5818.htm">pair</A></I></B>, <B><I><A HREF="ret_6218.htm">return_temporary_buffer</A></I></B>.</P>
+
+
+<BR>
+<HR>
+<A HREF="gen_0186.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gre_0376.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

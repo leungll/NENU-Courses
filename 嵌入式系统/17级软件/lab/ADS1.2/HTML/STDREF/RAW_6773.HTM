@@ -1,0 +1,92 @@
+<HTML><HEAD><TITLE>raw_storage_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ran_2368.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rem_4572.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>raw_storage_iterator</H2>
+<PRE><HR>Memory Management
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Member Operators">Member Operators</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Enables iterator-based algorithms to store results into uninitialized memory.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Operatorsoperator++()">operator++()</A><BR>
+ <A HREF="#Member Operatorsoperator=()">operator=()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;memory&gt;
+template &lt;class OutputIterator, class T&gt;
+ class <B>raw_storage_iterator</B> : public 
+       iterator &lt;output_iterator_tag, void,void,void,void&gt; {
+
+public:
+   explicit raw_storage_iterator (OutputIterator);
+   raw_storage_iterator&lt;OutputIterator, T&gt;&amp; operator*();
+   raw_storage_iterator&lt;OutputIterator, T&gt;&amp;
+     operator= (const T&amp;);
+   raw_storage_iterator&lt;OutputIterator, T&gt;&amp; operator++();
+   raw_storage_iterator&lt;OutputIterator, T&gt; operator++ (int);
+};</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Class <B><I>raw_storage_iterator</I></B> enables iterator-based algorithms to store their results in uninitialized memory. The template parameter,            <SAMP>OutputIterator</SAMP> is required to have its <SAMP>operator*</SAMP> return an object for which <SAMP>operator&amp;</SAMP> is both defined and returns a pointer to <SAMP>T</SAMP>. </P>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>raw_storage_iterator</B> (OutputIterator x);</PRE>
+
+<UL>
+<P>Initializes the iterator to point to the same value as <SAMP>x</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Operators"><H3>Member Operators</H3></A>
+
+
+<A NAME="Member Operatorsoperator=()"></A><PRE>raw_storage_iterator &lt;OutputIterator, T&gt;&amp;
+<B>operator=</B>(const T&amp; element);</PRE>
+
+<UL>
+<P>Constructs an instance of <SAMP>T</SAMP>, initialized to the value <SAMP>element</SAMP>, at the location pointed to by the iterator.</P>
+</UL>
+
+
+
+<A NAME="Member Operatorsoperator++()"></A><PRE>raw_storage_iterator &lt;OutputIterator, T&gt;&amp; 
+<B>operator++</B>();</PRE>
+
+<UL>
+<P>Pre-increment: advances the iterator and returns a reference to the updated iterator.</P>
+</UL>
+
+
+
+<PRE>raw_storage_iterator&lt;OutputIterator, T&gt;
+<B>operator++</B>(int);</PRE>
+
+<UL>
+<P>Post-increment: advances the iterator and returns the old value of the iterator.</P>
+</UL>
+
+
+
+<BR>
+<HR>
+<A HREF="ran_2368.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rem_4572.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

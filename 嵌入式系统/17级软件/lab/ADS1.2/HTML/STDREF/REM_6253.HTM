@@ -1,0 +1,136 @@
+<HTML><HEAD><TITLE>remove_copy</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="rem_4572.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rem_9276.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>remove_copy</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Moves desired elements to the front of a container, and returns an iterator that describes where the sequence of desired elements ends.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator,
+          class OutputIterator,
+          class T&gt;
+ OutputIterator <B>remove_copy</B> (InputIterator first,
+                             InputIterator last,
+                             OutputIterator result,
+                             const T&amp; value);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>remove_copy</I></B> algorithm copies all the elements referred to by the iterator <SAMP>i</SAMP> in the range <SAMP>[first, last)</SAMP> for which the following corresponding condition does <I>not</I> hold:   <SAMP>*i  == value</SAMP>. <B><I>remove_copy</I></B> returns an iterator that points to the end of the resulting range. <B><I>remove_copy</I></B> is stable, which means that the relative order of the elements in the resulting range is the same as their relative order in the original range. The elements in the original sequence are not altered by <B><I>remove_copy</I></B>.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>Exactly <SAMP>last1 - first1</SAMP> applications of the corresponding predicate are done. </P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// remove.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iterator&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ template&lt;class Arg&gt;
+ struct all_true : public unary_function&lt;Arg, bool&gt;
+ {
+   bool operator() (const Arg&amp;) { return 1; }
+ };
+
+ int main ()
+ {
+   int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+   vector&lt;int&gt; v(arr+0, arr+10);
+
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+   //
+   // Remove the 7.
+   //
+   vector&lt;int&gt;::iterator result = remove(v.begin(),
+                         v.end(), 7);
+   //
+   // Delete dangling elements from the vector.
+   //
+   v.erase(result, v.end());
+
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+   //
+   // Remove everything beyond the fourth element.
+   //
+   result = remove_if(v.begin()+4, v.begin()+8,
+            all_true&lt;int&gt;());
+   //
+   // Delete dangling elements.
+   //
+   v.erase(result, v.end());
+
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+   //
+   // Now remove all 3s on output.
+   // 
+   <B>remove_copy</B>(v.begin(), v.end(), <br>               ostream_iterator&lt;int,char&gt;(cout," "), 3);
+   cout &lt;&lt; endl &lt;&lt; endl;
+   //
+   // Now remove everything satisfying predicate on output.
+   // Should yield a NULL vector.
+   //
+   remove_copy_if(v.begin(), v.end(), <br>                  ostream_iterator&lt;int,char&gt;(cout," "),
+                  all_true&lt;int&gt;());
+ 
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+1 2 3 4 5 6 7 8 9 10
+1 2 3 4 5 6 8 9 10
+1 2 3 4
+1 2 4</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="rem_4572.htm">remove</A></I></B>, <B><I><A HREF="rem_0514.htm">remove_if</A></I></B>, <B><I><A HREF="rem_9276.htm">remove_copy_if</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="rem_4572.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rem_9276.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

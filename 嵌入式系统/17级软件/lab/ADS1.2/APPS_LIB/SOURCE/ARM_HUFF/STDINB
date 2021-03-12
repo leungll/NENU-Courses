@@ -1,0 +1,8 @@
+1	n	tstfiles/huff8b	y	y	variants/1testfile	y	y
+1	y	13	y	variants/1testfib	y	y
+2	n	tstfiles/huff16b	y	y	variants/2testfile	y	y
+2	y	24	y	variants/2testfib	y	y
+2	y	0	30	13	n
+3	n	tstfiles/huff32b	y	y	variants/3testfile	y	y
+3	y	24	y	variants/3testfib	y	y
+0

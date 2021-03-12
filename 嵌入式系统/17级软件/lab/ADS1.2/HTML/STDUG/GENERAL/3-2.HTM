@@ -1,0 +1,32 @@
+<HTML><HEAD><TITLE>3.2 Predicates</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="3-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>3.2 Predicates</H2>
+<A NAME="idx41"><!></A>
+<P>A <I>predicate</I> is simply a function that returns either a boolean value or an integer value. Following the normal C convention, an integer value is assumed to be true if non-zero, and false otherwise. Here is an example of a predicate, which takes an integer as argument and returns <SAMP>true</SAMP> if the number represents a leap year, and <SAMP>false</SAMP> otherwise:</P>
+<UL>
+<PRE>
+bool isLeapYear (unsigned int year)
+                    // return true if year is leap year
+{
+                    // millennia are leap years
+   if (0 == year % 1000) return true;
+                   // every fourth century is
+   if (0 == year % 400) return true;
+                   // every fourth year is
+   if (0 == year % 4) return true;
+                   // otherwise not
+   return false;
+}</PRE>
+</UL>
+<P>A predicate is used as an argument, for example, in the generic algorithm named <SAMP>find_if()</SAMP>. This algorithm returns the first value that satisfies the predicate, returning the end-of-range value if no such element is found. Using this algorithm, the following locates the first leap year in a list of years:</P>
+<UL>
+<PRE>
+list&lt;int&gt;::iterator firstLeap = 
+   find_if(aList.begin(), aList.end(), isLeapYear);</PRE>
+</UL>
+
+<HR>
+<A HREF="3-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

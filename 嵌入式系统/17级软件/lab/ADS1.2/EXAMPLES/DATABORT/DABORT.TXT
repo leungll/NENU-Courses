@@ -1,0 +1,860 @@
+               A Standard Data Abort Handler Veneer
+               ====================================
+
+Copyright 1997 Advanced RISC Machines Limited. All rights reserved.
+
+Author: David Seal
+
+
+Change history
+==============
+
+Revision 0.1 [16 Oct 1997] --- Initial draft version.
+Revision 0.2 [31 Oct 1997] --- Review comments incorporated.
+Revision 0.3 [04 Nov 1997] --- "SuptThumb" option becomes supported.
+Revision 0.4 [07 Nov 1997] --- Change "ReturnUndef" to string, to allow
+                               address specification.
+Revision 0.5 [28 Nov 1997] --- Remove unwanted indirection in
+                               "ReturnToNext" mechanism.
+Sept 00 : Minor edits for ADS 1.1 release
+
+
+Introduction
+============
+
+Data abort handling on the ARM is quite complex by now, due to a number of
+factors:
+
+* Differences between processors' abort models, with regard to base register
+  writeback for an aborted instruction - from ARM6 to the present, we have
+  had three different abort models used.
+
+* The growth in the number of classes of load/store instruction that need to
+  be dealt with. For ARM6, the instructions concerned were (in groups with
+  similar properties from the point of view of abort handling):
+
+    LDR/LDRB/LDRBT/LDRT/STR/STRB/STRBT/STRT        (12-bit immediate offset)
+    LDR/LDRB/LDRBT/LDRT/STR/STRB/STRBT/STRT        (shifted register offset)
+    SWP/SWPB                                                     (no offset)
+    LDM/STM                       (offset derived from 16-bit register list)
+    LDC/STC                                (8-bit immediate offset, times 4)
+
+  By ARM7TDMI/ARM9TDMI, this list is augmented by:
+
+    LDRH/LDRSB/LDRSH/STRH                           (8-bit immediate offset)
+    LDRH/LDRSB/LDRSH/STRH                                  (register offset)
+    Thumb LDM/STM                  (offset derived from 8-bit register list)
+    Thumb PUSH/POP                 (offset derived from 9-bit register list)
+    Thumb LDR/STR                          (5-bit immediate offset, times 4)
+    Thumb LDR(sp)/LDR(pc)/STR(sp)          (8-bit immediate offset, times 4)
+    Thumb LDRH/STRH                        (5-bit immediate offset, times 2)
+    Thumb LDRB/STRB                                 (5-bit immediate offset)
+    Thumb LDR/LDRB/LDRH/LDRSB/LDRSH/STR/STRB/STRH          (register offset)
+
+* Complications due to banked registers - the data abort handler must make
+  certain that it is working with the correct version of a register.
+
+* Complications due to the PC being in the main register set, yet not
+  behaving quite like a normal register. These are mostly alleviated by
+  architectural rules prohibiting writeback to the base register if it is
+  R15, but still give rise to special cases in the abort handler code to
+  prevent out-of-control behaviour if such an instruction is executed.
+
+* Complications due to the possibility of the offset register being the same
+  as the base register, which can lead to the original base register value
+  not being reconstructible if writeback occurs. The worst cases of this
+  occur with post-indexing and make it impossible to recover from the abort;
+  these are definitely architecturally undefined ("UNPREDICTABLE"). Others
+  occur with pre-indexing and require special-case handling in the data
+  abort handler; their architectural status is unclear at the time of
+  writing. (Basically, the ARM Architecture Reference Manual says they are
+  UNPREDICTABLE, but nothing else says this or tries to enforce this status.
+  This leaves it unclear whether this is the result of a mis-edit to the ARM
+  ARM, and leaves the possibility open that such instructions are being used
+  in real code.)
+
+* Complications due to possible interactions with other exceptions, such
+  as "what happens if exception X occurs here?" or "how long is it
+  acceptable to leave interrupts disabled?".
+
+Beyond these "processor core" considerations, there will usually be other
+OS-specific ones: e.g. whether this is an abort that can be recovered from
+by adjusting the memory map appropriately, and if so, how that adjustment
+should be done. These can vary from something comparatively simple such as
+adjusting the memory access controls in an MMU or Protection Unit, to very
+complex operations such as mapping in a file across an unreliable network.
+
+In addition, the data abort exception is entered in a fashion that is
+unlikely to be compatible with any procedure calling standard. Even in the
+simpler cases of OS-specific adjustment of the memory map, it is likely
+to be complex enough that implementing (most of) it in a high-level language
+is highly desirable: this means that an assembly-language "veneer" is needed
+to translate the data abort exception into a procedure call. In its simplest
+form, such a veneer basically just dumps the processor state into a memory
+area, calls a high level language routine with this memory area as a
+parameter and restores the processor state from the memory area when the
+procedure returns. This leaves the OS-specific code to deal with all the
+"processor core" details listed above as well as its own complications.
+
+The purpose of this document is to propose and specify a somewhat more
+complicated veneer, the purpose of which is to insulate the OS-specific code
+from the processor core considerations. In essence, it will perform
+processor-core-specific tidy-up operations (e.g. base register restoration)
+and checks (e.g. for instructions that cannot be recovered from) before
+calling the OS-specific code, and may use more than one strategy for
+returning to the original program after the OS-specific code returns (this
+would be necessary e.g. if it is required to handle the pre-indexing base
+register = offset register cases referred to above).
+
+The overall scheme is therefore along the lines of:
+
+  Original    ----------------+----------------------+--------------------
+  instruction                 | Aborting instruction |
+  stream      ----------------+----------------------+--------------------
+                             / \                      \
+                            /   \                      \  Recovery by
+                           /     \                      \ emulation
+                          /       \                      --<----------
+                   --<----         \                                  \
+                  / Data abort      --<--------------------------------\
+                 /  trap             Recovery by instruction retry      \
+                /                                                        \
+               +-----------+---------------+-----------+------------------+
+  New veneer   | Dump      | Processor-    | Procedure | Choose & perform |
+  invocation   | processor | core-specific | call to   | data abort       |
+               | state     | tidy-ups      | OS code   | recovery actions |
+               +-----------+---------------+-----------+------------------+
+                                          /             \
+                                         /               \
+                         --<-------------                 --<--------
+                        / Passing a standardised           Procedure \
+                       /  set of parameters                return     \
+                      /                                                \
+                     +--------------------------------------------------+
+  Main OS code       |       OS-specific handler for data aborts        |
+                     +--------------------------------------------------+
+
+
+The advantages of this would be:
+
+* The standard ones of "divide and conquer": with the veneer handling the
+  processor core's data abort considerations and the OS-specific code
+  handling the wider system issues, each is likely to be simpler and easier
+  to implement.
+
+* Easier upgrade to a new processor core: only the veneer is liable to need
+  changing. Furthermore, the processor options the veneer need to be able to
+  deal with are quite tightly defined architecturally, which means that it
+  should not need to be changed frequently. (The most likely changes are
+  upgrades to deal with new instructions being added to the instruction set
+  - e.g. the motivation for this particular proposal is a customer wanting a
+  data abort handler that can deal with Thumb instructions.)
+
+* Fewer potential problems due to errors in data abort handling - it is an
+  easy area to make mistakes in if you're not very familiar with the
+  architecture (two data abort handlers I looked at while considering this
+  proposal both had significant bugs or limitations in them, for instance).
+
+
+Specification
+=============
+
+The data abort veneer will be provided as a single assembler source file,
+which is assembled appropriately for the system into which it is to be
+linked. It assembles as a single code area: all variables that it needs are
+either held in registers or defined elsewhere in the system and made
+available to the data abort veneer via suitable linking.
+
+There will also be an associated C header file, which defines some symbolic
+constants used for OS communication with the data abort veneer. As supplied,
+this file will not be able to contain function prototypes for the function
+calls described below, due to the fact that the correct prototypes depend
+strongly on the assembly-time options used. Users are however encouraged to
+generate and use the appropriate prototypes for their selection of
+assembly-time options.
+
+
+General Rules about Assembly-time Options
+-----------------------------------------
+
+The assembly-time options described in the following sections can be invoked
+in two ways:
+
+1) Via command-line -PreDefine options.
+
+2) By producing a system-specific "options file" which defines and sets the
+   appropriate assembly-time variables (with GBLL/SETL or GBLS/SETS
+   directives as appropriate), then INCLUDEs the main assembler source file.
+
+For clarity and to save space, this document is written on the assumption
+that method 1) is being used. To use method 2) on some or all of the
+options, just translate each -PreDefine option into the corresponding
+GBLx/SETx pair in the options file. Note also that in one case, a macro name
+can be specified by an option: this macro cannot be defined on the command
+line, and thus this possibility can only be used by defining the macro in an
+options (or similar) file.
+
+All options that must be specified are indicated as such in the text.
+Otherwise, logical options have their non-default value indicated in the
+option syntax, with the default being the opposite choice to the one shown,
+and other types of option have their default value indicated in the text.
+
+All options whose values are to be treated as assembler labels, area names,
+etc. (e.g. the veneer entry point) will be subject to some standard
+pre-processing. The purpose of this is to ensure that the symbol actually
+used is surrounded by a pair of vertical bars ("|"), to allow the widest
+possible range of characters in the symbol. If the symbol as supplied is
+already surrounded by vertical bars, nothing is done; otherwise, vertical
+bars are added before and after it. (It is an error for the symbol as
+supplied to contain vertical bar characters except as a matched pair at its
+start and end. The pre-processing will detect some such errors; others will
+only be detected if and when their substitution creates invalid source
+lines.)
+
+Notes on option naming:
+
+* All names are case-sensitive.
+
+* All names have been restricted to a maximum of 15 characters, partly in
+  order not to produce really excessive case-sensitive typing exercises, and
+  partly in order to keep the source formatting reasonably sane. This does
+  entail the use of some abbreviations.
+
+
+Standard Assembly-time Options
+------------------------------
+
+The data abort veneer's source file will cater for the following
+assembly-time options:
+
+* A mandatory option specifying the symbolic name of the veneer's entry
+  point:
+
+  -PD 'VeneerEntry SETS "<entry_point_name>"'
+
+  A symbol of the given name will be generated and EXPORTed. It is the
+  responsibility of the rest of the system to ensure that the data abort
+  vector at 0x00000010 or 0xFFFF0010 transfers control to this entry point -
+  typically via code such as:
+
+        B       <entry_point_name>
+
+  or:
+
+        LDR     PC,DataAbortHandler
+        :
+        :
+    DataAbortHandler DCD <entry_point_name>
+
+* An option to specify the name of the area created by the assembly:
+
+  -PD 'AreaName SETS "<area_name>"'
+
+  This defaults to "DataAbortVeneerCode"; the most likely reason for wanting
+  to change it is to affect linking order.
+
+* Options specifying the abort model(s) supported:
+
+  -PD 'BaseUpdated SETL {TRUE}'
+    Support the "Base Updated Abort Model". (This is the one used in ARM6
+    configured for late aborts, ARM7 and ARM9, in which an aborting
+    instruction with base register writeback will have performed the
+    writeback.)
+
+  -PD 'BaseRestored SETL {TRUE}'
+    Support the "Base Restored Abort Model". (This is the one used in ARM8
+    and StrongARM, in which an aborting instruction with base register
+    writeback will always have left the base register unchanged.)
+
+  -PD 'EarlyAbort SETL {TRUE}'
+    Support the legacy "early aborts" abort model for ARM6 processors
+    configured for early aborts. (Note that this abort model is no longer
+    allowed under ARM architecture version 4, but may still be present in
+    older ARM-based systems. Also note that this abort model is basically a
+    hybrid between the other two, and thus requires almost no extra code to
+    support once the other two are present.)
+
+  At least one of these must be specified.
+
+  If only one abort model is specified, only the correct code for that abort
+  model will be assembled, and no further action by the rest of the system
+  is required to identify the correct abort model to use. This would be the
+  normal option to use in an embedded system, for which the exact processor
+  version being used is known and constant.
+
+  If more than one abort model is specified, the correct code for all
+  selected abort models is assembled, and the rest of the system is required
+  to communicate the correct abort model to use to the data abort veneer
+  before a data abort can arise. The means by which this is done is
+  described under "Assembly-time Options for Multiple Abort Models" below.
+
+* Options to say how the OS-specific handler will be called:
+
+  -PD 'HandlerName SETS "<handler_name>"'
+    (Mandatory.) The name of the OS-specific handler. Its exact
+    interpretation depends on the calling standard used - see the next
+    entry.
+
+  -PD 'HandlerCallStd SETS "<calling_standard_name>"'
+    (Defaults to "APCS_NOSWST".) Define the procedure calling standard to be
+    used when calling the OS-specific handler. Possible values are:
+
+    APCS_NOSWST: The "no software stack checking" variant of the ARM
+      Procedure Calling Standard. A symbol defined by the "HandlerName"
+      option will be IMPORTed and a procedure call generated to it to
+      implement the OS-specific handler call. Details of the parameters to
+      and return value from this call appear below.
+
+    APCS_SWST: The "software stack checking" variant of the ARM Procedure
+      Calling Standard. This is identical to the APCS_NOSWST option, except
+      that before the call, the "sl" register (R10) will be loaded with an
+      OS-supplied value.
+
+    APCS_MACRO: Arguments will be marshalled and registers preserved (if
+      necessary) as though for the APCS_NOSWST choice, but a macro will be
+      expanded in place of generating a BL to an external procedure. The
+      macro's name is given by the "HandlerName" option, and takes no
+      parameters. Entry and exit conditions for the macro are as specified
+      by the "no software stack checking" variant of the ARM Procedure
+      Calling Standard, except that R14 does not contain a return link, and
+      it should "return" by executing past the end of the macro. (This
+      essentially allows a very simple OS-specific handler to be implemented
+      in-line.)
+
+  -PD 'HandlerCallMode SETS "<mode_name>"'
+    (Defaults to "Supervisor" for APCS_NOSWST and APCS_SWST calling
+    standards, "Abort" for APCS_MACRO calling standard.) Define the mode in
+    which the OS-specific handler is to be invoked. Possible values are
+    "Abort" (to remain in Abort-32 mode), "Supervisor" (to transfer to
+    Supervisor-32 mode) and "System" (to transfer to System-32 mode).
+
+  -PD 'HandlerSL SETS "<symbol>"'
+    (Mandatory for APCS_SWST calling standard, unnecessary and unused
+    otherwise.) For the APCS_SWST calling standard, a suitable stack limit
+    value must be loaded for the procedure call to the OS-specific handler.
+    This is done by IMPORTing the given symbol, which should be the address
+    of a word containing the stack limit value.
+
+* Options to say what parameters will be passed to the OS-specific handler:
+
+  -PD 'PassSPSR SETL {TRUE}'
+    Pass the SPSR_abort value, which was copied from the CPSR when the
+    ARM took the data abort trap. This would most likely be used to
+    determine whether the processor was in a privileged or user mode (by
+    testing whether bits 3:0 != 0000 or == 0000 respectively), but also
+    allows tests such as whether the processor was in Thumb state, whether
+    interrupts were enabled, etc.
+
+  -PD 'PassInstrAddr SETL {TRUE}'
+    Pass the address of the aborting instruction. The instruction itself can
+    be obtained (if desired) by dereferencing this address, taking the CPSR
+    T bit (bit 5) value into account. (This means that the "PassSPSR" option
+    above must also be specified if the OS-specific handler wants to access
+    the instruction on a Thumb-aware system.)
+
+  -PD 'PassRegDumpAddr SETL {TRUE}'
+    Pass the address of a 15-word dump of the values of registers R0-R14
+    made on entry to the data abort veneer, and possibly adjusted to unwind
+    some or all of the effects of the aborting instruction. Note however
+    that not all of the effects of the aborting instruction are guaranteed
+    to have been unwound - some can't be in the cases of LDMs, of errors,
+    and (if supported) of pre-indexed LDRs with base register = offset
+    register. Similarly, the OS-specific handler should not write modified
+    values to this dump; if it does, there can be no guarantee that it will
+    get the "expected" results.
+
+    Some further details:
+
+    * For banked registers, the values in this 15-word register dump are
+      those for the processor mode in which the aborting instruction was
+      executed.
+
+    * As far as memory protection goes, this register dump will be on the
+      abort stack and so will be accessible by code which can access the
+      abort stack.
+
+  -PD 'PassXferAddr SETL {TRUE}'
+    Pass the address of the data that was to have been loaded or stored. In
+    the case of a multi-word load or store (ARM LDC/LDM/STC/STM, or Thumb
+    LDM/POP/PUSH/STM), this will be the starting address of the transfer,
+    and the actual aborting address may occur at a later point in the
+    transfer. (Using ARM processor core facilities only, it is impossible
+    to determine the exact aborting address in this case without performing
+    "trial accesses" to the memory system: this could result in unwanted
+    behaviour for some systems, so should be left up to the OS-specific
+    handler.)
+
+    Note that it may be possible to use system facilities such as the
+    standard coprocessor 15 Fault Address Register to determine the aborting
+    address more easily than processor-core-only code can. If such
+    facilities exist in a given system, it will probably be better for the
+    OS-specific handler to use them and not to request the "PassXferAddress"
+    option.
+
+  See "Parameters of the OS-specific Handler Call" below for more details of
+  the call to the OS-specific handler.
+
+* Options to specify what return values the OS-specific handler may produce:
+
+  -PD 'ReturnNormal SETL {TRUE}'
+    Allow the OS-specific handler to return 0x0 to request that the original
+    program should be returned to.
+
+  -PD 'ReturnUndef SETS "<value_or_symbol>"'
+    (Defaults to not allowing this return value.) Allow the OS-specific
+    handler to return 0x4 to request that a trap to the undefined
+    instruction vector should be faked. "<value_or_symbol>" specifies the
+    actual address to be branched to, as either a hexadecimal number (e.g.
+    "0x00000004" or "0xFFFF0004") or an IMPORTed symbol.
+
+  -PD 'ReturnToNext SETS "<symbol>"'
+    (Defaults to not allowing this return value.) Allow the OS-specific
+    handler to return 0x10 to request that another data abort handler should
+    be invoked. The given symbol will be IMPORTed and treated as the address
+    of this second data abort handler.
+
+  -PD 'ReturnAddress SETL {TRUE}'
+    Allow the OS-specific handler to return an address to which control will
+    be transferred after unwinding the data abort veneer's stack and doing
+    any other "cleaning up" that is necessary.
+
+  At least one of the options that may be used when an error occurs must be
+  specified - see "Return Value from the OS-specific Handler Call" below for
+  more details of this, and for other information about the return value.
+
+* An option to remove support for Thumb:
+
+  -PD 'SuptThumb SETL {FALSE}'
+
+  If specified, this will cause the code that handles Thumb instructions not
+  to be assembled. This reduces the code size of the data abort veneer when
+  it is only to be run on non-Thumb-aware processor cores.
+
+* An option to control error detection:
+
+  -PD 'StrictErrors SETL {FALSE}'
+
+  If "StrictErrors" is left at (or set to) its default value of {TRUE}, the
+  data abort veneer will generate an error for any instruction which is
+  architecturally undefined in the areas relevant to data abort unwinding
+  (address generation and base register writeback in particular), and will
+  do so consistently across all abort models. This will happen regardless of
+  whether this is particularly relevant to the correct functioning of the
+  data abort veneer's code.
+
+  If "StrictErrors" is set to {FALSE}, the data abort veneer will only
+  generate an error for conditions that it needs to detect in order to
+  function correctly. This saves code, at the expense of incompatibility
+  between different abort models with respect to precisely which errors are
+  detected.
+
+  Note: Not all architecturally undefined instructions are detected as
+    errors even with "StrictErrors" equal to {TRUE}. E.g. use of the
+    SPSR->CPSR transferring version of LDM (i.e. LDM Rn,{<registers>,PC}^)
+    in user or system modes is UNPREDICTABLE, but the reason for this is the
+    non-existence of a user/system mode SPSR, which is not an area relevant
+    to data abort unwinding. Similarly, architectural undefinedness in the
+    area of precisely what value gets loaded or stored will generally not be
+    detected - e.g. a SWP with Rn = R15 will be detected, but one with Rd =
+    R15 or Rm = R15 will not be. See "Errors" below for a list of the errors
+    that are detected.
+
+
+Assembly-time Options for Multiple Abort Models
+-----------------------------------------------
+
+The following assembly-time options are used when the code is assembled to
+handle more than one of the possible abort models, to specify how it is
+determined at run time which abort model to use.
+
+* An option to specify a variable that identifies the abort model to use:
+
+  -PD 'AbortModelVar SETS "<name>"'
+
+  This option is mandatory if the code is assembled for more than one abort
+  model, and ignored if the code is assembled for just one abort model (or
+  is used during initialisation only if the "AbortModelInit" option is also
+  specified - see below).
+
+  The code will IMPORT a symbol called "<name>" and treat it as the address
+  of a data word. The value of the word is read by the data abort veneer and
+  used to identify the abort model. Provisionally, the following values are
+  allocated to the various abort models:
+
+    0: Base Restored Abort Model
+    1: Legacy "early aborts" model
+    3: Base Updated Abort Model
+
+  The authoritative sources for these abort model identifiers is however the
+  C header file.
+
+* An option to specify the name of an initialisation routine which
+  determines the abort model in use:
+
+  -PD 'AbortModelInit SETS "<name>"'
+
+  If unspecified or set to the empty string, the initialisation routine will
+  not be assembled. If set to a non-empty string, the initialisation routine
+  will be assembled, its entry point will be labelled "<name>" and the
+  resulting label will be EXPORTed.
+
+  To use the initialisation routine:
+
+  - Install the data abort handler.
+
+  - Call the initialisation routine in a mode other than abort mode, before
+    any code that can cause a data abort exception is executed, and not
+    allowing it to be interrupted by any code that can cause a data abort.
+
+    The routine takes a single parameter, which should be the address of a
+    word of memory which is guaranteed to abort.
+
+  - The initialisation routine returns zero to indicate that initialisation
+    was successful, in which case the variable specified by "AbortModelVar"
+    will now contain the correct value for the processor's abort model.
+
+  - The initialisation routine returns a non-zero value to indicate that
+    initialisation failed. The only plausible reasons for initialisation
+    failure with the anticipated implementation are that the supplied
+    address did not in fact cause an abort as expected, or that the
+    processor did not conform to any of the selected abort models. Note that
+    this second reason for an error means that the initialisation routine
+    can be useful even when only one abort model is being assembled, as it
+    allows the code to detect that it is being run on an unsuitable
+    processor.
+
+  The initialisation routine works by issuing some aborting loads from the
+  specified address, then looking at the base register contents in special
+  case code within the data abort veneer to see how the processor behaved.
+  It thus does not need to access any sort of processor ID code, but does
+  require the data abort veneer to be installed before it is called.
+
+
+Possible Extra Assembly-time Options
+------------------------------------
+
+The following assembly-time options are possible extra ones that may be needed 
+at some point, but are not included in this version:
+
+* Options to support re-enabling interrupts at a suitable point. At present,
+  this code assumes that the OS-specific handler is in charge of re-enabling
+  interrupts if necessary.
+
+* An option to specify that load instructions which load their own base
+  register *and* specify base register writeback are to be supported, on the
+  basis that base register writeback has or has not occurred (as specified
+  by the abort model) and that the base register load has been suppressed:
+
+  -PD 'SuptLoadBaseWB SETL {TRUE}'
+
+  The issue here is that while these instructions are architecturally
+  UNPREDICTABLE, most ARM implementations to date have implemented them as
+  first writing back to the base register, then loading its contents. (The
+  overall effect is the same as if writeback had not been specified.) At
+  least some (old) code uses these instructions, and it is unknown how
+  widely they occur: it may be necessary in some systems to support them
+  despite them being UNPREDICTABLE.
+
+  If this option is not specified, such instructions will generate an error.
+
+* An option to say whether LDR/STR instructions with writeback and a
+  register offset, and the same register specified as both the base register
+  and the index register are supported as far as possible. Post-indexed ones
+  cannot be supported in general and are definitely not architecturally
+  defined; pre-indexed ones can be, but with various levels of difficulty
+  depending on the abort model and other options.
+
+  -PD 'SuptBaseEqIndex SETL {TRUE}'
+
+  If not specified, pre-indexed instructions of the type described will not
+  be supported. The instructions concerned are ones of the forms:
+
+    LDR Rd,[Rn,Rn]!              STR Rd,[Rn,Rn]!
+    LDR Rd,[Rn,-Rn]!             STR Rd,[Rn,-Rn]!
+    LDR Rd,[Rn,Rn,<shift>]!      STR Rd,[Rn,Rn,<shift>]!
+    LDR Rd,[Rn,-Rn,<shift>]!     STR Rd,[Rn,-Rn,<shift>]!
+
+  The issue here is the combination of a number of facts:
+
+  a) A data abort handler can always recover from such instructions, but
+     cannot always use the standard algorithms for doing so. In particular,
+     with the Base Updated Abort Model, such an instruction must be treated
+     as a special case.
+
+  b) The architectural position of such instructions is somewhat dubious:
+     the ARM ARM says that both these instructions and the corresponding
+     post-indexed ones are "UNPREDICTABLE", but all ARM datasheets just say
+     this about the post-indexed versions.
+
+
+Parameters of the OS-specific Handler Call
+------------------------------------------
+
+The parameters passed to the OS-specific handler are a single obligatory
+"error code" parameter followed by a number of optional parameters. All
+parameters are word-sized (or smaller values which are passed as words). The
+exact mechanism by which parameters are passed is determined by the
+procedure calling standard being used.
+
+The error code parameter is zero to indicate that no error occurred, and is
+set to an error number otherwise. It is always the first parameter to the
+OS-specific handler. See "Errors" below for details of the possible errors.
+
+The optional parameters are the CPSR value at the time the instruction
+aborted, the address of the aborting instruction and the address of the data
+to be transferred by the aborting instruction. These are requested
+respectively by the "PassSPSR", "PassInstrAddr", "PassRegDumpAddr" and
+"PassXferAddr" options listed under "Standard Assembly-time Options" above.
+The requested optional parameters (if any) are passed as the 2nd and
+subsequent parameters to the OS-specific handler, in the appropriate
+sub-order of:
+
+  SPSR, instruction address, register dump address, transfer address
+
+All parameters as normal ARM 32-bit words, and may in general be treated as
+being of any type compatible with such words under the chosen procedure
+calling standard and/or any relevant language bindings. (The error code
+parameter is a slight exception to this: it should additionally be treated
+as a signed value.)
+
+
+Return Value from the OS-specific Handler Call
+----------------------------------------------
+
+If it returns, the OS-specific handler must return a single value, which
+should be one of the following. To avoid the inclusion of too much unwanted
+code, each type of return value is only permitted if the corresponding
+"ReturnXXXX" assembly-time option is set.
+
+* 0x0 to request normal data abort recovery actions (normally instruction
+  retry). (Enabled by the "ReturnNormal" assembly-time option.)
+
+  This is only a legitimate return value if no error was reported on entry
+  to the OS-specific handler.
+
+* 0x4 to request that the data abort veneer should unwind all its normal
+  effects (e.g. on the abort mode stack) and "return" in such a way as to
+  fake an entry to the undefined instruction trap. (Enabled by the
+  "ReturnUndef" assembly-time option.)
+
+  The "ReturnUndef" assembly-time option specifies precisely where the faked
+  undefined instruction trap is to be entered. This may be specified as a
+  hexadecimal number starting with the characters "0x": such a definition
+  will be used as an absolute address. If "ReturnUndef" is anything else, it
+  will be treated as the name of a symbol which should be IMPORTed and used
+  as the address of the trap handler.
+
+  To fake an entry to the standard ARM undefined instruction trap, set
+  "ReturnUndef" to "0x00000004". To fake one to the "high vectors" undefined
+  instruction trap on an ARM with the appropriate facility, set
+  "ReturnUndef" to "0xFFFF0004". (It is also possible to set "ReturnUndef"
+  to other values, to cause a non-standard "undefined instruction trap"
+  entry: this can be useful e.g. to avoid the problem described in the
+  warning below.)
+
+  The register values on entry to the undefined instruction trap are the
+  same as those on the original entry to the data abort trap, except that
+  (a) abort-model-specific base register restoration has been done as
+  necessary; (b) R14_undef, SPSR_undef and the CPSR will be set to what they
+  would have been had the aborting instruction actually been an undefined
+  instruction.
+
+  This is a legitimate return value regardless of the error code on entry to
+  the undefined instruction handler.
+
+  (WARNING: It should be noted that some standard undefined instruction
+  handling code does not currently correctly deal with LDMs and STMs that
+  manage somehow to enter the undefined instruction trap. This includes the
+  undefined instruction handlers in the FPE and the FPA Support Code, with
+  the result that use of this return value is currently incompatible with
+  any floating point option other than the floating point library.)
+
+* 0x10 to request that the data abort veneer should unwind all its normal
+  effects (e.g. on the abort mode stack) and "return" in such a way as to
+  fake an entry to a second data abort handler. (Enabled by the
+  "ReturnToNext" assembly-time option, which also specifies what the
+  address of that second handler is.)
+
+  The register values on entry to the second data abort handler are the same
+  as those on the original entry to the data abort trap, except that
+  abort-model-specific base register restoration has been done as necessary.
+
+  This is only a legitimate return value if no error was reported on entry
+  to the OS-specific handler.
+
+* A non-zero address to request that the data abort veneer should unwind all
+  its normal effects (e.g. pop any values it pushed on to the abort mode
+  stack), then transfer control to that address. (Enabled by the
+  "ReturnAddress" assembly-time option.)
+
+  When control arrives at that address, the processor will be in the same
+  mode as it was when the OS-specific handler was called (i.e. as determined
+  by the "HandlerCallMode" assembly-time option described under "Standard
+  Assembly-time Options" above). Register values will be the same as they
+  were on the original entry to the data abort trap, except that
+  (a) abort-model-specific base register restoration has been done as
+  necessary; (b) for banked registers, the value will have been shifted to
+  the new mode's version of the register.
+
+  This is a legitimate return value regardless of the error code on entry to
+  the undefined instruction handler.
+
+Any returned value which is not one of the specific return values listed
+above will be treated as the "return an address" option, as will any
+specific return value whose corresponding "ReturnXXXX" option is not set. If
+the "ReturnAddress" assembly-time option is not set, anything treated as the
+"return an address" option will instead be treated as an erroneous and
+invalid request by the OS-specific handler.
+
+The OS-specific handler may also fail to return, but must in that case take
+responsibility for unwinding the data abort veneer's effects on the abort
+stack. (How easy this is may vary between OSes.)
+
+
+Errors
+------
+
+The following error codes are provisionally assigned:
+
+  -1: OS-specific handler made invalid request.
+   0: No error.
+   1: Pre-indexed LDR/STR with base register = offset register and base
+      register writeback, and extra code to deal with this case wasn't
+      assembled.
+   2: Post-indexed LDR/STR with base register = offset register.
+   3: Use of a base register of R15 with base register writeback.
+   4: Use of a base register of R15 in an LDM, STM or SWP instruction.
+   5: Use of an offset register of R15.
+   6: Instruction that both writes back to and loads its base register (can
+      only occur if the "SuptLoadBaseWB" option is not specified).
+   7: Use of an empty register list in an LDM or STM instruction (including
+      the Thumb POP and PUSH instructions).
+   8: Use of writeback in a "user bank" LDM or STM instruction.
+   9: Instruction should not have been capable of generating a data abort.
+
+However, the C header file is the authoritative source for these values.
+
+Error code -1 is never produced on a normal call to the OS-specific handler.
+However, if the OS-specific handler returns a value that it is not supposed
+to, a second call to the OS-specific handler will be made, this time with
+error code -1. The intent is to assist with debug during development: once
+the OS-specific handler has been made to treat error code -1 as a fatal
+internal error, incorrect behaviour by other, potentially more complicated
+parts of it will be detected. (A drawback is that if the OS-specific handler
+makes an invalid request in response to error code -1, an infinite loop will
+result. However, if the system is this badly broken, something drastically
+wrong is liable to happen anyway.)
+
+The optional parameters will generally be valid when an error is reported,
+with the following exceptions:
+
+* If the "OS-specific handler made invalid request" error occurs, none of
+  the optional parameters will necessarily be valid.
+
+* The data transfer address requested by "PassXferAddress" will not always
+  be valid if an error occurs: this is unavoidable because the correct data
+  transfer address isn't even architecturally defined in many such cases.
+
+
+System Environment Requirements
+-------------------------------
+
+1) The system must provide a Full Descending abort stack and initialise
+   R13_abort to point at it. The capacity of the stack must be at least 32
+   words (128 bytes), and the memory concerned must be "non-aborting" (i.e.
+   privileged accesses to it must not generate aborts) at any time that a
+   data abort is capable of occurring.
+
+2) The data abort veneer code itself must be non-aborting at any time that a
+   data abort is capable of occurring. If it supports multiple abort models,
+   the data word saying which abort model is in use (the one specified by
+   the "AbortModelVar" option) must similarly be non-aborting.
+
+3) The data abort veneer will take care that at the time it calls the
+   OS-specific handler, all its "live" data is either in callee-save
+   registers for the chosen procedure calling standard or on the abort
+   stack. If the OS-specific handler is to be called in abort mode, this
+   should automatically ensure that the live R13_abort value is in a
+   callee-save register; otherwise, R13_abort will be copied to a
+   callee-save register before the OS-specific call and copied back
+   afterwards.
+
+   This means that the OS-specific handler can cause further aborts,
+   provided it takes care that (a) the procedure calling standard's
+   constraints are obeyed; (b) the procedure calling standard is one in
+   which R13 is a callee-save register; (c) the contents of the current
+   abort stack above R13_abort are preserved; (d) enough words are available
+   on the abort stack.
+
+4) It is the system's responsibility to ensure that FIQs cannot interfere
+   with data abort processing. In particular, note that a FIQ can occur very
+   early in the processing of a data abort, and in particular can occur
+   after processing of the data abort entry sequence and before the hardware
+   vector instruction at 0x00000010 or 0xFFFF0010 is obeyed. At this point,
+   the data abort handler has had no chance to do anything at all, including
+   saving the values in R14_abort and SPSR_abort. Accordingly, if a FIQ
+   handler wants to do anything that could generate an abort, it must take
+   care to preserve all state relevant to an outstanding abort before it
+   allows the possibility of generating an abort itself.
+
+5) If the OS-specific handler is to be called in supervisor or system mode,
+   the relevant R13 value is set up correctly for the given procedure
+   calling standard at any time that a data abort is capable of occurring.
+
+6) If the OS-specific handler is to be called in abort mode, that the given
+   procedure calling standard is compatible with its use of R13 as a Full
+   Descending stack pointer, and that enough words are available on the
+   abort stack to allow both for the data abort handler's requirement in 1)
+   above and for any requirements the procedure calling standard has.
+
+7) If the APCS_SWST calling standard is being used, that the word specified
+   by the "HandlerSL" option contains a suitable stack limit for the
+   OS-specific handler at all times that a data abort is capable of
+   occurring.
+
+
+Examples of Assembly-Time Options
+---------------------------------
+
+1) A system which will only be run on a bare ARM7TDMI, and which can fix up
+   the reason for an abort based on the veneer-generated transfer address
+   alone. (This needs a strategy along the lines of "if page containing
+   transfer address is unmapped, map that page in; otherwise, map the next
+   page in" to deal with the multi-word transfer cases.)
+
+   The OS-specific handler wants to fix up the reason for the abort and use
+   normal data abort actions if there is no error; if there is an error, it
+   wants to tidy up and invoke a standard error routine to print out some
+   diagnostics about register values.
+
+     -PD 'VeneerEntry SETS "AsmDataAbortHandler"'
+     -PD 'BaseUpdated SETL {TRUE}'
+     -PD 'HandlerName SETS "CDataAbortHandler"'
+     -PD 'HandlerCallMode SETS "Supervisor"'
+     -PD 'PassXferAddr SETL {TRUE}'
+     -PD 'ReturnNormal SETL {TRUE}'
+     -PD 'ReturnAddress SETL {TRUE}'
+
+2) A system which is to run on a variety of ARM processors from ARM7TDMI
+   onwards, using system mode to run most privileged processes, and which
+   will use an MMU Fault Address Register to determine which page needs
+   mapping in. In the event of the abort indicating a real error rather than
+   just a mapped-out page, however, it wants information about the aborting
+   instruction and the processor state at the time of the abort for
+   error-reporting purposes. (Errors will be reported by faking an entry to
+   the standard undefined instruction trap.) The system also wants to use
+   the veneer-supplied facility to select the correct abort model to use
+   during system initialisation.
+
+     -PD 'VeneerEntry SETS "AsmDataAbortHandler"'
+     -PD 'BaseUpdated SETL {TRUE}'
+     -PD 'BaseRestored SETL {TRUE}'
+     -PD 'HandlerName SETS "CDataAbortHandler"'
+     -PD 'HandlerCallMode SETS "System"'
+     -PD 'PassSPSR SETL {TRUE}'
+     -PD 'PassInstrAddr SETL {TRUE}'
+     -PD 'PassRegDumpAddr SETL {TRUE}'
+     -PD 'ReturnNormal SETL {TRUE}'
+     -PD 'ReturnUndef SETL "0x00000004"'
+     -PD 'AbortModelVar SETS "DataAbortModel"'
+     -PD 'AbortModelInit SETS "AsmDataAbortInit"'

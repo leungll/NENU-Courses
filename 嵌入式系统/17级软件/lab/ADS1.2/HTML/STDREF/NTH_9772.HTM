@@ -1,0 +1,140 @@
+<HTML><HEAD><TITLE>nth_element</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="not_5572.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_6413.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>nth_element</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Rearranges a collection so that all elements lower in sorted order than the <SAMP>nth</SAMP> element come before it and all elements higher in sorter order than the <SAMP>nth</SAMP> element come after it.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class RandomAccessIterator&gt;
+ void <B>nth_element</B> (RandomAccessIterator first,
+                   RandomAccessIterator nth,
+                   RandomAccessIterator last);
+
+template &lt;class RandomAccessIterator, class Compare&gt;
+ void <B>nth_element</B> (RandomAccessIterator first,
+                   RandomAccessIterator nth,
+                   RandomAccessIterator last,
+                   Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>nth_element</I></B> algorithm rearranges a collection according to either the default comparison operator (<SAMP>&gt;</SAMP>) or a comparison operator given by the user. After the algorithm is applied, three things are <SAMP>true</SAMP>:</P>
+<UL>
+<LI><P>The element that would be in the <SAMP>nth</SAMP> position if the collection were completely sorted is in the <SAMP>nth</SAMP> position</P>
+</LI>
+<LI><P>All elements prior to the <SAMP>nth</SAMP> position would also precede that position in an ordered collection</P>
+</LI>
+<LI><P>All elements following the <SAMP>nth</SAMP> position would also follow that position in an ordered collection</P>
+</LI>
+</UL>
+<P>That is, for any iterator <SAMP>i</SAMP> in the range <SAMP>[first, nth)</SAMP> and any iterator <SAMP>j</SAMP> in the range <SAMP>[nth, last)</SAMP>, it holds that <SAMP>!(*i &gt; *j)</SAMP> or <SAMP>comp(*i, *j) == false</SAMP>. </P>
+<P>Note that the elements that precede or follow the <SAMP>nth</SAMP> position are not necessarily sorted relative to each other. The <B><I>nth_element</I></B> algorithm does <I>not</I> sort the entire collection.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>The algorithm is linear, on average, where <SAMP>N</SAMP> is the size of the range <SAMP>[first, last)</SAMP>.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// nthelem.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ template&lt;class RandomAccessIterator&gt;
+ void quik_sort(RandomAccessIterator start, 
+                RandomAccessIterator end)
+ {
+   size_t dist = 0;
+   distance(start, end, dist);
+
+   //Stop condition for recursion
+   if(dist &gt; 2)
+   {
+     //Use nth_element to do all the work for quik_sort
+     <B>nth_element</B>(start, start+(dist/2), end);
+
+     //Recursive calls to each remaining unsorted portion
+     quik_sort(start, start+(dist/2-1));
+     quik_sort(start+(dist/2+1), end);
+   }
+
+   if(dist == 2 &amp;&amp; *end &lt; *start)
+     swap(start, end);
+ }
+
+ int main()
+ {
+   //Initialize a vector using an array of ints
+   int arr[10] = {37, 12, 2, -5, 14, 1, 0, -1, 14, 32};
+   vector&lt;int&gt; v(arr, arr+10);
+
+   //Print the initial vector
+   cout &lt;&lt; "The unsorted values are: " &lt;&lt; endl &lt;&lt; "     ";
+   vector&lt;int&gt;::iterator i; 
+   for(i = v.begin(); i != v.end(); i++)
+     cout &lt;&lt; *i &lt;&lt; ", ";
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   //Use the new sort algorithm
+   quik_sort(v.begin(), v.end());
+
+   //Output the sorted vector
+   cout &lt;&lt; "The sorted values are: " &lt;&lt; endl &lt;&lt; "     ";
+   for(i = v.begin(); i != v.end(); i++)
+     cout &lt;&lt; *i &lt;&lt; ", ";
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The unsorted values are:
+     37, 12, 2, -5, 14, 1, 0, -1, 14, 32,
+The sorted values are:
+     -5, -1, 0, 1, 2, 12, 14, 14, 32, 37,</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Alg_5157.htm">Algorithms</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="not_5572.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_6413.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

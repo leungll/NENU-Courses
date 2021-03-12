@@ -1,0 +1,54 @@
+<HTML><HEAD><TITLE>20.1 User-Defined Character Types</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="20.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>20.1 User-Defined Character Types</H2>
+<A NAME="idx478"><!></A>
+<P>One of the fundamental differences between the new, templated iostreams and the traditional iostreams is the ability of the new iostreams to accommodate user-defined character types. It's now possible to use the C++ iostreams interface with arbitrary character-like types, as well as with ordinary <SAMP>char</SAMP>s. </P>
+<P>Of course, this flexibility comes at a price. Any user-defined character type must satisfy rather severe requirements. The type really must act like an ordinary <SAMP>char</SAMP> in most circumstances. In addition, several classes must be defined to support the type in the iostreams environment.</P>
+
+<A NAME="2011"><H3>20.1.1 Requirements for User-Defined Character Types</H3></A>
+<A NAME="idx479"><!></A>
+<P>In general, user-defined character types must meet the following requirements:</P>
+<UL>
+<LI><P>They must have a <I>public default constructor</I>.</P>
+</LI>
+<LI><P>They must have a <I>public copy constructor</I>.</P>
+</LI>
+<LI><P>They must have a <I>public destructor</I>.</P>
+</LI>
+<LI><P>They must be <I>convertible to int</I>.</P>
+</LI>
+<LI><P>They must be <I>assignable</I>.</P>
+</LI>
+<LI><P>They must be <I>comparable for equality and ordering</I>.</P>
+</LI>
+</UL>
+<P>In addition, it must be possible to convert an object of the user-defined type to an object of type <SAMP>char</SAMP> and vice versa. These particular conversions need not be part of the type itself. They are defined as part of the new character classification facet that must accompany the new type. We'll examine these conversions a little later on.</P>
+<A NAME="idx480"><!></A>
+<P>The following type satisfies the requirements for a user-defined type:</P>
+<UL>
+<PRE>
+struct Echar
+{
+  Echar():c(0),i(0) {;}
+  Echar(char cc):c(cc),i(0) {;}
+  Echar(char cc,char ii):c(cc),i(ii) {;}
+  operator int() { return c; }
+  char c;
+  char i;
+};
+
+bool operator==(const Echar&amp; lhs, const Echar&amp; rhs)
+{ return lhs.c == rhs.c; }
+
+bool operator!=(const Echar&amp; lhs, const Echar&amp; rhs)
+{ return !(lhs.c == rhs.c); }
+
+bool operator&lt;(const Echar&amp; lhs, const Echar&amp; rhs)
+{ return lhs.c &lt; rhs.c; }</PRE>
+</UL>
+
+<HR>
+<A HREF="20.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

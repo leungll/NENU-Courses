@@ -1,0 +1,7 @@
+1	123a456b789c*0#d	1024	32	2048	n	variants/1testn	y	n
+1	123a456b789c*0#d	256	256	4096	y	variants/1testy	y	n
+2	variants/1testn	y	n
+2	variants/1testy	y	n
+2	tstfiles/dtmfdata	y	n
+666	123a456b789c*0#d	256	32	1024	n	8
+0

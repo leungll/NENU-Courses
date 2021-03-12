@@ -1,0 +1,23 @@
+<HTML><HEAD><TITLE>17.1 Deriving a New Stream Type</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="17.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="17-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>17.1 Deriving a New Stream Type</H2>
+<A NAME="idx413"><!></A>
+<P>Sometimes it is useful to derive a stream type from the standard iostreams. This is the case when you want to add data members or functions, or modify the behavior of a stream's I/O operations.</P>
+<P>In <A HREF="15.htm">Chapter 15</A> we learned that additional data can be added to a stream object by using <SAMP>xalloc()</SAMP>, <SAMP>iword()</SAMP>, and <SAMP>pword()</SAMP>. However, this solution has a certain weakness in that only a pointer to the additional data can be stored and someone else has to worry about the actual memory.</P>
+<A NAME="idx414"><!></A>
+<A NAME="fn21"><!></A>
+<P>This weakness can be overcome by deriving a new stream type that stores the additional data as a data member. Let's consider again the example of the <SAMP>date</SAMP> inserter and the <SAMP>setfmt</SAMP> manipulator from <A HREF="15-3.htm">Section 15.3</A>. Here let's derive a new stream that has an additional data member for storing the format string together with a corresponding member function for setting the date format specification.<SUP><A HREF="endnotes.htm#fn21">21</A></SUP> Again, we confine the example to the inserter of the <SAMP>date</SAMP> object and omit the extractor. Instead of inserting into an output stream, as we did before, we now use a new type of stream called <SAMP>odatstream</SAMP>:</P>
+<UL>
+<PRE>
+date today;
+odatstream ostr(cout);
+// ...
+ostr &lt;&lt; setfmt("%D") &lt;&lt; today;</PRE>
+</UL>
+<P>In the next sections, we explore how we can implement such a derived stream type.</P>
+
+<HR>
+<A HREF="17.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="17-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

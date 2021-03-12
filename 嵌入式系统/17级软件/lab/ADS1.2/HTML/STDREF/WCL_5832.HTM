@@ -1,0 +1,92 @@
+<HTML><HEAD><TITLE>wclog</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="wci_0249.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="wco_9369.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>wclog</H2>
+<PRE><HR>Pre-defined stream
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Formatting">Formatting</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Controls output to a stream buffer associated with the object <SAMP>stderr</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iostream&gt;
+extern wostream wclog;
+wostream <B>wclog</B>;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The object <SAMP>wclog</SAMP> controls output to a stream buffer associated with the object <SAMP>stderr</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>. The difference between <SAMP>wclog</SAMP> and <SAMP>wcerr</SAMP> is that <SAMP>wclog</SAMP> is buffered, but <SAMP>wcerr</SAMP> isn't. Therefore, commands like <SAMP>wclog &lt;&lt; L"ERROR !!";</SAMP> and <SAMP>fprintf(stderr,"ERROR !!");</SAMP> are not synchronized. <SAMP>wclog</SAMP> uses the locale <SAMP>codecvt</SAMP> facet to convert the wide characters it receives to the tiny characters it outputs to <SAMP>stderr</SAMP>. </P>
+
+<A NAME="Formatting"><H3>Formatting</H3></A>
+<P>The formatting is done through member functions or manipulators. See <B><I><A HREF="cou_4514.htm">cout</A></I></B>, <B><I><A HREF="wco_9369.htm">wcout</A></I></B> or <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B> for details.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// wclog example
+//
+#include&lt;iostream&gt;
+#include&lt;fstream&gt;
+
+void main ( )
+{
+  using namespace std;   
+
+  // open the file "file_name.txt"
+  // for reading
+  wifstream in("file_name.txt");
+  
+  // output the all file to stdout
+  if ( in ) 
+    wcout &lt;&lt; in.rdbuf(); 
+  else
+    // if the wifstream object is in a bad state
+    // output an error message to stderr
+    wclog &lt;&lt; L"Error while opening the file" &lt;&lt; endl;  
+}</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P><SAMP>wclog</SAMP> can be used to redirect some of the errors to another recipient. For example, you might want to redirect them to a file named <SAMP>my_err</SAMP>:</P>
+<UL>
+<PRE>wofstream out("my_err");
+if ( out )
+  wclog.rdbuf(out.rdbuf());
+else
+  cerr &lt;&lt; "Error while opening the file" &lt;&lt; endl;</PRE>
+
+</UL>
+<P>Then when you are doing something like <SAMP>wclog &lt;&lt; L"error number x";</SAMP> the error message is output to the file <SAMP>my_err</SAMP>. You can use the same scheme to redirect <SAMP>wclog</SAMP> to other devices.</P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++), <B><I>iostream</I></B>(3C++), <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B>(3C++), <B><I><A HREF="cou_4514.htm">cout</A></I></B>(3C++), <B><I><A HREF="cin_0825.htm">cin</A></I></B>(3C++), <B><I><A HREF="cer_5818.htm">cerr</A></I></B>(3C++), <B><I><A HREF="clo_8238.htm">clog</A></I></B>(3C++), <B><I><A HREF="wci_0249.htm">wcin</A></I></B>(3C++), <B><I><A HREF="wco_9369.htm">wcout</A></I></B>(3C++), <B><I><A HREF="wce_2198.htm">wcerr</A></I></B>(3C++), <B><I>iomanip</I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.3.2</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="wci_0249.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="wco_9369.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

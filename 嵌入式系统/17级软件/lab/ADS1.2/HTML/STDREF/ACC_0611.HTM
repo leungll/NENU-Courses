@@ -1,0 +1,119 @@
+<HTML><HEAD><TITLE>accumulate</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="classref.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adj_9476.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>accumulate</H2>
+<PRE><HR>Generalized Numeric Operation
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Accumulates all elements within a range into a single value.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;numeric&gt;
+template &lt;class InputIterator, class T&gt;
+T accumulate (InputIterator first,
+              InputIterator last,
+              T init);
+
+template &lt;class InputIterator,
+          class T,
+          class BinaryOperation&gt;
+T accumulate (InputIterator first,
+              InputIterator last,
+              T init,
+              BinaryOperation binary_op);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>accumulate</I></B> applies a binary operation to <SAMP>init</SAMP> and each value in the range <SAMP>[first,last).</SAMP> The result of each operation is returned in <SAMP>init</SAMP>. This process aggregates the result of performing the operation on every element of the sequence into a single value.</P>
+<P>Accumulation is done by initializing the accumulator <SAMP>acc</SAMP> with the initial value <SAMP>init</SAMP> and then modifying it with <SAMP>acc = acc + *i</SAMP> or <SAMP>acc = binary_op(acc, *i)</SAMP> for every iterator <SAMP>i</SAMP> in the range <SAMP>[first, last)</SAMP> in order. If the sequence is empty, <B><I>accumulate</I></B> returns <SAMP>init</SAMP>.</P>
+<P><SAMP>binary_op</SAMP> should not have side effects.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>accumulate</I></B> performs exactly <SAMP>last-first</SAMP> applications of the binary operation (<SAMP>operator+</SAMP> by default).</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// accum.cpp
+//
+ #include &lt;numeric&gt;   //for accumulate
+ #include &lt;vector&gt;    //for vector
+ #include &lt;functional&gt; //for times
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   //
+   //Typedef for vector iterators
+   //
+   typedef vector&lt;int&gt;::iterator iterator;
+   //
+   //Initialize a vector using an array of ints
+   //
+   int d1[10] = {1,2,3,4,5,6,7,8,9,10};
+   vector&lt;int&gt; v1(d1, d1+10);
+   //
+   //Accumulate sums and products
+   //
+   int sum = accumulate(v1.begin(), v1.end(), 0);
+   int prod = accumulate(v1.begin(), v1.end(), 
+               1, times&lt;int&gt;());
+   //
+   //Output the results
+   //
+   cout &lt;&lt; "For the series: ";
+   for(iterator i = v1.begin(); i != v1.end(); i++)
+       cout &lt;&lt; *i &lt;&lt; " ";
+
+   cout &lt;&lt; " where N = 10." &lt;&lt; endl;
+   cout &lt;&lt; "The sum = (N*N + N)/2 = " &lt;&lt; sum &lt;&lt; endl;
+   cout &lt;&lt; "The product = N! = " &lt;&lt; prod &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the series: 1 2 3 4 5 6 7 8 9 10  where N = 10.
+The sum = (N*N + N)/2 = 55
+The product = N! = 3628800</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<UL>
+<PRE>vector&lt;int,allocator&lt;int&gt; &gt;</PRE>
+
+</UL>
+<P>instead of:</P>
+<UL>
+<PRE>vector&lt;int&gt;</PRE>
+
+</UL>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="classref.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adj_9476.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

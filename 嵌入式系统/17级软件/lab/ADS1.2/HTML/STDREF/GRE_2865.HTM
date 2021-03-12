@@ -1,0 +1,59 @@
+<HTML><HEAD><TITLE>greater_equal</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="gre_0376.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gsl_4121.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>greater_equal</H2>
+<PRE><HR>Function Object
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A binary function object that returns <SAMP>true</SAMP> if its first argument is greater than or equal to its second</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;functional&gt;
+template &lt;class T&gt;
+struct <B>greater_equal</B> ; : binary_function&lt;T, T, bool&gt; {
+  bool operator() (const T&amp;, const T&amp;) const;
+};</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>greater_equal</I></B> is a binary function object. Its <SAMP>operator()</SAMP> returns <SAMP>true</SAMP> if <SAMP>x</SAMP> is greater than or equal to <SAMP>y</SAMP>. You can pass a <B><I>greater_equal</I></B> object to any algorithm that requires a binary function. For example, the <B><I><A HREF="sor_1439.htm">sort</A></I></B> algorithm can accept a binary function as an alternate comparison object to sort a sequence. <B><I>greater_equal</I></B> would be used in that algorithm in the following manner:</P>
+<UL>
+<PRE>vector&lt;int&gt; vec1;
+.
+.
+sort(vec1.begin(), vec1.end(),<B>greater_equal&lt;int&gt;</B>());</PRE>
+
+</UL>
+<P>After this call to <B><I><A HREF="sor_1439.htm">sort</A></I></B>, <SAMP>vec1</SAMP> is sorted in descending order.</P>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of </P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="gre_0376.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gsl_4121.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

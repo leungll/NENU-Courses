@@ -1,0 +1,59 @@
+<HTML><HEAD><TITLE>18.4 Example Program: Exceptions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="18-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="VI.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>18.4 Example Program: Exceptions</H2>
+<BLOCKQUOTE><HR>
+<B>NOTE: This program is in the file exceptn.cpp.
+</B><HR></BLOCKQUOTE>
+<A NAME="idx413"><!></A>
+<P>This following example program demonstrates the use of exceptions:</P>
+<UL>
+<PRE>
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+
+static void f() { throw runtime_error("a runtime error"); }
+
+int main ()
+{
+  string s;
+  
+  // First we'll try to incite then catch an exception 
+  // from the Standard C++ Library string class.
+  // We'll try to replace at a position that is non-existent.
+  //
+  // By wrapping the body of main in a try-catch block we can be
+  // assured that we'll catch all exceptions in the exception
+  // hierarchy. You can simply catch an exception as is done below,
+  // or you can catch each of the exceptions in which you have an 
+  // interest.
+  try
+  {
+    s.replace(100,1,1,'c');
+  }
+  catch (const exception&amp; e)
+  {
+    cout &lt;&lt; "Got an exception: " &lt;&lt; e.what() &lt;&lt; endl;
+  }
+
+  // Now we'll throw our own exception using the function 
+  // defined above.
+  try
+  {
+    f();
+  }
+  catch (const exception&amp; e)
+  {
+    cout &lt;&lt; "Got an exception: " &lt;&lt; e.what() &lt;&lt; endl;
+  }
+ 
+ return 0;
+}</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="18-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="VI.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

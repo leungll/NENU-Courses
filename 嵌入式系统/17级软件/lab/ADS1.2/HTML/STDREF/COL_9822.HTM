@@ -1,0 +1,240 @@
+<HTML><HEAD><TITLE>collate, collate_byname</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="cod_7392.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="com_1776.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>collate, collate_byname</H2>
+<PRE><HR>collate_byname<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>collate<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet 
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A string collation, comparison, and hashing facet.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionscompare()">compare()</A><BR>
+ <A HREF="#Protected Member Functionsdo_compare()">do_compare()</A><BR>
+ <A HREF="#Protected Member Functionsdo_hash()">do_hash()</A><BR>
+ <A HREF="#Protected Member Functionsdo_transform()">do_transform()</A><BR>
+ <A HREF="#Public Member Functionshash()">hash()</A><BR>
+ <A HREF="#Public Member Functionstransform()">transform()</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT&gt; class collate;
+template &lt;class charT&gt; class collate_byname;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>collate</I></B> and <B><I>collate_byname</I></B> facets allow for string collation, comparison, and hashing. Use the <B><I>collate</I></B> facet for the "C" locale, and use the <B><I>collate_byname</I></B> for named locales.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT&gt;
+class collate : public locale::facet {
+public:
+  typedef charT               char_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit collate(size_t refs = 0);
+  int compare(const charT*, const charT*,
+              const charT*, const charT*) const;
+  string_type transform(const charT*, const charT*) const;
+  long hash(const charT*, const charT*) const;
+  static locale::id id;
+protected:
+  ~collate();  // virtual
+  virtual int do_compare(const charT*, const charT*,
+                         const charT*, const charT*) const;
+  virtual string_type do_transform(const charT*, 
+                              const charT*) const;
+  virtual long do_hash (const charT*, const charT*) const;
+};
+
+template &lt;class charT&gt;
+class collate_byname : public collate&lt;charT&gt; {
+public:
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit collate_byname(const char*, size_t = 0);
+protected:
+  ~collate_byname();  // virtual
+  virtual int do_compare(const charT*, const charT*,
+                         const charT*, const charT*) const;
+  virtual string_type do_transform(const charT*, 
+                              const charT*) const;
+  virtual long do_hash(const charT*, const charT*) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string returned by member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>collate</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>collate</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, the object must be explicitly deleted: the locale does not do so.</P>
+</UL>
+
+
+
+<PRE>explicit <B>collate_byname</B>(const char* name, size_t refs = 0); </PRE>
+
+<UL>
+<P>Construct a <B><I>collate_byname</I></B> facet. Use the named locale specified by the name argument. The <SAMP>refs</SAMP> argument serves the same purpose as it does for the <B><I>collate</I></B> constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~collate</B>();  // virtual and protected
+<B>~collate_byname</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroy the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>; </PRE>
+
+<UL>
+<P>Unique identifier for this type of facet.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>collate</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>compare</SAMP> function simply calls its protected cousin <SAMP>do_compare</SAMP>.</P>
+
+
+<A NAME="Public Member Functionscompare()"></A><PRE>int 
+<B>compare</B>(const charT* low1, const charT* high1,
+        const charT* low2, const charT* high2) const; 
+<A NAME="Public Member Functionshash()"></A>long 
+<B>hash</B>(const charT* low, const charT* high) const; 
+<A NAME="Public Member Functionstransform()"></A>string_type 
+<B>transform</B>(const charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Each of these public member functions <SAMP>xxx</SAMP> simply call the corresponding protected <SAMP>do_xxx</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_compare()"></A><PRE>virtual int    
+<B>do_compare</B>(const charT* low1, const charT* high1,
+           const charT* low2, const charT* high2) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>1</SAMP> if the character string represented by the range <SAMP>[low1,high1)</SAMP> is greater than the character string represented by the range <SAMP>[low2,high2)</SAMP>, <SAMP>-1</SAMP> if first string is less than the second, or <SAMP>0</SAMP> if the two are equal.  The default instantiations, <SAMP>collate&lt;char&gt;</SAMP> and <SAMP>collate&lt;wchar_t&gt;</SAMP>, perform a lexicographical comparison.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_hash()"></A><PRE>virtual long   
+<B>do_hash</B>( const charT* low, const charT* high) </PRE>
+
+<UL>
+<P>Generates a hash value from a string defined by the range of characters <SAMP>[low,high)</SAMP>. Given two strings that compare equal (in other words, <SAMP>do_compare</SAMP> returns <SAMP>0</SAMP>), <SAMP>do_hash</SAMP> returns an integer value that is the same for both strings. For differing strings the probability that the return value is equal is approximately:</P>
+<P><SAMP>1.0/numeric_limits&lt;unsigned long&gt;::max()</SAMP></P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_transform()"></A><PRE>virtual string_type 
+<B>do_transform</B>(const charT* low, const charT* high) const; </PRE>
+
+<UL>
+<P>Returns a string that yields the same result in a lexicographical comparison with another string returned from transform as does the <SAMP>do_compare</SAMP> function applied to the original strings. In other words, the result of applying a lexicographical comparison to two strings returned from <SAMP>transform</SAMP> is the same as applying <SAMP>do_compare</SAMP> to the original strings passed to transform.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// collate.cpp
+//
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+  locale loc;
+  string s1("blue");
+  string s2("blues");
+  // Get a reference to the collate&lt;char&gt; facet
+  const collate&lt;char&gt;&amp; co =
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+      use_facet&lt;collate&lt;char&gt; &gt;(loc);
+#else
+      use_facet(loc,(collate&lt;char&gt;*)0);
+#endif
+  // Compare two strings
+  cout &lt;&lt; co.compare(s1.begin(),s1.end(),
+                     s2.begin(),s2.end()-1) &lt;&lt; endl;
+  cout &lt;&lt; co.compare(s1.begin(),s1.end(),
+                     s2.begin(),s2.end()) &lt;&lt; endl;
+  // Retrieve hash values for two strings
+  cout &lt;&lt; co.hash(s1.begin(),s1.end()) &lt;&lt; endl;
+  cout &lt;&lt; co.hash(s2.begin(),s2.end()) &lt;&lt; endl;
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="cty_0953.htm">ctype</A></I></B> </P>
+
+
+<BR>
+<HR>
+<A HREF="cod_7392.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="com_1776.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

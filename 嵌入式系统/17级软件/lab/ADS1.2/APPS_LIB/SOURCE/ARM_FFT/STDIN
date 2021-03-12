@@ -1,0 +1,12 @@
+1	tstfiles/sin64_1	n	n	0	y	variants/1test	n	n
+2	tstfiles/line64	n	n	1	variants/2testhamm	n	n
+3	tstfiles/line64	n	n	n	variants/3testhann	n	n
+4	tstfiles/sin64_1	n	n	variants/4test	n	n
+5	tstfiles/line64	n	n	1	y	n	variants/5testhamm	n	n
+6	tstfiles/sin64_1	n	n	0	variants/6test	n	n
+7	tstfiles/sin64_1	n	n	0	y	variants/7test	n	n
+8	tstfiles/line64	n	n	2	n	variants/8testhann	n	n
+9	tstfiles/sin64_1	n	n	variants/9test	n	n
+10	tstfiles/line64	n	n	variants/10test	n	n
+0
+

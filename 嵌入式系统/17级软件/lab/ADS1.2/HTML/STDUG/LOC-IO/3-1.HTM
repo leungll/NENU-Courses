@@ -1,0 +1,108 @@
+<HTML><HEAD><TITLE>3.1 The C Locale</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>3.1 The C Locale</H2>
+<A NAME="idx40"><!></A>
+<P>All the culture and language dependencies discussed in the previous section need to be represented in an operating system. This information is usually represented in a kind of language table, called a <I>locale</I>.</P>
+<A NAME="idx41"><!></A>
+<P>The X/Open consortium has standardized a variety of services for Native Language Support (NLS<I>)</I> in the programming language C. This standard is commonly known as XPG4. Internationalization services as well as localization support are included in X/Open's <I>Native Language Support</I>. The description below is based on this standard.</P>
+<A NAME="idx42"><!></A>
+<P>According to XPG4, the C locale is composed of several <I>categories</I>, which are given in <A HREF="#Table 3">Table 3</A>.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx43"><!></A>
+<H4><A NAME="Table 3">Table 3 -- Categories of the C locale</A> </H4><tr><td valign=top><B>Category</B><td valign=top><B>Content</B>&nbsp;
+<tr><td valign=top>
+<SAMP>LC_NUMERIC</SAMP><BR>
+<td valign=top>
+Rules and symbols for numbers<BR>
+
+<tr><td valign=top>
+<SAMP>LC_TIME</SAMP><BR>
+<td valign=top>
+Values for date and time information<BR>
+
+<tr><td valign=top>
+<SAMP>LC_MONETARY</SAMP><BR>
+<td valign=top>
+Rules and symbols for monetary information<BR>
+
+<tr><td valign=top>
+<SAMP>LC_CTYPE</SAMP><BR>
+<td valign=top>
+Character classification and case conversion<BR>
+
+<tr><td valign=top>
+<SAMP>LC_COLLATE</SAMP><BR>
+<td valign=top>
+Collation sequence<BR>
+
+<tr><td valign=top>
+<SAMP>LC_MESSAGES</SAMP><BR>
+<td valign=top>
+Formats and values of messages<BR>
+
+
+</TABLE>
+
+<A NAME="idx44"><!></A>
+<P>The external representation of a C locale is usually as a <I>file</I> in UNIX. Other operating systems may use other representations. The external representation is transformed into an internal memory representation by calling the function setlocale(), as shown in <A HREF="#Figure 4">Figure 4</A>:</P>
+
+<H4><A NAME="Figure 4">Figure 4 -- Transformation of a C locale from external to internal representation</A></H4>
+<IMG SRC="images/locfig4.gif">
+ 
+
+<P>Inside a program, the C locale is represented by one or more global data structures. The C library provides a set of functions that use information from those global data structures to adapt their behavior to local conventions. Examples of these functions and the information they cover are listed in <A HREF="#Table 4">Table 4</A>:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx45"><!></A>
+<H4><A NAME="Table 4">Table 4 -- C locale functions and the information they cover</A> </H4><tr><td valign=top><B>C Locale Function</B><td valign=top><B>Information Covered</B>&nbsp;
+<tr><td valign=top>
+setlocale<SAMP>(),</SAMP> ...<BR>
+<td valign=top>
+Locale initialization and <BR>
+language information<BR>
+
+<tr><td valign=top>
+isalpha(), isupper(), isdigit(), ...<BR>
+<td valign=top>
+Character classification<BR>
+
+<tr><td valign=top>
+strftime(), ...<BR>
+<td valign=top>
+Date and time functions<BR>
+
+<tr><td valign=top>
+strfmon()<BR>
+<td valign=top>
+Monetary functions<BR>
+
+<tr><td valign=top>
+printf(), scanf(), ...<BR>
+<td valign=top>
+Number parsing and formatting<BR>
+
+<tr><td valign=top>
+strcoll(), wcscoll(), ...<BR>
+<td valign=top>
+String collation<BR>
+
+<tr><td valign=top>
+mblen(), mbtowc(), wctomb(), ...<BR>
+<td valign=top>
+Multibyte functions<BR>
+
+<tr><td valign=top>
+catopen(), catgets(), catclose()<BR>
+<td valign=top>
+Message retrieval<BR>
+
+
+</TABLE>
+
+
+</P>
+
+<HR>
+<A HREF="3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

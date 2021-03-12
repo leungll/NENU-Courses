@@ -1,0 +1,679 @@
+<HTML><HEAD><TITLE>set</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Seq_6405.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="set_0972.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>set</H2>
+<PRE><HR>Container
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Assignment Operators">Assignment Operators</A></LI>
+<LI><A HREF="#Allocators">Allocators</A></LI>
+<LI><A HREF="#Iterators">Iterators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Non-member Operators">Non-member Operators</A></LI>
+<LI><A HREF="#Specialized Algorithms">Specialized Algorithms</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>An associative container that supports unique keys. A <B><I>set</I></B> supports bidirectional iterators.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Iteratorsbegin()">begin()</A><BR>
+ <A HREF="#Member Functionsclear()">clear()</A><BR>
+ <A HREF="#Member Functionscount()">count()</A><BR>
+ <A HREF="#Member Functionsempty()">empty()</A><BR>
+ <A HREF="#Iteratorsend()">end()</A><BR>
+ <A HREF="#Member Functionsequal_range()">equal_range()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Member Functionserase()">erase()</A><BR>
+ <A HREF="#Member Functionsfind()">find()</A><BR>
+ <A HREF="#Allocatorsget_allocator()">get_allocator()</A><BR>
+ <A HREF="#Member Functionsinsert()">insert()</A><BR>
+ <A HREF="#Member Functionskey_comp()">key_comp()</A><BR>
+ <A HREF="#Member Functionslower_bound()">lower_bound()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Member Functionsmax_size()">max_size()</A><BR>
+ <A HREF="#Non-member Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;()">operator&gt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&gt;=()">operator&gt;=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;()">operator&lt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator&lt;=()">operator&lt;=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Assignment Operatorsoperator=()">operator=()</A><BR>
+ <A HREF="#Non-member Operatorsoperator==()">operator==()</A><BR>
+ <A HREF="#Iteratorsrbegin()">rbegin()</A><BR>
+ <A HREF="#Iteratorsrend()">rend()</A><BR>
+ <A HREF="#Member Functionssize()">size()</A><BR>
+ <A HREF="#Member Functionsswap()">swap()</A><BR>
+ <A HREF="#Member Functionsupper_bound()">upper_bound()</A><BR>
+ <A HREF="#Member Functionsvalue_comp()">value_comp()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;set&gt;
+template &lt;class Key, class Compare = less&lt;Key&gt;,
+class Allocator = allocator&lt;Key&gt; &gt;
+class <B>set</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>set&lt;Key, Compare, Allocator&gt;</I></B> is an associative container that supports unique keys and allows for fast retrieval of the keys. A <B><I>set</I></B> contains, at most, one of any key value. The keys are sorted using <SAMP>Compare</SAMP>. </P>
+<P>Since a <B><I>set</I></B> maintains a total order on its elements, you cannot alter the key values directly. Instead, you must insert new elements with an <SAMP>insert_iterator</SAMP>. </P>
+<P>Any type used for the template parameter <SAMP>Key</SAMP> must include the following (where <SAMP>T</SAMP> is the <SAMP>type</SAMP>, <SAMP>t</SAMP> is a <SAMP>value</SAMP> of <SAMP>T</SAMP> and <SAMP>u</SAMP> is a <SAMP>const</SAMP> <SAMP>value</SAMP> of <SAMP>T</SAMP>):</P>
+<TABLE>
+<TR><TD VALIGN=top>Copy constructors  </TD>
+<TD><SAMP>T(t)</SAMP> and <SAMP>T(u)</SAMP></TD></TR>
+<TR><TD VALIGN=top>Destructor  </TD>
+<TD><SAMP>t.~T()</SAMP></TD></TR>
+<TR><TD VALIGN=top>Address of  </TD>
+<TD><SAMP>&amp;t</SAMP> and <SAMP>&amp;u</SAMP> yielding <SAMP>T*</SAMP> and <SAMP>const T*</SAMP> respectively</TD></TR>
+<TR><TD VALIGN=top>Assignment  </TD>
+<TD><SAMP>t = a</SAMP> where <SAMP>a</SAMP> is a (possibly <SAMP>const</SAMP>) value of <SAMP>T</SAMP></TD></TR>
+</TABLE>
+<P>The <SAMP>type</SAMP> used for the <SAMP>Compare</SAMP> template parameter must satisfy the requirements for binary functions.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class Key, class Compare = less&lt;Key&gt;,
+class Allocator = allocator&lt;Key&gt; &gt;
+class set {
+public:
+// types
+typedef Key key_type;
+typedef Key value_type;
+typedef Compare key_compare;
+typedef Compare value_compare;
+typedef Allocator allocator_type;
+typedef typename Allocator::reference reference;
+typedef typename Allocator::const_reference const_reference;
+class iterator;
+class const_iterator;
+typedef typename Allocator::size_type size_type;
+typedef typename Allocator::difference_type difference_type;
+typedef typename std::reverse_iterator&lt;iterator&gt;
+                      reverse_iterator;
+typedef typename std::reverse_iterator&lt;const_iterator&gt;
+                      const_reverse_iterator;
+
+// Construct/Copy/Destroy
+explicit set (const Compare&amp; = Compare(), 
+              const Allocator&amp; = Allocator ());
+template &lt;class InputIterator&gt;
+set (InputIterator, InputIterator, 
+     const Compare&amp; = Compare(),
+     const Allocator&amp; = Allocator ());
+set (const set&lt;Key, Compare, Allocator&gt;&amp;);
+~set ();
+set&lt;Key, Compare, Allocator&gt;&amp; operator= 
+   (const set &lt;Key, Compare, Allocator&gt;&amp;);
+allocator_type get_allocator () const;
+
+// Iterators
+iterator begin ();
+const_iterator begin () const;
+iterator end ();
+const_iterator end () const;
+reverse_iterator rbegin ();
+const_reverse_iterator rbegin () const;
+reverse_iterator rend ();
+const_reverse_iterator rend () const;
+
+// Capacity
+bool empty () const;
+size_type size () const;
+size_type max_size () const;
+
+// Modifiers
+pair&lt;iterator, bool&gt; insert (const value_type&amp;);
+iterator insert (iterator, const value_type&amp;);
+template &lt;class InputIterator&gt;
+void insert (InputIterator, InputIterator);
+void erase (iterator);
+size_type erase (const key_type&amp;);
+void erase (iterator, iterator);
+void swap (set&lt;Key, Compare, Allocator&gt;&amp;);
+void clear ();
+
+
+// Observers
+key_compare key_comp () const;
+value_compare value_comp () const;
+
+// Set operations
+size_type count (const key_type&amp;) const;
+pair&lt;iterator, iterator&gt; equal_range (const  key_type&amp;) const;
+iterator find (const key_type&amp;) const;
+iterator lower_bound (const key_type&amp;) const;
+iterator upper_bound (const key_type&amp;) const
+};
+
+// Non-member Operators
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator== (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator!= (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator&lt; (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator&gt; (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator&lt;= (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+template &lt;class Key, class Compare, class Allocator&gt;
+bool operator&gt;= (const set&lt;Key, Compare, Allocator&gt;&amp;,
+const set&lt;Key, Compare, Allocator&gt;&amp;);
+
+// Specialized Algorithms
+template &lt;class Key, class Compare, class Allocator&gt;
+void swap (set &lt;Key, Compare, Allocator&gt;&amp;,
+set &lt;Key, Compare, Allocator&gt;&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit 
+<B>set</B>(const Compare&amp; comp = Compare(),
+const Allocator&amp; alloc = Allocator());</PRE>
+
+<UL>
+<P>Creates a set of zero elements. If the function object <SAMP>comp</SAMP> is supplied, it is used to compare elements of the set.   Otherwise, the default function object in the template argument is used. The template argument defaults to <SAMP>less (&lt;)</SAMP>. The allocator alloc is used for all storage management.</P>
+</UL>
+
+
+
+<PRE>template &lt;class InputIterator&gt;
+<B>set</B>(InputIterator first, InputIterator last, 
+const Compare&amp; comp = Compare()
+const Allocator&amp; alloc = Allocator());</PRE>
+
+<UL>
+<P>Creates a set of length <SAMP>last - first</SAMP>, filled with all values obtained by dereferencing the <SAMP>InputIterators</SAMP> on the range <SAMP>[first, last)</SAMP>. If the function object <SAMP>comp</SAMP> is supplied, it is used to compare elements of the set. Otherwise, the default function object in the template argument is used. The template argument defaults to <SAMP>less (&lt;)</SAMP>. Uses the allocator Allocator() for all storage management. </P>
+</UL>
+
+
+
+<PRE><B>set</B>(const set&lt;Key, Compare, Allocator&gt;&amp; x);</PRE>
+
+<UL>
+<P>Copy constructor. Creates a copy of <SAMP>x</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~set</B>();</PRE>
+
+<UL>
+<P>Releases any allocated memory for self.</P>
+</UL>
+
+
+<A NAME="Assignment Operators"><H3>Assignment Operators</H3></A>
+
+
+<A NAME="Assignment Operatorsoperator=()"></A><PRE>set&lt;Key, Compare, Allocator&gt;&amp; 
+<B>operator=</B>(const set&lt;Key, Compare, Allocator&gt;&amp; x);</PRE>
+
+<UL>
+<P>Returns a reference to self. Self shares an implementation with <SAMP>x</SAMP>. </P>
+</UL>
+
+
+<A NAME="Allocators"><H3>Allocators</H3></A>
+
+
+<A NAME="Allocatorsget_allocator()"></A><PRE>allocator_type 
+<B>get_allocator</B>() const;</PRE>
+
+<UL>
+<P>Returns a copy of the allocator used by self for storage management.</P>
+</UL>
+
+
+<A NAME="Iterators"><H3>Iterators</H3></A>
+
+
+<A NAME="Iteratorsbegin()"></A><PRE>iterator 
+<B>begin</B>();</PRE>
+
+<UL>
+<P>Returns an <SAMP>iterator</SAMP> that points to the first element in self.</P>
+</UL>
+
+
+
+<PRE>const_iterator 
+<B>begin</B>() const;</PRE>
+
+<UL>
+<P>Returns a <SAMP>const_iterator</SAMP> that points to the first element in self.</P>
+</UL>
+
+
+
+<A NAME="Iteratorsend()"></A><PRE>iterator 
+<B>end</B>();</PRE>
+
+<UL>
+<P>Returns an <SAMP>iterator</SAMP> that points to the past-the-end value.</P>
+</UL>
+
+
+
+<PRE>const_iterator 
+<B>end</B>() const;</PRE>
+
+<UL>
+<P>Returns a <SAMP>const_iterator</SAMP> that points to the past-the-end value.</P>
+</UL>
+
+
+
+<A NAME="Iteratorsrbegin()"></A><PRE>reverse_iterator 
+<B>rbegin</B>();</PRE>
+
+<UL>
+<P>Returns a <SAMP>reverse_iterator</SAMP> that points to the past-the-end value.</P>
+</UL>
+
+
+
+<PRE>const_reverse_iterator 
+<B>rbegin</B>() const;</PRE>
+
+<UL>
+<P>Returns a <SAMP>const_reverse_iterator</SAMP> that points to the past-the-end value.</P>
+</UL>
+
+
+
+<A NAME="Iteratorsrend()"></A><PRE>reverse_iterator 
+<B>rend</B>();</PRE>
+
+<UL>
+<P>Returns a <SAMP>reverse_iterator</SAMP> that points to the first element.</P>
+</UL>
+
+
+
+<PRE>const_reverse_iterator 
+<B>rend</B>() const;</PRE>
+
+<UL>
+<P>Returns a <SAMP>const_reverse_iterator</SAMP> that points to the first element.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsclear()"></A><PRE>void
+<B>clear</B>();</PRE>
+
+<UL>
+<P>Erases all elements from the set.</P>
+</UL>
+
+
+
+<A NAME="Member Functionscount()"></A><PRE>size_type 
+<B>count</B>(const key_type&amp; x) const;</PRE>
+
+<UL>
+<P>Returns the number of elements equal to <SAMP>x</SAMP>. Since a set supports unique keys, <SAMP>count</SAMP> always returns <SAMP>1</SAMP> or <SAMP>0</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsempty()"></A><PRE>bool 
+<B>empty</B>() const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the size is zero.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsequal_range()"></A><PRE>pair&lt;iterator, iterator&gt; 
+<B>equal_range</B>(const key_type&amp;  x) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>pair(lower_bound(x),upper_bound(x))</SAMP>. The <SAMP>equal_range</SAMP> function indicates the valid range for insertion of <SAMP>x</SAMP> into the set.</P>
+</UL>
+
+
+
+<A NAME="Member Functionserase()"></A><PRE>size_type 
+<B>erase</B>(const key_type&amp; x);</PRE>
+
+<UL>
+<P>Deletes all the elements matching <SAMP>x</SAMP>.   Returns the number of elements erased. Since a set supports unique keys, <SAMP>erase</SAMP> always returns <SAMP>1</SAMP> or <SAMP>0</SAMP>.</P>
+</UL>
+
+
+
+<PRE>void
+<B>erase</B>(iterator position);</PRE>
+
+<UL>
+<P>Deletes the map element pointed to by the iterator <SAMP>position</SAMP>. Returns an <SAMP>iterator</SAMP> pointing to the element following the deleted element, or <SAMP>end()</SAMP> if the deleted item was the last one in this list.</P>
+</UL>
+
+
+
+<PRE>void
+<B>erase</B>(iterator first, iterator last);</PRE>
+
+<UL>
+<P>Deletes the elements in the range (<SAMP>first, last</SAMP>). Returns an <SAMP>iterator</SAMP> pointing to the element following the last deleted element, or <SAMP>end()</SAMP> if there were no elements after the deleted range.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsfind()"></A><PRE>iterator 
+<B>find</B>(const key_value&amp; x) const;</PRE>
+
+<UL>
+<P>Returns an <SAMP>iterator</SAMP> that points to the element equal to <SAMP>x</SAMP>. If there is no such element, the iterator points to the past-the-end value.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsinsert()"></A><PRE>pair&lt;iterator, bool&gt; 
+<B>insert</B>(const value_type&amp; x);</PRE>
+
+<UL>
+<P>Inserts <SAMP>x</SAMP> into self according to the comparison function object. The template's default comparison function object is <SAMP>less (&lt;)</SAMP>. If the insertion succeeds, it returns a pair composed of the iterator position where the insertion took place and <SAMP>true</SAMP>. Otherwise, the pair contains the end value and <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<PRE>iterator 
+<B>insert</B>(iterator position, const value_type&amp; x);</PRE>
+
+<UL>
+<P><SAMP>x</SAMP> is inserted into the set. A position may be supplied as a hint regarding where to do the insertion. If the insertion is done right after <SAMP>position</SAMP>, then it takes amortized constant time. Otherwise it takes <SAMP>0 (log N)</SAMP> time. The return value points to the inserted <SAMP>x</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template &lt;class InputIterator&gt;
+void 
+<B>insert</B>(InputIterator first, InputIterator last);</PRE>
+
+<UL>
+<P>Inserts copies of the elements in the range <SAMP>[first, last]</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionskey_comp()"></A><PRE>key_compare 
+<B>key_comp</B>() const;</PRE>
+
+<UL>
+<P>Returns the comparison function object for the set.</P>
+</UL>
+
+
+
+<A NAME="Member Functionslower_bound()"></A><PRE>iterator 
+<B>lower_bound</B>(const key_type&amp; x) const;</PRE>
+
+<UL>
+<P>Returns an <SAMP>iterator</SAMP> that points to the first element that is greater than or equal to <SAMP>x</SAMP>. If there is no such element, the iterator points to the past-the-end value.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsmax_size()"></A><PRE>size_type 
+<B>max_size</B>() const;</PRE>
+
+<UL>
+<P>Returns the size of the largest possible set.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssize()"></A><PRE>size_type 
+<B>size</B>() const;</PRE>
+
+<UL>
+<P>Returns the number of elements.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsswap()"></A><PRE>void 
+<B>swap</B>(set&lt;Key, Compare, Allocator&gt;&amp; x);</PRE>
+
+<UL>
+<P>Exchanges self with <SAMP>x</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsupper_bound()"></A><PRE>iterator 
+<B>upper_bound</B>(const key_type&amp; x) const</PRE>
+
+<UL>
+<P>Returns an iterator that points to the first element that is greater than or equal to <SAMP>x</SAMP>. If there is no such element, the iterator points to the past-the-end value.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsvalue_comp()"></A><PRE>value_compare 
+<B>value_comp</B>() const;</PRE>
+
+<UL>
+<P>Returns the set's comparison object. This is identical to the function <SAMP>key_comp()</SAMP>.</P>
+</UL>
+
+
+<A NAME="Non-member Operators"><H3>Non-member Operators</H3></A>
+
+
+<A NAME="Non-member Operatorsoperator==()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator==</B>(const set&lt;Key, Compare, Allocator&gt;&amp; x,
+const set&lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>x</SAMP> is the same as <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator!=()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator!=</B>(const set&lt;Key, Compare, Allocator&gt;&amp; x,
+const set&lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x==y)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator&lt;</B>(const set &lt;Key, Compare, Allocator&gt;&amp; x,
+const set &lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the elements contained in <SAMP>x</SAMP> are lexicographically less than the elements contained in <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator&gt;</B>(const set &lt;Key, Compare, Allocator&gt;&amp; x,
+const set &lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>y &lt; x</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&lt;=()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator&lt;=</B>(const set &lt;Key, Compare, Allocator&gt;&amp; x,
+const set &lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(y &lt; x)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator&gt;=()"></A><PRE>template &lt;class Key, class Compare, class Allocator&gt;
+bool <B>operator&gt;=</B>(const set &lt;Key, Compare, Allocator&gt;&amp; x,
+const set &lt;Key, Compare, Allocator&gt;&amp; y);</PRE>
+
+<UL>
+<P>Returns <SAMP>!(x &lt; y)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Specialized Algorithms"><H3>Specialized Algorithms</H3></A>
+
+
+<PRE>template &lt;class Key, class Compare, class Allocator&gt;
+void <B>swap</B>(set &lt;Key, Compare, Allocator&gt;&amp; a,
+set &lt;Key, Compare, Allocator&gt;&amp; b);</PRE>
+
+<UL>
+<P>Swaps the contents of <SAMP>a</SAMP> and <SAMP>b</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// setex.cpp
+//
+#include &lt;set&gt;
+#include &lt;iostream&gt;
+ using namespace std;
+
+typedef <B>set</B>&lt;double, less&lt;double&gt;, allocator&lt;double&gt; &gt;
+        set_type;
+ostream&amp; operator&lt;&lt;(ostream&amp; out, const set_type&amp; s)
+ {
+copy(s.begin(), s.end(), 
+     ostream_iterator&lt;set_type::value_type,char&gt;(cout," "));
+return out;
+ }
+
+int main(void)
+ {
+// create a set of doubles
+   set_type   sd;
+   int         i;
+
+for(i = 0; i &lt; 10; ++i) {
+// insert values
+sd.insert(i);
+   }
+
+// print out the set
+cout &lt;&lt; sd &lt;&lt; endl &lt;&lt; endl;
+
+// now let's erase half of the elements in the set
+int half = sd.size() &gt;&gt; 1;
+set_type::iterator sdi = sd.begin();
+advance(sdi,half);
+sd.erase(sd.begin(),sdi);
+// print it out again
+cout &lt;&lt; sd &lt;&lt; endl &lt;&lt; endl;
+
+// Make another set and an empty result set
+set_type sd2, sdResult;
+for (i = 1; i &lt; 9; i++)
+  sd2.insert(i+5);
+cout &lt;&lt; sd2 &lt;&lt; endl;
+// Try a couple of set algorithms
+set_union(sd.begin(),sd.end(),sd2.begin(),sd2.end(),
+          inserter(sdResult,sdResult.begin()));
+cout &lt;&lt; "Union:" &lt;&lt; endl &lt;&lt; sdResult &lt;&lt; endl;
+sdResult.erase(sdResult.begin(),sdResult.end());
+set_intersection(sd.begin(),sd.end(),
+                 sd2.begin(),sd2.end(),
+                 inserter(sdResult,sdResult.begin()));
+cout &lt;&lt; "Intersection:" &lt;&lt; endl &lt;&lt; sdResult &lt;&lt; endl;
+return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+0 1 2 3 4 5 6 7 8 9
+
+5 6 7 8 9
+
+6 7 8 9 10 11 12 13
+Union:
+5 6 7 8 9 10 11 12 13
+Intersection:
+6 7 8 9</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>Member function templates are used in all containers included in the Standard Template Library. An example of this feature is the constructor for set <SAMP>&lt;Key, Compare, Allocator&gt;</SAMP> that takes two templatized iterators:</P>
+<UL>
+<PRE>template &lt;class InputIterator&gt;
+set (InputIterator, InputIterator,
+const Compare&amp; = Compare(),
+const Allocator&amp; = Allocator());</PRE>
+
+</UL>
+<P><B><I>set</I></B> also has an insert function of this type. These functions, when not restricted by compiler limitations, allow you to use any type of input iterator as arguments.   For compilers that do not support this feature, substitute functions allow you to use an iterator obtained from the same type of container as the one you are constructing (or calling a member function on), or you can use a pointer to the type of element you have in the container.</P>
+<P>For example, if your compiler does not support member function templates, you can construct a set in the following two ways:</P>
+<UL>
+<PRE>int intarray[10];
+set&lt;int&gt; first_set(intarray, intarray + 10);
+set&lt;int&gt; second_set(first_set.begin(),
+first_set.end());</PRE>
+
+</UL>
+<P>but not this way:</P>
+<UL>
+<PRE>set&lt;long&gt; long_set(first_set.begin(),
+first_set.end());</PRE>
+
+</UL>
+<P>since the <SAMP>long_set</SAMP> and <SAMP>first_set</SAMP> are not the same type.</P>
+<P>Also, many compilers do not support default template arguments. If your compiler is one of these you always need to supply the <SAMP>Compare</SAMP> template argument and the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>set&lt;int, less&lt;int&gt;, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>set&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="all_7029.htm">allocator</A></I></B>, <B><I><A HREF="Bid_8932.htm">Bidirectional Iterators</A></I></B>, <B><I><A HREF="Con_2487.htm">Containers</A></I></B>, <B><I><A HREF="lex_3806.htm">lexicographical_compare</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="Seq_6405.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="set_0972.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

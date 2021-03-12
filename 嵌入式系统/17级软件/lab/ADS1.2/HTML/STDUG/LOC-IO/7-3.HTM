@@ -1,0 +1,677 @@
+<HTML><HEAD><TITLE>7.3 Format Control Using the Stream's Format State</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="7-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>7.3 Format Control Using the Stream's Format State</H2>
+
+<A NAME="idx227"><!></A>
+<A NAME="idx228"><!></A>
+<A NAME="731"><H3>7.3.1 Format Parameters</H3></A>
+<A NAME="idx229"><!></A>
+<P>Associated with each stream are a number of <I>format state variables</I> that control the details of formatting and parsing. Format state variables are classes inherited from a stream's base class, either <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> or <B><I>basic_ios&lt;charT,traits&gt;</I></B>. There are two kinds of format parameters: those that can have an arbitrary value, and those that can have only a few different values. </P>
+
+<A NAME="7311"><H4>7.3.1.1 Parameters That Can Have an Arbitrary Value</H4></A>
+<A NAME="idx230"><!></A>
+<P>The value is stored as a private data member in one of the base classes, and set and retrieved through public member functions inherited from that base class. There are three such parameters, described in <A HREF="#Table 6">Table 6</A>:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx231"><!></A>
+<H4><A NAME="Table 6">Table 6 -- Format parameters with arbitrary values</A></H4><tr><td valign=top><B><B>Access function</B></B><td valign=top><B><B>Defined in</B> </B><B><B>base class</B></B><td valign=top><B><B>Effect</B></B><td valign=top><B><B>Default</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>width()</SAMP><BR>
+<td valign=top>
+<B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B><BR>
+<td valign=top>
+Minimal field width<BR>
+<td valign=top>
+0<BR>
+
+<tr><td valign=top>
+<SAMP>precision()</SAMP><BR>
+<td valign=top>
+<B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B><BR>
+<td valign=top>
+Precision of floating point values<BR>
+<td valign=top>
+6<BR>
+
+<tr><td valign=top>
+<SAMP>fill()</SAMP><BR>
+<td valign=top>
+<B><I><A HREF="../../stdref/bas_6405.htm">basic_ios</A></I></B><BR>
+<B><I>&lt;charT,traits&gt;</I></B><BR>
+<td valign=top>
+Fill character for padding<BR>
+<td valign=top>
+The space character<BR>
+
+
+</TABLE>
+
+
+</P>
+
+<A NAME="7312"><H4>7.3.1.2 Parameters That Can Have Only a Few Different Values</H4></A>
+<A NAME="idx232"><!></A>
+<P>Typically, these would have just two or three different values. These parameters are represented by one or more bits in a data member of type <SAMP>fmtflags</SAMP> in class <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B>. These are usually called <I>format flags</I>. You can set format flags using the <SAMP>setf()</SAMP> function in class <B><I>ios_base</I></B>, clear them using <SAMP>unsetf()</SAMP>, and retrieve them through the <SAMP>flags()</SAMP> function.</P>
+<A NAME="idx233"><!></A>
+<A NAME="fn2"><!></A>
+<P>Some format flags are grouped because they are mutually exclusive; for example, output within an output field can be adjusted to the left or to the right, or to an internally specified adjustment. One and only one of the corresponding three format flags, <SAMP>left</SAMP>, <SAMP>right</SAMP>, or <SAMP>internal</SAMP>, can be set.<SUP><A HREF="endnotes.htm#fn2">2</A></SUP> If you want to set one of these bits to <SAMP>1</SAMP>, you need to set the other two to <SAMP>0</SAMP>. To make this easier, there are <I>bit groups</I> whose main function is to reset all bits in one group. The bit group for adjustment is <SAMP>adjustfield</SAMP>, defined as <SAMP>left | right | internal</SAMP>. </P>
+<P><A HREF="#Table 7">Table 7</A> gives an overview of all format flags and their effects on input and output operators. (For details on how the format flags affect input and output operations, see the <I>Class Reference</I> entry for <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B>.) The first column below<I>, format flag</I>, lists the flag names; for example, <SAMP>showpos</SAMP> stands for <SAMP>ios_base::showpos</SAMP>. The <I>group</I> column lists the name of the group for flags that are mutually exclusive. The third column gives a brief description of the effect of setting the flag. The <I>stdio</I> column refers to format characters used by the C functions <SAMP>scanf()</SAMP> or <SAMP>printf()</SAMP> that have the same or similar effect. The last column, <I>default</I>, lists the setting that is used if you do not explicitly set the flag.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx234"><!></A>
+<H4><A NAME="Table 7">Table 7 -- Flags and their effects on operators</A>  </H4><tr><td valign=top><B><B>Format flag</B></B><td valign=top><B><B>Group</B></B><td valign=top><B><B>Effect</B></B><td valign=top><B><B>stdio</B> </B><td valign=top><B>Default</B>&nbsp;
+<tr><td valign=top>&nbsp;
+<td valign=top rowspan=4>
+<SAMP>adjustfield</SAMP><BR>
+<td valign=top>
+Adds fill characters to certain generated output for adjustment:<BR>
+<td valign=top>
+<BR>
+<td valign=top>
+<SAMP>left</SAMP> <BR>
+<SUP>See footnote <SUP>1</SUP></SUP><BR>
+
+<tr><td valign=top>
+<SAMP>left</SAMP><BR>
+<td valign=top>
+left<BR>
+<td valign=top>
+<SAMP>-</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>right</SAMP><BR>
+<td valign=top>
+right<BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>internal</SAMP><BR>
+<td valign=top>
+Adds fill characters at designated internal point<BR>
+<td valign=top>
+none<BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>&nbsp;
+<td valign=top rowspan=4>
+<SAMP>basefield</SAMP><BR>
+<td valign=top>
+Converts integer input or generates integer output in:<BR>
+<td valign=top>
+<SAMP>%i</SAMP><BR>
+<td valign=top>
+<SAMP>dec</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>dec</SAMP><BR>
+<td valign=top>
+decimal base<BR>
+<td valign=top>
+<SAMP>%d,%u</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>oct</SAMP><BR>
+<td valign=top>
+octal base<BR>
+<td valign=top>
+<SAMP>%o</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>hex</SAMP><BR>
+<td valign=top>
+hexadecimal base<BR>
+<td valign=top>
+<SAMP>%x</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>&nbsp;
+<td valign=top rowspan=3>
+<SAMP>floatfield</SAMP><BR>
+<td valign=top>
+Generates floating point output:<BR>
+<td valign=top>
+<SAMP>%g,%G</SAMP><BR>
+<td valign=top>
+<SAMP>fixed</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>fixed</SAMP><BR>
+<td valign=top>
+in fixed-point notation<BR>
+<td valign=top>
+<SAMP>%f</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>scientific</SAMP><BR>
+<td valign=top>
+in scientific notation<BR>
+<td valign=top>
+<SAMP>%e,%E</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>
+<SAMP>boolalpha</SAMP><BR>
+<td valign=top rowspan=7>&nbsp;
+<td valign=top>
+Inserts and extracts <SAMP>bool</SAMP> values in alphabetic format<BR>
+<td valign=top>&nbsp;
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showpos</SAMP><BR>
+<td valign=top>
+Generates a <SAMP>+</SAMP> sign in non-negative generated numeric output<BR>
+<td valign=top>
+<SAMP>+</SAMP><BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showpoint</SAMP><BR>
+<td valign=top>
+Always generates a decimal-point in generated floating-point output<BR>
+<td valign=top>
+<SAMP>.n</SAMP>  <BR>
+<SUP>See footnote <SUP>2</SUP></SUP><BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showbase</SAMP><BR>
+<td valign=top>
+Generates a prefix indicating the numeric base of a generated integer output<BR>
+<td valign=top>
+<SAMP>#</SAMP><BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>skipws</SAMP><BR>
+<td valign=top>
+Skips leading white space before certain input operations<BR>
+<td valign=top>
+none<BR>
+<td valign=top>
+<SAMP>1</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>unitbuf</SAMP><BR>
+<td valign=top>
+Flushes output after each formatting operation<BR>
+<td valign=top>
+none<BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>uppercase</SAMP> <BR>
+<td valign=top>
+Replaces certain lowercase letters with their uppercase equivalents in generated output<BR>
+<td valign=top>
+<SAMP>%X</SAMP><BR>
+<SAMP>%E</SAMP><BR>
+<SAMP>%G</SAMP><BR>
+<td valign=top>
+<SAMP>0</SAMP><BR>
+
+
+</TABLE>
+
+<TABLE BORDER=0>
+<TR><TD VALIGN=top>1</TD><TD VALIGN=top>Initially, none of the bits is set. This is more or less equivalent to left.
+</TD></TR>
+
+<TR><TD VALIGN=top>2</TD><TD VALIGN=top>Where n indicates the number of decimals
+</TD></TR>
+</TABLE>
+
+</P>
+<A NAME="idx235"><!></A>
+<P>The effect of setting a format parameter is usually permanent; that is, the parameter setting is in effect until the setting is explicitly changed. The only exception to this rule is the field width. The width is automatically reset to its default value, <SAMP>0</SAMP>, after each input or output operation that uses the field width. Here is an example:</P>
+<UL>
+<PRE>
+int i; char* s[11];
+cin &gt;&gt; setw(10) &gt;&gt; i &gt;&gt; s;                                    //1
+cout &lt;&lt; setw(10) &lt;&lt;i &lt;&lt; s;                                    //2</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Extracting an integer is independent of the specified field width. The extractor for integers always reads as many digits as belong to the integer. As extraction of integers does not use the field width setting, the field width of <SAMP>10</SAMP> is still in effect when a character sequence is subsequently extracted. Only 10 characters are extracted in this case. After the extraction, the field width is reset to <SAMP>0</SAMP>.
+<TR VALIGN="top"><TD>//2</TD><TD>The inserter for integers uses the specified field width and fills the field with padding characters if necessary. After the insertion, it resets the field width to <SAMP>0</SAMP>. Hence, the subsequent insertion of the string does not fill the field with padding characters for a string with less than 10 characters. 
+</TABLE>
+<BLOCKQUOTE><HR>
+<B>NOTE: With the exception of the field width, all format parameter settings are permanent. The field width parameter is reset after each use.
+</B><HR></BLOCKQUOTE>
+<A NAME="idx236"><!></A>
+<P>The following code sample shows how you can control formatting by using some of the parameters:</P>
+<UL>
+<PRE>
+#include &lt;iostream&gt;
+using namespace ::std;
+// ...
+ios_base::fmtflags original_flags = cout.flags();             //1
+cout&lt;&lt; 812&lt;&lt;'|';
+cout.setf(ios_base::left,ios_base::adjustfield);              //2
+cout.width(10);                                               //3
+cout&lt;&lt; 813 &lt;&lt; 815 &lt;&lt; '\n';
+cout.unsetf(ios_base::adjustfield);                           //4
+cout.precision(2);
+cout.setf(ios_base::uppercase|ios_base::scientific);          //5
+cout &lt;&lt; 831.0 &lt;&lt; ` ` &lt;&lt; 8e2;
+cout.flags(original_flags);                                   //6</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Store the current format flag setting, in order to restore it later on.
+<TR VALIGN="top"><TD>//2</TD><TD>Change the adjustment from the default setting <SAMP>right</SAMP> to <SAMP>left</SAMP>.
+<TR VALIGN="top"><TD>//3</TD><TD>Set the field width from its default <SAMP>0</SAMP> to <SAMP>10</SAMP>. A field width of <SAMP>0</SAMP> means that no padding characters are inserted, and this is the default behavior of all insertions.
+<TR VALIGN="top"><TD>//4</TD><TD>Clear the adjustment flags.
+<TR VALIGN="top"><TD>//5</TD><TD>Change the precision for floating-point values from its default <SAMP>6</SAMP> to <SAMP>2</SAMP>, and set yet another couple of format flags that affect floating-point values.
+<TR VALIGN="top"><TD>//6</TD><TD>Restore the original flags.
+</TABLE>
+<P>The output is:</P>
+<UL>
+<PRE>
+812|813       815
+8.31E+02 8.00E+02</PRE>
+</UL>
+
+<A NAME="idx237"><!></A>
+<A NAME="732"><H3>7.3.2 Manipulators</H3></A>
+<A NAME="idx238"><!></A>
+<P>Format control requires calling a stream's member functions. Each such call interrupts the respective shift expression. But what if you need to change formats within a shift expression? This is possible in iostreams. Instead of writing:</P>
+<UL>
+<PRE>
+cout&lt;&lt; 812 &lt;&lt; '|';
+cout.setf(ios_base::left,ios_base::adjustfield);
+cout.width(10);
+cout&lt;&lt; 813 &lt;&lt; 815 &lt;&lt; '\n';</PRE>
+</UL>
+<P>you can write:</P>
+<UL>
+<PRE>
+cout&lt;&lt; 812 &lt;&lt; '|' &lt;&lt; left &lt;&lt; setw(10) &lt;&lt; 813 &lt;&lt; 815 &lt;&lt; endl;</PRE>
+</UL>
+<A NAME="idx239"><!></A>
+<P>In this example, objects like <SAMP>left</SAMP>, <SAMP>setw</SAMP>, and <SAMP>endl</SAMP> are called <I>manipulators</I>. A manipulator is an object of a certain type; let's call the type <SAMP>manip</SAMP> for the time being. There are overloaded versions of:</P>
+<UL>
+<PRE>
+<SAMP>basic_istream &lt;charT,traits&gt;:: operator&gt;&gt;()</SAMP> </PRE>
+</UL>
+<P>and: </P>
+<UL>
+<PRE>
+<SAMP>basic_ostream &lt;charT,traits&gt;:: operator&lt;&lt;()</SAMP> </PRE>
+</UL>
+<P>for type <SAMP>manip</SAMP>. Hence a manipulator can be extracted from or inserted into a stream together with other objects that have the shift operators defined. (<A HREF="7-3.htm#732">Section 7.3.2</A> explains in greater detail how manipulators work and how you can implement your own manipulators.)</P>
+<A NAME="idx240"><!></A>
+<P>The effect of a manipulator need not be an actual input to or output from the stream. Most manipulators set just one of the above described format flags, or do some other kind of stream manipulation. For example, an expression like:</P>
+<UL>
+<PRE>
+<SAMP>cout &lt;&lt; left;</SAMP> </PRE>
+</UL>
+<P>is equivalent to: </P>
+<UL>
+<PRE>
+<SAMP>cout.setf (ios_base::left, ios_base::adjustfield);.</SAMP></PRE>
+</UL>
+<P>Nothing is inserted into the stream. The only effect is that the format flag for adjusting the output to the left is set.</P>
+<A NAME="idx241"><!></A>
+<P>On the other hand, the manipulator <SAMP>endl</SAMP> inserts the newline character to the stream, and flushes to the underlying stream buffer. The expression:</P>
+<UL>
+<PRE>
+<SAMP>cout &lt;&lt; endl;</SAMP> </PRE>
+</UL>
+<P>is equivalent to: </P>
+<UL>
+<PRE>
+<SAMP>cout &lt;&lt; '\n'; cout.flush();</SAMP></PRE>
+</UL>
+<A NAME="idx242"><!></A>
+<P>Some manipulators take arguments, like <SAMP>setw(int)</SAMP>. The <SAMP>setw</SAMP> manipulator sets the field width. The expression:</P>
+<UL>
+<PRE>
+<SAMP>cout &lt;&lt; setw(10);</SAMP></PRE>
+</UL>
+<P>is equivalent to: </P>
+<UL>
+<PRE>
+<SAMP>cout.width(10);</SAMP></PRE>
+</UL>
+<P>In general, you can think of a manipulator as an object you can insert into or extract from a stream, in order to manipulate that stream. Some manipulators can be applied only to output streams, others only to input streams. Most manipulators change format bits only in one of the stream base classes, <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> or <B><I>basic_ios&lt;charT,traits&gt;</I></B>. These can be applied to input and output streams.</P>
+<P><A HREF="#Table 8">Table 8</A> gives an overview of all manipulators defined by iostreams. The first column, <B>Manipulator</B>, lists its name. All manipulators are classes defined in the namespace <SAMP>::std</SAMP>. The second column, <B>Use</B>, indicates whether the manipulator is intended to be used with istreams (<SAMP>i</SAMP>), ostreams (<SAMP>o</SAMP>), or both (<SAMP>io</SAMP>). The third column, <B>Effect</B>, summarizes the effect of the manipulator. The last column, <B>Equivalent</B>, lists the corresponding call to the stream's member function.</P>
+<A NAME="idx243"><!></A>
+<P>Note that the second column indicates only the <I>intended</I> use of a manipulator. In many cases, it is possible to apply an output manipulator to an input stream, and vice versa. Generally, this kind of non-intended manipulation is harmless in that it has no effect. For instance, if you apply the output manipulator <SAMP>showpoint</SAMP> to an input stream, the manipulation is simply ignored. However, if you use an output manipulator on a bidirectional stream during input, the manipulation does not affect current input operations, but subsequent output operations.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx244"><!></A>
+<H4><A NAME="Table 8">Table 8 -- Manipulators<SUP>1</SUP></A> </H4><tr><td valign=top><B><B>Manipulator</B></B><td valign=top><B><B>Use</B></B><td valign=top><B><B>Effect</B></B><td valign=top><B><B>Equivalent</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>boolalpha</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Puts <SAMP>bool</SAMP> values in alphabetic format<BR>
+<td valign=top>
+<SAMP>io.setf(ios_base::boolalpha)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>dec</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Converts integers to/from decimal notation<BR>
+<td valign=top>
+<SAMP>io.setf(ios_base::dec,</SAMP><BR>
+  <SAMP>ios_base::basefield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>endl</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Inserts newline and flushes buffer<BR>
+<td valign=top>
+<SAMP>o.put(o.widen('\n'));</SAMP><BR>
+  <SAMP>o.flush()</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>ends</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Inserts end of string character<BR>
+<td valign=top>
+<SAMP>o.put(o.widen('\0'))</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>fixed</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Puts floating point values in fixed-point notation<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::fixed,</SAMP><BR>
+  <SAMP>ios_base::floatfield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>flush</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Flushes stream buffer<BR>
+<td valign=top>
+<SAMP>o.flush()</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>hex</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Converts integers to/from hexadecimal notation<BR>
+<td valign=top>
+<SAMP>io.setf(ios_base::hex,</SAMP><BR>
+  <SAMP>ios_base::basefield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>internal</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Adds fill characters at a designated internal point<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::internal,</SAMP><BR>
+  <SAMP>ios_base::adjustfield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>left</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Adds fill characters for adjustment to the left<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::left,</SAMP><BR>
+  <SAMP>ios_base::adjustfield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>noboolalpha</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>io.unsetf(ios_base::boolalpha)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>noshowbase</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>o.unsetf (ios_base::showbase)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>noshowpoint</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>o.unsetf (ios_base::showpoint)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>noshowpos</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>o.unsetf (ios_base::showpos)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>noskipws</SAMP><BR>
+<td valign=top>
+<SAMP>i</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>i.unsetf(ios_base::skipws)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>nounitbuf</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>o.unsetf(ios_base::unitbuf)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>nouppercase</SAMP><BR>
+<td valign=top>&nbsp;
+<td valign=top>
+Resets the above<BR>
+<td valign=top>
+<SAMP>o.unsetf (ios_base::uppercase)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>oct</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Converts to/from octal notation<BR>
+<td valign=top>
+<SAMP>io.setf(ios_base::oct,</SAMP><BR>
+  <SAMP>ios_base::basefield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>resetiosflags</SAMP><BR>
+  <SAMP>(ios_base::fmt</SAMP><BR>
+  <SAMP>flags mask)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Clears <B><I>ios</I></B> flags<BR>
+<td valign=top>
+<SAMP>io.setf((ios_base::fmtflags)</SAMP><BR>
+  <SAMP>0, mask)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>right</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Adds fill characters for adjustment to the right<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::right,</SAMP><BR>
+  <SAMP>ios_base::adjustfield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>scientific</SAMP><BR>
+<td valign=top>&nbsp;
+<td valign=top>
+Puts floating point values in scientific notation<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::scientific,</SAMP><BR>
+  <SAMP>ios_base::floatfield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>setbase</SAMP><BR>
+ <SAMP>(int base)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Sets base for integer notation (base = 8, 10, 16)<BR>
+<td valign=top>
+<SAMP>io.setf (base ==</SAMP><BR>
+ <SAMP>8?ios_base::oct: base == 10</SAMP> <BR>
+<SAMP>? ios_base::dec : base == 16</SAMP> <BR>
+<SAMP>? ios_base::hex :</SAMP><BR>
+ <SAMP>ios_base::fmtflags(0),</SAMP><BR>
+ <SAMP>ios_base::basefield)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>setfill(charT c)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Sets fill character for padding<BR>
+<td valign=top>
+<SAMP>io.fill(c)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>setiosflags</SAMP><BR>
+  <SAMP>(ios_base::fmt</SAMP><BR>
+  <SAMP>flags mask)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Sets <B><I>ios</I></B> flags<BR>
+<td valign=top>
+<SAMP>io.setf(mask)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>setprecision</SAMP><BR>
+  <SAMP>(int n)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Sets precision of floating point values<BR>
+<td valign=top>
+<SAMP>io.precision(n)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>setw(int n)</SAMP><BR>
+<td valign=top>
+<SAMP>io</SAMP><BR>
+<td valign=top>
+Sets minimal field width<BR>
+<td valign=top>
+<SAMP>io.width(n)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showbase</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Generates a prefix indicating the numeric base of an integer<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::showbase)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showpoint</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Always generates a decimal-point for floating-point values<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::showpoint)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>showpos</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Generates a <SAMP>+</SAMP> sign for non-negative numeric values<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::showpos)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>skipws</SAMP><BR>
+<td valign=top>
+<SAMP>i</SAMP><BR>
+<td valign=top>
+Skips leading white space <BR>
+<td valign=top>
+<SAMP>i.setf(ios_base::skipws)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>unitbuf</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Flushes output after each formatting operation<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::unitbuf)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>uppercase</SAMP><BR>
+<td valign=top>
+<SAMP>o</SAMP><BR>
+<td valign=top>
+Replaces certain lowercase letters with their uppercase equivalents<BR>
+<td valign=top>
+<SAMP>o.setf(ios_base::uppercase)</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>ws</SAMP><BR>
+<td valign=top>
+<SAMP>i</SAMP><BR>
+<td valign=top>
+Skips white spaces<BR>
+<td valign=top>&nbsp;
+
+
+</TABLE>
+
+<TABLE BORDER=0>
+<TR><TD VALIGN=top>1</TD><TD VALIGN=top>The Rogue Wave implementation of the Standard C++ Library also specifies the non-standard manipulators:<br>
+    <SAMP>__lock</SAMP> locks the stream for multithread use;<br>
+    <SAMP>__unlock</SAMP> unlocks the stream for multithread use.
+</TD></TR>
+</TABLE><TFNPARA>
+</TD></TR>
+</TABLE>
+
+</P>
+
+<HR>
+<A HREF="7-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

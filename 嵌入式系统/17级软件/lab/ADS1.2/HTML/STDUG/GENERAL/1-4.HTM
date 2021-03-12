@@ -1,0 +1,86 @@
+<HTML><HEAD><TITLE>1.4 Overview of This Manual</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="1-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="II.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>1.4 Overview of This Manual</H2>
+
+<A NAME="141"><H3>1.4.1 Assumptions</H3></A>
+<P>This manual is <I>The Standard C++ Library User's Guide</I>, an introduction to the Rogue Wave implementation of the Standard C++ Library. It assumes that you are familiar with the basic features of the C++ programming language. If you are new to C++, you may want to start with an introductory text, such as <I>The C++ Programming Language</I> by Bjarne Stroustrup (Addison-Wesley, 1997).</P>
+<P>Everything in the Standard C++ Library is contained in the std namespace. You must specify a using declaration or explicitly scope any name from the library; for example, <SAMP>using std::vector;</SAMP> or <SAMP>std::vector&lt;int&gt; v;</SAMP>. This is assumed in the examples.</P>
+
+<A NAME="142"><H3>1.4.2 Conventions</H3></A>
+<A NAME="idx6"><!></A>
+<P>This manual uses some distinctive terms and conventions. The Standard C++ Library consists mostly of class and function templates, so abbreviations for these templates are common. For example, in the iostreams part of the documentation, <SAMP>fstream</SAMP> stands for <SAMP>template &lt;class charT, class traits&gt; class basic_fstream</SAMP>. A slightly more succinct notation for a class template is also frequently used: <SAMP>basic_fstream &lt;charT, traits&gt;</SAMP>. <I>File stream</I> stands for the abstract notion of the file stream class template; <SAMP>badbit</SAMP> stands for the state flag <SAMP>ios_base::badbit</SAMP>.</P>
+<A NAME="idx7"><!></A>
+<P>The term <I>algorithm</I> indicates functions in the generic algorithms portion of the Standard C++ Library, so as to avoid confusion with member functions, argument functions, and user-defined functions. </P>
+<P>An empty pair of parentheses <SAMP>()</SAMP> follows function names and algorithm names, so as to avoid emphasizing their arguments. An underline character <SAMP>_</SAMP>  is used as a separator in both class names and function names. </P>
+<P>Special fonts set off class names, code samples, and special meanings, as shown in <A HREF="#Table 2">Table 2</A>:.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 2">Table 2 -- Typographic conventions</A></H4><tr><td valign=top><B>Convention</B><td valign=top><B>Purpose</B><td valign=top><B>Example</B>&nbsp;
+<tr><td valign=top>
+<SAMP>Courier</SAMP><BR>
+<td valign=top>
+Code, examples, function names, file names, directory names, operating system commands <BR>
+<td valign=top>
+<SAMP>return result;</SAMP><BR>
+
+<tr><td valign=top>
+<I>italic</I><BR>
+<td valign=top>
+Emphasis.<BR>
+New terms.<BR>
+Titles.<BR>
+<td valign=top>
+operating system <I>family</I><BR>
+special <I>ending</I> iterator<BR>
+<I>User's Guide</I><BR>
+
+<tr><td valign=top>
+<B>bold</B><BR>
+<td valign=top>
+Emphasis.<BR>
+Commands from an interface.<BR>
+Rogue Wave product names.<BR>
+<td valign=top>
+do this <B>before</B> that<BR>
+the <B>OK</B> button<BR>
+a <B>Standard C++ Library</B> file<BR>
+
+<tr><td valign=top>
+<B><I>bold italic</I></B><BR>
+<td valign=top>
+Class names.<BR>
+<td valign=top>
+<B><I>priority_queue</I></B><BR>
+
+
+</TABLE>
+
+
+</P>
+
+<A NAME="143"><H3>1.4.3 Organization</H3></A>
+<P>This manual is organized into six parts:</P>
+<UL>
+<LI><P><B>Part I Introduction</B> provides overviews of the product, the documentation that explains the product, and this manual, <I>The Standard C++ Library User's Guide</I>. </P>
+</LI>
+<LI><P><B>Part II</B> <B>Fundamentals</B> explains the fundamental Standard C++ Library concepts of iterators, functions, and predicates.</P>
+</LI>
+<LI><P>The product overview noted that data structures are separated from algorithms in the Standard C++ Library. </P>
+</LI>
+<P>In this manual, <B>Part III</B> <B>Containers</B> gives an overview of the data structures or <I>containers</I>, and devotes a chapter to describing each in detail with an example. <B>Part IV</B> <B>Algorithms</B> deals with the algorithms, devoting one chapter to the generic algorithms, and another to the generic algorithms specific to ordered collections. Within the algorithm chapters, each kind of algorithm is explained in its own section with an example and a reference to the file containing the complete source code. </P>
+<LI><P><B>Part V</B> <B>Special Techniques</B> describes techniques such as using allocators, building containers and generic algorithms, using the traits technique, and dealing with exceptions.</P>
+</LI>
+<LI><P><B>Part VI</B> <B>Special Classes</B> devotes a chapter to each of the four unique classes <B><I><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B>, <B><I><A HREF="../../stdref/com_8038.htm">complex</A></I></B>, <B><I><A HREF="../../stdref/num_5679.htm">numeric_limits</A></I></B>, and <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B>.</P>
+</LI>
+</UL>
+
+<A NAME="144"><H3>1.4.4 Reading Suggestion</H3></A>
+<P>The first time you read this manual it may be hard to know where to start. The container definitions form the heart of the library, but you can't really appreciate them without understanding the algorithms that so greatly extend their functionality. On the other hand, you can't really understand the algorithms without some appreciation of the containers. </P>
+<P>A good approach is to read <B>Part II Fundamentals</B> carefully. Next, skim the definitions of the containers in <B>Part III Containers</B> and the descriptions of the algorithms in <B>Part IV Algorithms</B>, then go back and read these parts in more detail. You can then proceed to the more specialized areas of the manual.</P>
+
+
+<BR>
+<HR>
+<A HREF="1-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="II.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

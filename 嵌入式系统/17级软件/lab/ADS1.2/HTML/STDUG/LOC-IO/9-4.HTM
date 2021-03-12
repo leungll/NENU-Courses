@@ -1,0 +1,18 @@
+<HTML><HEAD><TITLE>9.4 Binary and Text Mode</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="9-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>9.4 Binary and Text Mode</H2>
+
+<A NAME="idx288"><!></A>
+<P>The representation of text files varies among operating systems. For example, the end of a line in a UNIX environment is represented by the <I>linefeed</I> character <SAMP>`\n'</SAMP>. On PC-based systems, the end of the line consists of two characters, <I>carriage</I> <I>return</I> <SAMP>'\r'</SAMP> and <I>linefeed</I> <SAMP>'\n'</SAMP>. The end of the file differs as well on these two operating systems. Peculiarities on other operating systems are also conceivable.</P>
+<A NAME="idx289"><!></A>
+<P>To make programs more portable among operating systems, an automatic conversion can be done on input and output. The carriage return or linefeed sequence, for example, can be converted to a single <SAMP>`\n'</SAMP> character on input; the <SAMP>`\n'</SAMP> can be expanded to <SAMP>"\r\n"</SAMP> on output. This conversion mode is called <I>text mode</I>, as opposed to <I>binary mode</I>. In binary mode, no such conversions are performed.</P>
+<A NAME="fn11"><!></A>
+<P>The mode flag <SAMP>ios_base::binary</SAMP> has the effect of opening a file in binary mode. This has the effect described above; in other words, all automatic conversions, such as converting <SAMP>"\r\n"</SAMP> to <SAMP>`\n',</SAMP> are suppressed. <SUP><A HREF="endnotes.htm#fn11">11</A></SUP></P>
+<P>If you must process a binary file, you should always set the <SAMP>binary</SAMP> mode flag, because most likely you do not want any kind of implicit, system-specific conversion performed.</P>
+<P>The effect of the binary open mode is frequently misunderstood. It does <I>not</I> put the inserters and extractors into a binary mode, and hence suppress the formatting they usually perform. Binary input and output is done solely by <SAMP>basic_istream &lt;charT&gt; ::read()</SAMP> and <SAMP>basic_ostream &lt;charT&gt; ::write()</SAMP>.</P>
+
+<HR>
+<A HREF="9-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,272 @@
+<HTML><HEAD><TITLE>istream_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="iss_3309.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ist_1762.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>istream_iterator</H2>
+<PRE><HR>Iterators
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Operators">Operators</A></LI>
+<LI><A HREF="#Non-member Operators">Non-member Operators</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A stream iterator that has iterator capabilities for istreams. This iterator allows generic algorithms to be used directly on streams.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesistream_type">istream_type</A><BR>
+ <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typesvalue_type">value_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Non-member Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Operatorsoperator++()">operator++()</A><BR>
+ <A HREF="#Operatorsoperator-&gt;()">operator-&gt;()</A><BR>
+ <A HREF="#Non-member Operatorsoperator==()">operator==()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iterator&gt;
+template &lt;class T, class charT, class traits = ios_traits&lt;charT&gt;, 
+          class Distance = ptrdiff_t&gt;
+class <B>istream_iterator</B> : public iterator&lt;input_iterator_tag,
+                               T,Distance&gt;;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Stream iterators are the standard iterator interface for input and output streams.</P>
+<P>The class <B><I>istream_iterator</I></B> reads elements from an input stream using operator <SAMP>&gt;&gt;</SAMP>. A value of type <SAMP>T</SAMP> is retrieved and stored when the iterator is constructed and each time <SAMP>operator++</SAMP> is called. The iterator is equal to the end-of-stream iterator value if the end-of-file is reached. You can use the constructor with no arguments to create an end-of-stream iterator. The only valid use of this iterator is to compare to other iterators when checking for end of file. Do not attempt to dereference the end-of-stream iterator; it plays the same role as the past-the-end iterator of the <SAMP>end()</SAMP> function of containers. Since an <B><I>istream_iterator</I></B> is an input iterator, you cannot assign to the value returned by dereferencing the iterator. This also means that <B><I>istream_iterators</I></B> can only be used for single pass algorithms.</P>
+<P>Since a new value is read every time the <SAMP>operator++</SAMP> is used on an <B><I>istream_iterator</I></B>, that operation is not equality-preserving. This means that <SAMP>i == j</SAMP> does <I>not</I> mean that <SAMP>++i == ++j</SAMP> (although two end-of-stream iterators are always equal).</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class T, class charT, class traits = ios_traits&lt;charT&gt;
+          class Distance = ptrdiff_t&gt;
+ class istream_iterator : 
+          public iterator&lt;input_iterator_tag,T, Distance&gt;
+ {
+
+ public:
+    typedef T value_type;
+    typedef charT char_type;
+    typedef traits traits_type;
+    typedef basic_istream&lt;charT,traits&gt; istream_type;
+
+    istream_iterator();
+    istream_iterator (istream_type&amp;);
+    istream_iterator 
+          (const stream_iterator&lt;T,charT,traits,Distance&gt;&amp;);
+    ~istream_itertor ();
+
+    const T&amp; operator*() const;
+    const T* operator -&gt;() const;
+    istream_iterator &lt;T,charT,traits,
+                      Distance&gt;&amp; operator++();
+    istream_iterator &lt;T,charT,traits,Distance&gt;  
+                      operator++ (int)
+ };
+
+// Non-member Operators
+
+template &lt;class T, class charT, class traits,class Distance&gt;
+bool operator==(const istream_iterator&lt;T,charT,traits,Distance&gt;&amp;,
+          const istream_iterator&lt;T,charT,traits,Distance&gt;&amp;);
+
+template &lt;class T, class charT, class traits,class Distance&gt;
+bool operator!=(const istream_iterator&lt;T,charT,traits,Distance&gt;&amp;,
+          const istream_iterator&lt;T,charT,traits,Distance&gt;&amp;);</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesvalue_type"></A><PRE><B>value_type</B>; </PRE>
+
+<UL>
+<P>Type of value to stream in.</P>
+</UL>
+
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B>; </PRE>
+
+<UL>
+<P>Type of character the stream is built on.</P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B>; </PRE>
+
+<UL>
+<P>Traits used to build the stream.</P>
+</UL>
+
+
+
+<A NAME="Typesistream_type"></A><PRE><B>istream_type</B>; </PRE>
+
+<UL>
+<P>Type of stream this iterator is constructed on.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>istream_iterator</B>();</PRE>
+
+<UL>
+<P>Constructs an end-of-stream iterator. This iterator can be used to compare against an end-of-stream condition. Use it to provide end iterators to algorithms.</P>
+</UL>
+
+
+
+<PRE><B>istream_iterator</B>(istream&amp; s);</PRE>
+
+<UL>
+<P>Constructs an <B><I>istream_iterator</I></B> on the given stream.</P>
+</UL>
+
+
+
+<PRE><B>istream_iterator</B>(const istream_iterator&amp; x);</PRE>
+
+<UL>
+<P>Copy constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~istream_iterator</B>();</PRE>
+
+
+<A NAME="Operators"><H3>Operators</H3></A>
+
+
+<A NAME="Operatorsoperator*()"></A><PRE>const T&amp; 
+<B>operator*</B>() const;</PRE>
+
+<UL>
+<P>Returns the current value stored by the iterator.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator-&gt;()"></A><PRE>const T*
+<B>operator-&gt;</B>() const;</PRE>
+
+<UL>
+<P>Returns a pointer to the current value stored by the iterator.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator++()"></A><PRE>istream_iterator&amp; <B>operator++</B>()
+istream_iterator <B>operator++</B>(int)</PRE>
+
+<UL>
+<P>Retrieves the next element from the input stream. </P>
+</UL>
+
+
+<A NAME="Non-member Operators"><H3>Non-member Operators</H3></A>
+
+
+<A NAME="Non-member Operatorsoperator==()"></A><PRE>bool 
+<B>operator==</B>(const istream_iterator&lt;T,charT,traits,
+            Distance&gt;&amp; x,
+            const
+            istream_iterator&lt;T,charT,traits,Distance&gt;&amp; y)</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>x</SAMP> is the same as <SAMP>y</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Operatorsoperator!=()"></A><PRE>bool 
+<B>operator!=</B>(const istream_iterator&lt;T,charT,traits,
+            Distance&gt;&amp; x,
+            const
+            istream_iterator&lt;T,charT,traits,Distance&gt;&amp; y)</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if <SAMP>x</SAMP> is not the same as <SAMP>y</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// io_iter.cpp
+//
+ #include &lt;iterator&gt;
+ #include &lt;vector&gt;
+ #include &lt;numeric&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main ()
+ {
+   vector&lt;int&gt; d;
+   int total = 0;
+   //
+   // Collect values from cin until end of file
+   // Note use of default constructor to get ending iterator
+   //
+   cout &lt;&lt; "Enter a sequence of integers (eof to quit): " ;
+   copy(<B>istream_iterator</B>&lt;int,char&gt;(cin),
+        <B>istream_iterator</B>&lt;int,char&gt;(),
+        inserter(d,d.begin()));
+   //
+   // stream the whole vector and the sum to cout
+   //
+   copy(d.begin(),d.end()-1,
+        ostream_iterator&lt;int,char&gt;(cout," + "));
+   if (d.size())
+     cout &lt;&lt; *(d.end()-1) &lt;&lt; " = " &lt;&lt;
+          accumulate(d.begin(),d.end(),total) &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. You also have to include all parameters to the istream_iterator template. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Ite_5295.htm">Iterators</A></I></B>, <B><I><A HREF="ost_2238.htm">ostream_iterator</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="iss_3309.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ist_1762.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,112 @@
+<HTML><HEAD><TITLE>9.2 Working with File Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="9-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>9.2 Working with File Streams</H2>
+
+<A NAME="921"><H3>9.2.1 Creating and Opening File Stream Objects</H3></A>
+<A NAME="idx267"><!></A>
+<A NAME="fn9"><!></A>
+<P>There are two ways to create a file stream<SUP><A HREF="endnotes.htm#fn9">9</A></SUP>: you can create an empty file stream, open a file, and connect it to the stream later on; or you can open the file and connect it to a stream at construction time. These two procedures are demonstrated in the two following examples, respectively:</P>
+<UL>
+<PRE>
+ifstream file;                                                //1
+...;
+file.open(argv[1]);                                           //2
+if (!file) // error: unable to open file for input</PRE>
+</UL>
+<A NAME="idx268"><!></A>
+<P>or:</P>
+<UL>
+<PRE>
+ifstream source("src.cpp");                                   //3
+if (!source) // error: unable to open src.cpp for input</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A file stream is created that is not connected to any file. Any operation on the file stream fails.
+<TR VALIGN="top"><TD>//2</TD><TD>Here a file is opened and connected to the file stream. If the file cannot be opened, <SAMP>ios_base::failbit</SAMP> is set; otherwise, the file stream is now ready for use.
+<TR VALIGN="top"><TD>//3</TD><TD>Here the file is both opened and connected to the stream.
+</TABLE>
+
+<A NAME="922"><H3>9.2.2 Checking a File Stream's Status</H3></A>
+<A NAME="idx269"><!></A>
+<P>Generally you can check whether the attempt to open a file was successful by examining the stream state afterwards; <SAMP>failbit</SAMP> is set in case of failure. </P>
+<A NAME="idx270"><!></A>
+<P>There is also a function called <SAMP>is_open()</SAMP> that indicates whether a file stream is connected to an open file. This function does <I>not</I> mean that a previous call to <SAMP>open()</SAMP> was successful. To understand the subtle difference, consider the case of a file stream that is already connected to a file. Any subsequent call to <SAMP>open()</SAMP> fails, but <SAMP>is_open()</SAMP> still returns <SAMP>TRUE</SAMP>, as shown in the following code:</P>
+<UL>
+<PRE></PRE>
+<A NAME="idx271"><!></A>
+<PRE>void main(int argc, char* argv[])
+{
+  if (argc &gt; 2)
+  {  ofstream fil;                                            //1
+     fil.open(argv[1]);
+     // ...
+     fil.open(argv[2]);                                       //2
+     if (fil.fail())                                          //3
+     {  // open failed  }
+     if (fil.is_open())                                       //4
+     {  // connected to an open file  }
+  }
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Open a file and connect the file stream to it.
+<TR VALIGN="top"><TD>//2</TD><TD>Any subsequent open on this stream fails.
+<TR VALIGN="top"><TD>//3</TD><TD>Hence the <SAMP>failbit</SAMP> is set.
+<TR VALIGN="top"><TD>//4</TD><TD>However, <SAMP>is_open()</SAMP> still returns <SAMP>TRUE</SAMP>, because the file stream still is connected to an open file.
+</TABLE>
+
+<A NAME="idx272"><!></A>
+<A NAME="923"><H3>9.2.3 Closing a File Stream</H3></A>
+<A NAME="idx273"><!></A>
+<P>In the example above, it would be advisable to close the file stream before you try to connect it to another file. This is done implicitly by the file streams destructor in the following code:</P>
+<UL>
+<PRE>
+void main(int argc, char* argv[])
+{
+  if (argc &gt; 2)
+  {  ofstream fil;
+     fil.open(argv[1]);
+     // ...
+  }                                                           //1
+  {  ofstream fil;
+     fil.open(argv[2]);
+    // ...
+  }
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Here the file stream <SAMP>fil</SAMP> goes out of scope and the file it is connected to is closed automatically.
+</TABLE>
+<P>You can explicitly close the connected file. The file stream is then empty, until it is reconnected to another file:</P>
+<UL>
+<PRE>
+ifstream f;                                                   //1
+for (int i=1; i&lt;argc; ++i)
+{
+    f.open(argv[i]);                                          //2
+    if (f)                                                    //3
+    {
+        process(f);                                           //4
+        f.close();                                            //5
+    }
+    else
+        cerr &lt;&lt; "file " &lt;&lt; argv[i] &lt;&lt; " cannot be opened.\n";
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>An empty file stream is created.
+<TR VALIGN="top"><TD>//2</TD><TD>A file is opened and connected to the file stream.
+<TR VALIGN="top"><TD>//3</TD><TD>Here we check whether the file was successfully opened. If the file could not be opened, the <SAMP>failbit</SAMP> would be set.
+<TR VALIGN="top"><TD>//4</TD><TD>Now the file stream is usable, and the file's content can be read and processed.
+<TR VALIGN="top"><TD>//5</TD><TD>Close the file again. The file stream is empty again.
+</TABLE>
+
+<HR>
+<A HREF="9-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

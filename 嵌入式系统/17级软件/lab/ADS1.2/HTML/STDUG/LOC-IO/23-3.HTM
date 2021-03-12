@@ -1,0 +1,15 @@
+<HTML><HEAD><TITLE>23.3 The Location of Locks</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="23-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>23.3 The Location of Locks</H2>
+<A NAME="idx498"><!></A>
+<P>Stream locks are obtained and released in public member functions of <B><I><A HREF="../../stdref/bas_6405.htm">basic_ios</A></I></B>, <B><I><A HREF="../../stdref/bas_3074.htm">basic_istream</A></I></B>, <B><I><A HREF="../../stdref/bas_8583.htm">basic_ostream</A></I></B>, <B><I><A HREF="../../stdref/bas_7446.htm">basic_ifstream</A></I></B>, <B><I><A HREF="../../stdref/bas_4928.htm">basic_ofstream</A></I></B>, <B><I><A HREF="../../stdref/bas_2581.htm">basic_istringstream</A></I></B>, <B><I><A HREF="../../stdref/bas_8767.htm">basic_ostringstream</A></I></B>, and <B><I><A HREF="../../stdref/str_6184.htm">strstream</A></I></B>. This means that all calls to public member functions of these classes are safe. </P>
+<P>Stream buffer locks are obtained in the constructor of the <B><I>sentry</I></B> object contained in both <B><I><A HREF="../../stdref/bas_3074.htm">basic_istream</A></I></B> and <B><I><A HREF="../../stdref/bas_8583.htm">basic_ostream</A></I></B>, and released in the destructor.   Calls to member functions of stream buffers are not safe. The buffer must be locked explicitly before the function is called, and unlocked after the function returns.</P>
+<P>A stream buffer lock can be obtained by explicitly calling the member function _<SAMP>RW_lock_buffer()</SAMP> provided by <B><I><A HREF="../../stdref/bas_0582.htm">basic_streambuf</A></I></B>. The lock is released by calling <SAMP>_RW_release_buffer()</SAMP>, or you can use the lock and unlock manipulators as shown above. These functions are provided as extensions to the Standard C++ Library definition, but are contained in the <SAMP>std</SAMP> namespace.</P>
+
+
+<BR>
+<HR>
+<A HREF="23-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

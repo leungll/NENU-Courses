@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>3.5 Negators and Binders</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="3-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="III.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>3.5 Negators and Binders</H2>
+<A NAME="idx52"><!></A>
+<P><I>Negators</I> and <I>binders</I> are function adaptors that are used to build new function objects out of existing function objects. Almost always, negators and binders are applied to functions as part of the process of building an argument list prior to invoking yet another function or generic algorithm.</P>
+<A NAME="idx53"><!></A>
+<P>The negators <B><I><A HREF="../../stdref/not_6483.htm">not1()</A></I></B> and <B><I><A HREF="../../stdref/not_2978.htm">not2()</A></I></B> take a unary and a binary predicate function object, respectively, and create a new function object that yields the complement of the original. For example, using the widget tester function object defined in <A HREF="3-3.htm#3321">Section 3.3.2.1</A>, the function object</P>
+<UL>
+<PRE>   
+not2(WidgetTester())</PRE>
+</UL>
+<P>yields a binary predicate which takes exactly the same arguments as the widget tester. It is true when the corresponding widget tester is false, and false otherwise. Negators work only with function objects defined as subclasses of the classes <B><I><A HREF="../../stdref/una_4659.htm">unary_function</A></I></B> and <B><I><A HREF="../../stdref/bin_7851.htm">binary_function</A></I></B>, given earlier.</P>
+<P>A binder takes a two-argument function, and binds either the first or second argument to a specific value, thereby yielding a one-argument function. The underlying function must be a subclass of class <B><I><A HREF="../../stdref/bin_7851.htm">binary_function</A></I></B>. The binder <B><I><A HREF="../../stdref/bin_1899.htm">bind1st()</A></I></B> binds the first argument, while the binder <B><I><A HREF="../../stdref/bin_4473.htm">bind2nd()</A></I></B> binds the second.</P>
+<P>For example, the binder <B><I><A HREF="../../stdref/bin_4473.htm">bind2nd(greater&lt;int&gt;(), 5)</A></I></B> creates a function object that tests for being larger than 5. This could be used in the following, which yields an iterator representing the first value in a list larger than 5:</P>
+<UL>
+<PRE>
+list&lt;int&gt;::iterator where = find_if(aList.begin(), aList.end(),
+           bind2nd(greater&lt;int&gt;(), 5));</PRE>
+</UL>
+<P>Combining a binder and a negator, we can create a function that is true if the argument is divisible by 3, and false otherwise. This function can be used to remove all the multiples of 3 from a list. </P>
+<UL>
+<PRE>
+list&lt;int&gt;::iterator where = remove_if (aList.begin(), aList.end(),
+           not1(bind2nd(modulus&lt;int&gt;(), 3)));</PRE>
+</UL>
+<P>A binder is used to tie the widget number of a call to the binary function <SAMP>WidgetTester(),</SAMP> yielding a one-argument function that takes only a widget as argument. This is used to find the first widget that matches the given widget type:</P>
+<UL>
+<PRE>
+list&lt;Widget&gt;::iterator wehave = 
+   find_if(on_hand.begin(), on_hand.end(), 
+      bind2nd(WidgetTester(), wid));</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B><A NAME="idx54"><!></A>
+NOTE: The idea described here by the term binder is in other contexts often described by the term <I>curry</I>. It is named after the computer scientist Haskell P. Curry, who used the concept extensively in an influential book on the theory of computation in the 1930s. Curry himself attributed the idea to Moses Sch&ouml;nfinkel, leaving one to wonder why we don't instead refer to binders as Sch&ouml;nfinkels.
+</B><HR></BLOCKQUOTE>
+
+
+<BR>
+<HR>
+<A HREF="3-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="III.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

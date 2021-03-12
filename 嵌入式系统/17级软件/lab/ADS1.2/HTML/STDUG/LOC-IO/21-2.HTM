@@ -1,0 +1,18 @@
+<HTML><HEAD><TITLE>21.2 When to Imbue a New Locale</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="21-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>21.2 When to Imbue a New Locale</H2>
+
+<A NAME="idx487"><!></A>
+<P>A program cannot necessarily imbue a new <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> on a stream or stream buffer at any particular time. Problems are likely if a new <B><I>locale</I></B> is imbued on a stream buffer with a state-dependent code conversion, since the buffer might very well be in the middle of a state-dependent conversion.   In such a situation, the code conversion facet contained in the new <B><I>locale</I></B> would likely be at loose ends indeed. To avoid problems, follow these guidelines for imbuing locales:</P>
+<UL>
+<LI><P>A new <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> can always be imbued immediately after construction of a stream or stream buffer, in other words, before any other operation is attempted.</P>
+</LI>
+<LI><P>A new <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> can always be imbued after an operation that flushes the streambuffer.</P>
+</LI>
+</UL>
+
+<HR>
+<A HREF="21-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

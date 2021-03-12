@@ -1,0 +1,114 @@
+<HTML><HEAD><TITLE>rotate, rotate_copy</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="rev_1561.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sea_8558.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>rotate, rotate_copy</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Swaps the segment that contains elements from <SAMP>first</SAMP> through <SAMP>middle-1</SAMP> with the segment that contains the elements from <SAMP>middle</SAMP> through <SAMP>last</SAMP>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator&gt;
+void <B>rotate</B> (ForwardIterator first,
+             ForwardIterator middle,
+             ForwardIterator last);
+
+template &lt;class ForwardIterator, class OutputIterator&gt;
+OutputIterator <B>rotate_copy</B> (ForwardIterator first,
+                            ForwardIterator middle,
+                            ForwardIterator last,
+                            OutputIterator result);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>rotate</I></B> algorithm takes three iterator arguments: <SAMP>first</SAMP>, which defines the start of a sequence; <SAMP>last</SAMP>, which defines the end of the sequence; and <SAMP>middle</SAMP>, which defines a point within the sequence. <B><I>rotate</I></B> "swaps" the segment that contains elements from <SAMP>first</SAMP> through <SAMP>middle-1</SAMP> with the segment that contains the elements from <SAMP>middle</SAMP> through <SAMP>last</SAMP>. After <B><I>rotate</I></B> has been applied, the element that was in position <SAMP>middle</SAMP>, is in position <SAMP>first</SAMP>, and the other elements in that segment are in the same order relative to each other. Similarly, the element that was in position <SAMP>first</SAMP> is now in position <SAMP>last-middle +1</SAMP>. An example illustrates how <B><I>rotate</I></B> works:</P>
+<P>Say that we have the sequence:</P>
+<P>   <SAMP>2 4 6 8 1 3 5</SAMP> </P>
+<P>If we call <B><I>rotate</I></B> with <SAMP>middle = 5</SAMP>, the two segments are</P>
+<P>   <SAMP>2 4 6  8      and      1 3 5</SAMP> </P>
+<P>After we apply rotate, the new sequence is:</P>
+<P>   <SAMP>1 3 5 2 4 6 8</SAMP></P>
+<P>Note that the element that was in the fifth position is now in the first position, and the element that was in the first position is in position 4 (<SAMP>last - first + 1</SAMP>, or 8 - 5 +1 =4).</P>
+<P>The formal description of this algorithms is: for each non-negative integer <SAMP>i &lt; (last - first)</SAMP>, <B><I>rotate</I></B> places the element from the position <SAMP>first + i</SAMP> into position <SAMP>first + (i + (last - middle)) % (last - first)</SAMP>. <SAMP>[first, middle)</SAMP> and <SAMP>[middle, last)</SAMP> are valid ranges. </P>
+<P><B><I><A HREF="rot_9792.htm">rotate_copy</A></I></B> rotates the elements as described above, but instead of swapping elements within the same sequence, it copies the result of the rotation to a container specified by <SAMP>result</SAMP>. <B><I>rotate_copy</I></B> copies the range <SAMP>[first, last)</SAMP> to the range <SAMP>[result, result + (last - first))</SAMP> such that for each non- negative integer <SAMP>i &lt; (last - first)</SAMP> the following assignment takes place: </P>
+<P><SAMP>*(result + (i + (last - middle)) % (last -first)) = *(first + i).</SAMP></P>
+<P>The ranges <SAMP>[first, last)</SAMP> and <SAMP>[result, result, + (last - first))</SAMP> may not overlap. </P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>For <B><I>rotate</I></B>, at most <SAMP>last - first</SAMP> swaps are performed.</P>
+<P>For <B><I><A HREF="rot_9792.htm">rotate_copy</A></I></B>, <SAMP>last - first</SAMP> assignments are performed.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// rotate
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   //Initialize a vector with an array of ints
+   int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+   vector&lt;int&gt; v(arr, arr+10);
+
+   //Print out elements in original (sorted) order
+   cout &lt;&lt; "Elements before rotate: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   //Rotate the elements
+   <B>rotate</B>(v.begin(), v.begin()+4, v.end());
+   //Print out the rotated elements
+   cout &lt;&lt; "Elements after rotate: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+Elements before rotate:
+     1 2 3 4 5 6 7 8 9 10
+Elements after rotate:
+     5 6 7 8 9 10 1 2 3 4</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="rev_1561.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sea_8558.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

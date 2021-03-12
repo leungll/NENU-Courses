@@ -1,0 +1,110 @@
+<HTML><HEAD><TITLE>distance</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="deq_4164.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="dis_0582.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>distance</H2>
+<PRE><HR>Iterator Operation
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Computes the distance between two iterators.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iterator&gt;
+template &lt;class ForwardIterator&gt;
+ iterator_traits&lt;ForwardIterator&gt;::difference_type
+ distance (ForwardIterator first,
+                ForwardIterator last);
+
+template &lt;class ForwardIterator, class Distance&gt;
+ void distance (ForwardIterator first,
+                ForwardIterator last,
+                Distance&amp; n);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>distance</I></B> template function computes the distance between two iterators. The first version returns that value, while the second version increments <SAMP>n</SAMP> by that value. The last iterator must be reachable from the first iterator. </P>
+<P>Note that the second version of this function is obsolete. It is included for backward compatibility and to support compilers that do not include partial specialization. The first version of the function is not available with compilers that do not support partial specialization, since it depends on <SAMP>iterator_traits</SAMP>, which itself depends on that particular language feature.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// distance.cpp
+//
+
+ #include &lt;iterator&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   //
+   //Initialize a vector using an array
+   //
+   int arr[6] = {3,4,5,6,7,8};
+   vector&lt;int&gt; v(arr,arr+6);
+   //
+   //Declare a list iterator, s.b. a ForwardIterator
+   //
+   vector&lt;int&gt;::iterator itr = v.begin()+3;
+   //
+   //Output the original vector
+   //
+   cout &lt;&lt; "For the vector: ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   cout &lt;&lt; "When the iterator is initialized to point to "
+        &lt;&lt; *itr &lt;&lt; endl;
+   //
+   // Use of distance
+   //
+   vector&lt;int&gt;::difference_type dist = 0;
+   distance(v.begin(), itr, dist);
+   cout &lt;&lt; "The distance between the beginning and itr is " 
+        &lt;&lt; dist &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the vector: 3 4 5 6 7 8
+When the iterator is initialized to point to 6
+The distance between the beginning and itr is 3</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector &lt;int, allocator,int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector &lt;int&gt;</SAMP></P>
+<P>If your compiler does not support partial specialization, then you can't use the version of <B><I>distance</I></B> that returns the distance. Instead you have to use the version that increments a reference parameter.</P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Seq_6405.htm">Sequences</A></I></B>, <B><I><A HREF="Ran_7821.htm">Random Access Iterators</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="deq_4164.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="dis_0582.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

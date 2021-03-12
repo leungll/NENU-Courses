@@ -1,0 +1,35 @@
+<HTML><HEAD><TITLE>8.3 Catching Exceptions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="8-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>8.3 Catching Exceptions</H2>
+
+<A NAME="idx261"><!></A>
+<A NAME="fn6"><!></A>
+<P>By default a stream does not throw any exceptions.<SUP><A HREF="endnotes.htm#fn6">6</A></SUP> You must explicitly activate an exception because a stream contains <I>an exception mask</I>. Each flag in this mask corresponds to one of the error flags. For example, once the <SAMP>badbit</SAMP> flag is set in the exception mask, an exception is thrown each time the <SAMP>badbit</SAMP> flag gets set in the stream state. The following code demonstrates how to activate an exception on an input stream <SAMP>InStr</SAMP>:</P>
+<UL>
+<PRE>
+try {
+   InStr.exceptions(ios_base::badbit | ios_base::failbit);    //1
+   in &gt;&gt; x;
+   // do lots of other stream i/o
+}
+catch(ios_base::failure&amp; exc)                                 //2
+{   cerr &lt;&lt; exc.what() &lt;&lt; endl; 
+    throw;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<A NAME="fn7"><!></A>
+<TR VALIGN="top"><TD>//1</TD><TD>In calling the <SAMP>exceptions()</SAMP> function, you indicate what flags in the stream's state shall cause an exception to be thrown.<SUP><A HREF="endnotes.htm#fn7">7</A></SUP>
+<TR VALIGN="top"><TD>//2</TD><TD>Objects thrown by the stream's operations are of types derived from <SAMP>ios_base::failure</SAMP>. Hence this catch clause catches all stream exceptions in principle. We qualify this generalization because a stream might fail to catch certain exceptions like <SAMP>bad_alloc</SAMP>, for example, so that exceptions other than <SAMP>ios_base::failure</SAMP> might be raised. That's how exception handling in C++ works: you never know what exceptions will be raised.
+</TABLE>
+<A NAME="idx262"><!></A>
+<P>Generally, it is a good idea to activate the <SAMP>badbit</SAMP> exception and suppress the <SAMP>eofbit</SAMP> and <SAMP>failbit</SAMP> exceptions, because the latter do not represent exceptional states. A <SAMP>badbit</SAMP> situation, however, is likely to be a serious error condition similar to the memory shortage indicated by a <SAMP>bad_alloc</SAMP> exception. Unless you want to suppress exceptions thrown by iostreams altogether, we would recommend that you switch on the <SAMP>badbit</SAMP> exception and turn off <SAMP>eofbit</SAMP> and <SAMP>failbit</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="8-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

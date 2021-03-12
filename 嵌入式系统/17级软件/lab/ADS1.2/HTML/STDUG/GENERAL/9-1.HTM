@@ -1,0 +1,34 @@
+<HTML><HEAD><TITLE>9.1 The map Data Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="9.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>9.1 The map Data Abstraction</H2>
+<A NAME="idx156"><!></A>
+<P>A <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> is an indexed data structure, similar to a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> or a <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>. However, a <B><I>map</I></B> differs from a <B><I>vector</I></B> or <B><I>deque</I></B> in two important respects:</P>
+<UL>
+<LI><P>First, in a <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> the index values or <I>key values</I> need not be <SAMP>integer</SAMP>, but can be any ordered datatype. For example, a <B><I>map</I></B> can be indexed by real numbers, or by strings. Any datatype for which a comparison operator can be defined can be used as a key. As with a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> or <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>, elements can be accessed through the subscript operator or other techniques. </P>
+</LI>
+<LI><P>Second, a <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> is an ordered data structure. This means that elements are maintained in sequence, the ordering determined by key values. Because <B><I>map</I></B>s maintain values in order, they can very rapidly find the element specified by any given key. Searching is performed in logarithmic time. Like a <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B>, maps are not limited in size, but expand or contract as necessary as new elements are added or removed. In large part, a <B><I>map</I></B> can simply be considered a <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> that maintains a collection of pairs.</P>
+</LI>
+</UL>
+<P>In other programming languages, a map-like data structure is sometimes referred to as a dictionary, a table, or an associative array. In the Standard C++ Library, there are two varieties of <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B>s:</P>
+<UL>
+<LI><P>The <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> data structure demands unique keys; that is, there is a one-to-one association between key elements and their corresponding values. In a <B><I>map</I></B>, the insertion of a new value that uses an existing key is ignored. </P>
+</LI>
+<A NAME="idx157"><!></A>
+<LI><P>The <B><I><A HREF="../../stdref/mul_8396.htm">multimap</A></I></B> permits multiple different entries to be indexed by the same key. </P>
+</LI>
+</UL>
+<P>Both data structures provide relatively fast insertion, deletion, and access operations in logarithmic time. For a description of the <B><I><A HREF="../../stdref/pai_5818.htm">pair</A></I></B> datatype, see the discussion of insertion in <A HREF="8-2.htm#823">Section 8.2.3</A>.</P>
+
+<A NAME="911"><H3>9.1.1 Include files</H3></A>
+<A NAME="idx158"><!></A>
+<P>Whenever you use a <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> or a <B><I><A HREF="../../stdref/mul_8396.htm">multimap</A></I></B>, you must include the <SAMP>map</SAMP> header file.</P>
+<UL>
+<PRE>
+# include &lt;map&gt;</PRE>
+</UL>
+
+<HR>
+<A HREF="9.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="9-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

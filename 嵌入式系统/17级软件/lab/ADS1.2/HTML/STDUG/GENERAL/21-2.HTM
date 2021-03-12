@@ -1,0 +1,66 @@
+<HTML><HEAD><TITLE>21.2 Fundamental Datatypes</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="21-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>21.2 Fundamental Datatypes</H2>
+
+<A NAME="idx433"><!></A>
+<P>The Standard C++ Library describes a specific type by providing a specialized implementation of the <SAMP>numeric_limits</SAMP> class for the type. Static functions and static constant data members then provide information specific to the type. The Standard C++ Library includes descriptions of the fundamental datatypes given in <A HREF="#Table 21">Table 21</A>.</P>
+<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 21">Table 21 -- Fundamental datatypes of the Standard C++ Library</A> </H4><tr><td valign=top><B><SAMP>bool</SAMP></B><td valign=top><B><SAMP>char</SAMP></B><td valign=top><B><SAMP>int</SAMP></B><td valign=top><B><SAMP>float</SAMP></B>&nbsp;
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>signed char</SAMP><BR>
+<td valign=top>
+<SAMP>short</SAMP><BR>
+<td valign=top>
+<SAMP>double</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>unsigned char</SAMP><BR>
+<td valign=top>
+<SAMP>long</SAMP><BR>
+<td valign=top>
+<SAMP>long double</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>&nbsp;
+<td valign=top>
+<SAMP>wchar_t</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>&nbsp;
+<td valign=top>&nbsp;
+<td valign=top>
+<SAMP>unsigned short</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>&nbsp;
+<td valign=top>&nbsp;
+<td valign=top>
+<SAMP>unsigned int</SAMP><BR>
+<td valign=top>&nbsp;
+
+<tr><td valign=top>&nbsp;
+<td valign=top>&nbsp;
+<td valign=top>
+<SAMP>unsigned long</SAMP><BR>
+<td valign=top>&nbsp;
+
+
+</TABLE>
+
+
+</P>
+<P>Certain implementations may also provide information on other datatypes. Whether or not an implementation is described can be discovered using the static data member field <SAMP>is_specialized</SAMP>. For example, the following is legal, and will indicate that the <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> datatype is not described by this mechanism.</P>
+<UL>
+<PRE>
+cout &lt;&lt; "are strings described " &lt;&lt;
+   numeric_limits&lt;string&gt;::is_specialized &lt;&lt; endl;</PRE>
+</UL>
+<P>For datatypes that do not have a specialization, the values yielded by the functions and data fields in <SAMP>numeric_limits</SAMP> are generally <SAMP>zero</SAMP> or <SAMP>false</SAMP>.</P>
+
+<HR>
+<A HREF="21-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

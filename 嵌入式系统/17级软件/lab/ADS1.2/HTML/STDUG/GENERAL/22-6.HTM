@@ -1,0 +1,21 @@
+<HTML><HEAD><TITLE>22.6 Member Functions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="22-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>22.6 Member Functions</H2>
+<A NAME="idx455"><!></A>
+<P>The member functions of class <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> include the <SAMP>size()</SAMP> function, which returns the size of a <B><I>valarray</I></B>, and the <SAMP>sum()</SAMP> function, which returns the sum of all elements in a <B><I>valarray</I></B>. The functions <SAMP>min()</SAMP> and <SAMP>max()</SAMP> return, respectively, the minimum and maximum values in a <B><I>valarray</I></B>.</P>
+<P>Class <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> also contains two shift functions. Both functions shift elements a specified number of steps to the left, where the <SAMP>0</SAMP><SUP>th</SUP> element is defined as the leftmost. The <SAMP>shift()</SAMP> function fills in at the right with <SAMP>0</SAMP>'s or <SAMP>T()</SAMP>'s. The <SAMP>cshift()</SAMP> function performs a circular shift or <I>rotation</I> so that the <SAMP>i</SAMP><SUP>th</SUP> element becomes the element at location <SAMP>self.length() - n -i</SAMP>, where <SAMP>i</SAMP> runs from <SAMP>0</SAMP> to <SAMP>n</SAMP>, and <SAMP>n</SAMP> is the number of steps to shift. Both functions return a new <B><I>valarray</I></B>, but the original is not changed. For example:</P>
+<UL>
+<PRE>
+int a[5] = {1,2,3,4,5};
+valarray&lt;int&gt; v(a,5);
+valarray&lt;int&gt; v2 = v.shift(2);                 // v2 = {3,4,5,0,0}
+v2 = v.cshift(2);                              // v2 = {3,4,5,1,2}</PRE>
+</UL>
+<P>Class <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> provides two versions of the <SAMP>apply()</SAMP> function. These functions apply a user-specified function to each element in the array. Again, these return a new array with the result leaving the original array unaltered.</P>
+<P>Finally, as we noted in the discussion on constructors, <B><I><A HREF="../../stdref/val_6244.htm">valarray</A></I></B> has a resize function that allows a program to change the number of elements contained by that array. The original elements, if any, are lost in the process since the function re-initializes all elements in the newly-sized array.</P>
+
+<HR>
+<A HREF="22-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

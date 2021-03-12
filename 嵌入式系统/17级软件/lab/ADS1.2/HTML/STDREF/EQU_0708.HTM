@@ -1,0 +1,108 @@
+<HTML><HEAD><TITLE>equal</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="div_3309.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="equ_3232.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>equal</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Compares two ranges for equality.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+
+template &lt;class InputIterator1, class InputIterator2&gt;
+ bool equal(InputIterator1 first1, InputIterator1 last1,
+            InputIterator2 first2);
+
+template &lt;class InputIterator1, class InputIterator2,
+          class BinaryPredicate&gt;
+ bool equal(InputIterator1 first1, InputIterator1 last1,
+            InputIterator2 first2, BinaryPredicate
+            binary_pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>equal</I></B> algorithm does a pairwise comparison of all of the elements in one range with all of the elements in another range to see if they match. The first version of <B><I>equal</I></B> uses the equal operator (==) as the comparison function, and the second version allows you to specify a binary predicate as the comparison function. The first version returns <SAMP>true</SAMP> if all of the corresponding elements are equal to each other. The second version of <B><I>equal</I></B> returns <SAMP>true</SAMP> if for each pair of elements in the two ranges, the result of applying the binary predicate is <SAMP>true</SAMP>. In other words, <B><I>equal</I></B> returns <SAMP>true</SAMP> if both of the following are <SAMP>true</SAMP>:</P>
+<OL>
+<LI><P>There are at least as many elements in the second range as in the first;</P>
+</LI>
+<LI><P>For every iterator <SAMP>i</SAMP> in the range <SAMP>[first1, last1)</SAMP> the following corresponding conditions hold: </P>
+</LI>
+<P><SAMP>*i == *(first2 + (i - first1))</SAMP></P>
+<P>or</P>
+<P><SAMP>binary_pred(*i, *(first2 + (i - first1))) == true</SAMP></P>
+</OL>
+<P>Otherwise, <B><I>equal</I></B> returns <SAMP>false</SAMP>.</P>
+<P>This algorithm assumes that there are at least as many elements available after <SAMP>first2</SAMP> as there are in the range <SAMP>[first1, last1).</SAMP></P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>equal</I></B> performs at most <SAMP>last1-first1</SAMP> comparisons or applications of the predicate.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// equal.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;functional&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   int d1[4] = {1,2,3,4};
+   int d2[4] = {1,2,4,3};
+   //
+   // Set up two vectors
+   //
+   vector&lt;int&gt; v1(d1+0, d1 + 4), v2(d2+0, d2 + 4);
+
+   // Check for equality
+   bool b1 = <B>equal</B>(v1.begin(),v1.end(),v2.begin());
+   bool b2 = <B>equal</B>(v1.begin(),v1.end(),
+                   v2.begin(),equal_to&lt;int&gt;());
+
+   // Both b1 and b2 are false
+   cout &lt;&lt; (b1 ? "TRUE" : "FALSE")  &lt;&lt; " " 
+        &lt;&lt; (b2 ? "TRUE" : "FALSE") &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+FALSE FALSE</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int,allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="div_3309.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="equ_3232.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

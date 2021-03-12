@@ -1,0 +1,118 @@
+<HTML><HEAD><TITLE>lower_bound</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="log_7695.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mak_0285.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>lower_bound</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Determine the first valid position for an element in a sorted container.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>template &lt;class ForwardIterator, class T&gt;
+ ForwardIterator <B>lower_bound</B>(ForwardIterator first, 
+                             ForwardIterator last,
+                             const T&amp; value);
+
+ template &lt;class ForwardIterator, class T, class Compare&gt;
+  ForwardIterator <B>lower_bound</B>(ForwardIterator first, 
+                              ForwardIterator last,
+                              const T&amp; value, Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>lower_bound</I></B> algorithm compares a supplied <SAMP>value</SAMP> to elements in a sorted container and returns the first position in the container that <SAMP>value</SAMP> can occupy without violating the container's ordering. There are two versions of the algorithm. The first uses the less than operator (<SAMP>operator&lt;</SAMP>) to perform the comparison, and assumes that the sequence has been sorted using that operator. The second version lets you include a function object of type <SAMP>Compare</SAMP>, and assumes that <SAMP>Compare</SAMP> is the function used to sort the sequence. The function object must be a binary predicate. </P>
+<P><B><I>lower_bound</I></B>'s return value is the iterator for the first element in the container that is <I>greater than or equal to</I> <SAMP>value</SAMP>, or, when the comparison operator is used, the first element that does not satisfy the comparison function. Formally, the algorithm returns an iterator <SAMP>i</SAMP> in the range <SAMP>[first, last)</SAMP> such that for any iterator <SAMP>j</SAMP> in the range <SAMP>[first, i)</SAMP> the following corresponding conditions hold: </P>
+<P><SAMP>*j  &lt;  value</SAMP></P>
+<P>or </P>
+<P><SAMP>comp(*j, value) == true</SAMP></P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>lower_bound</I></B> performs at most <SAMP>log(last - first) + 1</SAMP> comparisons.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// ul_bound.cpp
+//
+ #include &lt;vector&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+ 
+ int main()
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[11] = {0,1,2,2,3,4,2,2,2,6,7};
+
+   // Set up a vector
+   vector&lt;int&gt; v1(d1,d1 + 11);
+
+   // Try lower_bound variants
+   iterator it1 = <B>lower_bound</B>(v1.begin(),v1.end(),3);
+   // it1 = v1.begin() + 4
+
+   iterator it2 = 
+       <B>lower_bound</B>(v1.begin(),v1.end(),2,less&lt;int&gt;());
+   // it2 = v1.begin() + 4
+
+   // Try upper_bound variants
+   iterator it3 = upper_bound(v1.begin(),v1.end(),3);
+   // it3 = vector + 5
+
+   iterator it4 = 
+      upper_bound(v1.begin(),v1.end(),2,less&lt;int&gt;());
+   // it4 = v1.begin() + 5 
+
+   cout &lt;&lt; endl &lt;&lt; endl
+        &lt;&lt; "The upper and lower bounds of 3: ( "
+        &lt;&lt; *it1 &lt;&lt; " , " &lt;&lt; *it3 &lt;&lt; " ]" &lt;&lt; endl;
+
+   cout &lt;&lt; endl &lt;&lt; endl
+        &lt;&lt; "The upper and lower bounds of 2: ( "
+        &lt;&lt; *it2 &lt;&lt; " , " &lt;&lt; *it4 &lt;&lt; " ]" &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The upper and lower bounds of 3: ( 3 , 4 ]
+The upper and lower bounds of 2: ( 2 , 3 ]</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int,allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="upp_0967.htm">upper_bound</A></I></B>, <B><I><A HREF="equ_3232.htm">equal_range</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="log_7695.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mak_0285.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

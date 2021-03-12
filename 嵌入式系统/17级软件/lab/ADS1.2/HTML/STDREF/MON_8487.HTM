@@ -1,0 +1,233 @@
+<HTML><HEAD><TITLE>money_put</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="mon_5329.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mon_8228.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>money_put</H2>
+<PRE><HR>money_put<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Static Members">Static Members</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Monetary formatting facet for output. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Static Membersid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_put()">do_put()</A><BR>
+ <A HREF="#Public Member Functionsput()">put()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT,
+         class OutputIterator = ostreambuf_iterator&lt;charT&gt; &gt;
+class money_put;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>money_put</I></B> facet takes a <SAMP>long double</SAMP> value, or generic sequence of digits and writes out a formatted representation of the monetary value. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT, 
+         class OutputIterator = ostreambuf_iterator&lt;charT&gt; &gt;
+class money_put : public locale::facet {
+public:
+  typedef charT               char_type;
+  typedef OutputIterator      iter_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit money_put(size_t = 0);
+  iter_type put(iter_type, bool, ios_base&amp;, char_type,
+                long double) const;
+  iter_type put(iter_type, bool, ios_base&amp;, char_type,
+                const string_type&amp;) const;
+  static locale::id id;
+protected:
+  ~money_put();  // virtual
+  virtual iter_type  do_put(iter_type, bool, ios_base&amp;, 
+                            char_type, long double) const;
+  virtual iter_type do_put(iter_type, bool, ios_base&amp;, 
+                           char_type, const string_type&amp;)
+                           const;
+}; </PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of the character upon which the facet is instantiated.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string passed to member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>money_put</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>money_put</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~money_put</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Static Members"><H3>Static Members</H3></A>
+
+
+<A NAME="Static Membersid"></A><PRE>static locale::id <B>id</B>; </PRE>
+
+<UL>
+<P>Unique identifier for this type of facet.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>money_put</I></B> facet include an interface to protected members. Each public member <SAMP>put</SAMP> has a corresponding virtual protected member <SAMP>do_put</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsput()"></A><PRE>iter_type 
+<B>put</B>(iter_type s, bool intl, ios_base&amp; f, char_type fill,
+    long double units) const;
+iter_type 
+<B>put</B>(iter_type s, bool intl, ios_base&amp; f, char_type fill,
+    const string_type&amp; digits) const; </PRE>
+
+<UL>
+<P>Each of these two overloads of the public member function <SAMP>put</SAMP> simply calls the corresponding protected <SAMP>do_put</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_put()"></A><PRE>virtual iter_type 
+<B>do_put</B>(iter_type s, bool intl, ios_base&amp; f, char_type fill, 
+       long double units) const; </PRE>
+
+<UL>
+<P>Writes out a character string representation of the monetary value contained in <SAMP>units</SAMP>. Since <SAMP>units</SAMP> represents the monetary value in the smallest possible unit of currency, any fractional portions of the value are ignored.   <SAMP>f.flags()</SAMP> and the <SAMP>moneypunct&lt;charT, intl&gt;</SAMP> facet from <SAMP>f.getloc()</SAMP> give the formatting information.</P>
+<P>The <SAMP>fill</SAMP> argument is used for any padding.</P>
+<P>Returns an iterator pointing one past the last character written.</P>
+</UL>
+
+
+
+<PRE>virtual iter_type 
+<B>do_put</B>(iter_type s, bool intl, ios_base&amp; f, char_type fill,
+       const string_type&amp; digits) const; </PRE>
+
+<UL>
+<P>Writes out a character string representation of the monetary value contained in <SAMP>digits</SAMP>. <SAMP>digits</SAMP> represents the monetary value as a sequence of digits in the smallest possible unit of currency. <SAMP>do_put</SAMP> only looks at an optional <SAMP>-</SAMP> character and any immediately contiguous digits. <SAMP>f.flags()</SAMP> and the <SAMP>moneypunct&lt;charT, intl&gt;</SAMP> facet from <SAMP>f.getloc()</SAMP> give the formatting information.</P>
+<P>The <SAMP>fill</SAMP> argument is used for any padding.</P>
+<P>Returns an iterator pointing one past the last character written.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// moneyput.cpp
+//
+
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  typedef ostreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+          iter_type;
+
+  locale loc;
+  string buffer("10002");
+  long double ldval = 10002; 
+
+  // Construct a ostreambuf_iterator on cout
+  iter_type begin(cout);
+
+  // Get a money put facet
+  const money_put&lt;char,iter_type&gt;&amp; mp = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;money_put&lt;char,iter_type&gt; &gt;(loc);
+#else
+  use_facet(loc,(money_put&lt;char,iter_type&gt;*)0);
+#endif
+
+  // Put out the string representation of the monetary value
+  cout &lt;&lt; buffer &lt;&lt; " --&gt; ";
+  mp.put(begin,false,cout,' ',buffer);
+
+  // Put out the long double representation 
+  // of the monetary value
+  cout &lt;&lt; endl &lt;&lt; ldval &lt;&lt; " --&gt; ";
+  mp.put(begin,false,cout,' ',ldval);
+
+  cout &lt;&lt;  endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="mon_5329.htm">money_get</A></I></B>, <B><I><A HREF="mon_8228.htm">moneypunct</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="mon_5329.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mon_8228.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

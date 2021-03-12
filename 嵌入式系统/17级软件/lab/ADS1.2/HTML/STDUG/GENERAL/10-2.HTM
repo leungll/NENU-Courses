@@ -1,0 +1,157 @@
+<HTML><HEAD><TITLE>10.2 The stack Data Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="10-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="10-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>10.2 The stack Data Abstraction</H2>
+<A NAME="idx179"><!></A>
+<P>As a data abstraction, a <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> is traditionally defined as any object that implements the operations defined in <A HREF="#Table 16">Table 16</A>:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 16">Table 16 -- Stack operations</A></H4><tr><td valign=top><B>Function</B><td valign=top><B>Implemented operation</B>
+<A NAME="idx180"><!></A>
+<tr><td valign=top>
+<SAMP>empty()</SAMP><BR>
+<td valign=top>
+Returns true if the collection is empty<BR>
+
+<A NAME="idx181"><!></A>
+<tr><td valign=top>
+<SAMP>size()</SAMP><BR>
+<td valign=top>
+Returns number of elements in collection<BR>
+
+<A NAME="idx182"><!></A>
+<tr><td valign=top>
+<SAMP>top()</SAMP><BR>
+<td valign=top>
+Returns (but does not remove) the topmost element in the stack<BR>
+
+<A NAME="idx183"><!></A>
+<tr><td valign=top>
+<SAMP>push(newElement)</SAMP><BR>
+<td valign=top>
+Pushes a new element onto the stack<BR>
+
+<A NAME="idx184"><!></A>
+<tr><td valign=top>
+<SAMP>pop()</SAMP><BR>
+<td valign=top>
+Removes (but does not return) the topmost element from the stack<BR>
+
+
+</TABLE>
+
+
+</P>
+<P>Note that accessing the front element and removing the front element are separate operations. </P>
+
+<A NAME="1021"><H3>10.2.1 Include Files</H3></A>
+<A NAME="idx185"><!></A>
+<P>Programs that use the <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> data abstraction should include the file <SAMP>stack</SAMP>:</P>
+<UL>
+<PRE>
+# include &lt;stack&gt;</PRE>
+</UL>
+
+<A NAME="1022"><H3>10.2.2 Declaration and Initialization of stack</H3></A>
+<A NAME="idx186"><!></A>
+<P>A declaration for a <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> must specify the underlying element type; it can also specify the container that will hold the elements. For a <B><I>stack</I></B> the default container is a <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>, but a <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> or <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> can also be used. The <B><I>vector</I></B> version is generally smaller, while the <B><I>deque</I></B> version may be slightly faster. </P>
+<P>The following are sample declarations for a stack:</P>
+<UL>
+<PRE>
+stack&lt;int&gt; stackOne;                       // stack using deque
+stack&lt; double, deque&lt;double&gt; &gt; stackTwo;
+stack&lt; Part *, list&lt;Part * &gt; &gt; stackThree;
+stack&lt; Customer, list&lt;Customer&gt; &gt; stackFour;</PRE>
+</UL>
+<P>The last example creates a <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> from a user-defined type named <B><I>Customer</I></B>. </P>
+<BLOCKQUOTE><HR>
+<B>NOTE: On most compilers it is important to leave a space between the two right angle brackets in the declaration of a stack, as shown in the example, or they are interpreted by the compiler as a right shift operator.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="idx187"><!></A>
+<A NAME="1023"><H3>10.2.3 Example Program: An RPN Calculator</H3></A>
+<A NAME="idx188"><!></A>
+<P>A classic application of a <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> is in the implementation of this calculator. </P>
+<BLOCKQUOTE><HR>
+<B>NOTE: This program is in the file calc.cpp.
+</B><HR></BLOCKQUOTE>
+<P>Input to the calculator consists of a text <SAMP>string</SAMP> that represents an expression written in reverse polish notation (RPN). <I>Operands</I>, called <I>integer constants</I>, are pushed on a <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> of values. As operators are encountered, the appropriate number of operands are popped off the stack, the operation is performed, and the result is pushed back on the stack.</P>
+<P>We can divide the development of our <B><I><A HREF="../../stdref/sta_9602.htm">stack</A></I></B> simulation into two parts, a <I>calculator engine</I> and a <I>calculator program</I>. A <I>calculator engine</I> is concerned with the actual work involved in the simulation, but does not perform any input or output operations. The name is intended to suggest an analogy to a car engine or a computer processor: the mechanism performs the actual work, but the user of the mechanism does not normally directly interact with it. Wrapped around this is the <I>calculator program</I>, which interacts with the user and passes appropriate instructions to the calculator engine.</P>
+<P>We can use the following class definition for our calculator engine. Inside the class declaration we define an enumerated <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> of values to represent each of the possible operators that the calculator is prepared to accept. We have made two simplifying assumptions: all operands will be integer values, and only binary operators will be handled.</P>
+<UL>
+<PRE>
+class calculatorEngine {
+public:
+   enum binaryOperator {plus, minus, times, divide};
+   
+   int currentMemory ()           // return current top of stack
+      { return data.top(); }
+      
+   void pushOperand (int value)   // push operand value on to stack
+      { data.push (value); }
+      
+   void doOperator (binaryOperator);   // pop stack and perform
+                                       // operator
+   
+protected:
+   stack&lt; int &gt; data;
+};</PRE>
+</UL>
+<A NAME="fn2"><!></A>
+<P>The member function <SAMP>doOperator()</SAMP> performs the actual work. It pops values from the stack<SUP><A HREF="endnotes.htm#fn2">2</A></SUP>, performs the operation, then pushes the result back onto the stack:</P>
+<UL>
+<PRE>
+void calculatorEngine::doOperator (binaryOperator theOp)
+{
+   int right = data.top();             // read top element
+   data.pop();                         // pop it from stack
+   int left = data.top();              // read next top element
+   data.pop();   // pop it from stack
+   switch (theOp) {
+      case plus: data.push(left + right); break;
+      case minus: data.push(left - right); break;
+      case times: data.push(left * right); break;
+      case divide: data.push(left / right); break;
+      }
+}</PRE>
+</UL>
+<P>The main program reads values in reverse polish notation, invoking the calculator engine to do the actual work:</P>
+<UL>
+<PRE>
+void main() {
+   int intval;
+   calculatorEngine calc;
+   char c;
+   
+   while (cin &gt;&gt; c)
+      switch (c) {
+         case '0': case '1': case '2': case '3': case '4':
+         case '5': case '6': case '7': case '8': case '9':
+            cin.putback(c);
+            cin &gt;&gt; intval;
+            calc.pushOperand(intval);
+            break;
+         
+         case '+':  calc.doOperator(calculatorEngine::plus);
+            break;
+   
+         case '-':  calc.doOperator(calculatorEngine::minus);
+            break;
+   
+         case '*':  calc.doOperator(calculatorEngine::times);
+            break;
+   
+         case '/':  calc.doOperator(calculatorEngine::divide);
+            break;
+
+         case 'p':  cout &lt;&lt; calc.currentMemory() &lt;&lt; endl;
+            break;
+   
+         case 'q':  return; // quit program
+      }
+}</PRE>
+</UL>
+
+<HR>
+<A HREF="10-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="10-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,126 @@
+<HTML><HEAD><TITLE>set_symmetric_difference</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="set_9182.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="set_6462.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>set_symmetric_difference</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A basic set operation for constructing a sorted symmetric difference.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator1, class InputIterator2,
+          class OutputIterator&gt;
+  OutputIterator
+    <B>set_symmetric_difference</B> (InputIterator1 first1,
+                              InputIterator1 last1,
+                              InputIterator2 first2,
+                              InputIterator2 last2,
+                              OutputIterator result);
+template &lt;class InputIterator1, class InputIterator2,
+          class OutputIterator, class Compare&gt;
+  OutputIterator
+    <B>set_symmetric_difference</B> (InputIterator1 first1,
+                              InputIterator1 last1,
+                              InputIterator2 first2,
+                              InputIterator2 last2,
+                              OutputIterator result, 
+                              Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>set_symmetric_difference</I></B> constructs a sorted symmetric difference of the elements from the two ranges. This means that the constructed range includes copies of the elements that are present in the range <SAMP>[first1, last1)</SAMP> (but not present in the range <SAMP>[first2, last2)</SAMP>) <I>and</I> copies of the elements that are present in the range <SAMP>[first2, last2)</SAMP> (but not in the range <SAMP>[first1, last1)</SAMP>). It returns the end of the constructed range. </P>
+<P>For example, suppose we have two sets:</P>
+<P><SAMP>1 2 3 4 5</SAMP></P>
+<P>and</P>
+<P><SAMP>3 4 5 6 7</SAMP></P>
+<P>The <B><I>set_symmetric_difference</I></B> of these two sets is:</P>
+<P><SAMP>1 2 6 7</SAMP></P>
+<P>The result of <B><I>set_symmetric_difference</I></B> is undefined if the result range overlaps with either of the original ranges. </P>
+<P><B><I>set_symmetric_difference</I></B> assumes that the ranges are sorted using the default comparison operator less than (<SAMP>&lt;</SAMP>), unless an alternative comparison operator (<SAMP>comp</SAMP>) is provided. </P>
+<P>Use the <B><I>set_symmetric_difference</I></B> algorithm to return a result that includes elements that are present in the first set and not in the second.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>At most <SAMP>((last1 - first1) + (last2 - first2)) * 2 -1</SAMP> comparisons are performed.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// set_s_di.cpp
+//
+#include&lt;algorithm&gt;
+#include&lt;set&gt;
+#include &lt;istream.h&gt;
+using namespace std;
+
+int main()
+ {
+
+//Initialize some sets
+int a1[] = {1,3,5,7,9,11};
+int a3[] = {3,5,7,8};
+set&lt;int, less&lt;int&gt; &gt; odd(a1+0,a1+6), result, 
+    small(a3+0,a3+4);
+//Create an insert_iterator for result
+insert_iterator&lt;set&lt;int, less&lt;int&gt; &gt; &gt; 
+    res_ins(result, result.begin());
+//Demonstrate set_symmetric_difference
+cout &lt;&lt; "The symmetric difference of:" &lt;&lt; endl &lt;&lt; "{";
+copy(small.begin(),small.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+cout &lt;&lt; "} with {";
+copy(odd.begin(),odd.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+cout &lt;&lt; "} =" &lt;&lt; endl &lt;&lt; "{";
+<B>set_symmetric_difference</B>(small.begin(), small.end(),
+                         odd.begin(), odd.end(), res_ins);
+copy(result.begin(),result.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+cout &lt;&lt; "}" &lt;&lt; endl &lt;&lt; endl;
+return 0;
+ }
+</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The symmetric difference of:
+{3 5 7 8 } with {1 3 5 7 9 11 } =
+{1 8 9 11 }</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Compare</SAMP> template argument and the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>set&lt;int, less&lt;int&gt;, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>set&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I> <A HREF="inc_3676.htm">includes</A></I></B>, <B><I><A HREF="set_1649.htm">set</A></I></B>, <B><I><A HREF="set_6462.htm">set_union</A></I></B>,<B><I><A HREF="set_9182.htm">set_intersection</A></I></B>, <B><I><A HREF="set_0972.htm">set_difference</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="set_9182.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="set_6462.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

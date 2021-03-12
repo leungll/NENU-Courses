@@ -1,0 +1,145 @@
+<HTML><HEAD><TITLE>5.5 The Phone Number Facet Class Revisited</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.5 The Phone Number Facet Class Revisited</H2>
+<A NAME="idx125"><!></A>
+<P>Let us now try to implement the phone number facet class. What does this facet need to know?</P>
+<UL>
+<LI><P>A facet needs to know its own locality, because a phone number is formatted differently for domestic and international use; for example, a German number looks like (089) / 636-48018 when used in Germany, but it looks like +1-49-89-636-48018 when used internationally.</P>
+</LI>
+<LI><P>A facet needs information about the prefix for dialing international numbers; for example, 011 for dialing foreign numbers from the US, or 00 from Germany, or 19 from France.</P>
+</LI>
+<LI><P>A facet needs access to a table of all country codes, so that one can enter a mnemonic for the country instead of looking up the respective country code. For example, I would like to say: "This is a phone number somewhere in Japan" without having to know what the country code for Japan is.</P>
+</LI>
+</UL>
+
+<A NAME="idx126"><!></A>
+<A NAME="551"><H3>5.5.1 Adding Data Members</H3></A>
+<A NAME="idx127"><!></A>
+<P>The following class declaration for the telephone number formatting facet class is enhanced with data members for the facet object's own locality, and its prefix for international calls (see //2 and //3 in the code below). Adding a table of country codes is omitted for the time being.</P>
+<UL>
+<PRE>
+class phone_put: public locale::facet {
+public:
+  typedef string string_t;
+  static locale::id id;
+  phone_put(size_t refs = 0) : locale::facet(refs)
+                             , myCountryCode_("")
+                             , intlPrefix_("")      {  }
+ string_t put(const string_t&amp; ext, 
+              const string_t&amp; area, 
+              const string_t&amp; cnt) const;
+protected:
+  phone_put( const string_t&amp; myC                              //1
+           , const string_t&amp; intlP
+           , size_t refs = 0)
+           : locale::facet(refs)
+           , myCountryCode_(myC)
+           , intlPrefix_(intlP)   {  }
+  const string_t myCountryCode_;                              //2
+  const string_t intlPrefix_;                                 //3
+};</PRE>
+</UL>
+<P>Note how this class serves as a base class for the facet classes that really implement a locale-dependent phone number formatting. Hence, the public constructor does not need to be extended, and a protected constructor is added instead (see //1 above).</P>
+
+<A NAME="552"><H3>5.5.2  Adding Country Codes</H3></A>
+<A NAME="idx128"><!></A>
+<P>Let us now deal with the problem of adding the international country codes that were omitted from the previous class declaration. These country codes can be held as a map of strings that associates the country code with a mnemonic for the country's name, as shown in <A HREF="9-5.htm#Table 14">Table 14</A>:</P>
+
+<A NAME="idx129"><!></A>
+<H4><A NAME="Figure 14">Figure 14 -- Map associating country codes with mnemonics for countries' names</A></H4>
+<IMG SRC="images/locfig15.gif">
+ 
+
+<A NAME="idx130"><!></A>
+<P>In the following code, we add the table of country codes:</P>
+<UL>
+<PRE>
+class phone_put: public locale::facet 
+{
+ public:
+   class prefixMap_t : public map&lt;string,string&gt;             //1
+   { 
+    public:
+       prefixMap_t() { insert(tab_t(string("US"),string("1"))); 
+       insert(tab_t(string("De"),string("49")));
+       // ...
+   }
+};
+   static const prefixMap_t* std_codes()                     //2
+          { return &amp;stdCodes_; }
+ protected:
+   static const prefixMap_t stdCodes_;                       //3
+};</PRE>
+</UL>
+<P>Since the table of country codes is a constant table that is valid for all telephone number facet objects, it is added as a static data member stdCodes_ (see <SAMP>//3</SAMP>). The initialization of this data member is encapsulated in a class, prefixMap_t <br>(see <SAMP>//1</SAMP>). For convenience, a function std_codes() is added to give access to the table (see //2).</P>
+<P>Despite its appealing simplicity, however, having just one static country code table might prove too inflexible. Consider that mnemonics might vary from one locale to another due to different languages. Maybe mnemonics are not called for, and you really need more extended names associated with the actual country code.</P>
+<P>In order to provide more flexibility, we can build in the ability to work with an arbitrary table. A pointer to the respective country code table can be provided when a facet object is constructed. The static table, shown in <A HREF="#Figure 15">Figure 15</A> below,  serves as a default:</P>
+
+<A NAME="idx131"><!></A>
+<H4><A NAME="Figure 15">Figure 15 -- Map associating country codes with country names</A></H4>
+<IMG SRC="images/locfig16.gif">
+ 
+
+<A NAME="idx132"><!></A>
+<P>Since we hold the table as a pointer, we need to pay attention to memory management for the table pointed to. We use a flag for determining whether the provided table needs to be deleted when the facet is destroyed. The following code demonstrates use of the table and its associated flag:</P>
+<UL>
+<PRE>
+class phone_put: public locale::facet {
+public:
+  typedef string string_t;
+  class prefixMap_t;
+  static locale::id id;
+
+  phone_put( const prefixMap_t* tab=0                         //1
+           , bool del = false
+           , size_t refs = 0)
+           : locale::facet(refs)
+           , countryCodes_(tab), delete_it_(del)
+           , myCountryCode_(""), intlPrefix_("") 
+  { if (tab)   {  countryCodes_ = tab;
+                  delete_it_ = del;   }
+    else       {  countryCodes_ = &amp;stdCodes_;                 //2
+                  delete_it_ = false; }
+  }
+  string_t put(const string_t&amp; ext, 
+               const string_t&amp; area, 
+               const string_t&amp; cnt) const;
+
+  const prefixMap_t* country_codes() const                    //3
+  { return countryCodes_; }
+
+  static const prefixMap_t* std_codes()    { return &amp;stdCodes_; }
+protected:
+  phone_put(const string_t&amp; myC, const string_t&amp; intlP
+          , const prefixMap_t* tab=0, bool del = false
+          , size_t refs = 0)
+          : locale::facet(refs)
+          , countryCodes_(tab), delete_it_(del)
+          , myCountryCode_(myC), intlPrefix_(intlP) 
+  { ... }
+  virtual ~phone_put() 
+  { if(delete_it_)
+      countryCodes_-&gt;prefixMap_t::~prefixMap_t();             //4
+  }
+
+  const prefixMap_t* countryCodes_;                           //5
+  bool delete_it_;                                               
+  static const prefixMap_t stdCodes_;
+  const string_t myCountryCode_;
+  const string_t intlPrefix_;
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The constructor is enhanced to take a pointer to the country code table, together with the flag for memory management of the provided table.
+<TR VALIGN="top"><TD>//2</TD><TD>If no table is provided, the static table is installed as a default.
+<TR VALIGN="top"><TD>//3</TD><TD>For convenience, a function that returns a pointer to the current table is added.
+<TR VALIGN="top"><TD>//4</TD><TD>The table is deleted if the memory management flags says so.
+<TR VALIGN="top"><TD>//5</TD><TD>Protected data members are added to hold the pointer to the current country code table, as well as the associated memory management flag.
+</TABLE>
+
+<HR>
+<A HREF="5-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

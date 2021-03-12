@@ -1,0 +1,32 @@
+<HTML><HEAD><TITLE>5.2 A Phone Number Class</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.2 A Phone Number Class</H2>
+<P>An application that has to handle phone numbers will probably have a class that represents a phone number. We will also want to read and write telephone numbers via iostreams, and therefore define suitable extractor and inserter functions. For the sake of simplicity, we will focus on the inserter function in our example.</P>
+<A NAME="idx120"><!></A>
+<P>To begin, here is the complete class declaration for the telephone number class <SAMP>phoneNo</SAMP>:</P>
+<UL>
+<PRE>
+class phoneNo
+{
+public:
+ typedef basic_ostream&lt;char&gt; outStream_t;
+ typedef string string_t;
+
+ phoneNo(const string_t&amp; cc,const string_t&amp; ac,const string_t&amp; ex)
+    : countryCode(cc), areaCode(ac), extension(ex) {}
+
+private:
+   string_t countryCode;                                     //"de"
+   string_t areaCode;                                        //"89"
+   string_t extension;                                //"636-48018"
+
+friend phoneNo::outStream_t&amp; operator&lt;&lt;
+   (phoneNo::outStream_t&amp;, const phoneNo&amp;);
+};</PRE>
+</UL>
+
+<HR>
+<A HREF="5-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

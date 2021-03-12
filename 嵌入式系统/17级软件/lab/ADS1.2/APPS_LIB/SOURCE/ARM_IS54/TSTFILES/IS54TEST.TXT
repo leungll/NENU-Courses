@@ -1,0 +1,30 @@
+#
+# IS-54-B Convolutional Encoder test files
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+#
+
+IS54 Convolutional Encoder Test Data
+____ _____________ _______ ____ ____
+
+
+File:			is54data
+Description:	4 sets of 7 16-bit non-specific unsigned data values
+			89 bits of IS54 data + 23 bits of pad in each set
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:		little
+
+
+Viewer Applications
+====== ============
+
+Windows 95/NT
+------- -----
+
+Any text capable application.
+
+
+UNIX
+----
+
+Any text capable application.

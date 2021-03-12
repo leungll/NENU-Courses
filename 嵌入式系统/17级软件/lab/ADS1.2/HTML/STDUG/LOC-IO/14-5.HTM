@@ -1,0 +1,20 @@
+<HTML><HEAD><TITLE>14.5 Synchronizing the Predefined Standard Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.5 Synchronizing the Predefined Standard Streams</H2>
+
+<A NAME="idx397"><!></A>
+<P>The predefined streams <SAMP>cin</SAMP>, <SAMP>cout</SAMP>, <SAMP>cerr</SAMP>, and <SAMP>clog</SAMP> are examples of synchronized streams:</P>
+<UL>
+<LI><P><SAMP>cin</SAMP> is tied to <SAMP>cout</SAMP>; that is, before each input operation on <SAMP>cin</SAMP>, the output stream <SAMP>cout</SAMP> is forced to flush its buffer.</P>
+</LI>
+<LI><P><SAMP>cerr</SAMP> is synchronized using the <SAMP>unitbuf</SAMP> format flag; that is, after each output to <SAMP>cerr</SAMP>, its buffer is flushed.</P>
+</LI>
+<LI><P><SAMP>clog</SAMP> is connected to the same output channel and thus behaves like <SAMP>cerr</SAMP>, except that it is not synchronized with any of the other standard streams; that is, it does not have the <SAMP>unitbuf</SAMP> flag set.</P>
+</LI>
+</UL>
+
+<HR>
+<A HREF="14-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-6.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

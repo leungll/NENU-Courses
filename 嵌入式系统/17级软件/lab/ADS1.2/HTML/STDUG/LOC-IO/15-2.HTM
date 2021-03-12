@@ -1,0 +1,23 @@
+<HTML><HEAD><TITLE>15.2 An Example: Storing a Date Format String </TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="15-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>15.2 An Example: Storing a Date Format String </H2>
+<P>Consider the inserter and extractor we defined for a date class in <A HREF="11-3.htm">Section 11.3</A>. The input and output operations were internationalized and relayed the task of date formatting and parsing to the stream's locale. Here, however, the rules for formatting and parsing were fixed, making them much more restricted than the features available in the standard C library, for example. </P>
+<A NAME="idx401"><!></A>
+<A NAME="fn18"><!></A>
+<P>In the standard C library, you can specify format strings, similar to those for <SAMP>prinft()</SAMP> and <SAMP>scanf()</SAMP>, that describe the rules for parsing and formatting dates.<SUP><A HREF="endnotes.htm#fn18">18</A></SUP> For example, the format string <SAMP>"%A, %B %d, %Y"</SAMP> stands for the rule that a date must consist of the name of the weekday, the name of the month, the day of the month, and the year-as in Friday, July 12, 1996. </P>
+<A NAME="idx402"><!></A>
+<P>Now imagine you want to improve the input and output operations for the date class by allowing specification of such format strings. How can you do this? Other format information is stored in the stream's format state; consequently, you may want to store the format string for dates somewhere in the stream as well. And indeed, you can.</P>
+<A NAME="idx403"><!></A>
+<A NAME="fn19"><!></A>
+<P>Streams have an array for private use. An array element is of a <SAMP>union</SAMP> type that allows access as a <SAMP>long</SAMP> or as a pointer to <SAMP>void</SAMP>.<SUP><A HREF="endnotes.htm#fn19">19</A></SUP> The array is of unspecified size, and new memory is allocated as needed. In principle, you can think of it as infinitely long.</P>
+<P>You can use this array to store in a stream whatever additional information you might need. In our example, we would want to store the format string.</P>
+<A NAME="idx404"><!></A>
+<P>The array can be accessed by two functions: <SAMP>iword()</SAMP> and <SAMP>pword()</SAMP>. Both functions take an index to an array element and return a reference to the respective element. The function <SAMP>iword()</SAMP> returns a reference to <SAMP>long</SAMP>; the function <SAMP>pword()</SAMP> allows access to the array element as a pointer to <SAMP>void</SAMP>.</P>
+<A NAME="idx405"><!></A>
+<P>Indices into the array are maintained by the <SAMP>xalloc()</SAMP> function, a static function in class <SAMP>ios_base</SAMP> that returns the next free index into the array.</P>
+
+<HR>
+<A HREF="15-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

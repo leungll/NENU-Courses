@@ -1,0 +1,399 @@
+<HTML><HEAD><TITLE>basic_stringbuf</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bas_0007.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_2565.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>basic_stringbuf</H2>
+<PRE><HR>basic_stringbuf<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_streambuf
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Associates the input or output sequence with a sequence of arbitrary characters.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesios_type">ios_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesstringbuf">stringbuf</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+ <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typeswstringbuf">wstringbuf</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsoverflow()">overflow()</A><BR>
+ <A HREF="#Member Functionspbackfail()">pbackfail()</A><BR>
+ <A HREF="#Member Functionsseekoff()">seekoff()</A><BR>
+ <A HREF="#Member Functionsseekpos()">seekpos()</A><BR>
+ <A HREF="#Member Functionssetbuf()">setbuf()</A><BR>
+ <A HREF="#Member Functionsstr()">str()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Member Functionsunderflow()">underflow()</A><BR>
+ <A HREF="#Member Functionsxsputn()">xsputn()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;sstream&gt; 
+template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+class basic_stringbuf
+: public basic_streambuf&lt;charT, traits&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>basic_stringbuf</I></B> is derived from <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>. Its purpose is to associate the input or output sequence with a sequence of arbitrary characters. The sequence can be initialized from, or made available as, an object of class <B><I><A HREF="bas_0007.htm">basic_string</A></I></B>. Each object of type <B><I>basic_stringbuf&lt;charT, traits,Allocator&gt;</I></B> controls two character sequences:</P>
+<UL>
+<LI><P>A character input sequence;</P>
+</LI>
+<LI><P>A character output sequence.</P>
+</LI>
+</UL>
+<P>Note: see <B><I><A HREF="bas_0582.htm">basic_streambuf.</A></I></B></P>
+<P>The two sequences are related to each other, but are manipulated separately. This allows you to read and write characters at different positions in objects of type <B><I>basic_stringbuf</I></B> without any conflict (as opposed to the <B><I><A HREF="bas_3163.htm">basic_filebuf</A> </I></B>objects, in which a joint file position is maintained).</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class allocator&lt;charT&gt; &gt;
+class basic_stringbuf 
+: public basic_streambuf&lt;charT, traits&gt; {
+
+  public:
+
+   typedef charT                        char_type;
+   typedef typename traits::int_type    int_type;
+   typedef typename traits::pos_type    pos_type;
+   typedef typename traits::off_type    off_type;
+
+   typedef basic_ios&lt;charT, traits&gt;     ios_type;
+   typedef basic_string&lt;charT, traits,
+                        Allocator&gt;      string_type;
+
+
+   explicit basic_stringbuf(ios_base::openmode which =
+                            (ios_base::in | ios_base::out));
+     
+   explicit basic_stringbuf(const string_type&amp; str,
+                            ios_base::openmode which =
+                            (ios_base::in | ios_base::out));
+    
+   virtual ~basic_stringbuf();
+     
+   string_type str() const;     
+   void str(const string_type&amp; str_arg);
+
+ protected:
+
+   virtual int_type underflow();
+   virtual int_type pbackfail(int_type c = traits::eof());
+   virtual int_type overflow(int_type c = traits::eof());
+   virtual basic_streambuf&lt;charT,traits&gt;* 
+    setbuf(char_type *s,streamsize n);
+
+   virtual pos_type seekoff(off_type off, 
+                            ios_base::seekdir way,
+                            ios_base::openmode which =
+                            ios_base::in | ios_base::out);
+
+   virtual pos_type seekpos(pos_type sp,
+                            ios_base::openmode which =
+                            ios_base::in | ios_base::out);
+
+   virtual streamsize xsputn(const char_type* s, 
+                             streamsize n);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesios_type"></A><PRE><B>ios_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>ios_type</SAMP> is an instantiation of class <SAMP>basic_ios</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>string_type</SAMP> is an instantiation of class <SAMP>basic_string</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesstringbuf"></A><PRE><B>stringbuf</B> </PRE>
+
+<UL>
+<P>The type <SAMP>stringbuf</SAMP> is an instantiation of class <SAMP>basic_stringbuf</SAMP> on type <SAMP>char</SAMP>:</P>
+<P><SAMP>typedef basic_stringbuf&lt;char&gt; stringbuf;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typeswstringbuf"></A><PRE><B>wstringbuf</B></PRE>
+
+<UL>
+<P>The type <SAMP>wstringbuf</SAMP> is an instantiation of class <SAMP>basic_stringbuf</SAMP> on type <SAMP>wchar_t</SAMP>:</P>
+<P><SAMP>typedef basic_stringbuf&lt;wchar_t&gt; wstringbuf;</SAMP></P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>basic_stringbuf</B>(ios_base::openmode which =
+                ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_stringbuf</SAMP>, initializing the base class with <SAMP>basic_streambuf()</SAMP>, and initializing the open mode with <SAMP>which</SAMP>.</P>
+</UL>
+
+
+
+<PRE>explicit <B>basic_stringbuf</B>(const string_type&amp; str,
+                ios_base::openmode which =
+                ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_stringbuf</SAMP>, initializing the base class with <SAMP>basic_streambuf()</SAMP>, and initializing the open mode with <SAMP>which</SAMP>. The string object <SAMP>str</SAMP> is copied to the underlying buffer. If the opening mode is <SAMP>in</SAMP>, initializes the input sequence to point to the first character of the buffer. If the opening mode is <SAMP>out</SAMP>, it initializes the output sequence to point to the first character of the buffer. If the opening mode is <SAMP>out | app</SAMP>, it initializes the output sequence to point to the last character of the buffer. </P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~basic_stringbuf</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>basic_stringbuf</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsoverflow()"></A><PRE>int_type 
+<B>overflow</B>(int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>If the output sequence has a put position available, and <SAMP>c</SAMP> is not <SAMP>traits::eof()</SAMP>, then this function writes <SAMP>c</SAMP> into it. If there is no position available, the function increases the size of the buffer by allocating more memory and then writes <SAMP>c</SAMP> at the new current put position. If the operation fails, the function returns <SAMP>traits::eof()</SAMP>. Otherwise it returns <SAMP>traits::not_eof(c)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspbackfail()"></A><PRE>int_type 
+<B>pbackfail</B>( int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>Puts back the character designated by <SAMP>c</SAMP> into the input sequence. If <SAMP>traits::eq_int_type(c,traits::eof())</SAMP> returns <SAMP>true</SAMP>, the function moves the input sequence one position backward. If the operation fails, the function returns <SAMP>traits::eof()</SAMP>. Otherwise it returns <SAMP>traits::not_eof(c)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsseekoff()"></A><PRE>pos_type 
+<B>seekoff</B>(off_type off, ios_base::seekdir way,
+        ios_base::openmode which = 
+        ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>If the open mode is <SAMP>in | out</SAMP>, this function alters the stream position of both the input and the output sequences. If the open mode is <SAMP>in</SAMP>, it alters the stream position of only the input sequence, and if it is <SAMP>out</SAMP>, it alters the stream position of the output sequence. The new position is calculated by combining the two parameters <SAMP>off</SAMP> (displacement) and <SAMP>way</SAMP> (reference point). If the current position of the sequence is invalid before repositioning, the operation fails and the return value is <SAMP>pos_type(off_type(-1))</SAMP>. Otherwise the function returns the current new position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsseekpos()"></A><PRE>pos_type 
+<B>seekpos</B>(pos_type sp,ios_base::openmode which = 
+        ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>If the open mode is <SAMP>in | out</SAMP>, <SAMP>seekpos()</SAMP> alters the stream position of both the input and the output sequences. If the open mode is <SAMP>in</SAMP>, it alters the stream position of the input sequence only, and if the open mode is <SAMP>out</SAMP>, it alters the stream position of the output sequence only. If the current position of the sequence is invalid before repositioning, the operation fails and the return value is <SAMP>pos_type(off_type(-1))</SAMP>. Otherwise the function returns the current new position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssetbuf()"></A><PRE>basic_streambuf&lt;charT,traits&gt;* 
+<B>setbuf</B>(char_type*s, streamsize n); </PRE>
+
+<UL>
+<P>A stringbuf maintains an underlying character array for storing buffered characters.  This function gives you a way to resize or replace that buffer, with certain restrictions.</P>
+<P>First of all, <SAMP>n</SAMP> must be greater than the number of characters currently in the buffer.  If <SAMP>n</SAMP> is too small, then <SAMP>setbuf</SAMP> has no effect and returns a null pointer to indicate failure. </P>
+<P>If <SAMP>n</SAMP> is large enough, then this function has one of two effects:</P>
+</UL>
+
+<UL><UL>
+<LI><P>If <SAMP>s</SAMP> is not a null pointer, then <SAMP>setbuf</SAMP> copies the buffered contents of the stringbuf into the <SAMP>n</SAMP> character array starting at <SAMP>s</SAMP> and installs <SAMP>s</SAMP> as the underlying character array used by the stringbuf.  <SAMP>s</SAMP> replaces the old underlying array.  In this case, the function returns <SAMP>s</SAMP> on success or a null pointer to indicate failure. </P>
+<P>Note that the stringbuf now owns <SAMP>s</SAMP> and deletes it if a subsequent call to <SAMP>setbuf</SAMP> replaces it or, failing that, when the stringbuf is destroyed.  A program should not itself delete a pointer passed to <SAMP>setbuf</SAMP> if the call succeeds.  And <SAMP>s</SAMP> must have been allocated from the heap using new.</P></LI>
+<LI><P>If <SAMP>s</SAMP> is a null pointer, then <SAMP>setbuf</SAMP> resizes the underlying character array to <SAMP>n</SAMP> characters.  The function returns a pointer to the beginning of the resized array if the operation is successful, or a null pointer if not.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Member Functionsstr()"></A><PRE>string_type 
+<B>str</B>() const; </PRE>
+
+<UL>
+<P>Returns a string object of type <SAMP>string_type</SAMP> whose content is a copy of the underlying buffer contents.</P>
+</UL>
+
+
+
+<PRE>void 
+<B>str</B>(const string_type&amp; str_arg); </PRE>
+
+<UL>
+<P>Clears the underlying buffer and copies the string object <SAMP>str_arg</SAMP> into it. If the opening mode is <SAMP>in</SAMP>, initializes the input sequence to point to the first character of the buffer. If the opening mode is <SAMP>out</SAMP>, the function initializes the output sequence to point to the first character of the buffer. If the opening mode is <SAMP>out | app</SAMP>, it initializes the output sequence to point to the last character of the buffer. </P>
+</UL>
+
+
+
+<A NAME="Member Functionsunderflow()"></A><PRE>int_type 
+<B>underflow</B>();</PRE>
+
+<UL>
+<P>If the input sequence has a read position available, the function returns the contents of this position. Otherwise it tries to expand the input sequence to match the output sequence, and if possible returns the content of the new current position. The function returns <SAMP>traits::eof()</SAMP> to indicate failure.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsxsputn()"></A><PRE>streamsize 
+<B>xsputn</B>(const char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Writes up to <SAMP>n</SAMP> characters to the output sequence. The characters written are obtained from successive elements of the array whose first element is designated by <SAMP>s</SAMP>. The function returns the number of characters written.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>// stdlib/examples/manual/stringbuf.cpp
+//
+#include&lt;iostream&gt;
+#include&lt;sstream&gt;
+#include&lt;string&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  // create a read/write string-stream object on tiny char
+  // and attach it to an ostringstream object
+  ostringstream out_1(ios_base::in | ios_base::out);
+
+  // tie the istream object to the ostringstream object
+  istream in_1(out_1.rdbuf());   
+
+  // output to out_1
+  out_1 &lt;&lt; "Here is the first output";
+
+  // create a string object on tiny char 
+  string string_ex("l'heure est grave !");
+
+  // open a read only string-stream object on tiny char
+  // and initialize it
+  istringstream in_2(string_ex);
+
+  // output in_1 to the standard output
+  cout &lt;&lt; in_1.str() &lt;&lt; endl;
+
+  // output in_2 to the standard output
+  cout &lt;&lt; in_2.rdbuf() &lt;&lt; endl;
+
+  // reposition in_2 at the beginning
+  in_2.seekg(0);
+
+  stringbuf::pos_type pos;
+
+  // get the current put position
+  // equivalent to
+  // out_1.tellp(); 
+  pos = out_1.rdbuf()-&gt;pubseekoff(0,ios_base::cur,
+                                  ios_base::out);
+
+  // append the content of stringbuffer
+  // pointed to by in_2 to the one 
+  // pointed to by out_1
+  out_1 &lt;&lt; ' ' &lt;&lt; in_2.rdbuf();
+
+  // output in_1 to the standard output
+  cout &lt;&lt; in_1.str() &lt;&lt; endl;
+
+  // position the get sequence
+  // equivalent to
+  // in_1.seekg(pos);
+  in_1.rdbuf()-&gt;pubseekpos(pos, ios_base::in);
+
+  // output "l'heure est grave !"
+  cout &lt;&lt; in_1.rdbuf() &lt;&lt; endl &lt;&lt; endl; 
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I> <A HREF="cha_3696.htm">char_traits</A></I></B>(3C++),<B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="bas_0007.htm">basic_string</A></I></B>(3C++), <B><I><A HREF="bas_2581.htm">basic_istringstream</A></I></B>(3C++), <B><I><A HREF="bas_8767.htm">basic_ostringstream</A></I></B>(3C++), <B><I><A HREF="bas_2565.htm">basic_stringstream</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.7.1</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="bas_0007.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_2565.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

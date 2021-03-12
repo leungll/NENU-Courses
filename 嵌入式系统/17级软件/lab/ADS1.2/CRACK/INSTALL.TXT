@@ -1,0 +1,5 @@
+安装结束时,出现 "ARM License Wizard" 时, 选择"Install License",
+之后在"License File To Be Installed" 栏内用 "Browse"寻找要添加文件,
+点击出现在对话框的 license.dat 文件即可。
+
+TEAM EFA

@@ -1,0 +1,8 @@
+#
+# PACKAGE file for ARM Developer Suite 1.2
+# ----------------------------------------
+#
+
+PACKAGE ads armlmd 1.2 C03090514F63A1F2D762 COMPONENTS="armasm compiler bats armulate axd adwu \
+	fromelf armlink codewarrior armsd"
+FEATURE ads armlmd 1.2 permanent uncounted 1CACB94A2B039E2B7E1F HOSTID=ANY ISSUER=Team-EFA

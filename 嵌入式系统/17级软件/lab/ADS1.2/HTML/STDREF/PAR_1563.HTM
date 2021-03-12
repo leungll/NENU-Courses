@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>partial_sort_copy</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="par_4963.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="par_6923.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>partial_sort_copy</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Templatized algorithm for sorting collections of entities.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator,
+          class RandomAccessIterator&gt;
+ void <B>partial_sort_copy</B> (InputIterator first,
+                         InputIterator last,
+                         RandomAccessIterator result_first,
+                         RandomAccessIterator result_last);
+template &lt;class InputIterator,
+          class RandomAccessIterator,
+          class Compare&gt;
+ void <B>partial_sort_copy</B> (InputIterator first,
+                         InputIterator last,
+                         RandomAccessIterator result_first,
+                         RandomAccessIterator result_last,
+                         Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>partial_sort_copy</I></B> algorithm places the smaller of <SAMP>last - first</SAMP> and <SAMP>result_last - result_first</SAMP> sorted elements from the range <SAMP>[first, last)</SAMP> into the range beginning at <SAMP>result_first</SAMP> (in other words, the range: <SAMP>[result_first, result_first+min(last - first, result_last - result_first)</SAMP>). The effect is as if the range <SAMP>[first,last)</SAMP> were placed in a temporary buffer, sorted, and then as many elements as possible copied into the range <SAMP>[result_first, result_last)</SAMP>.</P>
+<P>The first version of the algorithm uses less than (<SAMP>operator&lt;</SAMP>) as the comparison operator for the sort. The second version uses the comparison function <SAMP>comp.</SAMP></P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>partial_sort_copy</I></B> does approximately <SAMP>(last-first) * log(min(last-first, result_last-result_first))</SAMP> comparisons.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// partsort.cpp
+ #include &lt;vector&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   int d1[20] = {17, 3,  5,  -4, 1, 12, -10, -1, 14, 7,
+                 -6, 8, 15, -11, 2, -2,  18,  4, -3, 0};
+   //
+   // Set up a vector.
+   //
+   vector&lt;int&gt; v1(d1+0, d1+20);
+   //
+   // Output original vector.
+   //
+   cout &lt;&lt; "For the vector: ";
+   copy(v1.begin(), v1.end(), 
+        ostream_iterator&lt;int&gt;(cout," "));
+   //
+   // Partial sort the first seven elements.
+   //
+   partial_sort(v1.begin(), v1.begin()+7, v1.end());
+   //
+   // Output result.
+   //
+   cout &lt;&lt; endl &lt;&lt; endl &lt;&lt; "A partial_sort of 7 
+        elements gives: " 
+        &lt;&lt; endl &lt;&lt; "     ";
+   copy(v1.begin(), v1.end(), 
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl;
+   //
+   // A vector of ten elements.
+   vector&lt;int&gt; v2(10, 0);
+   //
+   // Sort the last ten elements in v1 into v2.
+   <B>partial_sort_copy</B>(v1.begin()+10, v1.end(), v2.begin(),<br>                     v2.end());
+   //
+   // Output result.
+   cout &lt;&lt; endl &lt;&lt; "A partial_sort_copy of the last 
+         ten elements gives: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v2.begin(), v2.end(), 
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the vector: 17 3 5 -4 1 12 -10 -1 14 7 -6 8 15 -11 2 -2 18 4 -3 0
+A partial_sort of seven elements gives:
+     -11 -10 -6 -4 -3 -2 -1 17 14 12 7 8 15 5 3 2 18 4 1 0
+A partial_sort_copy of the last ten elements gives:
+     0 1 2 3 4 5 7 8 15 18</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you need to always include the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="sor_1439.htm">sort</A></I></B> <B><I><A HREF="sta_5767.htm">stable_sort</A></I></B>, <B><I><A HREF="par_4963.htm">partial_sort</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="par_4963.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="par_6923.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

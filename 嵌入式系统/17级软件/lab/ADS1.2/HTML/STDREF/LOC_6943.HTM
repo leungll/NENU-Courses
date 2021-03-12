@@ -1,0 +1,374 @@
+<HTML><HEAD><TITLE>locale</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="lis_3222.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="log_2801.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>locale</H2>
+<PRE><HR>Localization Container
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Public Member Operators">Public Member Operators</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Static Public Member Functions">Static Public Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A localization class containing a polymorphic set of facets. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typescategory">category</A><BR>
+ <A HREF="#Typesfacet">facet</A><BR>
+ <A HREF="#Typesid">id</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Static Public Member Functionsclassic()">classic()</A><BR>
+ <A HREF="#Static Public Member Functionsglobal()">global()</A><BR>
+ <A HREF="#Public Member Functionsname()">name()</A><BR>
+ <A HREF="#Public Member Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Public Member Operatorsoperator()()">operator()()</A><BR>
+ <A HREF="#Public Member Operatorsoperator=()">operator=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Operatorsoperator==()">operator==()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt; 
+class locale;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>locale</I></B> is a localization interface and a set of indexed facets, each of which covers one particular localization issue. The default locale object is constructed on the "C" locale. Locales can also be constructed on named locales.</P>
+<P>A calling program can determine whether a particular facet is contained in a locale by using the <SAMP>has_facet</SAMP> function, and the program can obtain a reference to that facet with the <SAMP>use_facet</SAMP> function. These are not member functions, but instead take a locale object as an argument.</P>
+<P><B><I>locale</I></B> has several important characteristics. </P>
+<P>First, successive calls to member functions always return the same result. This allows a calling program to safely cache the results of a call.   </P>
+<P>Only a locale constructed from a name, from parts of two named locales, or from a stream, has a name. All other locales are unnamed. Only named locales may be compared for equality. An unnamed locale is equal only to itself.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class locale {
+public:
+  // types:
+  class facet;
+  class id;
+  typedef int category;
+  static const category   none, collate, ctype, monetary, 
+                          numeric, time, messages,
+                          all = collate | ctype | monetary | 
+                                numeric | time | messages;
+  // construct/copy/destroy:
+  locale() throw()
+  locale(const locale&amp;) throw()
+  explicit locale(const char*);
+  locale(const locale&amp;, const char*, category);
+  template &lt;class Facet&gt; locale(const locale&amp;, Facet*);
+  locale(const locale&amp;, const locale&amp;, category);
+  ~locale() throw();  // non-virtual
+  const locale&amp; operator=(const locale&amp;) throw();
+  template &lt;class Facet&gt; locale combine (const locale&amp;);
+  // locale operations:
+  basic_string&lt;char&gt;                  name() const;
+  bool operator==(const locale&amp;) const;
+  bool operator!=(const locale&amp;) const;
+  template &lt;class charT, class Traits, class Allocator&gt;
+    bool operator()(const basic_string&lt;charT,Traits,
+                                       Allocator&gt;&amp;,
+                    const basic_string&lt;charT,Traits,
+                                       Allocator&gt;&amp;)
+                    const;
+  // global locale objects:
+  static       locale global(const locale&amp;);
+  static const locale&amp; classic();
+};
+
+class locale::facet {
+protected:
+  explicit facet(size_t refs = 0);
+  virtual ~facet();
+private:
+  facet(const facet&amp;);          // not defined
+  void operator=(const facet&amp;); // not defined
+};
+
+class locale::id {
+public:
+  id();
+private:
+  void operator=(const id&amp;); // not defined
+  id(const id&amp;);             // not defined
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typescategory"></A><PRE><B>category</B></PRE>
+
+<UL>
+<P>Standard facets fall into eight broad categories. These are: <SAMP>none, collate, ctype, monetary, numeric, time, messages,</SAMP> and <SAMP>all.</SAMP> <SAMP>all</SAMP> is a combination of all the other categories except <SAMP>none</SAMP>. Bitwise operations may be applied to combine or screen these categories. For instance, <SAMP>all</SAMP> is defined as:</P>
+<P> <SAMP>(collate | ctype | monetary | numeric | time | messages)</SAMP></P>
+<P><B><I>locale</I></B> member functions that take a category argument must be included with one of the above values or with one of the constants from the old C locale (for example, <SAMP>LC_CTYPE</SAMP>).</P>
+</UL>
+
+
+
+<A NAME="Typesfacet"></A><PRE><B>facet</B></PRE>
+
+<UL>
+<P>Base class for facets. This class exists primarily to allow for reference counting services to derived classes. All facets must derive from it, either directly or indirectly (for example, <SAMP>facet -&gt; ctype&lt;char&gt; -&gt; my_ctype</SAMP>).</P>
+<P>If the <SAMP>refs</SAMP> argument to the constructor is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+<P>Copy construction and assignment of this class are not allowed.</P>
+</UL>
+
+
+
+<A NAME="Typesid"></A><PRE><B>id</B></PRE>
+
+<UL>
+<P>Type used to index facets in the <B><I>locale</I></B> container. Every facet must contain a member of this type.</P>
+<P>Copy construction and assignment of this type are not allowed. </P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>locale</B>()
+  throw()</PRE>
+
+<UL>
+<P>Constructs a default <B><I>locale</I></B> object. This locale is the same as the last argument passed to <SAMP>locale::global()</SAMP>, or, if that function has not been called, the locale is the same as the classic "C" locale.</P>
+</UL>
+
+
+
+<PRE><B>locale</B>(const locale&amp; other)
+  throw()</PRE>
+
+<UL>
+<P>Constructs a copy of the locale argument <SAMP>other</SAMP>.</P>
+</UL>
+
+
+
+<PRE>explicit <B>locale</B>(const char* std_name); </PRE>
+
+<UL>
+<P>Constructs a <B><I>locale</I></B> object on the named locale indicated by <SAMP>std_name</SAMP>. Throws a <B><I>runtime_error</I></B> exception if <SAMP>std_name</SAMP> is not a valid locale name.</P>
+</UL>
+
+
+
+<PRE><B>locale</B>(const locale&amp; other, const char* std_name,
+       category cat); </PRE>
+
+<UL>
+<P>Constructs a <B><I>locale</I></B> object that is a copy of <SAMP>other</SAMP>, except for the facets that are in the category specified by <SAMP>cat</SAMP>. These facets are obtained from the named locale identified by <SAMP>std_name</SAMP>. Throws a <SAMP>runtime_error</SAMP> exception if <SAMP>std_name</SAMP> is not a valid locale name. </P>
+<P>The resulting locale has a name only if <SAMP>other</SAMP> has a name.</P>
+</UL>
+
+
+
+<PRE>template &lt;class Facet&gt; 
+<B>locale</B>(const locale&amp; other, Facet* f); </PRE>
+
+<UL>
+<P>Constructs a <B><I>locale</I></B> object that is a copy of <SAMP>other</SAMP>, except for the facet of type <SAMP>Facet</SAMP>. Unless <SAMP>f</SAMP> is null, it is used to supply the missing facet. Otherwise the facet comes from <SAMP>other</SAMP> as well. </P>
+<P>Note that the resulting locale does not have a name.</P>
+</UL>
+
+
+
+<PRE><B>locale</B>(const locale&amp; other, const locale&amp; one, 
+       category cat); </PRE>
+
+<UL>
+<P>Constructs a <B><I>locale</I></B> object that is a copy of <SAMP>other</SAMP>, except for facets that are in the category specified by category argument <SAMP>cat</SAMP>. These missing facets are obtained from the other locale argument, <SAMP>one</SAMP>.</P>
+<P>Note that the resulting locale has a name only if both <SAMP>other</SAMP> and <SAMP>one</SAMP> have names.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~locale</B>();</PRE>
+
+<UL>
+<P>Destroys the locale.</P>
+</UL>
+
+
+<A NAME="Public Member Operators"><H3>Public Member Operators</H3></A>
+
+
+<A NAME="Public Member Operatorsoperator=()"></A><PRE>const locale&amp; 
+<B>operator=</B>(const locale&amp; other) throw();</PRE>
+
+<UL>
+<P>Replaces <SAMP>*this</SAMP> with a copy of <SAMP>other</SAMP>. Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+<PRE>
+<PRE>template &lt;class Facet&gt; 
+locale <B>combine</B>(const locale&amp; other); </PRE>
+
+</PRE>
+<UL>
+<P>Returns a locale object that is a copy of <SAMP>*this</SAMP>, except for the facet of type <SAMP>Facet</SAMP>, which is taken from <SAMP>other</SAMP>. If <SAMP>other</SAMP> does not contain a facet of type <SAMP>Facet</SAMP>, a <B><I>runtime_error</I></B> exception is thrown.</P>
+<P>Note that the returned locale does not have a name.</P>
+</UL>
+
+
+
+<A NAME="Public Member Operatorsoperator==()"></A><PRE>bool 
+<B>operator==</B>(const locale&amp; other) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if both <SAMP>other</SAMP> and <SAMP>*this</SAMP> are the same object, if one is a copy of another, or if both have the same name. Otherwise returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Operatorsoperator!=()"></A><PRE>bool 
+<B>operator!=</B>(const locale&amp; other) const; </PRE>
+
+<UL>
+<P>Returns !<SAMP>(*this == other)</SAMP></P>
+</UL>
+
+
+
+<PRE>template &lt;class charT,Traits&gt;
+<A NAME="Public Member Operatorsoperator()()"></A>bool 
+<B>operator()</B>(const basic_string&lt;charT,Traits&gt;&amp; s1,
+           const basic_string&lt;charT,Traits&gt;&amp; s2) const; </PRE>
+
+<UL>
+<P>This operator allows a <B><I>locale</I></B> object to be used as a comparison object for comparing two strings. Returns the result of comparing the two strings using the <SAMP>compare</SAMP> member function of the <SAMP>collate&lt;charT&gt;</SAMP> facet contained in <SAMP>*this</SAMP>. Specifically, this function returns the following:</P>
+<UL>
+<PRE>    use_facet&lt; collate&lt;charT&gt; &gt;(*this).compare(s1.data(),
+    s1.data()+s1.size(), s2.data(),
+    s2.data()+s2.size()) &lt; 0;</PRE>
+
+</UL>
+<P>This allows a <SAMP>locale</SAMP> to be used with standard algorithms, such as <SAMP>sort</SAMP>, for localized comparison of strings.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsname()"></A><PRE>basic_string&lt;char&gt; 
+<B>name()</B> const; </PRE>
+
+<UL>
+<P>Returns the name of this locale, if it has one; otherwise returns the string <SAMP>"*"</SAMP>.</P>
+</UL>
+
+
+<A NAME="Static Public Member Functions"><H3>Static Public Member Functions</H3></A>
+<PRE>
+<PRE>static const locale&amp; </PRE>
+
+</PRE>
+
+
+<A NAME="Static Public Member Functionsclassic()"></A><PRE><B>classic</B>();</PRE>
+
+<UL>
+<P>Returns a locale with the semantics of the classic "C" locale.</P>
+</UL>
+
+<PRE>
+<PRE>static locale </PRE>
+
+</PRE>
+
+
+<A NAME="Static Public Member Functionsglobal()"></A><PRE><B>global</B>(const locale&amp; loc); </PRE>
+
+<UL>
+<P>Sets the global locale to <SAMP>loc</SAMP>. This causes future uses of the default constructor for <SAMP>locale</SAMP> to return a copy of <SAMP>loc</SAMP>. If <SAMP>loc</SAMP> has a name,    this function has the further effect of calling                                      <SAMP>std::setlocale(LC_ALL,loc.name().c_str());.</SAMP> Returns          the previous value of <SAMP>locale()</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// locale.cpp
+//
+
+ #include &lt;string&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ #include "codecvte.h"
+
+ int main ()
+ {
+  using namespace std;
+
+  locale loc;  // Default locale
+
+  // Construct new locale using default locale plus
+  // user defined codecvt facet
+  // This facet converts from ISO Latin 
+  // Alphabet No. 1 (ISO 8859-1) to 
+  // U.S. ASCII code page 437
+  // This facet replaces the default for
+  // codecvt&lt;char,char,mbstate_t&gt;
+  locale my_loc(loc,new ex_codecvt);
+
+  // imbue modified locale onto cout
+  locale old = cout.imbue(my_loc);
+  cout &lt;&lt; "A \x93 jolly time was had by all" &lt;&lt; endl;
+
+  cout.imbue(old);
+  cout &lt;&lt; "A jolly time was had by all" &lt;&lt; endl;
+
+  // Create a vector of strings 
+  vector&lt;string,allocator&lt;void&gt; &gt; v;
+  v.insert(v.begin(),"antelope");
+  v.insert(v.begin(),"bison");
+  v.insert(v.begin(),"elk");
+
+  copy(v.begin(),v.end(),
+       ostream_iterator&lt;string,char,
+                char_traits&lt;char&gt; &gt;(cout," "));
+  cout &lt;&lt; endl;
+
+  // Sort the strings using the locale as a comparitor
+  sort(v.begin(),v.end(),loc);
+
+  copy(v.begin(),v.end(),
+       ostream_iterator&lt;string,char,
+               char_traits&lt;char&gt; &gt;(cout," "));
+
+  cout &lt;&lt; endl;
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="has_4618.htm">has_facet</A></I></B>, <B><I><A HREF="use_3346.htm">use_facet</A></I></B>, <B><I>specific facet reference sections</I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="lis_3222.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="log_2801.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

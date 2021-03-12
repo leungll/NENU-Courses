@@ -1,0 +1,44 @@
+Source files for the example programs presented in the standard library 
+tutorial.  
+
+The files are as follows:
+
+alg1.cpp through alg6.cpp:
+	These are example programs for the generic algorithms described
+	in Section 12.  
+
+alg7.cpp:
+	Ordered collection generic algorithms from Section 13.
+
+calc.cpp:
+	The RPN calculator example from Section 10.2.1
+
+complx.cpp:
+	Complex Number example program.	Section 14.3
+
+concord.cpp:
+	Concordance program from section 9.3.3
+	Note that this program reads the standard input.
+
+graph.cpp: 
+	Graph program from section 9.3.2.
+
+icecream.cpp:
+	Event-driven simulation from section 11.3.1
+
+radix.cpp:
+	radix sort program from section 7.3
+
+sieve.cpp:
+	prime sieve program from section 5.3.
+
+spell.cpp:
+	spelling check program from section 8.3
+
+tele.cpp:
+	telephone database program from section 9.3.1.
+
+widwork.cpp:
+	widget works inventory program, from section 6.3
+
+

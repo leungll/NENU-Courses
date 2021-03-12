@@ -1,0 +1,25 @@
+<HTML><HEAD><TITLE>5.3 Boolean Vectors</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.3 Boolean Vectors</H2>
+
+<A NAME="idx92"><!></A>
+<P>In the Standard C++ Library, <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s of bit values (boolean 1/0 values) are handled as a special case, so that the values can be efficiently packed with several elements to a word. The operations for a boolean <B><I>vector</I></B>, <B><I><A HREF="../../stdref/vec_0251.htm">vector&lt;bool&gt;</A></I></B>, are a superset of those for an ordinary <B><I>vector</I></B>, only the implementation is more efficient.</P>
+<A NAME="idx93"><!></A>
+<P>One new member function added to the boolean <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> datatype is <SAMP>flip()</SAMP>. When invoked, this function inverts all the bits of the <B><I>vector</I></B>. Boolean <B><I>vector</I></B>s also return as reference an internal value that also supports the <SAMP>flip()</SAMP> member function:</P>
+<UL>
+<PRE>
+vector&lt;bool&gt; bvec(27);
+bvec.flip();               // flip all values
+bvec[17].flip();           // flip bit 17</PRE>
+</UL>
+<P>The <B><I><A HREF="../../stdref/vec_0251.htm">vector&lt;bool&gt;</A></I></B> also supports an additional <SAMP>swap()</SAMP> member function that allows swapping the values indicated by a pair of references: </P>
+<UL>
+<PRE>   
+bvec.swap(bvec [17], bvec [16]);</PRE>
+</UL>
+
+<HR>
+<A HREF="5-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>13.8 The for_each Algorithm</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="13-7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>13.8 The for_each Algorithm</H2>
+<A NAME="idx337"><!></A>
+<P>The algorithm <SAMP>for_each</SAMP> applies a function to all elements in a collection. This algorithm takes three arguments: the first two provide the <B><I><A HREF="../../stdref/ite_5554.htm">iterator</A></I></B>s that describe the sequence to be evaluated, and the third is a one-argument function. The algorithm <SAMP>for_each()</SAMP> applies the function to each value of the sequence, passing the value as an argument:</P>
+<UL>
+<PRE>
+Function for_each 
+   (InputIterator first, InputIterator last, Function);</PRE>
+</UL>
+<P>For example, the following code fragment, which uses the <SAMP>print_if_leap()</SAMP> function, prints a list of the leap years that occur between 1900 and 1997: </P>
+<UL>
+<PRE>
+cout &lt;&lt; "leap years between 1990 and 1997 are: ";
+for_each (1990, 1997, print_if_leap);
+cout &lt;&lt; endl;</PRE>
+</UL>
+<P>The argument function is guaranteed to be invoked only once for each element in the sequence. The <SAMP>for_each()</SAMP> algorithm itself returns the value of the third argument, although this is usually ignored.</P>
+<BLOCKQUOTE><HR>
+<B>NOTE: The function passed as the third argument is not permitted to make any modifications to the sequence, so it can only achieve a result by means of a side effect, such as printing, assigning a value to a global or static variable, or invoking another function that produces a side effect. If the argument function returns any result, it is ignored.
+</B><HR></BLOCKQUOTE>
+<P>The following example searches an array of <SAMP>integer</SAMP> values representing dates, to determine which vintage wine years were also leap years:</P>
+<UL>
+<PRE>
+int vintageYears[] = {1947, 1955, 1960, 1967, 1994};
+...
+
+cout &lt;&lt; "vintage years which were also leap years are: ";
+for_each (vintageYears, vintageYears + 5, print_if_leap);
+cout &lt;&lt; endl;</PRE>
+</UL>
+<P>Side effects need not be restricted to printing. Assume we have a function <SAMP>countCaps()</SAMP> that counts the occurrence of capital letters:</P>
+<UL>
+<PRE>
+int capCount = 0;
+
+void countCaps(char c)  { if (isupper(c)) capCount++; }</PRE>
+</UL>
+<P>The following example counts the number of capital letters in a string value:</P>
+<UL>
+<PRE>
+string advice = "Never Trust Anybody Over 30!";
+for_each(advice.begin(), advice.end(),countCaps);
+cout &lt;&lt; "upper-case letter count is " &lt;&lt; capCount &lt;&lt; endl;</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="13-7.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

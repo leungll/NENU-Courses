@@ -1,0 +1,220 @@
+<HTML><HEAD><TITLE>ostrstream</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ost_2389.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Out_2989.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ostrstream</H2>
+<PRE><HR>ostrstream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ostream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ios<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>ios_base
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Writes to an array in memory.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typestraits">traits</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsfreeze()">freeze()</A><BR>
+ <A HREF="#Member Functionspcount()">pcount()</A><BR>
+ <A HREF="#Member Functionsrdbuf()">rdbuf()</A><BR>
+ <A HREF="#Member Functionsstr()">str()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;strstream&gt; 
+class ostrstream
+: public basic_ostream&lt;char&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>ostrstream</I></B> writes to an array in memory. It uses a private       <B><I><A HREF="str_4456.htm">strstreambuf</A> </I></B>object to control the associated array object. It inherits from <B><I><A HREF="bas_8583.htm">basic_ostream&lt;char&gt;</A></I></B> and therefore can use all the formatted and unformatted output functions.</P>
+<P>This is a deprecated feature and might not be available in future versions.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class ostrstream 
+: public basic_ostream&lt;char&gt; {
+
+ public:
+
+  typedef char_traits&lt;char&gt;             traits;
+
+  typedef char                         char_type;
+  typedef typename traits::int_type    int_type;
+  typedef typename traits::pos_type    pos_type;
+  typedef typename traits::off_type    off_type;
+
+  ostrstream();
+  ostrstream(char *s, int n,
+             ios_base::openmode = ios_base::out);
+    
+  virtual ~ostrstream();
+
+  strstreambuf *rdbuf() const;
+  void freeze(int freezefl = 1);
+  char *str();
+  int pcount() const;
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym of type <SAMP>char</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typestraits"></A><PRE><B>traits</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits</SAMP> is a synonym of type <SAMP>char_traits&lt;char&gt;</SAMP>.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>ostrstream</B>();</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>ostrstream</SAMP>, initializing the base class <SAMP>basic_ostream&lt;char&gt;</SAMP> with the associated <SAMP>strstreambuf</SAMP> object. The <SAMP>strstreambuf</SAMP> object is initialized by calling its default constructor <SAMP>strstreambuf()</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>ostrstream</B>(char* s, int n, ios_base::openmode
+           mode = ios_base::out); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>ostrstream</SAMP>, initializing the base class <SAMP>basic_ostream&lt;char&gt;</SAMP> with the associated <SAMP>strstreambuf</SAMP> object. The <SAMP>strstreambuf</SAMP> object is initialized by calling one of two constructors:</P>
+</UL>
+
+<UL><UL>
+<LI><P>If <SAMP>mode &amp; app == 0</SAMP>, it calls <SAMP>strstreambuf(s,n,s)</SAMP></P>
+</LI>
+<LI><P>Otherwise it calls <SAMP>strstreambuf(s,n,s + ::strlen(s))</SAMP></P>
+</LI>
+</UL></UL>
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~ostrstream</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>ostrstream</SAMP>. </P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsfreeze()"></A><PRE>void 
+<B>freeze</B>(bool freezefl = 1); </PRE>
+
+<UL>
+<P>If the mode is dynamic, alters the freeze status of the dynamic array object as follows:</P>
+</UL>
+
+<UL><UL>
+<LI><P>If <SAMP>freezefl</SAMP> is <SAMP>false</SAMP>, the function sets the freeze status to frozen.</P>
+</LI>
+<LI><P>Otherwise, it clears the freeze status.</P>
+</LI>
+</UL></UL>
+
+<A NAME="Member Functionspcount()"></A><PRE>int
+<B>pcount</B>() const; </PRE>
+
+<UL>
+<P>Returns the size of the output sequence.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsrdbuf()"></A><PRE>strstreambuf* 
+<B>rdbuf</B>() const; </PRE>
+
+<UL>
+<P>Returns a pointer to the private <SAMP>strstreambuf</SAMP> object associated with the stream.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsstr()"></A><PRE>char* 
+<B>str</B>();</PRE>
+
+<UL>
+<P>Returns a pointer to the underlying array object, which may be null.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<P>See <B><I><A HREF="str_6184.htm">strstream</A></I></B>, <B><I><A HREF="ist_1286.htm">istrstream</A></I></B> and <B><I><A HREF="str_4456.htm">strstreambuf</A></I></B> examples.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="str_4456.htm">strstreambuf</A></I></B>(3C++), <B><I><A HREF="ist_1286.htm">istrstream</A></I></B>(3C++), <B><I><A HREF="str_6184.htm">strstream</A></I></B>(3C++)  </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Annex D Compatibility features Section D.6.3</I></P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="ost_2389.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Out_2989.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

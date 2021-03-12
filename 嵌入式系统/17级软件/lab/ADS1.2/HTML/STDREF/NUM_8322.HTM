@@ -1,0 +1,253 @@
+<HTML><HEAD><TITLE>num_put</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="num_6413.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_5679.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>num_put</H2>
+<PRE><HR>num_put<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric formatting facet for output. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_put()">do_put()</A><BR>
+ <A HREF="#Public Member Functionsput()">put()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT, class OutputIterator&gt; class num_put;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>num_put&lt;charT,OutputIterator&gt;</I></B> facet allows for formatted output of numbers. <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B> and all other output-oriented streams use this facet to implement formatted numeric output.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT, class OutputIterator =
+  ostreambuf_iterator&lt;charT&gt; &gt;
+class num_put : public locale::facet {
+public:
+  typedef charT            char_type;
+  typedef OutputIterator   iter_type;
+  explicit num_put(size_t = 0);
+
+  iter_type put(iter_type, ios_base&amp;, char_type, bool)
+            const;
+  iter_type put(iter_type, ios_base&amp;, char_type, long)
+            const;
+  iter_type put(iter_type, ios_base&amp;, char_type,
+                unsigned long) const;
+  iter_type put(iter_type, ios_base&amp;, char_type,
+                double) const;
+  iter_type put(iter_type, ios_base&amp;, char_type,
+                long double) const;
+  static locale::id id;
+
+protected:
+  ~num_put();  // virtual
+  virtual iter_type do_put(iter_type, ios_base&amp;, char_type,
+                           bool) const;
+  virtual iter_type do_put(iter_type, ios_base&amp;, char_type,
+                           long) const;
+  virtual iter_type do_put(iter_type, ios_base&amp;, char_type,
+                           unsigned long) const;
+  virtual iter_type do_put(iter_type, ios_base&amp;, char_type,
+                           double) const;
+  virtual iter_type do_put(iter_type, ios_base&amp;, char_type,
+                           long double) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character upon which the facet is instantiated.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>num_put</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Constructs a <B><I>num_put</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~num_put</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>num_put</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>put</SAMP> function simply calls its protected cousin <SAMP>do_put</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsput()"></A><PRE>iter_type 
+<B>put</B>(iter_type s, ios_base&amp; io, char_type fill, bool v)
+    const; 
+iter_type 
+<B>put</B>(iter_type s, ios_base&amp; io, char_type fill, long v)
+    const; 
+iter_type 
+<B>put</B>(iter_type s, ios_base&amp; io, char_type fill,
+    unsigned long v) const; 
+iter_type 
+<B>put</B>(iter_type s, ios_base&amp; io, char_type fill, double v)
+    const; 
+iter_type
+<B>put</B>(iter_type s, ios_base&amp; io, char_type fill, 
+    long double v) const; </PRE>
+
+<UL>
+<P>Each of the five overloads of the <SAMP>put</SAMP> function simply call the corresponding <SAMP>do_put</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_put()"></A><PRE>virtual iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; io, 
+       char_type fill, bool v) const; 
+virtual iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; io, 
+       char_type fill, long v) const; 
+virtual iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; io, 
+       char_type fill,unsigned long) const; 
+virtual iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; io, 
+       char_type fill, double v) const; 
+virtual iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; io, 
+       char_type fill,long double v) const; </PRE>
+
+<UL>
+<P>The five overloads of the <SAMP>do_put</SAMP> member function all take a numeric value and output a formatted character string representing that value. The character string is output through the <SAMP>s</SAMP> argument to the function. The <SAMP>io</SAMP> argument is used to obtain formatting specifications, and the <SAMP>fill</SAMP> argument determines the character to use in padding.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// numput.cpp
+//
+
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  typedef ostreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+   iter_type;
+  
+  locale loc;
+  bool bval = true;
+  long lval = 422432L;
+  unsigned long ulval = 12328889UL;
+  double dval = 10933.8934; 
+  long double ldval = 100028933.8934; 
+
+  // Construct a ostreambuf_iterator on cout
+  iter_type begin(cout);
+
+  // Get a num_put facet reference
+  const num_put&lt;char,iter_type&gt;&amp; np = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;num_put&lt;char,iter_type&gt; &gt;(loc);
+#else
+  use_facet(loc,(num_put&lt;char,iter_type&gt;*)0);
+#endif
+
+  // Put out a bool
+  cout &lt;&lt; bval &lt;&lt; " --&gt; ";
+  np.put(begin,cout,' ',bval);
+
+  // Put out a long
+  cout &lt;&lt; endl &lt;&lt; lval &lt;&lt; " --&gt; ";
+  np.put(begin,cout,' ',lval);
+
+  // Put out an unsigned long
+  cout &lt;&lt; endl &lt;&lt; ulval &lt;&lt; " --&gt; ";
+  np.put(begin,cout,' ',ulval);
+
+  // Put out a double
+  cout &lt;&lt; endl &lt;&lt; dval &lt;&lt; " --&gt; ";
+  np.put(begin,cout,' ',dval);
+
+  // Put out a long double
+  cout &lt;&lt; endl &lt;&lt; ldval &lt;&lt; " --&gt; ";
+  np.put(begin,cout,' ',ldval);
+
+  cout &lt;&lt;  endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="num_6413.htm">numget</A></I></B>, <B><I><A HREF="num_2619.htm">numpunct</A></I></B>, <B><I><A HREF="cty_0953.htm">ctype</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="num_6413.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_5679.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

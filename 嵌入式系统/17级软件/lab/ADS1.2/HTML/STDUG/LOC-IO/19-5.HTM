@@ -1,0 +1,155 @@
+<HTML><HEAD><TITLE>19.5 Example 2: Defining a Multibyte Character Code Conversion (JIS &lt;-&gt; Unicode)</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="19-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>19.5 Example 2: Defining a Multibyte Character Code Conversion (JIS &lt;-&gt; Unicode)</H2>
+<A NAME="idx472"><!></A>
+<P>Let us consider the example of a state-dependent code conversion. As mentioned previously, this type of conversion would occur between JIS, which is a state-dependent multibyte encoding for Japanese characters, and Unicode, which is a wide-character encoding. As usual, we assume that the external device uses multibyte encoding, and the internal processing uses wide-character encoding.</P>
+<P>Here is what you must do to implement and use a state-dependent code conversion facet:</P>
+<OL>
+<LI><P>Define a new conversion state type if necessary.</P>
+</LI>
+<LI><P>Define a new character traits type if necessary, or instantiate the character traits template with the new state type.</P>
+</LI>
+<LI><P>Define the code conversion facet.</P>
+</LI>
+<LI><P>Instantiate new stream types using the new character traits type.</P>
+</LI>
+<LI><P>Imbue a file stream's buffer with a locale that carries the new code conversion facet.</P>
+</LI>
+</OL>
+<P>These steps are explained in detail in the following sections.</P>
+
+<A NAME="1951"><H3>19.5.1  Define a New Conversion State Type</H3></A>
+<A NAME="idx473"><!></A>
+<P>While parsing or creating a sequence of multibytes in a state-dependent multibyte encoding, the code conversion facet has to maintain a conversion state. This state is by default of type <SAMP>mbstate_t</SAMP>, which is the implementation-dependent state type defined by the C library. If this type does not suffice to keep track of the conversion state, you must provide your own conversion state type. We show how this is done in the code below, but please note first that the new state type must have the following member functions:</P>
+<UL>
+<LI><P>A constructor, since the argument <SAMP>0</SAMP> has the special meaning of creating a conversion state object that represents the initial conversion state</P>
+</LI>
+<LI><P>Copy constructor and assignment</P>
+</LI>
+<LI><P>Comparison for equality and inequality</P>
+</LI>
+</UL>
+<A NAME="idx474"><!></A>
+<P>Now here is the sketch of a new conversion state type:</P>
+<UL>
+<PRE>
+class JISstate_t {
+public: 
+                   JISstate_t( int state=0 )
+                   : state_(state) { ; }
+ 
+                   JISstate_t(const JISstate_t&amp; state)
+                   : state_(state.state_) { ; }
+ 
+                   JISstate_t&amp; operator=(const JISstate_t&amp; state)
+                    {
+                       if ( &amp;state != this )
+                         state_= state.state_;
+                       return *this;
+                    }
+ 
+                   JISstate_t&amp; operator=(const int state)
+                    {
+                       state_= state;
+                       return *this;
+                    }
+ 
+                   bool operator==(const JISstate_t&amp; state) const
+                    {
+                       return ( state_ == state.state_ );
+                    }
+ 
+                   bool operator!=(const JISstate_t&amp; state) const
+                    {
+                       return ( !(state_ == state.state_) );
+                    }
+ 
+private: 
+                   int state_;
+ 
+                 };</PRE>
+</UL>
+
+<A NAME="1952"><H3>19.5.2  Define a New Character Traits Type</H3></A>
+<A NAME="idx475"><!></A>
+<P>The conversion state type is part of the character traits. Hence, with a new conversion state type, you need a new character traits type.</P>
+<P>If you do not want to rely on a nonstandard and thus non-portable feature of the library, you must define a new character traits type and redefine the necessary types:</P>
+<UL>
+<PRE>
+struct JIS_char_traits: public char_traits&lt;wchar_t&gt; 
+{
+        typedef JISstate_t                state_type;
+        typedef fpos&lt;state_type&gt;          pos_type;
+        typedef wstreamoff                off_type;
+};</PRE>
+</UL>
+
+<A NAME="1953"><H3>19.5.3  Define the Code Conversion Facet</H3></A>
+<A NAME="idx476"><!></A>
+<P>Just as in the first example, you must define the actual code conversion facet. The steps are basically the same as before, too: define a new class template for the new code conversion type and specialize it. The code would look like this:</P>
+<UL>
+<PRE>
+template &lt;class internT, class externT, class stateT&gt;
+class UnicodeJISConversion
+: public codecvt&lt;internT, externT, stateT&gt;
+{
+};
+
+class UnicodeJISConversion&lt;wchar_t, char, JISstate_t&gt;
+: public codecvt&lt;wchar_t, char, JISstate_t&gt;
+{
+protected:
+ 
+ result do_in(JISstate_t&amp; state,
+              const char*  from,
+              const char*  from_end,
+              const char*&amp; from_next,
+              wchar_t*     to, 
+              wchar_t*     to_limit,
+              wchar_t*&amp;    to_next) const;
+
+ result do_out(JISstate_t&amp; state,
+               const wchar_t*  from,
+               const wchar_t*  from_end,
+               const wchar_t*&amp; from_next,
+               char*           to,
+               char*           to_limit, 
+               char*&amp;          to_next) const;
+
+ bool do_always_noconv() const throw()
+ { return false; };
+ 
+ int do_encoding() const throw();
+ { return -1; }
+ 
+};</PRE>
+</UL>
+<P>In this case, the function <SAMP>do_encoding()</SAMP> has to return <SAMP>-1</SAMP>, which identifies the code conversion as state-dependent. Again, the functions <SAMP>in()</SAMP> and <SAMP>out()</SAMP> must conform to the error indication policy explained under class <B><I><A HREF="../../stdref/cod_3309.htm">codecvt</A></I></B> in the <I>Class Reference.</I></P>
+<P>The distinguishing characteristic of a state-independent conversion is that the conversion state argument to <SAMP>in()</SAMP> and <SAMP>out()</SAMP> is used for communication between the file stream buffer and the code conversion facet. The file stream buffer is responsible for creating, maintaining, and deleting the conversion state. At the beginning, the file stream buffer creates a conversion state object that represents the initial conversion state and hands it over to the code conversion facet. The facet modifies it according to the conversion it performs. The file stream buffer receives it and stores it between two subsequent code conversions.</P>
+
+<A NAME="1954"><H3>19.5.4  Use the New Code Conversion Facet</H3></A>
+<A NAME="idx477"><!></A>
+<P>Here is an example of how the new code conversion facet can be used:</P>
+<UL>
+<PRE>
+typedef basic_fstream&lt;wchar_t,JIS_char_traits&gt; JIS_fstream;   //1
+JIS_fstream inout("/tmp/fil");
+UnicodeJISConversion&lt;wchar_t,char,JISstate_t&gt; cvtfac;
+locale cvtloc(locale(),&amp;cvtfac);
+inout.rdbuf()-&gt;pubimbue(cvtloc)                               //2
+wcout &lt;&lt; inout.rdbuf();                                       //3</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Our Unicode-JIS code conversion needs a conversion state type different from the default type <SAMP>mbstate_t</SAMP>. Since the conversion state type is contained in the character traits, we must create a new file type. Instead of <SAMP>JIS_char_traits</SAMP>, we could have taken advantage of the nonstandard extension to the character traits template and have used <SAMP>char_traits&lt;wchar_t,JISstate_t&gt;</SAMP>.
+<TR VALIGN="top"><TD>//2</TD><TD>Here the stream buffer's locale is replaced by a copy of the global locale that has a Unicode-JIS code conversion facet.
+<TR VALIGN="top"><TD>//3</TD><TD>The content of the JIS encoded file <SAMP>"/tmp/fil"</SAMP> is read, automatically converted to Unicode, and written to <SAMP>wcout</SAMP>.
+</TABLE>
+
+
+<BR>
+<HR>
+<A HREF="19-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

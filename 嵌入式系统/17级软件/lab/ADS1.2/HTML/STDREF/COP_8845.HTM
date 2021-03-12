@@ -1,0 +1,122 @@
+<HTML><HEAD><TITLE>copy, copy_backward</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Con_2487.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cou_2234.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>copy, copy_backward</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Copies a range of elements.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator, class OutputIterator&gt;
+ OutputIterator copy(InputIterator first, 
+                     InputIterator last,
+                     OutputIterator result);
+template &lt;class BidirectionalIterator1, 
+          class BidirectionalIterator2&gt;
+ BidirectionalIterator2
+  copy_backward(BidirectionalIterator1 first,
+                BidirectionalIterator1 last,
+                BidirectionalIterator2 result);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>copy</I></B> algorithm copies values from the range specified by <SAMP>[first</SAMP>, <SAMP>last)</SAMP> to the range specified by <SAMP>[result, result + (last - first))</SAMP>. <B><I>copy</I></B> can be used to copy values from one container to another, or to copy values from one location in a container to another location in the <I>same</I> container, as long as <SAMP>result</SAMP> is not within the range <SAMP>[first-last)</SAMP>. <B><I>copy</I></B> returns <SAMP>result + (last - first)</SAMP>. For each non-negative integer <SAMP>n &lt; (last - first)</SAMP>, <B><I>copy</I></B> assigns <SAMP>*(first + n)</SAMP> to <SAMP>*(result + n)</SAMP>. The result of <B><I>copy</I></B> is undefined if <SAMP>result</SAMP> is in the range <SAMP>[first, last)</SAMP>.</P>
+<P>Unless <SAMP>result</SAMP> is an insert iterator, <B><I>copy</I></B> assumes that at least as many elements follow <SAMP>result</SAMP> as are in the range <SAMP>[first, last)</SAMP>.</P>
+<P>The <B><I><A HREF="cop_8845.htm">copy_backward</A></I></B> algorithm copies elements in the range specified by <SAMP>[first, last)</SAMP> into the range specified by [<SAMP>result - (last - first), result)</SAMP>, starting from the end of the sequence (<SAMP>last-1</SAMP>) and progressing to the front (<SAMP>first</SAMP>). Note that <B><I>copy_backward</I></B> does <I>not</I> reverse the order of the elements, it simply reverses the order of transfer. <B><I>copy_backward</I></B> returns <SAMP>result - (last - first)</SAMP>. You should use <B><I>copy_backward</I></B> instead of <B><I>copy</I></B> when <SAMP>last</SAMP> is in the range <SAMP>[result - (last - first), result)</SAMP>. For each positive integer <SAMP>n &lt;= (last - first)</SAMP>, <B><I>copy_backward</I></B> assigns <SAMP>*(last - n)</SAMP> to <SAMP>*(result - n)</SAMP>. The result of <B><I>copy_backward</I></B> is undefined if <SAMP>result</SAMP> is in the range <SAMP>[first, last)</SAMP>.</P>
+<P>Unless <SAMP>result</SAMP> is an insert iterator, <B><I><A HREF="cop_8845.htm">copy_backward</A></I></B> assumes that there are at least as many elements ahead of <SAMP>result</SAMP> as are in the range <SAMP>[first, last)</SAMP>.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>Both <B><I>copy</I></B> and <B><I><A HREF="cop_8845.htm">copy_backward</A></I></B> perform exactly <SAMP>last - first</SAMP> assignments.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>   //
+   // stdlib/examples/manual/copyex.cpp
+   //
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   int d1[4] = {1,2,3,4};
+   int d2[4] = {5,6,7,8};
+
+   // Set up three vectors
+   //
+   vector&lt;int&gt; v1(d1,d1 + 4), v2(d2,d2 + 4), v3(d2,d2 + 4);
+   //
+   // Set up one empty vector
+   //
+   vector&lt;int&gt; v4;
+   //
+   // Copy v1 to v2
+   //
+   copy(v1.begin(),v1.end(),v2.begin());
+   //
+   // Copy backwards v1 to v3
+   //
+   copy_backward(v1.begin(),v1.end(),v3.end());
+   //
+   // Use insert iterator to copy into empty vector
+   //
+   copy(v1.begin(),v1.end(),back_inserter(v4));
+   //
+   // Copy all four to cout
+   //
+   ostream_iterator&lt;int,char&gt; out(cout," ");
+   copy(v1.begin(),v1.end(),out);
+   cout &lt;&lt; endl;
+   copy(v2.begin(),v2.end(),out);
+   cout &lt;&lt; endl;
+   copy(v3.begin(),v3.end(),out);
+   cout &lt;&lt; endl;
+   copy(v4.begin(),v4.end(),out);
+   cout &lt;&lt; endl;
+   
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+1 2 3 4
+1 2 3 4
+1 2 3 4
+1 2 3 4</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector &lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector &lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="Con_2487.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cou_2234.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

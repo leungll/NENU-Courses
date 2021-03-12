@@ -1,0 +1,270 @@
+<HTML><HEAD><TITLE>auto_ptr</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Ass_1789.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bac_0189.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>auto_ptr</H2>
+<PRE><HR>Memory Management
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Operators">Operators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A simple, smart pointer class.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typesauto_ptr_ref">auto_ptr_ref</A><BR>
+ <A HREF="#Operatorsoperator">operator</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsget()">get()</A><BR>
+ <A HREF="#Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Operatorsoperator-&gt;()">operator-&gt;()</A><BR>
+ <A HREF="#Operatorsoperator=()">operator=()</A><BR>
+ <A HREF="#Member Functionsrelease()">release()</A><BR>
+ <A HREF="#Member Functionsreset()">reset()</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;memory&gt;
+template &lt;class X&gt; class auto_ptr;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>auto_ptr</I></B> holds onto a pointer obtained via <SAMP>new</SAMP> and deletes that object when the <B><I>auto_ptr</I></B> object itself is destroyed (such as when leaving block scope). <B><I>auto_ptr</I></B> can be used to make calls to operator new exception-safe. The <B><I>auto_ptr</I></B> class has semantics of strict ownership: an object may be safely pointed to by only one <B><I>auto_ptr</I></B>, so copying an <B><I>auto_ptr</I></B> copies the pointer and transfers ownership to the destination if the source had already had ownership. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class X&gt; class auto_ptr {
+template &lt;class Y&gt; class auto_ptr_ref {
+   public:
+     const auto_ptr&lt;Y&gt;&amp; p;
+     auto_ptr_ref (const auto_ptr&lt;Y&gt;&amp;);
+};
+   public:
+     typedef X element_type;
+     // constructor/copy/destroy
+
+     explicit auto_ptr (X* = 0) throw();
+     auto_ptr (const auto_ptr&lt;X&gt;&amp;) throw ();
+     template &lt;class Y&gt;
+       auto_ptr (const auto_ptr&lt;Y&gt;&amp;) throw();
+     void operator=(const auto_ptr&lt;X&gt;&amp;) throw():
+     template &lt;class Y&gt;
+       void operator= (const auto_ptr&lt;Y&gt;&amp;) throw();
+     ~auto_ptr ();
+
+     // members
+
+     X&amp; operator* () const throw();
+     X* operator-&gt; () const throw();
+     X* get () const throw();
+     X* release () throw();
+     void reset (X*=0) throw();
+     auto_ptr(auto_ptr_ref&lt;X&gt;) throw();
+     template &lt;class Y&gt;
+     operator auto_ptr_ref&lt;Y&gt;() throw();
+     template &lt;class Y&gt;
+     operator auto_ptr&lt;Y&gt;() throw();
+ };</PRE>
+
+</PRE>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesauto_ptr_ref"></A><PRE>template &lt;class Y&gt;
+class <B>auto_ptr_ref</B>;</PRE>
+
+<UL>
+<P>A private class template that holds a reference to an <SAMP>auto_ptr</SAMP>. It can only be constructed within an <SAMP>auto_ptr</SAMP> using a reference to an <SAMP>auto_ptr</SAMP>. It prevents unsafe copying.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit 
+<B>auto_ptr</B> (X* p = 0);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>auto_ptr&lt;X&gt;</SAMP>, initializing the held pointer to <SAMP>p</SAMP>, and acquiring ownership of that pointer. <SAMP>p</SAMP> must point to an object of class <SAMP>X</SAMP> or a class derived from <SAMP>X</SAMP> for which <SAMP>delete p</SAMP> is defined and accessible, or <SAMP>p</SAMP> must be a null pointer.</P>
+</UL>
+
+
+
+<PRE><B>auto_ptr</B> (const auto_ptr&lt;X&gt;&amp; a);
+template &lt;class Y&gt;
+<B>auto_ptr</B> (const auto_ptr&lt;Y&gt;&amp; a);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>auto_ptr&lt;X&gt;</SAMP>, and copies the argument <SAMP>a</SAMP> to <SAMP>*this</SAMP>. If <SAMP>a</SAMP> owned the underlying pointer, then <SAMP>*this</SAMP> becomes the new owner of that pointer.</P>
+</UL>
+
+
+
+<PRE><B>auto_ptr</B> (const auto_ptr_ref&lt;X&gt; r);</PRE>
+
+<UL>
+<P>Constructs an <SAMP>auto_ptr</SAMP> from an <SAMP>auto_ptr_ref</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~auto_ptr</B> ();</PRE>
+
+<UL>
+<P>Deletes the underlying pointer.</P>
+</UL>
+
+
+<A NAME="Operators"><H3>Operators</H3></A>
+
+
+<A NAME="Operatorsoperator"></A><PRE>void <B>operator</B>= (const auto_ptr&lt;X&gt;&amp; a);
+<A NAME="Operatorsoperator=()"></A>template &lt;class Y&gt; 
+void <B>operator=</B> (const auto_ptr&lt;Y&gt;&amp; a);</PRE>
+
+<UL>
+<P>Copies the argument <SAMP>a</SAMP> to <SAMP>*this</SAMP>. If <SAMP>a</SAMP> owned the underlying pointer, then <SAMP>*this</SAMP> becomes the new owner of that pointer. If <SAMP>*this</SAMP> already owned a pointer, then that pointer is deleted first.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator*()"></A><PRE>X&amp; 
+<B>operator*</B> () const;</PRE>
+
+<UL>
+<P>Returns a reference to the object to which the underlying pointer points.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator-&gt;()"></A><PRE>X* 
+<B>operator-&gt;</B> () const;</PRE>
+
+<UL>
+<P>Returns the underlying pointer.</P>
+</UL>
+
+
+
+<PRE>template &lt;class Y&gt;
+<B>operator</B> auto_ptr_ref&lt;Y&gt; ();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>auto_ptr_ref</SAMP> from <SAMP>*this</SAMP> and returns it.</P>
+</UL>
+
+
+
+<PRE>template &lt;class Y&gt;
+<B>operator</B> auto_ptr&lt;Y&gt; ();</PRE>
+
+<UL>
+<P>Constructs a new <SAMP>auto_ptr</SAMP> using the underlying pointer held by <SAMP>*this</SAMP>. Calls <SAMP>release()</SAMP> on <SAMP>*this</SAMP>, so <SAMP>*this</SAMP> no longer possesses the pointer. Returns the new <SAMP>auto_ptr</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsget()"></A><PRE>X* 
+<B>get</B> () const;</PRE>
+
+<UL>
+<P>Returns the underlying pointer.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsrelease()"></A><PRE>X*
+<B>release</B>();</PRE>
+
+<UL>
+<P>Releases ownership of the underlying pointer. Returns that pointer.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsreset()"></A><PRE>void
+<B>reset</B>(X* p)</PRE>
+
+<UL>
+<P>Sets the underlying pointer to <SAMP>p</SAMP>. If non-null, deletes the old underlying pointer.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>   //
+   // auto_ptr.cpp
+   //
+   #include &lt;iostream&gt;
+   #include &lt;memory&gt;
+   using namespace std;
+
+   //
+   // A simple structure.
+   //
+   struct X
+   {
+       X (int i = 0) : m_i(i) { }
+       int get() const { return m_i; }
+       int m_i;
+   };
+
+   int main ()
+   {
+      //
+      // b will hold a pointer to an X.
+      //
+      auto_ptr&lt;X&gt; b(new X(12345));
+      //
+      // a will now be the owner of the underlying pointer.
+      //
+      auto_ptr&lt;X&gt; a = b;
+      //
+      // Output the value contained by 
+      // the underlying pointer.
+      //
+      cout &lt;&lt; a-&gt;get() &lt;&lt; endl;
+      //
+      // The pointer will be deleted when a is destroyed on 
+      // leaving scope.
+      //
+      return 0;
+   }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+12345</PRE>
+
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="Ass_1789.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bac_0189.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,76 @@
+#
+# Filter test files
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+#
+
+Filter Test Data
+______ ____ ____
+
+
+Finite Impulse Response
+------ ------- --------
+
+File:			fircoeff
+Description:	8 non-specific FIR filter coefficients
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			firdata
+Description:	128 point non-specific data
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16 bits
+Endian:			little
+
+
+Infinite Impulse Response
+-------- ------- --------
+
+File:			iircoeff
+Description:	4 non-specific IIR filter coefficients
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			firdata
+Description:	16 point non-specific data
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16 bits
+Endian:			little
+
+
+Least Mean Square
+----- ---- ------
+
+File:			lmscoeff
+Description:	8 non-specific LMS filter coefficients
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16-bit
+Endian:			little
+
+File:			lmsdata
+Description:	128 point non-specific data
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16 bits
+Endian:			little
+
+File:			lmsdesir
+Description:	128 point non-specific data
+Data format:	hexadecimal text (with leading 0x)
+Data size:		16 bits
+Endian:			little
+
+
+Viewer Applications
+====== ============
+
+Windows 95/NT
+------- -----
+
+Any text capable application.
+
+
+UNIX
+----
+
+Any text capable application.

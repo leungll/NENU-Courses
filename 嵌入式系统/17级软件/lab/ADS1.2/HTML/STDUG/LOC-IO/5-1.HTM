@@ -1,0 +1,80 @@
+<HTML><HEAD><TITLE>5.1 An Example of Formatting Phone Numbers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.1 An Example of Formatting Phone Numbers</H2>
+
+<A NAME="idx118"><!></A>
+<P>The previous chapters explained how you can use locales and the standard facet classes, and how you can build new facet classes. This chapter introduces you to the technique of building your own facet class and using it in conjunction with the input/output streams of the Standard C++ Library, the iostreams. This material is rather advanced, and requires some knowledge of standard iostreams.</P>
+<A NAME="idx119"><!></A>
+<P>In the following sections, we will work through a complete example on formatting telephone numbers. Formatting telephone numbers involves local conventions that vary from culture to culture. For example, the same US phone number can have all of the formats listed below:</P>
+<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3>
+
+<tr><td valign=top>
+754-3010<BR>
+<td valign=top>
+Local<BR>
+
+<tr><td valign=top>
+(541) 754-3010<BR>
+<td valign=top>
+Domestic<BR>
+
+<tr><td valign=top>
++1-541-754-3010<BR>
+<td valign=top>
+International<BR>
+
+<tr><td valign=top>
+1-541-754-3010<BR>
+<td valign=top>
+Dialed in the US<BR>
+
+<tr><td valign=top>
+001-541-754-3010<BR>
+<td valign=top>
+Dialed from Germany<BR>
+
+<tr><td valign=top>
+191 541 754 3010<BR>
+<td valign=top>
+Dialed from France<BR>
+
+
+</TABLE>
+
+
+</P>
+<P>Now consider a German phone number. Although a German phone number consists of an area code and an extension like a US number, the format is different. Here is the same German phone number in a variety of formats:</P>
+<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3>
+
+<tr><td valign=top>
+636-48018<BR>
+<td valign=top>
+Local<BR>
+
+<tr><td valign=top>
+(089) / 636-48018<BR>
+<td valign=top>
+Domestic<BR>
+
+<tr><td valign=top>
++49-89-636-48018<BR>
+<td valign=top>
+International<BR>
+
+<tr><td valign=top>
+19-49-89-636-48018<BR>
+<td valign=top>
+Dialed from France<BR>
+
+
+</TABLE>
+
+
+</P>
+<P>Note the difference in formatting domestic numbers. In the US, the convention is <SAMP>1 (area code) extension</SAMP>, while in Germany it is <SAMP>(0 area code)/extension</SAMP>.</P>
+
+<HR>
+<A HREF="5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

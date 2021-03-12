@@ -1,0 +1,418 @@
+<HTML><HEAD><TITLE>5.2 vector Operations</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.2 vector Operations</H2>
+<A NAME="idx70"><!></A>
+<P>In this section, each of the member functions provided by the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> datatype are described in more detail. These member functions provide the basic operations for <B><I>vector</I></B>s. They can be greatly extended through the generic algorithms described in <A HREF="13.htm">Chapter 13</A>.</P>
+
+<A NAME="521"><H3>5.2.1 Declaration and Initialization of vectors</H3></A>
+<A NAME="idx71"><!></A>
+<P>Because it is a template class, the declaration of a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> must include a designation of the component type. This can be a primitive language type, like an <SAMP>integer</SAMP> or <SAMP>double</SAMP>, a pointer type, or a user-defined type. In the latter case, the user-defined type <I>must</I> implement a copy constructor, as this constructor is used to initialize newly created elements. </P>
+<BLOCKQUOTE><HR>
+<B>REMEMBER: Elements that are held by a vector must define a copy constructor. Although not used by functions in the vector class, some of the generic algorithms also require vector elements to recognize either the equivalence operator == or the relational less-than operator &lt;.
+</B><HR></BLOCKQUOTE>
+<P>Like an <B><I>array</I></B>, a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> is most commonly declared with an integer argument that describes the number of elements the <B><I>vector</I></B> will hold and an initial value for each element:</P>
+<UL>
+<PRE>
+vector&lt;int&gt; vec_one(10,0);</PRE>
+</UL>
+<P>For <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s as well as other Standard Library containers, an allocator type can also be provided as an additional template parameter:</P>
+<UL>
+<PRE>
+<SAMP>vector&lt;int,allocator&lt;int&gt;&gt;</SAMP></PRE>
+</UL>
+<P>These two declarations are synonymous. Note that if the allocator template parameter is provided explicitly, then its type must match the contained type.</P>
+<P>If the type has a default constructor, as it does in this case, then the second argument can be omitted. The constructor used to create the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> here is declared as <SAMP>explicit</SAMP>, which prevents it being used as a conversion operator. This is generally a good idea, since otherwise an <SAMP>integer</SAMP> might unintentionally be converted into a <B><I>vector</I></B> in certain situations.</P>
+<P>There are a variety of other forms of constructor that can also be used to create <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s. If no size is provided, the <B><I>vector</I></B> initially contains no elements, and increases in size automatically as elements are added. The copy constructor creates a clone of a <B><I>vector</I></B> from another <B><I>vector</I></B>. </P>
+<UL>
+<PRE>
+vector&lt;int&gt; vec_two(5, 3);      // copy constructor
+vector&lt;int&gt; vec_three;
+vector&lt;int&gt; vec_four(vec_two);  //  initialization by assignment</PRE>
+</UL>
+<P>A <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> can also be initialized using elements from another collection, by means of a beginning and ending iterator pair. The arguments can be any form of iterator; thus collections can be initialized with values drawn from any of the container classes in the Standard C++ Library that support iterators. </P>
+<UL>
+<PRE>
+vector &lt;int&gt; vec_five (aList.begin(), aList.end());</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B>NOTE: Because it requires the ability to define a method with a template argument different from the class template, some compilers may not yet support the initialization of containers using iterators. While compiler technology is catching up with the Standard C++ Library definition, the Rogue Wave version of the Standard C++ Library will support conventional pointers and vector iterators in this manner.
+</B><HR></BLOCKQUOTE>
+<P>A <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> can be assigned the values of another <B><I>vector</I></B>, in which case the target receives a copy of the argument <B><I>vector</I></B>.</P>
+<UL>
+<PRE>
+vec_three = vec_five;</PRE>
+</UL>
+<A NAME="idx72"><!></A>
+<P>The <SAMP>assign()</SAMP> member function is similar to an assignment, but is more versatile and, in some cases, requires more arguments. Like an assignment, the existing values in the container are deleted, and replaced with the values specified by the arguments. There are two forms of <SAMP>assign().</SAMP> The first takes two iterator arguments that specify a sub-sequence of an existing container. The values from this sub-sequence then become the new elements in the receiver. The second version of <SAMP>assign()</SAMP> takes a count and an optional value of the container element type. After the call the container holds only the number of elements specified by the count, which are equal to either the default value for the container type or the initial value specified.</P>
+<UL>
+<PRE>
+vec_six.assign(list_ten.begin(), list_ten.end());
+vec_four.assign(3, 7);      // three copies of the value 7
+vec_five.assign(12);        // twelve copies of value zero</PRE>
+</UL>
+<P>If a destructor is defined for the container element type, the destructor is called for each value removed from the collection.</P>
+<A NAME="idx73"><!></A>
+<P>Finally, two <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s can exchange their entire contents by means of the <SAMP>swap()</SAMP> operation. The argument container takes on the values of the receiver, while the receiver assumes those of the argument. A swap is very efficient, and should be used in preference to an explicit element-by-element transfer where appropriate.</P>
+<UL>
+<PRE>
+vec_three.swap(vec_four); </PRE>
+</UL>
+
+<A NAME="522"><H3>5.2.2 Type Definitions</H3></A>
+<A NAME="idx74"><!></A>
+<P>The class <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> includes a number of type definitions, most commonly used in declaration statements. For example, an iterator for a <B><I>vector</I></B> of <SAMP>integer</SAMP>s can be declared in the following fashion:</P>
+<UL>
+<PRE>
+vector&lt;int&gt;::iterator location;</PRE>
+</UL>
+<P>In addition to <SAMP>iterator</SAMP>, <A HREF="#Table 9">Table 9</A> defines the following types:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 9">Table 9 -- Type definitions for class vector</A></H4><tr><td valign=top><B>Type</B><td valign=top><B>Definition</B>&nbsp;
+<tr><td valign=top>
+<SAMP>value_type</SAMP><BR>
+<td valign=top>
+The type associated with the elements the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> maintains.<BR>
+
+<tr><td valign=top>
+<SAMP>const_iterator</SAMP><BR>
+<td valign=top>
+An iterator that does not allow modification of the underlying sequence.<BR>
+
+<tr><td valign=top>
+<SAMP>reverse_iterator</SAMP><BR>
+<td valign=top>
+An iterator that moves in a backward direction.<BR>
+
+<tr><td valign=top>
+<SAMP>const_reverse_iterator</SAMP><BR>
+<td valign=top>
+A combination constant and reverse iterator.<BR>
+
+<tr><td valign=top>
+<SAMP>reference</SAMP><BR>
+<td valign=top>
+A reference to an underlying element.<BR>
+
+<tr><td valign=top>
+<SAMP>const_reference</SAMP><BR>
+<td valign=top>
+A reference to an underlying element that will not permit the element to be modified.<BR>
+
+<tr><td valign=top>
+<SAMP>size_type</SAMP><BR>
+<td valign=top>
+An unsigned integer type, used to refer to the size of containers.<BR>
+
+<tr><td valign=top>
+<SAMP>difference_type</SAMP><BR>
+<td valign=top>
+A signed integer type, used to describe distances between iterators.<BR>
+
+<tr><td valign=top>
+<SAMP>allocator_type</SAMP><BR>
+<td valign=top>
+The type of allocator used to manage memory for the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>.<BR>
+
+
+</TABLE>
+
+
+</P>
+
+<A NAME="523"><H3>5.2.3 Subscripting a vector</H3></A>
+<A NAME="idx75"><!></A>
+<P>The value being maintained by a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> at a specific index can be accessed or modified using the subscript operator, just like an ordinary array. Also like arrays, there are no attempts to verify the validity of the index values. Indexing a constant <B><I>vector</I></B> yields a constant reference. Attempts to index a <B><I>vector</I></B> outside the range of legal values generates unpredictable and spurious results:</P>
+<UL>
+<PRE>
+cout &lt;&lt; vec_five[1] &lt;&lt; endl;
+vec_five[1] = 17;</PRE>
+</UL>
+<A NAME="idx76"><!></A>
+<P>The member function <SAMP>at()</SAMP> can be used in place of the subscript operator. It takes exactly the same arguments as the subscript operator, and returns exactly the same values, but it will throw an out-of-range exception if the argument is invalid.</P>
+<A NAME="idx77"><!></A>
+<P>The member function <SAMP>front()</SAMP> returns the first element in the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, while the member function <SAMP>back()</SAMP> yields the last. Both also return constant references when applied to constant <B><I>vector</I></B>s.</P>
+<UL>
+<PRE>
+cout &lt;&lt; vec_five.front() &lt;&lt; " ... " &lt;&lt; vec_five.back() &lt;&lt; endl;</PRE>
+</UL>
+
+<A NAME="524"><H3>5.2.4 Extent and Size-Changing Operations</H3></A>
+<A NAME="idx78"><!></A>
+<P>In general, there are three different <I>sizes</I> associated with any <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>: </P>
+<UL>
+<LI><P>the number of elements currently being held by the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B></P>
+</LI>
+<LI><P>the maximum size to which the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> can be expanded without requiring that new storage be allocated</P>
+</LI>
+<LI><P>the upper limit on the size of any <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>. </P>
+</LI>
+</UL>
+<A NAME="idx79"><!></A>
+<P>These three values are yielded by the member functions <SAMP>size()</SAMP>, <SAMP>capacity()</SAMP>, and <SAMP>max_size()</SAMP>, respectively:</P>
+<UL>
+<PRE>
+cout &lt;&lt; "size: " &lt;&lt; vec_five.size() &lt;&lt; endl;
+cout &lt;&lt; "capacity: " &lt;&lt; vec_five.capacity() &lt;&lt; endl;
+cout &lt;&lt; "max_size: " &lt;&lt; vec_five.max_size() &lt;&lt; endl;</PRE>
+</UL>
+<P>The maximum size is usually limited only by the amount of available memory, or the largest value that can be described by the datatype <SAMP>size_type</SAMP>. The current size and capacity are more difficult to characterize. As noted in <A HREF="5-2.htm#525">Section 5.2.5</A>, elements can be added to or removed from a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> in a variety of ways. When elements are removed from a <B><I>vector</I></B>, the memory for the <B><I>vector</I></B> is generally not reallocated, and thus the size is decreased but the capacity remains the same. A subsequent insertion does not force a reallocation of new memory if the original capacity is not exceeded.</P>
+<A NAME="idx80"><!></A>
+<P>An insertion that causes the size to exceed the capacity generally results in a new block of memory being allocated to hold the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> elements. Values are then copied into this new memory using the assignment operator appropriate to the element type, and the old memory is deleted. Because this can be a potentially costly operation, the <B><I>vector</I></B> datatype provides a means for the programmer to specify a value for the capacity of a <B><I>vector</I></B>. The member function <SAMP>reserve()</SAMP> is a directive to the <B><I>vector</I></B>, indicating that the <B><I>vector</I></B> is expected to grow to at least the given size. If the argument used with <SAMP>reserve()</SAMP> is larger than the current capacity, a reallocation occurs and the argument value becomes the new capacity. (It may subsequently grow even larger; the value given as the argument need not be a bound, just a guess.) If the capacity is already in excess of the argument, no reallocation takes place. Invoking <SAMP>reserve()</SAMP> does not change the size of the <B><I>vector</I></B>, nor the element values themselves, with the exception that they may potentially be moved should reallocation take place.</P>
+<UL>
+<PRE>
+vec_five.reserve(20);</PRE>
+</UL>
+<P>A reallocation invalidates all references, pointers, and iterators referring to elements being held by a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>.</P>
+<A NAME="idx81"><!></A>
+<P>The member function <SAMP>empty()</SAMP> returns true if the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> currently has a size of zero, regardless of the capacity of the <B><I>vector</I></B>. Using this function is generally more efficient than comparing the result returned by <SAMP>size()</SAMP> to zero.</P>
+<UL>
+<PRE>
+cout &lt;&lt; "empty is " &lt;&lt; vec_five.empty() &lt;&lt; endl;</PRE>
+</UL>
+<A NAME="idx82"><!></A>
+<P>The member function <SAMP>resize()</SAMP> changes the size of the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> to the value specified by the argument. Values are either added to or erased from the end of the collection as necessary. An optional second argument can be used to provide the initial value for any new elements added to the collection, although this argument is not optional if the contained type does not have a default constructor. If a destructor is defined for the element type, the destructor is called for any values that are removed from the collection:</P>
+<UL>
+<PRE>               
+// become size 12, adding values of 17 if necessary
+vec_five.resize (12, 17); </PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B>NOTE: A vector stores values in a single large block of memory.  A deque, on the other hand, employs a number of smaller blocks. This difference may be important on machines that limit the size of any single block of memory, because in such cases a deque will be able to hold much larger collections than a vector.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="525"><H3>5.2.5 Inserting and Removing Elements</H3></A>
+<A NAME="idx83"><!></A>
+<P>As noted earlier, the class <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> differs from an ordinary array in that a <B><I>vector</I></B> can increase or decrease in size in certain circumstances. When an insertion causes the number of elements being held in a <B><I>vector</I></B> to exceed the capacity of the current block of memory being used to hold the values, a new block is allocated and the elements are copied to the new storage.</P>
+<BLOCKQUOTE><HR>
+<B>NOTE: Even adding a single element to a vector can, in the worst case, require time proportional to the number of elements in the vector, as each element is moved to a new location. If insertions are a prominent feature of your current problem, you should explore the possibility of using containers, such as lists or sets, which are optimized for insert operations.
+</B><HR></BLOCKQUOTE>
+<A NAME="idx84"><!></A>
+<P>A new element can be added to the back of a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> using the function <SAMP>push_back()</SAMP>. If there is space in the current allocation, this operation is very efficient (constant time). </P>
+<UL>
+<PRE>
+vec_five.push_back(21);   // add element 21 to end of collection</PRE>
+</UL>
+<A NAME="idx85"><!></A>
+<P>The corresponding removal operation is <SAMP>pop_back()</SAMP>, which decreases the size of the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, but does not change its capacity. If the container type defines a destructor, the destructor is called on the value being eliminated. Again, this operation is very efficient. The class <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B> permits values to be added and removed from both the back and the front of the collection, as described in <A HREF="7.htm">Chapter 7</A>.</P>
+<A NAME="idx86"><!></A>
+<P>More general insertion operations can be performed using the <SAMP>insert()</SAMP> member function. The location of the insertion is described by an iterator; insertion takes place immediately preceding the location denoted. A fixed number of constant elements can be inserted by a single function call. It is much more efficient to insert a block of elements in a single call than to perform a sequence of individual insertions, because with a single call at most one allocation will be performed.</P>
+<UL>
+<PRE>                                  
+                                  // find the location of the 7
+vector&lt;int&gt;::iterator where = 
+      find(vec_five.begin(), vec_five.end(), 7);
+                             // then insert the 12 before the 7
+vec_five.insert(where, 12);
+vec_five.insert(where, 6, 14);    // insert six copies of 14</PRE>
+</UL>
+<P>The most general form of the <SAMP>insert()</SAMP> member function takes a position and a pair of iterators that denote a sub-sequence from another container. The range of values described by the sequence is inserted into the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>. Again, using this function is preferable to using a sequence of individual insertions because at most a single allocation is performed.</P>
+<UL>
+<PRE>
+vec_five.insert (where, vec_three.begin(), vec_three.end());</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B>NOTE: Once more, it is important to remember that should an insertion cause reallocation, all references, pointers, and iterators that denoted a location in the now-deleted memory block become invalid.
+</B><HR></BLOCKQUOTE>
+<P>In addition to the <SAMP>pop_back()</SAMP> member function, which removes elements from the end of a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, a function exists that removes elements from the middle of a <B><I>vector</I></B>, using an iterator to denote the location. The member function that performs this task is <SAMP>erase()</SAMP>, which has two forms: </P>
+<UL>
+<LI><P>the first takes a single iterator and removes an individual value </P>
+</LI>
+<LI><P> the second takes a pair of iterators and removes all values in the given range. The size of the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> is reduced, but the capacity is unchanged. If the container type defines a destructor, the destructor is invoked on the eliminated values:</P>
+</LI>
+
+<PRE>   
+vec_five.erase(where);
+                             // erase from the 12 to the end
+where = find(vec_five.begin(), vec_five.end(), 12);
+vec_five.erase(where, vec_five.end());</PRE>
+
+</UL>
+
+<A NAME="526"><H3>5.2.6 Iteration</H3></A>
+<A NAME="idx87"><!></A>
+<P>The member functions <SAMP>begin()</SAMP> and <SAMP>end()</SAMP> yield random access iterators for the container. Again, we note that the iterators yielded by these operations can become invalidated after insertions or removals of elements. The member functions <SAMP>rbegin()</SAMP> and <SAMP>rend()</SAMP> return similar iterators, but these access the underlying elements in reverse order. Constant iterators are returned if the original container is declared as constant, or if the target of the assignment or parameter is constant.</P>
+
+<A NAME="527"><H3>5.2.7 Test for Inclusion</H3></A>
+<A NAME="idx88"><!></A>
+<P>A <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> does not directly provide any method that can be used to determine if a specific value is contained in the collection. However, the generic algorithms <SAMP>find()</SAMP> or <SAMP>count()</SAMP> can be used for this purpose (see <A HREF="13-3.htm#1331">Section 13.3.1</A> and <A HREF="13-6.htm#1361">Section 13.6.1</A>). For example, the following statement tests to see whether an integer <B><I>vector</I></B> contains the element 17:</P>
+<UL>
+<PRE>
+count (vec_five.begin(), vec_five.end(), 17);</PRE>
+</UL>
+<P>If your compiler does not support partial specialization, then you must use the following interface instead:</P>
+<UL>
+<PRE>
+int num = 0;
+count (vec_five.begin(), vec_five.end(), 17, num);
+
+if (num)
+   cout &lt;&lt; "contains a 17" &lt;&lt; endl;
+else
+   cout &lt;&lt; "does not contain a 17" &lt;&lt; endl;</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B>NOTE: count() returns its result through an argument that is passed by reference. It is important that this value be properly initialized before invoking this function.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="528"><H3>5.2.8 Sorting and Sorted vector Operations</H3></A>
+<A NAME="idx89"><!></A>
+<P>A <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> does not automatically maintain its values in sequence. However, a <B><I>vector</I></B> can be placed in order using the generic algorithm <SAMP>sort()</SAMP> (see <A HREF="14-2.htm">Section 14.2</A>). The simplest form of sort uses for its comparisons the less-than operator for the element type. An alternative version of the generic algorithm permits the programmer to specify the comparison operator explicitly. This can be used, for example, to place the elements in descending rather than ascending order: </P>
+<UL>
+<PRE>
+   // sort ascending
+sort (aVec.begin(), aVec.end());
+
+   // sort descending, specifying the ordering function explicitly
+sort (aVec.begin(), aVec.end(), greater&lt;int&gt;() );
+
+   // alternate way to sort descending
+sort (aVec.rbegin(), aVec.rend());</PRE>
+</UL>
+<P>A number of the operations described in <A HREF="14.htm">Chapter 14</A> can be applied to a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> holding an ordered collection. For example, two <B><I>vector</I></B>s can be merged using the generic algorithm <SAMP>merge()</SAMP> (see <A HREF="14-5.htm">Section 14.5</A>).</P>
+<UL>
+<PRE>
+// merge two vectors, printing output
+merge (vecOne.begin(), vecOne.end(), vecTwo.begin(), vecTwo.end(),
+   ostream_iterator&lt;int,char&gt; (cout, " "));</PRE>
+</UL>
+<P>Sorting a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> also permits the more efficient binary search algorithms (see <A HREF="14-4.htm">Section 14.4</A>), instead of a linear traversal algorithm such as <SAMP>find().</SAMP></P>
+
+<A NAME="529"><H3>5.2.9 Useful Generic Algorithms</H3></A>
+<A NAME="idx90"><!></A>
+<P>Most of the algorithms described in <A HREF="IV.htm">Part IV</A> can be used with <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s, but some are more useful than others. For example, the maximum value in a <B><I>vector</I></B> can be determined as follows:</P>
+<UL>
+<PRE>
+vector&lt;int&gt;::iterator where = 
+   max_element (vec_five.begin(), vec_five.end());
+cout &lt;&lt; "maximum is " &lt;&lt; *where &lt;&lt; endl;</PRE>
+</UL>
+<A NAME="idx91"><!></A>
+<P> <A HREF="#Table 10">Table 10</A> summarizes some of the algorithms that are especially useful with <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 10">Table 10 -- Generic algorithms useful with vectors</A> </H4><tr><td valign=top> <B>Algorithm</B> <td valign=top><B>Purpose</B> &nbsp;
+<tr><td valign=top>
+<SAMP>fill</SAMP><BR>
+<td valign=top>
+Fill a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> with a given initial value <BR>
+
+<tr><td valign=top>
+<SAMP>copy</SAMP><BR>
+<td valign=top>
+Copy one sequence into another <BR>
+
+<tr><td valign=top>
+<SAMP>generate</SAMP><BR>
+<td valign=top>
+Copy values from a generator into a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> <BR>
+
+<tr><td valign=top>
+<SAMP>find</SAMP><BR>
+<td valign=top>
+Find an element that matches a condition <BR>
+
+<tr><td valign=top>
+<SAMP>adjacent_find</SAMP><BR>
+<td valign=top>
+Find consecutive duplicate elements <BR>
+
+<tr><td valign=top>
+<SAMP>search</SAMP><BR>
+<td valign=top>
+Find a sub-sequence within a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> <BR>
+
+<tr><td valign=top>
+<SAMP>max_element, min_element</SAMP><BR>
+<td valign=top>
+Locate maximum or minimum element <BR>
+
+<tr><td valign=top>
+<SAMP>reverse</SAMP><BR>
+<td valign=top>
+Reverse order of elements <BR>
+
+<tr><td valign=top>
+<SAMP>replace</SAMP><BR>
+<td valign=top>
+Replace elements with new values <BR>
+
+<tr><td valign=top>
+<SAMP>rotate</SAMP><BR>
+<td valign=top>
+Rotate elements around a midpoint <BR>
+
+<tr><td valign=top>
+<SAMP>partition</SAMP><BR>
+<td valign=top>
+Partition elements into two groups <BR>
+
+<tr><td valign=top>
+<SAMP>next_permutation</SAMP><BR>
+<td valign=top>
+Generate permutations <BR>
+
+<tr><td valign=top>
+<SAMP>inplace_merge</SAMP><BR>
+<td valign=top>
+Inplace merge within a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> <BR>
+
+<tr><td valign=top>
+<SAMP>random_shuffle</SAMP><BR>
+<td valign=top>
+Randomly shuffle elements in <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> <BR>
+
+<tr><td valign=top>
+<SAMP>count</SAMP><BR>
+<td valign=top>
+Count number of elements that satisfy condition <BR>
+
+<tr><td valign=top>
+<SAMP>accumulate</SAMP><BR>
+<td valign=top>
+Reduce <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> to a single value <BR>
+
+<tr><td valign=top>
+<SAMP>inner_product</SAMP><BR>
+<td valign=top>
+Inner product of two <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s <BR>
+
+<tr><td valign=top>
+<SAMP>equal</SAMP><BR>
+<td valign=top>
+Test two <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s for pair-wise equality <BR>
+
+<tr><td valign=top>
+<SAMP>lexicographical_compare</SAMP> <BR>
+<td valign=top>
+Lexical comparison <BR>
+
+<tr><td valign=top>
+<SAMP>transform</SAMP><BR>
+<td valign=top>
+Apply transformation to a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> <BR>
+
+<tr><td valign=top>
+<SAMP>partial_sum</SAMP><BR>
+<td valign=top>
+Partial sums of values <BR>
+
+<tr><td valign=top>
+<SAMP>adjacent_difference</SAMP><BR>
+<td valign=top>
+Adjacent differences of value <BR>
+
+<tr><td valign=top>
+<SAMP>for_each</SAMP><BR>
+<td valign=top>
+Execute function on each element <BR>
+
+
+</TABLE>
+
+
+</P>
+
+<HR>
+<A HREF="5-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

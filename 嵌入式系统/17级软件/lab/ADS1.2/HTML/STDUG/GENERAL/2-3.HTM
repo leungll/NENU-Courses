@@ -1,0 +1,42 @@
+<HTML><HEAD><TITLE>2.3 Stream Iterators</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="2-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="2-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>2.3 Stream Iterators</H2>
+<A NAME="idx32"><!></A>
+<P>Stream iterators are used to access an existing input or output stream using iterator operations. An input stream iterator permits an input stream to be read using iterator operations. Similarly, an output stream iterator writes to an output stream when iterator operations are executed.</P>
+
+<A NAME="231"><H3>2.3.1 Input Stream Iterators</H3></A>
+<A NAME="idx33"><!></A>
+<P>As we noted in the discussion of input iterators, the Standard C++ Library provides a mechanism for turning an input stream into an input iterator through class <SAMP>istream_iterator</SAMP>. When declared, the four template arguments are the element type, the stream character type, the character traits type, and a type that measures the distance between elements. The latter two default to <SAMP>char_traits&lt;charT</SAMP> &gt; and <SAMP>ptrdiff_t.</SAMP> The default is almost always the appropriate behavior. The single argument provided to the constructor for an <SAMP>istream_iterator</SAMP> is the stream to be accessed. Each time the <SAMP>++</SAMP> operator is invoked on an input stream iterator, a new value from the stream is read (using the operator <SAMP>&gt;&gt;</SAMP>) and stored. This value is then available through the use of the dereference operator <SAMP>*</SAMP>. The value constructed by <SAMP>istream_iterator</SAMP> when no arguments are provided to the constructor can be used as an ending iterator value. For example, the following code finds the first value 7 in a file of integer values:</P>
+<UL>
+<PRE>
+istream_iterator&lt;int, char&gt; intstream(cin), eof;
+istream_iterator&lt;int, char&gt;::iterator where = 
+         find(intstream, eof, 7);</PRE>
+</UL>
+<P>The element denoted by an iterator for an input stream is valid only until the next element in the stream is requested. Also, since an input stream iterator is an input iterator, elements can only be accessed, not modified by assignment. Finally, elements can be accessed only once, and only in a forward moving direction. If you want to read the contents of a stream more than one time, you must create a separate iterator for each pass.</P>
+
+<A NAME="232"><H3>2.3.2 Output Stream Iterators</H3></A>
+<A NAME="idx34"><!></A>
+<P>The output stream iterator mechanism is analogous to the input stream iterator. Each time a value is assigned to the iterator, it is written on the associated output stream using the operator <SAMP>&gt;&gt;</SAMP>. To create an output stream iterator, you must specify the associated output stream as an argument with the constructor. Values written to the output stream must recognize the stream <SAMP>&gt;&gt;</SAMP> operation. An optional second argument to the constructor is a string used as a separator between each pair of values.   For example, the following code copies all the values from a vector into the standard output, and separates each value by a space:</P>
+<UL>
+<PRE>
+copy (newdata.begin(), newdata.end(), 
+      ostream_iterator&lt;int,char&gt; (cout, " "));</PRE>
+</UL>
+<P>Simple file transformation algorithms can be created by combining input and output stream iterators and the various algorithms provided by the Standard C++ Library. The following short program reads a file of integers from the standard input, removes all occurrences of the value 7, and copies the remainder to the standard output, separating each value by a new line:</P>
+<UL>
+<PRE>
+void main() 
+{
+   istream_iterator&lt;int, char&gt; input (cin), eof;
+   ostream_iterator&lt;int, char&gt; output (cout, "\n");
+
+   remove_copy (input, eof, output, 7);
+}</PRE>
+</UL>
+
+<HR>
+<A HREF="2-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="2-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,15 @@
+<HTML><HEAD><TITLE>24.1 The Character Type</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="24.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>24.1 The Character Type</H2>
+
+<A NAME="idx499"><!></A>
+<P>You may already have used iostreams in the past-the traditional iostreams. The iostreams included in the Standard C++ Library are mostly compatible, yet slightly different from what you know. The most apparent change is that the new iostream classes are templates, taking the type of the character as a template parameter.</P>
+<A NAME="idx500"><!></A>
+<P>The traditional iostreams were of limited use. They could handle only byte streams; in other words, they read files byte per byte, and worked internally with a buffer of bytes. They had problems with languages that have alphabets containing thousands of characters. These alphabets are encoded as multibytes for storage on external devices like files, and represented as wide characters internally. They required a code conversion with each input and output.</P>
+<P>The new templatized iostreams can handle large alphabets. These iostreams can be instantiated for one-byte skinny characters of type <SAMP>char</SAMP>, and for wide characters of type <SAMP>wchar_t</SAMP>. In fact, you can instantiate iostream classes for any user-defined character type. <A HREF="20.htm">Chapter 20</A> describes in detail how this can be done.</P>
+
+<HR>
+<A HREF="24.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

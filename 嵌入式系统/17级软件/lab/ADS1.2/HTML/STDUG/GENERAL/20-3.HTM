@@ -1,0 +1,34 @@
+<HTML><HEAD><TITLE>20.3 Example Program: Roots of a Polynomial</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="20-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>20.3 Example Program: Roots of a Polynomial</H2>
+
+<A NAME="idx430"><!></A><BLOCKQUOTE><HR>
+<B>NOTE: This program is in the file complx.cpp.
+</B><HR></BLOCKQUOTE>
+<P>The roots of a polynomial 
+<IMG SRC="images/specclass0.gif">are given by the formula:</P>
+<P><UL><IMG SRC="images/specclass1.gif"></UL></P>
+<P>The following program takes as input three double precision numbers, and returns the complex roots as a pair of values.</P>
+<UL>
+<PRE>
+typedef complex&lt;double&gt; dcomplex;
+
+pair&lt;dcomplex, dcomplex&gt; quadratic
+      (dcomplex a, dcomplex b, dcomplex c)
+         // return the roots of a quadratic equation
+{
+   dcomplex root = sqrt(b * b - 4.0 * a * c);
+   a *= 2.0;
+   return make_pair(
+      (-b + root)/a, 
+      (-b - root)/a);
+}</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="20-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

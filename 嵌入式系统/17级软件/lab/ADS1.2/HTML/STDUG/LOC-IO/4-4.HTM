@@ -1,0 +1,123 @@
+<HTML><HEAD><TITLE>4.4 Using a Stream's Facet</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="4-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="4-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>4.4 Using a Stream's Facet</H2>
+
+<A NAME="idx108"><!></A>
+<P>Here is a more advanced example that uses a <SAMP>time_put</SAMP> facet to print a date. Let us assume we have a date and want to print it this way:</P>
+<UL>
+<PRE>
+struct tm aDate;                                              //1
+
+memset(aDate,<SAMP>0,sizeof aDate);                                 //2</SAMP>
+aDate.tm_year = 1989;
+aDate.tm_mon = 9;
+aDate.tm_mday = 1;                                             
+
+cout.imbue(locale::locale("De_CH"));                          //3
+cout &lt;&lt; aDate;                                                //4
+</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A date object is created. It is of type tm, which is the time structure defined in the standard C library.
+<TR VALIGN="top"><TD>//2</TD><TD>The date object is initialized with a particular date, September 1, 1989.
+<TR VALIGN="top"><TD>//3</TD><TD>Let's assume our program is supposed to run in a German-speaking canton of Switzerland. Hence, we imbue the standard output stream with a German-Swiss locale.
+<TR VALIGN="top"><TD>//4</TD><TD>The date is printed in German to the standard output stream.
+</TABLE>
+<P>The output is: 1. September 1989</P>
+<A NAME="idx109"><!></A>
+<P>As there is no operator&lt;&lt;() defined in the Standard C++ Library for the time structure tm from the C library, we must provide this inserter ourselves. The following code suggests a way this can be done. If you are not familiar with iostreams, please refer to the iostreams part of this <I>User's</I> <I>Guide</I>. </P>
+<P>To keep it simple, the handling of exceptions thrown during the formatting is omitted.</P>
+<UL>
+<PRE>
+template&lt;class charT, class traits&gt;
+basic_ostream&lt;charT, traits&gt;&amp;
+operator&lt;&lt;(basic_ostream&lt;charT,traits&gt;&amp; os, const tm&amp; date)   //1
+{
+ locale loc = os.getloc();                                    //2
+ typedef ostreambuf_iterator&lt;charT,traits&gt; outIter_t;         //3
+ const time_put&lt;charT,outIter_t&gt;&amp; fac                         //4
+     = use_facet &lt; time_put&lt;charT, bufIter_t &gt; &gt; (loc);       //5
+ fac.put(os,os,os.fill(),&amp;date,'x');                          //6
+ return os;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>This is a typical signature of a stream inserter; it takes a reference to an output stream and a constant reference to the object to be printed, and returns a reference to the same stream.
+<TR VALIGN="top"><TD>//2</TD><TD>The stream's locale object is obtained via the stream's member function getloc(). This is the locale object where we expect to find a time-formatting facet object.
+<TR VALIGN="top"><TD>//3</TD><TD>We define a type for an output iterator to a stream buffer. 
+<BR><BR>Time-formatting facet objects write the formatted output via an iterator into an output container (see the sections on containers and iterators in the <I>Standard C++ Library</I> <I>User's</I> <I>Guide</I>). In principle, this can be an arbitrary container that has an output iterator, such as a string or a C++ array. 
+<BR><BR>Here we want the time-formatting facet object to bypass the stream's formatting layer and write directly to the output stream's underlying stream buffer. Therefore, the output container shall be a stream buffer.
+<TR VALIGN="top"><TD>//4</TD><TD>We define a variable that will hold a reference to the locale object's time_put facet object. The time formatting facet class time_put has two template parameters:
+<UL>
+<LI><P>The <I>first</I> template parameter is the character type used for output. Here we provide the stream's character type as the template argument.</P>
+</LI>
+<LI><P>The <I>second</I> template parameter is the output iterator type. Here we provide the stream buffer iterator type outIter_t that we had defined as before.</P>
+</LI>
+</UL>
+<TR VALIGN="top"><TD>//5</TD><TD>Here we get the time-formatting facet object from the stream's locale via use_facet().
+<TR VALIGN="top"><TD>//6</TD><TD>The facet object's formatting service put() is called. Let us see what arguments it takes. Here is the function's interface:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+
+<tr><td valign=top>
+<SAMP>iter_type put</SAMP><BR>
+<td valign=top>
+<SAMP>(iter_type</SAMP><BR>
+<td valign=top>
+<SAMP>(a)</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>,ios_base&amp;</SAMP><BR>
+<td valign=top>
+<SAMP>(b)</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>,char_type</SAMP><BR>
+<td valign=top>
+<SAMP>(c)</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>,const tm*</SAMP><BR>
+<td valign=top>
+<SAMP>(d)</SAMP><BR>
+
+<tr><td valign=top>&nbsp;
+<td valign=top>
+<SAMP>,char)</SAMP><BR>
+<td valign=top>
+<SAMP>(e)</SAMP><BR>
+
+
+</TABLE>
+
+
+
+<BR><BR>The types iter_type and char_type stand for the types that were provided as template arguments when the facet class was instantiated. In this case, they are ostreambuf_iterator&lt;charT,traits&gt; and charT, where charT and traits are the respective streams template arguments.
+<BR><BR>Here is the actual call:
+<BR><BR><SAMP>nextpos = fac.put(os,os,os.fill(),&amp;date,'x');</SAMP>
+<BR><BR>Now let's see what the arguments mean:
+<TABLE CELLPADDING=3>
+<TR><TD VALIGN="top">a.</TD><TD><P>The first parameter is supposed to be an output iterator. We provide an iterator to the stream's underlying stream buffer. The reference os to the output stream is converted to an output iterator, because output stream buffer iterators have a constructor taking an output stream, that is, basic_ostream&lt;charT,traits&gt;&amp;.</P>
+</TD></TR>
+<TR><TD VALIGN="top">b.</TD><TD><P>The second parameter is of type ios_base&amp;, which is one of the stream base classes. The class ios_base contains data for format control (see the section on iostreams for details). The facet object uses this formatting information. We provide the output stream's ios_base part here, using the automatic cast from a reference to an output stream, to a reference to its base class.</P>
+</TD></TR>
+<TR><TD VALIGN="top">c.</TD><TD><P>The third parameter is the fill character. It is used when the output has to be adjusted and blank characters have to be filled in. We provide the stream's fill character, which one can get by calling the stream's fill() function.</P>
+</TD></TR>
+<TR><TD VALIGN="top">d.</TD><TD><P>The fourth parameter is a pointer to a time structure tm from the C library.</P>
+</TD></TR>
+<TR><TD VALIGN="top">e.</TD><TD><P>The fifth parameter is a format character as in the C function strftime(); the x stands for the locale's appropriate date representation.</P>
+</TD></TR>
+<TR><TD VALIGN="top">f.</TD><TD><P>The value returned is an output iterator that points to the position immediately after the last inserted character. </P>
+</TD></TR>
+</TABLE><BR>
+</TABLE>
+
+<HR>
+<A HREF="4-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="4-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

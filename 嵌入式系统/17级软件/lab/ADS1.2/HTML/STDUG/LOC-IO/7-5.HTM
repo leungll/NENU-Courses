@@ -1,0 +1,89 @@
+<HTML><HEAD><TITLE>7.5 Formatted Input</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="7-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>7.5 Formatted Input</H2>
+<P>In principle, input and output operators behave symmetrically. There is only one important difference: for output you control the precise format of the inserted character sequence, while for input the format of an extracted character sequence is never exactly described. This is for practical reasons. You may want to extract the next floating point value from a stream, for example, without necessarily knowing its exact format. You want it whether it is signed or not, or in exponential notation with a small or capital E for the exponent, etc. Hence, extractors in general accept an item in any format permitted for its type.</P>
+<A NAME="idx246"><!></A>
+<P>Formatted input is handled as follows:</P>
+<OL>
+<A NAME="fn4"><!></A>
+<LI><P>Extractors automatically ignore all white space characters (blanks, tabulators, newlines <SUP><A HREF="endnotes.htm#fn4">4</A></SUP>) that precede the item to be extracted.</P>
+</LI>
+<LI><P>When the first relevant character is found, they extract characters from the input stream until they find a separator; that is, a character that does not belong to the item. White space characters in particular are separators. </P>
+</LI>
+<LI><P>The separator remains in the input stream and becomes the first character extracted in a subsequent extraction.</P>
+</LI>
+</OL>
+<A NAME="idx247"><!></A>
+<P>Several format parameters, which control insertion, are irrelevant for extraction. The format parameter fill character, <SAMP>fill()</SAMP>, and the adjustment flags, <SAMP>left</SAMP>, <SAMP>right</SAMP>, and <SAMP>internal</SAMP>, have no effect on extraction. The field width is relevant only for extraction of strings, and ignored otherwise.</P>
+
+<A NAME="idx248"><!></A>
+<A NAME="751"><H3>7.5.1 Skipping Characters</H3></A>
+<A NAME="idx249"><!></A>
+<P>You can use the manipulator <SAMP>noskipws</SAMP> to <SAMP></SAMP>switch off the automatic skipping of white space characters. For example, extracting white space characters may be necessary if you expect the input has a certain format, and you need to check for violations of the format requirements. This procedure is shown in the following code:</P>
+<UL>
+<PRE>
+cin &gt;&gt; noskipws;
+char c;
+do 
+{ float fl;
+  c = ' '; cin &gt;&gt; fl &gt;&gt; c;  // extract number and separator
+if (c == ',' || c == '\n')  // next char is ',' or newline ?
+    process(fl);            // yes: use the number
+}
+while (c == ',');
+if (c != '\n') error();     // no: error!</PRE>
+</UL>
+<A NAME="idx250"><!></A>
+<P>If you must skip a sequence of characters other than white spaces, you can use the <SAMP>istream</SAMP>'s member function <SAMP>ignore()</SAMP>. The call:</P>
+<UL>
+<PRE>
+basic_ifstream&lt;myChar,myTraits&gt; InputStream("file-name");
+InputStream.ignore(numeric_limits&lt;streamsize&gt;::max()
+                  ,myChar('\n'));</PRE>
+</UL>
+<P>or, for ordinary tiny characters of type <SAMP>char</SAMP>: </P>
+<UL>
+<PRE>
+ifstream InputStream("file-name");
+InputStream.ignore(INT_MAX,'\n');</PRE>
+</UL>
+<P>ignores all characters until the end of the line. This example uses a file stream that is not predefined. File streams are described in <A HREF="6-4.htm#6415">Section 6.4.1.5</A>.</P>
+
+<A NAME="752"><H3>7.5.2 Input of Strings</H3></A>
+<A NAME="idx251"><!></A>
+<P>When you extract strings or character arrays from an input stream, characters are read until:</P>
+<UL>
+<LI><P>A white space character is found</P>
+</LI>
+<LI><P>The end of the input is reached</P>
+</LI>
+<LI><P>A certain number of characters is extracted, if <SAMP>width() != 0</SAMP>; . In the case of a string, this number is the field width <SAMP>width().</SAMP> In the case of a character array, this number is <SAMP>width()-1.</SAMP> </P>
+</LI>
+</UL>
+<P>Note that the field width is reset to <SAMP>0</SAMP> after the extraction of a string.</P>
+<P>There are subtle differences between extracting a character sequence into a character array and extracting it into a string object. For example:</P>
+<UL>
+<PRE>
+char buf[SZ];
+cin &gt;&gt; buf;</PRE>
+</UL>
+<P>is different from </P>
+<UL>
+<PRE>
+string s;
+cin &gt;&gt; s;</PRE>
+</UL>
+<P>Extraction into a string is safe, because strings automatically extend their capacity as necessary. You can extract as many characters as you want since the string always adjusts its size accordingly. Character arrays, on the other hand, have fixed size and cannot dynamically extend their capacity. If you extract more characters than the character array can take, the extractor writes beyond the end of the array. To prevent this, you must set the field width as follows each time you extract characters into a character array:</P>
+<UL>
+<PRE>
+char buf[SZ];
+cin &gt;&gt; width(SZ) &gt;&gt; buf;</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="7-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

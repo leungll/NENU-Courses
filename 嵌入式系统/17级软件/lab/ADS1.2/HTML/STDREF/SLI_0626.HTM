@@ -1,0 +1,152 @@
+<HTML><HEAD><TITLE>slice</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="set_6462.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sli_1044.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>slice</H2>
+<PRE><HR>Valarray helpers
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Accessors">Accessors</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric array class for representing a BLAS-like <B><I>slice</I></B> from an array.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Accessorssize()">size()</A><BR>
+ <A HREF="#Accessorsstart()">start()</A><BR>
+ <A HREF="#Accessorsstride()">stride()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;valarray&gt;
+class <B>slice</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>slice</I></B> allows you to represent a BLAS-like slice from an array. A BLAS slice contains a starting index, a length, and a stride. The index indicates the first element in the slice, the length determines the number of elements, and the stride indicates the interval between elements in the original array. For instance, the <B><I>slice</I></B> (1,3,2) applied to the array (1,2,3,4,5,6,7) produces the array (2,4,6).</P>
+<P>When applied to a <B><I><A HREF="val_6244.htm">valarray</A></I></B> using the <B><I>slice</I></B> subscript operator (see <B><I>valarray</I></B>) a <B><I>slice</I></B> produces a <B><I><A HREF="sli_1044.htm">slice_array</A></I></B>. The <B><I>slice_array</I></B> gives a view into the original <B><I>valarray</I></B> that is tailored to match parameters of the <B><I>slice</I></B>. The elements in a <B><I>slice_array</I></B> are references to the elements in the original array. This means you need to explicitly copy the <B><I>slice_array</I></B> into another <B><I>valarray</I></B> in order to have a distinct array. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>class slice {
+public:
+  // constructors
+  slice();
+  slice(size_t, size_t, size_t);
+ 
+  // Accessors
+  size_t start() const;
+  size_t size() const;
+  size_t stride() const;
+};</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>slice</B>();</PRE>
+
+<UL>
+<P>Creates a <B><I>slice</I></B> specifying no elements. This constructor is only intended to allow the creation of arrays of slices. </P>
+</UL>
+
+
+
+<PRE><B>slice</B>(size_t start, size_t length, size_t stride);</PRE>
+
+<UL>
+<P>Creates a <B><I>slice</I></B> with starting index, length, and stride as indicated by the arguments. </P>
+</UL>
+
+
+
+<PRE><B>slice</B>(const slice&amp;)</PRE>
+
+<UL>
+<P>Creates a <B><I>slice</I></B> with starting index, length, and stride as indicated by the slice argument. </P>
+</UL>
+
+
+<A NAME="Accessors"><H3>Accessors</H3></A>
+
+
+<A NAME="Accessorsstart()"></A><PRE>size_t <B>start</B>();</PRE>
+
+<UL>
+<P>Returns the starting index of the slice.</P>
+</UL>
+
+
+
+<A NAME="Accessorssize()"></A><PRE>size_t <B>size</B>();</PRE>
+
+<UL>
+<P>Returns the length of the slice.</P>
+</UL>
+
+
+
+<A NAME="Accessorsstride()"></A><PRE>size_t <B>stride</B>();</PRE>
+
+<UL>
+<P>Returns the stride of the slice. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// slice.cpp
+//
+#include "valarray.h" // Contains a valarray stream inserter
+using namespace std;
+int main(void)
+{
+  int ibuf[10] = {0,1,2,3,4,5,6,7,8,9};  
+
+  // create a valarray of ints
+  <B>valarray</B>&lt;int&gt;         vi(ibuf,10);
+  // print it out
+  cout &lt;&lt; vi &lt;&lt; endl;
+
+  // print out a slice
+  cout &lt;&lt; valarray&lt;int&gt;(vi[slice(1,3,2)]) &lt;&lt; endl;
+  return 0;
+}</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+[0,1,2,3,4,5,6,7,8,9]
+[1,3,5]</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="val_6244.htm">valarray</A></I></B>, <B><I><A HREF="sli_1044.htm">slice_array</A></I></B>, <B><I><A HREF="gsl_4121.htm">gslice</A></I></B>, <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B>, <B><I><A HREF="mas_2579.htm">mask_array</A></I></B>, <B><I><A HREF="ind_9304.htm">indirect_array</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="set_6462.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sli_1044.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

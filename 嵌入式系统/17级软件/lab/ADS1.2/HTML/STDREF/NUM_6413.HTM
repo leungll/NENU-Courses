@@ -1,0 +1,290 @@
+<HTML><HEAD><TITLE>num_get</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="nth_9772.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_8322.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>num_get</H2>
+<PRE><HR>num_get<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric formatting facet for input.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_get()">do_get()</A><BR>
+ <A HREF="#Public Member Functionsget()">get()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT, class InputIterator &gt; class num_get;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>num_get</I></B> facet allows for formatted input of numbers. <B><I><A HREF="bas_3074.htm">basic_istream</A> </I></B>and all other input-oriented streams use this facet to implement formatted numeric input.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT, class InputIterator =
+  istreambuf_iterator&lt;charT&gt; &gt;
+class num_get : public locale::facet {
+public:
+  typedef charT            char_type;
+  typedef InputIterator    iter_type;
+  explicit num_get(size_t refs = 0);
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, bool&amp;)          const;
+  iter_type get(iter_type, iter_type, ios_base&amp; ,
+                ios_base::iostate&amp;, long&amp;)          const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, unsigned short&amp;) const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, unsigned int&amp;)  const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, unsigned long&amp;) const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, float&amp;)         const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, double&amp;)        const;
+  iter_type get(iter_type, iter_type, ios_base&amp;,
+                ios_base::iostate&amp;, long double&amp;)   const;
+  static locale::id id;
+
+protected:
+  ~num_get();  // virtual
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, bool&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, long&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           unsigned short&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           unsigned int&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           unsigned long&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, float&amp;)
+                           const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, double&amp;)
+                           const;
+  virtual iter_type do_get(iter_type, iter_type, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           long double&amp;) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>num_get</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>num_get</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~num_get</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>num_get</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members. For instance, the long version of the public <SAMP>get</SAMP> function simply calls its protected cousin <SAMP>do_get</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsget()"></A><PRE>iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, bool&amp; v)          const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, long&amp; v)          const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, unsigned short&amp; v) const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, unsigned int&amp; v)  const;
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, unsigned long&amp; v) const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, float&amp; v) const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, double&amp; v) const; 
+iter_type 
+<B>get</B>(iter_type in, iter_type end, ios_base&amp; io,
+    ios_base::iostate&amp; err, long double&amp; v) const; </PRE>
+
+<UL>
+<P>Each of the eight overloads of the <SAMP>get</SAMP> function simply call the corresponding <SAMP>do_get</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_get()"></A><PRE>virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, bool&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, long&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, 
+       unsigned short&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, 
+       unsigned int&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, 
+       unsigned long&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, float&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; err, double&amp; v) const; 
+virtual iter_type 
+<B>do_get</B>(iter_type in, iter_type end, ios_base&amp; io,
+       ios_base::iostate&amp; long double&amp; v) const; </PRE>
+
+<UL>
+<P>The eight overloads of the <SAMP>do_get</SAMP> member function all take a sequence of characters <SAMP>[int,end)</SAMP>, and extract a numeric value. The numeric value is returned in <SAMP>v</SAMP>.   The <SAMP>io</SAMP> argument is used to obtain formatting information and the <SAMP>err</SAMP> argument is used to set error conditions in a calling stream.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// numget.cpp
+//
+
+#include &lt;sstream&gt;
+
+int main ()
+{
+  using namespace std;
+
+ typedef istreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+  iter_type;
+  
+  locale loc;
+  ios_base::iostate state;
+  bool bval = false;
+  long lval = 0L;
+  long double ldval = 0.0;
+  iter_type end;
+
+  // Get a num_get facet
+  const num_get&lt;char,iter_type&gt;&amp; tg = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;num_get&lt;char,iter_type&gt; &gt;(loc);
+#else
+  use_facet(loc,(num_get&lt;char,iter_type&gt;*)0);
+#endif
+
+  {
+    // Build an istringstream from the buffer and construct
+    // beginning and ending iterators on it.
+    istringstream ins("true");
+    iter_type begin(ins);
+
+    // Get a bool value
+    tg.get(begin,end,ins,state,bval);
+  }
+  cout &lt;&lt; bval &lt;&lt; endl;
+  {
+    // Get a long value
+    istringstream ins("2422235");
+    iter_type begin(ins);
+    tg.get(begin,end,ins,state,lval);
+  }
+  cout &lt;&lt; lval &lt;&lt; endl;
+  {
+    // Get a long double value
+    istringstream ins("32324342.98908");
+    iter_type begin(ins);
+    tg.get(begin,end,ins,state,ldval);
+  }
+  cout &lt;&lt; ldval &lt;&lt; endl;
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="num_8322.htm">num_put</A></I></B>, <B><I><A HREF="num_2619.htm">numpunct</A></I></B>, <B><I><A HREF="cty_0953.htm">ctype</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="nth_9772.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="num_8322.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

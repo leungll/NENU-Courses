@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>Operators</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="num_2619.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_2238.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>Operators</H2>
+<PRE><HR>Utility Operators
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Operators for the C++ Standard Template Library.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;utility&gt;
+namespace rel_ops {
+template &lt;class T&gt;
+ bool <B>operator!=</B> (const T&amp;, const T&amp;);
+
+template &lt;class T&gt;
+ bool <B>operator&gt;</B> (const T&amp;, const T&amp;);
+
+template &lt;class T&gt;
+ bool <B>operator&lt;=</B> (const T&amp;, const T&amp;);
+
+template &lt;class T&gt;
+ bool <B>operator&gt;=</B> (const T&amp;, const T&amp;);
+}</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>To avoid redundant definitions of <SAMP>operator!=</SAMP> out of <SAMP>operator==</SAMP> and of <SAMP>operators &gt;</SAMP>, <SAMP>&lt;=</SAMP>, and <SAMP>&gt;=</SAMP> out of <SAMP>operator&lt;</SAMP>, the library includes these definitions: </P>
+<P>    <SAMP>operator!=(x,y)</SAMP> returns <SAMP>!(x==y)</SAMP></P>
+<P>    <SAMP>operator&gt;(x,y)</SAMP>  returns <SAMP>y&lt;x</SAMP></P>
+<P>    <SAMP>operator&lt;=(x,y)</SAMP> returns <SAMP>!(y&lt;x)</SAMP></P>
+<P>    <SAMP>operator&gt;=(x,y)</SAMP> returns <SAMP>!(x&lt;y)</SAMP></P>
+<P>To avoid clashes with other global operators, these definitions are contained in the namespace <SAMP>rel_ops</SAMP>.   To use them, either scope explicitly or include a "using" declaration (for example, <SAMP>using namespace rel_ops</SAMP>).</P>
+
+
+<BR>
+<HR>
+<A HREF="num_2619.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_2238.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

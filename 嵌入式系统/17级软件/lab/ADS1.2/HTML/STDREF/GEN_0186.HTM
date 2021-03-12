@@ -1,0 +1,128 @@
+<HTML><HEAD><TITLE>generate, generate_n</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Fun_4316.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="get_8241.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>generate, generate_n</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Initialize a container with values produced by a value-generator class.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+
+template &lt;class ForwardIterator, class Generator&gt;
+  void <B>generate</B>(ForwardIterator first, ForwardIterator last,
+                Generator gen);
+
+template &lt;class OutputIterator, class Size, class Generator&gt;
+  void <B>generate_n</B>(OutputIterator first, Size n, Generator gen);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>A value-generator function returns a value each time it is invoked. The algorithms <B><I>generate</I></B> and <B><I>generate_n</I></B> initialize (or reinitialize) a sequence by assigning the return value of the generator function <SAMP>gen</SAMP> to all the elements designated by iterators in the range <SAMP>[first, last)</SAMP> or <SAMP>[first, first + n)</SAMP>. The function <SAMP>gen</SAMP> takes no arguments. (<SAMP>gen</SAMP> can be a function or a class with an <SAMP>operator ()</SAMP> defined that takes no arguments.)</P>
+<P><B><I>generate_n</I></B> assumes that there are at least <SAMP>n</SAMP> elements following <SAMP>first</SAMP>, unless <SAMP>first</SAMP> is an insert iterator.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>The <B><I>generate</I></B> and <B><I>generate_n</I></B> algorithms invoke <SAMP>gen</SAMP> and assign its return value exactly <SAMP>last - first</SAMP> (or <SAMP>n</SAMP>) times.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>// 
+// generate.cpp 
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ // Value generator simply doubles the current value 
+ // and returns it 
+ template &lt;class T&gt;
+ class generate_val
+ {
+   private:
+      T val_;
+   public:
+      generate_val(const T&amp; val) : val_(val) {}
+      T&amp; operator()() { val_ += val_; return val_; }
+ };
+
+ int main()
+ {
+   int d1[4] = {1,2,3,4};
+   generate_val&lt;int&gt; gen(1);
+
+   // Set up two vectors
+   vector&lt;int&gt; v1(d1,d1 + 4), v2(d1,d1 + 4);
+   // Set up one empty vector
+   vector&lt;int&gt; v3;
+
+   // Generate values for all of v1
+   <B>generate</B>(v1.begin(),v1.end(),gen);
+
+   // Generate values for first 3 of v2
+   <B>generate_n</B>(v2.begin(),3,gen);
+
+   // Use insert iterator to generate 5 values for v3 
+   <B>generate_n</B>(back_inserter(v3),5,gen);
+
+   // Copy all three to cout
+   ostream_iterator&lt;int,char&gt; out(cout," ");
+   copy(v1.begin(),v1.end(),out);
+   cout &lt;&lt; endl;
+   copy(v2.begin(),v2.end(),out);
+   cout &lt;&lt; endl;
+   copy(v3.begin(),v3.end(),out);
+   cout &lt;&lt; endl;
+
+   // Generate 3 values for cout
+   <B>generate_n</B>(ostream_iterator&lt;int&gt;(cout," "),3,gen);
+   cout &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+2 4 8 16
+2 4 8 4
+2 4 8 16 32
+2 4 8</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="Fun_4316.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="get_8241.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

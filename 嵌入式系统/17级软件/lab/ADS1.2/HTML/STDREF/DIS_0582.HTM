@@ -1,0 +1,63 @@
+<HTML><HEAD><TITLE>__distance_type</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="dis_0186.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="div_3309.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>__distance_type</H2>
+<PRE><HR>Iterator primitive
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Determines the type of distance used by an iterator. This function is now obsolete. It is retained in order to include backward compatibility and support compilers that do not include partial specialization.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<UL>
+<PRE>#include &lt;iterator&gt;
+template &lt;class Category, class T, class Distance, 
+          class Pointer, class Reference&gt;
+inline Distance* __distance_type(const iterator&lt;Category, T, 
+                 Distance, Pointer, Reference&gt;&amp;);
+template &lt;class T&gt;
+inline ptrdiff_t* __distance_type (const T*);</PRE>
+
+</UL>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The __<B><I>distance_type</I></B> family of function templates return a pointer to a value that is of the same type as that used to represent a distance between two iterators. The first of these take an iterator of a particular type and return a pointer to a default value of the <B><I>difference_type</I></B> for that iterator. The <SAMP>T*</SAMP> form of the function returns <SAMP>ptrdiff_t*</SAMP>.</P>
+<P>Generic algorithms use this function to create local variables of the correct type. The __<B><I>distance_type</I></B> functions are typically used like this:</P>
+<UL>
+<PRE>template &lt;class Iterator&gt;
+void foo(Iterator first, Iterator last)
+{
+  __foo(begin,end,__distance_type(first));
+}
+
+template &lt;class Iterator, class Distance&gt;
+void __foo(Iterator first, Iterator last, Distance*&gt;
+{
+  Distance d = Distance();
+  distance(first,last,d);
+  ...
+}</PRE>
+
+</UL>
+<P>The auxiliary function template allows the algorithm to extract a distance type from the first iterator and then use that type to perform some useful work.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P>Other iterator primitives: <B><I>__value_type</I></B>, <B><I><A HREF="ite_0362.htm">__iterator_category</A></I></B>, <B><I><A HREF="dis_0186.htm">distance</A></I></B>, <B><I><A HREF="adv_9283.htm">advance</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="dis_0186.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="div_3309.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

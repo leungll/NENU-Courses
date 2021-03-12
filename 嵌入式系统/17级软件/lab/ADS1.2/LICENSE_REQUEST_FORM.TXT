@@ -1,0 +1,125 @@
+
+ARM License Request Form
+========================
+
+To obtain a license file, please complete sections 1 - 4 of the form below,
+and return it to one of the e-mail addresses listed.
+
+Upon receipt of your request a license file will be returned to you as soon 
+as possible. 
+
+Please ensure that your e-mail program sends the license request file as 
+plain ASCII text.
+
+
+Return completed forms to:
+
+Email Address               
+-------------              
+licreq-europe@arm.com
+licreq-usa@arm.com
+licreq-asia@arm.com
+licreq-japan@arm.com
+
+============================================================================
+
+
+1.  Product Information
+
+    Enter the name, version, and serial number of the product that you
+    are requesting a license for.
+
+    Product Name and Version: 
+       Product Serial Number: 
+
+    The Product Serial Number can be found either on a label stuck
+    to your product box, or on a license card supplied with the
+    product. 
+
+
+2.  Customer Information:
+
+    Please enter the following information as fully as possible
+
+        End User Name: 
+     End User Company: 
+     End User Address: 
+                     : 
+                     : 
+            City/Town: 
+         State/Region: 
+              Country: 
+      ZIP/Postal Code: 
+            Telephone: 
+
+
+3.  E-Mail address
+
+    Enter the e-mail address that you wish your license file returned to.
+
+        E-Mail: 
+
+
+4.  License Server Information
+
+    The hostids for your system can be found using the command
+    'lmutil lmhostid'. If you are requesting a node-locked license,
+    and your PC system does not have a network card installed 
+    use the command 'lmutil lmhostid -vsn'.
+
+    NOTE: The hostid returned by 'lmutil lmhostid -vsn' can only
+          be used for PC node-locked licenses.
+
+    The 'lmutil' program can be found on your ARM product CD,
+    in the following locations.
+
+    'flexlm/solaris/flexlm.tar'  UnTAR file to access 'lmutil'.
+    'flexlm/hpux/flexlm.tar'     UnTAR file to access 'lmutil'.
+    'flexlm/linux/flexlm.tar'    UnTAR file to access 'lmutil'.
+    'flexlm/win32/lmutil.exe'
+
+
+    Please refer to the 'flexlm/enduser.pdf' file, on the product CD, 
+    for information on choosing a single or redundant license server.
+
+
+    Fill in either section a) or b), NOT both,
+
+    a)  Node-Locked License (PC Only)
+
+        hostid: 
+
+
+    b)  Floating Licenses (PC and Unix)
+
+        Fill in either section I) or II), NOT both
+
+        I)  Single License Server for floating licensed products.
+
+            hostname: 
+              hostid: 
+
+
+        II)  Redundant License Server set for floating licensed products.
+
+             Please provide the hostids for three separate machines,
+             otherwise a license cannot be provided.
+
+                           hostname       hostid 
+
+             Server 1.     
+             Server 2.     
+             Server 3.     
+
+
+
+Now return this form to ARM Limited to one of the e-mail addresses 
+located at the top of this form.
+
+============================================================================
+
+Copyright (c) ARM Limited 1998-2001. All rights reserved.
+
+============================================================================
+
+

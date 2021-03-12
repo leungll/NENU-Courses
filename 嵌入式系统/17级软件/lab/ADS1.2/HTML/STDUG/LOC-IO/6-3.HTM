@@ -1,0 +1,31 @@
+<HTML><HEAD><TITLE>6.3 How Do the Standard Iostreams Help Solve Problems?</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="6-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>6.3 How Do the Standard Iostreams Help Solve Problems?</H2>
+
+<A NAME="idx168"><!></A>
+<P>There are many situations in which iostreams are useful:</P>
+<UL>
+<A NAME="idx169"><!></A>
+<LI><P><B>File I/O.</B> Iostreams can still be used for input and output to files, although file I/O has lost some of it former importance. In the past, alpha-numeric user interfaces were often built using file input/output to the standard input and output channels. Today almost all applications have graphical user interfaces.</P>
+</LI>
+<P>Nevertheless, iostreams are still useful for input and output to files other than the standard input and output channels, and to all other kinds of external media that fit into the file abstraction. For example, in Rogue Wave's <B>Tools.h++ Professional</B>, the <SAMP>net</SAMP> class library for network communications programming uses iostreams for input and output to communication streams, like sockets and pipes.</P>
+<A NAME="idx170"><!></A>
+<LI><P><B>In-Memory I/O.</B> Iostreams can perform in-memory formatting and parsing. Even with a graphical user interface, you must format the text you want to display. The standard iostreams offer internationalized in-memory I/O, which is a great help for text processing tasks like formatting. The formatting of numeric values, for example, depends on cultural conventions. The formatting layer uses a locale's numeric facets to adapt its formatting and parsing to cultural conventions.</P>
+</LI>
+<A NAME="idx171"><!></A>
+<LI><P><B>Internationalized Text Processing.</B> This function is actively supported by iostreams. Iostreams use locales. As locales are extensible, any kind of facet can be carried by a locale, and thus used by a stream. By default, iostreams use only the numeric and the code conversion facets of a locale. However, date, time, and monetary facets are available in the Standard C++ Library. Other cultural dependencies can be encapsulated in unique facets and made accessible to a stream. You can easily internationalize your use of iostreams to meet your needs.</P>
+</LI>
+<A NAME="idx172"><!></A>
+<LI><P><B>Binary I/O.</B> The traditional iostreams suffer from a number of limitations. The biggest is the lack of conversion abilities: if you insert a <SAMP>double</SAMP> into a stream, for example, you do not know what format will be used to represent this <SAMP>double</SAMP> on the external device. There is no portable way to insert it as binary.</P>
+</LI>
+<P>Standard iostreams are by far more flexible. The code conversion performed on transfer of internal data to external devices can be customized: the transport layer delegates the task of converting to a code conversion facet. To provide a stream with a suitable code conversion facet for binary output, you can insert a <SAMP>double</SAMP> into a file stream in a portable binary data exchange format. No such code conversion facets are provided by the Standard C++ Library, however, and implementing such a facet is not trivial. As an alternative, you might consider implementing an entire stream buffer layer that can handle binary I/O.</P>
+<A NAME="idx173"><!></A>
+<LI><P><B>Extending Iostreams.</B> In a way, you can think of iostreams as a framework that can be extended and customized. You can add input and output operators for user-defined types, or create your own formatting elements, the manipulators. You can specialize entire streams, usually in conjunction with specialized stream buffers. You can provide different locales to represent different cultural conventions, or to contain special purpose facets. You can instantiate iostreams classes for new character types, other than <SAMP>char</SAMP> or <SAMP>wchar_t</SAMP>.</P>
+</LI>
+</UL>
+
+<HR>
+<A HREF="6-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

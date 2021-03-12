@@ -1,0 +1,95 @@
+<HTML><HEAD><TITLE>cin</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="cha_3696.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="clo_8238.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>cin</H2>
+<PRE><HR>Pre-defined stream
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Controls input from a stream buffer associated with the object <SAMP>stdin</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>.<SAMP></SAMP></P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iostream&gt;
+extern istream cin;
+istream <B>cin</B>;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The object <SAMP>cin</SAMP> controls input from a stream buffer associated with the object <SAMP>stdin</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>. By default, the standard C and C++ streams are synchronized, but you can improve performance by using the <SAMP>ios_base</SAMP> member function <SAMP>synch_with_stdio</SAMP> to desynchronize them.</P>
+<P>After the object <SAMP>cin</SAMP> is initialized, <SAMP>cin.tie()</SAMP> returns <SAMP>&amp;cout</SAMP>, which implies that <SAMP>cin</SAMP> and <SAMP>cout</SAMP> are synchronized. </P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// cin example #1
+//
+#include &lt;iostream&gt;
+
+void main ( )
+{
+  using namespace std;
+   
+  int i;
+  float f;
+  char c;
+
+  //read an integer, a float and a character from stdin 
+  cin &gt;&gt; i &gt;&gt; f &gt;&gt; c;
+
+  // output i, f and c to stdout
+  cout &lt;&lt; i &lt;&lt; endl &lt;&lt; f &lt;&lt; endl &lt;&lt; c &lt;&lt; endl;   
+}
+
+//
+// cin example #2
+//
+#include &lt;iostream&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  char p[50];
+
+  // remove all the white spaces 
+  cin &gt;&gt; ws;
+
+  // read characters from stdin until a newline
+  // or 49 characters have been read
+  cin.getline(p,50);
+
+  // output the result to stdout
+  cout &lt;&lt; p;   
+}</PRE>
+
+</UL>
+<P>When inputting <SAMP>"  Grendel the monster" (newline)</SAMP> in the previous test, the output is <SAMP>"Grendel the monster"</SAMP>. The manipulator <SAMP>ws</SAMP> removes spaces.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I>iostream</I></B>(3C++), <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B>(3C++), <B><I><A HREF="cou_4514.htm">cout</A></I></B>(3C++), <B><I><A HREF="cer_5818.htm">cerr</A></I></B>(3C++), <B><I><A HREF="clo_8238.htm">clog</A></I></B>(3C++), <B><I><A HREF="wci_0249.htm">wcin</A></I></B>(3C++), <B><I><A HREF="wco_9369.htm">wcout</A></I></B>(3C++), <B><I><A HREF="wce_2198.htm">wcerr</A></I></B>(3C++), <B><I><A HREF="wcl_5832.htm">wclog</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.3.1</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="cha_3696.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="clo_8238.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

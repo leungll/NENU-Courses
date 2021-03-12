@@ -1,0 +1,84 @@
+<HTML><HEAD><TITLE>11.3 A Simple Extractor and Inserter for the Example</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="11-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="11-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>11.3 A Simple Extractor and Inserter for the Example</H2>
+<P>Following the read and write conventions of iostreams, we would insert and extract the date object like this:</P>
+<UL>
+<PRE>
+date birthday(2,6,1952);
+cout &lt;&lt; birthday &lt;&lt; '\n';</PRE>
+</UL>
+<P>or </P>
+<UL>
+<PRE>
+date aDate;
+
+cout &lt;&lt; '\n' &lt;&lt; "Please, enter a date (day month year)" &lt;&lt; '\n';
+cin  &gt;&gt; aDate;
+cout &lt;&lt; aDate &lt;&lt; '\n';</PRE>
+</UL>
+<A NAME="idx302"><!></A>
+<P>For the next step, we would implement shift operators as inserters and extractors for <SAMP>date</SAMP> objects. Here is an extractor for class <SAMP>date</SAMP>:</P>
+<UL>
+<PRE>
+template&lt;class charT, class Traits&gt;
+basic_istream&lt;charT, Traits&gt;&amp;                                 //1
+operator&gt;&gt; (basic_istream&lt;charT,Traits&gt;&amp; is,                  //2
+            date&amp; dat)                                        //3
+{
+ is &gt;&gt; dat.tm_date.tm_mday;                                   //4
+ is &gt;&gt; dat.tm_date.tm_mon;
+ is &gt;&gt; dat.tm_date.tm_year;
+ return is;                                                   //5
+} </PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The returned value for extractors (and inserters) is a reference to the stream, so that several extractions can be done in one expression.
+<TR VALIGN="top"><TD>//2</TD><TD>The first parameter usually is the stream from which the data shall be extracted.
+<TR VALIGN="top"><TD>//3</TD><TD>The second parameter is a reference, or alternatively a pointer, to an object of the user-defined type.
+<TR VALIGN="top"><TD>//4</TD><TD>In order to allow access to private data of the date class, the extractor must be declared as a friend function in class <SAMP>date</SAMP>.
+<TR VALIGN="top"><TD>//5</TD><TD>The return value is the stream from which the data was extracted.
+</TABLE>
+<A NAME="idx303"><!></A>
+<P>As the extractor accesses private data members of class date, it must be declared as a friend function to class date. The same holds for the inserter. Here's a more complete version of class <SAMP>date</SAMP>:</P>
+<UL>
+<PRE>
+class date {
+public:
+   date(int d, int m, int y);
+   date(tm t);
+   date();
+   // more constructors and useful member functions
+
+private: 
+   tm tm_date;
+
+template&lt;class charT, Traits&gt;
+friend basic_istream&lt;charT, Traits&gt; &amp;operator &gt;&gt; 
+  (basic_istream&lt;charT, Traits &gt;&amp; is, date&amp; dat);
+ 
+template&lt;class charT, Traits&gt;
+friend basic_ostream&lt;charT, Traits&gt; &amp;operator &lt;&lt; 
+  (basic_ostream&lt;charT, Traits &gt;&amp; os, const date&amp; dat);
+};</PRE>
+</UL>
+<A NAME="idx304"><!></A>
+<P>The inserter can be built analogously, as shown below. The only difference is that you would hand over a <I>constant</I> reference to a date object, because the inserter is not supposed to modify the object it prints.</P>
+<UL>
+<PRE>
+template&lt;class charT, class Traits&gt;
+basic_ostream&lt;charT, Traits&gt;&amp;
+operator &lt;&lt; (basic_ostream&lt;charT, Traits &gt;&amp; os, const date&amp; dat)
+{
+ os &lt;&lt; dat.tm_date.tm_mon &lt;&lt; '-';
+ os &lt;&lt; dat.tm_date.tm_mday &lt;&lt; '-';
+ os &lt;&lt; dat.tm_date.tm_year ;
+ return os;
+}</PRE>
+</UL>
+
+<HR>
+<A HREF="11-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="11-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,13 @@
+<HTML><HEAD><TITLE>A.1 Implementation-Dependent Behavior</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="A.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=0>
+<H2>A.1 Implementation-Dependent Behavior</H2>
+<P>The ANSI/ISO-approved standard for the C++ language and library does not specify how <SAMP>pword()</SAMP> and <SAMP>iword()</SAMP> indicate failure, so this feature is dependent on the particular implementation of the library you are using. This Rogue Wave implementation uses operator <SAMP>new</SAMP> for allocating these arrays, which means that <SAMP>bad_alloc</SAMP> will be thrown.</P>
+<P>The standard also doesn't specify what happens if <SAMP>iword()</SAMP> or <SAMP>pword()</SAMP> are provided with an index that was not returned by a previous call to <SAMP>xalloc()</SAMP>. This Rogue Wave implementation allocates as much memory as necessary to provide the requested array entry.</P>
+
+
+
+<HR>
+<A HREF="A.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=O></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=O></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=O></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=O><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

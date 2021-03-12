@@ -1,0 +1,324 @@
+<HTML><HEAD><TITLE>ctype&lt;char&gt;</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="cty_0953.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cty_1366.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ctype&lt;char&gt;</H2>
+<PRE><HR>           <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11> ctype_base
+ctype&lt;char&gt;   
+           <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A specialization of the <B><I><A HREF="cty_0953.htm">ctype</A></I></B> facet.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsclassic_table()">classic_table()</A><BR>
+ <A HREF="#Protected Member Functionsdo_tolower()">do_tolower()</A><BR>
+ <A HREF="#Protected Member Functionsdo_toupper()">do_toupper()</A><BR>
+ <A HREF="#Public Member Functionsis()">is()</A><BR>
+ <A HREF="#Public Member Functionsnarrow()">narrow()</A><BR>
+ <A HREF="#Public Member Functionsscan_is()">scan_is()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsscan_not()">scan_not()</A><BR>
+ <A HREF="#Public Member Functionstable()">table()</A><BR>
+ <A HREF="#Public Member Functionstolower()">tolower()</A><BR>
+ <A HREF="#Public Member Functionstoupper()">toupper()</A><BR>
+ <A HREF="#Public Member Functionswiden()">widen()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+class ctype&lt;char&gt;; </PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>This specialization of the <B><I><A HREF="cty_0953.htm">ctype&lt;charT&gt;</A></I></B> template includes inline versions of <B><I><A HREF="cty_0953.htm">ctype</A></I></B>'s member functions. The facet has the same public interface and uses the same set of masks as the <B><I>ctype</I></B> template. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;&gt;
+class ctype&lt;char&gt; : public locale::facet, public ctype_base {
+  public:
+    typedef char char_type;
+    explicit ctype(const mask* = 0, bool = false, 
+                   size_t = 0);
+    bool         is(mask, char) const;
+    const char* is(const char*, 
+                    const char*, mask*) const;
+    const char* scan_is(mask,
+                         const char*, 
+                         const char*) const;
+    const char* scan_not(mask,
+                          const char*, 
+                          const char*) const;
+    char        toupper(char) const;
+    const char* toupper(char*, const char*) const;
+    char        tolower(char) const;
+    const char* tolower(char*, const char*) const;
+    char        widen(char) const;
+    const char*  widen(const char*, 
+                     const char*, char*) const;
+    char         narrow(char, char) const;
+    const char* narrow(const char*, const char*, 
+                        char, char*) const;
+    static locale::id id;
+    static const size_t table_size = 256;
+
+  protected:
+    const mask* table() const throw();
+    static const mask* classic_table() throw();
+
+~ctype();  // virtual
+    virtual char        do_toupper(char) const;
+    virtual const char* do_toupper(char*, 
+                                    const char*) const;
+    virtual char        do_tolower(char) const;
+    virtual const char* do_tolower(char*, 
+                                    const char*) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>ctype</B>(const mask* tbl = 0, bool del = false,
+               size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I><A HREF="cty_0953.htm">ctype</A></I></B> facet. The three parameters set up the following conditions:</P>
+</UL>
+
+<UL><UL>
+<LI><P>The <SAMP>tbl</SAMP> argument must be either <SAMP>0</SAMP> or an array of at least <SAMP>table_size</SAMP> elements.   If <SAMP>tbl</SAMP> is non-zero, then the supplied table is used for character classification. </P>
+</LI>
+<LI><P>If <SAMP>tbl</SAMP> is non zero, and <SAMP>del</SAMP> is <SAMP>true</SAMP>, then the <SAMP>tbl</SAMP> array is deleted by the destructor, so the calling program need not concern itself with the lifetime of the table.</P>
+</LI>
+<LI><P>If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object itself is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so.</P>
+</LI>
+</UL></UL>
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~ctype</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroy the facet. If the constructor was called with a non-zero <SAMP>tbl</SAMP> argument and a <SAMP>true</SAMP> <SAMP>del</SAMP> argument, then the array supplied by the <SAMP>tbl</SAMP> argument is deleted.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I><A HREF="cty_0953.htm">ctype&lt;char&gt;</A></I></B> facet specialization do not all serve the same purpose as the functions in the template. In many cases these functions implement functionality, rather than just forwarding a call to a protected implementation function.</P>
+
+
+<A NAME="Public Member Functionsclassic_table()"></A><PRE>static const mask* 
+<B>classic_table</B>() throw();</PRE>
+
+<UL>
+<P>Returns a pointer to a table_size character array that represents the classifications of characters in the "C" locale. </P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsis()"></A><PRE>bool
+<B>is</B>(mask m, char c) const; </PRE>
+
+<UL>
+<P>Determines if the character <SAMP>c</SAMP> has the classification indicated by the mask <SAMP>m</SAMP>. Returns <SAMP>table()[(unsigned char)c]</SAMP> and <SAMP>m.</SAMP></P>
+</UL>
+
+
+
+<PRE>const char* 
+<B>is</B>(const char* low, 
+   const char* high, mask* vec) const; </PRE>
+
+<UL>
+<P>Fills <SAMP>vec</SAMP> with every mask from <B><I>ctype_base</I></B> that applies to the range of characters indicated by <SAMP>[low,high)</SAMP>.   See <B><I>ctype_base</I></B> for a description of the masks. For instance, after the following call, the first five elements of <SAMP>v</SAMP> would contain: <SAMP>alpha|lower|print|xdigit|graph</SAMP>}:</P>
+<UL>
+<PRE>char a[] = "abcde";
+ctype_base::mask v[12];
+ctype&lt;char&gt;().do_is(a,a+5,v);</PRE>
+
+</UL>
+<P>Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsnarrow()"></A><PRE>char         
+<B>narrow</B>(char c, char dfault) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>const char* 
+<B>narrow</B>(const char* low, const char*, char dfault,
+       char* to) const; </PRE>
+
+<UL>
+<P>Performs <SAMP>::memcpy(to,low,high-low)</SAMP>. Returns <SAMP>high.</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsscan_is()"></A><PRE>const char* 
+<B>scan_is</B>(mask m, const char*, const char* high) const; </PRE>
+
+<UL>
+<P>Finds the first character in the range <SAMP>[low,high)</SAMP> that matches the classification indicated by the mask <SAMP>m</SAMP>. The classification is matched by checking for <SAMP>table()[(unsigned char) p] &amp; m</SAMP>, where <SAMP>p</SAMP> is in the range <SAMP>[low,high)</SAMP>. Returns the first <SAMP>p</SAMP> that matches, or <SAMP>high</SAMP> if none do.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsscan_not()"></A><PRE>const char* 
+<B>scan_not</B>(mask m, const char* low, const char* high) const; </PRE>
+
+<UL>
+<P>Finds the first character in the range <SAMP>[low,high)</SAMP> that does not match the classification indicated by the mask <SAMP>m</SAMP>.   The classification is matched by checking for <SAMP>!(table()[(unsigned char) p] &amp; m)</SAMP>, where <SAMP>p</SAMP> is in the range [low,high). Returns the first <SAMP>p</SAMP> that matches, or <SAMP>high</SAMP> if none do.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionstable()"></A><PRE>const mask* 
+<B>table</B>() const throw();</PRE>
+
+<UL>
+<P>If the <SAMP>tbl</SAMP> argument that was passed to the constructor was non-zero, then this function returns that argument. Otherwise it returns <SAMP>classic_table()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionstolower()"></A><PRE>char        
+<B>tolower</B>(char c) const;
+const char* 
+<B>tolower</B>(char* low, const char* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_tolower(c)</SAMP> or <SAMP>do_tolower(low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionstoupper()"></A><PRE>char        
+<B>toupper</B>(char) const;
+const char* 
+<B>toupper</B>(char* low, const char* high) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>do_toupper(c)</SAMP> or <SAMP>do_toupper(low,high).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Public Member Functionswiden()"></A><PRE>char        
+<B>widen</B>(char c) const; </PRE>
+
+<UL>
+<P>Returns <SAMP>c.</SAMP></P>
+</UL>
+
+
+
+<PRE>const char*  
+<B>widen</B>(const char* low, const char* high, char* to) const; </PRE>
+
+<UL>
+<P>Performs <SAMP>::memcpy(to,low,high-low)</SAMP>. Returns <SAMP>high.</SAMP></P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_tolower()"></A><PRE>virtual char        
+<B>do_tolower</B>(char) const; </PRE>
+
+<UL>
+<P>Returns the lower case representation of <SAMP>c,</SAMP> if such exists. Otherwise returns <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const char* 
+<B>do_tolower</B>(char* low, const char* high) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its lower case representation, if such exists. If a lower case representation does not exist, then the character is not changed. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_toupper()"></A><PRE>virtual char        
+<B>do_toupper</B>(char c) const; </PRE>
+
+<UL>
+<P>Returns the upper case representation of <SAMP>c,</SAMP> if such exists. Otherwise returns <SAMP>c</SAMP>.</P>
+</UL>
+
+
+
+<PRE>virtual const char* 
+<B>do_toupper</B>(char* low, const char* high) const; </PRE>
+
+<UL>
+<P>Converts each character in the range <SAMP>[low,high)</SAMP> to its upper case representation, if such exists. If an upper case representation does not exist, then the character is not changed. Returns <SAMP>high</SAMP>.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="col_9822.htm">collate</A></I></B>, <B><I><A HREF="cty_0953.htm">ctype&lt;char&gt;</A></I></B>, <B><I><A HREF="cty_1366.htm">ctype_byname</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="cty_0953.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cty_1366.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

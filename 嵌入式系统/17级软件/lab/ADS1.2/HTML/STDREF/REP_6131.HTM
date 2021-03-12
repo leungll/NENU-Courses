@@ -1,0 +1,128 @@
+<HTML><HEAD><TITLE>replace</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="rem_0514.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rep_5264.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>replace</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Substitutes elements in a collection with new values.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator, class T&gt;
+void <B>replace</B> (ForwardIterator first,
+              ForwardIterator last,
+              const T&amp; old_value,
+              const T&amp; new_value);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>For the range <SAMP>[first, last)</SAMP>, the <B><I>replace</I></B> algorithm replaces elements referred to by iterator <SAMP>i</SAMP> with <SAMP>new_value</SAMP>, when the following condition holds: <SAMP>*i == old_value</SAMP>.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>Exactly <SAMP>last - first</SAMP> comparisons or applications of the corresponding predicate are done.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// replace.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iterator&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ template&lt;class Arg&gt;
+ struct all_true : public unary_function&lt;Arg, bool&gt;
+ {
+   bool operator()(const Arg&amp;){ return 1; }
+ };
+
+ int main()
+ {
+
+   //Initialize a vector with an array of integers
+   int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+   vector&lt;int&gt; v(arr, arr+10);
+
+   //Print out original vector
+   cout &lt;&lt; "The original list: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),ostream_iterator&lt;int,char&gt;
+       (cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   //Replace the number 7 with 11
+   <B>replace</B>(v.begin(), v.end(), 7, 11);
+
+
+   // Print out vector with 7 replaced, 
+   // s.b. 1 2 3 4 5 6 11 8 9 10
+   cout &lt;&lt; "List after replace " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),o
+        stream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   //Replace 1 2 3 with 13 13 13
+   replace_if(v.begin(), v.begin()+3, all_true&lt;int&gt;(), 13);
+
+   // Print out the remaining vector, 
+   // s.b. 13 13 13 4 5 6 11 8 9 10
+   cout &lt;&lt; "List after replace_if " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The original list:
+     1 2 3 4 5 6 7 8 9 10
+List after replace:
+     1 2 3 4 5 6 11 8 9 10
+List after replace_if:
+     13 13 13 4 5 6 11 8 9 10
+List using replace_copy to cout:
+     17 17 17 4 5 6 11 8 9 10
+List with all elements output as 19s:
+     19 19 19 19 19 19 19 19 19 19</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="rep_6837.htm">replace_if</A></I></B>, <B><I><A HREF="rep_5264.htm">replace_copy</A></I></B>, <B><I><A HREF="rep_8915.htm">replace_copy_if</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="rem_0514.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="rep_5264.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

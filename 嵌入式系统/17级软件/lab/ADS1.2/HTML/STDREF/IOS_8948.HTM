@@ -1,0 +1,777 @@
+<HTML><HEAD><TITLE>ios_base</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ins_0081.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ios_2665.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ios_base</H2>
+<PRE><HR>Base Class
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Public Constructors">Public Constructors</A></LI>
+<LI><A HREF="#Public Destructors">Public Destructors</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Class failure">Class failure</A></LI>
+<LI><A HREF="#Class Init">Class Init</A></LI>
+<LI><A HREF="#Non-member Functions">Non-member Functions</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Defines member types and maintains data for classes that inherit from it.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typesevent_callback">event_callback</A><BR>
+ <A HREF="#Typesfmtflags">fmtflags</A><BR>
+ <A HREF="#Typesiostate">iostate</A><BR>
+ <A HREF="#Typesopenmode">openmode</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesseekdir">seekdir</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Non-member Functionsboolalpha()">boolalpha()</A><BR>
+ <A HREF="#Public Member Functionscopyfmt()">copyfmt()</A><BR>
+ <A HREF="#Non-member Functionsdec()">dec()</A><BR>
+ <A HREF="#Class failurefailure()">failure()</A><BR>
+ <A HREF="#Non-member Functionsfixed()">fixed()</A><BR>
+ <A HREF="#Public Member Functionsflags()">flags()</A><BR>
+ <A HREF="#Public Member Functionsgetloc()">getloc()</A><BR>
+ <A HREF="#Non-member Functionshex()">hex()</A><BR>
+ <A HREF="#Public Member Functionsimbue()">imbue()</A><BR>
+ <A HREF="#Non-member Functionsinternal()">internal()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsis_sync()">is_sync()</A><BR>
+ <A HREF="#Public Member Functionsiword()">iword()</A><BR>
+ <A HREF="#Non-member Functionsleft()">left()</A><BR>
+ <A HREF="#Non-member Functionsnoboolalpha()">noboolalpha()</A><BR>
+ <A HREF="#Non-member Functionsnoshowbase()">noshowbase()</A><BR>
+ <A HREF="#Non-member Functionsnoshowpoint()">noshowpoint()</A><BR>
+ <A HREF="#Non-member Functionsnoshowpos()">noshowpos()</A><BR>
+ <A HREF="#Non-member Functionsnoskipws()">noskipws()</A><BR>
+ <A HREF="#Non-member Functionsnounitbuf()">nounitbuf()</A><BR>
+ <A HREF="#Non-member Functionsnouppercase()">nouppercase()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Functionsoct()">oct()</A><BR>
+ <A HREF="#Public Member Functionsprecision()">precision()</A><BR>
+ <A HREF="#Public Member Functionspword()">pword()</A><BR>
+ <A HREF="#Public Member Functionsregister_callback()">register_callback()</A><BR>
+ <A HREF="#Non-member Functionsright()">right()</A><BR>
+ <A HREF="#Non-member Functionsscientific()">scientific()</A><BR>
+ <A HREF="#Public Member Functionssetf()">setf()</A><BR>
+ <A HREF="#Non-member Functionsshowbase()">showbase()</A><BR>
+ <A HREF="#Non-member Functionsshowpoint()">showpoint()</A><BR>
+ <A HREF="#Non-member Functionsshowpos()">showpos()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Non-member Functionsskipws()">skipws()</A><BR>
+ <A HREF="#Public Member Functionssync_with_stdio()">sync_with_stdio()</A><BR>
+ <A HREF="#Non-member Functionsunitbuf()">unitbuf()</A><BR>
+ <A HREF="#Public Member Functionsunsetf()">unsetf()</A><BR>
+ <A HREF="#Non-member Functionsuppercase()">uppercase()</A><BR>
+ <A HREF="#Class failurewhat()">what()</A><BR>
+ <A HREF="#Public Member Functionswidth()">width()</A><BR>
+ <A HREF="#Public Member Functionsxalloc()">xalloc()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;ios&gt;
+class ios_base;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>ios_base</I></B> defines several member types:</P>
+<UL>
+<LI><P>A class <SAMP>failure</SAMP> derived from <SAMP>exception</SAMP>.</P>
+</LI>
+<LI><P>A class <SAMP>Init.</SAMP></P>
+</LI>
+<LI><P>Three bitmask types: <SAMP>fmtflags</SAMP>, <SAMP>iostate</SAMP>, and <SAMP>openmode.</SAMP></P>
+</LI>
+<LI><P>Two enumerated types: <SAMP>seekdir</SAMP> and <SAMP>event.</SAMP></P>
+</LI>
+</UL>
+<P>It maintains several kinds of data:</P>
+<UL>
+<LI><P>Control information that influences how to interpret (format) input sequences and how to generate (format) output sequences.</P>
+</LI>
+<LI><P>Locale object used within the stream classes.</P>
+</LI>
+<LI><P>Additional information that is stored by the program for its private use.</P>
+</LI>
+</UL>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class ios_base {
+  
+ public:
+
+   class failure : public exception {
+      
+      public:
+
+          explicit failure(const string&amp; msg);
+          virtual ~failure() throw();
+          virtual const char* what() const throw();
+    };
+
+   typedef int      fmtflags;
+
+   enum fmt_flags {
+                    boolalpha   = 0x0001,
+                    dec         = 0x0002,
+                    fixed       = 0x0004, 
+                    hex         = 0x0008,
+                    internal    = 0x0010,
+                    left        = 0x0020,
+                    oct         = 0x0040,
+                    right       = 0x0080,
+                    scientific  = 0x0100,
+                    showbase    = 0x0200,
+                    showpoint   = 0x0400, 
+                    showpos     = 0x0800,
+                    skipws      = 0x1000,
+                    unitbuf     = 0x2000,
+                    uppercase   = 0x4000,
+                    adjustfield = left | right | internal,
+                    basefield   = dec | oct | hex,
+                    floatfield  = scientific | fixed
+                  };
+
+   typedef int      iostate;
+
+   enum io_state {
+                   goodbit     = 0x00,   
+                   badbit      = 0x01, 
+                   eofbit      = 0x02,
+                   failbit     = 0x04
+                 };
+
+   typedef int      openmode;
+
+   enum open_mode {
+                    app         = 0x01, 
+                    binary      = 0x02, 
+                    in          = 0x04, 
+                    out         = 0x08, 
+                    trunc       = 0x10,  
+                    ate         = 0x20 
+                  };
+
+   typedef int      seekdir;
+
+   enum seek_dir {
+                     beg         = 0x0,  
+                     cur         = 0x1, 
+                     end         = 0x2    
+                 };
+
+
+   class Init;
+    
+   fmtflags flags() const;
+   fmtflags flags(fmtflags fmtfl);
+   fmtflags setf(fmtflags fmtfl);
+   fmtflags setf(fmtflags fmtfl, fmtflags mask);
+   void unsetf(fmtflags mask);
+
+   streamsize precision() const;
+   streamsize precision(streamsize prec);
+   streamsize width() const;
+   streamsize width(streamsize wide);
+
+   locale imbue(const locale&amp; loc);
+   locale getloc() const
+
+   static int xalloc();
+   long&amp;  iword(int index);
+   void*&amp; pword(int index);
+
+   ios_base&amp; copyfmt(const ios_base&amp; rhs);
+
+   enum event     {
+                    erase_event   = 0x0001,
+                    imbue_event   = 0x0002,   
+                    copyfmt_event = 0x004
+                  };
+
+   typedef void (*event_callback) (event, ios_base&amp;, 
+                 int index);
+   void register_callback(event_callback fn, int index);
+
+   bool synch_with_stdio(bool sync = true);
+   bool is_synch();
+
+  protected:
+
+   ios_base();
+   virtual ~ios_base();
+
+  private:
+
+   union ios_user_union {
+                           long  lword;
+                           void* pword;
+                        };
+
+   union ios_user_union *userwords_;
+};
+
+ ios_base&amp; boolalpha(ios_base&amp;);
+ ios_base&amp; noboolalpha(ios_base&amp;);
+ ios_base&amp; showbase(ios_base&amp;);
+ ios_base&amp; noshowbase(ios_base&amp;);
+ ios_base&amp; showpoint(ios_base&amp;);
+ ios_base&amp; noshowpoint(ios_base&amp;);
+ ios_base&amp; showpos(ios_base&amp;);
+ ios_base&amp; noshowpos(ios_base&amp;);
+ ios_base&amp; skipws(ios_base&amp;);
+ ios_base&amp; noskipws(ios_base&amp;);
+ ios_base&amp; uppercase(ios_base&amp;);
+ ios_base&amp; nouppercase(ios_base&amp;);
+ ios_base&amp; internal(ios_base&amp;);
+ ios_base&amp; left(ios_base&amp;);
+ ios_base&amp; right(ios_base&amp;);
+ ios_base&amp; dec(ios_base&amp;);
+ ios_base&amp; hex(ios_base&amp;);
+ ios_base&amp; oct(ios_base&amp;);
+ ios_base&amp; fixed(ios_base&amp;);
+ ios_base&amp; scientific(ios_base&amp;);
+ ios_base&amp; unitbuf(ios_base&amp;);
+ ios_base&amp; nounitbuf(ios_base&amp;);</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesfmtflags"></A><PRE><B>fmtflags</B></PRE>
+
+<UL>
+<P>The type <SAMP>fmtflags</SAMP> is a bitmask type. Setting its elements has the following effects:</P>
+</UL>
+
+<UL><TABLE>
+<TR><TD VALIGN=top><SAMP>showpos</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a + sign in non-negative generated numeric output.</TD></TR>
+<TR><TD VALIGN=top><SAMP>showbase</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a prefix indicating the numeric base of generated integer output</TD></TR>
+<TR><TD VALIGN=top><SAMP>uppercase</SAMP>  <SAMP></TD>
+<TD></SAMP>Replaces certain lowercase letters with their uppercase equivalents in generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>showpoint</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a decimal-point character unconditionally in generated floating-point output</TD></TR>
+<TR><TD VALIGN=top><SAMP>boolalpha</SAMP>  <SAMP></TD>
+<TD></SAMP>Inserts and extracts bool type in alphabetic format</TD></TR>
+<TR><TD VALIGN=top><SAMP>unitbuf</SAMP>  <SAMP></TD>
+<TD></SAMP>Flushes output after each output operation</TD></TR>
+<TR><TD VALIGN=top><SAMP>internal</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters at a designated internal point in certain generated output. If no such point is designated, it's identical to <SAMP>right</SAMP>.</TD></TR>
+<TR><TD VALIGN=top><SAMP>left</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters on the right (final positions) of certain generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>right</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters on the left (initial positions) of certain generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>dec</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in decimal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>hex</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in hexadecimal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>oct</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in octal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>fixed</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates floating-point output in fixed-point notation</TD></TR>
+<TR><TD VALIGN=top><SAMP>scientific</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates floating-point output in scientific notation</TD></TR>
+<TR><TD VALIGN=top><SAMP>skipws  </TD>
+<TD></SAMP>Skips leading white space before certain input operation.</TD></TR>
+</TABLE></UL>
+
+<A NAME="Typesiostate"></A><PRE><B>iostate</B></PRE>
+
+<UL>
+<P>The type <SAMP>iostate</SAMP> is a bitmask type. Setting its elements has the following effects:</P>
+</UL>
+
+<UL><TABLE>
+<TR><TD VALIGN=top><SAMP>badbit  </TD>
+<TD></SAMP>Indicates a loss of integrity in an input or output sequence.</TD></TR>
+<TR><TD VALIGN=top><SAMP>eofbit  </TD>
+<TD></SAMP>Indicates that an input operation reached the end of an input sequence.</TD></TR>
+<TR><TD VALIGN=top><SAMP>failbit  </TD>
+<TD></SAMP>Indicates that an input operation failed to read the expected characters, or that an output operation failed to generate the desired characters.</TD></TR>
+</TABLE></UL>
+
+
+<A NAME="Typesopenmode"></A><PRE><B>openmode</B></PRE>
+
+<UL>
+<P>The type <SAMP>openmode</SAMP> is a bitmask type. Setting its elements has the following effects:</P>
+</UL>
+
+<UL><TABLE>
+<TR><TD VALIGN=top><SAMP>app  </TD>
+<TD></SAMP>Seeks to the end before writing.</TD></TR>
+<TR><TD VALIGN=top><SAMP>ate  </TD>
+<TD></SAMP>Opens and seeks to the end immediately after opening.</TD></TR>
+<TR><TD VALIGN=top><SAMP>binary  </TD>
+<TD></SAMP>Performs input and output in binary mode.</TD></TR>
+<TR><TD VALIGN=top><SAMP>in  </TD>
+<TD></SAMP>Opens for input.</TD></TR>
+<TR><TD VALIGN=top><SAMP>out  </TD>
+<TD></SAMP>Opens for output.</TD></TR>
+<TR><TD VALIGN=top><SAMP>trunc  </TD>
+<TD></SAMP>Truncates an existing stream when opening.</TD></TR>
+</TABLE></UL>
+
+
+<A NAME="Typesseekdir"></A><PRE><B>seekdir</B></PRE>
+
+<UL>
+<P>The type <SAMP>seekdir</SAMP> is a bitmask type. Setting its elements has the following effects:</P>
+</UL>
+
+<UL><TABLE>
+<TR><TD VALIGN=top><SAMP>beg  </TD>
+<TD></SAMP>Requests a seek relative to the beginning of the stream.</TD></TR>
+<TR><TD VALIGN=top><SAMP>cur  </TD>
+<TD></SAMP>Requests a seek relative to the current position within the sequence.</TD></TR>
+<TR><TD VALIGN=top><SAMP>end  </TD>
+<TD></SAMP>Requests a seek relative to the current end of the sequence.</TD></TR>
+</TABLE></UL>
+
+
+<A NAME="Typesevent_callback"></A><PRE><B>event_callback</B></PRE>
+
+<UL>
+<P>The type <SAMP>event_callback</SAMP> is the type of the callback function used as a parameter in the function <SAMP>register_callback</SAMP>. These functions allow you to use the <SAMP>iword</SAMP>, <SAMP>pword</SAMP> mechanism in an exception-safe environment.</P>
+</UL>
+
+
+<A NAME="Public Constructors"><H3>Public Constructors</H3></A>
+
+
+<PRE><B>ios_base</B>();</PRE>
+
+<UL>
+<P>The <SAMP>ios_base</SAMP> members have an indeterminate value after construction.</P>
+</UL>
+
+
+<A NAME="Public Destructors"><H3>Public Destructors</H3></A>
+
+
+<PRE><B>virtual</B>
+ <B>~ios_base</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>ios_base</SAMP>. Calls each registered callback pair <SAMP>(fn, index)</SAMP> as <SAMP>(*fn)(erase_event,*this, index)</SAMP> at such a time that any <SAMP>ios_base</SAMP> member function called from within <SAMP>fn</SAMP> has well-defined results.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionscopyfmt()"></A><PRE>ios_base&amp; 
+<B>copyfmt</B>(const ios_base&amp; rhs); </PRE>
+
+<UL>
+<P>Assigns to the member objects of <SAMP>*this</SAMP> the corresponding member objects of <SAMP>rhs</SAMP>. The contents of the union pointed to by <SAMP>pword</SAMP> and <SAMP>iword</SAMP> are copied, not the pointers themselves. Before copying any part of <SAMP>rhs</SAMP>, calls each registered callback pair <SAMP>(fn,index)</SAMP> as <SAMP>(*fn)(erase_even,*this, index)</SAMP>. After all parts have been replaced, calls each callback pair that was copied from <SAMP>rhs</SAMP> as <SAMP>(*fn)(copy_event,*this,index)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsflags()"></A><PRE>fmtflags 
+<B>flags</B>() const; </PRE>
+
+<UL>
+<P>Returns the format control information for both input and output.</P>
+</UL>
+
+
+
+<PRE>fmtflags 
+<B>flags</B>(fmtflags fmtfl); </PRE>
+
+<UL>
+<P>Saves the format control information, then sets it to <SAMP>fmtfl</SAMP> and returns the previously saved value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsgetloc()"></A><PRE>locale 
+<B>getloc</B>() const; </PRE>
+
+<UL>
+<P>Returns the imbued locale, which is used to perform locale-dependent input and output operations. The default locale, <SAMP>locale::locale()</SAMP>, is used if no other locale object has been imbued in the stream by a call to the <SAMP>imbue</SAMP> function.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsimbue()"></A><PRE>locale 
+<B>imbue</B>(const locale&amp; loc); </PRE>
+
+<UL>
+<P>Saves the value returned by <SAMP>getloc()</SAMP>, then assigns <SAMP>loc</SAMP> to a private variable and calls each registered callback pair <SAMP>(fn, index)</SAMP> as <SAMP>(*fn)(imbue_event,*this, index)</SAMP>. It then returns the previously saved value. </P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsis_sync()"></A><PRE>bool 
+<B>is_sync</B>();</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the C++ standard streams and the standard C streams are synchronized. Otherwise returns <SAMP>false</SAMP>. This function is not part of the C++ standard.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsiword()"></A><PRE>long&amp; 
+<B>iword</B>(int idx); </PRE>
+
+<UL>
+<P>Returns <SAMP>userwords_[idx].iword</SAMP>. If <SAMP>userwords_</SAMP> is a null pointer, allocates a union of <SAMP>long</SAMP> and <SAMP>void*</SAMP> of unspecified size and stores a pointer to its first element in <SAMP>userwords_</SAMP>. The function then extends the union pointed to by <SAMP>userwords_</SAMP> to include the element <SAMP>userwords_[idx]</SAMP>. Each newly allocated element of the union is initialized to zero. The reference returned may become invalid after another call to the object's <SAMP>iword</SAMP> or <SAMP>pword</SAMP> member with a different index, after a call to its <SAMP>copyfmt</SAMP> member, or when the object is destroyed.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsprecision()"></A><PRE>streamsize 
+<B>precision</B>() const; </PRE>
+
+<UL>
+<P>Returns the precision (number of digits after the decimal point) to generate on certain output conversions.</P>
+</UL>
+
+
+
+<PRE>streamsize 
+<B>precision</B>(streamsize prec); </PRE>
+
+<UL>
+<P>Saves the precision, then sets it to <SAMP>prec</SAMP> and returns the previously saved value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspword()"></A><PRE>void*&amp; 
+<B>pword</B>(int idx); </PRE>
+
+<UL>
+<P>Returns <SAMP>userword_[idx].pword</SAMP>. If <SAMP>userwords_</SAMP> is a null pointer, allocates a union of <SAMP>long</SAMP> and <SAMP>void*</SAMP> of unspecified size and stores a pointer to its first element in <SAMP>userwords_</SAMP>. The function then extends the union pointed to by <SAMP>userwords_</SAMP> to include the element <SAMP>userwords_[idx]</SAMP>. Each newly allocated element of the array is initialized to zero. The reference returned may become invalid after another call to the object's <SAMP>pword</SAMP> or <SAMP>iword</SAMP> member with a different index, after a call to its <SAMP>copyfmt</SAMP> member, or when the object is destroyed.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsregister_callback()"></A><PRE>void 
+<B>register_callback</B>(event_callback fn, int index); </PRE>
+
+<UL>
+<P> Registers the pair <SAMP>(fn, index)</SAMP> such that during calls to <SAMP>imbue()</SAMP>, <SAMP>copyfmt()</SAMP>, or <SAMP>~ios_base()</SAMP>, the function <SAMP>fn</SAMP> is called with argument <SAMP>index</SAMP>. Functions registered are called when an event occurs, in opposite order of registration. Functions registered while a callback function is active are not called until the next event. Identical pairs are not merged; a function registered twice is called twice per event.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssetf()"></A><PRE>fmtflags 
+<B>setf</B>(fmtflags fmtfl); </PRE>
+
+<UL>
+<P>Saves the format control information, then sets it to <SAMP>fmtfl</SAMP> and returns the previously saved value.</P>
+</UL>
+
+
+
+<PRE>fmtflags 
+<B>setf</B>(fmtflags fmtfl, fmtflags mask); </PRE>
+
+<UL>
+<P>Saves the format control information, then clears <SAMP>mask</SAMP> in <SAMP>flags()</SAMP>, sets <SAMP>fmtfl &amp; mask in flags()</SAMP> and returns the previously saved value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssync_with_stdio()"></A><PRE>bool 
+<B>sync_with_stdio</B>(bool sync = true); </PRE>
+
+<UL>
+<P>When called with a <SAMP>false</SAMP> argument, allows the C++ standard streams to operate independently of the standard C streams, which greatly improves performance. When called with a <SAMP>true</SAMP> argument, restores the default synchronization. The return value of the function is the status of the synchronization at the time of the call. </P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsunsetf()"></A><PRE>void 
+<B>unsetf</B>(fmtflags mask); </PRE>
+
+<UL>
+<P>Clears <SAMP>mask</SAMP> in <SAMP>flags()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionswidth()"></A><PRE>streamsize 
+<B>width</B>() const; </PRE>
+
+<UL>
+<P>Returns the field width (number of characters) to generate on certain output conversions.</P>
+</UL>
+
+
+
+<PRE>streamsize 
+<B>width</B>(streamsize wide); </PRE>
+
+<UL>
+<P>Saves the field width, then sets it to <SAMP>wide</SAMP> and returns the previously saved value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsxalloc()"></A><PRE>static int 
+<B>xalloc</B>();</PRE>
+
+<UL>
+<P>Returns the next static index that can be used with <SAMP>pword</SAMP> and <SAMP>iword</SAMP>. This is useful if you want to share data between several stream objects.</P>
+</UL>
+
+
+<A NAME="Class failure"><H3>Class failure</H3></A>
+<P>The class <B><I>failure</I></B> defines the base class for the types of all objects thrown as exceptions by functions in the <B><I>iostreams</I></B> library. It reports errors detected during stream buffer operations.</P>
+
+
+<A NAME="Class failurefailure()"></A><PRE>explicit <B>failure</B>(const string&amp; msg); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>failure</SAMP>, initializing the base class with <SAMP>exception(msg).</SAMP></P>
+</UL>
+
+
+
+<A NAME="Class failurewhat()"></A><PRE>const char* 
+<B>what</B>() const; </PRE>
+
+<UL>
+<P>Returns the message <SAMP>msg</SAMP> with which the exception was created.</P>
+</UL>
+
+
+<A NAME="Class Init"><H3>Class Init</H3></A>
+<P>The class <B><I>Init</I></B> describes an object whose construction ensures the construction of the eight objects declared in <SAMP>&lt;iostream&gt;</SAMP>, which associate file stream buffers with the standard C streams.</P>
+
+<A NAME="Non-member Functions"><H3>Non-member Functions</H3></A>
+
+
+<A NAME="Non-member Functionsboolalpha()"></A><PRE>ios_base&amp; 
+<B>boolalpha</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::boolalpha)</SAMP> and returns <SAMP>str.</SAMP></P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsdec()"></A><PRE>ios_base&amp; 
+<B>dec</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::dec, ios_base::basefield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsfixed()"></A><PRE>ios_base&amp; 
+<B>fixed</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::fixed, ios_base::floatfield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionshex()"></A><PRE>ios_base&amp; 
+<B>hex</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::hex, ios_base::basefield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsinternal()"></A><PRE>ios_base&amp; 
+<B>internal</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::internal, ios_base::adjustfield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsleft()"></A><PRE>ios_base&amp; 
+<B>left</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::left, ios_base::adjustfield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnoboolalpha()"></A><PRE>ios_base&amp; 
+<B>noboolalpha</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::boolalpha)</SAMP> and returns <SAMP>str.</SAMP></P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnoshowbase()"></A><PRE>ios_base&amp; 
+<B>noshowbase</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::showbase)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnoshowpoint()"></A><PRE>ios_base&amp; 
+<B>noshowpoint</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::showpoint)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnoshowpos()"></A><PRE>ios_base&amp; 
+<B>noshowpos</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::showpos)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnoskipws()"></A><PRE>ios_base&amp; 
+<B>noskipws</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::skipws)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnounitbuf()"></A><PRE>ios_base&amp; 
+<B>nounitbuf</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::unitbuf)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsnouppercase()"></A><PRE>ios_base&amp; 
+<B>nouppercase</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.unsetf(ios_base::uppercase)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsoct()"></A><PRE>ios_base&amp; 
+<B>oct</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::oct, ios_base::basefield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsright()"></A><PRE>ios_base&amp; 
+<B>right</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::right, ios_base::adjustfield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsscientific()"></A><PRE>ios_base&amp; 
+<B>scientific</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::scientific, ios_base::floatfield)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsshowbase()"></A><PRE>ios_base&amp; 
+<B>showbase</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::showbase)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsshowpoint()"></A><PRE>ios_base&amp; 
+<B>showpoint</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::showpoint)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsshowpos()"></A><PRE>ios_base&amp; 
+<B>showpos</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::showpos)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsskipws()"></A><PRE>ios_base&amp; 
+<B>skipws</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::skipws)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsunitbuf()"></A><PRE>ios_base&amp; 
+<B>unitbuf</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::unitbuf)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Non-member Functionsuppercase()"></A><PRE>ios_base&amp; 
+<B>uppercase</B>(ios_base&amp; str); </PRE>
+
+<UL>
+<P>Calls <SAMP>str.setf(ios_base::uppercase)</SAMP> and returns <SAMP>str</SAMP>.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B>(3C++), <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++), <B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.4.2</I></P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="ins_0081.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ios_2665.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

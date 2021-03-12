@@ -1,0 +1,262 @@
+<HTML><HEAD><TITLE>messages, messages_byname</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="mer_0626.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="min_9233.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>messages, messages_byname</H2>
+<PRE><HR>    <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>messages_base
+                            messages_byname<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>messages
+    <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>   locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Messaging facets. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top> <A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top> <A HREF="#Public Member Functionsclose()">close()</A><BR>
+ <A HREF="#Protected Member Functionsdo_close()">do_close()</A><BR>
+ <A HREF="#Protected Member Functionsdo_get()">do_get()</A><BR>
+ <A HREF="#Protected Member Functionsdo_open()">do_open()</A><BR>
+ <A HREF="#Public Member Functionsget()">get()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsopen()">open()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include&lt;locale&gt;
+class messages_base;
+template &lt;class charT&gt; class messages;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>messages</I></B> gives access to a localized messaging facility. The <B><I>messages</I></B> facet is used with the "C" locale, while the<B><I> <A HREF="mes_2641.htm">messages_byname</A></I></B> facet is used with named locales.</P>
+<P>The <B><I>messages_base</I></B> class includes a catalog type for use by the derived <B><I>messages</I></B> and <B><I><A HREF="mes_2641.htm">messages_byname</A></I></B> classes.</P>
+<P>Note that the default messages facet uses <SAMP>catopen, catclose</SAMP>, etc., to implement the message database. If your platform does not support these, then you need to imbue your own messages facet by implementing whatever database is available.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class messages_base {
+public:
+  typedef int catalog;
+};
+
+template &lt;class charT&gt;
+class messages : public locale::facet, public messages_base {
+public:
+  typedef charT char_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit messages(size_t = 0);
+  catalog open(const basic_string&lt;char&gt;&amp;, const locale&amp;)
+               const;
+  string_type get(catalog, int, int,
+                  const string_type&amp;) const;
+  void    close(catalog) const;
+  static locale::id id;
+protected:
+  ~messages();  // virtual
+  virtual catalog do_open(const basic_string&lt;char&gt;&amp;, 
+                          const locale&amp;) const;
+  virtual string_type do_get(catalog, int, int,
+                              const string_type&amp;) const;
+  virtual void    do_close(catalog) const;
+}; 
+
+class messages_byname : public messages&lt;charT&gt; {
+public:
+  explicit messages_byname(const char*, size_t = 0);
+protected:
+  ~messages_byname();  // virtual
+  virtual catalog do_open(const basic_string&lt;char&gt;&amp;, 
+                          const locale&amp;) const;
+virtual string_type do_get(catalog, int, int,
+                           const string_type&amp;) const;
+  virtual void    do_close(catalog) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string returned by member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>messages</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Constructs a <B><I>messages</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted because the locale does not do so.</P>
+</UL>
+
+
+
+<PRE>explicit <B>messages_byname</B>(const char* name, 
+   size_t refs = 0); </PRE>
+
+<UL>
+<P>Constructs a <B><I><A HREF="mes_2641.htm">messages_byname</A></I></B> facet. Uses the named locale specified by the name argument. The <SAMP>refs</SAMP> argument serves the same purpose as it does for the <B><I>messages</I></B> constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~messages</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+<PRE>
+<PRE>static locale::id <B>id</B>;</PRE>
+
+</PRE>
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>messages</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>open</SAMP> function simply calls its protected cousin <SAMP>do_open</SAMP>.</P>
+<UL>
+<PRE>void</PRE>
+
+</UL>
+
+
+<A NAME="Public Member Functionsclose()"></A><PRE><B>close</B>(catalog c) const; 
+<A NAME="Public Member Functionsget()"></A>string_type 
+<B>get</B>(catalog c, int set, int msgid, 
+    const string_type&amp; dfault) const; 
+<A NAME="Public Member Functionsopen()"></A>catalog 
+<B>open</B>(const basic_string&lt;char&gt;&amp; fn, const locale&amp;) const; </PRE>
+
+<UL>
+<P>Each of these public member functions <SAMP>xxx</SAMP> simply call the corresponding protected <SAMP>do_xxx</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_close()"></A><PRE>virtual void    
+<B>do_close</B>(catalog cat) const; </PRE>
+
+<UL>
+<P>Closes the catalog. The <SAMP>cat</SAMP> argument must be obtained by a call to <SAMP>open()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_get()"></A><PRE>virtual string_type 
+<B>do_get</B>(catalog cat, int set, int msgid, 
+       const string_type&amp; dfault) const; </PRE>
+
+<UL>
+<P>Retrieves a specific message. Returns the message identified by <SAMP>cat</SAMP>, <SAMP>set</SAMP>, <SAMP>msgid</SAMP>, and <SAMP>dfault</SAMP>. <SAMP>cat</SAMP> must be obtained by a previous call to <SAMP>open()</SAMP>. This function must not be called with a <SAMP>cat</SAMP> that has had close called on it after the last call to <SAMP>open()</SAMP>. That is, the catalog must be open and not yet closed.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_open()"></A><PRE>virtual catalog 
+<B>do_open</B>(const basic_string&lt;char&gt;&amp; name, const locale&amp;) const; </PRE>
+
+<UL>
+<P>Opens a message catalog. Returns a catalog identifier that can be passed to the <SAMP>get()</SAMP> function in order to access specific messages. Returns <SAMP>-1</SAMP> if the catalog name specified in the <SAMP>name</SAMP> argument is invalid. The <SAMP>loc</SAMP> argument is used for codeset conversion if necessary.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// messages.cpp
+//
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  locale loc;
+
+  // Get a reference to the messages&lt;char&gt; facet
+  const messages&lt;char&gt;&amp; mess = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+    use_facet&lt;messages&lt;char&gt; &gt;(loc);
+#else
+    use_facet(loc,(messages&lt;char&gt;*)0);
+#endif
+
+  // Open a catalog and try to grab
+  // both some valid messages, and an invalid message
+  string def("Message Not Found");
+  messages&lt;char&gt;::catalog cat =
+          mess.open("./rwstdmessages.cat",loc);
+  if (cat != -1)
+  {
+    string msg0 = mess.get(cat,1,1,def);
+    string msg1 = mess.get(cat,1,2,def);
+    string msg2 = mess.get(cat,1,6,def); // invalid msg #
+    string msg3 = mess.get(cat,2,1,def);
+
+    mess.close(cat);
+    cout &lt;&lt; msg0 &lt;&lt; endl &lt;&lt; msg1 &lt;&lt; endl
+         &lt;&lt; msg2 &lt;&lt; endl &lt;&lt; msg3 &lt;&lt; endl;
+  }
+  else
+    cout &lt;&lt; "Unable to open message catalog" &lt;&lt; endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="mer_0626.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="min_9233.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

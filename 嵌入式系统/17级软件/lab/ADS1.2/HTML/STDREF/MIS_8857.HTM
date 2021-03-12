@@ -1,0 +1,124 @@
+<HTML><HEAD><TITLE>mismatch</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="min_5058.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mod_6765.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>mismatch</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Compares elements from two sequences and returns the first two elements that don't match each other.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class InputIterator1, class InputIterator2&gt;
+  pair&lt;InputIterator1,InputIterator2&gt;
+  <B>mismatch</B>(InputIterator1 first1, InputIterator1 last1,
+           InputIterator2 first2);
+
+template &lt;class InputIterator1, class InputIterator2,
+          class BinaryPredicate&gt;
+  pair&lt;InputIterator1, Inputiterator2&gt;
+  <B>mismatch</B>(InputIterator first1, InputIterator1 last1,
+           InputIterator2 first2,
+           BinaryPredicate binary_pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>mismatch</I></B> algorithm compares members of two sequences and returns two iterators (<SAMP>i</SAMP> and <SAMP>j</SAMP>) that point to the first location in each sequence where the sequences differ from each other. Notice that the algorithm denotes both a starting position and an ending position for the first sequence, but denotes only a starting position for the second sequence. <B><I>mismatch</I></B> assumes that the second sequence has at least as many members as the first sequence. If the two sequences are identical, <B><I>mismatch</I></B> returns a pair of iterators that point to the end of the first sequence and the corresponding location at which the comparison stopped in the second sequence.</P>
+<P>The first version of <B><I>mismatch</I></B> checks members of a sequence for equality, while the second version lets you specify a comparison function. The comparison function must be a binary predicate.</P>
+<P>The iterators <SAMP>i</SAMP> and <SAMP>j</SAMP> returned by <B><I>mismatch</I></B> are defined as follows:</P>
+<UL>
+<PRE>j  == first2  +  (i  -  first1)</PRE>
+
+</UL>
+<P>and <SAMP>i</SAMP> is the first iterator in the range <SAMP>[first1, last1)</SAMP> for which the appropriate one of the following conditions hold: </P>
+<UL>
+<PRE>!(*i  ==  *(first2  +  (i  -  first1)))</PRE>
+
+</UL>
+<P>or</P>
+<UL>
+<PRE>binary_pred(*i, *(first2 + (i - first1))) == false</PRE>
+
+</UL>
+<P>If all of the members in the two sequences match, <B><I>mismatch</I></B> returns a pair of <SAMP>last1</SAMP> and <SAMP>first2 + (last1 - first1)</SAMP>. </P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>At most <SAMP>last1 - first1</SAMP> applications of the corresponding predicate are done.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// mismatch.cpp
+//
+ #include &lt;algorithm&gt;
+ #include &lt;vector&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main(void)
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[4] = {1,2,3,4};
+   int d2[4] = {1,3,2,4};
+
+   // Set up two vectors
+   vector&lt;int&gt; vi1(d1,d1 + 4), vi2(d2,d2 + 4);
+
+   // p1 will contain two iterators that point to the
+   // first pair of elements that are different between
+   // the two vectors
+   pair&lt;iterator, iterator&gt; p1 = <B>mismatch</B>(vi1.begin(),
+                           vi1.end(),vi2.begin());
+
+   // find the first two elements such that an element in 
+   // the first vector is greater than the element in 
+   // the second vector.
+   pair&lt;iterator, iterator&gt; p2 = <B>mismatch</B>(vi1.begin(),
+                                vi1.end(), vi2.begin(),
+                                     less_equal&lt;int&gt;());
+
+   // Output results
+   cout &lt;&lt; *p1.first &lt;&lt; ", " &lt;&lt; *p1.second &lt;&lt; endl;
+   cout &lt;&lt; *p2.first &lt;&lt; ", " &lt;&lt; *p2.second &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B> </P>
+<UL>
+<PRE>
+2, 3
+3, 2</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of: </P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="min_5058.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mod_6765.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,9 @@
+1	tstfiles/arm64.pgm	variants/1testo.pgm	variants/1teste.pgm
+2	tstfiles/arm64.pgm	8	variants/2testo.pgm	variants/2teste.pgm
+5	1
+5	0
+3	tstfiles/arm64.pgm	8	variants/3testo.pgm	variants/3teste.pgm
+6	1
+6	0
+4	tstfiles/arm64.pgm	8	variants/4testo.pgm	variants/4teste.pgm
+0

@@ -1,0 +1,231 @@
+<HTML><HEAD><TITLE>fpos</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="For_3289.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fro_0713.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>fpos</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Public Constructors">Public Constructors</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Valid Operations">Valid Operations</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Maintains position information fort he <B><I>iostream</I></B> classes.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typesstate_type">state_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsgood()">good()</A><BR>
+ <A HREF="#Public Member Functionslong()">long()</A><BR>
+ <A HREF="#Public Member Functionsoffset()">offset()</A><BR>
+ <A HREF="#Public Member Functionspos()">pos()</A><BR>
+ <A HREF="#Public Member Functionsstate()">state()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;rw/iotraits&gt;
+template&lt;class stateT = mbstate_t&gt;
+class fpos</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>fpos&lt;stateT&gt;</I></B> is used by the <B><I>iostream</I></B> classes to maintain position information. It maintains three kinds of information: the absolute position, the conversion state and the validity of the stored position. Streams instantiated on tiny characters use <B><I>streampos</I></B> as their positioning type, whereas streams instantiated on wide characters use <B><I>wstreampos</I></B>, but both are defined as <B><I>fpos&lt;mbstate_t&gt;</I></B>. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class stateT = mbstate_t&gt; 
+class fpos {
+
+ public:
+          
+  typedef stateT  state_type;
+
+  fpos(long off = 0);
+  fpos(state_type);                  
+
+  bool good();
+  operator long();
+
+  long offset() cont;
+  long offset(long); 
+
+  state_type   state(state_type); 
+  state_type   state () const;
+
+  long pos() const;
+  long pos(long);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesstate_type"></A><PRE><B>state_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>state_type</SAMP> holds the conversion state, and is compatible with the function <SAMP>locale::codecvt()</SAMP>. By default it is defined as <SAMP>mbstate_t</SAMP>.</P>
+</UL>
+
+
+<A NAME="Public Constructors"><H3>Public Constructors</H3></A>
+
+
+<PRE><B>fpos</B>(long off =0); </PRE>
+
+<UL>
+<P>Constructs an <SAMP>fpos</SAMP> object, initializing its position with <SAMP>off</SAMP> and its conversion state with the default <SAMP>stateT</SAMP> constructor. This function is not described in the C++ standard.</P>
+</UL>
+
+
+
+<PRE><B>fpos</B>(state_type st); </PRE>
+
+<UL>
+<P>Constructs an <SAMP>fpos</SAMP> object, initializing its conversion state with <SAMP>st</SAMP>, its position with the start position, and its status to <SAMP>good</SAMP>. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsstate()"></A><PRE>state_type 
+<B>state</B>() const; </PRE>
+
+<UL>
+<P>Returns the conversion state stored in the <SAMP>fpos</SAMP> object. </P>
+</UL>
+
+
+
+<PRE>state_type 
+<B>state</B>(state_type st); </PRE>
+
+<UL>
+<P>Stores <SAMP>st</SAMP> as the new conversion state in the <SAMP>fpos</SAMP> object and returns its previous value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsgood()"></A><PRE>bool <B>good</B>();</PRE>
+
+<UL>
+<P>Returns the status of the <SAMP>fpos</SAMP> object. Offset(<SAMP>-1</SAMP>) indicates an invalid value and returns <SAMP>false</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Public Member Functionslong()"></A><PRE>operator <B>long</B>();</PRE>
+
+<UL>
+<P>Converts <SAMP>fpos</SAMP> object to absolute displacement. This operator is handy when used with functions such as <SAMP>tellp()</SAMP> or <SAMP>tellg()</SAMP> to get absolute displacement.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsoffset()"></A><PRE>long
+<B>offset</B>() const;</PRE>
+
+<UL>
+<P>Returns the signed displacement in the fpos object.</P>
+</UL>
+
+
+
+<PRE>long
+<B>offset</B>(long off);</PRE>
+
+<UL>
+<P>Stores <SAMP>off</SAMP> as the new signed displacement in the <SAMP>fpos</SAMP> object and returns its previous value.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspos()"></A><PRE>long
+<B>pos</B>() const;</PRE>
+
+<UL>
+<P>Returns the absolute position in the fpos object.</P>
+</UL>
+
+
+
+<PRE>long
+<B>offset</B>(long pos);</PRE>
+
+<UL>
+<P>Stores <SAMP>pos</SAMP> as the new absolute position in the <SAMP>fpos</SAMP> object and returns its previous value.</P>
+</UL>
+
+
+<A NAME="Valid Operations"><H3>Valid Operations</H3></A>
+<P>In the following,</P>
+<UL>
+<LI><P><SAMP>P</SAMP> refers to type <SAMP>fpos&lt;stateT&gt;</SAMP></P>
+</LI>
+<LI><P><SAMP>p</SAMP> and <SAMP>q</SAMP> refer to a value of type <SAMP>fpos&lt;stateT&gt;</SAMP></P>
+</LI>
+<LI><P><SAMP>O</SAMP> refers to the offset type (<SAMP>streamoff</SAMP>, <SAMP>wstreamoff</SAMP>, <SAMP>long</SAMP> )</P>
+</LI>
+<LI><P><SAMP>o</SAMP> refers to a value of the offset type</P>
+</LI>
+<LI><P><SAMP>i</SAMP> refers to a value of type <SAMP>int</SAMP></P>
+</LI>
+</UL>
+<P>Valid operations:</P>
+<TABLE>
+<TR><TD VALIGN=top><SAMP>P p( I );   </TD>
+<TD></SAMP>Constructs from <SAMP>int</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>P p = i;  </TD>
+<TD></SAMP>Assigns from <SAMP>int</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>P( o )  </TD>
+<TD></SAMP>Converts from offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>O( p )  </TD>
+<TD></SAMP>Converts to offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>p == q  </TD>
+<TD></SAMP>Tests for equality</TD></TR>
+<TR><TD VALIGN=top><SAMP>p != q  </TD>
+<TD></SAMP>Tests for inequality</TD></TR>
+<TR><TD VALIGN=top><SAMP>q = p + o  </TD>
+<TD></SAMP>Adds offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>p += o  </TD>
+<TD></SAMP>Adds offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>q = p -o  </TD>
+<TD></SAMP>Subtracts offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>q -= o  </TD>
+<TD></SAMP>Subtracts offset</TD></TR>
+<TR><TD VALIGN=top><SAMP>o = p - q  </TD>
+<TD></SAMP>Returns offset</TD></TR>
+</TABLE>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="ios_2665.htm">iosfwd</A></I></B>(3C++), <B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.4.</I> </P>
+<P><I>Amendment 1 to the C Standard.</I></P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="For_3289.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fro_0713.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

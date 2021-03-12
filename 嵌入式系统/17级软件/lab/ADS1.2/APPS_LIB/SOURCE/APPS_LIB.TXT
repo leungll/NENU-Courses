@@ -1,0 +1,42 @@
+# ARM Applications Library
+# Copyright (C) ARM Limited 1998-1999. All rights reserved.
+
+AS950 ARM APPLICATIONS LIBRARY V1.1
+===================================
+
+This document lists each of the components of the ARM Applications 
+Library and provides general information.
+
+
+Components
+__________
+
+The ARM Applications Library contains components for:
+
+Non-compliant Adaptive Differential Pulse Code Modulation  arm_adpm
+Bit Manipulation Routines                                  arm_bitm
+Discrete Cosine Transform                                  arm_dct
+Fast Fourier Transform                                     arm_fft
+Filters                                                    arm_fil
+- Finite Impulse Response                                  arm_fir
+- Infinite Impulse Response                                arm_iir
+- Least Mean Square                                        arm_lms
+G.711                                                      arm_g711
+Huffman Encoding/Decoding                                  arm_huff
+IS54 Convolutional Encoder                                 arm_is54
+Mathematics                                                arm_math
+Multi-Tone Multi-Frequency Generation/Detection            arm_mtmf
+
+A general C utility library, util_lib, which is used for demonstrating 
+each of the main components, is also included.
+
+Within each component, there is a subset of the following folders:
+
+src       - the C test routine and the ARM and C source files specific 
+            to the component
+tstfiles  - the test files that can be used to demonstrate the 
+            component
+
+At the root level of each component, there are two .mcp project 
+files for use with the ARM Developer Suite, version 1.0.
+

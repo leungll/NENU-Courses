@@ -1,0 +1,140 @@
+<HTML><HEAD><TITLE>adjacent_difference</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="acc_0611.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adj_8817.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>adjacent_difference</H2>
+<PRE><HR>Generalized Numeric Operation
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Outputs a sequence of the differences between each adjacent pair of elements in a range.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;numeric&gt;
+template &lt;class InputIterator, class OutputIterator&gt;
+OutputIterator adjacent_difference (InputIterator first,
+                                    InputIterator last,
+                                    OutputIterator result);
+template &lt;class InputIterator,
+          class OutputIterator,
+          class BinaryOperation&gt;
+OutputIterator adjacent_difference (InputIterator first,
+                                    InputIterator last,
+                                    OutputIterator result,
+                                    BinaryOperation bin_op);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Informally, <B><I>adjacent_difference</I></B> fills a sequence with the differences between successive elements in a container. The result is a sequence in which the first element is equal to the first element of the sequence being processed, and the remaining elements are equal to the calculated differences between adjacent elements. For instance, applying <B><I>adjacent_difference</I></B> to {1,2,3,5} produces a result of {1,1,1,2}. </P>
+<P>By default, subtraction is used to compute the difference, but you can supply any binary operator. The binary operator is then applied to adjacent elements. For example, by supplying the plus (+) operator, the result of applying <B><I>adjacent_difference</I></B> to {1,2,3,5} is the sequence {1,3,5,8}.</P>
+<P>Formally, <B><I>adjacent_difference</I></B> assigns to every element referred to by iterator <SAMP>i</SAMP> in the range <SAMP>[result + 1, result + (last - first))</SAMP> a value equal to the appropriate one of the following:</P>
+<UL><P><SAMP>*(first + (i - result)) - *(first + (i - result) - 1)</SAMP></P></UL>
+<P>or </P>
+<UL>
+<PRE><SAMP>binary_op (*(first + (i - result)),</SAMP> 
+           <SAMP>*(first + (i - result) - 1))</SAMP></PRE>
+
+</UL>
+<P><SAMP>result</SAMP> is assigned the value of <SAMP>*first</SAMP>.</P>
+<P><SAMP>binary_op</SAMP> should not have side effects.</P>
+<P><SAMP>adjacent_difference</SAMP> returns <SAMP>result + (last - first)</SAMP>.</P>
+<P><SAMP>result</SAMP> can be equal to <SAMP>first</SAMP>. This allows you to place the results of applying <B><I>adjacent_difference</I></B> into the original sequence.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>This algorithm performs exactly <SAMP>(last-first) - 1</SAMP> applications of the default operation (<SAMP>-</SAMP>) or <SAMP>binary_op</SAMP>. </P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// adj_diff.cpp
+//
+ #include&lt;numeric&gt;       //For adjacent_difference
+ #include&lt;vector&gt;        //For vector
+ #include&lt;functional&gt;    //For times
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   //
+   //Initialize a vector of ints from an array
+   //
+   int arr[10] = {1,1,2,3,5,8,13,21,34,55};
+   vector&lt;int&gt; v(arr,arr+10);
+   //
+   //Two uninitialized vectors for storing results
+   //
+   vector&lt;int&gt; diffs(10), prods(10);
+   //
+   //Calculate difference(s) using default operator (minus)
+   //
+   adjacent_difference(v.begin(),v.end(),diffs.begin());
+   //
+   //Calculate difference(s) using the times operator
+   //
+   adjacent_difference(v.begin(), v.end(), prods.begin(), 
+         times&lt;int&gt;());
+   //
+   //Output the results
+   //
+   cout &lt;&lt; "For the vector: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+   cout &lt;&lt; "The differences between adjacent elements are: " 
+        &lt;&lt; endl &lt;&lt; "     ";
+   copy(diffs.begin(),diffs.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; endl;
+   cout &lt;&lt; "The products of adjacent elements are: "
+        &lt;&lt; endl &lt;&lt; "     ";
+   copy(prods.begin(),prods.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl;
+   return 0;</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the vector:
+     1 1 2 3 5 8 13 21 34 55
+The differences between adjacent elements are:
+    1 0 1 1 2 3 5 8 13 21
+The products of adjacent elements are:
+     1 1 2 6 15 40 104 273 714 1870</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<UL>
+<PRE>vector&lt;int,allocator&lt;int&gt; &gt;</PRE>
+
+</UL>
+<P>instead of:</P>
+<UL>
+<PRE>vector&lt;int&gt;</PRE>
+
+</UL>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="acc_0611.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adj_8817.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

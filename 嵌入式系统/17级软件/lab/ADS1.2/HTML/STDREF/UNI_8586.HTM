@@ -1,0 +1,118 @@
+<HTML><HEAD><TITLE>unique, unique_copy</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="uni_6183.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="upp_0967.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>unique, unique_copy</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Removes consecutive duplicates from a range of values and places the resulting unique values into the result.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator&gt;
+  ForwardIterator
+    <B>unique</B> (ForwardIterator first, ForwardIterator last);
+template &lt;class ForwardIterator, class BinaryPredicate&gt;
+  ForwardIterator
+    <B>unique</B> (ForwardIterator first, ForwardIterator last,
+            BinaryPredicate binary_pred);
+template &lt;class InputIterator, class OutputIterator&gt;
+  OutputIterator
+    <B>unique_copy</B> (InputIterator first, InputIterator last,
+                 OutputIterator result);
+template &lt;class InputIterator, class OutputIterator,
+          class BinaryPredicate&gt;
+  OutputIterator
+    <B>unique_copy</B> (InputIterator first, InputIterator last,
+                 OutputIterator result,
+                 BinaryPredicate binary_pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>unique</I></B> algorithm moves through a sequence and eliminates all but the first element from every consecutive group of equal elements. There are two versions of the algorithm-one that tests for equality and a second that tests adjacent elements against a binary predicate. An element is unique if it does not meet the corresponding condition listed here:</P>
+<P><SAMP>*i  ==  *(i  -  1)</SAMP>  </P>
+<P>or </P>
+<P><SAMP>binary_pred(*i, *(i - 1)) == true.</SAMP> </P>
+<P>If an element is unique, it is copied to the front of the sequence, overwriting the existing elements. Once all unique elements have been identified. The remainder of the sequence is left unchanged, and <B><I>unique</I></B> returns the end of the resulting range. </P>
+<P>The <B><I>unique_copy</I></B> algorithm copies the first element from every consecutive group of equal elements to an <B><I>OutputIterator</I></B>. The <B><I>unique_copy</I></B> algorithm also has two versions-one that tests for equality and a second that tests adjacent elements against a binary predicate.</P>
+<P><B><I>unique_copy</I></B> returns the end of the resulting range. </P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>For <B><I>unique_copy</I></B>, it is exactly <SAMP>(last - first) - 1</SAMP> applications of the corresponding predicate are performed.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// unique.cpp
+//
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+using namespace std;
+int main()
+ {
+//Initialize two vectors
+int a1[20] = {4, 5, 5, 9, -1, -1, -1, 3, 7, 5, 
+              5, 5, 6, 7, 7, 7, 4, 2, 1, 1};
+vector&lt;int&gt; v(a1+0, a1+20), result;
+
+//Create an insert_iterator for results
+insert_iterator&lt;vector&lt;int&gt; &gt; ins(result, result.begin());
+
+//Demonstrate includes
+cout &lt;&lt; "The vector: " &lt;&lt; endl &lt;&lt; "    ";
+copy(v.begin(),v.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+
+//Find the unique elements
+<B>unique_copy(</B>v.begin(), v.end(), ins);
+
+//Display the results
+cout &lt;&lt; endl &lt;&lt; endl
+     &lt;&lt; "Has the following unique elements:"
+     &lt;&lt; endl &lt;&lt; "     ";
+copy(result.begin(),result.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+return 0;
+}</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The vector:
+4 5 5 9 -1 -1 -1 3 7 5 5 5 6 7 7 7 4 2 1 1
+Has the following unique elements:
+4 5 9 -1 3 7 5 6 7 4 2 1</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write: </P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="uni_6183.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="upp_0967.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

@@ -1,0 +1,111 @@
+<HTML><HEAD><TITLE>adjacent_find</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="adj_9476.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adv_9283.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>adjacent_find</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Find the first adjacent pair of elements in a sequence that are equivalent.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator&gt;
+  ForwardIterator
+  adjacent_find(ForwardIterator first, 
+                ForwardIterator last);
+
+template &lt;class ForwardIterator, class BinaryPredicate&gt;
+ ForwardIterator
+  adjacent_find(ForwardIterator first, ForwardIterator last,
+                BinaryPredicate pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>There are two versions of the <B><I>adjacent_find</I></B> algorithm. The first finds equal adjacent elements in the sequence defined by iterators <SAMP>first</SAMP> and <SAMP>last</SAMP> and returns an iterator <SAMP>i</SAMP> pointing to the first of the equal elements. The second version lets you specify your own binary function to test for a condition. It returns an iterator <SAMP>i</SAMP> pointing to the first of the pair of elements that meet the conditions of the binary function. In other words, <B><I>adjacent_find</I></B> returns the first iterator <SAMP>i</SAMP> such that both <SAMP>i</SAMP> and <SAMP>i + 1</SAMP> are in the range <SAMP>[first, last)</SAMP> for which one of the following conditions holds:</P>
+<P><SAMP>*i == *(i + 1)</SAMP></P>
+<P>or</P>
+<P><SAMP>pred(*i,*(i + 1)) == true</SAMP></P>
+<P>If <B><I>adjacent_find</I></B> does not find a match, it returns <SAMP>last</SAMP>.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>adjacent_find</I></B> performs exactly <SAMP>find(first,last,value) - first</SAMP> applications of the corresponding predicate.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// find.cpp
+//
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+ int main()
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[10] = {0,1,2,2,3,4,2,2,6,7}; 
+
+   // Set up a vector
+   vector&lt;int&gt; v1(d1,d1 + 10);
+
+   // Try find 
+   iterator it1 = find(v1.begin(),v1.end(),3);
+
+   // Try find_if
+   iterator it2 = 
+    find_if(v1.begin(),v1.end(),bind1st(equal_to&lt;int&gt;(),3));
+
+   // Try both adjacent_find variants
+   iterator it3 = adjacent_find(v1.begin(),v1.end());
+
+   iterator it4 = 
+      adjacent_find(v1.begin(),v1.end(),equal_to&lt;int&gt;());
+
+   // Output results
+   cout &lt;&lt; *it1 &lt;&lt; " " &lt;&lt; *it2 &lt;&lt; " " &lt;&lt; *it3 &lt;&lt; " " 
+        &lt;&lt; *it4 &lt;&lt; endl;
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P>Program Output :</P>
+<UL>
+<PRE>
+3 3 2 2</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int,allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="fin_7988.htm">find</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="adj_9476.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="adv_9283.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

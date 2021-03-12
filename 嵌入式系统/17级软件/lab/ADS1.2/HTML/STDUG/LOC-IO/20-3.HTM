@@ -1,0 +1,43 @@
+<HTML><HEAD><TITLE>20.3 Creating and Using Streams Instantiated on User-Defined Types</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="20-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>20.3 Creating and Using Streams Instantiated on User-Defined Types</H2>
+<A NAME="idx485"><!></A>
+<P>Once all the support work is finished, you can instantiate a stream class template on your type and begin to use it--well, not quite. Because the new stream requires the new facets you've defined, you must first create a new locale containing these facets and then imbue that locale on your stream. You can do this as follows:</P>
+<UL>
+<PRE>
+typedef basic_fstream&lt;Echar,Etraits&gt; Estream;                // 1
+locale Eloc(locale(locale(),new Ecodecvt),new Ectype);       // 2
+Estream foo("foo.txt");                                      // 3
+foo.imbue(Eloc);                                             // 4</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Typedef the special stream type to something convenient.
+<TR VALIGN="top"><TD>//2</TD><TD>Construct a new locale object and replace the <SAMP>codecvt</SAMP> and <SAMP>ctype</SAMP> facets with the ones we've defined for <SAMP>Echar</SAMP>. We use the constructor that takes an existing locale and a new facet to construct a locale with a new <SAMP>codecvt</SAMP> facet, and then use it again to get a locale with both new facets.
+<TR VALIGN="top"><TD>//3</TD><TD>Construct an <SAMP>Estream</SAMP>.
+<TR VALIGN="top"><TD>//4</TD><TD>Imbue the new locale containing our replacement facets onto the <SAMP>Estream</SAMP>.
+</TABLE>
+<P>Now we're ready to insert <SAMP>Echar</SAMP>s into the stream and read them back in:</P>
+<UL>
+<PRE>
+Echar e[10];
+Estream::pos_type pos = foo.tellp();                           //1
+foo &lt;&lt; 10;                                                     //2
+foo.seekg(pos);                                                //3
+foo &gt;&gt; e;                                                      //4</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Get current position.
+<TR VALIGN="top"><TD>//2</TD><TD>Write out the integer <SAMP>10</SAMP>.
+<TR VALIGN="top"><TD>//3</TD><TD>Seek back.
+<TR VALIGN="top"><TD>//4</TD><TD>Read in the string <SAMP>10</SAMP> as <SAMP>Echar</SAMP>s. 
+</TABLE>
+
+
+<BR>
+<HR>
+<A HREF="20-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

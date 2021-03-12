@@ -1,0 +1,15 @@
+<HTML><HEAD><TITLE>22.2 Differences between Stream Iterators and Container Iterators</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="22-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>22.2 Differences between Stream Iterators and Container Iterators</H2>
+
+<A NAME="idx490"><!></A>
+<P>In contrast to regular container iterators, stream iterators can provide only non-modifiable read-only access or write-only access to their elements. The <B><I><A HREF="../../stdref/ist_4337.htm">istream_iterator</A></I></B> is a read-only iterator that can access but not modify elements by assignment. The <B><I><A HREF="../../stdref/ost_2238.htm">ostream_iterator</A></I></B>,on the other hand, provides write-only access to streams.</P>
+<P>Each time the <B><I><A HREF="../../stdref/ist_4337.htm">istream_iterator</A></I></B> invokes <SAMP>operator++,</SAMP> a new value from the stream is read and stored in a <SAMP>const T</SAMP> value<SAMP>,</SAMP> where <SAMP>T</SAMP> is the type of the element being written. The <SAMP>const</SAMP> value, which by definition cannot be overwritten by assignment, is then available through the use of the dereferencing operator <SAMP>*</SAMP>. This behavior of storing elements in the iterator is unique to <B><I>istream_iterator</I></B>s. </P>
+<P>Also unlike container iterators, stream iterators can access elements only once, and only in the forward-moving direction, so that they can work only with one-pass algorithms. If the contents of the stream are to be read more than once, separate iterators must be created for each pass. </P>
+<P>The <B><I><A HREF="../../stdref/ist_4337.htm">istream_iterator</A></I></B> has a template argument <SAMP>Distance</SAMP>, which is defined as <SAMP>ptrdiff_t</SAMP> but not used in the implementation. There is no distance type template argument for <B><I><A HREF="../../stdref/ost_2238.htm">ostream_iterator</A></I></B>, so it does not have the notion of distance! </P>
+
+<HR>
+<A HREF="22-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

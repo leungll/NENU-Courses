@@ -1,0 +1,32 @@
+<HTML><HEAD><TITLE>19.2 Declaration and Initialization of Autopointers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="19-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>19.2 Declaration and Initialization of Autopointers</H2>
+<A NAME="idx416"><!></A>
+<P>You attach an <B><I><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B> object to a pointer either by using one of the constructors for <B><I>auto_ptr</I></B>, by assigning one <B><I>auto_ptr</I></B> object to another, or by using the reset member function. Only one <B><I>auto_ptr</I></B> owns a particular pointer at any one time, except for the NULL pointer, which all <B><I>auto_ptr</I></B>s own by default. Any use of the <B><I>auto_ptr</I></B> copy constructor or assignment operator transfers ownership from one <B><I>auto_ptr</I></B> object to another. For instance, suppose we create an <B><I>auto_ptr</I></B> <SAMP>a</SAMP> like this:</P>
+<UL>
+<PRE>
+auto_ptr&lt;string&gt; a(new string);</PRE>
+</UL>
+<P>The <B><I><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B> object <SAMP>a</SAMP> now owns the newly created pointer. When <SAMP>a</SAMP> is destroyed, such as when it goes out of scope, the pointer is deleted. But if we assign <SAMP>a</SAMP> to <SAMP>b</SAMP> using the assignment operator:</P>
+<UL>
+<PRE>
+auto_ptr&lt;string&gt; b = a;</PRE>
+</UL>
+<P><SAMP>b</SAMP> now owns the pointer. Use of the assignment operator causes <SAMP>a</SAMP> to release ownership of the pointer. Now if <SAMP>a</SAMP> goes out of scope the pointer is not affected. However, the pointer <I>is</I> deleted when <SAMP>b</SAMP> goes out of scope.</P>
+<P>The use of <SAMP>new</SAMP> within the constructor for <SAMP>a</SAMP> may seem a little odd. Normally we avoid constructs like this since it puts the responsibility for deletion on a different entity than the one responsible for allocation. In this case, however, the sole responsibility of the <B><I><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B> is to manage the deletion. This syntax is actually preferable since it prevents us from accidentally deleting the pointer ourselves. </P>
+<P>Use <SAMP>operator*</SAMP>, <SAMP>operator-&gt;</SAMP> or the member function <SAMP>get()</SAMP> to access the pointer held by an <B><I><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B>. For instance, we can use any of the three following statements to assign <SAMP>"What's up Doc"</SAMP> to the string now pointed to by the <B><I>auto_ptr</I></B> <SAMP>b</SAMP>:</P>
+<UL>
+<PRE>
+*b = "What's up Doc";
+*(b.get()) = "What's up Doc";
+ b-&gt;assign("What's up Doc");</PRE>
+</UL>
+<P>Class <B><I><A HREF="../../stdref/aut_3512.htm"><A HREF="../../stdref/aut_3512.htm">auto_ptr</A></I></B></A> also provides a release member function that releases ownership of a pointer. Any <B><I>auto_ptr</I></B> that does not own a specific pointer is assumed to point to the NULL pointer, so calling release on an <B><I>auto_ptr</I></B> will set it to the NULL pointer. In the example above, when <SAMP>a</SAMP> is assigned to <SAMP>b</SAMP>, the pointer held by <SAMP>a</SAMP> is released and <SAMP>a</SAMP> is set to the NULL pointer.</P>
+
+
+<BR>
+<HR>
+<A HREF="19-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="20.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

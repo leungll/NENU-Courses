@@ -1,0 +1,478 @@
+<HTML><HEAD><TITLE>wcout</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="wcl_5832.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=0>
+<H2>wcout</H2>
+<PRE><HR>Pre-defined stream
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Formatting">Formatting</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Default Values">Default Values</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Controls output to a stream buffer associated with the object <SAMP>stdout</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;iostream&gt;
+extern wostream wcout;
+wostream <B>wcout</B>;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The object <SAMP>wcout</SAMP> controls output to a stream buffer associated with the object <SAMP>stdout</SAMP> declared in <SAMP>&lt;cstdio&gt;</SAMP>. By default the standard C and C++ streams are synchronized, but performance can be improved by using the <SAMP>ios_base</SAMP> member function <SAMP>synch_with_stdio</SAMP> to desynchronize them. </P>
+<P>After the object <SAMP>wcin</SAMP> is initialized, <SAMP>wcin.tie()</SAMP> returns <SAMP>&amp;wcout</SAMP>, which implies that <SAMP>wcin</SAMP> and <SAMP>wcout</SAMP> are synchronized. <SAMP>wcout</SAMP> uses the locale <SAMP>codecvt</SAMP> facet to convert the wide characters it receives to the tiny characters it outputs to <SAMP>stdout</SAMP>. </P>
+
+<A NAME="Formatting"><H3>Formatting</H3></A>
+<P>The formatting is done through member functions or manipulators. 
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Manipulators<B></TH>
+<TH><B>Member Functions<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>showpos</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::showpos)</SAMP> <BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noshowpos</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::showpos)</SAMP> <BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>showbase</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::showbase)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noshowbase</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::showbase)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>uppercase</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::uppercase)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>nouppercase</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::uppercase)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>showpoint</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::showpoint)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noshowpoint</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::showpoint)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>boolalpha</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::boolalpha)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noboolalpha</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::boolalpha)</SAMP> <BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>unitbuf</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::unitbuf)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>nounitbuf</SAMP><BR>
+</TD>
+<TD>
+<SAMP>unsetf(ios_base::unitbuf)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>internal</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::internal,</SAMP><BR>
+     <SAMP>ios_base::adjustfield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>left</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::left,</SAMP><BR>
+     <SAMP>ios_base::adjustfield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>right</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::right,</SAMP><BR>
+     <SAMP>ios_base::adjustfield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>dec</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::dec,</SAMP><BR>
+     <SAMP>ios_base::basefield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>hex</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::hex,</SAMP><BR>
+     <SAMP>ios_base::basefield)</SAMP> <BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>oct</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::oct,</SAMP><BR>
+     <SAMP>ios_base::basefield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>fixed</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::fixed,</SAMP><BR>
+     <SAMP>ios_base::floatfield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>scientific</SAMP><BR>
+</TD>
+<TD>
+<SAMP>setf(ios_base::scientific,</SAMP><BR>
+    <SAMP>ios_base::floatfield)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>resetiosflags</SAMP><BR>
+ <SAMP>(ios_base::fmtflags flag)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>setf(0,flag)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>setiosflags</SAMP><BR>
+ <SAMP>(ios_base::fmtflags flag)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>setf(flag)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>setbase (int base)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>see above</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>setfill(char_type c)</SAMP><BR>
+</TD>
+<TD>
+<SAMP>fill(c)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>setprecision (int n)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>precision(n)</SAMP> <BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>setw (int n)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>width(n)</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>endl</SAMP><BR>
+</TD>
+<TD>
+<SAMP></SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ends</SAMP><BR>
+</TD>
+<TD>
+<SAMP></SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>flush</SAMP><BR>
+</TD>
+<TD>
+<SAMP>flush( )</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+
+<A NAME="Description"><H3>Description</H3></A>
+<TABLE>
+<TR><TD VALIGN=top><SAMP>showpos</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a + sign in non-negative generated numeric output.</TD></TR>
+<TR><TD VALIGN=top><SAMP>showbase</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a prefix indicating the numeric base of generated integer output</TD></TR>
+<TR><TD VALIGN=top><SAMP>uppercase</SAMP>  <SAMP></TD>
+<TD></SAMP>Replaces certain lowercase letters with their uppercase equivalents in generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>showpoint</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates a decimal-point character unconditionally in generated floating-point output</TD></TR>
+<TR><TD VALIGN=top><SAMP>boolalpha</SAMP>  <SAMP></TD>
+<TD></SAMP>Inserts and extracts bool type in alphabetic format</TD></TR>
+<TR><TD VALIGN=top><SAMP>unitbuf</SAMP>  <SAMP></TD>
+<TD></SAMP>Flushes output after each output operation</TD></TR>
+<TR><TD VALIGN=top><SAMP>internal</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters at a designated internal point in certain generated output. If no such point is designated, it's identical to <SAMP>right</SAMP>.</TD></TR>
+<TR><TD VALIGN=top><SAMP>left</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters on the right (final positions) of certain generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>right</SAMP>  <SAMP></TD>
+<TD></SAMP>Adds fill characters on the left (initial positions) of certain generated output</TD></TR>
+<TR><TD VALIGN=top><SAMP>dec</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in decimal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>hex</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in hexadecimal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>oct</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in octal base</TD></TR>
+<TR><TD VALIGN=top><SAMP>fixed</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates floating-point output in fixed-point notation</TD></TR>
+<TR><TD VALIGN=top><SAMP>scientific</SAMP>  <SAMP></TD>
+<TD></SAMP>Generates floating-point output in scientific notation</TD></TR>
+<TR><TD VALIGN=top><SAMP>resetiosflags</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>(ios_base::fmtflags flag)  </TD>
+<TD></SAMP>Resets the <SAMP>fmtflags</SAMP> field <SAMP>flag</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>setiosflags</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>(ios_base::fmtflags flag)  </TD>
+<TD></SAMP>Sets up the flag <SAMP>flag</SAMP></TD></TR>
+<TR><TD VALIGN=top><SAMP>setbase(int base)</SAMP>  <SAMP></TD>
+<TD></SAMP>Converts integer input or generates integer output in base <SAMP>base</SAMP>. The parameter <SAMP>base</SAMP> can be 8, 10 or 16. </TD></TR>
+<TR><TD VALIGN=top><SAMP>setfill(char_type c)</SAMP>  <SAMP></TD>
+<TD></SAMP>Sets the character used to pad (fill) an output conversion to the specified field width</TD></TR>
+<TR><TD VALIGN=top><SAMP>setprecision(int n)</SAMP>  <SAMP></TD>
+<TD></SAMP>Sets the precision (number of digits after the decimal point) to generate on certain output conversions</TD></TR>
+<TR><TD VALIGN=top><SAMP>setw(int n)</SAMP>  <SAMP></TD>
+<TD></SAMP>Sets the field with (number of characters) to generate on certain output conversions</TD></TR>
+<TR><TD VALIGN=top><SAMP>endl</SAMP>  <SAMP></TD>
+<TD></SAMP>Inserts a newline character into the output sequence and flush the output buffer. </TD></TR>
+<TR><TD VALIGN=top><SAMP>ends</SAMP>  <SAMP></TD>
+<TD></SAMP>Inserts a null character into the output sequence. </TD></TR>
+<TR><TD VALIGN=top><SAMP>flush</SAMP>  <SAMP></TD>
+<TD></SAMP>Flush the output buffer. </TD></TR>
+</TABLE>
+
+<A NAME="Default Values"><H3>Default Values</H3></A>
+<UL>
+<PRE>precision()            6
+width()                0
+fill()                 the space character
+flags()                skipws | dec
+getloc()               locale::locale()</PRE>
+
+</UL>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// wcout example #1
+//
+#include&lt;iostream&gt;
+#include&lt;iomanip&gt;
+
+void main ( )
+{
+  using namespace std; 
+
+  int i;
+  float f;
+  
+  // read an integer and a float from stdin
+  cin &gt;&gt; i &gt;&gt; f;
+
+  // output the integer and goes at the line
+  wcout &lt;&lt; i &lt;&lt; endl;
+
+  // output the float and goes at the line
+  wcout &lt;&lt; f &lt;&lt; endl;   
+
+  // output i in hexa
+  wcout &lt;&lt; hex &lt;&lt; i &lt;&lt; endl;
+
+  // output i in octal and then in decimal
+  wcout &lt;&lt; oct &lt;&lt; i &lt;&lt; dec &lt;&lt; i &lt;&lt; endl;  
+
+  // output i preceded by its sign
+  wcout &lt;&lt; showpos &lt;&lt; i &lt;&lt; endl;
+
+  // output i in hexa
+  wcout &lt;&lt; setbase(16) &lt;&lt; i &lt;&lt; endl;
+
+  // output i in dec and pad to the left with character
+  // @ until a width of 20
+  // if you input 45 it outputs 45@@@@@@@@@@@@@@@@@@ 
+  wcout &lt;&lt; setfill(L'@') &lt;&lt; setw(20) &lt;&lt; left &lt;&lt; dec &lt;&lt; i;
+  wcout &lt;&lt; endl;
+
+  // output the same result as the code just above
+  // but uses member functions rather than manipulators
+  wcout.fill('@');
+  wcout.width(20);
+  wcout.setf(ios_base::left, ios_base::adjustfield);
+  wcout.setf(ios_base::dec, ios_base::basefield);
+  wcout &lt;&lt; i &lt;&lt; endl; 
+
+  // outputs f in scientific notation with
+  // a precision of 10 digits
+  wcout &lt;&lt; scientific &lt;&lt; setprecision(10) &lt;&lt; f &lt;&lt; endl;
+
+  // change the precision to 6 digits
+  // equivalents to wcout &lt;&lt; setprecision(6);
+  wcout.precision(6);
+
+  // output f and goes back to fixed notation
+  wcout &lt;&lt; f &lt;&lt; fixed &lt;&lt; endl;
+  
+}
+
+//
+// wcout example #2
+//
+#include &lt;iostream&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  wchar_t p[50];
+
+  wcin.getline(p,50);
+
+  wcout &lt;&lt; p;   
+}
+
+//
+// wcout example #3
+//
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+void main ( )
+{
+  using namespace std;  
+
+  // open the file "file_name.txt"
+  // for reading
+  wifstream in("file_name.txt");
+  
+  // output the all file to stdout
+  if ( in ) 
+    wcout &lt;&lt; in.rdbuf(); 
+  else
+    { 
+      wcout &lt;&lt; "Error while opening the file";  
+      wcout &lt;&lt; endl;
+    }
+}</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>Keep in mind that the manipulator <SAMP>endl</SAMP> flushes the stream buffer. Therefore, use <SAMP>L`\n'</SAMP> if your only intent is to go at the line. It greatly improves performance when C and C++ streams are not synchronized.</P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++), <B><I>iostream</I></B>(3C++), <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B>(3C++), <B><I><A HREF="cin_0825.htm">cin</A></I></B>(3C++), <B><I><A HREF="cou_4514.htm">cout</A></I></B>(3C++), <B><I><A HREF="cer_5818.htm">cerr</A></I></B>(3C++), <B><I><A HREF="clo_8238.htm">clog</A></I></B>(3C++), <B><I><A HREF="wci_0249.htm">wcin</A></I></B>(3C++), <B><I><A HREF="wce_2198.htm">wcerr</A></I></B>(3C++), <B><I><A HREF="wcl_5832.htm">wclog</A></I></B>(3C++), <B><I>iomanip</I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++)</P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.3.2</I></P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+
+
+<BR>
+<HR>
+<A HREF="wcl_5832.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><IMG SRC="images/nonext.gif" WIDTH=19 HEIGHT=21 ALT="No next file" BORDER=0>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

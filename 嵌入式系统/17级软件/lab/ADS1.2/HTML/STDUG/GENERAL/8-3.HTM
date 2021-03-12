@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>8.3 Example Program: A Spelling Checker</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="8-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>8.3 Example Program: A Spelling Checker</H2>
+<A NAME="idx144"><!></A>
+<P>A simple example program that uses a <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> is a spelling checker. </P>
+<BLOCKQUOTE><HR>
+<B>NOTE: This program can be found in the file spell.cpp.
+</B><HR></BLOCKQUOTE>
+<P>The checker takes as arguments two input streams: the first represents a stream of correctly spelled words (that is, a dictionary), and the second a text file. To begin, the dictionary is read into a set. This is performed with a <SAMP>copy()</SAMP> function and an input stream iterator, copying the values into an inserter for the dictionary. Next, words from the text are examined one by one, to see if they are in the dictionary. If they are not, they are added to a set of misspelled words. After the entire text has been examined, the program outputs the list of misspelled words.</P>
+<UL>
+<PRE>
+void spellCheck (istream &amp; dictionary, istream &amp; text)
+{
+   typedef set &lt;string, less&lt;string&gt; &gt; stringset;
+   stringset words, misspellings;
+   string word;
+   istream_iterator&lt;string, ptrdiff_t&gt; dstream(dictionary), eof;
+
+   // first read the dictionary
+   copy (dstream, eof, inserter(words, words.begin())); 
+
+   // next read the text
+   while (text &gt;&gt; word)
+      if (! words.count(word))
+         misspellings.insert(word);
+
+   // finally, output all misspellings
+   cout &lt;&lt; "Misspelled words:" &lt;&lt; endl;
+   copy (misspellings.begin(), misspellings.end(),
+      ostream_iterator&lt;string&gt;(cout, "\n"));
+}</PRE>
+</UL>
+<P>An improvement would be to suggest alternative words for each misspelling. There are various heuristics that can be used to discover alternatives. The technique we use here is to simply exchange adjacent letters. To find these, a call on the following function is inserted into the loop that displays the misspellings:</P>
+<UL>
+<PRE>
+{
+   for (int I = 1; I &lt; word.length(); I++) {
+      swap(word[I-1], word[I]);
+      if (words.count(word)) 
+         cout &lt;&lt; "Suggestion: " &lt;&lt; word &lt;&lt; endl;
+      // put word back as before
+      swap(word[I-1], word[I]);
+      }
+}</PRE>
+</UL>
+
+<HR>
+<A HREF="8-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

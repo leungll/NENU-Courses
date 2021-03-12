@@ -1,0 +1,76 @@
+<HTML><HEAD><TITLE>17.5 Using iword/pword for RTTI in Derived Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="17-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>17.5 Using iword/pword for RTTI in Derived Streams</H2>
+<A NAME="idx431"><!></A>
+<P>In the previous section, we discussed an example that used runtime-type identification (RTTI) to enable a given input or output operation to adapt its behavior based on the properties of the respective stream type.</P>
+<P>Before RTTI was introduced into the C++ language in the form of the new style casts <SAMP>dynamic_cast&lt;&gt;</SAMP>, the problem was solved using <SAMP>iword()</SAMP>, <SAMP>pword()</SAMP>, and <SAMP>xalloc()</SAMP> as substitutes for RTTI. We describe this old-fashioned technique only briefly because, as the previous example suggests, the use of dynamic casts is clearly preferable over the RTTI substitute. Still, the traditional technique might be useful if your current compiler does not yet support the new-style casts. </P>
+<P>The basic idea of the traditional technique is that the stream class and all functions and classes that need the runtime type information, like the inserter and the manipulator function, agree on two things:</P>
+<UL>
+<LI><P>An index into the arrays for additional storage; in other words, <I>Where</I> do I find the RTTI?</P>
+</LI>
+<LI><P>The content or type identification that all concerned parties expect to find there; in other words, <I>What</I> will I find?</P>
+</LI>
+</UL>
+<P>In the following sketch, the derived stream class reserves an index into the additional storage. The index is a static data member of the derived stream class, and identifies all objects of that stream class. The content of that particular slot in the stream's additional storage, which is accessible through <SAMP>pword()</SAMP>, is expected to be the respective stream object's <SAMP>this</SAMP> pointer.</P>
+<A NAME="idx432"><!></A>
+<P>Here are the modifications to the derived class <SAMP>odatstream</SAMP>:</P>
+<UL>
+<PRE>
+template &lt;class charT, class Traits=char_traits&lt;charT&gt; &gt;
+class odatstream : public basic_ostream &lt;charT,Traits&gt;
+{
+public:
+ static int xindex()                                          //1
+ {
+  static int inited = 0;
+  static int value = 0;
+  if (!inited)
+  {
+     value = xalloc();
+     inited++;
+  }
+  return value;
+ }
+
+ odatstream(basic_ostream&lt;charT,Traits&gt;&amp; ostr,const char* fmt = "%x")
+ : basic_ostream&lt;charT,Traits&gt;(ostr.rdbuf())
+ {
+   pword(xindex()) = this;                                    //2
+ 
+   fmt_=new charT[strlen(fmt)];
+   use_facet&lt;ctype&lt;charT&gt; &gt;(ostr.getloc()).widen(fmt, fmt+strlen(fmt), fmt_);
+ }
+
+ // ... other member, as in the previous section ...
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The static function <SAMP>xindex()</SAMP> is concerned with reserving the index into the arrays for additional storage. It also serves as the access function to the index.
+<TR VALIGN="top"><TD>//2</TD><TD>The reserved slot in the arrays for additional storage is filled with the object's own address.
+</TABLE>
+<P>Here are the corresponding modifications to the manipulator:</P>
+<UL>
+<PRE>
+template &lt;class charT, class Traits&gt;
+inline basic_ostream&lt;charT,Traits&gt;&amp;
+sfmt(basic_ostream&lt;charT,Traits&gt;&amp; ostr, const char* f)
+{
+ if (ostr.pword(odatstream&lt;charT,Traits&gt;::xindex()) == &amp;ostr) //1
+    ((odatstream&lt;charT,Traits&gt;&amp;)ostr).fmt(f);
+ return ostr;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The manipulator function checks whether the content of the reserved slot in the stream's storage is the stream's address. If it is, the stream is considered to be a date output stream.
+</TABLE>
+<P>Note that the technique described in this section is not safe. There is no way to ensure that date output streams and their related functions and classes are the only ones that access the reserved slot in a date output stream's additional storage. In principle, every stream object of any type can access all entries through <SAMP>iword()</SAMP> or <SAMP>pword()</SAMP>. It's up to your programming discipline to restrict access to the desired functions. It is unlikely, however, that all streams will make the same assumptions about the storage's content. Instead of agreeing on each stream object's address as the run-time-type identification, we also could have stored certain integers, pointers to certain strings, etc. Remember, it's the combination of reserved index <I>and</I> assumed content that represents the RTTI substitute.</P>
+
+
+<BR>
+<HR>
+<A HREF="17-4.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

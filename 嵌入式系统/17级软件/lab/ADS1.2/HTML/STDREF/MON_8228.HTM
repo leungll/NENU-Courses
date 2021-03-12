@@ -1,0 +1,392 @@
+<HTML><HEAD><TITLE>moneypunct, moneypunct_byname</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="mon_8487.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mul_8396.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>moneypunct, moneypunct_byname</H2>
+<PRE><HR>                                     <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>moneypunct_base
+moneypunct_byname<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>moneypunct 
+                                     <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Static Members">Static Members</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Monetary punctuation facets.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Static Membersid">id</A><BR>
+ <A HREF="#Static MembersIntl">Intl</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionscurr_symbol()">curr_symbol()</A><BR>
+ <A HREF="#Public Member Functionsdecimal_point()">decimal_point()</A><BR>
+ <A HREF="#Protected Member Functionsdo_curr_symbol()">do_curr_symbol()</A><BR>
+ <A HREF="#Protected Member Functionsdo_decimal_point()">do_decimal_point()</A><BR>
+ <A HREF="#Protected Member Functionsdo_frac_digits()">do_frac_digits()</A><BR>
+ <A HREF="#Protected Member Functionsdo_grouping()">do_grouping()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionsdo_negative_sign()">do_negative_sign()</A><BR>
+ <A HREF="#Protected Member Functionsdo_neg_format()">do_neg_format()</A><BR>
+ <A HREF="#Protected Member Functionsdo_positive_sign()">do_positive_sign()</A><BR>
+ <A HREF="#Protected Member Functionsdo_pos_format()">do_pos_format()</A><BR>
+ <A HREF="#Protected Member Functionsdo_thousands_sep()">do_thousands_sep()</A><BR>
+ <A HREF="#Public Member Functionsfrac_digits()">frac_digits()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionsgrouping()">grouping()</A><BR>
+ <A HREF="#Public Member Functionsnegative_sign()">negative_sign()</A><BR>
+ <A HREF="#Public Member Functionsneg_format()">neg_format()</A><BR>
+ <A HREF="#Public Member Functionspositive_sign()">positive_sign()</A><BR>
+ <A HREF="#Public Member Functionspos_format()">pos_format()</A><BR>
+ <A HREF="#Public Member Functionsthousands_sep()">thousands_sep()</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+class money_base;
+template &lt;class charT, bool International = false&gt;
+class moneypunct;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>moneypunct</I></B> facets include formatting specifications and punctuation character for monetary values. The <B><I>moneypunct</I></B> facet is used with the "C" locale, while the <B><I>moneypunct_byname</I></B> facet is used with named locales.   </P>
+<P>The facet is used by <B><I> <A HREF="mon_8487.htm">money_put</A> </I></B>for outputting formatted representations of monetary values and by <B><I><A HREF="mon_5329.htm">money_get</A></I></B> for reading these strings back in. </P>
+<P><B><I>money_base</I></B> includes a structure, <SAMP>pattern</SAMP>, that specifies the order of syntactic elements in a monetary value and enumeration values representing those elements. The <SAMP>pattern</SAMP> struct includes a simple array of characters, <SAMP>field</SAMP>. Each index in <SAMP>field</SAMP> is taken up by an enumeration value indicating the location of a syntactic element. The enumeration values are described below:
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Format Flag<B></TH>
+<TH><B>Meaning<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>none</SAMP><BR>
+</TD>
+<TD>
+<SAMP>No grouping separator</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>space</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Use space for grouping separator</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>symbol</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Currency symbol</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>sign</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Sign of monetary value</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>value</SAMP><BR>
+</TD>
+<TD>
+<SAMP>The monetary value itself</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+<P>The <SAMP>do_pos_format</SAMP> and <SAMP>do_neg_format</SAMP> member functions of <B><I>moneypunct</I></B> both return the <SAMP>pattern</SAMP> type. See the description of these functions for further elaboration.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class money_base {
+public:
+  enum part { none, space, symbol, sign, value };
+  struct pattern { char field[4]; };
+};
+
+template &lt;class charT, bool International = false&gt;
+class moneypunct : public locale::facet, public money_base {
+public:
+  typedef charT char_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit moneypunct(size_t = 0);
+  charT        decimal_point() const;
+  charT        thousands_sep() const;
+  string       grouping()      const;
+  string_type  curr_symbol()   const;
+  string_type  positive_sign() const;
+  string_type  negative_sign() const;
+  int          frac_digits()   const;
+  pattern      pos_format()    const;
+  pattern      neg_format()    const;
+  static locale::id id;
+  static const bool intl = International;
+protected:
+  ~moneypunct();  // virtual
+  virtual charT        do_decimal_point() const;
+  virtual charT        do_thousands_sep() const;
+  virtual string       do_grouping()      const;
+  virtual string_type  do_curr_symbol()   const;
+  virtual string_type  do_positive_sign() const;
+  virtual string_type  do_negative_sign() const;
+  virtual int          do_frac_digits()   const;
+  virtual pattern      do_pos_format()    const;
+  virtual pattern      do_neg_format()    const;
+}; 
+
+template &lt;class charT, bool Intl = false&gt;
+class moneypunct_byname : public moneypunct&lt;charT, Intl&gt; {
+public:
+  explicit moneypunct_byname(const char*, size_t = 0);
+protected:
+  ~moneypunct_byname();  // virtual
+  virtual charT        do_decimal_point() const;
+  virtual charT        do_thousands_sep() const;
+  virtual string       do_grouping()      const;
+  virtual string_type  do_curr_symbol()   const;
+  virtual string_type  do_positive_sign() const;
+  virtual string_type  do_negative_sign() const;
+  virtual int          do_frac_digits()   const;
+  virtual pattern      do_pos_format()    const;
+  virtual pattern      do_neg_format()    const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string returned by member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>moneypunct</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Constructs a <B><I>moneypunct</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+
+<PRE>explicit <B>moneypunct_byname</B>(const char* name, 
+                             size_t refs = 0); </PRE>
+
+<UL>
+<P>Constructs a <B><I>moneypunct_byname</I></B> facet. Uses the named locale specified by the <SAMP>name</SAMP> argument. The <SAMP>refs</SAMP> argument serves the same purpose as it does for the <B><I>moneypunct</I></B> constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~moneypunct</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Static Members"><H3>Static Members</H3></A>
+
+
+<A NAME="Static Membersid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+
+<A NAME="Static MembersIntl"></A><PRE>static const bool intl = <B>Intl</B>; </PRE>
+
+<UL>
+<P><SAMP>true</SAMP> for international representation, <SAMP>false</SAMP> otherwise.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>moneypunct</I></B> and<B><I> moneypunct_byname</I></B> facets include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>decimal_point</SAMP> function simply calls its protected cousin <SAMP>do_decimal_point</SAMP>.</P>
+
+
+<A NAME="Public Member Functionscurr_symbol()"></A><PRE>string_type  <B>curr_symbol</B>()   const; 
+<A NAME="Public Member Functionsdecimal_point()"></A>charT        <B>decimal_point</B>() const; 
+<A NAME="Public Member Functionsfrac_digits()"></A>int          <B>frac_digits</B>()   const; 
+<A NAME="Public Member Functionsgrouping()"></A>string       <B>grouping</B>()      const; 
+<A NAME="Public Member Functionsneg_format()"></A>pattern      <B>neg_format</B>()    const; 
+<A NAME="Public Member Functionsnegative_sign()"></A>string_type  <B>negative_sign</B>() const; 
+<A NAME="Public Member Functionspos_format()"></A>pattern      <B>pos_format</B>()    const; 
+<A NAME="Public Member Functionspositive_sign()"></A>string_type  <B>positive_sign</B>() const; 
+<A NAME="Public Member Functionsthousands_sep()"></A>charT        <B>thousands_sep</B>() const; </PRE>
+
+<UL>
+<P>Each public member function <SAMP>xxx</SAMP> simply calls the corresponding protected <SAMP>do_xxx</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_curr_symbol()"></A><PRE>virtual string_type 
+<B>do_curr_symbol</B>()   const; </PRE>
+
+<UL>
+<P>Returns a string to use as the currency symbol.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_decimal_point()"></A><PRE>virtual charT        
+<B>do_decimal_point</B>() const; </PRE>
+
+<UL>
+<P>Returns the radix separator to use if fractional digits are allowed (see <SAMP>do_frac_digits</SAMP>).</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_frac_digits()"></A><PRE>virtual int          
+<B>do_frac_digits</B>()   const; </PRE>
+
+<UL>
+<P>Returns the number of digits in the fractional part of the monetary representation.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_grouping()"></A><PRE>virtual string       
+<B>do_grouping</B>()      const; </PRE>
+
+<UL>
+<P>Returns a string in which each character is used as an integer value to represent the number of digits in a particular grouping, starting with the rightmost group. A group is simply the digits between adjacent thousands' separators. Each group at a position larger than the size of the string gets the same value as the last element in the string. If a value is less than or equal to zero, or equal to <SAMP>CHAR_MAX</SAMP>, then the size of that group is unlimited.   <B><I>moneypunct</I></B> returns an empty string, indicating no grouping.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_negative_sign()"></A><PRE>virtual string_type 
+<B>do_negative_sign</B>() const; </PRE>
+
+<UL>
+<P>A string to use as the negative sign. The first character of this string is placed in the position indicated by the format pattern (see <SAMP>do_neg_format</SAMP>); the rest of the characters, if any, are placed after all other parts of the monetary value.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_neg_format()"></A><PRE>virtual pattern 
+<B>do_neg_format</B>()    const; 
+<A NAME="Protected Member Functionsdo_pos_format()"></A>virtual pattern 
+<B>do_pos_format</B>()    const; </PRE>
+
+<UL>
+<P>Returns a pattern object specifying the location of the various syntactic elements in a monetary representation. The enumeration values <SAMP>symbol</SAMP>, <SAMP>sign</SAMP>, and <SAMP>value</SAMP> appear exactly once in this pattern, with the remaining location taken by either <SAMP>none</SAMP> or <SAMP>space</SAMP>. <SAMP>none</SAMP> never occupies the first position in the pattern and <SAMP>space</SAMP> never occupies the first or the last position. Beyond these restrictions, elements may appear in any order. <B><I>moneypunct</I></B> returns {symbol, sign, none, value}.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_positive_sign()"></A><PRE>virtual string_type 
+<B>do_positive_sign</B>() const; </PRE>
+
+<UL>
+<P>A string to use as the positive sign. The first character of this string is placed in the position indicated by the format pattern (see <SAMP>do_pos_format</SAMP>); the rest of the characters, if any, are placed after all other parts of the monetary value.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_thousands_sep()"></A><PRE>virtual charT        
+<B>do_thousands_sep</B>() const; </PRE>
+
+<UL>
+<P>Returns the grouping separator if grouping is allowed (see <SAMP>do_grouping</SAMP>).</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// moneypun.cpp
+//
+
+#include &lt;string&gt;
+
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  locale loc;
+
+  // Get a moneypunct facet
+  const moneypunct&lt;char,false&gt;&amp; mp = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;moneypunct&lt;char,false&gt; &gt;(loc);
+#else
+  use_facet(loc,(moneypunct&lt;char,false&gt;*)0);
+#endif
+
+  cout &lt;&lt; "Decimal point        = " 
+       &lt;&lt; mp.decimal_point() &lt;&lt; endl; 
+  cout &lt;&lt; "Thousands separator  = " 
+       &lt;&lt; mp.thousands_sep() &lt;&lt; endl; 
+  cout &lt;&lt; "Currency symbol      = " 
+       &lt;&lt; mp.curr_symbol() &lt;&lt; endl; 
+  cout &lt;&lt; "Negative Sign        = " 
+       &lt;&lt; mp.negative_sign() &lt;&lt; endl; 
+  cout &lt;&lt; "Digits after decimal = " 
+       &lt;&lt; mp.frac_digits() &lt;&lt; endl; 
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="mon_8487.htm">money_put</A></I></B>, <B><I><A HREF="mon_5329.htm">money_get</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="mon_8487.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mul_8396.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

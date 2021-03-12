@@ -1,0 +1,22 @@
+<HTML><HEAD><TITLE>15.4 Caveat</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="15-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="16.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>15.4 Caveat</H2>
+<P>Note that the solution suggested here has a pitfall.</P>
+<A NAME="idx410"><!></A>
+<P>The manipulator takes the format specification and stores it. The inserter retrieves it and uses it. In such a situation, the question arises: Who owns the format string? In other words, who is responsible for creating and deleting it and hence controlling its lifetime? Neither the manipulator nor the inserter can own it because they share it.</P>
+<P>We solved the problem by requiring the format specification to be created and deleted by the iostream user. Only a pointer to the format string is handed over to the manipulator, and only this pointer is stored through <SAMP>pword()</SAMP>. Also, we do not copy the format string because it would not be clear who-the manipulator or the inserter-is responsible for deleting the copy. Hence the iostream user has to monitor the format string's lifetime, and ensure that the format string is valid for as long as it is accessed by the inserter.</P>
+<P>This introduces a subtle lifetime problem in cases where the date format is a variable instead of a constant: the stream might be a static stream and hence live longer that the date format variable. This is a problem you always deal with when storing a pointer or reference to additional data instead of copying the data.</P>
+<P>However, this subtle problem does not impose an undue burden on the user of our <SAMP>setfmt</SAMP> manipulator. If a static character sequence is provided, as in:</P>
+<UL>
+<PRE>
+cout &lt;&lt; <SAMP>setfmt</SAMP>("%A, %B %d, %Y") &lt;&lt; today;</PRE>
+</UL>
+<P>the <SAMP>setfmt</SAMP> manipulator can be used safely, even with static streams like <SAMP>cout</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="15-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="16.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

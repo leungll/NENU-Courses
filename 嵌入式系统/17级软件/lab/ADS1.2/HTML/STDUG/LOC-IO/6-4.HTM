@@ -1,0 +1,199 @@
+<HTML><HEAD><TITLE>6.4 The Internal Structure of the Iostreams Layers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="6-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>6.4 The Internal Structure of the Iostreams Layers</H2>
+<A NAME="idx174"><!></A>
+<P>As explained earlier, the standard iostreams have two layers, one for formatting, and another for code conversion and transport of characters to and from the external device. For convenience, let's repeat here as <A HREF="#Figure 22">Figure 22</A> the same illustration of the iostreams layers given as <A HREF="6-2.htm#Figure 20">Figure 20</A>:</P>
+
+<A NAME="idx175"><!></A>
+<H4><A NAME="Figure 22">Figure 22 -- The iostreams layers</A></H4>
+<IMG SRC="images/iofig4.gif">
+ 
+
+<P>The next sections gives a more detailed description of the iostreams software architecture, including the classes and their inheritance relationship and respective responsibilities. If you would rather start using iostreams directly, go on to <A HREF="7.htm">Chapter 7</A>.</P>
+
+<A NAME="641"><H3>6.4.1 The Internal Structure of the Formatting Layer</H3></A>
+<A NAME="idx176"><!></A>
+<P>Classes that belong to the formatting layer are often referred to as the stream classes. <A HREF="#Figure 23">Figure 23</A> illustrates the class hierarchy of all the stream classes:</P>
+
+<A NAME="idx177"><!></A>
+<H4><A NAME="Figure 23">Figure 23 -- Internal class hierarchy of the formatting layer</A></H4>
+<IMG SRC="images/ioallframe6.gif" WIDTH=682 HEIGHT=573>
+<A NAME="idx178"><!></A>
+<P>You may notice that the classes <SAMP>strstream</SAMP>, <SAMP>istrstream</SAMP>, and <SAMP>ostrstream</SAMP> are not included in this diagram, even though we describe them in the <I>Class Reference</I>. Sometimes called <I>deprecated features</I> in the standard, these classes are provided solely for the sake of compatibility with the traditional iostreams, and will not be supported in future versions of the standard iostreams. </P>
+<P>In the next sections, we discuss in more detail the components and characteristics of the components that are included in the class hierarchy given in <A HREF="#Figure 23">Figure 23</A>.</P>
+
+<A NAME="idx179"><!></A>
+<A NAME="6411"><H4>6.4.1.1 Iostreams Base Class ios_base</H4></A>
+<A NAME="idx180"><!></A>
+<P>This class is the base class of all stream classes. Independent of character type, it encapsulates information that is needed by all streams. This information includes:</P>
+<UL>
+<LI><P>Control information for parsing and formatting</P>
+</LI>
+<LI><P>Additional information for the user's special needs, that is, a way to extend iostreams</P>
+</LI>
+<LI><P>The locale imbued on the stream</P>
+</LI>
+</UL>
+<P>Additionally, <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> defines several types that are used by all stream classes, such as format flags, status bits, open mode, exception class, and so on.</P>
+
+<A NAME="6412"><H4>6.4.1.2 The Iostreams Character Type-Dependent Base Class</H4></A>
+<A NAME="idx181"><!></A>
+<P>Here is the virtual base class for the stream classes:</P>
+<UL>
+<PRE>
+basic_ios&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</PRE>
+</UL>
+<A NAME="idx182"><!></A>
+<P>The class holds a pointer to the stream buffer, and to state information that reflects the integrity of the stream buffer. Note that <B><I><A HREF="../../stdref/bas_6405.htm">basic_ios&lt;&gt;</A></I></B> is a class template taking two parameters, the type of character handled by the stream, and the <I>character traits</I>.</P>
+<P>The type of character can be type <SAMP>char</SAMP> for single-byte characters, or type <SAMP>wchar_t</SAMP> for wide characters, or any other user-defined character type. There are instantiations for <SAMP>char</SAMP> and <SAMP>wchar_t</SAMP> provided by the Standard C++ Library.</P>
+<P>For convenience, there are typedefs for these instantiations:</P>
+<P><SAMP>typedef basic_ios&lt;char&gt;</SAMP> <B>ios</B> and <SAMP>typedef basic_ios&lt;wchar_t&gt;</SAMP> <B>wios</B></P>
+<A NAME="idx183"><!></A>
+<P>Note that <B>ios</B> is not a class anymore, as it was in the traditional iostreams. If you have existing programs that use the old iostreams, they may no longer be compatible with the standard iostreams. (See <A HREF="24.htm">Chapter 24</A>.)</P>
+
+<A NAME="idx184"><!></A>
+<A NAME="6413"><H4>6.4.1.3 Character Traits</H4></A>
+<A NAME="idx185"><!></A>
+<P>Character traits describe the properties of a character type. Many things change with the character type, such as:</P>
+<UL>
+<A NAME="idx186"><!></A>
+<LI><P><B>The end-of-file value</B>. For type <SAMP>char</SAMP>, the end-of file value is represented by an integral constant called <SAMP>EOF</SAMP>. For type <SAMP>wchar_t</SAMP>, there is a constant defined that is called <SAMP>WEOF</SAMP>. For an arbitrary user-defined character type, the associated character traits define what the end-of-file value for this particular character type is.</P>
+</LI>
+<A NAME="idx187"><!></A>
+<LI><P><B>The type of the</B> <SAMP>EOF</SAMP> <B>value</B>. This needs to be a type that can hold the <SAMP>EOF</SAMP> value. For example, for single-byte characters, this type is <SAMP>int</SAMP>, different from the actual character type <SAMP>char</SAMP>.</P>
+</LI>
+<A NAME="idx188"><!></A>
+<LI><P><B>The equality of two characters</B>. For an exotic user-defined character type, the equality of two characters might mean something different from just bit-wise equality. Here you can define it.</P>
+</LI>
+</UL>
+<P>A complete list of character traits is given in the <I>Class Reference</I> entry for <SAMP>char_traits</SAMP>.</P>
+<P>There are specializations defined for type <SAMP>char</SAMP> and <SAMP>wchar_t</SAMP>. In general, this class template is not meant to be instantiated for a character type. You should always define class template specializations.</P>
+<P>Fortunately, the Standard C++ Library is designed to make the most common cases the easiest. The traits template parameter has a sensible default value, so usually you need not bother with character traits at all.</P>
+
+<A NAME="idx189"><!></A>
+<A NAME="6414"><H4>6.4.1.4 The Input and Output Streams</H4></A>
+<P>The three stream classes for input and output are:</P>
+<UL>
+<A NAME="idx190"><!></A>
+<PRE>basic_istream &lt;class charT, class traits=char_traits&lt;charT&gt; &gt; 
+basic_ostream &lt;class charT, class traits=char_traits&lt;charT&gt; &gt; 
+basic_iostream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</PRE>
+</UL>
+<A NAME="idx191"><!></A>
+<P>Class <SAMP>istream</SAMP> handles input, class <SAMP>ostream</SAMP> is for output. Class <SAMP>iostream</SAMP> deals with input <I>and</I> output; such a stream is called a <I>bidirectional</I> stream.</P>
+<A NAME="idx192"><!></A>
+<P>The three stream classes define functions for parsing and formatting, which are overloaded versions of <SAMP>operator&gt;&gt;()</SAMP> for input, called <I>extractors</I>, and overloaded versions of <SAMP>operator&lt;&lt;()</SAMP> for output, called <I>inserters</I>.</P>
+<A NAME="idx193"><!></A>
+<P>Additionally, there are member functions for unformatted input and output, like <SAMP>get()</SAMP>, <SAMP>put()</SAMP>, etc.</P>
+
+<A NAME="6415"><H4>6.4.1.5 The File Streams</H4></A>
+<A NAME="idx194"><!></A>
+<P>The file stream classes support input and output to and from files. They are: </P>
+<UL>
+<A NAME="idx195"><!></A>
+<PRE>basic_ifstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt; 
+basic_ofstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt; 
+basic_fstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</PRE>
+</UL>
+<A NAME="idx196"><!></A>
+<P>There are functions for opening and closing files, similar to the C functions <SAMP>fopen()</SAMP> and <SAMP>fclose()</SAMP>. Internally they use a special kind of stream buffer, called a <I>file buffer,</I> to control the transport of characters to/from the associated file. The function of the file streams is illustrated in <A HREF="#Figure 24">Figure 24</A>:</P>
+
+<A NAME="idx197"><!></A>
+<H4><A NAME="Figure 24">Figure 24 -- File I/O</A></H4>
+<IMG SRC="images/ioallframe7.gif" WIDTH=583 HEIGHT=172>
+
+<A NAME="idx198"><!></A>
+<A NAME="6416"><H4>6.4.1.6 The String Streams</H4></A>
+<A NAME="idx199"><!></A>
+<P>The string stream classes support in-memory I/O; that is, reading and writing to a string held in memory. They are:</P>
+<UL>
+<A NAME="idx200"><!></A><A NAME="idx201"><!></A><A NAME="idx202"><!></A>
+<PRE>basic_istringstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;
+basic_ostringstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;
+basic_stringstream&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</PRE>
+</UL>
+<P>There are functions for getting and setting the string to be used as a buffer. Internally a specialized stream buffer is used. In this particular case, the buffer and the external device are the same. <A HREF="#Figure 25">Figure 25</A> illustrates how the string stream classes work:</P>
+
+<A NAME="idx203"><!></A>
+<H4><A NAME="Figure 25">Figure 25 -- In-memory I/O</A></H4>
+<IMG SRC="images/ioallframe8.gif" WIDTH=564 HEIGHT=175>
+
+<A NAME="idx204"><!></A>
+<A NAME="642"><H3>6.4.2 The Transport Layer's Internal Structure</H3></A>
+<A NAME="idx205"><!></A>
+<P>Classes of the transport layer of the standard iostreams are often referred to as the stream buffer classes. <A HREF="#Figure 26">Figure 26</A> gives the class hierarchy of all stream buffer classes.</P>
+
+<A NAME="idx206"><!></A>
+<H4><A NAME="Figure 26">Figure 26 -- Hierarchy of the transport layer</A></H4>
+<IMG SRC="images/ioallframe9.gif" WIDTH=655 HEIGHT=263>
+<P>The stream buffer classes are responsible for transfer of characters from and to external devices. </P>
+
+<A NAME="6421"><H4>6.4.2.1 The Stream Buffer</H4></A>
+<A NAME="idx207"><!></A>
+<P>This class represents an abstract stream buffer:</P>
+<UL>
+<PRE></PRE>
+<A NAME="idx208"><!></A>
+<PRE><SAMP>basic_streambuf&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</SAMP></PRE>
+</UL>
+<A NAME="idx209"><!></A>
+<P>It does not have any knowledge about the external device. Instead, it defines two virtual functions, <SAMP>overflow()</SAMP> and <SAMP>underflow()</SAMP>, to perform the actual transport. These two functions have knowledge of the peculiarities of the external device they are connected to. They must be overwritten by all concrete stream buffer classes, like file and string buffers.</P>
+<P>The stream buffer class maintains two character sequences: the <I>get area</I>, which represents the input sequence read from an external device, and the <I>put area</I>, which is the output sequence to be written to the device. There are functions for providing the next character from the buffer, such as <SAMP>sgetc()</SAMP>, etc. They are typically called by the formatting layer in order to receive characters for parsing. Accordingly, there are also functions for placing the next character into the buffer, such as <SAMP>sputc()</SAMP>, etc.</P>
+<P>A stream buffer also carries a locale object.</P>
+
+<A NAME="6422"><H4>6.4.2.2 The File Buffer</H4></A>
+<A NAME="idx210"><!></A>
+<P>The file buffer classes associate the input and output sequences with a file. A file buffer takes the form:</P>
+<UL>
+<PRE></PRE>
+<A NAME="idx211"><!></A>
+<PRE><SAMP>basic_filebuf&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</SAMP></PRE>
+</UL>
+<A NAME="idx212"><!></A>
+<P>The file buffer has functions like <SAMP>open()</SAMP> and <SAMP>close()</SAMP>. The file buffer class inherits a locale object from its stream buffer base class. It uses the locale's code conversion facet for transforming the external character encoding to the encoding used internally. <A HREF="#Figure 27">Figure 27</A> shows how the file buffer works:</P>
+
+<A NAME="idx213"><!></A>
+<H4><A NAME="Figure 27">Figure 27 -- Character code conversion performed by the file buffer</A></H4>
+<IMG SRC="images/iofig11.gif">
+ 
+
+
+<A NAME="idx214"><!></A>
+<A NAME="6423"><H4>6.4.2.3 The String Stream Buffer</H4></A>
+<P>These classes implement the in-memory I/O:</P>
+<UL>
+<PRE></PRE>
+<A NAME="idx215"><!></A>
+<PRE><SAMP>basic_stringbuf&lt;class charT, class traits=char_traits&lt;charT&gt; &gt;</SAMP></PRE>
+</UL>
+<P>With string buffers, the internal buffer and the external device are one and the same. The internal buffer is dynamic, in that it is extended if necessary to hold all the characters written to it. You can obtain copies of the internally held buffer, and you can provide a string to be copied into the internal buffer.</P>
+
+<A NAME="idx216"><!></A>
+<A NAME="643"><H3>6.4.3 Collaboration of Streams and Stream Buffers</H3></A>
+<P>The base class <B><I><A HREF="../../stdref/bas_6405.htm">basic_ios&lt;&gt;</A></I></B> holds a pointer to a stream buffer. The derived stream classes, like file and string streams, contain a file or string buffer object. The stream buffer pointer of the base class refers to this embedded object. This architecture is illustrated in <A HREF="#Figure 28">Figure 28</A>: </P>
+
+<A NAME="idx217"><!></A>
+<H4><A NAME="Figure 28">Figure 28 -- How an input file stream uses a file buffer</A></H4>
+<IMG SRC="images/iofig12.gif">
+ 
+
+<P>Stream buffers can be used independently of streams, as for unformatted I/O, for example. However, streams always need a stream buffer.</P>
+
+<A NAME="idx218"><!></A>
+<A NAME="644"><H3>6.4.4 Collaboration of Locales and Iostreams</H3></A>
+<P>The base class <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> contains a locale object. The formatting and parsing functions defined by the derived stream classes use the <I>numeric facets</I> of that locale.</P>
+<P>The class <B><I>basic_ios&lt;charT&gt;</I></B> holds a pointer to the stream buffer. This stream buffer has a locale object, too, usually a copy of the same locale object used by the functions of the stream classes. The stream buffer's input and output functions use the <I>code conversion facet</I> of the attached locale. <A HREF="#Figure 29">Figure 29</A> illustrates the architecture:</P>
+
+<A NAME="idx219"><!></A>
+<H4><A NAME="Figure 29">Figure 29 -- How an input file stream uses locales</A></H4>
+<IMG SRC="images/iofig13.gif">
+ 
+
+
+
+<BR>
+<HR>
+<A HREF="6-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="7.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

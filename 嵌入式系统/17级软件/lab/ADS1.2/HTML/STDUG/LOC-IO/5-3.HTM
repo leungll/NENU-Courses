@@ -1,0 +1,40 @@
+<HTML><HEAD><TITLE>5.3 A Phone Number Formatting Facet Class</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.3 A Phone Number Formatting Facet Class</H2>
+<P>Now that we have locales and facets in C++, we can encapsulate the locale-dependent parsing and formatting of telephone numbers into a new facet class. Let's focus on formatting in this example. We call the new facet class phone_put, analogous to time_put, money_put, etc.</P>
+<A NAME="idx121"><!></A>
+<P>The phone_put facet class serves solely as a base class for facet classes that actually implement the locale-dependent formatting. The relationship of class phone_put to the other facet classes is illustrated in <A HREF="#Figure 13">Figure 13</A>:</P>
+
+<A NAME="idx122"><!></A>
+<H4><A NAME="Figure 13">Figure 13 -- The relationship of the phone_put facet to the implementing facets</A></H4>
+<IMG SRC="images/locfig14.gif">
+ 
+
+<A NAME="idx123"><!></A>
+<P>Here is a first tentative declaration of the new facet class phone_put:</P>
+<UL>
+<PRE>
+class phone_put: public locale::facet                        //1
+{
+public:
+   static locale::id id;                                     //2
+   phone_put(size_t refs = 0) : locale::facet(refs) { }      //3
+
+   string_t put(const string_t&amp; ext
+               ,const string_t&amp; area 
+               ,const string_t&amp; cnt) const;                  //4
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Derive from the base class locale::facet, so that a locale object is able to maintain instances of our new phone facet class.
+<TR VALIGN="top"><TD>//2</TD><TD>New base facet classes need to define a static data member id of type locale::id.
+<TR VALIGN="top"><TD>//3</TD><TD>Define a constructor that takes the reference count that is handed over to the base class.
+<TR VALIGN="top"><TD>//4</TD><TD>Define a function put() that does the actual formatting.
+</TABLE>
+
+<HR>
+<A HREF="5-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

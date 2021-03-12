@@ -1,0 +1,112 @@
+<HTML><HEAD><TITLE>equal_range</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="equ_0708.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="equ_8796.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>equal_range</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Find the largest subrange in a collection into which a given value can be inserted without violating the ordering of the collection.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator, class T&gt;
+ pair&lt;ForwardIterator, ForwardIterator&gt;
+ <B>equal_range</B>(ForwardIterator first, ForwardIterator last,
+             const T&amp; value);
+
+ template &lt;class ForwardIterator, class T, class Compare&gt;
+  pair&lt;ForwardIterator, ForwardIterator&gt;
+  <B>equal_range</B>(ForwardIterator first, ForwardIterator last,
+              const T&amp; value, Compare comp);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>equal_range</I></B> algorithm performs a binary search on an ordered container to determine where the element <SAMP>value</SAMP> can be inserted without violating the container's ordering. The library includes two versions of the algorithm. The first version uses the less than operator (<SAMP>operator &lt;</SAMP>) to search for the valid insertion range, and assumes that the sequence was sorted using the less than operator. The second version allows you to specify a function object of type <SAMP>Compare</SAMP>, and assumes that <SAMP>Compare</SAMP> was the function used to sort the sequence. The function object must be a binary predicate. </P>
+<P><B><I>equal_range</I></B> returns a pair of iterators, <SAMP>i</SAMP> and <SAMP>j</SAMP>, that define a range containing elements equivalent to <SAMP>value</SAMP>, in other words, the first and last valid insertion points for <SAMP>value</SAMP>. If <SAMP>value</SAMP> is not an element in the container, <SAMP>i</SAMP> and <SAMP>j</SAMP> are equal. Otherwise, <SAMP>i</SAMP> points to the first element not "less" than <SAMP>value</SAMP>, and <SAMP>j</SAMP> points to the first element greater than value. In the second version, "less" is defined by the comparison object. Formally, <B><I>equal_range</I></B> returns a sub-range <SAMP>[i, j)</SAMP> such that <SAMP>value</SAMP> can be inserted at any iterator <SAMP>k</SAMP> within the range. Depending upon the version of the algorithm used, <SAMP>k</SAMP> must satisfy one of the following conditions: </P>
+<P><SAMP>!(*k &lt;  value)  &amp;&amp;  !(value  &lt;  *k)</SAMP></P>
+<P> or </P>
+<P><SAMP>comp(*k,value) == false &amp;&amp; comp(value, *k) == false</SAMP></P>
+<P>The range <SAMP>[first,last)</SAMP> is assumed to be sorted. Type <SAMP>T</SAMP> must be LessThanComparable.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P><B><I>equal_range</I></B> performs at most <SAMP>2 * log(last - first) + 1</SAMP> comparisons.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// eqlrange.cpp
+//
+ #include &lt;vector&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;functional&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[11] = {0,1,2,2,3,4,2,2,2,6,7};
+   //
+   // Set up a vector
+   //
+   vector&lt;int&gt; v1(d1+0, d1 + 11);
+   //
+   // Try equal_range variants   
+   //
+   pair&lt;iterator,iterator&gt; p1 = 
+       <B>equal_range</B>(v1.begin(),v1.end(),3);
+   // p1 = (v1.begin() + 4,v1.begin() + 5)
+   pair&lt;iterator,iterator&gt; p2 = 
+       <B>equal_range</B>(v1.begin(),v1.end(),2,less&lt;int&gt;()); 
+   // p2 = (v1.begin() + 4,v1.begin() + 5)
+   // Output results
+   cout &lt;&lt; endl  &lt;&lt; "The equal range for 3 is: "
+        &lt;&lt; "( " &lt;&lt; *p1.first &lt;&lt; " , " 
+        &lt;&lt; *p1.second &lt;&lt; " ) " &lt;&lt; endl &lt;&lt; endl; 
+   cout &lt;&lt; endl &lt;&lt; "The equal range for 2 is: "
+        &lt;&lt; "( " &lt;&lt; *p2.first &lt;&lt; " , " 
+        &lt;&lt; *p2.second &lt;&lt; " ) " &lt;&lt; endl; 
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The equal range for 3 is: ( 3 , 4 )
+The equal range for 2 is: ( 2 , 3 )</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int,allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bin_7851.htm">binary_function</A></I></B>, <B><I><A HREF="low_4395.htm">lower_bound</A></I></B>, <B><I><A HREF="upp_0967.htm">upper_bound</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="equ_0708.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="equ_8796.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

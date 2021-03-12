@@ -1,0 +1,122 @@
+<HTML><HEAD><TITLE>inner_product</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ind_9304.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="inp_3138.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>inner_product</H2>
+<PRE><HR>Generalized Numeric Operation
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Computes the inner product <SAMP>A X B</SAMP> of two ranges <SAMP>A</SAMP> and <SAMP>B</SAMP>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;numeric&gt;
+template &lt;class InputIterator1, class InputIterator2,
+          class T&gt;
+T <B>inner_product</B> (InputIterator1 first1, 
+                 InputIterator1 last1,
+                 InputIterator2 first2, T init);
+template &lt;class InputIterator1, class InputIterator2,
+          class T,
+          class BinaryOperation1,
+          class BinaryOperation2&gt;
+T <B>inner_product</B> (InputIterator1 first1, 
+                 InputIterator1 last1,
+                 InputIterator2 first2, T init,
+                 BinaryOperation1 binary_op1,
+                 BinaryOperation2 binary_op2);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>There are two versions of <B><I>inner_product</I></B>. The first computes an inner product using the default multiplication and addition operators, while the second allows you to specify binary operations to use in place of the default operations. </P>
+<P>The first version of the function computes its result by initializing the accumulator <SAMP>acc</SAMP> with the initial value <SAMP>init</SAMP> and then modifying it with:</P>
+<P><SAMP>acc = acc + ((*i1) * (*i2))</SAMP></P>
+<P>for every iterator <SAMP>i1</SAMP> in the range <SAMP>[first1, last1)</SAMP> and iterator <SAMP>i2</SAMP> in the range <SAMP>[first2, first2 + (last1 - first1))</SAMP>. The algorithm returns <SAMP>acc</SAMP>.</P>
+<P>The second version of the function initializes <SAMP>acc</SAMP> with <SAMP>init</SAMP>, then computes:</P>
+<P><SAMP>acc  =  binary_op1(acc, binary_op2(*i1,  *i2))</SAMP></P>
+<P>for every iterator <SAMP>i1</SAMP> in the range <SAMP>[first1, last1)</SAMP> and iterator <SAMP>i2</SAMP> in the range <SAMP>[first2, first2 + (last1  - first1))</SAMP>.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>The <B><I>inner_product</I></B> algorithm computes exactly <SAMP>(last1 - first1)</SAMP> applications of either:</P>
+<P><SAMP>acc + (*i1) * (*i2)</SAMP></P>
+<P> or </P>
+<P><SAMP>binary_op1(acc, binary_op2(*i1, *i2)).</SAMP></P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// inr_prod.cpp
+//
+ #include &lt;numeric&gt;       //For inner_product
+ #include &lt;list&gt;          //For list
+ #include &lt;vector&gt;        //For vectors
+ #include &lt;functional&gt;    //For plus and minus
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+   //Initialize a list and an int using arrays of ints
+   int a1[3] = {6, -3, -2};
+   int a2[3] = {-2, -3, -2};
+   list&lt;int&gt;   l(a1, a1+3);
+   vector&lt;int&gt; v(a2, a2+3);
+   //Calculate the inner product of the two sets of values
+   int inner_prod =
+        <B>inner_product</B>(l.begin(), l.end(), v.begin(), 0);
+   //Calculate a wacky inner product using the same values
+   int wacky = 
+         <B>inner_product</B>(l.begin(), l.end(), v.begin(), 0,
+                       plus&lt;int&gt;(), minus&lt;int&gt;());
+   //Print the output
+   cout &lt;&lt; "For the two sets of numbers: " &lt;&lt; endl 
+        &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; endl &lt;&lt; " and  ";
+   copy(l.begin(),l.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+   cout &lt;&lt; "," &lt;&lt; endl &lt;&lt; endl;
+   cout &lt;&lt; "The inner product is: " &lt;&lt; inner_prod &lt;&lt; endl;
+   cout &lt;&lt; "The wacky result is: " &lt;&lt; wacky &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the two sets of numbers:
+     -2 -3 -2
+ and  6 -3 -2 ,
+The inner product is: 1
+The wacky result is: 8</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>list&lt;int, allocator&lt;int&gt; &gt;</SAMP> and <SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of </P>
+<P><SAMP>list&lt;int&gt;</SAMP> and <SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+
+<BR>
+<HR>
+<A HREF="ind_9304.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="inp_3138.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

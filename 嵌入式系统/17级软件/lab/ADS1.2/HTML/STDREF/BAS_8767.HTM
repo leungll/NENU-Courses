@@ -1,0 +1,259 @@
+<HTML><HEAD><TITLE>basic_ostringstream</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bas_8583.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_0582.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>basic_ostringstream</H2>
+<PRE><HR>basic_ostringstream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ostream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ios<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>ios_base
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Supports writing objects of class <B><I><A HREF="bas_0007.htm">basic_string&lt;charT,traits,Allocator&gt;</A></I></B> </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesios_type">ios_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesostringstream">ostringstream</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+ <A HREF="#Typessb_type">sb_type</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typeswostringstream">wostringstream</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsrdbuf()">rdbuf()</A><BR>
+ <A HREF="#Member Functionsstr()">str()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;sstream&gt; 
+template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;void&gt; &gt;
+class basic_ostringstream
+: public basic_ostream&lt;charT, traits&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>basic_ostringstream&lt;charT,traits,Allocator&gt;</I></B> writes to an array in memory. It supports writing objects of class <B><I><A HREF="bas_0007.htm">basic_string&lt;charT,traits,Allocator&gt;</A></I></B>. It uses a <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B> object to control the associated storage. It inherits from <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B> and therefore can use all the formatted and unformatted output functions.   </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+class basic_ostringstream 
+: public basic_ostream&lt;charT, traits&gt; {
+
+ public:
+
+  typedef traits                           traits_type;
+  typedef charT                            char_type;
+  typedef typename traits::int_type        int_type;
+  typedef typename traits::pos_type        pos_type;
+  typedef typename traits::off_type        off_type;
+
+  typedef basic_stringbuf&lt;charT, traits, Allocator&gt; sb_type;
+  typedef basic_ios&lt;charT, traits&gt; ios_type;
+  typedef basic_string&lt;charT, traits, Allocator&gt;
+                       string_type;
+
+  explicit basic_ostringstream(ios_base::openmode which =
+                               ios_base::out);
+
+  explicit basic_ostringstream(const string_type&amp; str,
+                               ios_base::openmode which =
+                               ios_base::out);
+
+  virtual ~basic_ostringstream();
+
+  basic_stringbuf&lt;charT,traits,Allocator&gt; *rdbuf() const;
+
+  string_type str() const;
+
+  void str(const string_type&amp; str);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesios_type"></A><PRE><B>ios_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>ios_type</SAMP> is an instantiation of class <SAMP>basic_ios</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesostringstream"></A><PRE><B>ostringstream</B></PRE>
+
+<UL>
+<P>The type <SAMP>ostringstream</SAMP> is an instantiation of class <SAMP>basic_ostringstream</SAMP> on type <SAMP>char</SAMP>:</P>
+<P><SAMP>typedef basic_ostringstream&lt;char&gt; ostringstream;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typessb_type"></A><PRE><B>sb_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>sb_type</SAMP> is an instantiation of class <SAMP>basic_stringbuf</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>string_type</SAMP> is an instantiation of class <SAMP>basic_string</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typeswostringstream"></A><PRE><B>wostringstream</B></PRE>
+
+<UL>
+<P>The type <SAMP>wostringstream</SAMP> is an instantiation of class <SAMP>basic_ostringstream</SAMP> on type <SAMP>wchar_t</SAMP>:</P>
+<P><SAMP>typedef basic_ostringstream&lt;wchar_t&gt; wostringstream;</SAMP></P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>basic_ostringstream</B>(ios_base::openmode which =
+                             ios_base::out); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_ostringstream</SAMP>, initializing the base class <SAMP>basic_ostream</SAMP> with the associated string buffer. The string buffer is initialized by calling the <SAMP>basic_stringbuf</SAMP> constructor <SAMP>basic_stringbuf&lt;charT,traits,Allocator&gt;(which)</SAMP>.</P>
+</UL>
+
+
+
+<PRE>explicit <B>basic_ostringstream</B>(const string_type&amp; str,
+                             ios_base::openmode which =
+                             ios_base::out);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_ostringstream</SAMP>, initializing the base class <SAMP>basic_ostream</SAMP> with the associated string buffer. The string buffer is initialized by calling the <SAMP>basic_stringbuf</SAMP> constructor <SAMP>basic_stringbuf&lt;charT,traits,Allocator&gt;(str,which)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~basic_ostringstream</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>basic_ostringstream</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsrdbuf()"></A><PRE>basic_stringbuf&lt;charT,traits,Allocator&gt;* 
+<B>rdbuf</B>() const; </PRE>
+
+<UL>
+<P>Returns a pointer to the <SAMP>basic_stringbuf</SAMP> associated with the stream.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsstr()"></A><PRE>string_type 
+<B>str</B>() const; </PRE>
+
+<UL>
+<P>Returns a string object of type <SAMP>string_type</SAMP> whose contents is a copy of the underlying buffer contents.</P>
+</UL>
+
+
+
+<PRE>void 
+<B>str</B>(const string_type&amp; str);</PRE>
+
+<UL>
+<P>Clears the underlying string buffer and copies the string object <SAMP>str</SAMP> into it. If the opening mode is <SAMP>in</SAMP>, initializes the input sequence to point to the first character of the buffer. If the opening mode is <SAMP>out</SAMP>, initializes the output sequence to point to the first character of the buffer. If the opening mode is <SAMP>out | app</SAMP>, initializes the output sequence to point to the last character of the buffer. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<P>See <B><I><A HREF="bas_2565.htm">basic_stringstream</A></I></B>, <B><I><A HREF="bas_2581.htm">basic_istringstream</A></I></B> and <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B> examples.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B>(3C++), <B><I><A HREF="bas_0007.htm">basic_string</A></I></B>(3C++), <B><I><A HREF="bas_2581.htm">basic_istringstream</A></I></B>(3C++), <B><I><A HREF="bas_2565.htm">basic_stringstream</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.7.3</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="bas_8583.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_0582.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

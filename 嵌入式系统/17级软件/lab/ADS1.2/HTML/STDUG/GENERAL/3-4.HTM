@@ -1,0 +1,84 @@
+<HTML><HEAD><TITLE>3.4 Function Adaptors</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="3-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>3.4 Function Adaptors</H2>
+
+<A NAME="341"><H3>3.4.1 Definition</H3></A>
+<A NAME="idx49"><!></A>
+<P>A <I>function adaptor</I> is an instance of a class that adapts a global or member function so that the function can be used as a function object. A function adaptor may also be used to alter the behavior of a function or function object, as shown in <A HREF="3-5.htm">Section 3.5</A>. Each function adaptor provides a constructor that takes a global or member function. The adaptor also provides a parenthesis operator that forwards its call to that associated global or member function.</P>
+
+<A NAME="342"><H3>3.4.2 Adapting Global Functions</H3></A>
+<A NAME="idx50"><!></A>
+<P>The <B><I><A HREF="../../stdref/poi_7375.htm">pointer_to_unary_function</A></I></B> and <B><I><A HREF="../../stdref/poi_3537.htm">pointer_to_binary_function</A></I></B> templates adapt global functions of one or two arguments. These adaptors can be applied directly, or the <B><I><A HREF="../../stdref/ptr_4059.htm">ptr_fun</A></I></B> function template can be used to construct the appropriate adaptor automatically. For instance, a simple <SAMP>times3</SAMP> function can be adapted and applied to a vector of integers as follows:</P>
+<UL>
+<PRE>
+int times3(int x) {
+  return 3*x;
+}
+
+int a{} {1,2,3,4,5};
+vector&lt;int&gt; v(a,a+5), v2;
+
+transform(v.begin(),v.end(),v2.end(),ptr_fun(times3));</PRE>
+</UL>
+<P>Alternatively, the adapter could have been applied, and the new, adapted function object passed to the vector:</P>
+<UL>
+<PRE>
+pointer_to_unary_function&lt;int,int&gt; pf(times3);
+transform(v.begin(),v.end(),v2.end(),pf);</PRE>
+</UL>
+<P>This example points out the advantage of allowing the compiler to deduce the types needed by <B><I><A HREF="../../stdref/poi_7375.htm">pointer_to_unary_function</A></I></B> through the use of <SAMP>ptr_fun</SAMP>. </P>
+
+<A NAME="343"><H3>3.4.3 Adapting Member Functions</H3></A>
+<A NAME="idx51"><!></A>
+<P>The <B><I><A HREF="../../stdref/mem_1776.htm">mem_fun</A></I></B> family of templates adapts member functions, rather than global functions. For instance, to sort each list in a given set of lists, <B><I>mem_fun_t</I></B> or simply <B><I>mem_fun</I></B> can be used to apply the list sort member function to each element in the set:</P>
+<UL>
+<PRE>
+set&lt;list&lt;int&gt;* &gt; s;
+
+// Initialize the set with lists
+...
+// Sort each list in the set.
+for_each(s.begin(),s.end(),mem_fun(&amp;list&lt;int&gt;::sort));
+
+// Now each list in the set is sorted</PRE>
+</UL>
+<P>Using <B><I><A HREF="../../stdref/mem_1776.htm">mem_fun</A></I></B> is necessary because the generic sort algorithm cannot be used on a list. It is also the simplest way to access any polymorphic characteristics of an object held in a standard container. For instance, a virtual draw function might be invoked on a collection of objects that are all part of the canonical <br><SAMP>shape hierarchy</SAMP> like this:</P>
+<UL>
+<PRE>
+// shape hierarchy
+class shape {
+   virtual void draw();
+};
+
+class circle : public shape {
+   void draw();
+};
+
+class square : public shape {
+  void draw();
+};
+
+//  Assemble a vector of shapes
+circle c;
+square s;
+vector&lt;shape*&gt; v;
+v.push_back(&amp;s);
+v.push_back(&amp;c);
+
+// Call draw on each one
+for_each(v.begin(),v.end(), mem_fun(&amp;shape::draw));</PRE>
+</UL>
+<P>Like the global function adaptors, each member function adaptor consists of a class template and an associated function template. The class is the actual adaptor, while the function simplifies the use of the class by constructing instances of that class on the fly. For instance, in the above example, a user could construct a <B><I>mem_fun_t</I></B>, and pass that to the <SAMP>for_each</SAMP> algorithm:</P>
+<UL>
+<PRE>
+mem_fun_t&lt;shape&gt; mf(&amp;shape::draw);
+for_each(v.begin(),v.end(),mf);</PRE>
+</UL>
+<P>Here again the <B><I><A HREF="../../stdref/mem_1776.htm">mem_fun</A></I></B> function template simplifies the use of the <B><I>mem_fun_t</I></B> adaptor by allowing the compiler to deduce the type needed by <B><I>mem_fun_t</I></B>.</P>
+<P>The Standard C++ Library provides member function adaptors for functions with zero arguments as above and with one argument. They can be easily extended to member functions with more arguments. </P>
+
+<HR>
+<A HREF="3-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

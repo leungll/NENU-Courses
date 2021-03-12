@@ -1,0 +1,124 @@
+<HTML><HEAD><TITLE>find_first_of</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="fin_7707.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fin_2105.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>find_first_of</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Finds the first occurrence of any value from one sequence in another sequence.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class ForwardIterator1, class ForwardIterator2&gt;
+ForwardIterator1 <B>find_first_of</B> (ForwardIterator1 first1,
+                                ForwardIterator1 last1,
+                                ForwardIterator2 first2,
+                                ForwardIterator2 last2);
+
+template &lt;class ForwardIterator1, class ForwardIterator2,
+          class BinaryPredicate&gt;
+ForwardIterator1 <B>find_first_of</B> (ForwardIterator1 first1,
+                                ForwardIterator1 last1,
+                                ForwardIterator2 first2,
+                                ForwardIterator2 last2,
+                                BinaryPredicate pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>find_first_of</I></B> algorithm finds the first occurrence of a value from a sequence, specified by <SAMP>first2, last2</SAMP>, in a sequence specified by <SAMP>first1, last1</SAMP>. The algorithm returns an iterator in the range <SAMP>[first1, last1)</SAMP> that points to the first matching element<SAMP>.</SAMP> If the first sequence <SAMP>[first1, last1)</SAMP> does not contain any of the values in the second sequence, <B><I>find_first_of</I></B> returns <SAMP>last1</SAMP>. </P>
+<P>In other words, <B><I>find_first_of</I></B> returns the first iterator <SAMP>i</SAMP> in the <SAMP>[first1, last1)</SAMP>such that for some integer <SAMP>j</SAMP> in the range <SAMP>[first2, last2)</SAMP>, the following conditions hold: </P>
+<UL>
+<PRE>*i == *j, pred(*i,*j) == true.</PRE>
+
+</UL>
+<P>Or <B><I>find_first_of</I></B> returns <SAMP>last1</SAMP> if no such iterator is found.</P>
+<P>Two versions of the algorithm exist. The first uses the equality operator as the default binary predicate, and the second allows you to specify a binary predicate.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>At most <SAMP>(last1 - first1)*(last2 - first2)</SAMP> applications of the corresponding predicate are done.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// find_f_o.cpp
+//
+ #include &lt;vector&gt;
+ #include &lt;algorithm&gt;
+ #include &lt;functional&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main()
+ {
+   typedef vector&lt;int&gt;::iterator iterator;
+   int d1[10] = {0,1,2,2,3,4,2,2,6,7};
+   int d2[2] = {6,4};
+   //
+   // Set up two vectors
+   //
+   vector&lt;int&gt; v1(d1,d1 + 10), v2(d2,d2 + 2);
+   //
+   // Try both find_first_of variants 
+   //
+   iterator it1 =   
+     <B>find_first_of</B>(v1.begin(),v1.end(),v2.begin(),v2.end()); 
+   <B>find_first_of</B>(v1.begin(),v1.end(),v2.begin(),v2.end(),
+                 equal_to&lt;int&gt;());
+   //
+   // Output results
+   //
+   cout &lt;&lt; "For the vectors: ";
+   copy(v1.begin(),v1.end(),
+        ostream_iterator&lt;int,char&gt;(cout," " ));
+   cout &lt;&lt; " and ";
+   copy(v2.begin(),v2.end(),
+        ostream_iterator&lt;int,char&gt;(cout," " ));
+   cout &lt;&lt; endl &lt;&lt; endl
+       &lt;&lt; "both versions of find_first_of point to: "
+       &lt;&lt; *it1;
+   
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+For the vectors: 0 1 2 2 3 4 2 2 6 7  and 6 4
+both versions of find_first_of point to: 4</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>vector&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Alg_5157.htm">Algorithms</A></I></B>, <B><I><A HREF="adj_8817.htm">adjacent_find</A></I></B>, <B><I><A HREF="fin_7988.htm">find</A></I></B>, <B><I><A HREF="fin_2105.htm">find_if</A></I></B>, <B><I><A HREF="fin_7707.htm">find_end</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="fin_7707.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fin_2105.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

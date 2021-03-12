@@ -1,0 +1,72 @@
+<HTML><HEAD><TITLE>logical_or</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="log_1866.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="low_4395.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>logical_or</H2>
+<PRE><HR>Function Object
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A binary function object that returns <SAMP>true</SAMP> if either of its arguments are <SAMP>true</SAMP>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;functional&gt;
+template &lt;class T&gt;
+struct <B>logical_or</B> : binary_function&lt;T, T, bool&gt; ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>logical_or</I></B> is a binary function object. Its <SAMP>operator()</SAMP> returns <SAMP>true</SAMP> if either <SAMP>x</SAMP> or <SAMP>y</SAMP> are <SAMP>true</SAMP>. You can pass a <B><I>logical_or</I></B> object to any algorithm that requires a binary function. For example, the <B><I><A HREF="tra_4787.htm">transform</A></I></B> algorithm applies a binary operation to corresponding values in two collections and stores the result of the function.   <B><I>logical_or</I></B> is used in that algorithm in the following manner:</P>
+<UL>
+<PRE>vector&lt;bool&gt; vec1;
+vector&lt;bool&gt; vec2;
+vector&lt;bool&gt; vecResult;
+.
+.
+.
+transform(vec1.begin(), vec1.end(),
+          vec2.begin(),
+          vecResult.begin(), <B>logical_or&lt;bool&gt;()</B>);</PRE>
+
+</UL>
+<P>After this call to <B><I><A HREF="tra_4787.htm">transform</A></I></B>, <SAMP>vecResult(n)</SAMP> contains a <SAMP>1</SAMP> (<SAMP>true</SAMP>) if either <SAMP>vec1(n)</SAMP> or <SAMP>vec2(n)</SAMP> is <SAMP>true</SAMP> or a <SAMP>0</SAMP> (<SAMP>false</SAMP>) if both <SAMP>vec1(n)</SAMP> and <SAMP>vec2(n)</SAMP> are <SAMP>false</SAMP>.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T&gt;
+struct logical_or : binary_function&lt;T, T, bool&gt; {
+  bool operator() (const T&amp;, const T&amp;) const;
+};</PRE>
+
+</PRE>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;bool, allocator&lt;bool&gt; &gt;</SAMP></P>
+<P>instead of: </P>
+<P><SAMP>vector&lt;bool&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bin_7851.htm">binary_function</A></I></B>, <B><I><A HREF="Fun_4316.htm">Function Objects</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="log_1866.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="low_4395.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

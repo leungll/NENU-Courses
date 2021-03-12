@@ -1,0 +1,450 @@
+<HTML><HEAD><TITLE>time_put</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="tim_6304.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_6283.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>time_put</H2>
+<PRE><HR>        <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>time_put_base
+time_put 
+        <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A time formatting facet for output.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_put()">do_put()</A><BR>
+ <A HREF="#Public Member Functionsput()">put()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT, class OutputIterator = 
+          ostreambuf_iterator&lt;charT&gt; &gt;
+class time_put;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>time_put</I></B> facet includes facilities for formatted output of date/time values. The member function of <B><I>time_put</I></B> takes a date/time in the form of a struct <SAMP>tm</SAMP> and translates this into a character string representation.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT, class OutputIterator =    
+          ostreambuf_iterator&lt;charT&gt; &gt;
+class time_put : public locale::facet {
+public:
+  typedef charT            char_type;
+  typedef OutputIterator   iter_type;
+  explicit time_put(size_t = 0);
+  iter_type put(iter_type, ios_base&amp;, 
+                char_type, const tm*,
+                const charT*, const charT*) const;
+  iter_type put(iter_type, ios_base&amp;, char_type,
+                const tm*, char, char = 0) const;
+  static locale::id id;
+protected:
+  ~time_put();  // virtual
+  virtual iter_type do_put(iter_type, ios_base&amp;, 
+                           char_type, const tm*,
+                           char, char) const;
+}; </PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>time_put</B>(size_t refs = 0); </PRE>
+
+<UL>
+<P>Constructs a <B><I>time_put</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~time_put</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsput()"></A><PRE>iter_type 
+<B>put</B>(iter_type s, ios_base&amp; f, 
+    char_type fill, const tm* tmb,
+    const charT* pattern, const charT* pat_end) const; </PRE>
+
+<UL>
+<P>Creates a character string representing the Date/Time contained in <SAMP>tmb</SAMP>. The format of the string is determined by a sequence of format modifiers contained in the range <SAMP>[pattern,pat_end)</SAMP>. These modifiers are from the same set as those used by the <SAMP>strftime</SAMP> function and are applied in exactly the same way. The resulting string is written out to the buffer pointed to by the iterator <SAMP>s</SAMP>. See the table below for a description of <SAMP>strftime</SAMP> formatting characters.</P>
+<P>The <SAMP>fill</SAMP> argument is used for any padding.</P>
+<P>Returns an iterator pointing one past the last character written.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_put()"></A><PRE>iter_type 
+<B>do_put</B>(iter_type s, ios_base&amp; f, char_type fill,
+    const tm* tmb, char format, char modifier = 0) const; </PRE>
+
+<UL>
+<P>Calls the protected virtual <SAMP>do_put</SAMP> function.</P>
+<P>Writes out a character string representation of the Date/Time contained in <SAMP>t</SAMP>. The string is formatted according the specifier <SAMP>format</SAMP> and modifier <SAMP>modifier</SAMP>. These values are interpreted in exactly the same way as the <SAMP>strftime</SAMP> function interprets its format and modifier flags. See the table below for a description of <SAMP>strftime</SAMP> formatting characters.</P>
+<P>The <SAMP>fill</SAMP> argument is used for any padding.</P>
+<P>Returns an iterator pointing one past the last character written.</P>
+</UL>
+
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4>Table 1 -- Formatting characters used by strftime() . For those formats that do not use all members of the struct tm, only those members that are actually used are noted [in brackets].</H4><TR ALIGN=left VALIGN=top>
+<TH><B>Format character<B></TH>
+<TH><B>Meaning<B></TH>
+<TH><B>Example<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>a</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Abbreviated weekday name [from tm::tm_wday]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Sun</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>A</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Full weekday name [from tm::tm_wday]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Sunday</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>b</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Abbreviated month name</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>Feb</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>B</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Full month name</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>February</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>c</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date and time [may use all members]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Feb 29 14:34:56 1984</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>d</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Day of the month</SAMP><BR>
+</TD>
+<TD>
+<SAMP>29</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>H</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Hour of the 24-hour day</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>14</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>I</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Hour of the 12-hour day</SAMP><BR>
+</TD>
+<TD>
+<SAMP>02</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>j</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Day of the year, from 001 [from tm::tm_yday]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>60</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>m</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Month of the year, from 01</SAMP><BR>
+</TD>
+<TD>
+<SAMP>02</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>M</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Minutes after the hour</SAMP><BR>
+</TD>
+<TD>
+<SAMP>34</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>p</SAMP><BR>
+</TD>
+<TD>
+<SAMP>AM/PM indicator, if any</SAMP><BR>
+</TD>
+<TD>
+<SAMP>AM</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>S</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Seconds after the minute</SAMP><BR>
+</TD>
+<TD>
+<SAMP>56</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>U</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Sunday week of the year, from 00 [from tm::tm_yday and tm::tm_wday]</SAMP><BR>
+</TD>
+<TD>
+<SAMP></SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>w</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Day of the week, with 0 for Sunday</SAMP><BR>
+</TD>
+<TD>
+<SAMP>0</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>W</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Monday week of the year, from 00 [from tm::tm_yday and tm::tm_wday]</SAMP><BR>
+</TD>
+<TD>
+<SAMP></SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>x</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date [uses tm::tm_yday in some locales]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Feb 29 1984</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>X</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Time</SAMP><BR>
+</TD>
+<TD>
+<SAMP>14:34:56</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>y</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Year of the century, from 00 (deprecated)</SAMP> <BR>
+</TD>
+<TD>
+<SAMP>84</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>Y</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Year</SAMP><BR>
+</TD>
+<TD>
+<SAMP>1984</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>Z</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Time zone name [from tm::tm_isdst]</SAMP><BR>
+</TD>
+<TD>
+<SAMP>PST or PDT</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>// 
+// timeput.cpp
+//
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  typedef ostreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+          iter_type;
+  
+  locale loc;
+  time_t tm = time(NULL);
+  struct tm* tmb = localtime(&amp;tm);
+  struct tm timeb;
+  memcpy(&amp;timeb,tmb,sizeof(struct tm));
+  char pat[] = "%c";
+
+  // Get a time_put facet
+  const time_put&lt;char,iter_type&gt;&amp; tp = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;time_put&lt;char,iter_type&gt; &gt;(loc);
+#else
+  use_facet(loc,(time_put&lt;char,iter_type&gt;*)0);
+#endif
+
+  // Construct a ostreambuf_iterator on cout
+  iter_type begin(cout);
+  
+  cout &lt;&lt; " --&gt; ";
+  tp.put(begin,cout,' ',&amp;timeb,pat,pat+2);
+ 
+  cout &lt;&lt; endl &lt;&lt; " --&gt; ";
+  tp.put(begin,cout,' ',&amp;timeb,'c',' ');
+
+  cout &lt;&lt;  endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="tim_0622.htm">time_get</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="tim_6304.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_6283.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

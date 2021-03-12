@@ -1,0 +1,100 @@
+<HTML><HEAD><TITLE>19.3 Example 1: Defining a Tiny Character Code Conversion (ASCII &lt;-&gt; EBCDIC)</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="19-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>19.3 Example 1: Defining a Tiny Character Code Conversion (ASCII &lt;-&gt; EBCDIC)</H2>
+<A NAME="idx463"><!></A>
+<P>As an example of how file stream buffers and code conversion facets collaborate, we would now like to implement a code conversion facet that can translate text files encoded in EBCDIC into character streams encoded in ASCII. The conversion between ASCII characters and EBCDIC characters is a constant-size code conversion where each character is represented by one byte. Hence the conversion can be done on a character-by-character basis. </P>
+<A NAME="idx464"><!></A>
+<P>To implement and use an ASCII-EBCDIC code conversion facet, we:</P>
+<OL>
+<LI><P>Derive a new facet type from the standard code conversion facet type <SAMP>codecvt</SAMP>.</P>
+</LI>
+<LI><P>Specialize the new facet type for the character type <SAMP>char</SAMP>.</P>
+</LI>
+<LI><P>Implement the member functions that are used by the file buffer.</P>
+</LI>
+<LI><P>Imbue a file stream's buffer with a locale that carries an ASCII-EBCDIC code conversion facet. </P>
+</LI>
+</OL>
+<P>The following sections explain these steps in detail.</P>
+
+<A NAME="idx465"><!></A>
+<A NAME="1931"><H3>19.3.1  Derive a New Facet Type</H3></A>
+<A NAME="idx466"><!></A>
+<P>Here is the new code conversion facet type <SAMP>AsciiEbcdicConversion</SAMP>:</P>
+<UL>
+<PRE>
+template &lt;class internT, class externT, class stateT&gt;
+class AsciiEbcdicConversion
+: public codecvt&lt;internT, externT, stateT&gt;
+{
+};</PRE>
+</UL>
+<P>It is empty because we will specialize the class template for the character type <SAMP>char</SAMP>.</P>
+
+<A NAME="idx467"><!></A>
+<A NAME="1932"><H3>19.3.2  Specialize the New Facet Type and Implement the Member Functions</H3></A>
+<P>Each code conversion facet has two main member functions, <SAMP>in()</SAMP> and <SAMP>out()</SAMP>:</P>
+<UL>
+<LI><P>Function <SAMP>in()</SAMP> is responsible for the conversion done on reading from the external device.</P>
+</LI>
+<LI><P>Function <SAMP>out()</SAMP> is responsible for the conversion necessary for writing to the external device.</P>
+</LI>
+</UL>
+<P>The other member functions of a code conversion facet used by a file stream buffer are: </P>
+<UL>
+<LI><P>The function <SAMP>always_noconv()</SAMP>, which returns <SAMP>TRUE</SAMP> if no conversion is performed by the facet. This is because file stream buffers might want to bypass the code conversion facet when no conversion is necessary; for example, when the external encoding is identical to the internal. Our facet obviously will perform a conversion and does not want to be bypassed, so <SAMP>always_noconv()</SAMP> returns <SAMP>FALSE</SAMP> in our example. </P>
+</LI>
+<LI><P>The function <SAMP>encoding()</SAMP>, which provides information about the type of conversion; that is, whether it is state-dependent or constant-size, etc. In our example, the conversion is constant-size. The function <SAMP>encoding()</SAMP> is supposed to return the size of the internal characters, which is 1 because the file buffer uses an ASCII encoding internally.</P>
+</LI>
+</UL>
+<A NAME="idx468"><!></A>
+<P>All public member functions of a facet call the respective, protected virtual member function, named <SAMP>do_...()</SAMP>. Here is the declaration of the specialized facet type:</P>
+<UL>
+<PRE>
+class AsciiEbcdicConversion&lt;char, char, mbstate_t&gt;
+: public codecvt&lt;char, char, mbstate_t&gt;
+{
+protected:
+ 
+ result do_in(mbstate_t&amp; state
+              ,const char* from, const char* from_end, const char*&amp; from_next
+              ,char* to        , char* to_limit      , char*&amp; to_next) const;
+ 
+ result do_out(mbstate_t&amp; state
+              ,const char* from, const char* from_end, const char*&amp; from_next
+              ,char* to        , char* to_limit      , char*&amp; to_next) const;
+
+ bool do_always_noconv() const thow()
+ { return false; };
+ 
+ int do_encoding() const throw();
+ { return  1; }
+ 
+};</PRE>
+</UL>
+<P>For the sake of brevity, we implement only those functions used by Rogue Wave's implementation of file stream buffers. If you want to provide a code conversion facet that is more widely usable, you must also implement the functions <SAMP>do_length()</SAMP> and <SAMP>do_max_length()</SAMP>. </P>
+<P>The implementation of the functions <SAMP>do_in()</SAMP> and <SAMP>do_out()</SAMP> is straightforward. Each of the functions translates a sequence of characters in the range <SAMP>[from,from_end)</SAMP> into the corresponding sequence <SAMP>[to,to_end)</SAMP>. The pointers <SAMP>from_next</SAMP> and <SAMP>to_next</SAMP> point one beyond the last character successfully converted. In principle, you can do whatever you want, or whatever it takes, in these functions. However, for effective communication with the file stream buffer, it is important to indicate success or failure properly.</P>
+
+<A NAME="1933"><H3>19.3.3  Use the New Code Conversion Facet</H3></A>
+<A NAME="idx469"><!></A>
+<P>Here is an example of how the new code conversion facet can be used:</P>
+<UL>
+<PRE>
+fstream inout("/tmp/fil");                                    //1
+AsciiEbcdicConversion&lt;char,char,mbstate_t&gt; cvtfac;
+locale cvtloc(locale(),&amp;cvtfac);
+inout.rdbuf()-&gt;pubimbue(cvtloc)                               //2
+cout &lt;&lt; inout.rdbuf();                                        //3</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>When a file is created, a snapshot of the current global locale is attached as the default locale. Remember that a stream has two locale objects: one used for formatting numeric items, and a second used by the stream's buffer for code conversions.
+<TR VALIGN="top"><TD>//2</TD><TD>Here the stream buffer's locale is replaced by a copy of the global locale that has an ASCII-EBCDIC code conversion facet.
+<TR VALIGN="top"><TD>//3</TD><TD>The content of the EBCDIC file <SAMP>"/tmp/fil"</SAMP> is read, automatically converted to ASCII, and written to <SAMP>cout</SAMP>.
+</TABLE>
+
+<HR>
+<A HREF="19-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

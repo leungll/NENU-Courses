@@ -1,0 +1,211 @@
+<HTML><HEAD><TITLE>indirect_array</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="inc_3676.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="inn_8576.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>indirect_array</H2>
+<PRE><HR>Valarray helpers
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Assignment Operators">Assignment Operators</A></LI>
+<LI><A HREF="#Computed Assignment Operators">Computed Assignment Operators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric array class used to represent elements selected from a <B><I><A HREF="val_6244.htm">valarray</A></I></B>.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Computed Assignment Operatorsoperator%=()">operator%=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&amp;=()">operator&amp;=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&gt;&gt;=()">operator&gt;&gt;=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator&lt;&lt;=()">operator&lt;&lt;=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator*=()">operator*=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator+=()">operator+=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Computed Assignment Operatorsoperator-=()">operator-=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator/=()">operator/=()</A><BR>
+ <A HREF="#Assignment Operatorsoperator=()">operator=()</A><BR>
+ <A HREF="#Computed Assignment Operatorsoperator^=()">operator^=()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;valarray&gt;
+template &lt;class T&gt;
+class <B>indirect_array</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>indirect_array&lt;T&gt;</I></B> creates a selective view into a <B><I><A HREF="val_6244.htm">valarray</A></I></B>. <B><I>Indirect_array</I></B>s are produced by applying the indirect subscript operator to a <B><I>valarray</I></B>. The indirect array produced by this subscript contains only the elements of the <B><I>valarray</I></B> whose indices appear as values in the argument. The elements in an <B><I>indirect_array</I></B> are references to selected elements in the <B><I>valarray</I></B> (so changing an element in the <B><I>indirect_array</I></B> really changes the corresponding element in the <B><I>valarray</I></B>). An <B><I>indirect_array</I></B> does not itself hold any distinct elements. The template cannot be instantiated directly since all its constructors are private. However, you can copy an <B><I>indirect_array</I></B> to a <B><I>valarray</I></B> using either the <B><I>valarray</I></B> copy constructor or the assignment operator. Reference semantics are lost at that point. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T&gt; class indirect_array {
+public:
+
+  // types
+  typedef T value_type;
+
+  // destructor
+  ~indirect_array();
+
+  // public assignment
+  void operator= (const valarray&lt;T&gt;&amp; array) const;
+  // computed assignment
+  void operator*= (const valarray&lt;T&gt;&amp; array) const;
+  void operator/= (const valarray&lt;T&gt;&amp; array) const;
+  void operator%= (const valarray&lt;T&gt;&amp; array) const;
+  void operator+= (const valarray&lt;T&gt;&amp; array) const;
+  void operator-= (const valarray&lt;T&gt;&amp; array) const;
+  void operator^= (const valarray&lt;T&gt;&amp; array) const;
+  void operator&amp;= (const valarray&lt;T&gt;&amp; array) const;
+  void operator|= (const valarray&lt;T&gt;&amp; array) const;
+  void operator&lt;&lt;= (const valarray&lt;T&gt;&amp; array) const;
+  void operator&gt;&gt;= (const valarray&lt;T&gt;&amp; array) const;
+ 
+  // fill function
+  void operator=(const T&amp;);  
+
+private:
+  // constructors
+  indirect_array();
+  indirect_array(const indirect_array&lt;T&gt;&amp;);
+  // operator = 
+  indirect_array&lt;T&gt;&amp; 
+     operator= (const indirect_array&lt;T&gt;&amp; array);
+};</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>indirect_array</B>();
+<B>indirect_array</B>(const indirect_array&amp;);</PRE>
+
+<UL>
+<P>All <B><I>indirect_array</I></B> constructors are private and cannot be called directly. This prevents copy construction of <B><I>indirect_arrays</I></B>.</P>
+</UL>
+
+
+<A NAME="Assignment Operators"><H3>Assignment Operators</H3></A>
+
+
+<A NAME="Assignment Operatorsoperator=()"></A><PRE>void <B>operator=</B>(const valarray&lt;T&gt;&amp; x) const;</PRE>
+
+<UL>
+<P>Assigns values from <SAMP>x</SAMP> to the selected elements of the <B><I><A HREF="val_6244.htm">valarray</A></I></B> that self refers to. Remember that an <B><I>indirect_array</I></B> never holds any elements itself; it simply refers to selected elements in the <B><I>valarray</I></B> used to generate it.</P>
+</UL>
+
+
+
+<PRE>indirect_array&lt;T&gt;&amp; 
+<B>operator=</B>(const indirect-_array&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P>Private assignment operator. Cannot be called directly, thus preventing assignment between <B><I>indirect_arrays</I></B>.</P>
+</UL>
+
+
+<A NAME="Computed Assignment Operators"><H3>Computed Assignment Operators</H3></A>
+
+
+<A NAME="Computed Assignment Operatorsoperator*=()"></A><PRE>void <B>operator*=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator/=()"></A>void <B>operator/=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator%=()"></A>void <B>operator%=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator+=()"></A>void <B>operator+=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator-=()"></A>void <B>operator-=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator^=()"></A>void <B>operator^=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator&amp;=()"></A>void <B>operator&amp;=</B>(const valarray&lt;T&gt;&amp; val) const;
+void <B>operator|=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator&lt;&lt;=()"></A>void <B>operator&lt;&lt;=</B>(const valarray&lt;T&gt;&amp; val) const;
+<A NAME="Computed Assignment Operatorsoperator&gt;&gt;=()"></A>void <B>operator&gt;&gt;=</B>(const valarray&lt;T&gt;&amp; val) const;</PRE>
+
+<UL>
+<P>Applies the indicated operation using elements from <SAMP>val</SAMP> to the selected elements of the <B><I><A HREF="val_6244.htm">valarray</A></I></B> that self refers to. Remember that an <B><I>indirect_array</I></B> never holds any elements itself; it simply refers to selected elements in the <B><I>valarray</I></B> used to generate it.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<PRE>void <B>operator=</B>(const T&amp; x);</PRE>
+
+<UL>
+<P>Assigns <SAMP>x</SAMP> to the selected elements of the valarray that self refers to. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// indirect_array.cpp
+//
+#include "valarray.h" // Contains a valarray stream inserter
+using namespace std;
+
+int main(void)
+{
+  int ibuf[10] = {0,1,2,3,4,5,6,7,8,9};
+  size_t sbuf[6] = {0,2,3,4,7,8};
+
+  // create a valarray of ints
+  valarray&lt;int&gt;         vi(ibuf,10);
+
+  // create a valarray of indices for a selector
+  valarray&lt;size_t&gt; selector(sbuf,6);
+
+  // print out the valarray&lt;int&gt;
+  cout &lt;&lt; vi &lt;&lt; endl;
+
+  // Get a indirect_array 
+  // and assign that indirect to another valarray
+  indirect_array&lt;int&gt; select = vi[selector];
+  valarray&lt;int&gt; vi3 = select;
+
+  // print out the selective array
+  cout &lt;&lt; vi3 &lt;&lt; endl;
+
+  // Double the selected values
+  select += vi3;
+
+  // print out vi1 again
+  cout &lt;&lt; vi &lt;&lt; endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+[0,1,2,3,4,5,6,7,8,9]
+[0,2,3,4,7,8]
+[0,1,4,6,8,5,6,14,16,9]</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="val_6244.htm">valarray</A></I></B>, <B><I><A HREF="sli_1044.htm">slice_array</A></I></B>, <B><I><A HREF="sli_0626.htm">slice</A></I></B>, <B><I><A HREF="gsl_4121.htm">gslice</A></I></B>, <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B>, <B><I><A HREF="mas_2579.htm">mask_array</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="inc_3676.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="inn_8576.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

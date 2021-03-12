@@ -1,0 +1,39 @@
+This is a text file to test the Huffman Encoder and Decoder.
+
+It was written in a text editor using ascii text and then converted
+to binary and hexadecimal text formats (with leading 0x) for each of
+8-, 16- and 32-bit data so that it can be used as test data for the
+Huffman routines.
+
+Each sentence, in each paragraph, is hard returned and punctuation is
+used to add variety to the symbols and the probability of occurrence
+for the symbols and hence the codewords that are produced.
+
+Random occurrences of words such as "queen" and "zebra" are included
+so that those letters of the alphabet that don't occur very often are
+incorporated into the test routine.
+
+White space and capital letters are also a key factor with the most
+frequently occurring symbol expected [but not proven as yet!] being
+a 'space' character or 0x20 as it is in hexadecimal format.
+
+Other characters such as *, $, %, £, #, # and the "curly braces" {}
+could have been included have not been??!!!!!
+
+All that remains now is to use the file to test the Huffman functions...
+
+Contact Information
+_______ ___________
+
+For further technical support please contact the Software Support 
+group at ARM:
+
+  Software Support
+  ARM Limited
+  Fulbourn Road
+  Cherry Hinton
+  Cambridge
+  CB1 4JN
+  UK
+
+  sw-support@arm.com

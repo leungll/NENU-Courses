@@ -1,0 +1,50 @@
+<HTML><HEAD><TITLE>18.3 Connecting iostream and streambuf Objects</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="18-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>18.3 Connecting iostream and streambuf Objects</H2>
+
+<A NAME="idx455"><!></A>
+<P>In <A HREF="17-3.htm#1732">Section 17.3.2</A> we saw how to derive a new <B><I>stream</I></B> class. In <A HREF="18-2.htm">Section 18.2</A> we saw how to derive a <B><I>streambuf</I></B> class, and an example of how to connect the two. In this section, we'll look a little more closely at the ways the two can be connected together safely. </P>
+<P> This connection can be attempted in two different ways:</P>
+<UL>
+<LI><P>By deriving from a descendent of <B><I>ios</I></B> which does not have a <B><I>streambuf</I></B>, such as <B><I>istream</I></B> or <B><I>ostream</I></B>, and providing it with an external <B><I>streambuf</I></B> which is itself a derived type.</P>
+</LI>
+<LI><P>By deriving from a descendent of <B><I>ios</I></B> which provides a <B><I>streambuf</I></B>, such as <B><I>ifstream</I></B> or <B><I>ofstream</I></B>.</P>
+</LI>
+</UL>
+<A NAME="idx456"><!></A>
+<P>In the first case where the stream does not have a buffer, the ANSI/ISO standard mandates that no parent class constructors or destructors (<B><I>ios</I></B>, <B><I>istream</I></B>, or <B><I>ostream</I></B>) access the stream buffer. This restriction is important, since a derivation such as the following is otherwise unsafe:</P>
+<UL>
+<PRE>
+class DerivedStreamBuf : public streambuf
+{
+      // ....
+};
+
+class DerivedOutputStream : public ostream
+{
+     public:
+           DerivedOutputStream():ostream(&amp;dsb):ios(0){} // 1
+            // ....
+     private:
+           DerivedStreamBuf &amp;dsb;
+          // ....
+};
+</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The <B><I>DerivedOutputStream</I></B> constructor calls its parent constructors in the following order:
+<BR><BR><SAMP>ios()</SAMP>
+<BR><BR><SAMP>ostream(&amp;dsb)</SAMP>
+<BR><BR><SAMP>DerivedStreamBuf ()</SAMP> 
+<BR><BR><SAMP>DerivedOutputStream()</SAMP>
+</TABLE>
+<P>Looking at this order, we can see that <B><I>ios</I></B> and <B><I>ostream</I></B> were constructed before <B><I>DerivedStreamBuf()</I></B> was executed. Therefore the pointer <SAMP>(&amp;dsb)</SAMP> passed through the <B><I>ostream</I></B> constructor is essentially an invalid pointer, and accessing it would be catastrophic. In the case where the derived <B><I>stream</I></B> has a buffer, only the descendent who provides the buffer can access it during construction or destruction. In both cases, explicitly preventing access to the stream buffer by the base class during the construction and destruction phases prevents catastrophic consequences.</P>
+
+
+<BR>
+<HR>
+<A HREF="18-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="19.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,45 @@
+<HTML><HEAD><TITLE>14.3 nth Element</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.3 nth Element</H2>
+
+<A NAME="idx347"><!></A>
+<P>Imagine we have the sequence <SAMP>2 5 3 4 7</SAMP>, and we want to discover the median or middle element. If we do this with the function <SAMP>nth_element()</SAMP>, one result might be the following sequence:</P>
+<UL>
+<PRE>
+<SAMP>3 2 | 4 | 7 5</SAMP></PRE>
+</UL>
+<P>The vertical bars are used to describe the separation of the result into three parts: the elements before the requested value, the requested value, and the values after the requested value. Note that the values in the first and third sequences are unordered; in fact, they can appear in the result in any order. The only requirement is that the values in the first part are no larger than the value we are seeking, and the elements in the third part are no smaller than this value.</P>
+<P>The three iterators provided as arguments to the algorithm <SAMP>nth_element()</SAMP> divide the argument sequence into the three sections we just described. These are the section prior to the middle iterator, the single value denoted by the middle iterator, and the region between the middle iterator and the end. Either the first or third of these may be empty.</P>
+<P>The arguments to the algorithm can be described as follows:</P>
+<UL>
+<PRE>
+void nth_element (RandomAccessIterator first, 
+   RandomAccessIterator nth, 
+   RandomAccessIterator last [, Compare ] );</PRE>
+</UL>
+<P>Following the call on <SAMP>nth_element()</SAMP>, the nth largest value is copied into the position denoted by the middle <B><I><A HREF="../../stdref/ite_5554.htm">iterator</A></I></B>. The region between the first <B><I>iterator</I></B> and the middle iterator will have values no larger than the nth element, while the region between the middle <B><I>iterator</I></B> and the end will hold values no smaller than the nth element.</P>
+<P>The example program illustrates finding the fifth largest value in a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> of random numbers.</P>
+<UL>
+<PRE>
+void nth_element_example ()</PRE>
+<A NAME="idx348"><!></A>
+<PRE>      // illustrates the use of the nth_element algorithm
+      // see alg7.cpp for complete source code
+{
+      // make a vector of random integers
+   vector&lt;int&gt; aVec(10);
+   generate (aVec.begin(), aVec.end(), randomValue);
+
+      // now find the 5th largest
+   vector&lt;int&gt;::iterator nth = aVec.begin() + 4;
+   nth_element (aVec.begin(), nth, aVec.end());
+
+   cout &lt;&lt; "fifth largest is " &lt;&lt; *nth &lt;&lt; endl;
+}</PRE>
+</UL>
+
+<HR>
+<A HREF="14-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="14-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

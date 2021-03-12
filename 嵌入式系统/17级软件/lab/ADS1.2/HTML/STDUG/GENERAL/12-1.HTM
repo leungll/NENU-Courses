@@ -1,0 +1,31 @@
+<HTML><HEAD><TITLE>12.1 The string Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="12.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>12.1 The string Abstraction</H2>
+<A NAME="idx211"><!></A>
+<P>A <I>string</I> is basically a sequence of characters that can be indexed. In fact, although a <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> is not declared as a subclass of <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, almost all the <B><I>vector</I></B> operators discussed in <A HREF="5.htm">Chapter 5</A> can be applied to <B><I>string</I></B> values. Indeed, a string qualifies as a <B><I>sequence</I></B> container type. However, a <B><I>string</I></B> is also a much more abstract quantity. In addition to simple <B><I>vector</I></B> operators, the <B><I>string</I></B> datatype provides a number of useful and powerful high level operations.</P>
+<A NAME="idx212"><!></A>
+<P>In the Standard C++ Library, a <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> is actually a template class, named <B><I><A HREF="../../stdref/bas_0007.htm">basic_string</A></I></B>. The template argument represents the type of character that will be held by the <B><I>string</I></B> container. By defining strings in this fashion, the Standard C++ Library not only provides facilities for manipulating sequences of normal 8-bit ASCII characters, but also for manipulating other types of character-like sequences, such as 16-bit wide characters. The datatypes <B><I>string</I></B> and <B><I>wstring</I></B> (for wide string) are simply typedefs of <B><I>basic_string</I></B>, defined as follows:</P>
+<UL>
+<PRE>
+typedef basic_string&lt;char&gt; string;
+typedef basic_string&lt;wchar_t&gt; wstring;</PRE>
+</UL>
+<BLOCKQUOTE><HR>
+<B>NOTE: In the remainder of this chapter, we refer to the string datatype, but all the operations we introduce are equally applicable to wide strings.
+</B><HR></BLOCKQUOTE>
+<P>As we have already noted, a <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> is similar in many ways to a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> of characters. Like the <B><I>vector</I></B> datatype, a <B><I>string</I></B> is associated with two sizes. The first represents the <I>number of characters</I> currently being stored in the string; the second is the capacity, the <I>maximum number of characters</I> that can potentially be stored in a <B><I>string</I></B> without reallocation of a new internal buffer. </P>
+<P>As in the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> datatype, the capacity of a <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> is a dynamic quantity. When <B><I>string</I></B> operations cause the number of characters being stored in a <B><I>string</I></B> value to exceed the capacity of the <B><I>string</I></B>, a new internal buffer is allocated and initialized with the <B><I>string</I></B> values, and the capacity of the <B><I>string</I></B> is increased. All this occurs behind the scenes, requiring no interaction with the programmer.</P>
+
+<A NAME="1211"><H3>12.1.1 Include Files</H3></A>
+<A NAME="idx213"><!></A>
+<P>Programs that use <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B>s must include the <SAMP>string</SAMP> header file:</P>
+<UL>
+<PRE>
+# include &lt;string&gt;</PRE>
+</UL>
+
+<HR>
+<A HREF="12.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="12-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

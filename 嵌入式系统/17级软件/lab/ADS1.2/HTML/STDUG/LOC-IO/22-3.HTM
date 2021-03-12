@@ -1,0 +1,29 @@
+<HTML><HEAD><TITLE>22.3 Error Indication by Stream Iterators</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="22-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>22.3 Error Indication by Stream Iterators</H2>
+<A NAME="idx491"><!></A>
+<P>The <B><I>istream</I></B> and <B><I>ostream</I></B> iterators by themselves have no means of indicating the success or failure of an operation. The stream being operated on should be probed for good(), eof(), fail(), or bad() conditions. This is convenient, as stream state can be checked for exception conditions that were set in <br><B><I><A HREF="../../stdref/bas_6405.htm">basic_ios</A></I></B> ( void exceptions(iostate except_mask<SAMP>))</SAMP> after each input or output operation. </P>
+<UL>
+<PRE>
+void  print()
+{
+      ostream_iterator&lt;int, char, char_traits&lt;char&gt; &gt; os(cout);
+       try
+          {
+              *os = 3;  //output `3'
+                os++;  // receive next output
+           }
+            catch(ios_base::failure &amp; emsg)
+            {
+                  cerr&lt;&lt;emsg.what();
+            }
+
+}</PRE>
+</UL>
+<P>The <B><I>streambuf</I></B> iterators provide a member function, <SAMP>failed()</SAMP>, to indicate success or failure in a preceding operation on the stream buffer. </P>
+
+<HR>
+<A HREF="22-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="22-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

@@ -1,0 +1,196 @@
+<HTML><HEAD><TITLE>gslice</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="gre_2865.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gsl_1439.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>gslice</H2>
+<PRE><HR>Valarray helpers
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Accessors">Accessors</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A numeric array class used to represent a generalized slice from an array.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Accessorssize()">size()</A><BR>
+ <A HREF="#Accessorsstart()">start()</A><BR>
+ <A HREF="#Accessorsstride()">stride()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;valarray&gt;
+class <B>gslice</B> ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>gslice</I></B> represents a generalized slice from an array. A generalized slice contains a starting index, a set of lengths and a set of strides. The number of lengths and strides must be equal. Together the lengths and strides allow a slice from a multiple dimension array (with the dimension equal to the number of strides) to be represented on a one dimensional <B><I><A HREF="val_6244.htm">valarray</A></I></B>. The <B><I>gslice</I></B> maps a set of <SAMP>n</SAMP> indices <SAMP>(ij)</SAMP>, where <SAMP>n</SAMP> is equal to the number of strides, to a single index <SAMP>k</SAMP>. </P>
+<P>When applied to a <B><I><A HREF="val_6244.htm">valarray</A></I></B> using the <B><I>gslice</I></B> subscript operator (see <B><I>valarray</I></B>) a <B><I>gslice</I></B> produces a <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B>. The <B><I>gslice_array</I></B> class creates a view into the original <B><I>valarray</I></B> that is tailored to match parameters of the <B><I>gslice</I></B>. The elements in a <B><I>gslice_array</I></B> are references to the elements in the original array. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>class gslice {
+public:
+  // constructors
+  gslice();
+  gslice(size_t, const valarray&lt;size_t&gt;&amp;, 
+         const valarray&lt;size_t&gt;&amp;);
+  gslice (const gslice&amp;);
+
+  // Accessors
+  size_t start() const;
+  valarray&lt;size_t&gt; size() const;
+  valarray&lt;size_t&gt; stride() const;
+};</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>gslice</B>();</PRE>
+
+<UL>
+<P>Default constructor creates a gslice specifying no elements. </P>
+</UL>
+
+
+
+<PRE><B>gslice</B>(size_t start, const valarray&lt;size_t&gt;&amp; length,
+       const valarray&lt;size_t&gt;&amp; stride);</PRE>
+
+<UL>
+<P>Creates a slice with starting index, length and stride as indicated by the arguments. </P>
+</UL>
+
+
+
+<PRE><B>gslice</B>(const gslice&amp;)</PRE>
+
+<UL>
+<P>Creates a slice with starting index, length and stride as indicated by the slice argument. </P>
+</UL>
+
+
+<A NAME="Accessors"><H3>Accessors</H3></A>
+
+
+<A NAME="Accessorsstart()"></A><PRE>size_t <B>start</B>();</PRE>
+
+<UL>
+<P>Returns the starting index of the <B><I>gslice</I></B>.</P>
+</UL>
+
+
+
+<A NAME="Accessorssize()"></A><PRE>valarraysize_t&gt; <B>size</B>();</PRE>
+
+<UL>
+<P>Returns a <B><I><A HREF="val_6244.htm">valarray&lt;size_t&gt;</A></I></B> containing the lengths of the <B><I>gslice</I></B>.</P>
+</UL>
+
+
+
+<A NAME="Accessorsstride()"></A><PRE>Valarray&lt;size_t&gt; <B>stride</B>();</PRE>
+
+<UL>
+<P>Returns a <B><I><A HREF="val_6244.htm">valarray&lt;size_t&gt;</A></I></B> containing the strides of the <B><I>gslice</I></B>. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// gslice.cpp
+//
+#include "valarray.h" // Contains a valarray stream inserter
+ using namespace std;
+
+int main(void)
+{
+  int ibuf[27] = 
+   {0,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,9,2,3,4,5,6,7,8,9,10};
+  size_t len_buf[3] = {3,3,3};
+  size_t stride_buf[3] = {9,3,1};
+
+  // create a valarray of ints
+  valarray&lt;int&gt;  vi(ibuf,27);
+
+  // create length and stride valarrays
+  valarray&lt;size_t&gt; len(len_buf,3);
+  valarray&lt;size_t&gt; stride(stride_buf,3);
+
+  // print out the valarray
+  cout &lt;&lt; vi &lt;&lt; endl;
+
+  // Print out all three dimensions (the entire valarray)
+  cout &lt;&lt; valarray&lt;int&gt;(vi[gslice(0,len,stride)]) &lt;&lt; endl;
+
+  // Print a two dimensional slice out of the middle
+  valarray&lt;size_t&gt; len2(2);
+  len2[0] = 3;
+  len2[1] = 3;
+  valarray&lt;size_t&gt; stride2(2);
+  stride2[0] = 3;
+  stride2[1] = 1;
+  cout &lt;&lt; valarray&lt;int&gt;(vi[gslice(9,len2,stride2)]) &lt;&lt; endl;
+
+  // Print another two dimensional slice out of the middle
+  // but orthogonal to one we just did
+  stride2[0] = 9;
+  stride2[1] = 1;
+  cout &lt;&lt; valarray&lt;int&gt;(vi[gslice(3,len2,stride2)]) &lt;&lt; endl;
+
+  // Print out the last plane in the middle,
+  // (orthogonal to both of the previous ones)
+  stride2[0] = 3;
+  stride2[1] = 9;
+  cout &lt;&lt; valarray&lt;int&gt;(vi[gslice(1,len2,stride2)]) &lt;&lt; endl;
+
+  // Now how about a diagonal slice?
+  // upper left front to lower right back
+  stride2[0] = 3;
+  stride2[1] = 10;
+  cout &lt;&lt; valarray&lt;int&gt;(vi[gslice(0,len2,stride2)]) &lt;&lt; endl;
+  
+  return 0;
+}</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+[0,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,9,2,3,4,5,6,7,8,9,10]
+[0,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,9,2,3,4,5,6,7,8,9,10]
+[1,2,3,4,5,6,7,8,9]
+[3,4,5,4,5,6,5,6,7]
+[1,2,3,4,5,6,7,8,9]
+[0,2,4,3,5,7,6,8,10]</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="val_6244.htm">valarray</A></I></B>, <B><I><A HREF="sli_1044.htm">slice_array</A></I></B>, <B><I><A HREF="sli_0626.htm">slice</A></I></B>, <B><I><A HREF="gsl_1439.htm">gslice_array</A></I></B>, <B><I><A HREF="mas_2579.htm">mask_array</A></I></B>, <B><I><A HREF="ind_9304.htm">indirect_array</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="gre_2865.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gsl_1439.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

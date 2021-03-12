@@ -1,0 +1,20 @@
+<HTML><HEAD><TITLE>14.6 Synchronization with the C Standard I/O</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="14-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>14.6 Synchronization with the C Standard I/O</H2>
+<A NAME="idx398"><!></A>
+<P>The predefined C++ streams <SAMP>cin</SAMP>, <SAMP>cout</SAMP>, <SAMP>cerr</SAMP>, and <SAMP>clog</SAMP> are associated with the standard C files <SAMP>stdin</SAMP>, <SAMP>stdout</SAMP>, and <SAMP>stderr,</SAMP> as we saw in <A HREF="7-1.htm">Section 7.1</A>. This means that insertions into <SAMP>cout</SAMP>, for instance, go to the same file as output to <SAMP>stdout</SAMP>. By default, input and output to the predefined streams are synchronized with read or write operations on the standard C files. The effect is that input and output operations are executed in the order of invocation, independently of whether the operations used the predefined C++ streams or the standard C files.</P>
+<A NAME="idx399"><!></A>
+<P>This synchronization is time-consuming and thus might not be desirable in all situations. You can switch it off by calling:</P>
+<UL>
+<PRE>
+sync_with_stdio(false);</PRE>
+</UL>
+<P>After such a call, the predefined streams operate independently of the C standard files, with possible performance improvements in your C++ stream operations. However, you should call <SAMP>sync_with_stdio()</SAMP> prior to any input or output operation on the predefined streams, because otherwise the effect of calling <SAMP>sync_with_stdio()</SAMP> is implementation-defined.</P>
+
+
+<BR>
+<HR>
+<A HREF="14-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

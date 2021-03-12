@@ -1,0 +1,271 @@
+<HTML><HEAD><TITLE>exception</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="equ_8796.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fac_8558.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>exception</H2>
+<PRE><HR>Standard Exception
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Operators">Operators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Constructors for Derived Classes">Constructors for Derived Classes</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A class that supports logic and runtime errors.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Operatorsoperator=()">operator=()</A><BR>
+ <A HREF="#Member Functionswhat()">what()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;exception&gt;
+class exception;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>exception</I></B> defines the base class for the types of objects thrown as exceptions by Standard C++ Library components and some expressions. This class is used to report errors detected during program execution. Users can also use these exceptions to report errors in their own programs. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class exception {
+
+   public:
+     exception () throw();
+     exception (const exception&amp;) throw();
+     exception&amp; operator= (const exception&amp;) throw();
+     virtual ~exception () throw();
+     virtual const char* what () const throw();
+ };
+
+ class logic_error : public exception {
+   public:
+     explicit logic_error (const string&amp; what_arg);
+ };
+
+ class domain_error : public logic_error {
+   public:
+     explicit domain_error (const string&amp; what_arg);
+ };
+
+ class invalid_argument : public logic_error {
+   public:
+     explicit invalid_argument (const string&amp; what_arg);
+ };
+
+ class length_error : public logic_error {
+   public:
+     explicit length_error (const string&amp; what_arg);
+ };
+
+
+ class out_of_range : public logic_error {
+   public:
+     explicit out_of_range (const string&amp; what_arg);
+ };
+
+ class runtime_error : public exception {
+   public:
+     explicit runtime_error (const string&amp; what_arg);
+ };
+
+ class range_error : public runtime_error {
+   public:
+     explicit range_error (const string&amp; what_arg);
+ };
+
+ class overflow_error : public runtime_error {
+   public:
+     explicit overflow_error (const string&amp; what_arg);
+ };
+
+ class underflow_error : public runtime_error {
+   public:
+     explicit underflow_error (const string&amp; what_arg);
+ };</PRE>
+
+</UL>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>exception</B>() 
+throw();</PRE>
+
+<UL>
+<P>Constructs an object of class <B><I>exception</I></B>.</P>
+</UL>
+
+
+
+<PRE><B>exception</B>(const exception&amp;) 
+throw();</PRE>
+
+<UL>
+<P>Copies an <SAMP>exception</SAMP> object.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual 
+<B>~exception</B>()
+throw();</PRE>
+
+<UL>
+<P>Destroys an object of class <B><I>exception</I></B>.</P>
+</UL>
+
+
+<A NAME="Operators"><H3>Operators</H3></A>
+
+
+<A NAME="Operatorsoperator=()"></A><PRE>exception&amp; 
+<B>operator=</B>(const exception&amp;) 
+throw();</PRE>
+
+<UL>
+<P>Copies an <SAMP>exception</SAMP> object.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionswhat()"></A><PRE>virtual const char* 
+<B>what</B>()const 
+throw();</PRE>
+
+<UL>
+<P>Returns an implementation-defined, null-terminated byte string representing a human-readable message describing the exception. The message may be a null-terminated multibyte string, suitable for conversion and display as a <SAMP>wstring</SAMP>.</P>
+</UL>
+
+
+<A NAME="Constructors for Derived Classes"><H3>Constructors for Derived Classes</H3></A>
+
+
+<PRE>logic_error::<B>logic_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>logic_error</SAMP>.</P>
+</UL>
+
+
+
+<PRE>domain_error::<B>domain_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>domain_error.</SAMP></P>
+</UL>
+
+
+
+<PRE>invalid_argument::<B>invalid_argument</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>invalid_argument</SAMP>.</P>
+</UL>
+
+
+
+<PRE>length_error::<B>length_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>length_error</SAMP>.</P>
+</UL>
+
+
+
+<PRE>out_of_range::<B>out_of_range</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>out_of_range</SAMP>.</P>
+</UL>
+
+
+
+<PRE>runtime_error::<B>runtime_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>runtime_error</SAMP>.</P>
+</UL>
+
+
+
+<PRE>range_error::<B>range_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>range_error</SAMP>.</P>
+</UL>
+
+
+
+<PRE>overflow_error<B>::overflow_error</B>(const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>overflow_error</SAMP>.</P>
+</UL>
+
+
+
+<PRE>underflow_error<B>::underflow_error</B>(
+                    const string&amp; what_arg);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>underflow_error</SAMP>.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>  //
+  // except.cpp
+  //
+  #include &lt;iostream&gt;
+  #include &lt;stdexcept&gt;
+  using namespace std;
+
+  static void f() { throw runtime_error("a runtime error"); }
+
+  int main ()
+  {
+     //
+     // By wrapping the body of main in a try-catch block 
+     // we can be assured that we'll catch all exceptions 
+     // in the exception hierarchy. You can simply catch 
+     // exception as is done below, or you can catch each 
+     // of the exceptions in which you have an interest.
+     //
+     try
+     {
+         f();
+     }
+     catch (const exception&amp; e)
+     {
+         cout &lt;&lt; "Got an exception: " &lt;&lt; e.what() &lt;&lt; endl;
+     }
+     return 0;
+  }</PRE>
+
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="equ_8796.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fac_8558.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

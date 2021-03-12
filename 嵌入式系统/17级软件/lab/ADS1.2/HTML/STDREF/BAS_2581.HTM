@@ -1,0 +1,353 @@
+<HTML><HEAD><TITLE>basic_istringstream</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bas_3074.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_4928.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>basic_istringstream</H2>
+<PRE><HR>basic_istringstream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_istream<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_ios<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>ios_base
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Supports reading objects of class <B><I><A HREF="bas_0007.htm">basic_string&lt;charT,traits,Allocator&gt;</A></I></B> from an array in memory.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesios_type">ios_type</A><BR>
+ <A HREF="#Typesistringstream">istringstream</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesoff_type">off_type</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+ <A HREF="#Typessb_type">sb_type</A><BR>
+ <A HREF="#Typesstring_type">string_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typeswistringstream">wistringstream</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsrdbuf()">rdbuf()</A><BR>
+ <A HREF="#Member Functionsstr()">str()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;sstream&gt; 
+template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;charT&gt; &gt;
+class basic_istringstream
+: public basic_istream&lt;charT, traits&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>basic_istringstream&lt;charT,traits,Allocator&gt;</I></B> reads from an array in memory. It supports reading objects of class <B><I><A HREF="bas_0007.htm">basic_string&lt;charT,traits,Allocator&gt;</A></I></B>. It uses a <SAMP>basic_stringbuf</SAMP> object to control the associated storage. It inherits from <B><I><A HREF="bas_3074.htm">basic_istream</A></I></B> and therefore can use all the formatted and unformatted input functions.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt;,
+         class Allocator = allocator&lt;void&gt; &gt;
+class basic_istringstream 
+: public basic_istream&lt;charT, traits&gt; {
+
+ public:
+
+  typedef basic_stringbuf&lt;charT, traits, Allocator&gt; sb_type;
+  typedef basic_ios&lt;charT, traits&gt; ios_type;
+  typedef basic_string&lt;charT, traits, Allocator&gt;
+                       string_type;
+
+  typedef traits                           traits_type;
+  typedef charT                            char_type;
+  typedef typename traits::int_type        int_type;
+  typedef typename traits::pos_type        pos_type;
+  typedef typename traits::off_type        off_type;
+
+  explicit basic_istringstream(ios_base::openmode which = 
+                               ios_base::in);
+
+  explicit basic_istringstream(const string_type&amp; str,
+                               ios_base::openmode which =
+                               ios_base::in);
+
+  virtual ~basic_istringstream();
+  basic_stringbuf&lt;charT,traits,Allocator&gt; *rdbuf() const;
+  string_type str() const;
+  void str(const string_type&amp; str);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesios_type"></A><PRE><B>ios_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>ios_type</SAMP> is an instantiation of class <SAMP>basic_ios</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesistringstream"></A><PRE><B>istringstream</B></PRE>
+
+<UL>
+<P>The type <SAMP>istringstream</SAMP> is an instantiation of class <SAMP>basic_istringstream</SAMP> on type <SAMP>char</SAMP>:</P>
+<P><SAMP>typedef basic_istringstream&lt;char&gt; istringstream;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typessb_type"></A><PRE><B>sb_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>sb_type</SAMP> is an instantiation of class <SAMP>basic_stringbuf</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>string_type</SAMP> is an instantiation of class <SAMP>basic_string</SAMP> on type <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typeswistringstream"></A><PRE><B>wistringstream</B></PRE>
+
+<UL>
+<P>The type <SAMP>wistringstream</SAMP> is an instantiation of class <SAMP>basic_istringstream</SAMP> on type <SAMP>wchar_t</SAMP>:</P>
+<P><SAMP>typedef basic_istringstream&lt;wchar_t&gt; wistringstream;</SAMP></P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>basic_istringstream</B>(ios_base::openmode which =
+                             ios_base::in); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_istringstream</SAMP>, initializing the base class <SAMP>basic_istream</SAMP> with the associated string buffer. The string buffer is initialized by calling the <SAMP>basic_stringbuf</SAMP> constructor <SAMP>basic_stringbuf&lt;charT,traits,Allocator&gt;(which)</SAMP>.</P>
+</UL>
+
+
+
+<PRE>explicit <B>basic_istringstream</B>(const string_type&amp; str,
+                             ios_base::openmode which =
+                             ios_base::in); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_istringstream</SAMP>, initializing the base class <SAMP>basic_istream</SAMP> with the associated string buffer. The string buffer is initialized by calling the <SAMP>basic_stringbuf</SAMP> constructor <SAMP>basic_stringbuf&lt;charT,traits,Allocator&gt;(str,which)</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~basic_istringstream</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>basic_istringstream</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsrdbuf()"></A><PRE>basic_stringbuf&lt;charT,traits,Allocator&gt;* 
+<B>rdbuf</B>() const; </PRE>
+
+<UL>
+<P>Returns a pointer to the <SAMP>basic_stringbuf</SAMP> associated with the stream.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsstr()"></A><PRE>string_type 
+<B>str</B>() const; </PRE>
+
+<UL>
+<P>Returns a string object of type <SAMP>string_type</SAMP>, which contains a copy of the underlying buffer contents.</P>
+</UL>
+
+
+
+<PRE>void 
+<B>str</B>(const string_type&amp; str); </PRE>
+
+<UL>
+<P>Clears the string buffer and copies the string object <SAMP>str</SAMP> into it. If the opening mode is <SAMP>in</SAMP>, initializes the input sequence to point to the first character of the buffer. If the opening mode is <SAMP>out</SAMP>, initializes the output sequence to point to the first character of the buffer. If the opening mode is <SAMP>out | app</SAMP>, initializes the output sequence to point to the last character of the buffer. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// stdlib/examples/manual/istringstream.cpp
+//
+#include&lt;iostream&gt;
+#include&lt;sstream&gt;
+#include&lt;string&gt;
+#include&lt;iomanip&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  long   l= 20;
+  wchar_t *ntbs=L"Il avait l'air heureux";
+  wchar_t c;
+  wchar_t buf[50];
+
+  // create a read/write string-stream object on wide char
+  // and attach it to an wistringstream object
+  wistringstream in(ios_base::in | ios_base::out);
+
+  // tie the ostream object to the wistringstream object
+  wostream out(in.rdbuf());   
+
+  // output ntbs in out
+  out &lt;&lt; ntbs;
+
+  // output each word on a separate line
+  while ( in.get(c) )
+   {
+     if ( c == L' ' ) 
+      wcout &lt;&lt; endl;
+     else
+      wcout &lt;&lt; c;
+   }
+  wcout &lt;&lt; endl &lt;&lt; endl;
+
+  // move back the input sequence to the beginning
+  in.seekg(0); 
+
+  // clear the state flags
+  in.clear();
+
+  // does the same thing as the previous code
+  // output each word on a separate line
+  while ( in &gt;&gt; buf )
+   wcout &lt;&lt; buf &lt;&lt; endl; 
+    
+  wcout &lt;&lt; endl &lt;&lt; endl;
+
+  // create a tiny string object
+  string test_string("Il dormait pour l'eternite");
+
+  // create a read/write string-stream object on char
+  // and attach it to an istringstream object
+  istringstream in_bis(ios_base:: in | ios_base::out |
+                       ios_base::app );
+
+  // create an ostream object
+  ostream out_bis(in_bis.rdbuf()); 
+
+  // initialize the string buffer with test_string
+  in_bis.str(test_string);
+
+  out_bis &lt;&lt; endl;
+
+  // output the base info before each integer
+  out_bis &lt;&lt; showbase;
+
+  ostream::pos_type pos= out_bis.tellp();
+
+  // output l in hex with a field with of 20 
+  out_bis &lt;&lt; hex &lt;&lt; setw(20) &lt;&lt; l &lt;&lt; endl;
+
+  // output l in oct with a field with of 20
+  out_bis &lt;&lt; oct &lt;&lt; setw(20) &lt;&lt; l &lt;&lt; endl;
+
+  // output l in dec with a field with of 20
+  out_bis &lt;&lt; dec &lt;&lt; setw(20) &lt;&lt; l &lt;&lt; endl;
+
+  // output the all buffer
+  cout &lt;&lt; in_bis.rdbuf();
+
+  // seek the input sequence to pos 
+  in_bis.seekg(pos);
+
+  int a,b,d;
+
+  // read the previous outputted integer
+  in_bis &gt;&gt; a &gt;&gt; b &gt;&gt; d;
+
+  // output 3 times 20
+  cout &lt;&lt; a &lt;&lt; endl &lt;&lt; b &lt;&lt; endl &lt;&lt; d &lt;&lt; endl;
+
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B>(3C++), <B><I><A HREF="bas_0007.htm">basic_string</A></I></B>(3C++), <B><I><A HREF="bas_8767.htm">basic_ostringstream</A></I></B>(3C++), <B><I><A HREF="bas_2565.htm">basic_stringstream</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.7.2</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="bas_3074.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_4928.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

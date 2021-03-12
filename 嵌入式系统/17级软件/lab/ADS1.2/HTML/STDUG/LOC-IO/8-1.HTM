@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>8.1 About Flags</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>8.1 About Flags</H2>
+<A NAME="idx252"><!></A>
+<P>It probably comes as no surprise that streams have an error state. When an error occurs, flags are set in the state according to the general category of the error. Flags and their error categories are summarized in <A HREF="#Table 9">Table 9</A>:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx253"><!></A>
+<H4><A NAME="Table 9">Table 9 -- Flags and corresponding error categories</A></H4><tr><td valign=top><B>iostate flag</B><td valign=top><B>Error category</B>&nbsp;
+<tr><td valign=top>
+<SAMP>ios_base::goodbit</SAMP><BR>
+<td valign=top>
+Everything's fine<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::eofbit</SAMP><BR>
+<td valign=top>
+An input operation reached the end of an input sequence<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::failbit</SAMP><BR>
+<td valign=top>
+An input operation failed to read the expected character, or<BR>
+an output operation failed to generate the desired characters<BR>
+
+<tr><td valign=top>
+<SAMP>ios_base::badbit</SAMP><BR>
+<td valign=top>
+Indicates the loss of integrity of the underlying input or output sequence<BR>
+
+
+</TABLE>
+
+
+</P>
+<A NAME="idx254"><!></A>
+<P>Note that the flag <SAMP>ios_base::goodbit</SAMP> is not really a flag; its value, <SAMP>0</SAMP>, indicates the absence of any error flag. It means the stream is OK. By convention, all input and output operations have no effect once the stream state is different than 0.</P>
+<A NAME="idx255"><!></A>
+<P>There are several situations when both <SAMP>eofbit</SAMP> and <SAMP>failbit</SAMP> are set; however, the two have different meanings and do not always occur in conjunction. The flag <SAMP>ios_base::eofbit</SAMP> is set when there is an attempt to read past the end of an input sequence. This occurs in the following two typical examples:</P>
+<OL>
+<LI><P>Assume the extraction happens character-wise. Once the last character is read, the stream is still in good state; <SAMP>eofbit</SAMP> is not yet set. Any subsequent extraction, however, is considered an attempt to read past the end of the input sequence. Thus, <SAMP>eofbit</SAMP> is set.</P>
+</LI>
+<LI><P>If you do not read character-wise, but extract an integer or a string, for example, you always read past the end of the input sequence. This is because the input operators read characters until they find a separator, or hit the end of the input sequence. Consequently, if the input contains the sequence <SAMP>... 912749&lt;eof&gt;</SAMP> and an integer is extracted, <SAMP>eofbit</SAMP> is set.  </P>
+</LI>
+</OL>
+<A NAME="idx256"><!></A>
+<P>The flag <SAMP>ios_base::failbit</SAMP> is set as the result of a read or write operation that fails. For example, if you try to extract an integer from an input sequence containing only white spaces, the extraction of an integer fails, and the <SAMP>failbit</SAMP> is set. Let's see whether <SAMP>failbit</SAMP> would be set in the previous examples:</P>
+<OL>
+<LI><P>After reading the last available character, the extraction not only reads past the end of the input sequence; it also fails to extract the requested character. Hence, <SAMP>failbit</SAMP> is set in addition to <SAMP>eofbit</SAMP>.</P>
+</LI>
+<LI><P>Here it is different. Although the end of the input sequence is reached by extracting the integer, the input operation does not fail and the desired integer is indeed read. Hence, in this situation only the <SAMP>eofbit</SAMP> is set.</P>
+</LI>
+</OL>
+<A NAME="idx257"><!></A>
+<P>In addition to these input and output operations, there are other situations that can trigger failure. For example, file streams set <SAMP>failbit</SAMP> if the associated file cannot be opened (see <A HREF="9-2.htm#922">Section 9.2.2</A>).</P>
+<A NAME="idx258"><!></A>
+<P>The flag <SAMP>ios_base::badbit</SAMP> indicates problems with the underlying stream buffer. These problems could be:</P>
+<UL>
+<A NAME="fn5"><!></A>
+<LI><P><B><I>Memory shortage</I></B>. There is no memory available to create the buffer, or the buffer has size <SAMP>0</SAMP> for other reasons<SUP><A HREF="endnotes.htm#fn5">5</A></SUP>, or the stream cannot allocate memory for its own internal data, as with <SAMP>iword</SAMP> and <SAMP>pword</SAMP>.</P>
+</LI>
+<LI><P><B><I>The underlying stream buffer throws an exception</I></B>. The stream buffer might lose its integrity, as in memory shortage, or code conversion failure, or an unrecoverable read error from the external device. The stream buffer can indicate this loss of integrity by throwing an exception, which is caught by the stream and results in setting the <SAMP>badbit</SAMP> in the stream's state.</P>
+</LI>
+</UL>
+<P>Generally, you should keep in mind that <SAMP>badbit</SAMP> indicates an error situation that is likely to be unrecoverable, whereas <SAMP>failbit</SAMP> indicates a situation that might allow you to retry the failed operation. The flag <SAMP>eofbit</SAMP> simply indicates the end of the input sequence.</P>
+<P>What can you do to check for such errors? You have two possibilities for detecting stream errors:</P>
+<UL>
+<LI><P>You can declare that you want to have an exception raised once an error occurs in any input or output operation.</P>
+</LI>
+<LI><P>You can actively check the stream state after each input or output operation.</P>
+</LI>
+</UL>
+<P>We explore these possibilities in the next two sections.</P>
+
+<HR>
+<A HREF="8.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

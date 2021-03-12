@@ -1,0 +1,168 @@
+<HTML><HEAD><TITLE>7.3 Example Program: Radix Sort</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="7-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>7.3 Example Program: Radix Sort</H2>
+
+<A NAME="idx120"><!></A>
+<P>The radix sort algorithm is a good illustration of how <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B>s and <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>s can be combined with other containers. In the radix sort, a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> of <B><I>deque</I></B>s is manipulated much like a hash table.</P>
+<BLOCKQUOTE><HR>
+<B>NOTE: The complete radix sort program is in the file radix.cpp.
+</B><HR></BLOCKQUOTE>
+<P>Radix sorting is a technique for ordering a list of positive integer values. The values are successively ordered on digit positions, from right to left. This is accomplished by copying the values into <I>buckets</I>, where the index for the bucket is given by the position of the digit being sorted. Once all digit positions are examined, the list must be sorted. </P>
+<P><A HREF="#Table 12">Table 12</A> shows the sequences of values found in each bucket during the four steps involved in sorting the list <SAMP>624 852 426 987 269 146 415 301 730 78 593</SAMP>. During pass 1, the ones place digits are ordered. During pass 2, the tens place digits are ordered, retaining the relative positions of values set by the earlier pass. On pass 3 the hundreds place digits are ordered, again retaining the previous relative ordering. After three passes the result is an ordered list.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 12">Table 12 -- Sequence of values in each bucket during radix sort</A></H4><tr><td valign=top><B>Bucket</B> <td valign=top> <B>Pass 1</B> <td valign=top> <B>Pass 2</B> <td valign=top> <B>Pass 3</B> &nbsp;
+<tr><td valign=top>
+0 <BR>
+<td valign=top>
+ 730 <BR>
+<td valign=top>
+ 301 <BR>
+<td valign=top>
+   78 <BR>
+
+<tr><td valign=top>
+1 <BR>
+<td valign=top>
+ 301 <BR>
+<td valign=top>
+ 415 <BR>
+<td valign=top>
+ 146 <BR>
+
+<tr><td valign=top>
+2 <BR>
+<td valign=top>
+ 852 <BR>
+<td valign=top>
+ 624, 426 <BR>
+<td valign=top>
+ 269 <BR>
+
+<tr><td valign=top>
+3 <BR>
+<td valign=top>
+ 593 <BR>
+<td valign=top>
+ 730 <BR>
+<td valign=top>
+ 301 <BR>
+
+<tr><td valign=top>
+4 <BR>
+<td valign=top>
+ 624 <BR>
+<td valign=top>
+ 146 <BR>
+<td valign=top>
+ 415, 426 <BR>
+
+<tr><td valign=top>
+5 <BR>
+<td valign=top>
+ 415 <BR>
+<td valign=top>
+ 852 <BR>
+<td valign=top>
+ 593 <BR>
+
+<tr><td valign=top>
+6 <BR>
+<td valign=top>
+ 426, 146 <BR>
+<td valign=top>
+ 269 <BR>
+<td valign=top>
+ 624 <BR>
+
+<tr><td valign=top>
+7 <BR>
+<td valign=top>
+ 987 <BR>
+<td valign=top>
+   78 <BR>
+<td valign=top>
+ 730 <BR>
+
+<tr><td valign=top>
+8 <BR>
+<td valign=top>
+   78 <BR>
+<td valign=top>
+ 987 <BR>
+<td valign=top>
+ 852 <BR>
+
+<tr><td valign=top>
+9 <BR>
+<td valign=top>
+ 269 <BR>
+<td valign=top>
+ 593 <BR>
+<td valign=top>
+ 987 <BR>
+
+
+</TABLE>
+
+
+</P>
+<P>The radix sorting algorithm is simple. A <SAMP>while</SAMP> loop is used to cycle through the various passes. The value of the variable <SAMP>divisor</SAMP> indicates which digit is currently being examined. A boolean flag is used to determine when execution should halt. Each time the <SAMP>while</SAMP> loop is executed, a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> of <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>s is declared. By placing the declaration of this structure inside the <SAMP>while</SAMP> loop, it is reinitialized to empty each step. Each time the loop is executed, the values in the <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> are copied into the appropriate bucket by executing the function <SAMP>copyIntoBuckets()</SAMP> on each value. Once distributed into the buckets, the values are gathered back into the <B><I>list</I></B> by means of an accumulation.</P>
+<UL>
+<PRE>
+void radixSort(list&lt;unsigned int&gt; &amp; values)
+{
+   bool flag = true;
+   int divisor = 1;
+   
+   while (flag) {
+      vector&lt; deque&lt;unsigned int&gt; &gt; buckets(10);
+      flag = false;
+      for_each(values.begin(), values.end(), 
+            copyIntoBuckets(...));
+      accumulate(buckets.begin(), buckets.end(), 
+            values.begin(), listCopy);
+      divisor *= 10;
+      }
+}</PRE>
+</UL>
+<P>The use of the function <SAMP>accumulate()</SAMP> here is slightly unusual. The <I>scalar</I> value being constructed is the <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> itself. The initial value for the accumulation is the iterator denoting the beginning of the <B><I>list</I></B>. Each bucket is processed by the following binary function:</P>
+<UL>
+<PRE>
+list&lt;unsigned int&gt;::iterator 
+      listCopy(list&lt;unsigned int&gt;::iterator c, 
+         deque&lt;unsigned int&gt; &amp; lst)
+{
+   // copy list back into original list, returning end
+   return copy(lst.begin(), lst.end(), c);
+}</PRE>
+</UL>
+<P>The only difficulty remaining is defining the function <SAMP>copyIntoBuckets()</SAMP>. The problem here is that the function must take as its argument only the element being inserted, but it must also have access to the three values <SAMP>buckets</SAMP>, <SAMP>divisor</SAMP>, and <SAMP>flag</SAMP>. In languages that permit functions to be defined within other functions, the solution is to define <SAMP>copyIntoBuckets()</SAMP> as a local function within the <SAMP>while</SAMP> loop. But C++ has no such facilities. Instead, we must create a class definition, which can be initialized with references to the appropriate values. The parenthesis operator for this class is then used as the function for the <SAMP>for_each()</SAMP> invocation in the radix sort program.</P>
+<UL>
+<PRE>
+class copyIntoBuckets {
+public:
+   copyIntoBuckets
+      (int d, vector&lt; deque&lt;unsigned int&gt; &gt; &amp; b, bool &amp; f) 
+         : divisor(d), buckets(b), flag(f) {}
+
+   int divisor;
+   vector&lt;deque&lt;unsigned int&gt; &gt; &amp; buckets;
+   bool &amp; flag;
+
+   void operator () (unsigned int v)
+   {   int index = (v / divisor) % 10;
+       // flag is set to true if any bucket 
+       // other than zeroth is used
+       if (index) flag = true; 
+       buckets[index].push_back(v);
+   }
+};</PRE>
+</UL>
+
+
+<BR>
+<HR>
+<A HREF="7-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

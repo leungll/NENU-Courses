@@ -1,0 +1,360 @@
+<HTML><HEAD><TITLE>Function Objects</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="fro_0713.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gen_0186.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>Function Objects</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Function objects are objects with an <SAMP>operator()</SAMP> defined.   They are used as arguments to templatized algorithms, in place of pointers to functions.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE> #include&lt;functional&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Function objects are objects with an <SAMP>operator()</SAMP> defined. They are important for the effective use of the standard library's generic algorithms, because the interface for each algorithmic template can accept either an object with an <SAMP>operator()</SAMP> defined, or a pointer to a function. The Standard C++ Library includes both a standard set of function objects, and a pair of classes that you can use as the base for creating your own function objects.</P>
+<P>Function objects that take one argument are called <I>unary function objects.</I> Unary function objects must include the typedefs <SAMP>argument_type</SAMP> and <SAMP>result_type</SAMP>. Similarly, function objects that take two arguments are called <I>binary function objects</I> and, as such, must include the typedefs <SAMP>first_argument_type</SAMP>, <SAMP>second_argument_type</SAMP>, and <SAMP>result_type</SAMP>. </P>
+<P>The classes <SAMP>unary_function</SAMP> and <SAMP>binary_function</SAMP> make the task of creating templatized function objects easier. The necessary typedefs for a unary or binary function object are included by inheriting from the appropriate function object class.</P>
+<P>The function objects in the standard library are listed below, together with a brief description of their operation. This class reference also includes an alphabetic entry for each function.</P>
+<P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Name <B></TH>
+<TH><B>Operation<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD COLSPAN=2 ROWSPAN=1>
+<SAMP>arithmetic functions</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>plus</SAMP><BR>
+</TD>
+<TD>
+<SAMP>addition x + y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>minus</SAMP><BR>
+</TD>
+<TD>
+<SAMP>subtraction x - y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>multiplies</SAMP><BR>
+</TD>
+<TD>
+<SAMP>multiplication x * y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>divides</SAMP><BR>
+</TD>
+<TD>
+<SAMP>division x / y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>modulus</SAMP><BR>
+</TD>
+<TD>
+<SAMP>remainder x % y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>negate</SAMP><BR>
+</TD>
+<TD>
+<SAMP>negation - x</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD COLSPAN=2 ROWSPAN=1>
+<SAMP>comparison functions</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>equal_to</SAMP><BR>
+</TD>
+<TD>
+<SAMP>equality test x == y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>not_equal_to</SAMP><BR>
+</TD>
+<TD>
+<SAMP>inequality test x != y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>greater</SAMP><BR>
+</TD>
+<TD>
+<SAMP>greater comparison x &gt; y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>less</SAMP><BR>
+</TD>
+<TD>
+<SAMP>less-than comparison x &lt; y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>greater_equal</SAMP><BR>
+</TD>
+<TD>
+<SAMP>greater than or equal comparison x &gt;= y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>less_equal</SAMP><BR>
+</TD>
+<TD>
+<SAMP>less than or equal comparison x &lt;= y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD COLSPAN=2 ROWSPAN=1>
+<SAMP>logical functions</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>logical_and</SAMP><BR>
+</TD>
+<TD>
+<SAMP>logical conjunction x &amp;&amp; y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>logical_or</SAMP><BR>
+</TD>
+<TD>
+<SAMP>logical disjunction x || y</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>logical_not</SAMP><BR>
+</TD>
+<TD>
+<SAMP>logical negation ! x</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>    template &lt;class Arg, class Result&gt;
+    struct unary_function{
+         typedef Arg argument_type;
+         typedef Result result_type;
+    };
+
+    template &lt;class Arg1, class Arg2, class Result&gt;
+    struct binary_function{
+         typedef Arg1 first_argument_type;
+         typedef Arg2 second_argument_type;
+         typedef Result result_type;
+    };
+
+ // Arithmetic Operations
+
+   template&lt;class T&gt;
+   struct plus : binary_function&lt;T, T, T&gt; {
+        T operator() (const T&amp;, const T&amp;) const;
+};
+
+template &lt;class T&gt;
+struct minus : binary_function&lt;T, T, T&gt; {
+        T operator() (const T&amp;, const T&amp;) const;
+};
+
+template &lt;class T&gt;
+struct multiplies : binary_function&lt;T, T, T&gt; {
+        T operator() (const T&amp;, const T&amp;) const;
+};
+
+template &lt;class T&gt;
+struct divides : binary_function&lt;T, T, T&gt; {
+        T operator() (const T&amp;, const T&amp;) const;
+};
+
+template &lt;class T&gt;
+struct modulus : binary_function&lt;T, T, T&gt; {
+        T operator() (const T&amp;, const T&amp;) const;
+};
+
+template &lt;class T&gt;
+struct negate : unary_function&lt;T, T&gt; {
+        T operator() (const T&amp;) const;
+};
+
+ // Comparisons
+
+template &lt;class T&gt;
+struct equal_to : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct not_equal_to : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct greater : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct less : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct greater_equal : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct less_equal : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ // Logical Comparisons
+
+ template &lt;class T&gt;
+ struct logical_and : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct logical_or : binary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};
+
+ template &lt;class T&gt;
+ struct logical_not : unary_function&lt;T, T, bool&gt; {
+         bool operator() (const T&amp;, const T&amp;) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// funct_ob.cpp
+//
+ #include&lt;functional&gt;
+ #include&lt;deque&gt;
+ #include&lt;vector&gt;
+ #include&lt;algorithm&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ //Create a new function object from unary_function
+ template&lt;class Arg&gt;
+ class factorial : public unary_function&lt;Arg, Arg&gt;
+ {
+   public:
+
+   Arg operator()(const Arg&amp; arg)
+   {
+     Arg a = 1;
+     for(Arg i = 2; i &lt;= arg; i++)
+       a *= i;
+     return a;
+   }
+ };
+
+ int main()
+ {
+   //Initialize a deque with an array of ints
+   int init[7] = {1,2,3,4,5,6,7};
+   deque&lt;int&gt; d(init, init+7);
+
+   //Create an empty vector to store the factorials
+   vector&lt;int&gt; v((size_t)7);
+
+   //Transform the numbers in the deque to their factorials
+   //and store in the vector
+   transform(d.begin(), d.end(), v.begin(),
+             <B>factorial&lt;int&gt;</B>());
+
+   //Print the results
+   cout &lt;&lt; "The following numbers: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(d.begin(),d.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+
+   cout &lt;&lt; endl &lt;&lt; endl;
+   cout &lt;&lt; "Have the factorials: " &lt;&lt; endl &lt;&lt; "     ";
+   copy(v.begin(),v.end(),
+        ostream_iterator&lt;int,char&gt;(cout," "));
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+The following numbers:
+     1 2 3 4 5 6 7
+Have the factorials:
+     1 2 6 24 120 720 5040</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you have to write:</P>
+<P><SAMP>vector&lt;int, allocator&lt;int&gt; &gt; and deque&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of: </P>
+<P><SAMP>vector&lt;int&gt; and deque&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bin_7851.htm">binary_function</A></I></B>, <B><I><A HREF="una_4659.htm">unary_function</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="fro_0713.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="gen_0186.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

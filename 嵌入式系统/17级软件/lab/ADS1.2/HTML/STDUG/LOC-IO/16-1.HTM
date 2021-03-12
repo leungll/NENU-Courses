@@ -1,0 +1,19 @@
+<HTML><HEAD><TITLE>16.1 Defining Callback Functions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="16.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="16-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>16.1 Defining Callback Functions</H2>
+<A NAME="idx411"><!></A>
+<P>The Standard C++ Library iostreams facility uses callback functions to allow a program to respond to certain events. A program registers a callback by providing an ordinary function with an appropriate signature and calling <SAMP>ios_base::register_callback</SAMP> with a pointer to the function and an index into the streams parray. The callback function is then called any time one of the following occurs:</P>
+<UL>
+<LI><P>Destruction of a stream; <SAMP>ios_base::~ios_base()</SAMP> is called.</P>
+</LI>
+<LI><P>Imbuing a locale; <SAMP>ios_base::imbue()</SAMP> is called.</P>
+</LI>
+<LI><P>Copying the stream state; <SAMP>ios_base::cpyfmt()</SAMP> is called.</P>
+</LI>
+</UL>
+
+<HR>
+<A HREF="16.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="16-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

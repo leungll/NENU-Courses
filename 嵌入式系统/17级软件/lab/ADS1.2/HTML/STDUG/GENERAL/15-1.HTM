@@ -1,0 +1,28 @@
+<HTML><HEAD><TITLE>15.1 An Overview</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="15.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>15.1 An Overview</H2>
+<A NAME="idx365"><!></A>
+<P>The Standard C++ allocator interface encapsulates the types and functions needed to manage the storage of data in a generic way. The interface provides:</P>
+<UL>
+<LI><P>pointer and reference types</P>
+</LI>
+<LI><P>the type of the difference between pointers</P>
+</LI>
+<LI><P>the type to describe the size of a block of storage</P>
+</LI>
+<LI><P>storage allocation and deallocation primitives</P>
+</LI>
+<LI><P>object construction and destruction primitives.</P>
+</LI>
+</UL>
+<A NAME="idx366"><!></A>
+<P>This allocator interface wraps the mechanism for managing data storage, and separates this mechanism from the classes and functions used to maintain associations between data elements. This eliminates the need to rewrite containers and algorithms to suit different storage mechanisms. The interface lets you encapsulate all the storage mechanism details in an allocator, then provide that allocator to an existing container when appropriate.</P>
+<P>The Standard C++ Library provides a default allocator class, <B><I><A HREF="../../stdref/all_7029.htm">allocator</A></I></B>, that implements this interface using the standard <SAMP>new</SAMP> and <SAMP>delete</SAMP> operators for all storage management. </P>
+<A NAME="idx367"><!></A>
+<P>This chapter briefly describes how to use <B><I><A HREF="../../stdref/all_7029.htm">allocator</A></I></B>s with existing containers, then discusses what you need to consider when designing your own <B><I>allocator</I></B>s. <A HREF="16.htm">Chapter 16</A> describes what you must consider when designing containers that use <B><I>allocator</I></B>s.</P>
+
+<HR>
+<A HREF="15.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

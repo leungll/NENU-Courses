@@ -1,0 +1,23 @@
+
+#include "../inc/config.h"
+#define    PCB  (*(volatile unsigned *) 0x01d20008)
+#define    PDB  (*(volatile unsigned *) 0x01d2000c)
+
+void Main(void)
+{	
+
+    Target_Init();
+    
+    PCB = 0x7cf;    //配置端口PB4,PB5为输出类型；
+    while(1)
+    { 
+    	PDB = 0x7ff;    //熄灭D7，D8；
+    	Delay(5000);
+    	PDB = 0x7ef;   //点亮D7；
+    	Delay(5000);
+    	PDB = 0x7df;   //点亮D8
+    	Delay(5000);
+    	PDB = 0x7cf;   //点亮D7，D8；
+   }
+}
+

@@ -1,0 +1,26 @@
+<HTML><HEAD><TITLE>25.1 Extensions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="25.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="25-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>25.1 Extensions</H2>
+<P>Rogue Wave's implementation of the standard iostreams has several extensions that we describe briefly in the sections below.</P>
+
+<A NAME="2511"><H3>25.1.1  File Descriptors</H3></A>
+<A NAME="idx509"><!></A>
+<P>The traditional iostreams allowed a file stream to connect to a file using a <I>file descriptor</I>. File descriptors are used by functions like <SAMP>open()</SAMP>, <SAMP>close()</SAMP>, <SAMP>read()</SAMP>, and <SAMP>write()</SAMP> that are part of most C libraries, especially on UNIX-based platforms. However, the ISO/ANSI standard for the programming language C and its library does not include these functions, nor does it mention file descriptors. In this sense, the use of file descriptors introduces platform and operating system dependencies into your program. This is exactly why the standard iostreams does not use file descriptors. </P>
+<P>Now you might already have programs that use the file descriptor features of the traditional iostreams. And you may need to access system-specific files like pipes, which are accessible only through file descriptors. To address these concerns, Rogue Wave's implementation offers additional constructors and member functions in the file stream and file buffer classes that enable you to work with file descriptors.</P>
+<P>The main additions are:</P>
+<UL>
+<LI><P>Constructors that take a file descriptor rather than a file name</P>
+</LI>
+<LI><P>An additional third parameter that allows specification of file access rights. This parameter, available on several constructors and the <SAMP>open()</SAMP> member functions, is not available with the standard interface. The parameter has a default, so that you usually need not worry about file protection. </P>
+</LI>
+</UL>
+
+<A NAME="2512"><H3>25.1.2  Multithreaded Environments</H3></A>
+<A NAME="idx510"><!></A>
+<P>See <A HREF="23.htm">Chapter 23</A> on multithreading. Note that all multithreading features are an extension of the standard and are therefore not portable to other implementations of the library.</P>
+
+<HR>
+<A HREF="25.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="25-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

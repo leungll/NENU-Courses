@@ -1,0 +1,76 @@
+<HTML><HEAD><TITLE>use_facet</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="upp_0967.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="val_6244.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>use_facet</H2>
+<PRE><HR>Locale Function
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A template function used to obtain a facet. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class Facet&gt; const Facet&amp; use_facet(const locale&amp;);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>use_facet</I></B> returns a reference to the corresponding facet contained in the locale argument. You specify the facet type by explicitly including the template parameter (see the example below). If that facet is not present, then <B><I>use_facet</I></B> throws <B><I>runtime_error.</I></B> Otherwise, the reference remains valid for as long as any copy of   the locale exists.</P>
+<P>Note that if your compiler cannot overload function templates on return type, then you need to use an alternate <B><I>use_facet</I></B> template. The alternate template takes an additional argument that is a pointer to the type of facet you want to extract from the locale. The declaration looks like this:</P>
+<UL>
+<PRE>template &lt;class Facet&gt; 
+const Facet&amp; use_facet(const locale&amp;, Facet*);</PRE>
+
+</UL>
+<P>The example below shows the use of both variations of <B><I>use_facet</I></B>.</P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// usefacet.cpp
+//
+#include &lt;iostream&gt;
+
+int main ()
+{
+  using namespace std;
+
+  locale loc;
+
+  // Get a ctype facet
+  const ctype&lt;char&gt;&amp; ct = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+     use_facet&lt;ctype&lt;char&gt; &gt;(loc); 
+#else
+     use_facet(loc,(ctype&lt;char&gt;*)0); 
+#endif
+
+  cout &lt;&lt; 'a' &lt;&lt; ct.toupper('c') &lt;&lt; endl;
+ 
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="has_4618.htm">has_facet</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="upp_0967.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="val_6244.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

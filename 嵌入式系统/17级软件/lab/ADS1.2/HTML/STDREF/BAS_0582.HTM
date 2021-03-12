@@ -1,0 +1,667 @@
+<HTML><HEAD><TITLE>basic_streambuf</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bas_8767.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_0007.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>basic_streambuf</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Public Constructors">Public Constructors</A></LI>
+<LI><A HREF="#Public Destructors">Public Destructors</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Abstract base class for deriving various stream buffers to facilitate control of character sequences.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+ <A HREF="#Typespos_type">pos_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesstreambuf">streambuf</A><BR>
+ <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typeswstreambuf">wstreambuf</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionseback()">eback()</A><BR>
+ <A HREF="#Protected Member Functionsegptr()">egptr()</A><BR>
+ <A HREF="#Protected Member Functionsepptr()">epptr()</A><BR>
+ <A HREF="#Protected Member Functionsgbump()">gbump()</A><BR>
+ <A HREF="#Public Member Functionsgetloc()">getloc()</A><BR>
+ <A HREF="#Protected Member Functionsgptr()">gptr()</A><BR>
+ <A HREF="#Protected Member Functionsimbue()">imbue()</A><BR>
+ <A HREF="#Public Member Functionsin_avail()">in_avail()</A><BR>
+ <A HREF="#Protected Member Functionsoverflow()">overflow()</A><BR>
+ <A HREF="#Protected Member Functionspbackfail()">pbackfail()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionspbase()">pbase()</A><BR>
+ <A HREF="#Protected Member Functionspbump()">pbump()</A><BR>
+ <A HREF="#Protected Member Functionspptr()">pptr()</A><BR>
+ <A HREF="#Public Member Functionspubimbue()">pubimbue()</A><BR>
+ <A HREF="#Public Member Functionspubseekoff()">pubseekoff()</A><BR>
+ <A HREF="#Public Member Functionspubseekpos()">pubseekpos()</A><BR>
+ <A HREF="#Public Member Functionspubsetbuf()">pubsetbuf()</A><BR>
+ <A HREF="#Public Member Functionspubsync()">pubsync()</A><BR>
+ <A HREF="#Public Member Functionssbumpc()">sbumpc()</A><BR>
+ <A HREF="#Protected Member Functionsseekoff()">seekoff()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionsseekpos()">seekpos()</A><BR>
+ <A HREF="#Protected Member Functionssetbuf()">setbuf()</A><BR>
+ <A HREF="#Protected Member Functionssetg()">setg()</A><BR>
+ <A HREF="#Protected Member Functionssetp()">setp()</A><BR>
+ <A HREF="#Public Member Functionssgetc()">sgetc()</A><BR>
+ <A HREF="#Public Member Functionssgetn()">sgetn()</A><BR>
+ <A HREF="#Protected Member Functionsshowmanyc()">showmanyc()</A><BR>
+ <A HREF="#Public Member Functionssnextc()">snextc()</A><BR>
+ <A HREF="#Public Member Functionssputbackc()">sputbackc()</A><BR>
+ <A HREF="#Public Member Functionssputc()">sputc()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Public Member Functionssputn()">sputn()</A><BR>
+ <A HREF="#Public Member Functionssungetc()">sungetc()</A><BR>
+ <A HREF="#Protected Member Functionssync()">sync()</A><BR>
+ <A HREF="#Protected Member Functionsuflow()">uflow()</A><BR>
+ <A HREF="#Protected Member Functionsunderflow()">underflow()</A><BR>
+ <A HREF="#Public Member Functionswhich_open_mode()">which_open_mode()</A><BR>
+ <A HREF="#Protected Member Functionsxsgetn()">xsgetn()</A><BR>
+ <A HREF="#Protected Member Functionsxsputn()">xsputn()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;streambuf&gt;
+template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class basic_streambuf;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class template <B><I>basic_streambuf&lt;charT,traits&gt;</I></B> serves as an abstract base class for deriving various stream buffers to facilitate control of character sequences such as:</P>
+<UL>
+<LI><P>A character input sequence;</P>
+</LI>
+<LI><P>A character output sequence.</P>
+</LI>
+</UL>
+<P>Each sequence is associated with three pointers (as described below), which, if non-null, all point into the same <SAMP>charT</SAMP> array object. The array object represents, at any moment, a segment of characters from the sequence. Operations performed on a sequence alter the values pointed to by these pointers, perform reads and writes directly to or from associated sequences, and alter "the stream position" and conversion state as needed to maintain this segment to sequence relationship. The three pointers are:</P>
+<UL>
+<LI><P>The beginning pointer, or lowest element address in the array;</P>
+</LI>
+<LI><P>The next pointer, or next element address that is a current candidate for reading or writing;</P>
+</LI>
+<LI><P>The end pointer, or first element address beyond the end of the array.</P>
+</LI>
+</UL>
+<P>Stream buffers can impose various constraints on the sequences they control, including:</P>
+<UL>
+<LI><P>The controlled input sequence may be unreadable;</P>
+</LI>
+<LI><P>The controlled output sequence may be unwriteable;</P>
+</LI>
+<LI><P>The controlled sequences can be associated with the contents of other representations for character sequences, such as external files;</P>
+</LI>
+<LI><P>The controlled sequences can impose limitations on how the program can read characters from a sequence, write characters to a sequence, put characters back into an input sequence, or alter the stream position.</P>
+</LI>
+</UL>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class basic_streambuf {
+
+public:
+     
+ typedef charT                       char_type;
+ typedef traits                      traits_type;
+
+ typedef typename traits::int_type    int_type;
+ typedef typename traits::pos_type    pos_type;
+ typedef typename traits::off_type    off_type;
+
+
+ virtual ~basic_streambuf();
+
+ locale pubimbue( const locale&amp; loc);
+ locale getloc() const; 
+
+ basic_streambuf&lt;char_type, traits&gt; *
+   pubsetbuf(char_type *s, streamsize n);
+
+ pos_type pubseekoff(off_type off, ios_base::seekdir way,
+                     ios_base::openmode which =
+                     ios_base::in | ios_base::out);
+
+ pos_type pubseekpos(pos_type sp, ios_base::openmode which =
+                     ios_base::in | ios_base::out);
+
+ int pubsync();
+ 
+ ios_base::openmode which_open_mode();
+ 
+ streamsize   in_avail();
+ int_type snextc();
+ int_type sbumpc();
+ int_type sgetc();
+ streamsize sgetn(char_type *s, streamsize n);
+
+ int_type sputbackc(char_type c);
+ int sungetc();
+
+ int_type sputc(char_type c);
+ streamsize sputn(const char_type *s, streamsize n);
+
+protected:
+
+ basic_streambuf();
+     
+ char_type *eback() const;
+ char_type *gptr()  const;
+ char_type *egptr() const;
+
+ void gbump(int n);
+ void setg(char_type *gbeg_arg,char_type *gnext_arg,
+           char_type *gend_arg);
+
+ char_type *pbase() const;
+ char_type *pptr() const;
+ char_type *epptr() const;
+ void pbump(int n);
+ void setp(char_type *pbeg_arg,char_type *pend_arg);
+
+ virtual void imbue( const locale&amp; loc);
+
+ virtual basic_streambuf&lt;charT, traits&gt;*
+   setbuf(char_type *s, streamsize n);
+
+ virtual pos_type seekoff(off_type off,
+                          ios_base::seekdir way,
+                          ios_base::openmode which = 
+                          ios_base::in | ios_base::out);
+
+ virtual pos_type seekpos(pos_type sp,
+                          ios_base::openmode which = 
+                          ios_base::in | ios_base::out);
+
+ virtual int showmanyc();
+ virtual streamsize xsgetn(char_type *s, streamsize n);
+
+ virtual int_type underflow();
+ virtual int_type uflow();
+
+ virtual int_type pbackfail(int_type c = traits::eof());
+ virtual streamsize xsputn(const char_type *s, 
+                           streamsize n);
+ virtual int_type overflow(int_type c = traits::eof());
+ 
+ virtual int sync();
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesstreambuf"></A><PRE><B>streambuf</B></PRE>
+
+<UL>
+<P>The type <SAMP>streambuf</SAMP> is an instantiation of class <SAMP>basic_streambuf</SAMP> on type <SAMP>char</SAMP>:</P>
+<P><SAMP>typedef basic_streambuf&lt;char&gt; streambuf;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typeswstreambuf"></A><PRE><B>wstreambuf</B></PRE>
+
+<UL>
+<P>The type <SAMP>wstreambuf</SAMP> is an instantiation of class <SAMP>basic_streambuf</SAMP> on type <SAMP>wchar_t</SAMP>:</P>
+<P><SAMP>typedef basic_streambuf&lt;wchar_t&gt; wstreambuf;</SAMP></P>
+</UL>
+
+
+<A NAME="Public Constructors"><H3>Public Constructors</H3></A>
+
+
+<PRE><B>basic_streambuf</B>();</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>basic_streambuf</SAMP>. Initializes all its pointer member objects to null pointers, and initializes the <SAMP>getloc()</SAMP> member function to return the value of <SAMP>locale::locale()</SAMP>.</P>
+</UL>
+
+
+<A NAME="Public Destructors"><H3>Public Destructors</H3></A>
+
+
+<PRE>virtual <B>~basic_streambuf</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>basic_streambuf</SAMP>.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsgetloc()"></A><PRE>locale 
+<B>getloc</B>() const; </PRE>
+
+<UL>
+<P>If <SAMP>pubimbue()</SAMP> has ever been called, returns the last value of <SAMP>loc</SAMP> supplied. Otherwise, it returns the default (global) locale <SAMP>locale::locale()</SAMP> in effect at the time of construction.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsin_avail()"></A><PRE>streamsize 
+<B>in_avail</B>();</PRE>
+
+<UL>
+<P>If a read position is available, returns the number of available characters in the input sequence. Otherwise calls the protected function <SAMP>showmanyc()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspubimbue()"></A><PRE>locale 
+<B>pubimbue</B>(const locale&amp; loc); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>imbue(loc)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspubseekoff()"></A><PRE>pos_type 
+<B>pubseekoff</B>(off_type off, ios_base::seekdir way,
+           ios_base::openmode which =
+           ios_base::in | ios_base::out ); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>seekoff(off,way,which)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspubseekpos()"></A><PRE>pos_type 
+<B>pubseekpos</B>(pos_type sp, ios_base::openmode which=
+           ios_base::in | ios_base::out ); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>seekpos(sp,which)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspubsetbuf()"></A><PRE>basic_streambuf&lt;char_type,traits&gt;* 
+<B>pubsetbuf</B>(char_type* s,streamsize n); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>setbuf(s,n)</SAMP> .</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionspubsync()"></A><PRE>int 
+<B>pubsync</B>();</PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>sync()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssbumpc()"></A><PRE>int_type 
+<B>sbumpc</B>();</PRE>
+
+<UL>
+<P>If the input sequence read position is not available, calls the function <SAMP>uflow()</SAMP>. Otherwise it returns <SAMP>*gptr()</SAMP> and increments the next pointer for the input sequence.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssgetc()"></A><PRE>int_type 
+<B>sgetc</B>();</PRE>
+
+<UL>
+<P>If the input sequence read position is not available, calls the protected function <SAMP>underflow()</SAMP>. Otherwise it returns <SAMP>*gptr()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssgetn()"></A><PRE>streamsize 
+<B>sgetn</B>(char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>xsgetn(s,n)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssnextc()"></A><PRE>int_type 
+<B>snextc</B>();</PRE>
+
+<UL>
+<P>Calls the function <SAMP>sbumpc()</SAMP> and if it returns <SAMP>traits::eof()</SAMP>, returns <SAMP>traits::eof()</SAMP>. Otherwise it calls the function <SAMP>sgetc()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssputbackc()"></A><PRE>int_type 
+<B>sputbackc</B>(char_type c); </PRE>
+
+<UL>
+<P>If the input sequence putback position is not available or if <SAMP>traits::eq(c,gptr() [-1])</SAMP> returns <SAMP>false</SAMP>, calls the protected function <SAMP>pbackfail(c)</SAMP>. Otherwise it decrements the next pointer for the input sequence and returns <SAMP>*gptr()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssputc()"></A><PRE>int_type 
+<B>sputc</B>(char_type c);</PRE>
+
+<UL>
+<P>If the output sequence write position is not available, calls the protected function <SAMP>overflow(traits::to_int_type( c ))</SAMP>. Otherwise, it stores <SAMP>c</SAMP> at the next pointer for the output sequence, increments the pointer, and returns <SAMP>*pptr()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssputn()"></A><PRE>streamsize 
+<B>sputn</B>(const char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Calls the protected function <SAMP>xsputn(s,n)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionssungetc()"></A><PRE>int_type 
+<B>sungetc</B>();</PRE>
+
+<UL>
+<P>If the input sequence putback position is not available, calls the protected function <SAMP>pbackfail().</SAMP> Otherwise it decrements the next pointer for the input sequence and returns <SAMP>*gptr()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionswhich_open_mode()"></A><PRE>ios_base::openmode 
+<B>which_open_mode</B>();</PRE>
+
+<UL>
+<P>Returns the mode in which the stream buffer is opened. This function is not described in the C++ standard.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionseback()"></A><PRE>char_type* 
+<B>eback</B>() const; </PRE>
+
+<UL>
+<P>Returns the beginning pointer for the input sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsegptr()"></A><PRE>char_type* 
+<B>egptr</B>() const; </PRE>
+
+<UL>
+<P>Returns the end pointer for the input sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsepptr()"></A><PRE>char_type* 
+<B>epptr</B>() const; </PRE>
+
+<UL>
+<P>Returns the end pointer for the output sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsgbump()"></A><PRE>void 
+<B>gbump</B>(int n); </PRE>
+
+<UL>
+<P>Advances the next pointer for the input sequence by <SAMP>n</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsgptr()"></A><PRE>char_type* 
+<B>gptr</B>() const; </PRE>
+
+<UL>
+<P>Returns the next pointer for the input sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsimbue()"></A><PRE>void 
+<B>imbue</B>(const locale&amp;);</PRE>
+
+<UL>
+<P>Changes any translations based on locale. The default behavior is to do nothing. This function has to be overloaded in the classes derived from <SAMP>basic_streambuf</SAMP>. The purpose of this function is to allow the derived class to be informed of changes in locale at the time they occur. The new imbued locale object is only used by the stream buffer; it does not affect the stream itself.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsoverflow()"></A><PRE>int_type 
+<B>overflow</B>(int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>The member functions <SAMP>sputc()</SAMP> and <SAMP>sputn()</SAMP> call this function when not enough room can be found in the put buffer to accommodate the argument character sequence. The function returns <SAMP>traits::eof()</SAMP> if it fails to make more room available or if it fails to empty the buffer by writing the characters to their output device.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionspbackfail()"></A><PRE>int_type 
+<B>pbackfail</B>(int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>If <SAMP>c</SAMP> is equal to <SAMP>traits::eof()</SAMP>, <SAMP>gptr()</SAMP> is moved back one position. Otherwise <SAMP>c</SAMP> is prepended. The function returns <SAMP>traits::eof()</SAMP> to indicate failure.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionspbase()"></A><PRE>char_type* 
+<B>pbase</B>() const; </PRE>
+
+<UL>
+<P>Returns the beginning pointer for the output sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionspbump()"></A><PRE>void 
+<B>pbump</B>(int n); </PRE>
+
+<UL>
+<P>Advances the next pointer for the output sequence by <SAMP>n</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionspptr()"></A><PRE>char_type* 
+<B>pptr</B>() const; </PRE>
+
+<UL>
+<P>Returns the next pointer for the output sequence.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsseekoff()"></A><PRE>pos_type 
+<B>seekoff</B>(off_type off, ios_base::seekdir way,
+        ios_base::openmode which =
+        ios_base::in | ios_base::out ); </PRE>
+
+<UL>
+<P>Alters the stream positions within one or more of the controlled sequences in a way that is defined separately for each class derived from <SAMP>basic_streambuf</SAMP>. The default behavior is to return an object of type <SAMP>pos_type</SAMP> that stores an invalid stream position.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsseekpos()"></A><PRE>pos_type 
+<B>seekpos</B>(pos_type sp, ios_base::openmode which=
+        ios_base::in | ios_base::out ); </PRE>
+
+<UL>
+<P>Alters the stream positions within one or more of the controlled sequences in a way that is defined separately for each class derived from <SAMP>basic_streambuf</SAMP>. The default behavior is to return an object of class <SAMP>pos_type</SAMP> that stores an invalid stream position.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionssetbuf()"></A><PRE>basic_streambuf* 
+<B>setbuf</B>(char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Performs an operation that is defined separately for each class derived from <SAMP>basic_streambuf</SAMP>. The purpose of this function is to allow the user to provide his own buffer or to resize the current buffer.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionssetg()"></A><PRE>void 
+<B>setg</B>(char_type* gbeg, char_type* gnext, char_type* gend); </PRE>
+
+<UL>
+<P>Sets up a private member for the following to be <SAMP>true</SAMP>:</P>
+<UL>
+<PRE>   eback() == gbeg, gptr() == gnext and egptr() == gend</PRE>
+
+</UL>
+</UL>
+
+
+
+<A NAME="Protected Member Functionssetp()"></A><PRE>void 
+<B>setp</B>(char_type* pbeg, char_type* pend); </PRE>
+
+<UL>
+<P>Sets up a private member for the following to be <SAMP>true</SAMP>:</P>
+<UL>
+<PRE>   pbase() == pbeg, pptr() == pbeg and epptr() == pend</PRE>
+
+</UL>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsshowmanyc()"></A><PRE>int 
+<B>showmanyc</B>();</PRE>
+
+<UL>
+<P>Returns the number of characters available in the internal buffer, or returns <SAMP>-1</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionssync()"></A><PRE>int 
+<B>sync</B>();</PRE>
+
+<UL>
+<P>Synchronizes the controlled sequences with the internal buffer, in a way that is defined separately for each class derived from <SAMP>basic_streambuf</SAMP>. The default behavior is to do nothing. On failure the return value is <SAMP>-1</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsunderflow()"></A><PRE>int_type 
+<B>underflow</B>();</PRE>
+
+<UL>
+<P>The public members of <SAMP>basic_streambuf</SAMP> call this function only if <SAMP>gptr()</SAMP> is null or <SAMP>gptr() &gt;= egptr()</SAMP>. This function returns the character pointed to by <SAMP>gptr()</SAMP>, if <SAMP>gptr()</SAMP> is not null and if <SAMP>gptr() &lt; egptr()</SAMP>. Otherwise the function tries to read character into the buffer. If it fails, it returns <SAMP>traits::eof()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsuflow()"></A><PRE>int_type 
+<B>uflow</B>();</PRE>
+
+<UL>
+<P>Calls <SAMP>underflow()</SAMP> and if <SAMP>underflow()</SAMP> returns <SAMP>traits::eof()</SAMP>, returns <SAMP>traits::eof()</SAMP>. Otherwise, does <SAMP>gbump(1)</SAMP> and returns the value of <SAMP>*gptr()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsxsgetn()"></A><PRE>streamsize 
+<B>xsgetn</B>(char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Assigns up to <SAMP>n</SAMP> characters to successive elements of the array whose first element is designated by <SAMP>s</SAMP>. The characters are read from the input sequence. Assigning stops when either <SAMP>n</SAMP> characters have been assigned or a call to <SAMP>sbumpc()</SAMP> would return <SAMP>traits::eof()</SAMP>. The function returns the number of characters read.</P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsxsputn()"></A><PRE>streamsize 
+<B>xsputn</B>(const char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Writes up to <SAMP>n</SAMP> characters to the output sequence. The characters written are obtained from successive elements of the array whose first element is designated by <SAMP>s</SAMP>. Writing stops when either <SAMP>n</SAMP> characters have been written or a call to <SAMP>sputc()</SAMP> would return <SAMP>traits::eof()</SAMP>. The function returns the number of characters written.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B>(3C++), <B><I><A HREF="bas_3672.htm">basic_stringbuf</A></I></B>(3C++), <B><I><A HREF="str_4456.htm">strstreambuf</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 27.5.2</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="bas_8767.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="bas_0007.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

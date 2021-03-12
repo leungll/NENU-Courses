@@ -1,0 +1,57 @@
+<HTML><HEAD><TITLE>3.2 The C++ Locales</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="3-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>3.2 The C++ Locales</H2>
+<P>In C++, a locale is a class called locale provided by the Standard C++ Library. The C++ class locale differs from the C locale because it is more than a language table, or data representation of the various culture and language dependencies. It also includes the internationalization services, which in C are global functions.</P>
+<A NAME="idx46"><!></A>
+<P>In C++, internationalization semantics are broken out into separate classes called <I>facets</I>. Each facet handles a set of internationalization services; for example, the formatting of monetary values. Facets may also represent a set of culture and language dependencies, such as the rules and symbols for monetary information.</P>
+<A NAME="idx47"><!></A>
+<P>Each locale object maintains a set of facet objects. In fact, you can think of a C++ locale as a container of facets, as illustrated in <A HREF="#Figure 5">Figure 5</A> below:</P>
+
+<A NAME="idx48"><!></A>
+<H4><A NAME="Figure 5">Figure 5 -- A C++ locale is a container of facets</A></H4>
+<IMG SRC="images/locfig5.gif">
+ 
+
+
+<A NAME="321"><H3>3.2.1 Facets</H3></A>
+<A NAME="idx49"><!></A>
+<P>Facet classes encapsulate data that represents a set of culture and language dependencies, and offer a set of related internationalization services. Facet classes are very flexible. They can contain just about any internationalization service you can invent. The <B><I>Standard C++ Library</I></B> offers a number of predefined standard facets, which provide services similar to those contained in the C library. However, you could bundle additional internationalization services into a new facet class, or purchase a facet library.</P>
+
+<A NAME="3211"><H4>3.2.1.1 The Standard Facets</H4></A>
+<A NAME="idx50"><!></A>
+<P>As listed in Table 1, the C locale is composed of six categories of locale-dependent information: LC_NUMERIC (rules and symbols for numbers), LC_TIME (values for date and time information), LC_MONETARY (rules and symbols for monetary information), LC_CTYPE (character classification and conversion), LC_COLLATE (collation sequence), and LC_MESSAGES (formats and values of messages). </P>
+<A NAME="idx51"><!></A>
+<P>Similarly, there are six groups of standard facet classes. A detailed description of these facets is contained in the <I>Class Reference</I>, but a brief overview is given below. Note that an abbreviation like num_get&lt;charT,InputIterator&gt; means that num_get is a class template taking two template arguments, a character type, and an input iterator type. The groups of the standard facets are:</P>
+<UL>
+<A NAME="idx52"><!></A>
+<LI><P><B>Numeric.</B> The facet classes num_get&lt;charT,InputIterator&gt; and num_put&lt;charT,OutputIterator&gt; handle numeric formatting and parsing. The facet classes provide get() and put() member functions for values of type long, double, etc.</P>
+</LI>
+<A NAME="idx53"><!></A>
+<P>The facet class numpunct&lt;charT&gt; specifies numeric punctuation. It provides functions like decimal_point(),  thousands_sep(), etc.</P>
+<A NAME="idx54"><!></A>
+<LI><P><B>Time.</B> The facet classes time_get&lt;charT,InputIterator&gt; and time_put&lt;charT,OutputIterator&gt; handle date and time formatting and parsing. They provide functions like get_time(), get_date(), get_weekday(), etc.</P>
+</LI>
+<A NAME="idx55"><!></A>
+<LI><P><B>Monetary.</B> The facet classes money_get&lt;charT,InputIterator&gt; and money_put&lt;charT,OutputIterator&gt; handle formatting and parsing of monetary values. They provide get() and put() member functions that parse or produce a sequence of digits, representing a count of the smallest unit of the currency. For example, the sequence $1,056.23 in a common US locale would yield 105623 units, or the character sequence "105623". </P>
+</LI>
+<A NAME="idx56"><!></A>
+<P>The facet class moneypunct&lt;charT,bool&gt; handles monetary punctuation like the facet numpunct&lt;charT&gt; handles numeric punctuation. It comes with functions like curr_symbol(), etc.</P>
+<A NAME="idx57"><!></A>
+<LI><P><B>Ctype.</B> The facet class ctype&lt;charT&gt; encapsulates the Standard C++ Library ctype features for character classification, like tolower(), toupper(), isspace(), isprint(), etc. </P>
+</LI>
+<A NAME="idx58"><!></A>
+<P>The facet class codecvt&lt;internT,externT,stateT&gt; is used when converting from one encoding scheme to another, such as from the multibyte encoding JIS to the wide-character encoding Unicode. The main member functions are <SAMP>in()</SAMP> and <SAMP>out()</SAMP>. There is a template specialization &lt;wchar_t,char,mbstate_t&gt;  for multibyte to wide character conversions.</P>
+<A NAME="idx59"><!></A>
+<LI><P><B>Collate.</B> The facet class collate&lt;charT&gt; provides features for string collation, including a compare() function used for string comparison.</P>
+</LI>
+<A NAME="idx60"><!></A>
+<LI><P><B>Messages.</B> The facet class messages&lt;charT&gt; implements the X/Open message retrieval. It provides facilities to access message catalogues via open() and close(catalog), and to retrieve messages via get(..., int msgid,...).</P>
+</LI>
+</UL>
+<P>The names of the standard facets obey certain naming rules. The get facet classes, like num_get and time_get, handle parsing. The put facet classes handle formatting. The punct facet classes, like numpunct and moneypunct, represent rules and symbols.</P>
+
+<HR>
+<A HREF="3-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="3-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

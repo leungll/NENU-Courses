@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>6.1 What Are the Standard Iostreams?</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>6.1 What Are the Standard Iostreams?</H2>
+<A NAME="idx147"><!></A>
+<P>The Standard C++ Library includes classes for data stream input/output. Before the current ANSI/ISO standard, most C++ compilers were delivered with a class library commonly known as the i<I>ostreams</I> library. In this manual, we refer to this library as the <I>traditional iostreams</I>, in contrast to the <I>standard iostreams</I> that are now part of the ANSI/ISO Standard C++ Library. The standard iostreams are to some extent compatible with the traditional iostreams, in that the overall architecture and the most commonly used interfaces are retained. <A HREF="24.htm">Chapter 24</A> describes the incompatibilities in greater detail.</P>
+<A NAME="idx148"><!></A>
+<P>We can compare the standard iostreams not only with the traditional C++ iostreams library, but also with the I/O support in the Standard C Library. Many former C programmers still prefer the input/output functions offered by the C library, often referred to as <I>C stdio</I>. Their familiarity with the C library is justification enough for using the C stdio instead of C++ iostreams, but there are other reasons as well. For example, calls to the C functions <SAMP>printf()</SAMP> and <SAMP>scanf()</SAMP> are admittedly more concise with C stdio. However, C stdio has drawbacks, too, such as type insecurity and inability to extend consistently for user-defined classes. We'll discuss these in more detail in the following sections.</P>
+
+<A NAME="idx149"><!></A>
+<A NAME="611"><H3>6.1.1 Type Safety</H3></A>
+<A NAME="idx150"><!></A>
+<P>Let us compare a call to stdio functions with the use of standard iostreams. The stdio call reads as follows:</P>
+<UL>
+<PRE>
+int i = 25;
+char name[50] = "Janakiraman";
+fprintf(stdout, "%d %s", i, name);</PRE>
+</UL>
+<P>It correctly prints: <SAMP>25 Janakiraman</SAMP>.</P>
+<P>But what if we inadvertently switch the arguments to <SAMP>fprintf</SAMP>? The error is detected no sooner than run time. Anything can happen, from peculiar output to a system crash. This is not the case with the standard iostreams:</P>
+<UL>
+<PRE>
+cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; name &lt;&lt; '\n';</PRE>
+</UL>
+<P>Since there are overloaded versions of the shift operator <SAMP>operator&lt;&lt;()</SAMP>, the right operator is always called. The function <SAMP>cout &lt;&lt; i</SAMP> calls <SAMP>operator&lt;&lt;(int)</SAMP>, and <SAMP>cout &lt;&lt; name</SAMP> calls <SAMP>operator&lt;&lt;(const char*)</SAMP>. Hence, the standard iostreams are typesafe.</P>
+
+<A NAME="idx151"><!></A>
+<A NAME="612"><H3>6.1.2 Extensibility to New Types</H3></A>
+<A NAME="idx152"><!></A>
+<P>Another advantage of the standard iostreams is that user-defined types can be made to fit in seamlessly. Consider a type <SAMP>Pair</SAMP> that we want to print:</P>
+<UL>
+<PRE>
+struct Pair { int x; string y; }</PRE>
+</UL>
+<P>All we need to do is overload <SAMP>operator&lt;&lt;()</SAMP> for this new type <SAMP>Pair,</SAMP> and we can output pairs this way:</P>
+<UL>
+<PRE>
+Pair p(5, "May");
+cout &lt;&lt; p;</PRE>
+</UL>
+<P>The corresponding <SAMP>operator&lt;&lt;()</SAMP> can be implemented as:</P>
+<UL>
+<PRE>
+basic_ostream&lt;char&gt;&amp; 
+operator&lt;&lt;(basic_ostream&lt;char&gt;&amp; o, const Pair&amp; p)
+{ return o &lt;&lt; p.x &lt;&lt; ' ' &lt;&lt; p.y; }</PRE>
+</UL>
+
+<HR>
+<A HREF="6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="6-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

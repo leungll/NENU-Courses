@@ -1,0 +1,431 @@
+<HTML><HEAD><TITLE>strstreambuf</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="str_6184.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="swa_4514.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>strstreambuf</H2>
+<PRE><HR>strstreambuf<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>basic_streambuf
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Associates either the input sequence or the output sequence with a tiny character array whose elements store arbitrary values.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesint_type">int_type</A><BR>
+ <A HREF="#Typesios_type">ios_type</A><BR>
+ <A HREF="#Typesoff_type">off_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typespos_type">pos_type</A><BR>
+ <A HREF="#Typestraits">traits</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsfreeze()">freeze()</A><BR>
+ <A HREF="#Member Functionsoverflow()">overflow()</A><BR>
+ <A HREF="#Member Functionspbackfail()">pbackfail()</A><BR>
+ <A HREF="#Member Functionspcount()">pcount()</A><BR>
+ <A HREF="#Member Functionsseekoff()">seekoff()</A><BR>
+ <A HREF="#Member Functionsseekpos()">seekpos()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Member Functionssetbuf()">setbuf()</A><BR>
+ <A HREF="#Member Functionsstr()">str()</A><BR>
+ <A HREF="#Member Functionsunderflow()">underflow()</A><BR>
+ <A HREF="#Member Functionsxsputn()">xsputn()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;strstream&gt; 
+class strstreambuf
+: public basic_streambuf&lt;char&gt;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The class <B><I>strstreambuf</I></B> is derived from <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B> specialized on type <SAMP>char</SAMP> to associate either the input sequence or the output sequence with a tiny character array whose elements store arbitrary values. </P>
+<P>Each object of type <B><I>strstreambuf</I></B> controls two character sequences:</P>
+<UL>
+<LI><P>A character input sequence</P>
+</LI>
+<LI><P>A character output sequence</P>
+</LI>
+</UL>
+<P>Note: see <B><I><A HREF="bas_0582.htm">basic_streambuf.</A></I></B></P>
+<P>The two sequences are related to each other, but are manipulated separately. This means that you can read and write characters at different positions in objects of type <B><I>strstreambuf</I></B> without any conflict (in opposition to the <B><I><A HREF="bas_3163.htm">basic_filebuf</A></I></B> objects).</P>
+<P>The underlying array has several attributes:</P>
+<UL>
+<LI><P><SAMP>allocated</SAMP>, set when a dynamic array has been allocated, and hence should be freed by the destructor of the <B><I>strstreambuf</I></B> object.</P>
+</LI>
+<LI><P><SAMP>constant</SAMP>, set when the array has <SAMP>const</SAMP> elements, so the output sequence cannot be written.</P>
+</LI>
+<LI><P><SAMP>dynamic</SAMP>, set when the array object is allocated (or reallocated) as necessary to hold a character sequence that can change in length.</P>
+</LI>
+<LI><P><SAMP>frozen</SAMP>, set when the program has requested that the array not be altered, reallocated, or freed.</P>
+</LI>
+</UL>
+<P>This is a deprecated feature and might not be available in future versions.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class strstreambuf 
+: public basic_streambuf&lt;char&gt; {
+
+ public:
+
+  typedef char_traits&lt;char&gt;          traits;
+  typedef basic_ios&lt;char, traits&gt;    ios_type;
+
+  typedef char                       char_type;
+  typedef typename traits::int_type  int_type;
+  typedef typename traits::pos_type  pos_type;
+  typedef typename traits::off_type  off_type;
+
+  explicit strstreambuf(streamsize alsize = 0);
+  strstreambuf(void *(*palloc)(size_t), 
+               void (*pfree)(void *));
+  strstreambuf(char *gnext, streamsize n, char *pbeg = 0);
+
+  strstreambuf(unsigned char *gnext, streamsize n,
+               unsigned char *pbeg = 0);
+  strstreambuf(signed char *gnext, streamsize n,
+               signed char *pbeg = 0);
+
+  strstreambuf(const char *gnext, streamsize n);
+  strstreambuf(const unsigned char *gnext, streamsize n);
+  strstreambuf(const signed char *gnext, streamsize n);
+
+  virtual ~strstreambuf();
+
+  void freeze(bool f = 1);
+  char *str();
+  int pcount() const;
+
+ protected:
+
+  virtual int_type overflow(int_type c = traits::eof());
+  virtual int_type pbackfail(int_type c = traits::eof());
+  virtual int_type underflow();
+
+  virtual pos_type seekoff(off_type, ios_type::seekdir way,
+                           ios_type::openmode which =
+                           ios_type::in | ios_type::out);
+
+  virtual pos_type seekpos(pos_type sp, 
+                        ios_type::openmode which =
+                           ios_type::in | ios_type::out);
+
+  virtual streambuf* setbuf(char *s, streamsize n);
+  virtual streamsize xsputn(const char_type* s, 
+                            streamsize n);
+
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym of type <SAMP>char</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesint_type"></A><PRE><B>int_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>int_type</SAMP> is a synonym of type <SAMP>traits::in_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesios_type"></A><PRE><B>ios_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>ios_type</SAMP> is an instantiation of class <SAMP>basic_ios</SAMP> on type <SAMP>char</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesoff_type"></A><PRE><B>off_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>off_type</SAMP> is a synonym of type <SAMP>traits::off_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typespos_type"></A><PRE><B>pos_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>pos_type</SAMP> is a synonym of type <SAMP>traits::pos_type</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typestraits"></A><PRE><B>traits</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits</SAMP> is a synonym of type <SAMP>char_traits&lt;char&gt;</SAMP>.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>strstreambuf</B>(streamsize alsize = 0); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>strstreambuf</SAMP>, initializing the base class with <SAMP>streambuf()</SAMP>. After initialization the <SAMP>strstreambuf</SAMP> object is in dynamic mode and its array object has a size of <SAMP>alsize</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>strstreambuf</B>(void* (*palloc)(size_t),
+             void (*pfree)(void*));</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>strstreambuf</SAMP>, initializing the base class with <SAMP>streambuf()</SAMP>. After initialization the <SAMP>strstreambuf</SAMP> object is in dynamic mode. The function used to allocate memory is pointed to by <SAMP>void*</SAMP> <SAMP>(*palloc)(size_t)</SAMP> and the one used to free memory is pointed to by <SAMP>void (*pfree)(void*)</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>strstreambuf</B>(char* gnext, streamsize n,
+             char* pbeg = 0);
+<B>strstreambuf</B>(signed char* gnext, streamsize n,
+             signed char* pbeg = 0);
+<B>strstreambuf</B>(unsigned char* gnext, streamsize n,
+             unsigned char* pbeg = 0); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>strstreambuf</SAMP>, initializing the base class with <SAMP>streambuf()</SAMP>. The argument <SAMP>gnext</SAMP> points to the first element of an array object whose number of elements is:</P>
+<UL>
+<PRE>   n, if n &gt; 0
+   ::strlen(gnext), if n == 0
+   INT_MAX, if n &lt; 0</PRE>
+
+</UL>
+<P>If <SAMP>pbeg</SAMP> is a null pointer, sets only the input sequence to <SAMP>gnext</SAMP>. Otherwise, also sets the output sequence to <SAMP>pbeg</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>strstreambuf</B>(const char* gnext, streamsize n);
+<B>strstreambuf</B>(const signed char* gnext, streamsize n);
+<B>strstreambuf</B>(const unsigned char* gnext, streamsize n); </PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>strstreambuf</SAMP>, initializing the base class with <SAMP>streambuf()</SAMP>. The argument <SAMP>gnext</SAMP> points to the first element of an array object whose number of elements is:</P>
+<UL>
+<PRE>   n, if n &gt; 0
+   ::strlen(gnext), if n == 0
+   INT_MAX, if n &lt; 0</PRE>
+
+</UL>
+<P>Sets the input sequence to <SAMP>gnext</SAMP> and the mode to <SAMP>constant</SAMP>.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE>virtual <B>~strstreambuf</B>();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>strstreambuf</SAMP>. The function frees the dynamically allocated array object only if allocated is set and frozen is not set.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsfreeze()"></A><PRE>void 
+<B>freeze</B>(bool freezefl = 1); </PRE>
+
+<UL>
+<P>If the mode is dynamic, alters the <SAMP>freeze</SAMP> status of the dynamic array as follows:</P>
+</UL>
+
+<UL><UL>
+<LI><P>If <SAMP>freezefl</SAMP> is <SAMP>false</SAMP>, the function sets the <SAMP>freeze</SAMP> status to <SAMP>frozen</SAMP>.</P>
+</LI>
+<LI><P>Otherwise, it clears the <SAMP>freeze</SAMP> status.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Member Functionsoverflow()"></A><PRE>int_type 
+<B>overflow</B>( int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>If the output sequence has a put position available, and <SAMP>c</SAMP> is not <SAMP>traits::eof()</SAMP>, then writes <SAMP>c</SAMP> into it. If there is no position available, the function increases the size of the array object by allocating more memory, and then writes <SAMP>c</SAMP> at the new current put position. If dynamic is not set or if frozen is set, the operation fails. The function returns <SAMP>traits::not_eof(c)</SAMP>, except if it fails, in which case it returns <SAMP>traits::eof()</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspbackfail()"></A><PRE>int_type 
+<B>pbackfail</B>( int_type c = traits::eof() ); </PRE>
+
+<UL>
+<P>Puts back the character designated by <SAMP>c</SAMP> into the input sequence. If <SAMP>traits::eq_int_type(c,traits::eof())</SAMP> returns <SAMP>true</SAMP>, move the input sequence one position backward. If the operation fails, the function returns <SAMP>traits::eof()</SAMP>. Otherwise it returns <SAMP>traits::not_eof(c)</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspcount()"></A><PRE>int 
+<B>pcount</B>() const; </PRE>
+
+<UL>
+<P>Returns the size of the output sequence.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsseekoff()"></A><PRE>pos_type 
+<B>seekoff</B>(off_type off, ios_base::seekdir way,
+        ios_base::openmode which = 
+        ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>If the open mode is <SAMP>in | out</SAMP>, alters the stream position of both the input and the output sequence. If the open mode is <SAMP>in</SAMP>, alters the stream position of only the input sequence. If the open mode is <SAMP>out</SAMP>, alters the stream position of only the output sequence. The new position is calculated by combining the two parameters <SAMP>off</SAMP> (displacement) and <SAMP>way</SAMP> (reference point). If the current position of the sequence is invalid before repositioning, the operation fails and the return value is <SAMP>pos_type(off_type(-1))</SAMP>. Otherwise the function returns the current new position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsseekpos()"></A><PRE>pos_type 
+<B>seekpos</B>(pos_type sp, ios_base::openmode which = 
+        ios_base::in | ios_base::out); </PRE>
+
+<UL>
+<P>If the open mode is <SAMP>in | out</SAMP>, alters the stream position of both the input and the output sequence. If the open mode is <SAMP>in</SAMP>, alters the stream position of only the input sequence. If the open mode is <SAMP>out</SAMP>, alters the stream position of only the output sequence. If the current position of the sequence is invalid before repositioning, the operation fails and the return value is <SAMP>pos_type(off_type(-1))</SAMP>. Otherwise the function returns the current new position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssetbuf()"></A><PRE>strstreambuf* 
+<B>setbuf</B>(char* s, streamsize n); </PRE>
+
+<UL>
+<P>If <SAMP>dynamic</SAMP> is set and <SAMP>freeze</SAMP> is not, proceed as follows:</P>
+<P>If <SAMP>s</SAMP> is not a null pointer and <SAMP>n</SAMP> is greater than the number of characters already in the current array, replaces it (copy its contents) by the array of size <SAMP>n</SAMP> pointed to by <SAMP>s</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsstr()"></A><PRE>char* 
+<B>str</B>();</PRE>
+
+<UL>
+<P>Calls <SAMP>freeze()</SAMP>, then returns the beginning pointer for the input sequence.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsunderflow()"></A><PRE>int_type 
+<B>underflow</B>();</PRE>
+
+<UL>
+<P>If the input sequence has a read position available, returns the content of this position. Otherwise tries to expand the input sequence to match the output sequence and if possible returns the content of the new current position. The function returns <SAMP>traits::eof()</SAMP> to indicate failure.</P>
+<P>In the case where <SAMP>s</SAMP> is a null pointer and <SAMP>n</SAMP> is greater than the number of characters already in the current array, resizes it to size <SAMP>n</SAMP>.</P>
+<P>If the function fails, it returns a null pointer.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsxsputn()"></A><PRE>streamsize 
+<B>xsputn</B>(const char_type* s, streamsize n); </PRE>
+
+<UL>
+<P>Writes up to <SAMP>n</SAMP> characters to the output sequence. The characters written are obtained from successive elements of the array whose first element is designated by <SAMP>s</SAMP>. The function returns the number of characters written.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// stdlib/examples/manual/strstreambuf.cpp
+//
+#include&lt;iostream&gt;
+#include&lt;strstream&gt;
+#include&lt;iomanip&gt;
+
+void main ( )
+{
+  using namespace std;
+
+  // create a read/write strstream object
+  // and attach it to an ostrstream object
+  ostrstream out;
+
+  // tie the istream object to the ostrstream object
+  istream in(out.rdbuf());   
+
+  // output to out
+  out &lt;&lt; "anticonstitutionellement is a big word !!!";
+
+  // create a NTBS 
+  const char *p ="Le rat des villes et le rat des champs";
+
+  // output the NTBS
+  out &lt;&lt; p &lt;&lt; endl;   
+
+  // resize the buffer
+  if ( out.rdbuf()-&gt;pubsetbuf(0,5000) )
+   cout &lt;&lt; endl &lt;&lt; "Success in allocating the buffer" 
+        &lt;&lt; endl;
+
+  // output the all buffer to stdout
+  cout &lt;&lt; in.rdbuf( );
+
+  // output the decimal conversion of 100 in hex
+  // with right padding and a width field of 200
+  out &lt;&lt; dec &lt;&lt; setfill('!') &lt;&lt; setw(200) &lt;&lt; 0x100 &lt;&lt; endl;  
+  
+  // output the content of the input sequence to stdout
+  cout &lt;&lt; in.rdbuf( ) &lt;&lt; endl;
+
+  // number of elements in the output sequence
+  cout &lt;&lt; out.rdbuf()-&gt;pcount() &lt;&lt; endl;
+
+  // resize the buffer to a minimum size
+  if ( out.rdbuf()-&gt;pubsetbuf(0,out.rdbuf()-&gt;pcount()) )
+   cout &lt;&lt; endl &lt;&lt; "Success in resizing the buffer" &lt;&lt; endl;
+
+  // output the content of the all array object
+  cout &lt;&lt; out.rdbuf()-&gt;str() &lt;&lt; endl;
+
+ }</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="cha_3696.htm">char_traits</A></I></B>(3C++), <B><I><A HREF="ios_8948.htm">ios_base</A></I></B>(3C++), <B><I><A HREF="bas_6405.htm">basic_ios</A></I></B>(3C++), <B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="ist_1286.htm">istrstream</A></I></B>(3c++), <B><I><A HREF="ost_0723.htm">ostrstream</A></I></B>(3C++), <B><I><A HREF="str_6184.htm">strstream</A></I></B>(3c++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Annex D Compatibility features Section D.5</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="str_6184.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="swa_4514.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

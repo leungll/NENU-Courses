@@ -1,0 +1,226 @@
+<HTML><HEAD><TITLE>ostream_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="Ope_8344.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_2389.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ostream_iterator</H2>
+<PRE><HR>Iterator
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Operators">Operators</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Stream iterators allow for use of iterators with ostreams and istreams. They allow generic algorithms to be used directly on streams.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesostream_type">ostream_type</A><BR>
+ <A HREF="#Typestraits_type">traits_type</A><BR>
+ <A HREF="#Typesvalue_type">value_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Operatorsoperator++()">operator++()</A><BR>
+ <A HREF="#Operatorsoperator=()">operator=()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;ostream&gt;
+template &lt;class T, class charT, 
+          class traits = char_traits&lt;charT&gt; &gt;
+class <B>ostream_iterator</B> 
+ : public iterator&lt;output_iterator_tag,void,void&gt;;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>Stream iterators use the standard iterator interface for input and output streams.</P>
+<P>The class <B><I>ostream_iterator</I></B> writes elements to an output stream. If you use the constructor that has a second <SAMP>char *</SAMP> argument, then that string is written after every element (the string must be null-terminated). Since an ostream iterator is an output iterator, it is not possible to get an element out of the iterator. You can only assign to it.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T, class charT, 
+          class traits = char_traits&lt;charT&gt; &gt;
+ class ostream_iterator  
+   : public iterator&lt;output_iterator_tag,void,void&gt; 
+{
+ public:</PRE>
+
+<UL>
+<PRE>  typedef T value_type;
+  typedef charT char_type;
+  typedef traits traits_type;
+  typedef basic_ostream&lt;charT,traits&gt; ostream_type;</PRE>
+
+</UL>
+<PRE>
+    ostream_iterator(ostream&amp;);
+    ostream_iterator (ostream&amp;, const char*); 
+    ostream_iterator (const 
+            ostream_iterator&lt;T,charT,char_traits&lt;charT&gt; &gt;&amp;);
+    ~ostream_itertor ();
+    ostream_iterator&lt;T,charT,char_traits&lt;charT&gt; &gt;&amp; 
+         operator=(const T&amp;);
+    ostream_iterator&lt;T,charT,char_traits&lt;charT&gt; &gt;&amp; 
+         operator* () const;
+    ostream_iterator&lt;T,charT,char_traits&lt;charT&gt; &gt;&amp;
+         operator++ ();
+    ostream_iterator&lt;T,charT,char_traits&lt;charT&gt; &gt; 
+         operator++ (int);
+ };</PRE>
+
+</PRE>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typesvalue_type"></A><PRE><B>value_type</B>; </PRE>
+
+<UL>
+<P>Type of value to stream in.</P>
+</UL>
+
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B>; </PRE>
+
+<UL>
+<P>Type of character the stream is built on.</P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B>; </PRE>
+
+<UL>
+<P>Traits used to build the stream.</P>
+</UL>
+
+
+
+<A NAME="Typesostream_type"></A><PRE><B>ostream_type</B>; </PRE>
+
+<UL>
+<P>Type of stream this iterator is constructed on.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>ostream_iterator</B> (ostream&amp; s);</PRE>
+
+<UL>
+<P>Constructs an <B><I>ostream_iterator</I></B> on the given stream.</P>
+</UL>
+
+
+
+<PRE><B>ostream_iterator</B> (ostream&amp; s, const char* delimiter);</PRE>
+
+<UL>
+<P>Constructs an <B><I>ostream_iterator</I></B> on the given stream. The null terminated string <SAMP>delimiter</SAMP> is written to the stream after every element.</P>
+</UL>
+
+
+
+<PRE><B>ostream_iterator</B> (const ostream_iterator&lt;T&gt;&amp; x);</PRE>
+
+<UL>
+<P> Copy constructor.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~ostream_iterator</B> ();</PRE>
+
+<UL>
+<P>Destroys an object of class <SAMP>ostream_iterator</SAMP>.</P>
+</UL>
+
+
+<A NAME="Operators"><H3>Operators</H3></A>
+
+
+<A NAME="Operatorsoperator=()"></A><PRE>const T&amp; <br><B>operator=</B> (const T&amp; value);</PRE>
+
+<UL>
+<P> Shift the value <SAMP>T</SAMP> onto the output stream.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator*()"></A><PRE>const T&amp; ostream_iterator&lt;T&gt;&amp; 
+<B>operator*</B> ();
+<A NAME="Operatorsoperator++()"></A>ostream_iterator&lt;T&gt;&amp;  
+<B>operator++</B>();
+ostream_iterator&lt;T&gt;
+<B>operator++</B> (int);</PRE>
+
+<UL>
+<P>These operators do nothing. They simply allow the iterator to be used in common constructs.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE> #include &lt;iterator&gt;
+ #include &lt;numeric&gt;
+ #include &lt;deque&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main ()
+ {
+   //
+   // Initialize a vector using an array.
+   //
+   int arr[4] = { 3,4,7,8 };
+   int total=0;
+   deque&lt;int&gt; d(arr+0, arr+4);
+   //
+   // stream the whole vector and a sum to cout
+   //
+   copy(d.begin(),d.end()-1,
+        <B>ostream_iterator</B>&lt;int,char&gt;(cout," + "));
+   cout &lt;&lt; *(d.end()-1) &lt;&lt; " = " &lt;&lt;
+        accumulate(d.begin(),d.end(),total) &lt;&lt; endl;
+   return 0;
+ }</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>deque&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>deque&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="ist_4337.htm">istream_iterator</A></I></B>, <B><I><A HREF="Ite_5295.htm">Iterators</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="Ope_8344.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_2389.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

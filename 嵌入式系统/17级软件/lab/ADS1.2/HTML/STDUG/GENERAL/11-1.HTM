@@ -1,0 +1,23 @@
+<HTML><HEAD><TITLE>11.1 The priority queue Data Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="11.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="11-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>11.1 The priority queue Data Abstraction</H2>
+<A NAME="idx195"><!></A>
+<P>A <B><I><A HREF="../../stdref/pri_2327.htm">priority_queue</A></I></B> is a data structure useful in problems where you need to rapidly and repeatedly find and remove the largest element from a collection of values. An everyday example of a priority queue is the <I>to do</I> list of tasks waiting to be performed that most of us maintain to keep ourselves organized. Some jobs, such as <I>clean desktop</I>, are not imperative and can be postponed arbitrarily. Other tasks, such as <I>finish report by Monday</I> or <I>buy flowers for anniversary</I>, are time-crucial and must be addressed more rapidly. Thus, we sort the tasks waiting to be accomplished in order of their importance, or perhaps based on a combination of their critical importance, their long term benefit, and the fun we will have doing them, and choose the most pressing.</P>
+<P>A more computer-related example of a priority queue is the list of pending processes maintained by an operating system, where the value associated with each element is the priority of the job. For example, it may be necessary to respond rapidly to a key pressed at a terminal before the data is lost when the next key is pressed. On the other hand, the process of copying a listing to a queue of output waiting to be handled by a printer is something that can be postponed for a short period, as long as it is handled eventually. By maintaining processes in a priority queue, those jobs with urgent priority are executed prior to any jobs with less urgent requirements.</P>
+<A NAME="idx196"><!></A>
+<P>Simulation programs use a priority queue of <I>future events</I>. The simulation maintains a virtual <I>clock</I>, and each event has an associated time when the event will take place. In such a collection, the element with the smallest time value is the next event that should be simulated. These are only a few instances of the types of problems for which a <B><I><A HREF="../../stdref/pri_2327.htm">priority_queue</A></I></B> is a useful tool. You probably have encountered others, or you soon will.</P>
+<P>Some developers may feel the term priority <I>queue</I> is a misnomer. The data structure is not a <B><I><A HREF="../../stdref/que_0953.htm">queue</A></I></B> in the sense that we used the term in <A HREF="10.htm">Chapter 10</A>, since it does not return elements in a strict first-in, first-out sequence. Nevertheless, the name is now firmly associated with this particular datatype.</P>
+
+<A NAME="1111"><H3>11.1.1 Include Files</H3></A>
+<A NAME="idx197"><!></A>
+<P>Programs that use the priority queue data abstraction should include the file <SAMP>queue</SAMP>:</P>
+<UL>
+<PRE>
+# include &lt;queue&gt;</PRE>
+</UL>
+
+<HR>
+<A HREF="11.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="11-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

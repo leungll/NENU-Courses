@@ -1,0 +1,103 @@
+<HTML><HEAD><TITLE>iterator_traits</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ite_0362.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Ite_5295.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>iterator_traits</H2>
+<PRE><HR>Iterator traits class
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Tag Types">Tag Types</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Returns basic information about an iterator.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>template &lt;class Iterator&gt; struct iterator_traits
+{
+   typedef typename Iterator::value_type value_type;
+   typedef typename Iterator::difference_type
+                              difference_type;
+   typedef typename Iterator::pointer pointer;
+   typedef typename Iterator::reference reference;
+   typedef typename Iterator::iterator_category
+                              iterator_category;
+};
+
+// Specialization
+template &lt;class T&gt; struct iterator_traits&lt;T*&gt;
+{
+   typedef T value_type;
+   typedef ptrdiff_t difference_type;
+   typedef T* pointer;
+   typedef T&amp; reference;
+   typedef random_access_iterator_tag iterator_category;
+};</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>iterator_traits</I></B> template and specialization allows algorithms to access information about a particular iterator in a uniform way. The template requires either an iterator with a basic interface consisting of the types <SAMP>value_type</SAMP>, difference_type, <SAMP>pointer</SAMP>, <SAMP>reference</SAMP>, and <SAMP>iterator_category</SAMP>, or it requires a specialization for the iterator. The library includes one specialization (partial) to handle all pointer iterator types.</P>
+<P><B><I>iterator_traits</I></B> are used within algorithms to create local variables of either the type pointed to by the iterator or of the iterator's distance type. The traits also improve the efficiency of algorithms by making use of knowledge about basic iterator categories provided by the <SAMP>iterator_category</SAMP> member. An algorithm can use this "tag" to select the most efficient implementation an iterator is capable of handling without sacrificing the ability to work with a wide range of iterator types. For instance, both the <SAMP>advance</SAMP> and <SAMP>distance</SAMP> primitives use <SAMP>iterator_category</SAMP> to maximize their efficiency by using the tag to select from one of several different auxiliary functions. The <SAMP>iterator_category</SAMP> must therefore be one of the iterator tags included by the library.</P>
+
+<A NAME="Tag Types"><H3>Tag Types</H3></A>
+<UL>
+<PRE>input_iterator_tag
+output_iterator_tag
+forward_iterator_tag
+bidirectional_iterator_tag
+random_access_iterator_tag</PRE>
+
+</UL>
+<P><SAMP>iterator_traits::iterator_category</SAMP> is typically used like this:</P>
+<UL>
+<PRE>template &lt;class Iterator&gt;
+void foo(Iterator first, Iterator last)
+{   
+  __foo(begin,end,
+        iterator_traits&lt;Iterator&gt;::iterator_category);
+}
+
+template &lt;class Iterator&gt;
+void __foo(Iterator first, Iterator last,
+           input_iterator_tag&gt;
+{
+  // Most general implementation
+}
+
+template &lt;class Iterator&gt;
+void __foo(Iterator first, Iterator last,
+           bidirectional_iterator_tag&gt;
+{
+  // Implementation takes advantage of bi-directional
+  // capability of the iterators
+}
+
+...etc.</PRE>
+
+</UL>
+<P>See the <B><I><A HREF="ite_5554.htm">iterator</A></I></B> section for a description of iterators and the capabilities associated with each type of iterator tag.</P>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support partial specialization, then this template and specialization are not available to you. Instead you need to use the <SAMP>__distance_type</SAMP>, <SAMP>__value_type</SAMP>, and <SAMP>__iterator_category</SAMP> families of function templates. The Rogue Wave <B>Standard C++ Library</B> also includes alternate implementations of the distance, advance, and count functions when partial specialization is not supported by a particular compiler.</P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I>__value_type</I></B>, <B><I><A HREF="dis_0582.htm">__distance_type</A></I></B>, <B><I><A HREF="ite_0362.htm">__iterator_category</A></I></B>, <B><I><A HREF="dis_0186.htm">distance</A></I></B>, <B><I><A HREF="adv_9283.htm">advance</A></I></B>, <B><I><A HREF="ite_5554.htm">iterator</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="ite_0362.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="Ite_5295.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

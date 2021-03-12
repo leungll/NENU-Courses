@@ -1,0 +1,249 @@
+<HTML><HEAD><TITLE>ostreambuf_iterator</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="ost_2238.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_0723.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>ostreambuf_iterator</H2>
+<PRE><HR>ostreambuf_iterator<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>output_iterator
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Member Operators">Member Operators</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+<LI><A HREF="#Standards Conformance">Standards Conformance</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Writes successive characters onto the stream buffer object from which it was constructed.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Typesostream_type">ostream_type</A><BR>
+ <A HREF="#Typesstreambuf_type">streambuf_type</A><BR>
+ <A HREF="#Typestraits_type">traits_type</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsfailed()">failed()</A><BR>
+ <A HREF="#Member Operatorsoperator*()">operator*()</A><BR>
+ <A HREF="#Member Operatorsoperator++()">operator++()</A><BR>
+ <A HREF="#Member Operatorsoperator=()">operator=()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;streambuf&gt; 
+template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class ostreambuf_iterator
+: public output_iterator</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The template class <B><I>ostreambuf_iterator</I></B> writes successive characters onto the stream buffer object from which it was constructed. <SAMP>operator=</SAMP> is used to write the characters. In case of failure, the member function <SAMP>failed()</SAMP> returns <SAMP>true</SAMP>. </P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template&lt;class charT, class traits = char_traits&lt;charT&gt; &gt;
+class ostreambuf_iterator 
+: public output_iterator {
+
+ public: 
+
+  typedef charT                          char_type;
+  typedef traits                         traits_type;
+  typedef basic_streambuf&lt;charT, traits&gt; streambuf_type;
+  typedef basic_ostream&lt;charT, traits&gt;   ostream_type;
+
+  ostreambuf_iterator(ostream_type&amp; s) throw();
+  ostreambuf_iterator(streambuf_type *s) throw();
+  ostreambuf_iterator&amp; operator=(charT c);
+
+  ostreambuf_iterator&amp; operator*();
+  ostreambuf_iterator&amp; operator++();
+  ostreambuf_iterator operator++(int);
+       
+  bool failed( ) const throw();
+    
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>char_type</SAMP> is a synonym for the template parameter <SAMP>charT</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Typesostream_type"></A><PRE><B>ostream_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>ostream_type</SAMP> is an instantiation of class <SAMP>basic_ostream</SAMP> on types <SAMP>charT</SAMP> and <SAMP>traits</SAMP>:</P>
+<P><SAMP>typedef basic_ostream&lt;charT, traits&gt;   ostream_type;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typesstreambuf_type"></A><PRE><B>streambuf_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>streambuf_type</SAMP> is an instantiation of class <SAMP>basic_streambuf</SAMP> on types <SAMP>charT</SAMP> and <SAMP>traits</SAMP>:</P>
+<P><SAMP>typedef basic_streambuf&lt;charT, traits&gt; streambuf_type;</SAMP></P>
+</UL>
+
+
+
+<A NAME="Typestraits_type"></A><PRE><B>traits_type</B></PRE>
+
+<UL>
+<P>The type <SAMP>traits_type</SAMP> is a synonym for the template parameter <SAMP>traits</SAMP>.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>ostreambuf_iterator</B>(ostream_type&amp; s) throw();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>ostreambuf_iterator</SAMP> that uses the <SAMP>basic_streambuf</SAMP> object pointed to by <SAMP>s.rdbuf()</SAMP>to output characters. If <SAMP>s.rdbuf()</SAMP> is a null pointer, calls to the member function <SAMP>failed()</SAMP> return <SAMP>true</SAMP>.</P>
+</UL>
+
+
+
+<PRE><B>ostreambuf_iterator</B>(streambuf_type *s) throw();</PRE>
+
+<UL>
+<P>Constructs an <SAMP>ostreambuf_iterator</SAMP> that uses the <SAMP>basic_streambuf</SAMP> object pointed to by <SAMP>s</SAMP> to output characters. If <SAMP>s</SAMP> is a null pointer, calls the member function <SAMP>failed()</SAMP> return <SAMP>true</SAMP>.</P>
+</UL>
+
+
+<A NAME="Member Operators"><H3>Member Operators</H3></A>
+
+
+<A NAME="Member Operatorsoperator=()"></A><PRE>ostreambuf_iterator&amp; 
+<B>operator=</B>(charT c); </PRE>
+
+<UL>
+<P>Inserts the <SAMP>character</SAMP> <SAMP>c</SAMP> into the output sequence of the attached stream buffer. If the operation fails, calls to the member function <SAMP>failed()</SAMP> return <SAMP>true</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Operatorsoperator++()"></A><PRE>ostreambuf_iterator&amp; 
+<B>operator++</B>();</PRE>
+
+<UL>
+<P>Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<PRE>ostreambuf_iterator 
+<B>operator++</B>(int); </PRE>
+
+<UL>
+<P>Returns <SAMP>*this</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Member Operatorsoperator*()"></A><PRE>ostreambuf_iterator 
+<B>operator*</B>();</PRE>
+
+<UL>
+<P>Returns <SAMP>*this</SAMP>. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+
+
+<A NAME="Public Member Functionsfailed()"></A><PRE>bool 
+<B>failed</B>() const 
+  throw();</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the iterator failed while inserting a character. Otherwise returns <SAMP>false</SAMP>. </P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// stdlib/examples/manual/ostreambuf_iterator.cpp
+//
+#include&lt;iostream&gt;
+#include&lt;fstream&gt;
+
+void main ( )
+{
+  using namespace std; 
+
+  // create a filebuf object
+  filebuf  buf;
+
+  // open the file iter_out and link it 
+  // to the filebuf object
+  buf.open("iter_out", ios_base::in | ios_base::out );
+
+  // create an ostreambuf_iterator and link it to 
+  // the filebuf object
+  ostreambuf_iterator&lt;char&gt; out_iter(&amp;buf);
+
+  // output into the file using the ostreambuf_iterator
+  for(char i=64; i&lt;128; i++ )
+   out_iter = i;
+
+  // seek to the beginning of the file
+  buf.pubseekpos(0);
+  
+  // create an istreambuf_iterator and link it to 
+  // the filebuf object
+  istreambuf_iterator&lt;char&gt; in_iter(&amp;buf);
+
+  // construct an end of stream iterator
+  istreambuf_iterator&lt;char&gt; end_of_stream_iterator;
+
+  cout &lt;&lt; endl;
+
+  // output the content of the file
+  while( !in_iter.equal(end_of_stream_iterator) )
+
+  // use both operator++ and operator*
+  cout &lt;&lt; *in_iter++;
+
+  cout &lt;&lt; endl;
+
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="bas_0582.htm">basic_streambuf</A></I></B>(3C++), <B><I><A HREF="bas_8583.htm">basic_ostream</A></I></B>(3C++), <B><I><A HREF="ist_1762.htm">istreambuf_iterator</A></I></B>(3C++) </P>
+<P><I>Working Paper for Draft Proposed International Standard for Information Systems--Programming Language C++, Section 24.5.4</I> </P>
+
+<A NAME="Standards Conformance"><H3>Standards Conformance</H3></A>
+<P>ANSI X3J16/ISO WG21 Joint C++ Committee</P>
+
+
+<BR>
+<HR>
+<A HREF="ost_2238.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ost_0723.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

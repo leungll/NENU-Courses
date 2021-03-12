@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>facets</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="exc_9785.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fil_4628.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>facets</H2>
+<PRE><HR>Localization classes
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A family of classes used to encapsulate categories of locale functionality. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The Standard C++ Localization library includes a locale interface that contains a collection of diverse facets. Each facet has localization facilities for some specific area, such as character classification or numeric formatting. Each facet also falls into one or more broad categories. These categories are defined in the locale class, and the standard facets fit into these categories as follows.
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Category<B></TH>
+<TH><B>Facets<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>collate</SAMP><BR>
+</TD>
+<TD>
+<SAMP>collate, collate_byname</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ctype</SAMP><BR>
+</TD>
+<TD>
+<SAMP>ctype, codecvt, ctype_byname, codecvt_byname</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>monetary</SAMP><BR>
+</TD>
+<TD>
+<SAMP>moneypunct, moneypunct_byname, money_put, money_get</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>numeric</SAMP><BR>
+</TD>
+<TD>
+<SAMP>numpunct, numpunct_byname, num_put, num_get</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>time</SAMP><BR>
+</TD>
+<TD>
+<SAMP>time_put, time_put_byname, time_get, time_get_byname</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>messages</SAMP><BR>
+</TD>
+<TD>
+<SAMP>messages, messages_byname</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+<P>A facet must satisfy two properties. First, it must be derived from the base class <SAMP>locale::facet</SAMP>, either directly or indirectly (for example, <SAMP>facet -&gt; ctype&lt;char&gt; -&gt; my_ctype</SAMP>). Second, it must contain a member of type <SAMP>locale::id</SAMP>. This ensures that the locale class can manage its collection of facets properly.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, specific facet reference sections</P>
+
+
+<BR>
+<HR>
+<A HREF="exc_9785.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="fil_4628.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

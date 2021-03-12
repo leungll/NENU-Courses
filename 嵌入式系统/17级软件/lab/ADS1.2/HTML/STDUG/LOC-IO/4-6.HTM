@@ -1,0 +1,63 @@
+<HTML><HEAD><TITLE>4.6 Creating a New Base Facet Class</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="4-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>4.6 Creating a New Base Facet Class</H2>
+<A NAME="idx115"><!></A>
+<P>At times you may need to add a facet object to a locale without displacing any of the existing facets. To do this, you must define a new base facet class.</P>
+<P>Here is an example of a new facet class like that. It is a facet that provides a service to check whether a character is a German umlaut, that is, one of the special characters <SAMP>&auml;&ouml;&uuml;&Auml;&Ouml;&Uuml;</SAMP>.</P>
+<UL>
+<PRE>
+class Umlaut : public locale::facet {                         //1
+  public:
+    static locale::id id;                                     //2
+    bool is umlaut(char c) { return do_isumlaut(c);}          //3
+    Umlaut(size_t refs=0): locale::facet(refs) {}             //4
+  protected:
+    virtual bool do_isumlaut(char);                           //5
+};</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>All base facet classes must be derived from class locale::facet.
+<TR VALIGN="top"><TD>//2</TD><TD>In addition, all base facet classes must contain a static member named <SAMP>id</SAMP>, of type <SAMP>locale::id</SAMP>. The locale system uses this object internally to identify the slot in locale objects where facets of this type are stored.
+<BR><BR>(Derived facet classes do not contain their own <SAMP>id</SAMP> members. Instead, they inherit the member from a base facet class, and therefore are stored in the same slot as the base class.)
+<TR VALIGN="top"><TD>//3</TD><TD>A member function is_umlaut() is declared that returns the result of calling the protected virtual function do_umlaut.
+<TR VALIGN="top"><TD>//4</TD><TD>The constructor takes a <SAMP>refs</SAMP> parameter which is passed to the base class <SAMP>locale::facet</SAMP> for lifetime control, as described earlier.
+<TR VALIGN="top"><TD>//5</TD><TD>The actual functionality of determining whether a character is an umlaut is implemented in a protected virtual member function. In general, all localization services in a facet should be implemented in virtual functions this way, so that derived facets can override them when necessary.
+</TABLE>
+<A NAME="idx116"><!></A>
+<P>Now let's create a locale with a facet of the new type, as shown in <A HREF="#Figure 12">Figure 12</A>:</P>
+
+<A NAME="idx117"><!></A>
+<H4><A NAME="Figure 12">Figure 12 -- Adding a new facet to a locale</A></H4>
+<IMG SRC="images/locfig13.gif">
+ 
+
+<P>The code for this procedure is given below:</P>
+<UL>
+<PRE>
+locale loc(locale(""),  // native locale
+           new Umlaut); // the new facet                      //1
+char c,d;
+while (cin &gt;&gt; c){
+ d = use_facet&lt;ctype&lt;char&gt; &gt;(loc).tolower(c);                 //2
+ if (has_facet&lt;Umlaut&gt;(loc))                                  //3
+ { if (use_facet&lt;Umlaut&gt;(loc).is umlaut(d))                   //4
+       cout &lt;&lt; c &lt;&lt; "belongs to the German alphabet!" &lt;&lt; '\n';
+ }
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A locale object is constructed with an instance of the new facet class. The locale object has all facet objects from the native locale object, plus an instance of the new facet class Umlaut.
+<TR VALIGN="top"><TD>//2</TD><TD>Let's assume our new umlaut facet class is somewhat limited; it can handle only lower case characters. Thus we have to convert each character to a lower case character before we hand it over to the umlaut facet object. This is done by using a ctype facet object's service function tolower().
+<TR VALIGN="top"><TD>//3</TD><TD>Before we use the umlaut facet object, we check whether such an object is present in the locale. In a toy example like this it is obvious, but in a real application it is advisable to check for the existence of nonstandard facet objects before trying to use them.
+<TR VALIGN="top"><TD>//4</TD><TD>The umlaut facet object is used, and its member function is umlaut() is called. Note that the syntax for using this newly contrived facet object is exactly like the syntax for using the standard ctype facet.
+</TABLE>
+
+
+<BR>
+<HR>
+<A HREF="4-5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

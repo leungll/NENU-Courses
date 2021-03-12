@@ -1,0 +1,20 @@
+<HTML><HEAD><TITLE>21.1 Locales and Iostreams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="21.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>21.1 Locales and Iostreams</H2>
+<A NAME="idx486"><!></A>
+<P>Within the Standard C++ Library iostreams, <B><I><A HREF="../../stdref/loc_6943.htm"><A HREF="../../stdref/loc_6943.htm">locale</A></I></B></A> is a class. Class <B><I>locale</I></B> is used for two distinct purposes: </P>
+<UL>
+<LI><P>The formatting layer of iostreams uses <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> facilities for numeric formatting and character classification. </P>
+</LI>
+<LI><P>The transport layer uses <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> facilities for code conversion.</P>
+</LI>
+</UL>
+<P>In the standard iostream classes, the formatting (stream) layer uses only the <B><I><A HREF="../../stdref/cty_0953.htm">ctype</A></I></B>, <B><I><A HREF="../../stdref/num_8322.htm">num_put</A></I></B>, and <B><I><A HREF="../../stdref/num_6413.htm">num_get</A></I></B> facets, while the transport (stream buffer) layer uses only the <B><I><A HREF="../../stdref/cod_3309.htm">codecvt</A></I></B> facet. For more information on locales and facets, see <A HREF="3.htm">Chapter 3</A> and the sections of the <I>Class Reference</I> devoted to the <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B> class and the various facets.</P>
+<P>Each layer contains its own <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B>, so the code conversion facility can be changed independent of numeric formatting. We simply change the <B><I>locale</I></B> associated with a stream buffer without altering the <B><I>locale</I></B> contained by the stream using that buffer.   On the other hand, changing a stream's <B><I>locale</I></B> also changes the <B><I>locale</I></B> contained by the associated stream buffer.</P>
+<P>The base class for all streams, <B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B>, contains a <B><I><A HREF="../../stdref/loc_6943.htm">locale</A></I></B>. This <B><I>locale</I></B> can be accessed with the <SAMP>getloc()</SAMP> function and changed with the <SAMP>imbue()</SAMP> function. Similarly, the <B><I><A HREF="../../stdref/bas_0582.htm">basic_streambuf</A></I></B> class also contains a <B><I>locale</I></B> and it has a <SAMP>getloc()</SAMP> function and <SAMP>pubimbue()</SAMP> function. A stream buffer has a protected <SAMP>imbue()</SAMP> function. In both cases the <SAMP>imbue()</SAMP> function is virtual in order to allow derived classes to change how localization is implemented. </P>
+
+<HR>
+<A HREF="21.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="21-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

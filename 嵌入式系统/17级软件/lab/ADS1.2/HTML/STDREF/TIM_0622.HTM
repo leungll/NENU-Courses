@@ -1,0 +1,394 @@
+<HTML><HEAD><TITLE>time_get</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="swa_1153.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_6304.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>time_get</H2>
+<PRE><HR>        <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>time_get_base
+time_get
+        <IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Facet ID">Facet ID</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A time formatting facet for input. </P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Facet IDid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Public Member Functionsdate_order()">date_order()</A><BR>
+ <A HREF="#Protected Member Functionsdo_date_order()">do_date_order()</A><BR>
+ <A HREF="#Protected Member Functionsdo_get_date()">do_get_date()</A><BR>
+ <A HREF="#Protected Member Functionsdo_get_monthname()">do_get_monthname()</A><BR>
+ <A HREF="#Protected Member Functionsdo_get_time()">do_get_time()</A><BR>
+ <A HREF="#Protected Member Functionsdo_get_weekday()">do_get_weekday()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Protected Member Functionsdo_get_year()">do_get_year()</A><BR>
+ <A HREF="#Public Member Functionsget_date()">get_date()</A><BR>
+ <A HREF="#Public Member Functionsget_monthname()">get_monthname()</A><BR>
+ <A HREF="#Public Member Functionsget_time()">get_time()</A><BR>
+ <A HREF="#Public Member Functionsget_weekday()">get_weekday()</A><BR>
+ <A HREF="#Public Member Functionsget_year()">get_year()</A><BR>
+</TD>
+<TD VALIGN=top></TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+class time_base;
+template &lt;class charT, class InputIterator = 
+          istreambuf_iterator&lt;charT&gt; &gt;
+class time_get;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>time_get</I></B> facet extracts time and date components from a character string and stores the resulting values in a <SAMP>struct tm</SAMP> argument. The facet parses the string using a specific format as a guide.    If the string does not fit the format, then the facet indicates an error by setting the <SAMP>err</SAMP> argument in the public member functions to <SAMP>iosbase::failbit</SAMP>. See member function descriptions for details.</P>
+<P>The time_base class includes a set of values for specifying the order in which the three parts of a date appear. The <SAMP>dateorder</SAMP> function returns one of these five possible values:
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4></H4><TR ALIGN=left VALIGN=top>
+<TH><B>Order<B></TH>
+<TH><B>Meaning<B></TH>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>noorder</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date format has no set ordering</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>dmy</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date order is day, month, year</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>mdy</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date order is month, day, year</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ymd</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date order is year, month, day</SAMP><BR>
+</TD>
+</TR>
+<TR VALIGN=top>
+<TD>
+<SAMP>ydm</SAMP><BR>
+</TD>
+<TD>
+<SAMP>Date order is year, day, month</SAMP><BR>
+</TD>
+</TR>
+</TABLE>
+
+
+</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>class time_base {
+public:
+  enum dateorder { no_order, dmy, mdy, ymd, ydm };
+};
+
+template &lt;class charT, class InputIterator = 
+          istreambuf_iterator&lt;charT&gt; &gt;
+class time_get : public locale::facet, public time_base {
+public:
+  typedef charT            char_type;
+  typedef InputIterator    iter_type;
+  explicit time_get(size_t = 0);
+  dateorder date_order()  const;
+  iter_type get_time(iter_type, iter_type, ios_base&amp;,
+                     ios_base::iostate&amp;, tm*)  const;
+  iter_type get_date(iter_type, iter_type, ios_base&amp;,
+                     ios_base::iostate&amp;, tm*)  const;
+  iter_type get_weekday(iter_type, iter_type, ios_base&amp;,
+                        ios_base::iostate&amp;, tm*) const;
+  iter_type get_monthname(iter_type, iter_type, ios_base&amp;,
+                          ios_base::iostate&amp;, tm*) const;
+  iter_type get_year(iter_type, iter_type, ios_base&amp;,
+                     ios_base::iostate&amp;, tm*) const;
+  static locale::id id;
+protected:
+  ~time_get();  // virtual
+  virtual dateorder do_date_order()  const;
+  virtual iter_type do_get_time(iter_type, iter_type,
+          os_base&amp;, ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_date(iter_type, iter_type,
+          ios_base&amp;, ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_weekday(iter_type, iter_type,
+          os_base&amp;, ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_monthname(iter_type, ios_base&amp;,
+          ios_base::iostate&amp;, tm*) const;
+  virtual iter_type do_get_year(iter_type, iter_type,
+          ios_base&amp;, ios_base::iostate&amp;, tm*) const;
+};</PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character the facet is instantiated on.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>time_get</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Constructs a <B><I>time_get</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so. In this case, the object can be maintained across the lifetime of multiple locales.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~time_get</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Facet ID"><H3>Facet ID</H3></A>
+
+
+<A NAME="Facet IDid"></A><PRE>static locale::id <B>id</B>;</PRE>
+
+<UL>
+<P>Unique identifier for this type of facet. </P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<UL>
+<P>The public members of the <B><I>time_get</I></B> facet include an interface to protected members. Each public member <SAMP>xxx</SAMP> has a corresponding virtual protected member <SAMP>do_xxx</SAMP>. All work is delegated to these protected members.   For instance, the long version of the public <SAMP>get_time</SAMP> function simply calls its protected cousin <SAMP>do_get_time</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Public Member Functionsdate_order()"></A><PRE>dateorder 
+<B>date_order</B>()  const; 
+<A NAME="Public Member Functionsget_date()"></A>iter_type 
+<B>get_date</B>(iter_type s, iter_type end, ios_base&amp; f,
+         ios_base::iostate&amp; err, tm* t)  const; 
+<A NAME="Public Member Functionsget_monthname()"></A>iter_type 
+<B>get_monthname</B>(iter_type s, iter_type end, ios_base&amp; f,
+              ios_base::iostate&amp; err, tm* t) const; 
+<A NAME="Public Member Functionsget_time()"></A>iter_type 
+<B>get_time</B>(iter_type s, iter_type end, ios_base&amp; f,
+         ios_base::iostate&amp; err, tm* t)  const; 
+<A NAME="Public Member Functionsget_weekday()"></A>iter_type 
+<B>get_weekday</B>(iter_type s, iter_type end, ios_base&amp; f,
+            ios_base::iostate&amp; err, tm* t) const; 
+<A NAME="Public Member Functionsget_year()"></A>iter_type 
+<B>get_year</B>(iter_type s, iter_type end, ios_base&amp; f,
+         ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Each of these public functions simply calls a corresponding protected virtual <SAMP>do_</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_date_order()"></A><PRE>virtual dateorder 
+<B>do_date_order</B>()  const; </PRE>
+
+<UL>
+<P>Returns the a value indicating the relative ordering of the three basic parts of a date. Possible return values are:</P>
+</UL>
+
+<UL><UL>
+<LI><P><SAMP>noorder</SAMP>, indicating that the date format has no ordering, an ordering cannot be determined, or the date format contains variable components other than Month, Day and Year. <SAMP>noorder</SAMP> is never returned by the default time_put, but may be used by derived classes.</P>
+</LI>
+<LI><P>One of <SAMP>dmy, mdy, ymd, ydm</SAMP>, indicating the relative ordering of Day, Month, and Year.</P>
+</LI>
+</UL></UL>
+
+
+<A NAME="Protected Member Functionsdo_get_date()"></A><PRE>virtual iter_type 
+<B>do_get_date</B>(iter_type s, iter_type end, ios_base&amp;,
+            ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Fills out the <SAMP>t</SAMP> argument with date values parsed from the character buffer specified by the range <SAMP>(s,end]</SAMP>. If the buffer does not contain a valid date representation, then the err argument is set to <SAMP>iosbase::failbit</SAMP>. </P>
+<P>Returns an iterator pointing just beyond the last character that can be determined to be part of a valid date. </P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_get_monthname()"></A><PRE>virtual iter_type 
+<B>do_get_monthname</B>(iter_type s, ios_base&amp;,
+                 ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Fills out the <SAMP>tm_mon</SAMP> member of the <SAMP>t</SAMP> argument with a month name parsed from the character buffer specified by the range <SAMP>(s,end]</SAMP>. As with <SAMP>do_get_weekday</SAMP>, this name may be an abbreviation, but the function attempts to read a full name if valid characters are found after an abbreviation. For example, if a full name is "December", and an abbreviation is "Dec", then the string "Dece" causes an error. If an error occurs, then the <SAMP>err</SAMP> argument is set to <SAMP>iosbase::failbit</SAMP>. </P>
+<P>Returns an iterator pointing just beyond the last character that can be determined to be part of a valid name. </P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_get_time()"></A><PRE>virtual iter_type 
+<B>do_get_time</B>(iter_type s, iter_type end, os_base&amp;,
+            ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Fills out the <SAMP>t</SAMP> argument with time values parsed from the character buffer specified by the range <SAMP>(s,end]</SAMP>. The buffer must contain a valid time representation. Returns an iterator pointing just beyond the last character that can be determined to be part of a valid time. </P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_get_weekday()"></A><PRE>virtual iter_type 
+<B>do_get_weekday</B>(iter_type s, iter_type end, os_base&amp;, 
+               ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Fills out the <SAMP>tm_wday</SAMP> member of the <SAMP>t</SAMP> argument with a weekday name parsed from the character buffer specified by the range <SAMP>(s,end]</SAMP>. This name may be an abbreviation, but the function attempts to read a full name if valid characters are found after an abbreviation. For instance, if a full name is "Monday", and an abbreviation is "Mon", then the string "Mond" causes an error. If an error occurs, then the <SAMP>err</SAMP> argument is set to <SAMP>iosbase::failbit</SAMP>. </P>
+<P>Returns an iterator pointing just beyond the last character that can be determined to be part of a valid name. </P>
+</UL>
+
+
+
+<A NAME="Protected Member Functionsdo_get_year()"></A><PRE>virtual iter_type 
+<B>do_get_year</B>(iter_type s, iter_type end, ios_base&amp;, 
+            ios_base::iostate&amp; err, tm* t) const; </PRE>
+
+<UL>
+<P>Fills in the <SAMP>tm_year</SAMP> member of the <SAMP>t</SAMP> argument with a year parsed from the character buffer specified by the range <SAMP>(s,end]</SAMP>. If an error occurs, then the <SAMP>err</SAMP> argument is set to <SAMP>iosbase::failbit</SAMP>. </P>
+<P>Returns an iterator pointing just beyond the last character that can be determined to be part of a valid year.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// timeget.cpp
+//
+#include &lt;locale&gt;
+#include &lt;sstream&gt;
+#include &lt;time.h&gt;
+
+  using namespace std;
+
+// Print out a tm struct
+ostream&amp; operator&lt;&lt; (ostream&amp; os, const struct tm&amp; t)
+{
+  os &lt;&lt; "Daylight Savings = " &lt;&lt; t.tm_isdst &lt;&lt; endl;
+  os &lt;&lt; "Day of year      = " &lt;&lt; t.tm_yday &lt;&lt; endl;
+  os &lt;&lt; "Day of week      = " &lt;&lt; t.tm_wday &lt;&lt; endl;
+  os &lt;&lt; "Year             = " &lt;&lt; t.tm_year &lt;&lt; endl;
+  os &lt;&lt; "Month            = " &lt;&lt; t.tm_mon &lt;&lt; endl;
+  os &lt;&lt; "Day of month     = " &lt;&lt; t.tm_mday &lt;&lt; endl;
+  os &lt;&lt; "Hour             = " &lt;&lt; t.tm_hour &lt;&lt; endl;
+  os &lt;&lt; "Minute           = " &lt;&lt; t.tm_min &lt;&lt; endl;
+  os &lt;&lt; "Second           = " &lt;&lt; t.tm_sec &lt;&lt; endl;
+  return os;
+}
+
+int main ()
+{
+  typedef istreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+    iter_type;
+  
+  locale loc;
+  time_t tm = time(NULL);
+  struct tm* tmb = localtime(&amp;tm);
+  struct tm timeb;
+  memcpy(&amp;timeb,tmb,sizeof(struct tm));
+  ios_base::iostate state;
+  iter_type end;
+
+  // Get a time_get facet
+  const time_get&lt;char,iter_type&gt;&amp; tg = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+  use_facet&lt;time_get&lt;char,iter_type&gt; &gt;(loc);
+#else
+  use_facet(loc,(time_get&lt;char,iter_type&gt;*)0);
+#endif
+
+  cout &lt;&lt; timeb &lt;&lt; endl;
+  {
+    // Build an istringstream from the buffer and construct
+    // beginning and ending iterators on it.
+    istringstream ins("12:46:32");
+    iter_type begin(ins);
+
+    // Get the time
+    tg.get_time(begin,end,ins,state,&amp;timeb);
+  }
+  cout &lt;&lt; timeb &lt;&lt; endl;
+  {
+    // Get the date
+    istringstream ins("Dec 6 1996");
+    iter_type begin(ins);
+    tg.get_date(begin,end,ins,state,&amp;timeb);
+  }
+  cout &lt;&lt; timeb &lt;&lt; endl;
+  {
+    // Get the weekday
+    istringstream ins("Tuesday");
+    iter_type begin(ins);
+    tg.get_weekday(begin,end,ins,state,&amp;timeb);
+  }
+  cout &lt;&lt; timeb &lt;&lt; endl;
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="tim_8525.htm">time_put</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="swa_1153.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="tim_6304.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

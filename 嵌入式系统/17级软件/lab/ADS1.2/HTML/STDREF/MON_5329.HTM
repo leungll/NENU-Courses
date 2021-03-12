@@ -1,0 +1,272 @@
+<HTML><HEAD><TITLE>money_get</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="mod_6765.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mon_8487.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>money_get</H2>
+<PRE><HR>money_get<IMG SRC="images/inherits.gif" WIDTH=69 HEIGHT=11>locale::facet
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Types">Types</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Destructors">Destructors</A></LI>
+<LI><A HREF="#Static Members">Static Members</A></LI>
+<LI><A HREF="#Public Member Functions">Public Member Functions</A></LI>
+<LI><A HREF="#Protected Member Functions">Protected Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Monetary formatting facet for input.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Data Types</B></TD></TR><TR><TD VALIGN=top><A HREF="#Typeschar_type">char_type</A><BR>
+ <A HREF="#Protected Member Functionsdo_get(">do_get(</A><BR>
+ <A HREF="#Static Membersid">id</A><BR>
+ <A HREF="#Typesiter_type">iter_type</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Typesstring_type">string_type</A><BR>
+</TD></TR>
+</TABLE></UL>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Protected Member Functionsdo_get()">do_get()</A><BR>
+ <A HREF="#Public Member Functionsget()">get()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;locale&gt;
+template &lt;class charT,
+          class InputIterator = istreambuf_iterator&lt;charT&gt; &gt;
+class money_get;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The <B><I>money_get</I></B> facet interprets formatted monetary string values.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;class charT,
+          class InputIterator = istreambuf_iterator&lt;charT&gt; &gt;
+class money_get : public locale::facet {
+public:
+  typedef charT               char_type;
+  typedef InputIterator       iter_type;
+  typedef basic_string&lt;charT&gt; string_type;
+  explicit money_get(size_t = 0);
+  iter_type get(iter_type, iter_type, bool, ios_base&amp;,
+                ios_base::iostate&amp;, long double&amp;) const;
+  iter_type get(iter_type, iter_type, bool, ios_base&amp;,
+                ios_base::iostate&amp;, string_type&amp;) const;
+  static locale::id id;
+protected:
+  ~money_get();  // virtual
+  virtual iter_type do_get(iter_type, iter_type, 
+                           bool, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           long double&amp;) const;
+  virtual iter_type do_get(iter_type, iter_type, 
+                           bool, ios_base&amp;,
+                           ios_base::iostate&amp;, 
+                           string_type&amp;) const;
+}; </PRE>
+
+</UL>
+
+<A NAME="Types"><H3>Types</H3></A>
+
+
+<A NAME="Typeschar_type"></A><PRE><B>char_type</B></PRE>
+
+<UL>
+<P>Type of character upon which the facet is instantiated.</P>
+</UL>
+
+
+
+<A NAME="Typesiter_type"></A><PRE><B>iter_type</B></PRE>
+
+<UL>
+<P>Type of iterator used to scan the character buffer.</P>
+</UL>
+
+
+
+<A NAME="Typesstring_type"></A><PRE><B>string_type</B></PRE>
+
+<UL>
+<P>Type of character string passed to member functions.</P>
+</UL>
+
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>money_get</B>(size_t refs = 0) </PRE>
+
+<UL>
+<P>Construct a <B><I>money_get</I></B> facet. If the <SAMP>refs</SAMP> argument is <SAMP>0</SAMP>, then destruction of the object is delegated to the locale, or locales, containing it. This allows the user to ignore lifetime management issues. On the other hand, if <SAMP>refs</SAMP> is <SAMP>1</SAMP>, then the object must be explicitly deleted; the locale does not do so.</P>
+</UL>
+
+
+<A NAME="Destructors"><H3>Destructors</H3></A>
+
+
+<PRE><B>~money_get</B>();  // virtual and protected</PRE>
+
+<UL>
+<P>Destroys the facet.</P>
+</UL>
+
+
+<A NAME="Static Members"><H3>Static Members</H3></A>
+
+
+<A NAME="Static Membersid"></A><PRE>static locale::id <B>id</B>; </PRE>
+
+<UL>
+<P>Unique identifier for this type of facet.</P>
+</UL>
+
+
+<A NAME="Public Member Functions"><H3>Public Member Functions</H3></A>
+<P>The public members of the <B><I>money_get</I></B> facet include an interface to protected members. Each public member <SAMP>get</SAMP> has a corresponding virtual protected member <SAMP>do_get</SAMP>.</P>
+
+
+<A NAME="Public Member Functionsget()"></A><PRE>iter_type 
+<B>get</B>(iter_type s, iter_type end, bool intl, ios_base&amp; f,
+    ios_base::iostate&amp; err, long double&amp; units) const;
+iter_type 
+<B>get</B>(iter_type s, iter_type end, bool intl, ios_base&amp; f,
+    ios_base::iostate&amp; err, string_type&amp; digits) const; </PRE>
+
+<UL>
+<P>Each of these two overloads of the public member function <SAMP>get</SAMP> calls the corresponding protected <SAMP>do_get</SAMP> function.</P>
+</UL>
+
+
+<A NAME="Protected Member Functions"><H3>Protected Member Functions</H3></A>
+
+
+<A NAME="Protected Member Functionsdo_get()"></A><PRE>virtual iter_type 
+<B>do_get</B>(iter_type s, iter_type end,
+       bool intl, ios_base&amp; f,
+       ios_base::iostate&amp; err, 
+       long double&amp; units) const;
+<A NAME="Protected Member Functionsdo_get("></A>virtual iter_type 
+<B>do_get(</B>iter_type s, iter_type end, 
+       bool intl, ios_base&amp; f,
+       ios_base::iostate&amp; err, 
+       string_type&amp; digits) const; </PRE>
+
+<UL>
+<P>Reads in a localized character representation of a monetary value and generates a generic representation, either as a sequence of digits or as a <SAMP>long double</SAMP> value.   In either case <SAMP>do_get</SAMP> uses the smallest possible unit of currency.</P>
+<P>Both overloads of <SAMP>do_get</SAMP> read characters from the range <SAMP>[s,end)</SAMP> until one of three things occurs:</P>
+</UL>
+
+<UL><UL>
+<LI><P>A monetary value is assembled</P>
+</LI>
+<LI><P>An error occurs</P>
+</LI>
+<LI><P>No more characters are available.</P>
+</LI>
+</UL></UL>
+<UL>
+<P>The functions use <SAMP>f.flags()</SAMP> and the <SAMP>moneypunct&lt;charT, true&gt;</SAMP> or <SAMP>moneypunct&lt;charT, false&gt;</SAMP> facet (depending on the <SAMP>intl</SAMP> argument) from <SAMP>f.getloc()</SAMP> for formatting information to use in interpreting the sequence of characters. <SAMP>do_get</SAMP>, then places a pure sequence of digits representing the monetary value in the smallest possible unit of currency into the string argument <SAMP>digits</SAMP>, or it calculates a <SAMP>long double</SAMP> value based on those digits and returns that value in <SAMP>units</SAMP>.</P>
+<P>The following specifics apply to formatting: </P>
+</UL>
+
+<UL><UL>
+<LI><P>Digit group separators are optional. If no grouping is specified, then any thousands separator characters are treated as delimiters.</P>
+</LI>
+<LI><P>If <SAMP>space</SAMP> or <SAMP>none</SAMP> are part of the format pattern in <SAMP>moneypunct</SAMP>, then optional whitespace is consumed, except at the end. See the <SAMP>moneypunct</SAMP> reference section for a description of money-specific formatting flags.</P>
+</LI>
+<LI><P>If <SAMP>iosbase::showbase</SAMP> is set in <SAMP>f.flags()</SAMP>, then the currency symbol is optional, and if it appears after all other elements, then it is not consumed. Otherwise the currency symbol is required, and is consumed wherever it occurs.</P>
+</LI>
+<LI><P><SAMP>digits</SAMP> are preceded by a <SAMP>`-'</SAMP> or <SAMP>units</SAMP> are negated, if the monetary value is negative.</P>
+</LI>
+<LI><P>See the <SAMP>moneypunct</SAMP> reference section for a description of money specific <SAMP>formatting</SAMP> flags.</P>
+</LI>
+</UL></UL>
+<UL>
+<P>The <SAMP>err</SAMP> argument is set to <SAMP>iosbase::failbit</SAMP> if an error occurs during parsing.</P>
+<P>Returns an iterator pointing one past the last character that is part of a valid monetary sequence.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// moneyget.cpp
+//
+
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+using namespace std;
+
+int main ()
+{
+  using namespace std;
+  typedef istreambuf_iterator&lt;char,char_traits&lt;char&gt; &gt;
+          iter_type;
+
+  locale loc;
+  string buffer("$100.02");
+  string dest;
+  long double ldest;
+  ios_base::iostate state;
+  iter_type end;
+
+  // Get a money_get facet
+  const money_get&lt;char,iter_type&gt;&amp; mgf = 
+#ifndef _RWSTD_NO_TEMPLATE_ON_RETURN_TYPE
+    use_facet&lt;money_get&lt;char,iter_type&gt; &gt;(loc);
+#else
+    use_facet(loc,(money_get&lt;char,iter_type&gt;*)0);
+#endif
+
+  {
+    // Build an istringstream from the buffer and construct
+    // a beginning iterator on it.
+    istringstream ins(buffer);
+    iter_type begin(ins);
+
+    // Get a string representation of the monetary value
+    mgf.get(begin,end,false,ins,state,dest);
+  }
+  {
+    // Build another istringstream from the buffer, etc.
+    // so we have an iterator pointing to the beginning
+    istringstream ins(buffer);
+    iter_type begin(ins);
+
+    // Get a long double representation 
+    // of the monetary value
+    mgf.get(begin,end,false,ins,state,ldest);
+  }
+  cout &lt;&lt; buffer &lt;&lt; " --&gt; " &lt;&lt; dest 
+       &lt;&lt; " --&gt; " &lt;&lt; ldest &lt;&lt; endl;
+
+  return 0;
+}</PRE>
+
+</UL>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="loc_6943.htm">locale</A></I></B>, <B><I><A HREF="fac_8558.htm">facets</A></I></B>, <B><I><A HREF="mon_8487.htm">money_put</A></I></B>, <B><I><A HREF="mon_8228.htm">moneypunct</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="mod_6765.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="mon_8487.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

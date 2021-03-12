@@ -1,0 +1,501 @@
+<HTML><HEAD><TITLE>bitset</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="bin_1899.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cer_5818.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>bitset</H2>
+<PRE><HR>Container
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Errors and Exceptions">Errors and Exceptions</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Assignment Operators">Assignment Operators</A></LI>
+<LI><A HREF="#Operators">Operators</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A template class and related functions for storing and manipulating fixed-size sequences of bits.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsany()">any()</A><BR>
+ <A HREF="#Member Functionscount()">count()</A><BR>
+ <A HREF="#Member Functionsflip()">flip()</A><BR>
+ <A HREF="#Member Functionsnone()">none()</A><BR>
+ <A HREF="#Operatorsoperator!=()">operator!=()</A><BR>
+ <A HREF="#Operatorsoperator&amp;()">operator&amp;()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Operatorsoperator&amp;=()">operator&amp;=()</A><BR>
+ <A HREF="#Operatorsoperator&gt;&gt;()">operator&gt;&gt;()</A><BR>
+ <A HREF="#Operatorsoperator&gt;&gt;=()">operator&gt;&gt;=()</A><BR>
+ <A HREF="#Operatorsoperator&lt;&lt;()">operator&lt;&lt;()</A><BR>
+ <A HREF="#Operatorsoperator&lt;&lt;=()">operator&lt;&lt;=()</A><BR>
+ <A HREF="#Assignment Operatorsoperator=()">operator=()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Operatorsoperator==()">operator==()</A><BR>
+ <A HREF="#Operatorsoperator^()">operator^()</A><BR>
+ <A HREF="#Operatorsoperator^=()">operator^=()</A><BR>
+ <A HREF="#Operatorsoperator~()">operator~()</A><BR>
+ <A HREF="#Member Functionsreset()">reset()</A><BR>
+ <A HREF="#Member Functionsset()">set()</A><BR>
+</TD>
+<TD VALIGN=top> <A HREF="#Member Functionssize()">size()</A><BR>
+ <A HREF="#Member Functionstest()">test()</A><BR>
+ <A HREF="#Member Functionsto_ulong()">to_ulong()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;bitset&gt;
+template &lt;size_t N&gt;
+class bitset ;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>bitset&lt;size_t N&gt;</I></B> is a class that describes objects that can store a sequence consisting of a fixed number of bits, <SAMP>N.</SAMP> Each bit represents either the value zero (<SAMP>reset</SAMP>) or one (<SAMP>set</SAMP>) and has a non-negative position <SAMP>pos</SAMP>. </P>
+
+<A NAME="Errors and Exceptions"><H3>Errors and Exceptions</H3></A>
+<P>Bitset constructors and member functions may report the following three types of errors - each associated with a distinct exception:</P>
+<UL>
+<LI><P>Invalid-argument error or <SAMP>invalid_argument()</SAMP> exception;</P>
+</LI>
+<LI><P>Out-of-range error or <SAMP>out_of_range()</SAMP> exception;</P>
+</LI>
+<LI><P>Overflow error or <SAMP>over-flow_error()</SAMP> exception;</P>
+</LI>
+</UL>
+<P>If exceptions are not supported on your compiler, you get an assertion failure instead of an exception.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<UL>
+<PRE>template &lt;size_t N&gt;
+class bitset {
+
+public:
+
+// bit reference:
+
+  class reference {
+   friend class bitset;
+  public:
+
+   ~reference();
+   reference&amp; operator= (bool);
+   reference&amp; operator= (const reference&amp;);
+   bool operator~() const;
+   operator bool() const;
+   reference&amp; flip();
+  };
+
+
+// Constructors
+  bitset ();
+  bitset (unsigned long);
+  template&lt;class charT, class traits, class Allocator&gt;
+  explicit bitset 
+           (const basic_string&lt;charT, traits, Allocator&gt;, 
+            typename basic_string&lt;charT, traits,
+                                  Allocator&gt;::size_type=0, 
+            typename basic_string&lt;charT, traits,
+                                  Allocator&gt;::size_type=
+            basic_string&lt;charT, traits, Allocator&gt;::npos);
+  bitset (const bitset&lt;N&gt;&amp;);
+  bitset&lt;N&gt;&amp; operator= (const bitset&lt;N&gt;&amp;); 
+
+// Bitwise Operators and Bitwise Operator Assignment
+   bitset&lt;N&gt;&amp; operator&amp;= (const bitset&lt;N&gt;&amp;);
+   bitset&lt;N&gt;&amp; operator|= (const bitset&lt;N&gt;&amp;);
+   bitset&lt;N&gt;&amp; operator^= (const bitset&lt;N&gt;&amp;);
+   bitset&lt;N&gt;&amp; operator&lt;&lt;= (size_t);
+   bitset&lt;N&gt;&amp; operator&gt;&gt;= (size_t);
+
+// Set, Reset, Flip
+   bitset&lt;N&gt;&amp; set ();
+   bitset&lt;N&gt;&amp; set (size_t, int = 1);
+   bitset&lt;N&gt;&amp; reset ();
+   bitset&lt;N&gt;&amp; reset (size_t);
+   bitset&lt;N&gt; operator~() const;
+   bitset&lt;N&gt;&amp; flip ();
+   bitset&lt;N&gt;&amp; flip (size_t);
+
+// element access
+   reference operator[] (size_t);
+   unsigned long to_ulong() const;
+   template&lt;class charT, class traits, class Allocator&gt;
+   basic_string&lt;charT, traits, Allocator&gt; to_string();
+   size_t count() const;
+   size_t size() const;
+   bool operator== (const bitset&lt;N&gt;&amp;) const;
+   bool operator!= (const bitset&lt;N&gt;&amp;) const;
+   bool test (size_t) const;
+   bool any() const;
+   bool none() const;
+   bitset&lt;N&gt; operator&lt;&lt; (size_t) const;
+   bitset&lt;N&gt; operator&gt;&gt; (size_t) const;
+
+};
+
+// Non-member operators
+template &lt;size_t N&gt;
+bitset&lt;N&gt; operator&amp; (const bitset&lt;N&gt;&amp;, const bitset&lt;N&gt;&amp;);
+
+template &lt;size_t N&gt;
+bitset&lt;N&gt; operator| (const bitset&lt;N&gt;&amp;, const bitset&lt;N&gt;&amp;);
+
+template &lt;size_t N&gt;
+bitset&lt;N&gt; operator^ (const bitset&lt;N&gt;&amp;, const bitset&lt;N&gt;&amp;);
+
+template &lt;size_t N&gt;
+istream&amp; operator&gt;&gt; (istream&amp;, bitset&lt;N&gt;&amp;);
+
+template &lt;size_t N&gt;
+ostream&amp; operator&lt;&lt; (ostream&amp;, const bitset&lt;N&gt;&amp;)</PRE>
+
+</UL>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE><B>bitset</B>();</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>bitset&lt;N&gt;</SAMP>, initializing all bit values to zero.</P>
+</UL>
+
+
+
+<PRE><B>bitset</B>(unsigned long val);</PRE>
+
+<UL>
+<P>Constructs an object of class <SAMP>bitset&lt;N&gt;</SAMP>, initializing the first <SAMP>M</SAMP> bit values to the corresponding bits in <SAMP>val</SAMP>. <SAMP>M</SAMP> is the smaller of <SAMP>N</SAMP> and the value <SAMP>CHAR_BIT * sizeof(unsigned long)</SAMP>. If <SAMP>M &lt; N</SAMP>, remaining bit positions are initialized to zero. Note: <SAMP>CHAR_BIT</SAMP> is defined in <SAMP>&lt;climits&gt;</SAMP>.</P>
+<UL>
+<PRE>template&lt;class charT, class traits, class Allocator&gt;</PRE>
+
+</UL>
+</UL>
+
+
+
+<PRE>explicit</PRE>
+
+<UL>
+<PRE><B>bitset</B> (const basic_string&lt;charT, traits, Allocator&gt;, 
+        typename basic_string&lt;charT, traits,
+                              Allocator&gt;::size_type=0, 
+        typename basic_string&lt;charT, traits,
+                              Allocator&gt;::size_type=
+        basic_string&lt;charT, traits, Allocator&gt;::npos);</PRE>
+
+</UL>
+<UL>
+<P>Determines the effective length <SAMP>rlen</SAMP> of the initializing string as the smaller of <SAMP>n</SAMP> and <SAMP>str.size() - pos</SAMP>. The function throws an <SAMP>invalid_argument</SAMP> exception if any of the <SAMP>rlen</SAMP> characters in <SAMP>str</SAMP>, beginning at position <SAMP>pos</SAMP>, is other than <SAMP>0</SAMP> or <SAMP>1</SAMP>. Otherwise, the function constructs an object of class <B><I>bitset&lt;N&gt;</I></B>, initializing the first <SAMP>M</SAMP> bit positions to values determined from the corresponding characters in the string <SAMP>str</SAMP>. <SAMP>M</SAMP> is the smaller of <SAMP>N</SAMP> and <SAMP>rlen</SAMP>. This constructor expects <SAMP>pos &lt;= str.size()</SAMP>. If that is not <SAMP>true</SAMP>, the constructor throws an <SAMP>out_of_range</SAMP> exception.</P>
+</UL>
+
+
+
+<PRE><B>bitset</B>(const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Creates a copy of <SAMP>rhs</SAMP>.</P>
+</UL>
+
+
+<A NAME="Assignment Operators"><H3>Assignment Operators</H3></A>
+
+
+<A NAME="Assignment Operatorsoperator=()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>operator=</B>(const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Erases all bits in self, then inserts into self a copy of each bit in <SAMP>rhs</SAMP>. Returns a reference to <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+<A NAME="Operators"><H3>Operators</H3></A>
+
+
+<A NAME="Operatorsoperator==()"></A><PRE>bool 
+<B>operator==</B>(const bitset&lt;N&gt;&amp; rhs) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the value of each bit in <SAMP>*this</SAMP> equals the value of each corresponding bit in <SAMP>rhs</SAMP>. Otherwise returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator!=()"></A><PRE>bool 
+<B>operator!=</B>(const bitset&lt;N&gt;&amp; rhs) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the value of any bit in <SAMP>*this</SAMP> is not equal to the value of the corresponding bit in <SAMP>rhs</SAMP>. Otherwise returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&amp;=()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>operator&amp;=</B>(const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Clears each bit in <SAMP>*this</SAMP> for which the corresponding bit in <SAMP>rhs</SAMP> is clear and leaves all other bits unchanged. Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<PRE>bitset&lt;N&gt;&amp; 
+<B>operator|=</B>(const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Sets each bit in <SAMP>*this</SAMP> for which the corresponding bit in <SAMP>rhs</SAMP> is set, and leaves all other bits unchanged. Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator^=()"></A><PRE>bitset&lt;N&gt;&amp;
+<A NAME="Operatorsoperator^=()"></A><B>operator^=</B>(const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P>Toggles each bit in <SAMP>*this</SAMP> for which the corresponding bit in <SAMP>rhs</SAMP> is set, and leaves all other bits unchanged. Returns <SAMP>*this</SAMP>. </P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&lt;&lt;=()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>operator&lt;&lt;=</B>(size_t pos);</PRE>
+
+<UL>
+<P>Replaces each bit at position <SAMP>I</SAMP> with <SAMP>0</SAMP> if <SAMP>I &lt; pos</SAMP> or with the value of the bit at <SAMP>I - pos</SAMP> if <SAMP>I &gt;= pos</SAMP>. Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&gt;&gt;=()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>operator&gt;&gt;=</B>(size_t pos);</PRE>
+
+<UL>
+<P>Replaces each bit at position <SAMP>I</SAMP> with <SAMP>0</SAMP> if <SAMP>pos &gt;= N-I</SAMP> or with the value of the bit at position <SAMP>I + pos</SAMP> if <SAMP>pos &lt; N-I</SAMP>. Returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&gt;&gt;()"></A><PRE>bitset&lt;N&gt;&amp;
+<B>operator&gt;&gt;</B>(size_t pos) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>bitset&lt;N&gt;(*this) &gt;&gt;= pos</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&lt;&lt;()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>operator&lt;&lt;</B>(size_t pos) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>bitset&lt;N&gt;(*this) &lt;&lt;= pos</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator~()"></A><PRE>bitset&lt;N&gt; 
+<B>operator~</B>() const;</PRE>
+
+<UL>
+<P>Returns the bitset that is the logical complement of each bit in <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator&amp;()"></A><PRE>bitset&lt;N&gt; 
+<B>operator&amp;</B>(const bitset&lt;N&gt;&amp; lhs,
+          const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P><SAMP>lhs</SAMP> gets logical <SAMP>AND</SAMP> of <SAMP>lhs</SAMP> with <SAMP>rhs</SAMP>.</P>
+</UL>
+
+
+
+<PRE>bitset&lt;N&gt; 
+<B>operator|</B>(const bitset&lt;N&gt;&amp; lhs,
+          const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P><SAMP>lhs</SAMP> gets logical <SAMP>OR</SAMP> of <SAMP>lhs</SAMP> with <SAMP>rhs</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Operatorsoperator^()"></A><PRE>bitset&lt;N&gt; 
+<A NAME="Operatorsoperator^()"></A><B>operator^</B>(const bitset&lt;N&gt;&amp; lhs,
+          const bitset&lt;N&gt;&amp; rhs);</PRE>
+
+<UL>
+<P><SAMP>lhs</SAMP> gets logical <SAMP>XOR</SAMP> of <SAMP>lhs</SAMP> with <SAMP>rhs</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template &lt;size_t N&gt;
+istream&amp; 
+<B>operator&gt;&gt;</B>(istream&amp; is, bitset&lt;N&gt;&amp; x);</PRE>
+
+<UL>
+<P>Extracts up to <SAMP>N</SAMP> characters (single-byte) from <SAMP>is</SAMP>. Stores these characters in a temporary object <SAMP>str</SAMP> of type <SAMP>string</SAMP>, then evaluates the expression <SAMP>x = bitset&lt;N&gt;(str)</SAMP>. Characters are extracted and stored until any of the following occurs:</P>
+<UL>
+<LI><P><SAMP>N</SAMP> characters have been extracted and stored</P>
+</LI>
+<LI><P>An end-of-file is reached on the input sequence</P>
+</LI>
+<LI><P>The next character is neither '0' nor '1'. In this case, the character is not extracted</P>
+</LI>
+</UL>
+<P>Returns <SAMP>is</SAMP>.</P>
+</UL>
+
+
+
+<PRE>template &lt;size_t N&gt;
+ostream&amp; 
+<B>operator&lt;&lt;</B>(ostream&amp; os, const bitset&lt;N&gt;&amp; x);</PRE>
+
+<UL>
+<P>Returns <SAMP>os &lt;&lt; x.to_string()</SAMP></P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsany()"></A><PRE>bool 
+<B>any</B>() const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if any bit in <SAMP>*this</SAMP> is set. Otherwise returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionscount()"></A><PRE>size_t 
+<B>count</B>() const;</PRE>
+
+<UL>
+<P>Returns a count of the number of bits set in <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsflip()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>flip</B>();</PRE>
+
+<UL>
+<P>Flips all bits in <SAMP>*this</SAMP>, and returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<PRE>bitset&lt;N&gt;&amp; 
+<B>flip</B>(size_t pos);</PRE>
+
+<UL>
+<P>Flips the bit at position <SAMP>pos</SAMP> in <SAMP>*this</SAMP> and returns <SAMP>*this</SAMP>. Throws an <SAMP>out_of_range</SAMP> exception if <SAMP>pos</SAMP> does not correspond to a valid bit position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsnone()"></A><PRE>bool 
+<B>none</B>() const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if no bit in <SAMP>*this</SAMP> is set.   Otherwise returns <SAMP>false</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsreset()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>reset</B>();</PRE>
+
+<UL>
+<P>Resets all bits in <SAMP>*this</SAMP>, and returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<PRE>bitset&lt;N&gt;&amp; 
+<B>reset</B>(size_t pos);</PRE>
+
+<UL>
+<P>Resets the bit at position <SAMP>pos</SAMP> in <SAMP>*this</SAMP>. Throws an <SAMP>out_of_range</SAMP> exception if <SAMP>pos</SAMP> does not correspond to a valid bit position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsset()"></A><PRE>bitset&lt;N&gt;&amp; 
+<B>set</B>();</PRE>
+
+<UL>
+<P>Sets all bits in <SAMP>*this</SAMP>, and returns <SAMP>*this</SAMP>.</P>
+</UL>
+
+
+
+<PRE>bitset&lt;N&gt;&amp; 
+<B>set</B>(size_t pos, int val = 1);</PRE>
+
+<UL>
+<P>Stores a new value in the bits at position <SAMP>pos</SAMP> in <SAMP>*this.</SAMP> If <SAMP>val</SAMP> is nonzero, the stored value is one, otherwise it is zero. Throws an <SAMP>out_of_range</SAMP> exception if <SAMP>pos</SAMP> does not correspond to a valid bit position.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssize()"></A><PRE>size_t 
+<B>size</B>() const;</PRE>
+
+<UL>
+<P>Returns the template parameter <SAMP>N</SAMP>.</P>
+</UL>
+
+
+
+<A NAME="Member Functionstest()"></A><PRE>bool 
+<B>test</B>(size_t pos) const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the bit at position <SAMP>pos</SAMP> is set. Throws an <SAMP>out_of_range</SAMP> exception if <SAMP>pos</SAMP> does not correspond to a valid bit position.</P>
+<UL>
+<PRE>template&lt;class charT, class traits, class Allocator&gt;
+basic_string&lt;charT, traits, Allocator&gt;
+<B>to_string</B>();</PRE>
+
+</UL>
+<P>Returns an object of type <SAMP>string</SAMP>, <SAMP>N</SAMP> characters long.</P>
+<P>Each position in the new string is initialized with a character ('0' for zero and '1' for one) representing the value stored in the corresponding bit position of <SAMP>*this</SAMP>. Character position <SAMP>N - 1</SAMP> corresponds to bit position 0. Subsequent decreasing character positions correspond to increasing bit positions.</P>
+</UL>
+
+
+
+<A NAME="Member Functionsto_ulong()"></A><PRE>unsigned long 
+<B>to_ulong</B>() const;</PRE>
+
+<UL>
+<P>Returns the integral value corresponding to the bits in <SAMP>*this</SAMP>. Throws an <SAMP>overflow_error</SAMP> if these bits cannot be represented as type <SAMP>unsigned long</SAMP>.</P>
+</UL>
+
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Con_2487.htm">Containers</A></I></B></P>
+
+
+
+
+<BR>
+<HR>
+<A HREF="bin_1899.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="cer_5818.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

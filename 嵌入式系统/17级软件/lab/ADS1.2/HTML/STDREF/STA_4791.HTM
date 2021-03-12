@@ -1,0 +1,113 @@
+<HTML><HEAD><TITLE>stable_partition</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="sor_3899.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sta_5767.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>stable_partition</H2>
+<PRE><HR>Algorithm
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Places all of the entities that satisfy the given predicate before all of the entities that do not, while maintaining the relative order of elements in each group.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;
+template &lt;class BidirectionalIterator, class Predicate&gt;
+  BidirectionalIterator
+    <B>stable_partition</B> (BidirectionalIterator first,
+                      BidirectionalIterator last,
+                      Predicate pred);</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>For the range <SAMP>[first, last)</SAMP>, the <B><I>stable_partition</I></B> algorithm places all elements that satisfy <SAMP>pred</SAMP> before all elements that do not satisfy it. It returns an iterator <SAMP>i</SAMP> that is one past the end of the group of elements that satisfies <SAMP>pred</SAMP>. In other words <B><I>stable_partition</I></B> returns <SAMP>i</SAMP> such that for any iterator <SAMP>j</SAMP> in the range <SAMP>[first, i)</SAMP>, <SAMP>pred(*j) == true</SAMP>, and for any iterator <SAMP>k</SAMP> in the range <SAMP>[i, last)</SAMP>, <SAMP>pred(*j) == false</SAMP>. The relative order of the elements in both groups is preserved. </P>
+<P>The <B><I><A HREF="par_0264.htm">partition</A></I></B> algorithm can be used when it is not necessary to maintain the relative order of elements within the groups that do and do not match the predicate.</P>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>The <B><I>stable_partition</I></B> algorithm does at most <SAMP>(last - first) * log(last - first)</SAMP> swaps and applies the predicate exactly <SAMP>last - first</SAMP> times. </P>
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// prtition.cpp
+//
+#include &lt;functional&gt;
+#include &lt;deque&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+//Create a new predicate from unary_function
+template&lt;class Arg&gt;
+class is_even : public unary_function&lt;Arg, bool&gt;
+{
+public:
+bool operator()(const Arg&amp; arg1)
+{
+return (arg1 % 2) == 0;
+   } 
+ };
+
+
+int main()
+{
+//Initialize a deque with an array of ints
+int init[10] = {1,2,3,4,5,6,7,8,9,10};
+deque&lt;int&gt; d(init, init+10);
+
+//Print out the original values
+cout &lt;&lt; "Unpartitioned values: " &lt;&lt; endl &lt;&lt; "     ";
+copy(d.begin(),d.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+cout &lt;&lt; endl &lt;&lt; endl;
+
+//Partition the deque according to even/oddness
+<B>stable_partition</B>(d.begin(), d.end(), is_even&lt;int&gt;());
+
+//Output result of partition
+cout &lt;&lt; "Partitioned values: " &lt;&lt; endl &lt;&lt; "     ";
+copy(d.begin(),d.end(),
+     ostream_iterator&lt;int,char&gt;(cout," "));
+return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+Unpartitioned values:           1 2 3 4 5 6 7 8 9 10
+Partitioned values:             10 2 8 4 6 5 7 3 9 1
+Stable partitioned values:      2 4 6 8 10 1 3 5 7 9</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, then you always need to supply the <SAMP>Allocator</SAMP> template argument. For instance, you need to write:</P>
+<P><SAMP>deque&lt;int, allocator&lt;int&gt; &gt;</SAMP></P>
+<P>instead of:</P>
+<P><SAMP>deque&lt;int&gt;</SAMP></P>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="par_0264.htm">partition</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="sor_3899.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="sta_5767.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

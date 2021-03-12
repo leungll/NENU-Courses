@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>18.3 Using Exceptions</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="18-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>18.3 Using Exceptions</H2>
+<A NAME="idx412"><!></A>
+<P>All exceptions thrown explicitly by any element of the library are guaranteed to be part of the Standard C++ Library exception hierarchy. Please review the <I>Class Reference</I> entries for these classes to determine which functions throw which exceptions. You can then choose to catch particular exceptions, or catch any that might be thrown by specifying the base class exception. </P>
+<P>For instance, if you are going to call the <SAMP>insert</SAMP> function on <B><I><A HREF="../../stdref/str_8586.htm">string</A></I></B> with a position value that could at some point be invalid, you should use code like this:</P>
+<UL>
+<PRE>
+string s;
+int n;
+...
+try 
+{
+s.insert(n,"Howdy");
+} 
+catch (const exception&amp; e)
+{
+   // deal with the exception
+}</PRE>
+</UL>
+<P>To throw your own exceptions, simply construct an exception of an appropriate type, assign it an appropriate message, and throw it. For example:</P>
+<UL>
+<PRE>
+...
+if (n &gt; max)
+   throw out_of_range("You're past the end, bud");</PRE>
+</UL>
+<P>The class <B><I><A HREF="../../stdref/exc_9785.htm">exception</A></I></B> serves as the base class for all other exception classes. As such it defines a standard interface. This interface includes the <SAMP>what()</SAMP> member function, which returns a null-terminated string that represents the message that was thrown with the exception. This function is likely to be most useful in a catch clause, as demonstrated in the example program in <A HREF="18-4.htm">Section 18.4</A>.</P>
+<P>The class <B><I><A HREF="../../stdref/exc_9785.htm">exception</A></I></B> does not contain a constructor that takes a message string, although it can be thrown without a message. Calling <SAMP>what()</SAMP> on an exception object returns a default message. All classes derived from <B><I>exception</I></B> <I>do</I> provide a constructor that allows you to specify a particular message.</P>
+<P>To throw a base exception, you could use the following code:</P>
+<UL>
+<PRE>
+throw exception;</PRE>
+</UL>
+<P>This is generally not very useful, however, since whatever catches this exception has no idea what kind of error has occurred. Instead of a base exception, you will usually throw a derived class such as <B><I>logic_error</I></B> or one of its derivations, such as <B><I>out_of_range</I></B> in the example above. Better still, you can extend the hierarchy by deriving your own classes. This allows you to provide error reporting specific to your particular problem. For instance:</P>
+<UL>
+<PRE>
+class bad_packet_error : public runtime_error
+{
+   public:
+      bad_packet_error(const string&amp; what);
+};
+
+if (bad_packet())
+   throw bad_packet_error("Packet size incorrect");</PRE>
+</UL>
+<P>This section has demonstrated how the Standard C++ Library exception classes provide you with a basic error model. From this foundation, you can build the right error detection and reporting methods required for your particular application.</P>
+
+<HR>
+<A HREF="18-2.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="18-4.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

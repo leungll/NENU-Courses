@@ -1,0 +1,57 @@
+<HTML><HEAD><TITLE>4.4 Container Types Not Found in the Standard Library</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="4-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>4.4 Container Types Not Found in the Standard Library</H2>
+<A NAME="idx60"><!></A>
+<P>The Standard C++ Library provides the containers used in the solution of most programming problems. However, there are a number of classic container types that are not included. In most cases, this is because the provided containers can be easily adapted to a wide variety of uses, including the uses traditionally provided by the omitted containers. <A HREF="#Table 8">Table 8</A> lists the container types that are not contained in the library, and the simple substitution.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 8">Table 8 -- Container types not given in the Standard C++ Library</A> </H4><tr><td valign=top><B>Container type NOT given</B><td valign=top><B>Standard C++ Library substitution</B>
+<A NAME="idx61"><!></A>
+<tr><td valign=top>
+tree <BR>
+<A NAME="idx62"><!></A>
+<td valign=top>
+The <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> datatype is internally implemented using a form of binary search tree. For most problems that would be solved using trees, the <B><I>set</I></B> datatype is an adequate substitute.<BR>
+
+<A NAME="idx63"><!></A>
+<tr><td valign=top>
+multidimensional array <BR>
+<td valign=top>
+Since <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>s can hold other <B><I>vector</I></B>s as elements, such structures can be easily constructed.<BR>
+
+<A NAME="idx64"><!></A>
+<tr><td valign=top>
+graph <BR>
+<td valign=top>
+One representation for graphs can be easily constructed as a map that holds other maps. This type of structure is described in the sample problem discussed in <A HREF="9-3.htm#932">Section 9.3.2</A>.<BR>
+
+<A NAME="idx65"><!></A>
+<tr><td valign=top>
+sparse array   <BR>
+<td valign=top>
+A novel substitution is the graph representation discussed in <A HREF="9-3.htm#932">Section 9.3.2</A>.<BR>
+
+<A NAME="idx66"><!></A>
+<tr><td valign=top>
+hash table <BR>
+<td valign=top>
+A hash table provides amortized constant time access, and insertion and removal of elements, by converting access and removal operations into indexing operations. In the Standard C++ Library, a hash table can be easily constructed as a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> (or <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B>) that holds <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B>s (or even <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B>s) as elements. A similar structure is described in the radix sort sample problem discussed in <A HREF="7-3.htm">Section 7.3</A>, although this example does not include invoking the hash function to convert a value into an index.<BR>
+
+<A NAME="idx67"><!></A>
+<tr><td valign=top>
+some <B><I>set</I></B> functionality<BR>
+<td valign=top>
+In the Standard C++ Library, the <B><I><A HREF="../../stdref/set_1649.htm">set</A></I></B> datatype is specifically ordered, and <B><I>set</I></B> operations (union, intersection, and so on) cannot be performed on a collections of unordered values (for example, a set of complex numbers). A <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> can be used as a substitute, although it is still necessary to write special set operation functions, as the generic algorithms cannot be used with <B><I>list</I></B>s. <BR>
+
+
+</TABLE>
+
+
+</P>
+
+
+<BR>
+<HR>
+<A HREF="4-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

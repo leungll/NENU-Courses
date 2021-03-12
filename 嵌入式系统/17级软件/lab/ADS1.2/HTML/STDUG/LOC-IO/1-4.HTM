@@ -1,0 +1,78 @@
+<HTML><HEAD><TITLE>1.4 Overview of This Manual</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="1-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="II.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>1.4 Overview of This Manual</H2>
+
+<A NAME="141"><H3>1.4.1 Organization</H3></A>
+<A NAME="idx5"><!></A>
+<P>This manual is divided into three parts:</P>
+<UL>
+<LI><P><B>Part I</B> is an introduction to the manual. It explains the organization of the manual, and its role in the total documentation for the Rogue Wave implementation of the Standard C++ Library.</P>
+</LI>
+<LI><P><B>Part II</B> explains <I>locales</I>. After a general introduction to internationalization, it explains the C facilities for internationalizing software, and how the C locale differs from the C++ locale. It defines a C++ locale and a facet, and tells how locales are created, composed, used, and replaced. It includes a complex example of a user-defined facet, which demonstrates how facets can be built and used in conjunction with iostreams.</P>
+</LI>
+<LI><P><B>Part III</B> explains the C++ stream input and output facilities commonly called <I>iostreams</I>. Beginning chapters cover the iostreams facility, how it works, and how it should be used; also, the iostreams architecture, its components, and class hierarchy. Middle chapters cover the basic operation of iostreams, and both simple and advanced techniques for extending the iostreams framework. Final chapters describe the main differences between the Standard C++ Library iostreams, the traditional iostreams, and Rogue Wave's implementation of iostreams in the Standard C++ Library. </P>
+</LI>
+</UL>
+<P>Please note that this manual is written as a part of the <I>Standard C++ Library User's Guide</I>, and so focuses on general principles and examples of using the product. More specific information on the classes and functions is contained in the <I>Class Reference</I>.</P>
+
+<A NAME="142"><H3>1.4.2 Conventions</H3></A>
+<A NAME="idx6"><!></A>
+<P>This manual uses some distinctive terms and conventions. The Standard C++ Library consists of many class and function templates, so shorter forms for these templates are common in this manual, as in the <I>Standard C++ Library User's Guide</I>. For example, in the iostreams part of the documentation, <SAMP>fstream</SAMP> stands for <SAMP>template &lt;class charT, class traits&gt; class basic_fstream</SAMP>. A slightly more succinct notation for a class template is also frequently used: <SAMP>basic_fstream &lt;charT, traits&gt;</SAMP>. </P>
+<P>Formal template declarations are used in the hierarchy diagrams, while shorter forms are used elsewhere. In the hierarchy diagrams, the notation:</P>
+<P><IMG SRC="images/locales16.gif" WIDTH=275 HEIGHT=112></P>
+<P>indicates that class <B><I>B</I></B> inherits from class <B><I>A</I></B>.  </P>
+<P><I>File stream</I> stands for the abstract notion of the file stream class template; <SAMP>badbit</SAMP> stands for the state flag <SAMP>ios_base::badbit</SAMP>. </P>
+<A NAME="idx7"><!></A>
+<P>The term <I>algorithm</I> indicates functions in the generic algorithms portion of the Standard C++ Library, so as to avoid confusion with member functions, argument functions, and user-defined functions. </P>
+<P>An empty pair of parentheses <SAMP>()</SAMP> follows function names and algorithm names, so as to avoid emphasizing their arguments. An underline character <SAMP>_</SAMP>  is used as a separator in both class names and function names. </P>
+<P>Special fonts set off class names, code samples, and special meanings, as shown in <A HREF="#Table 2">Table 2</A>:.</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<H4><A NAME="Table 2">Table 2 -- Typographic conventions</A></H4><tr><td valign=top><B>Convention</B><td valign=top><B>Purpose</B><td valign=top><B>Example</B>&nbsp;
+<tr><td valign=top>
+<SAMP>Courier</SAMP><BR>
+<td valign=top>
+Code, examples, function names, file names, directory names, operating system commands <BR>
+<td valign=top>
+<SAMP>return result;</SAMP><BR>
+
+<tr><td valign=top>
+<I>italic</I><BR>
+<td valign=top>
+Emphasis.<BR>
+New terms.<BR>
+Titles.<BR>
+<td valign=top>
+operating system <I>family</I><BR>
+special <I>ending</I> iterator<BR>
+<I>User's Guide</I><BR>
+
+<tr><td valign=top>
+<B>bold</B><BR>
+<td valign=top>
+Emphasis.<BR>
+Commands from an interface.<BR>
+Rogue Wave product names.<BR>
+<td valign=top>
+do this <B>before</B> that<BR>
+the <B>OK</B> button<BR>
+a <B>Standard C++ Library</B> file<BR>
+
+<tr><td valign=top>
+<B><I>bold italic</I></B><BR>
+<td valign=top>
+Class names.<BR>
+<td valign=top>
+<B><I>priority_queue</I></B><BR>
+
+
+</TABLE>
+
+
+</P>
+
+<BR>
+<HR>
+<A HREF="1-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="II.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

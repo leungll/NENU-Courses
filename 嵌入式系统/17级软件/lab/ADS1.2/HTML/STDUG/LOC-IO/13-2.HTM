@@ -1,0 +1,179 @@
+<HTML><HEAD><TITLE>13.2 Copying and Assigning Stream Objects</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="13-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="13-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>13.2 Copying and Assigning Stream Objects</H2>
+<A NAME="idx361"><!></A>
+<P>Stream objects cannot simply be copied and assigned. Let us consider a practical example to see what this means. A program writes data to a file if a file name is specified on program call, or to the standard output stream <SAMP>cout</SAMP> if no file name is specified. You should write to one output stream in your program; this stream can be either a file stream or the standard output stream. The most obvious way to do this is to declare an output file stream object and assign it to <SAMP>cout</SAMP>, or to use <SAMP>cout</SAMP> directly. However, you can't do it this way:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ofstream fil;
+  if (argc &gt; 1)
+  {  fil.open(argv[1]);
+     cout = fil;                            <B><I>// can't do this !!!</I></B>
+  } 
+  // output to cout, for example 
+  cout &lt;&lt; "Hello world!" &lt;&lt; endl;
+}</PRE>
+</UL>
+<A NAME="fn14"><!></A>
+<P>This solution is bad for at least three reasons. First, the predefined streams <SAMP>cin</SAMP>, <SAMP>cout</SAMP>, <SAMP>cerr</SAMP>, and <SAMP>clog</SAMP> have special properties and are treated differently from other streams. If you could reassign them, as done with <SAMP>cout</SAMP> in the example above, you would lose their special properties. Second, assignment and copying of streams is hazardous. Even if the assignment of the output stream <SAMP>fil</SAMP> compiles, your program is likely to crash afterwards.<SUP><A HREF="endnotes.htm#fn14">14</A></SUP> Finally, the base class for iostreams has private assignment and coy constructors to prevent you from doing this.</P>
+<BLOCKQUOTE><HR>
+<B><A NAME="idx362"><!></A>
+NOTE: Stream objects must never be copied or assigned to each other.
+</B><HR></BLOCKQUOTE>
+
+<A NAME="1321"><H3>13.2.1 Copying a Stream's Data Members</H3></A>
+<A NAME="idx363"><!></A>
+<P>To achieve the equivalent effect of a copy, you might consider copying each data member individually. This can be done as follows:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ofstream out;
+  if (argc &gt; 1)
+     out.open(argv[1]);
+  else
+  {  out.copyfmt(cout);                                       //1
+     out.clear(cout.rdstate());                               //2
+     out.rdbuf(cout.rdbuf());                                 //3
+  } 
+  // output to out, for example 
+  out &lt;&lt; "Hello world!" &lt;&lt; endl;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<A NAME="idx364"><!></A>
+<TR VALIGN="top"><TD>//1</TD><TD>The <SAMP>copyfmt()</SAMP> function copies all data from the standard output stream <SAMP>cout</SAMP> to the output file stream <SAMP>out</SAMP>, except the error state and the stream buffer. There is a function <SAMP>exceptions()</SAMP> that allows you to copy the exception mask separately, as in <SAMP>cout.exceptions(fil.exceptions()</SAMP>), but you need not do this explicitly, since <SAMP>copyfmt()</SAMP> already copies the exception mask.
+<TR VALIGN="top"><TD>//2</TD><TD>Here the error state is copied.
+<TR VALIGN="top"><TD>//3</TD><TD>Here the stream buffer pointer is copied. 
+</TABLE>
+<A NAME="idx365"><!></A>
+<P>Please note the little snag here. After the call to <SAMP>rdbuf()</SAMP>, the buffer is shared between the two streams, as shown in <A HREF="#Figure 30">Figure 30</A>:</P>
+
+<A NAME="idx366"><!></A>
+<H4><A NAME="Figure 30">Figure 30 -- Copying a stream's internal data results in a shared buffer</A></H4>
+<IMG SRC="images/iofig15.gif">
+ 
+
+
+<A NAME="1322"><H3>13.2.2 Sharing Stream Buffers Inadvertently</H3></A>
+<A NAME="idx367"><!></A>
+<P>Whether or not you intend to share a stream buffer among streams depends on your application. In any case, it is important that you realize the stream buffer is shared after a call to <SAMP>rdbuf()</SAMP>; in other words, you must monitor the lifetime of the stream buffer object and make sure it exceeds the lifetime of the stream. In our little example above, we use the standard output stream's buffer. Since the standard streams are static objects, their stream buffers have longer lifetimes that most other objects, so we are safe. However, whenever you share a stream buffer among other stream objects, you must carefully consider the stream buffer's lifetime.</P>
+<A NAME="idx368"><!></A>
+<P>The example above has another disadvantage we haven't considered yet, as shown in the following code:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ofstream out;
+  if (argc &gt; 1)
+     out.open(argv[1]);
+  else
+  {  out.copyfmt(cout);                                       //1
+     out.clear(cout.rdstate());                               //2
+     out.rdbuf(cout.rdbuf());                                 //3
+  } 
+  // output to out, for example 
+  out &lt;&lt; "Hello world!" &lt;&lt; endl;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Copy the values of member variables (other than the streambuffer and the iostate) in <SAMP>cout</SAMP> to <SAMP>out</SAMP>.
+<TR VALIGN="top"><TD>//2</TD><TD>Set state flags for <SAMP>out</SAMP> to the current state of <SAMP>cout</SAMP>.
+<TR VALIGN="top"><TD>//3</TD><TD>Replace <SAMP>out</SAMP>'s streambuffer with <SAMP>cout</SAMP>'s streambuffer.
+</TABLE>
+<A NAME="idx369"><!></A>
+<P>As we copy the standard output stream's entire internal data, we also copy its special behavior. For instance, the standard output stream is synchronized with the standard input stream. (See <A HREF="14.htm">Chapter 14</A> for further details.) If our output file stream <SAMP>out</SAMP> is a copy of <SAMP>cout</SAMP>, it is forced to synchronize its output operations with all input operations from <SAMP>cin</SAMP>. This might not be desired, especially since synchronization is a time-consuming activity. Here is a more efficient approach using only the stream buffer of the standard output stream:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  filebuf* fb = new filebuf;                                  //1
+  ostream out((argc&gt;1)?                                       //2
+    fb-&gt;open(argv[1],ios_base::out|ios_base::trunc):          //3
+    cout.rdbuf());                                            //4
+  if (out.rdbuf() != fb)
+    delete fb;
+  out &lt;&lt; "Hello world!" &lt;&lt; endl;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Instead of creating a file stream object, which already contains a file buffer object, we construct a separate file buffer object on the heap that we can hand over to an output stream object if needed. This way we can delete the file buffer object if not needed. In the original example, we constructed a file stream object with no chance of eliminating the file buffer object if not used. 
+<TR VALIGN="top"><TD>//2</TD><TD>An output stream is constructed. The stream has either the standard output stream's buffer, or a file buffer connected to a file.
+<TR VALIGN="top"><TD>//3</TD><TD>If the program is provided with a file name, the file is opened and connected to the file buffer object. (Note that you must ensure that the lifetime of this stream buffer object exceeds the lifetime of the output stream that uses it.) The <SAMP>open()</SAMP> function returns a pointer to the file buffer object. This pointer is used to construct the output stream object.
+<TR VALIGN="top"><TD>//4</TD><TD>If no file name is provided, the standard output stream's buffer is used.
+</TABLE>
+<P>As in the original example, <SAMP>out</SAMP> inserts through the standard output stream's buffer, but lacks the special properties of a standard stream. </P>
+<A NAME="idx370"><!></A>
+<A NAME="fn15"><!></A>
+<P>Here is an alternative solution that uses file descriptors, a nonstandard feature of Rogue Wave's implementation of the standard iostreams<SUP><A HREF="endnotes.htm#fn15">15</A></SUP>:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ofstream out;
+  if (argc &gt; 1)     out.open(argv[1]);                        //1
+  else              out.rdbuf()-&gt;open(1);                     //2
+  out &lt;&lt; "Hello world!" &lt;&lt; endl;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>If the program is provided with a file name, the file is opened and connected to the file buffer object.
+<TR VALIGN="top"><TD>//2</TD><TD>Otherwise, the output stream's file buffer is connected to the standard input stream <SAMP>stdout</SAMP> whose file descriptor is <SAMP>1</SAMP>.
+</TABLE>
+<P>The effect is the same as in the previous solution, because the standard output stream <SAMP>cout</SAMP> is connected to the C standard input file <SAMP>stdout</SAMP>. This is the simplest of all solutions, because it doesn't involve reassigning or sharing stream buffers. The output file stream's buffer is simply connected to the right file. However, this is a nonstandard solution, and may decrease portability.</P>
+
+<A NAME="1323"><H3>13.2.3 Using Pointers or References to Streams</H3></A>
+<A NAME="idx371"><!></A>
+<P>If you do not want to deal with stream buffers at all, you can also use pointers or references to streams instead. Here is an example:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ostream* fp;                                                //1
+  if (argc &gt; 1)
+      fp = new ofstream(argv[1]);                             //2
+  else
+     fp = &amp;cout                                               //3
+
+  // output to *fp, for example 
+  *fp &lt;&lt; "Hello world!" &lt;&lt; endl;                              //4
+  if(fp!=&amp;cout) delete fp;
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>A pointer to an <SAMP>ostream</SAMP> is used. (Note that it cannot be a pointer to an <SAMP>ofstream</SAMP>, because the standard output stream <SAMP>cout</SAMP> is not a file stream, but a plain stream of type <SAMP>ostream</SAMP>.)
+<TR VALIGN="top"><TD>//2</TD><TD>A file stream for the named output file is created on the heap and assigned to the pointer, in case a file name is provided.
+<TR VALIGN="top"><TD>//3</TD><TD>Otherwise, a pointer to <SAMP>cout</SAMP> is used.
+<TR VALIGN="top"><TD>//4</TD><TD>Output is written through the pointer to either <SAMP>cout</SAMP> or the named output file.
+</TABLE>
+<A NAME="idx372"><!></A>
+<P>An alternative approach could use a reference instead of a pointer:</P>
+<UL>
+<PRE>
+int main(int argc, char argv[])
+{
+  ostream&amp; fr = (argc &gt; 1) ? *(new ofstream(argv[1])) : cout;
+  // output to *fr, for example 
+  fr &lt;&lt; "Hello world!" &lt;&lt; endl;
+  if (&amp;fr!=&amp;cout) delete(&amp;fr);
+}</PRE>
+</UL>
+<P>Working with pointers and references has a drawback: you must create an output file stream object on the heap and, in principle, you must worry about deleting the object again, which might lead you into other dire straits.</P>
+<A NAME="idx373"><!></A>
+<P>In summary, creating a copy of a stream is not trivial and should only be done if you really need a copy of a stream object. In many cases, it is more appropriate to use references or pointers to stream objects instead, or to share a stream buffer between two streams.  </P>
+<BLOCKQUOTE><HR>
+<B>NOTE: Never create a copy of a stream object when a reference or a pointer to the stream object would suffice, or when a shared stream buffer would solve the problem.
+</B><HR></BLOCKQUOTE>
+
+<HR>
+<A HREF="13-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="13-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

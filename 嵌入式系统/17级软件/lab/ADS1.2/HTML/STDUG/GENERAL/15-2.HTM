@@ -1,0 +1,40 @@
+<HTML><HEAD><TITLE>15.2 Using Allocators with Existing Standard Library Containers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="15-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>15.2 Using Allocators with Existing Standard Library Containers</H2>
+<A NAME="idx368"><!></A>
+<P>Using allocators with existing Standard C++ Library container classes is a simple process. You just provide an allocator type when you instantiate a container, and provide an actual allocator object when you construct a container object:</P>
+<UL>
+<PRE>
+my_allocator alloc&lt;int&gt;;                  // Construct an allocator
+vector&lt;int,my_allocator&lt;int&gt; &gt; v(alloc);  // Use the allocator</PRE>
+</UL>
+<A NAME="idx369"><!></A>
+<P>All standard containers default the allocator template parameter type to <SAMP>allocator&lt;T&gt;</SAMP> and the object to <SAMP>Allocator()</SAMP>, where <SAMP>Allocator</SAMP> is the template parameter type. This means that the simplest use of allocators is to ignore them entirely. When you do not specify an allocator, the default allocator is used for all storage management.</P>
+<P>If you do provide a different allocator type as a template parameter, the type of object that you provide must match the template type. For example, the following code will cause a compiler error because the types in the template signature and the call to the allocator constructor don't match:</P>
+<UL>
+<PRE>
+template &lt;class T&gt; class my_alloc;
+list &lt;int, allocator&lt;int&gt; &gt; my_list(my_alloc()); \\ Wrong!</PRE>
+</UL>
+<P>The following call to the allocator constructor does match the template signature:</P>
+<UL>
+<PRE>
+list &lt;int, my_alloc&lt;int&gt; &gt; my_list(my_alloc());</PRE>
+</UL>
+<P>It's also important that the type used for the allocator template parameter and the type used as the element type in a standard container agree. For instance:</P>
+<UL>
+<PRE>
+list&lt;int, allocator&lt;long&gt;&gt;                        \\ Wrong!</PRE>
+</UL>
+<P>won't work. Remember that with a <B><I><A HREF="../../stdref/map_8018.htm">map</A></I></B> the contained type is actually a key-value pair:</P>
+<UL>
+<PRE>
+map&lt;int,long,less&lt;int&gt;,allocator&lt;pair&lt;int,long&gt;&gt;&gt;</PRE>
+</UL>
+<P>Note that the container always holds a <I>copy</I> of the <B><I><A HREF="../../stdref/all_7029.htm">allocator</A></I></B> object that is passed to the constructor. If you need a single <B><I>allocator</I></B> object to manage all storage for a number of containers, you must provide an <B><I>allocator</I></B> that maintains a reference to some shared implementation.</P>
+
+<HR>
+<A HREF="15-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="15-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

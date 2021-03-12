@@ -1,0 +1,13 @@
+<HTML><HEAD><TITLE>24.4 String Streams</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="24-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>24.4 String Streams</H2>
+<A NAME="idx505"><!></A>
+<P>Output string streams are always dynamic. The <SAMP>str()</SAMP> function does not have the functionality of freezing the string stream anymore. Instead, the string provided through <SAMP>str()</SAMP> is copied into the internal buffer; it is not used <I>as</I> the internal buffer. Accordingly, the string returned through <SAMP>str()</SAMP> is always a copy of the internal buffer. If you need to influence a string stream's internal buffering, you must do it through <SAMP>pubsetbuf()</SAMP>.</P>
+<A NAME="idx506"><!></A>
+<P>The classes <B><I><A HREF="../../stdref/str_6184.htm">strstream</A></I></B>, <B><I><A HREF="../../stdref/ist_1286.htm">istrstream</A></I></B>, <B><I><A HREF="../../stdref/ost_0723.htm">ostrstream</A></I></B>, and <B><I><A HREF="../../stdref/str_4456.htm">strstreambuf</A></I></B> are deprecated features in the standard iostreams. They are still provided by this implementation of the standard iostreams, but will be omitted in the future.</P>
+
+<HR>
+<A HREF="24-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="24-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

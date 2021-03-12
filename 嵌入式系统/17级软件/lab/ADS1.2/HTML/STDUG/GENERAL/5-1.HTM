@@ -1,0 +1,26 @@
+<HTML><HEAD><TITLE>5.1 The vector Data Abstraction</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.1 The vector Data Abstraction</H2>
+<A NAME="idx68"><!></A>
+<P>The <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> container class generalizes the concept of an ordinary C array. Like an array, a <B><I>vector</I></B> is an indexed data structure, with index values that range from 0 to one less than the number of elements contained in the structure. Also like an array, values are most commonly assigned to and extracted from the <B><I>vector</I></B> using the <SAMP>subscript</SAMP> operator. However, the <B><I>vector</I></B> differs from an array in the following important respects:</P>
+<UL>
+<LI><P>A <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> has more self-knowledge than an ordinary array. In particular, a <B><I>vector</I></B> can be queried about its size, about the number of elements it can potentially hold, which can differ from its current size, and so on.</P>
+</LI>
+<LI><P>The size of the <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> can change dynamically. New elements can be inserted on to the end of a <B><I>vector</I></B>, or into the middle. Storage management is handled efficiently and automatically. It is important to note, however, that while these abilities are provided, insertion into the middle of a <B><I>vector</I></B> is not as efficient as insertion into the middle of a <B><I><A HREF="../../stdref/lis_3222.htm">list</A></I></B> (<A HREF="6.htm">Section 6</A>). If many insertion operations are to be performed, the <B><I>list</I></B> container should be used instead of the <B><I>vector</I></B> datatype.</P>
+</LI>
+</UL>
+<P>The <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B> container class in the Standard C++ Library should be compared and contrasted to the <B><I><A HREF="../../stdref/deq_4164.htm">deque</A></I></B> container class described in <A HREF="7.htm">Chapter 7</A>. Like a <B><I>vector</I></B>, a <B><I>deque</I></B> (pronounced <I>deck</I>) is an indexed data structure. The major difference between the two is that a <B><I>deque</I></B> provides efficient insertion at either the beginning or the end of the container, while a <B><I>vector</I></B> provides efficient insertion only at the end. In many situations, either structure can be used. Use of a <B><I>vector</I></B> generally results in a smaller executable file, while use of a <B><I>deque</I></B> may result in a slightly faster program, depending upon the particular set of operations being performed.</P>
+
+<A NAME="511"><H3>5.1.1 Include Files</H3></A>
+<A NAME="idx69"><!></A>
+<P>Whenever you use a <B><I><A HREF="../../stdref/vec_0251.htm">vector</A></I></B>, you must include the <B><I>vector</I></B> header file:</P>
+<UL>
+<PRE>
+# include &lt;vector&gt;</PRE>
+</UL>
+
+<HR>
+<A HREF="5.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-2.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

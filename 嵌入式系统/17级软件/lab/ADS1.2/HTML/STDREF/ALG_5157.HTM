@@ -1,0 +1,269 @@
+<HTML><HEAD><TITLE>Algorithms</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="adv_9283.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="all_7029.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>Algorithms</H2>
+<PRE><HR>
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Algorithms by Mutating/Non-mutating Function">Algorithms by Mutating/Non-mutating Function</A></LI>
+<LI><A HREF="#Algorithms by Operation">Algorithms by Operation</A></LI>
+<LI><A HREF="#Algorithms by Category">Algorithms by Category</A></LI>
+<LI><A HREF="#Complexity">Complexity</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>Generic algorithms for performing various operations on containers and sequences.</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<P>None</P>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;algorithm&gt;</PRE>
+
+</PRE>
+<P>The synopsis of each algorithm appears in its entry in the reference guide.</P>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P>The Standard C++ Library allows you to apply generic algorithms to containers, and it supplies a set of these algorithms for searching, sorting, merging, transforming, scanning, and more. </P>
+<P>Each algorithm can be applied to a variety of containers, including those defined by a user of the library. The following design features make algorithms generic:</P>
+<UL>
+<LI><P>Generic algorithms access the collection through iterators</P>
+</LI>
+<LI><P>Algorithms are templatized on iterator types</P>
+</LI>
+<LI><P>Each algorithm is designed to require the least number of services from the iterators it uses</P>
+</LI>
+</UL>
+<P>In addition to requiring certain iterator capabilities, algorithms may require a container to be in a specific state. For example, some algorithms can only work on previously sorted containers.</P>
+<P>Because most algorithms rely on iterators to gain access to data, they can be grouped according to the type of iterator they require, as is done in the <I>Algorithms by Iterator</I> section below. They can also be grouped according to the type of operation they perform.</P>
+
+<A NAME="Algorithms by Mutating/Non-mutating Function"><H3>Algorithms by Mutating/Non-mutating Function</H3></A>
+<P>The broadest categorization groups algorithms into two main types: mutating and non-mutating. Algorithms that alter (or mutate) the contents of a container fall into the mutating group. All others are considered non-mutating. For example, both <B><I><A HREF="fil_4628.htm">fill</A></I></B> and <B><I><A HREF="sor_1439.htm">sort</A></I></B> are mutating algorithms, while <B><I><A HREF="fin_7988.htm">find</A></I></B> and <B><I><A HREF="for_7707.htm">for_each</A></I></B> are non-mutating.</P>
+<P>Non-mutating operations</P>
+<UL>
+<PRE>accumulate             find_end                  max_element
+adjacent_find          find_first_of             min
+binary_search          find_if                   min_element
+count_min              for_each                  mismatch
+count_if               includes                  nth_element
+equal                  lexicographical_compare   search
+equal_range            lower_bound               search_n
+find                   max   </PRE>
+
+</UL>
+<P>Mutating operations</P>
+<UL>
+<PRE>copy                   remove_if
+copy_backward          replace
+fill                   replace_copy
+fill_n                 replace_copy_if
+generate               replace_if
+generate_n             reverse
+inplace_merge          reverse_copy
+iter_swap              rotate
+make_heap              rotate_copy
+merge                  set_difference
+nth_element            set_symmetric_difference
+next_permutation       set_intersection
+partial_sort           set_union
+partial_sort_copy      sort
+partition              sort_heap
+prev_permutation       stable_partition
+push_heap              stable_sort
+pop_heap               swap
+random_shuffle         swap_ranges
+remove                 transform
+remove_copy            unique
+remove_copy_if         unique_copy</PRE>
+
+</UL>
+<P>Note that the library has place and copy versions of many algorithms, such as <B><I><A HREF="rep_6131.htm">replace</A></I></B> and <B><I><A HREF="rep_5264.htm">replace_copy</A></I></B>. The library also has versions of algorithms that allow the use of default comparators and comparators supplied by the user. Often these functions are overloaded, but in some cases (where overloading proved impractical or impossible) the names differ (for example, <B><I>replace</I></B>, which uses equality to determine replacement, and <B><I><A HREF="rep_6837.htm">replace_if</A></I></B>, which accesses a user-provided compare function).</P>
+
+<A NAME="Algorithms by Operation"><H3>Algorithms by Operation</H3></A>
+<P>We can further distinguish algorithms by the kind of operations they perform. The following lists all algorithms by loosely grouping them into similar operations.</P>
+<P>Initializing operations</P>
+<UL>
+<PRE>fill                           generate
+fill_n                         generate_n</PRE>
+
+</UL>
+<P>Search operations</P>
+<UL>
+<PRE>adjacent_find                  find_end             search_n
+count                          find_if
+count_if                       find_first_of
+find                           search</PRE>
+
+</UL>
+<P>Binary search operations (Elements must be sorted)</P>
+<UL>
+<PRE>binary_search                  lower_bound
+equal_range                    upper_bound</PRE>
+
+</UL>
+<P>Compare operations</P>
+<UL>
+<PRE>equal                          mismatch
+lexicographical_compare</PRE>
+
+</UL>
+<P>Copy operations</P>
+<UL>
+<PRE>copy                           copy_backward </PRE>
+
+</UL>
+<P>Transforming operations</P>
+<UL>
+<PRE>partition                      reverse
+random_shuffle                 reverse_copy
+replace                        rotate
+replace_copy                   rotate_copy
+replace_copy_if                stable_partition
+replace_if                     transform</PRE>
+
+</UL>
+<P><SAMP>Swap operations</SAMP></P>
+<UL>
+<PRE>swap                           swap_ranges</PRE>
+
+</UL>
+<P>Scanning operations</P>
+<UL>
+<PRE>accumulate                     for_each</PRE>
+
+</UL>
+<P>Remove operations</P>
+<UL>
+<PRE>remove                         remove_if
+remove_copy                    unique
+remove_copy_if                 unique_copy</PRE>
+
+</UL>
+<P>Sorting operations</P>
+<UL>
+<PRE>nth_element                    sort
+partial_sort                   stable_sort
+partial_sort_copy</PRE>
+
+</UL>
+<P>Merge operations (Elements must be sorted)</P>
+<UL>
+<PRE>inplace_merge                  merge</PRE>
+
+</UL>
+<P>Set operations (Elements must be sorted)</P>
+<UL>
+<PRE>includes                       set_symmetric_difference
+set_difference                 set_union
+set_intersection</PRE>
+
+</UL>
+<P>Heap operations</P>
+<UL>
+<PRE>make_heap                      push_heap
+pop_heap                       sort_heap</PRE>
+
+</UL>
+<P>Minimum and maximum</P>
+<UL>
+<PRE>max                            min
+max_element                    min_element</PRE>
+
+</UL>
+<P>Permutation generators</P>
+<UL>
+<PRE>next_permutation               prev_permutation</PRE>
+
+</UL>
+
+<A NAME="Algorithms by Category"><H3>Algorithms by Category</H3></A>
+<P>Each algorithm requires certain kinds of iterators (for a description of the iterators and their capabilities see the <B><I>Iterator</I></B> entry in this manual). The following set of lists groups the algorithms according to the types of iterators they require.</P>
+<P>Algorithms that use no iterators:</P>
+<UL>
+<PRE>max                    min                 swap</PRE>
+
+</UL>
+<P>Algorithms that require only input iterators:</P>
+<UL>
+<PRE>accumulate             find                mismatch
+count                  find_if
+count_if               includes
+equal                  inner_product
+for_each               lexicographical_compare</PRE>
+
+</UL>
+<P>Algorithms that require only output iterators:</P>
+<UL>
+<PRE>fill_n                 generate_n</PRE>
+
+</UL>
+<P>Algorithms that read from input iterators and write to output iterators:</P>
+<UL>
+<PRE>adjacent_difference    replace_copy        transform
+copy                   replace_copy_if     unique_copy
+merge                  set_difference
+partial_sum            set_intersection
+remove_copy            set_symmetric_difference
+remove_copy_if         set_union</PRE>
+
+</UL>
+<P>Algorithms that require forward iterators:</P>
+<UL>
+<PRE>adjacent_find         iter_swap            replace_if
+binary_search         lower_bound          rotate
+equal_range           max_element          search
+fill                  min_element          search_n
+find_end              remove               swap_ranges
+find_first_of         remove_if            unique
+generate              replace              upper_bound</PRE>
+
+</UL>
+<P>Algorithms that read from forward iterators and write to output iterators:</P>
+<UL>
+<PRE>rotate_copy</PRE>
+
+</UL>
+<P>Algorithms that require bidirectional iterators</P>
+<UL>
+<PRE>copy_backward          partition          stable_permutation
+inplace_merge          prev_permutation
+next_permutation       reverse</PRE>
+
+</UL>
+<P>Algorithms that read from bidirectional iterators and write to output iterators:</P>
+<UL>
+<PRE>reverse_copy</PRE>
+
+</UL>
+<P>Algorithms that require random access iterators:</P>
+<UL>
+<PRE>make_heap              pop_heap            sort
+nth_element            push_heap           sort_heap
+partial_sort           random_shuffle      stable_sort</PRE>
+
+</UL>
+<P>Algorithms that read from input iterators and write to random access iterators:</P>
+<UL>
+<PRE>partial_sort_copy</PRE>
+
+</UL>
+
+<A NAME="Complexity"><H3>Complexity</H3></A>
+<P>The complexity for each of these algorithms is given in the manual page for that algorithm.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P>Manual pages for each of the algorithms named in the lists above.</P>
+
+
+<BR>
+<HR>
+<A HREF="adv_9283.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="all_7029.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>

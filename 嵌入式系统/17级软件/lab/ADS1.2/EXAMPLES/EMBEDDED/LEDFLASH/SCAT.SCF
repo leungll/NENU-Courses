@@ -1,0 +1,63 @@
+;;; Copyright ARM Ltd 2001. All rights reserved.
+;
+; This scatterloading descriptor file defines:
+; one load region (FLASH) and a number of execution regions
+; (FLASH & 32bitRAM etc.)
+;
+; The entire program (code & data) is placed in FLASH which resides 
+; at 0x24000000, of length 0x4000000 bytes.  On reset, an aliased copy 
+; of FLASH is re-mapped (by hardware) to address 0x0.  Program 
+; execution starts at AREA Init in init.s, which is placed 
+; '+First' in the image.  Following reset, the first few 
+; instructions of init.s remap 32bitRAM to address 0x0.
+; (The ARM Integrator Board remaps its Flash in this way)
+;
+; Most of the RO code will execute from FLASH (its execution 
+; address (0x24000000) is the same as its load address (0x24000000), 
+; so it does not need to be moved (a 'root region'))
+;
+; 32bitRAM might be fast on-chip (internal) RAM, and is typically
+; used for the stack and code that must be executed quickly.
+; Here, the exception vectors (AREA Vect in vectors.s) get relocated 
+; (copied)  from FLASH to 32bitRAM at address 0x0 for speed, so this 
+; area is placed '+First' in the region.
+
+; The RW data will also get relocated (copied) from FLASH to RAM.
+; The ZI data will get created (initialized) in RAM, above the RW data
+;
+; The execution region UART0 is used to place a structure over the Integrator
+; UART0 registers. This region is marked UNINIT to prevent the C Library 
+; initializing this area, i.e writing 0's to peripheral register
+
+; The region HEAP is used to locate the bottom of the heap
+; The heap will grow up from this address
+;
+; The region STACKS is used to locate the top of the memory used to store
+; the stacks for each mode. The stacks will grow down from this address
+;
+
+FLASH 0x24000000 0x4000000
+{
+    FLASH 0x24000000 0x4000000
+    {
+        init.o (Init, +First)
+        * (+RO)
+    }
+
+    32bitRAM 0x0000
+    {
+        vectors.o (Vect, +First)
+        * (+RW,+ZI)
+    }
+
+    HEAP +0 UNINIT
+    {
+        heap.o (+ZI)
+    }
+
+    STACKS 0x40000 UNINIT
+    {
+        stack.o (+ZI)
+    }
+}
+

@@ -1,0 +1,73 @@
+<HTML><HEAD><TITLE>8.2 Checking the Stream State</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="8-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>8.2 Checking the Stream State</H2>
+
+<A NAME="idx259"><!></A>
+<P>Let's first examine how you can check for errors using the stream state. A stream has several member functions for this purpose, which are summarized with their effects in <A HREF="#Table 10">Table 10</A>:</P>
+<TABLE BORDER CELLPADDING=3 CELLSPACING=3>
+<A NAME="idx260"><!></A>
+<H4><A NAME="Table 10">Table 10 --  Stream member functions for error checking</A> </H4><tr><td valign=top><B><B><I><A HREF="../../stdref/ios_8948.htm">ios_base</A></I></B> member function</B><td valign=top><B><B>Effect</B></B>&nbsp;
+<tr><td valign=top>
+<SAMP>bool good()</SAMP><BR>
+<td valign=top>
+<SAMP>TRUE</SAMP> if no error flag is set<BR>
+
+<tr><td valign=top>
+<SAMP>bool eof()</SAMP><BR>
+<td valign=top>
+<SAMP>TRUE</SAMP> if <SAMP>eofbit</SAMP> is set<BR>
+
+<tr><td valign=top>
+<SAMP>bool fail()</SAMP><BR>
+<td valign=top>
+<SAMP>TRUE</SAMP> if <SAMP>failbit</SAMP> or <SAMP>badbit</SAMP> is set<BR>
+
+<tr><td valign=top>
+<SAMP>bool bad()</SAMP><BR>
+<td valign=top>
+<SAMP>TRUE</SAMP> if <SAMP>badbit</SAMP> is set<BR>
+
+<tr><td valign=top>
+<SAMP>bool operator!()</SAMP><BR>
+<td valign=top>
+As <SAMP>fail()</SAMP><BR>
+
+<tr><td valign=top>
+<SAMP>operator void*()</SAMP><BR>
+<td valign=top>
+Null pointer if <SAMP>fail()</SAMP> and non-null value otherwise<BR>
+
+<tr><td valign=top>
+<SAMP>iostate rdstate()</SAMP><BR>
+<td valign=top>
+Value of stream state<BR>
+
+
+</TABLE>
+
+
+</P>
+<P>It is a good idea to check the stream state in some central place, for example:</P>
+<UL>
+<PRE>
+if (!cout) error();</PRE>
+</UL>
+<P>The state of <SAMP>cout</SAMP> is examined with <SAMP>operator!()</SAMP>, which returns <SAMP>TRUE</SAMP> if the stream state indicates that an error occurred.</P>
+<P>An ostream can also appear in a boolean position to be tested as follows:</P>
+<UL>
+<PRE>
+if (cout &lt;&lt; x) // okay!</PRE>
+</UL>
+<P>The magic here is the <SAMP>operator void*()</SAMP> that returns a nonzero value when the stream state is nonzero.</P>
+<P>Finally, the explicit member functions can also be used:</P>
+<UL>
+<PRE>
+if (cout &lt;&lt; x, cout.good()) // okay!;</PRE>
+</UL>
+<P>Note that there is a difference between <SAMP>good()</SAMP> and <SAMP>operator!()</SAMP>. The function <SAMP>good()</SAMP> takes all flags into account; <SAMP>operator!()</SAMP> and <SAMP>fail()</SAMP> ignore <SAMP>eofbit</SAMP>.</P>
+
+<HR>
+<A HREF="8-1.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="8-3.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

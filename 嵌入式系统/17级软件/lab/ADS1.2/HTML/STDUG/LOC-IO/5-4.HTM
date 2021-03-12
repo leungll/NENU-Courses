@@ -1,0 +1,27 @@
+<HTML><HEAD><TITLE>5.4 An Inserter for Phone Numbers</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.4 An Inserter for Phone Numbers</H2>
+<A NAME="idx124"><!></A>
+<P>Now let's take a look at the implementation of the inserter for our phone number class:</P>
+<UL>
+<PRE>
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const phoneNo&amp; pn)
+{ 
+ locale loc = os.getloc();                                    //1
+ const phone_put&amp; ppFacet = use_facet&lt;phone_put&gt; (loc);       //2
+ os &lt;&lt; ppFacet.put(pn.extension, pn.areaCode, pn.countryCode);//3
+ return (os);
+}</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>The inserter function uses the output stream's locale object (obtained via getloc()), 
+<TR VALIGN="top"><TD>//2</TD><TD>uses the locale's phone number facet object,
+<TR VALIGN="top"><TD>//3</TD><TD>and calls the facet object's formatting service put().
+</TABLE>
+
+<HR>
+<A HREF="5-3.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-5.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

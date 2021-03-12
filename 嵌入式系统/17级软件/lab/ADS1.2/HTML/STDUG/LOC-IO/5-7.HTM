@@ -1,0 +1,44 @@
+<HTML><HEAD><TITLE>5.7 Using Phone Number Facets</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFFF>
+<A HREF="../index.htm"><IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0></A><BR>
+<A HREF="5-6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<H2>5.7 Using Phone Number Facets</H2>
+<A NAME="idx134"><!></A>
+<P>Now that we have laid the groundwork, we are almost ready to format phone numbers. Here is an example of how instances of the new facet class can be used:</P>
+<UL>
+<PRE>
+ostream ofstr("/tmp/out");
+ostr.imbue(locale(locale::classic(),new US_phone_put));       //1
+ostr &lt;&lt; phoneNo("Fr","1","60 17 07 16") &lt;&lt; endl;
+ostr &lt;&lt; phoneNo("US","541","711-PARK") &lt;&lt; endl;
+
+ostr.imbue(locale(locale("Fr")                                //2
+          ,new Fr_phone_put (&amp;myTab,"France")));
+ostr &lt;&lt; phoneNo("Allemagne","89","636-40938") &lt;&lt; endl;        //3</PRE>
+</UL>
+<TABLE CELLPADDING="3">
+
+<TR VALIGN="top"><TD>//1</TD><TD>Imbue an output stream with a locale object that has a phone number facet object. In the example above, it is the US English ASCII locale with a US phone number facet, and 
+<TR VALIGN="top"><TD>//2</TD><TD>A French locale using a French phone number facet with a particular country code table.
+<TR VALIGN="top"><TD>//3</TD><TD>Output phone numbers using the inserter function. The output is:</P>
+<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3>
+
+<tr><td valign=top>
+1-33-1-60170716<BR>
+
+<tr><td valign=top>
+(541) 711-PARK<BR>
+
+<tr><td valign=top>
+19 49 89 636 40938<BR>
+
+
+</TABLE>
+
+
+
+</TABLE>
+
+<HR>
+<A HREF="5-6.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of Document" BORDER=O></A><A HREF="booktoc.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="5-8.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><P>OEM Edition, &copy;Copyright 1999, Rogue Wave Software, Inc.<BR><A HREF="contact.htm">Contact</A> Rogue Wave about documentation or support issues.</P>
+</BODY></HTML>

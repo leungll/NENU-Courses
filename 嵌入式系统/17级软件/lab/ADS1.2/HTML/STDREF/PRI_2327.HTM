@@ -1,0 +1,284 @@
+<HTML><HEAD><TITLE>priority_queue</TITLE></HEAD><BODY BGCOLOR=#FFFFFF>
+<IMG SRC="images/banner.gif" WIDTH=405 HEIGHT=57 ALT="Rogue Wave banner" BORDER=0><BR>
+<A HREF="pre_1548.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ptr_4059.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A><BR>
+
+<H2>priority_queue</H2>
+<PRE><HR>Container Adaptor
+<HR></PRE>
+<UL>
+<LI><A HREF="#Summary">Summary</A></LI>
+<LI><A HREF="#memindex">Data Type and Member Function Indexes</A></LI>
+<LI><A HREF="#Synopsis">Synopsis</A></LI>
+<LI><A HREF="#Description">Description</A></LI>
+<LI><A HREF="#Interface">Interface</A></LI>
+<LI><A HREF="#Constructors">Constructors</A></LI>
+<LI><A HREF="#Member Functions">Member Functions</A></LI>
+<LI><A HREF="#Example">Example</A></LI>
+<LI><A HREF="#Warnings">Warnings</A></LI>
+<LI><A HREF="#See Also">See Also</A></LI>
+
+</UL>
+<A NAME="Summary"><H3>Summary</H3></A>
+<P>A container adapter that behaves like a priority queue. Items popped from the queue are in order with respect to a "priority."</P>
+<A NAME="memindex"><H3>Data Type and Member Function Indexes<BR>(exclusive of constructors and destructors)</H3></A>
+<UL><TABLE CELLPADDING=3>
+<TR><TD><B>Member Functions</B></TD></TR><TR><TD VALIGN=top><A HREF="#Member Functionsempty()">empty()</A><BR>
+ <A HREF="#Member Functionspop()">pop()</A><BR>
+ <A HREF="#Member Functionspush()">push()</A><BR>
+ <A HREF="#Member Functionssize()">size()</A><BR>
+ <A HREF="#Member Functionstop()">top()</A><BR>
+</TD></TR>
+</TABLE></UL>
+
+<A NAME="Synopsis"><H3>Synopsis</H3></A>
+<PRE>
+<PRE>#include &lt;queue&gt;
+template &lt;class T,
+          class Container = vector&lt;T&gt;,
+          class Compare = less&lt;Container::value_type&gt; &gt;
+class <B>priority_queue</B>;</PRE>
+
+</PRE>
+
+<A NAME="Description"><H3>Description</H3></A>
+<P><B><I>priority_queue</I></B> is a container adaptor that allows a container to act as a priority queue. This means that the item with the highest priority, as determined by either the default comparison operator (<SAMP>operator &lt;</SAMP>) or the comparison <SAMP>Compare</SAMP>, is brought to the front of the queue whenever anything is pushed onto or popped off the queue. </P>
+<P><B><I>priority_queue</I></B> adapts any container that gives <SAMP>front()</SAMP>, <SAMP>push_back()</SAMP>, and <SAMP>pop_back()</SAMP>. In particular, <B><I><A HREF="deq_4164.htm">deque</A></I></B> and <B><I><A HREF="vec_0251.htm">vector</A></I></B> can be used.</P>
+
+<A NAME="Interface"><H3>Interface</H3></A>
+<PRE>
+<PRE>template &lt;class T, class Container = vector&lt;T&gt;,
+          class Compare = less&lt;typename
+                          Container::value_type&gt; &gt;
+ class priority_queue {
+public:
+
+// typedefs
+   typedef typename Container::value_type value_type;
+   typedef typename Container::size_type size_type;
+   typedef Container container_type;
+
+//  Construct
+   explicit priority_queue (const Compare&amp; = Compare(),
+                            const Container&amp; = Container());
+   template &lt;class InputIterator&gt;
+     priority_queue (InputIterator first,
+                     InputIterator last,
+                     const Compare&amp; = Compare(), 
+                     const Container&amp; = Container());
+   bool empty () const;
+   size_type size () const;
+   const value_type&amp; top () const;
+   void push (const value_type&amp;);
+   void pop();
+};</PRE>
+
+</PRE>
+
+<A NAME="Constructors"><H3>Constructors</H3></A>
+
+
+<PRE>explicit <B>priority_queue</B> (const Compare&amp; x = Compare(),
+                         const Container&amp; = Container());</PRE>
+
+<UL>
+<P>Constructs a priority queue that uses <SAMP>Container</SAMP> for its underlying implementation, <SAMP>x</SAMP> as its standard for determining priority, and the allocator Allocator<SAMP>()</SAMP> for all storage management.</P>
+</UL>
+
+
+
+<PRE>template &lt;class InputIterator&gt;
+<B>priority_queue</B> (InputIterator first, InputIterator last,
+                const Compare&amp; x = Compare(),
+                const allocator_type&amp; alloc =
+                allocator_type());</PRE>
+
+<UL>
+<P>Constructs a new priority queue and places into it every entity in the range <SAMP>[first, last)</SAMP>. The priority_queue uses <SAMP>x</SAMP> for determining the priority, and the allocator <SAMP>alloc</SAMP> for all storage management.</P>
+</UL>
+
+
+<A NAME="Member Functions"><H3>Member Functions</H3></A>
+
+
+<A NAME="Member Functionsempty()"></A><PRE>bool 
+<B>empty</B> () const;</PRE>
+
+<UL>
+<P>Returns <SAMP>true</SAMP> if the priority_queue is empty, <SAMP>false</SAMP> otherwise.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspop()"></A><PRE>void 
+<B>pop</B>();</PRE>
+
+<UL>
+<P>Removes the item with the highest priority from the queue.</P>
+</UL>
+
+
+
+<A NAME="Member Functionspush()"></A><PRE>void 
+<B>push</B> (const value_type&amp; x);</PRE>
+
+<UL>
+<P>Adds <SAMP>x</SAMP> to the queue.</P>
+</UL>
+
+
+
+<A NAME="Member Functionssize()"></A><PRE>size_type 
+<B>size</B> () const;</PRE>
+
+<UL>
+<P>Returns the number of elements in the priority_queue.</P>
+</UL>
+
+
+
+<A NAME="Member Functionstop()"></A><PRE>const value_type&amp; 
+<B>top</B> () const;</PRE>
+
+<UL>
+<P>Returns a constant reference to the element in the queue with the highest priority.</P>
+</UL>
+
+
+<A NAME="Example"><H3>Example</H3></A>
+<UL>
+<PRE>//
+// p_queue.cpp
+//
+ #include &lt;queue&gt;
+ #include &lt;deque&gt;
+ #include &lt;vector&gt;
+ #include &lt;string&gt;
+ #include &lt;iostream&gt;
+ using namespace std;
+
+ int main(void)
+ {
+   // Make a priority queue of int using a vector container
+   <B>priority_queue</B>&lt;int, vector&lt;int&gt;, less&lt;int&gt; &gt; pq;
+ 
+   // Push a couple of values
+   pq.push(1);
+   pq.push(2);
+
+   // Pop a couple of values and examine the ends
+   cout &lt;&lt; pq.top() &lt;&lt; endl;
+   pq.pop();
+   cout &lt;&lt; pq.top() &lt;&lt; endl;
+   pq.pop();
+
+   // Make a priority queue of strings using 
+   // a deque container
+   <B>priority_queue</B>&lt;string, deque&lt;string&gt;, less&lt;string&gt; &gt;
+      pqs;
+
+   // Push on a few strings then pop them back off
+   int i;
+   for (i = 0; i &lt; 10; i++)
+   {
+     pqs.push(string(i+1,'a'));
+     cout &lt;&lt; pqs.top() &lt;&lt; endl;
+   }
+   for (i = 0; i &lt; 10; i++)
+   {
+     cout &lt;&lt; pqs.top() &lt;&lt; endl;
+     pqs.pop();
+   }
+
+   // Make a priority queue of strings using a deque    
+   // container, and greater as the compare operation
+   <B>priority_queue</B>&lt;string,deque&lt;string&gt;, greater&lt;string&gt; &gt;
+      pgqs;
+
+   // Push on a few strings then pop them back off
+   for (i = 0; i &lt; 10; i++)
+   {
+     pgqs.push(string(i+1,'a'));
+     cout &lt;&lt; pgqs.top() &lt;&lt; endl;
+   }
+
+   for (i = 0; i &lt; 10; i++)
+   {
+     cout &lt;&lt; pgqs.top() &lt;&lt; endl;
+     pgqs.pop();
+   }
+
+   return 0;
+ }</PRE>
+
+</UL>
+<P><B>Program Output</B></P>
+<UL>
+<PRE>
+2
+1
+a
+aa
+aaa
+aaaa
+aaaaa
+aaaaaa
+aaaaaaa
+aaaaaaaa
+aaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaa
+aaaaaaaa
+aaaaaaa
+aaaaaa
+aaaaa
+aaaa
+aaa
+aa
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+aa
+aaa
+aaaa
+aaaaa
+aaaaaa
+aaaaaaa
+aaaaaaaa
+aaaaaaaaa
+aaaaaaaaaa</PRE>
+
+</UL>
+
+<A NAME="Warnings"><H3>Warnings</H3></A>
+<P>If your compiler does not support default template parameters, you must always include a <SAMP>Container</SAMP> template parameter and a <SAMP>Compare</SAMP> template parameter when declaring an instance of <B><I>priority_queue</I></B>. For example, you would not be able to write:</P>
+<UL>
+<PRE>priority_queue&lt;int&gt; var;</PRE>
+
+</UL>
+<P>Instead, you would have to write:</P>
+<UL>
+<PRE><SAMP>priority_queue&lt;int, vector&lt;int&gt;,</SAMP> 
+  <SAMP>less&lt;typename vector&lt;int&gt;::value_type&gt; &gt; var;</SAMP></PRE>
+
+</UL>
+<P>If your compiler does not support namespaces, then you do not need the using declaration for <SAMP>std</SAMP>.</P>
+
+<A NAME="See Also"><H3>See Also</H3></A>
+<P><B><I><A HREF="Con_2487.htm">Containers</A></I></B>, <B><I><A HREF="que_0953.htm">queue</A></I></B></P>
+
+
+<BR>
+<HR>
+<A HREF="pre_1548.htm"><IMG SRC="images/prev.gif" WIDTH=20 HEIGHT=21 ALT="Previous file" BORDER=0></A><A HREF="index.htm"><IMG SRC="images/top.gif" WIDTH=56 HEIGHT=21 ALT="Top of document" BORDER=0></A><A HREF="classref.htm"><IMG SRC="images/toc.gif" WIDTH=56 HEIGHT=21 ALT="Contents" BORDER=0></A><A HREF="tindex.htm"><IMG SRC="images/index.gif" WIDTH=56 HEIGHT=21 ALT="Index" BORDER=0></A><A HREF="ptr_4059.htm"><IMG SRC="images/next.gif" WIDTH=19 HEIGHT=21 ALT="Next file" BORDER=0></A>
+<BR>&copy;Copyright 1999, Rogue Wave Software, Inc.<BR>Send <A HREF="mailto:onlinedocs@roguewave.com">mail</A> to report errors or comment on the documentation.
+<BR>
+OEM Release</BODY></HTML>
