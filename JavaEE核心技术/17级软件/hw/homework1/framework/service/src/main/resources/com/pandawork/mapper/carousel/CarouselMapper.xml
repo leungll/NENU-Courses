@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pandawork.mapper.carousel.CarouselMapper">
+
+    <resultMap id="carousel" type="com.pandawork.common.entity.carousel.Carousel" >
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="path" column="path"/>
+        <!--<result property="status" column="status"/>-->
+    </resultMap>
+
+    <select id="listAllCarousel" resultMap="carousel">
+        SELECT *
+        FROM `t_carousel`
+    </select>
+
+    <insert id="addCarousel">
+        INSERT INTO `t_carousel`
+        (`name`,`path`)
+        VALUES (#{carousel.name}, #{carousel.path})
+    </insert>
+
+    <delete id="delCarousel">
+        DELETE FROM `t_carousel`
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="updateCarousel">
+        UPDATE `t_carousel`
+        SET `name` = #{carousel.name},
+            `path` = #{carousel.path}
+        WHERE `id` = #{carousel.id}
+    </update>
+
+    <select id="selectById" resultMap="carousel" >
+        SELECT *
+        FROM `t_carousel`
+        WHERE `id` = #{id}
+    </select>
+</mapper>

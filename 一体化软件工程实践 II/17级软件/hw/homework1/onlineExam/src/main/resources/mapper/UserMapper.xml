@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.UserMapper">
+
+    <resultMap id="User" type="com.nenusoftware.onlineexam.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="selectByName" resultMap="User">
+        SELECT *
+        FROM t_user
+        WHERE t_user.username = #{username}
+    </select>
+
+    <select id="checkPassword" resultMap="User">
+        SELECT *
+        FROM t_user
+        WHERE t_user.username = #{username} and t_user.password = #{password}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO t_user
+        (id,username,password)
+        VALUES
+        (#{user.id},#{user.username},#{user.password})
+    </insert>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.teacheruser.entity.Teacher" table="teacheruser">
+ 		<id name="tid" column="tid">
+ 		</id>
+ 		<property name="password" column="password"/>
+ 		<property name="tname" column="tname"/>
+ 		<property name="phone" column="phone"/>
+ 		<property name="email" column="email"/>
+ 		<!-- 配置bj集合 -->
+ 		<set name="bjs" lazy="false" cascade="save-update,delete">
+ 			<key column="tid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.bj.entity.BJ"/>
+ 		</set>
+ 		<set name="questions" lazy="false" cascade="save-update,delete">
+ 			<key column="tid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.question.entity.Question"/>
+ 		</set>
+ 	</class>
+ </hibernate-mapping>

@@ -1,0 +1,127 @@
+/* NOTE: this file is script generated, change should be made at 'fe/scripts/generateFontResource.js' */
+@font-face {
+  font-style: normal;
+  font-family: 'FZLanTingHei';
+  font-weight: 400;
+  src: local('FZLanTingHeiS-R-GB'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTHJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTHJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZLanTingHei';
+  font-weight: 300;
+  src: local('FZLanTingHeiS-L-GB'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTXIHJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTXIHJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZLanTingHei';
+  font-weight: 700;
+  src: local('FZLanTingHeiS-B-GB'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTCHJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/ht/FZLTCHJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZYuan';
+  font-weight: 400;
+  src: local('FZZhunYuan-M02S'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY3JW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY3JW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZYuan';
+  font-weight: 300;
+  src: local('FZXiYuan-M01S'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY1JW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY1JW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZYuan';
+  font-weight: 700;
+  src: local('FZCuYuan-M03S'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY4JW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/yt/FZY4JW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZXinSong';
+  font-weight: 400;
+  src: local('FZNewShuSong-Z10S'), url('https://free.modao.cc/fonts/fangzheng/FZXSSJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/FZXSSJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZKai';
+  font-weight: 400;
+  src: local('FZKai-Z03S'), url('https://free.modao.cc/fonts/fangzheng/FZKTJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/FZKTJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZGongYeHei';
+  font-weight: 400;
+  src: local('FZGongYHS-R-GB'), url('https://free.modao.cc/fonts/fangzheng/FZGongYHJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/FZGongYHJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZHanZhenGuangBiao';
+  font-weight: 400;
+  src: local('FZHanZhenGuangBiaoS-GB'), url('https://free.modao.cc/fonts/fangzheng/FZHZGBJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/FZHZGBJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'FZZongYi';
+  font-weight: 400;
+  src: local('FZZongYi-M05S'), url('https://free.modao.cc/fonts/fangzheng/FZZYJW.woff2') format('woff2'), url('https://free.modao.cc/fonts/fangzheng/FZZYJW.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'PingFangSC';
+  font-weight: 400;
+  src: local('PingFangSC-Regular'), local('PingFang SC Regular'), local('.PingFangSC-Regular'), local('.PingFang SC Regular'), local('PingFangSC'), local('PingFang SC'), url('https://free.modao.cc/fonts/pingfang/SC-Regular.woff2') format('woff2'), url('https://free.modao.cc/fonts/pingfang/SC-Regular.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'PingFangSC';
+  font-weight: 700;
+  src: local('PingFangSC-Semibold'), local('PingFang SC Semibold'), local('.PingFangSC-Semibold'), local('.PingFang SC Semibold'), url('https://free.modao.cc/fonts/pingfang/SC-Semibold.woff2') format('woff2'), url('https://free.modao.cc/fonts/pingfang/SC-Semibold.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'SourceHanSansSC';
+  font-weight: 400;
+  src: local('SourceHanSansSC-Regular'), local('Source Han Sans SC Regular'), local('Source Han Sans SC'), local('Noto Sans CJK SC Regular'), local('Noto Sans CJK SC'), url('https://free.modao.cc/fonts/source-han/SansCN-Regular.woff2') format('woff2'), url('https://free.modao.cc/fonts/source-han/SansCN-Regular.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'SourceHanSansSC';
+  font-weight: 700;
+  src: local('SourceHanSansSC-Bold'), local('Source Han Sans SC Bold'), local('Noto Sans CJK SC Bold'), url('https://free.modao.cc/fonts/source-han/SansCN-Bold.woff2') format('woff2'), url('https://free.modao.cc/fonts/source-han/SansCN-Bold.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'SFUIText';
+  font-weight: 400;
+  src: local('SFUIText-Regular'), local('.SFUIText-Regular'), local('SFProText-Regular'), local('SFProText'), url('https://free.modao.cc/fonts/sf-ui/Text-Regular.woff2') format('woff2'), url('https://free.modao.cc/fonts/sf-ui/Text-Regular.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'SFUIText';
+  font-weight: 700;
+  src: local('SFUIText-Bold'), local('.SFUIText-Bold'), local('SFProText-Bold'), url('https://free.modao.cc/fonts/sf-ui/Text-Bold.woff2') format('woff2'), url('https://free.modao.cc/fonts/sf-ui/Text-Bold.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: local('Roboto'), url('https://free.modao.cc/fonts/roboto/Regular.woff2') format('woff2'), url('https://free.modao.cc/fonts/roboto/Regular.woff') format('woff');
+}
+@font-face {
+  font-style: normal;
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: local('Roboto-Bold'), local('Roboto Bold'), url('https://free.modao.cc/fonts/roboto/Bold.woff2') format('woff2'), url('https://free.modao.cc/fonts/roboto/Bold.woff') format('woff');
+}
+@font-face {
+  font-style: italic;
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: local('Roboto-Italic'), local('Roboto Italic'), url('https://free.modao.cc/fonts/roboto/Italic.woff2') format('woff2'), url('https://free.modao.cc/fonts/roboto/Italic.woff') format('woff');
+}
+@font-face {
+  font-style: italic;
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: local('Roboto-BoldItalic'), local('Roboto Bold Italic'), url('https://free.modao.cc/fonts/roboto/BoldItalic.woff2') format('woff2'), url('https://free.modao.cc/fonts/roboto/BoldItalic.woff') format('woff');
+}

@@ -1,0 +1,22 @@
+# maven ignore
+target/
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# others
+*.txt
+
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz

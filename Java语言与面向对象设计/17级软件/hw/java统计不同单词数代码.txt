@@ -1,0 +1,137 @@
+统计不同的单词数：
+两种想法：1.每输入一个单词（设为A），就循环一遍A前面的所有单词，并在循环中判断前面是否有与A相同的单词
+            如果没有与A相同的单词，就把A存在一个地方（设为S，这个地方专门用来存放A这样的单词）
+            如果有重复的单词，则舍弃A，舍弃的办法就是不把A存入S中
+                
+		代码实现：输入单词我们用while，因为我们不知道将要输入多少个单词，（我们不知道单词数n）
+                          所以没有办法用for循环
+                         （但是用while我们是可以统计出n的，但是这对于第一种办法
+                          来说显得有点愚蠢，因为用.hasNext(),只要后面还有输入，我们就进行程序的主体：
+                          循环加判断，如果没有输入就结束程序，所以没有必要统计n）
+                          输入:
+				Scanner in = new Scanner(System.in);
+                                while(in.hasNext())
+				{
+			             String s=in.next();//用map，将单词存入字符串中
+			        ........
+				}
+			  或：
+				Scanner input = new Scanner(System.in);
+				String [] strArray = new String [100];
+				while(input.hasNext())
+				{		
+				     strArray[n] = input.next();//常规for循环，将单词存入字符串数组中
+				........
+				}
+                          循环加判断的时候有两种思路：
+ 			  ①map：首先需要在循环外面搞一个map：Map m=new HashMap();
+				对于map来说，我们可以将输入的每个单词都存在字符串中，因为map的key和value
+				可以接受任何类型的数据，所以上面我们将单词存入字符串中
+				/*(当字符串ST 的输入遇到空格时，空格后面的字符将不再输入，所以后面的字符串
+				 (以空格划分前后)会覆盖掉ST ，如果不立即对ST进行操作的话，当有新的字符串
+				 输入的时候ST会丢失；
+				 所以除非每当我们输入完一个字符串之后立即将这个字符串存入到另一个新的可以存
+				 储字符串的地方（像map，字符串数组）或者舍弃这个字符串（对输入的字符串进行操
+				 作），否则的话我们将不得不命名许多个字符串来存储输入的字符串（以便后续操作）
+				 ，而这些字符串放在一起就可以构成一个字符串数组）*/
+				而map中有函数  .containsKey()  ,现在我们要做的是：对于每一个输入的字符串B，我
+				们判断B是否在map中，如果在，舍弃；如果不在，就将B存入map中，并对B赋值，这个值
+   				可以是int，bool....任何类型的(但就是不能为空)，然后计数器++，就统计出了不同的
+				单词数代码的主体如下：
+						while(in.hasNext())
+						{
+						String s=in.next();
+						if(!m.containsKey(s))
+						{
+							m.put(s, 1);
+							cnt++;
+						}
+						}
+			②普通for循环：普通for循环的话输入一定要用字符串数组，在①中已经说过了，主体的思想就是
+					如果碰上和B相同的字符串就把这个字符串变为"0",然后在新一轮的循环中如果碰
+					上为"0"的字符串continue，计数器++，最后输出count。
+				代码如下：
+				int i=0,count=0;
+				while(input.hasNext())
+				{
+				     i++;		
+				     strArray[n] = input.next();//常规for循环，将单词存入字符串数组中
+				     strArray2[n] = input.next();
+				     for(j=0,j<i;j++)
+				     {
+					if(strArray[i].equals(strArray[j])) 
+					strArray[j]="0";
+				      }
+				}
+				for(int k=0;k<n;k++)
+				{
+				   if(strArray[j]equals(0)) continue;
+				   count++;
+				}
+          2.统计单词的个数n,再把重复的单词减掉，判断重复的单词用两个for循环，第一层循环是用于定住句子中的某一个单词（A），
+	    第二层for循环用于遍历从A开始（不含A）的所有单词，来寻找与A相同的单词，并在循环中判断A和后面的单词是否有相同的
+	    这里要注意的是：对于数组a[n]，其中的元素是a[0]到a[n-1]所以第一层循环只到n-2即可。代码见下方
+
+
+**关于.hasNext():
+所有的输入，包括空格，回车，换行都会被当成hasnext，所有如果要结束输入，我们必须强制结束程序，方法是输入结束后，按回车，按
+Ctrl+z
+
+
+
+//法一：字符串数组：
+
+
+import java.util.Scanner;
+
+public class Roots {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String [] strArray = new String [100];
+		int n = 0;
+		while(input.hasNext()){		
+			strArray[n] = input.next();
+			n++;
+			
+		}
+		int sum = n;
+		for(int i = 0; i <= n-2; i++){
+			for(int j = i+1; j <= n-1; j++)
+				if (strArray[i].equals(strArray[j])){
+					sum--;
+					break;
+				}//不能用两个等号，==：检验两个字符串是否在同一位置
+			//字符串只能用equals：字1.equals(字2)
+		}
+		System.out.println(sum);
+	}
+}
+
+
+
+
+
+//法二map
+
+
+import java.util.*;
+
+public class WN2 {
+	public static void main(String[] args){
+		Scanner in=new Scanner(System.in);
+		Map m=new HashMap();
+		int cnt=0;
+		while(in.hasNext()){
+			String s=in.next();
+			if(!m.containsKey(s))
+			{
+				m.put(s, 1);
+				cnt++;
+			}
+		}
+		System.out.println(cnt);	
+	}
+}
+
+ 

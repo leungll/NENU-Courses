@@ -1,0 +1,120 @@
+/*----------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------
+@Filename:                reset.css
+@Description:            样式重置文档
+@Version:                1.0.0(2011-11-22)
+@author:                simon-shen
+==STRUCTURE:=========================================
+*$__清除内外边距
+*$__设置默认字体
+*$__重置列表元素
+*$__重置文本格式元素
+*$__重置表单元素
+*$__重置表格元素
+*$__重置 HTML5元素 
+*$__clearfix
+==NOTES:=============================================
+2011-11-22:
+    初始生成，采用了淘宝的css reset
+--------------------------------------------------------------------------------------------*/
+
+/*__清除内外边距
+--------------------------------------------------------------------------------------------*/
+
+body, h1, h2, h3, h4, h5, h6, hr p blockquote,/*structural elements  结构元素*/
+dl, dd, dt, ul, ol, li,/*list elements 列表元素*/
+pre, /*text formatting elements 文本格式元素*/
+fieldset, form, input, legend, button, textarea， select,/*form elements 表单元素*/
+th, td/*table elements 表格元素*/{
+	margin: 0px; 
+	padding: 0px;
+}
+
+/*__设置默认字体
+--------------------------------------------------------------------------------------------*/
+body, 
+button, input, select, textarea/*for ie*/{
+	font:12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+} 
+/*{font:12px; line-height: 1.5; font-family:tahoma, arial, \5b8b\4f53(宋体), sans-serif; }*/
+h1, h2, h3, h4, h5, h6{
+	font-size: 100%;
+}
+address, em, var, cite, dfn{
+	font-style: normal;
+}  
+/*将斜体扶正*/
+code, kbd, pre, samp {
+	font-family: courier new, courier, monospace; 
+} 
+/* 统一等宽字体 */
+small { 
+	font-size: 12px; 
+} 
+/* 小于 12px 的中文很难阅读，让 small 正常化 */
+/*__重置列表元素
+--------------------------------------------------------------------------------------------*/
+ul, ol{
+	list-style: none;
+}
+/*_重置文本格式元素
+—-----------—-----------—-----------—-----------—-----------—-----------—-----------—---------*/
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+}
+sup{
+	vertical-align: text-top;
+}
+sub{
+	vertical-align: text-bottom;
+}
+/*重置，减少对行高的影响*/
+/*_重置表单元素
+----------------------------------------------------------------------*/
+legend{
+	color: #000000;
+}
+/*for ie6*/
+fieldset, img{
+	border:0px;
+}
+/*img搭车：让img在链接中没有边框*/
+button, select, textarea, input{
+	font-size:100%;
+}
+/* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+/*重置表格元素
+------------------------------------------------------------------------*/
+table{
+	border-collapse: collapse; 
+	border-spacing: 0;
+}
+
+/*__重置 HTML5元素 
+--------------------------------------------------------------------------------------------*/
+article, aside, details, figcaption, figure, footer,header, hgroup, menu, nav, section,
+summary, time, mark, audio, video {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+mark { 
+	background: #ff0; 
+}
+
+/*__clearfix
+--------------------------------------------------------------------------------------------*/
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+} 
+* html .clearfix  { zoom: 1; } /* IE6 */ 
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */

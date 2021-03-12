@@ -1,0 +1,185 @@
+/*-----------------------------------------------------------------------------
+* @Description: 公共样式 (common.css)
+* @Version: 	V1.0.0
+* @author: 		liangm(1650984858@qq.com)
+* @date			2015.08.17
+* ==STRUCTURE:=========================================
+*$__全局样式
+*$__header部分公共样式
+*$__sidebar部分公共样式
+*$__content部分公共样式
+*$__welInfor部分公共样式
+*$__block部分公共样式
+*$__文本框公共样式
+*$__table公共样式
+* ==NOTES:=============================================
+* v1.0.0(2014.08.02):
+* 	初始生成 
+* ---------------------------------------------------------------------------*/
+/*_全局部分公共样式
+------------------------------------------------------------------------------------*/
+
+html, body{
+	width: 100%;
+	height:100%;
+	}
+/*_header部分公共样式
+------------------------------------------------------------------------------------*/
+.header{
+	width: 960px;
+	height: 26px;
+	margin: auto;
+	background: url("../../img/common/header.gif");
+}
+.header_log{
+	position: relative;
+	left: 15px;
+	color: #ffffff;    
+    font-size: 14px;  
+    font-family: '宋体';
+    cursor: pointer;
+
+}
+/*_continer部分公共样式
+------------------------------------------------------------------------------------*/
+.continer{
+	width:960px;
+	height: 100%;
+	margin: auto;
+}
+/*_sidebar部分公共样式
+------------------------------------------------------------------------------------*/
+.sidebar{
+	width: 231px;
+	height: inherit;
+	min-height: 534px;
+	margin-right: 5px;
+	float: left;
+	background:#5048f7 repeat ;
+}
+.meneu{
+	width: 207px;
+	height:23px;
+	line-height: 13px;
+	padding: 10px 0 0 20px;
+	color: #5757f7;
+	font-size: 14px;
+	font-family: '宋体';
+	background: #cbdde0;
+}
+.submenu{
+	width: 164px;
+	height: 24px;
+	padding:10px 0 0 80px;
+	margin: 12px 3px 0 4px;
+	color: #5757f7;
+	font-size: 16px;
+	font-family: '宋体';
+	background: url("../../img/common/sidebar_non.gif") no-repeat;
+}
+.active{
+	background: url("../../img/common/activebg.gif") no-repeat;
+}
+/*套页面时注意使用*/
+/*_content部分公共样式
+------------------------------------------------------------------------------------*/
+.content{
+	width: 724px;
+	height: 100%;
+	min-height: 534px;
+	background: #D0DEF7;
+	float: left;
+
+}
+/*welInf 登录人欢迎部分公共样式
+------------------------------------------------------------------------------------*/
+.wel_peo{
+	width: 647px;
+	height: 33px;
+	padding: 0 50px 0 27px;
+	color: #5757f7;    
+    font-size: 14px;  
+    font-family: '宋体';
+	background:#eaf8f9;	
+}
+.wel_inf{
+	position: relative;
+	top: 8px;
+	line-height: 16px;
+	float: left;
+}
+.wel_ext{
+	position: relative;
+	top: 8px;
+	line-height: 16px;
+	cursor: pointer;
+	float: right;
+}
+/*_block内容部分公共样式
+------------------------------------------------------------------------------------*/
+.block_form{
+	width: 724px;
+	min-height: 501px;
+	overflow: hidden;
+	background: #D0DEF7;
+}
+.block{
+	margin: 10px 0 0 10px;
+	color:#000000;
+	font-size: 16px;
+	font-family: '宋体';
+}
+.block_form hr{
+	color: #2171ff;
+	border-top: none;
+	width: 693px;
+	margin:18px auto 0px;
+}
+/*_文文本框部分公共样式
+-------------------------------------------------------------------------------------------*/
+.control_area{
+	margin-top: 36px;
+}
+.control_area label{
+	width: 80px;
+	height: 16px;
+	line-height: 16px;
+	margin-right: 5px;
+	display: inline-block;
+}
+.text_theme{
+	width: 74px;
+	height: 23px;
+	background-color: #fff;
+    border: 1px solid #d5d5d5;
+    color: black;
+}
+.control_area input[type="text"]{
+    width: 215px;
+}
+/*_block  table部分公共样式
+------------------------------------------------------------------------------------*/
+.block table{
+	background-color: transparent;
+    color: #000000;
+    width:669px;
+	border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+}
+thead th, tbody td {
+    border: 1px solid #000000;
+    height: 30px;
+    padding: 0 10px;
+    text-align: center;
+}
+/*_按钮部分公共样式
+------------------------------------------------------------------------------------*/
+.search{
+	width: 51px;
+	height: 16px;
+	float: right;
+	margin-right: 128px;
+	cursor: pointer;
+	background: url("../../img/common/search.gif") no-repeat;
+}

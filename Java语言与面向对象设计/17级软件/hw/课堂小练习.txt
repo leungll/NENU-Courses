@@ -1,0 +1,45 @@
+1,运行下面的程序，结果一般会输出__________________.
+public class t5 {
+	public static void main(String[]args)
+	{
+		
+		int i=0;
+		try
+		{
+			for(i=0;i<10;i++)
+			{
+				try
+				{
+					if(i%3==0)
+						throw new Exception();
+					System.out.println("1:"+i+",");
+				}
+				catch(Exception e2)
+				{
+					System.out.print("2:"+i+",");
+					i+=2;
+					if(i%3==2)
+						throw new Exception();
+					return;
+				}
+				finally
+				{
+					
+					i*=2;
+					System.out.print("3:"+i+",");
+				}
+				
+			}
+		}
+		catch(Exception e2)
+		{
+			System.out.print("4:"+i+",");
+			return;
+		}
+		finally
+		{
+			System.out.print("5:"+i);
+		}
+
+	}
+}

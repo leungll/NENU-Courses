@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.connection.autocommit">false</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		
+		<!-- 把映射文件放到核心配置文件中 -->
+		<mapping resource="edu/nenu/onlineExam/adminuser/entity/AdminUser.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/teacheruser/entity/Teacher.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/bj/entity/BJ.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/student/entity/Students.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/questiontype/entity/QuestionType.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/question/entity/Question.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/questionpaper/entity/QuestionPaper.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/qprelationq/entity/QpRelationq.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/testcontrol/entity/TestControl.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/testnote/entity/TestNote.hbm.xml"/>
+		<mapping resource="edu/nenu/onlineExam/answerstate/entity/AnswerState.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

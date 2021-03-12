@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.pandawork.core.entity.AbstractEntity" alias="AbstractEntity" />
+    </typeAliases>
+    
+   	<plugins>
+ 		<plugin interceptor="com.pandawork.core.dao.mybatis.submeter.plugin.SubmeterPlugin">
+ 			<property name="shardingConfig" value="shard_config.xml"/>
+ 		</plugin>
+	</plugins>
+
+    <!--<plugins>-->
+        <!--&lt;!&ndash; com.github.pagehelper为PageHelper类所在包名 &ndash;&gt;-->
+        <!--<plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+            <!--&lt;!&ndash; 使用下面的方式配置参数，后面会有所有的参数介绍 &ndash;&gt;-->
+            <!--<property name="helperDialect" value="mysql"/>-->
+        <!--</plugin>-->
+    <!--</plugins>-->
+
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+</configuration>

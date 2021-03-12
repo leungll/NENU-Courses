@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="ct"  namespace="/" extends="struts-default" >
+		
+		<!-- 管理员action -->
+		<action name="admin_*" class="adminUserAction" method="{1}">
+			<!-- 管理员登录 -->
+			<result name="alogin">/adenglu.jsp</result>
+			<!-- 登录成功 -->
+			<result name="loginSuccessadmin">/admin/all.jsp</result>
+			<!-- 登录失败 -->
+			<result name="loginFailadmin">/adenglu.jsp</result>
+			<!-- 查看信息 -->
+			<result name="ckxxadmin">/admin/ckxx.jsp</result>
+			<!-- 修改密码 -->
+			<result name="upwadmin">/admin/upw.jsp</result>
+			<!-- 修改成功 -->
+			<result name="updateadminPW">/teacher/upwsuccess.jsp</result>
+			<!-- 安全退出 -->
+			<result name="sessionDestoryadmin">/adenglu.jsp</result>
+		</action>
+		
+		
+		<!-- 教师action -->
+		<action name="teacher_*" class="teacherAction" method="{1}">
+			<!-- 教师登录 -->
+			<result name="login">/tdenglu.jsp</result>
+			<!-- 登录成功 -->
+			<result name="loginSuccess">/teacher/all.jsp</result>
+			<!-- 登录失败 -->
+			<result name="loginFail">/tdenglu.jsp</result>
+			<!-- 查看教师信息 -->
+			<result name="ckxx">/teacher/ckxx.jsp</result>
+			<!-- 修改密码 -->
+			<result name="upw">/teacher/upw.jsp</result>
+			<!-- 修改密码实现 -->
+			<result name="updatePW">/teacher/upwsuccess.jsp</result>
+			<!-- 管理员查询所有教师信息 -->
+			<result name="ckAllTeacherAdmin">/admin/ckallteacher.jsp</result>
+			<!-- 管理员查看教师信息 -->
+			<result name="ckTeacherXX">/admin/ckteacherxx.jsp</result>
+			<!-- 安全退出 -->
+			<result name="sessionDestoryteacher">/tdenglu.jsp</result>
+			<!-- 添加教师 -->
+			<result name="addTeacherAdmin">/admin/addteacher.jsp</result>
+			<!-- 添加教师实现 -->
+			<result name="addTeacherSX">/teacher/addqsuccess.jsp</result>
+		</action>
+		<!-- 班级action -->
+		<action name="bj_*" class="bjAction" method="{1}">
+			<!-- 查看班级 -->
+			<result name="ckbj">/teacher/ckbj.jsp</result>
+			<result name="ckbjAdmin">/admin/ckbj.jsp</result>
+			<!-- 跳转到添加班级页面 -->
+			<result name="addbj">/teacher/addbj.jsp</result>
+			<!-- 添加班级 -->
+			<result name="addbjsx" type="redirectAction">bj_ckbj</result>
+			<!-- 删除班级跳转到显示班级页面 -->
+			<result name="deleteBJ" type="redirectAction">bj_ckbj</result>
+			<result name="deleteBJAdmin" type="redirectAction">bj_ckbjAdmin</result>
+			<!-- 查看班级里所有学生的信息 -->
+			<result name="ckBJStudents">/teacher/ckbjstudents.jsp</result>
+		</action>
+		<!-- 试题类型action -->
+		<action name="questionType_*" class="qtAction" method="{1}">
+		</action>
+		<!-- 试题action -->
+		<action name="question_*" class="questionAction" method="{1}">
+			<!-- 查看选择相似试题 -->
+			<result name="ckXSXZQuestion">/teacher/ckxsxzquestion.jsp</result>
+			<result name="ckXSXZAdminQuestion">/admin/ckxsxzquestion.jsp</result>
+			<!-- 添加选择题 -->
+			<result name="addQuestionXZ">/teacher/addquestionxz.jsp</result>
+			<result name="addAdminQuestionXZ">/admin/addquestionxz.jsp</result>
+			<!-- 添加选择题实现 -->
+			<result name="addQuestionXZSX">/teacher/addqsuccess.jsp</result>
+			<!-- 查看判断相似试题 -->
+			<result name="ckXSPDQuestion">/teacher/ckxspdquestion.jsp</result>
+			<result name="ckXSPDAdminQuestion">/admin/ckxspdquestion.jsp</result>
+			<!-- 添加判断题 -->
+			<result name="addQuestionPD">/teacher/addquestionpd.jsp</result>
+			<result name="addAdminQuestionPD">/admin/addquestionpd.jsp</result>
+			<!-- 添加判断题实现 -->
+			<result name="addQuestionPDSX">/teacher/addqsuccess.jsp</result>
+			<!-- 查看填空相似试题 -->
+			<result name="ckXSTKQuestion">/teacher/ckxstkquestion.jsp</result>
+			<result name="ckXSTKAdminQuestion">/admin/ckxstkquestion.jsp</result>
+			<!-- 添加填空题 -->
+			<result name="addQuestionTK">/teacher/addquestiontk.jsp</result>
+			<result name="addAdminQuestionTK">/admin/addquestiontk.jsp</result>
+			<!-- 添加填空题实现 -->
+			<result name="addQuestionTKSX">/teacher/addqsuccess.jsp</result>
+			<!-- 选择查找试题的试题类型 -->
+			<result name="ckQuestionAndXZQT">/teacher/ckqxzqt.jsp</result>
+			<result name="ckAdminQuestionAndXZQT">/admin/ckqxzqt.jsp</result>
+			<!-- 查找试题 -->
+			<result name="ckQuestion">/teacher/ckqxzqt.jsp</result>
+			<!-- 管理员查找试题 -->
+			<result name="ckAdminQuestion">/admin/ckqxzqt.jsp</result>
+			<!-- 查看选择题详细信息 -->
+			<result name="ckXZQuestion">/teacher/ckxzquestion.jsp</result>
+			<!-- 查看填空题详细信息 -->
+			<result name="ckTKQuestion">/teacher/cktkquestion.jsp</result>
+			<!-- 查看判断题详细信息 -->
+			<result name="ckPDQuestion">/teacher/ckpdquestion.jsp</result>
+		</action>
+		<!-- 试卷与试题对应关系的action -->
+		<action name="qpRelationq_*" class="" method="{1}">
+			
+		</action>
+	</package>
+</struts>
+ 

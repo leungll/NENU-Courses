@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.student.entity.Students" table="student">
+ 		<id name="sid" column="sid"></id>
+ 		<property name="password" column="password"/>
+ 		<property name="name" column="name"/>
+ 		<property name="phone" column="phone"/>
+ 		<property name="email" column="email"/>
+ 		<many-to-one name="bj" class="edu.nenu.onlineExam.bj.entity.BJ" column="bjid"></many-to-one>
+ 		<set name="testNote" lazy="false" cascade="save-update,delete">
+ 			<key column="sid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.testnote.entity.TestNote"/>
+ 		</set>
+ 	</class>
+ </hibernate-mapping>

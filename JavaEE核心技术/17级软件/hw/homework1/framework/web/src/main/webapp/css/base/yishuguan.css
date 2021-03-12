@@ -1,0 +1,261 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-image:url(../../img/background/715070.jpg);
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-size: 100%;
+	background-attachment: fixed;
+}
+#top{
+	width: 100%;
+	position:fixed;
+	top:-90px;
+	z-index: 100;
+	background-color:rgba(0,0,0,0.5);
+}
+#top a,p{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#title{
+	margin: 10px 0px 0px 20px;
+	width: 35%;
+	float: left;
+}
+#title h1{
+	font-family:"汉仪篆书繁";
+	font-size: 60px;
+	margin: 5px 0;
+}
+#title h2{
+	font-family:"kelly-slab";
+	font-size: 25px;
+	margin: 5px 0 10px 0;
+}
+#nav{
+	width: 60%;
+	float: left;
+	margin: 40px auto 0;
+	text-align: center;
+}
+#firul>li{
+	display:inline-table;
+	list-style: none;
+	height: 50px;
+	width: 140px;
+	line-height: 50px;
+	margin: 0 10px 0 15px;
+/*	padding: 10px 30px;*/
+	border-top: solid #FFFFFF 2px;
+}
+#nav li:hover{
+	background-color:#626262;
+}
+#secul > li{
+	display: none;
+}
+#hover:hover{
+	overflow: inherit;
+}
+#hover:hover > #secul{
+	display: block;
+}
+#hover:hover > #secul li{
+	display: block;
+	background-color:#626262;
+	position: relative;
+	display: block;
+	list-style: none;
+	height: 50px;
+	line-height: 50px;
+	width: 140px;
+	border-top: solid #FFFFFF 2px;
+}
+#secul li:hover{
+	background-color:#393939 !important;
+}
+#top:hover{
+	top: 0px;
+	transition: 0.3s;
+}
+
+
+/*----------图片轮播相框容器----------*/
+#frame {
+            position: relative;			/*	--绝对定位，方便子元素的定位  */
+/*            width:100%; */
+            height:768px;
+            /*overflow : hidden;			!*--相框作用，定义溢出内容如何处理，只显示一个图片，超出部分自动隐藏scroll显示进度条---*!*/
+        }
+        #photos img {
+            float: left;
+            width:1536px;
+        }
+        #photos {/*---设置总的图片宽度--通过位移来达到轮播效果----*/
+            position: absolute;
+			z-index: 9 ;
+            width: calc(1536px * 5);/*---cale动态计算长度值，修改图片数量的话需要修改下面的动画参数*/
+            animation: ma 20s ease-out infinite alternate;/**/
+        }
+        @keyframes ma {
+			/*---每图片切换有两个阶段：位移切换和静置。中间的效果可以任意定制，五张图片轮流向左轮播，每次移动距离是一张图片的宽----*/
+            0%,20% {        margin-left: 0px;       }
+            25%,40% {       margin-left: -1536px;    }
+            45%,60% {       margin-left: -3072px;    }
+            65%,80% {       margin-left: -4608px;    }
+            85%,100% {      margin-left: -6144px;   }
+        }
+
+        .num{
+            position:absolute;
+			z-index:10;
+            display:inline-block;
+            right:45%;
+			bottom: 30px;
+            border-radius:100%;
+            background:darkslateblue;           /*圆框的颜色*/
+            width:25px;
+            height:25px;
+            line-height:25px;
+            cursor:pointer;
+            color:#fff;                 /*白色的字*/
+            text-align:center;
+            opacity:0.5;
+        }
+        .num:hover{background:#00f;}
+        .num:hover,#photos:hover{animation-play-state:paused;}
+        .num:nth-child(1){margin-right:120px}
+        .num:nth-child(2){margin-right:90px}
+        .num:nth-child(3){margin-right:60px}
+        .num:nth-child(4){margin-right:30px}
+        #a1:hover ~ #photos{animation: ma1 .5s ease-out forwards;}
+        #a2:hover ~ #photos{animation: ma2 .5s ease-out forwards;}
+        #a3:hover ~ #photos{animation: ma3 .5s ease-out forwards;}
+        #a4:hover ~ #photos{animation: ma4 .5s ease-out forwards;}
+        #a5:hover ~ #photos {animation: ma5 .5s ease-out forwards;}
+        @keyframes ma1 {0%{margin-left:-6144px;}100%{margin-left:-0px;} }
+        @keyframes ma2 {0%{margin-left:-6144px;}100%{margin-left:-1536px;}   }
+        @keyframes ma3 {100%{margin-left:-3072px;}   }
+        @keyframes ma4 {100%{margin-left:-4608px;}   }
+        @keyframes ma5 {100%{margin-left:-6144px;}  }
+
+
+
+#text{
+	background-color: rgba(255,285,255,1.00);
+	width: 100%;
+	padding: 80px 0px 20px 0px;
+	text-align: center;
+}
+#text span{
+	display: block;
+	width:70%;
+	margin: 0 auto;
+}
+#text img{
+	width: 3%;
+	margin: 100px auto 0px auto;
+}
+#trans{
+	width: 100%;
+	height: 768px;
+	transition: 0.5s;
+}
+
+
+
+
+#gallery2{
+	width: 100%;
+	height: 600px;
+	background-color: #222222;
+	color: #FFFFFF;
+	text-align: center;
+	padding-top: 55px;
+}
+#gallery2 a{
+	color: #FFFFFF;
+}
+.imgs2{
+	width: 12%;
+	height: 225px;
+	overflow: hidden;
+	margin: 100px 2% 0px 2%;
+	float: left;
+}
+.imgs2 img{
+	width: 100%;
+}
+
+
+#gallery{
+	width: 100%;
+	height: 800px;
+	background-color: #FFFFFF;
+	text-align: center;
+	padding-top: 55px;
+}
+#gallery a{
+	color: #000000;
+}
+#content{
+	width: 85%;
+	margin: 0 auto;
+}
+.imgs{
+	width: 20%;
+	height: 170px;
+	overflow: hidden;
+	margin: 100px 2% 0px 2%;
+	float: left;
+}
+.imgs img{
+	width: 100%;
+}
+#imgbox-loading { position: absolute; top: 0; left: 0; cursor: pointer; display: none; z-index: 90; }
+#imgbox-loading div { background: #FFF; width: 100%; height : 100%; }
+#imgbox-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 80; }
+.imgbox-wrap { position: absolute; top: 0; left: 0; background: #FFF; display: none; z-index: 90; }
+.imgbox-img { padding: 0; margin: 0; border: none; width: 100%; height: 100%; vertical-align: top; }
+.imgbox-title { padding-top: 10px; font-size: 11px; text-align: center; font-family: Arial; color: #333; display: none; }
+.imgbox-bg-wrap { position: absolute; padding: 0; margin: 0; display: none; }
+.imgbox-bg { position: absolute; width: 20px; height: 20px; }
+
+
+
+
+
+
+
+
+
+
+
+#foot{
+	background-color:#222222;
+	height: 200px;
+}
+#foot a{
+	color: #FFFFFF;
+	text-decoration-line: none;
+}
+.footbody{
+	background-color:#222222;
+	width: 30%;
+	height: 175px;
+	margin: 25px 20px 0px 20px;
+	float: left;
+	color: #FFFFFF;
+}
+.light{
+	width: 1px;
+	float: left;
+	margin: 20px 0 20px 0;
+	height: 160px;
+	border-left: #FFFFFF solid 0.5px;
+}

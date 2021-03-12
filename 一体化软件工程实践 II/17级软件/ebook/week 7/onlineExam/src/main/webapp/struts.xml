@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="ct"  namespace="/" extends="struts-default" >
+		
+		<!-- 管理员action -->
+		<action name="admin_*" class="adminUserAction" method="{1}">
+			<!-- 管理员登录 -->
+			<result name="alogin">/adminLogin.jsp</result>
+			<!-- 登录成功 -->
+			<result name="loginSuccessadmin">/admin/all.jsp</result>
+			<!-- 登录失败 -->
+			<result name="loginFailadmin">/adminLogin.jsp</result>
+			<!-- 查看信息 -->
+			<result name="ckxxadmin">/admin/ckxx.jsp</result>
+			<!-- 修改密码 -->
+			<result name="upwadmin">/admin/upw.jsp</result>
+			<!-- 修改成功 -->
+			<result name="updateadminPW">/teacher/upwsuccess.jsp</result>
+			<!-- 安全退出 -->
+			<result name="sessionDestoryadmin">/adminLogin.jsp</result>
+		</action>
+	<!-- 教师action -->
+		<action name="teacher_*" class="teacherAction" method="{1}">
+			<!-- 教师登录 -->
+			<result name="alogin">teacherLogin.jsp</result>
+			<!-- 登录成功 -->
+			<result name="loginSuccessadmin">/teacher/all.jsp</result>
+			<!-- 登录失败 -->
+			<result name="loginFailadmin">/teacherLogin.jsp</result>
+			<!-- 查看信息 -->
+			<result name="ckxxteacher">/teacher/ckxx.jsp</result>
+			<!-- 修改密码 -->
+			<result name="upwteacher">/teacher/upw.jsp</result>
+			<!-- 修改成功 -->
+			<result name="updateteacherPW">/teacher/upwsuccess.jsp</result>
+			<!-- 安全退出 -->
+			<result name="sessionDestoryteacher">/teacherLogin.jsp</result>
+			<!-- 添加教师 -->
+			<result name="addTeacherAdmin">/admin/addteacher.jsp</result>
+			<!-- 添加教师实现 -->
+			<result name="addTeacherSX">/teacher/addqsuccess.jsp</result>
+		</action>
+	</package>
+</struts>
+ 

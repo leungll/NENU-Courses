@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.testcontrol.entity.TestControl" table="testcontrol">
+ 		<id name="tcid" column="tcid">
+ 			<generator class="native"/>
+ 		</id>
+ 		<property name="state" column="state"/>
+ 		<property name="mode" column="mode"/>
+ 		<property name="tname" column="tname"/>
+ 		<property name="tdate" column="tdate"/>
+ 		<many-to-one name="questionPaper" class="edu.nenu.onlineExam.questionpaper.entity.QuestionPaper" column="qpid"></many-to-one>
+ 	</class>
+ </hibernate-mapping>

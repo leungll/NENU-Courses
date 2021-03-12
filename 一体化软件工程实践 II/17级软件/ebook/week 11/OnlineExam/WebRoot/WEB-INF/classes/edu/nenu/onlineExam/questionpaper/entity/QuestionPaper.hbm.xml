@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.questionpaper.entity.QuestionPaper" table="questionpaper">
+ 		<id name="qpid" column="qpid">
+ 			<generator class="native"/>
+ 		</id>
+ 		<property name="qpdate" column="qpdate"></property>
+ 		<property name="time" column="time"></property>
+ 		<!-- 教师与班级的关联 -->
+ 		<many-to-one name="teacher" class="edu.nenu.onlineExam.teacheruser.entity.Teacher" column="tid"></many-to-one>
+ 		<set name="qpRelationq" lazy="false" cascade="save-update,delete">
+ 			<key column="qpid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.qprelationq.entity.QpRelationq"/>
+ 		</set>
+ 		<set name="testControl" lazy="false" cascade="save-update,delete">
+ 			<key column="qpid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.testcontrol.entity.TestControl"/>
+ 		</set>
+ 		<set name="testNote" lazy="false" cascade="save-update,delete">
+ 			<key column="qpid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.testnote.entity.TestNote"/>
+ 		</set>
+ 	</class>
+ </hibernate-mapping>

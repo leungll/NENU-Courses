@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_onlineexam?useSSL=false
+    username: root
+    password: mysql
+    server:
+      port:8080
+    servlet:
+      path"/springboot
+mybatis:
+
+  type-aliases-package: com.nenusoftware.onlineexam.entity
+
+  mapper-locations: classpath:mapper/*.xml

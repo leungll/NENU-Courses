@@ -1,0 +1,122 @@
+/*-----------------------------------------------------------------------------
+* @Description: 公共样式 (widget.css)
+* @Version: 	V1.0.0
+* @author: 		shenj(1073805310@qq.com)
+* @date			2014.09.15
+* ==NOTES:=============================================
+* v1.0.0(2014.09.15):
+* 	初始生成 
+* ---------------------------------------------------------------------------*/
+/*dialog样式*/
+.dlg-holder thead tr{
+	background: #438eb9;
+	color: #ffffff;
+}
+.dlg-holder thead th{
+	text-align: left;
+}
+.dlg-title{
+	float: left;
+}
+.dlg-close{
+	float: right;
+	cursor: pointer;
+}
+.dlg-holder tbody > tr:nth-child(2n+1) > td {
+    background-color: #ffffff;
+}
+.dlg-holder .content-holder{
+	background: #ffffff;
+	border-bottom: 0px solid #ffffff;
+}
+.dlg-holder tfoot{
+	border: 1px solid #ddd;
+	border-top: 0px solid #ffffff;
+	background: #ffffff;
+	text-align: center;
+}
+.dlg-holder .dlg-footer{
+	padding: 5px 0;
+}
+.dlg-holder tfoot button{
+	width: 60px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #438eb9 !important;
+	border: 0px solid #438eb9;
+	color: #ffffff;
+}
+.dlg-holder .control-area .radio,
+.dlg-holder .control-area .checkbox{
+	padding-top: 0;
+}
+/*defender样式*/
+.error-field,.ks-select-calendar.error-field{
+	border: 1px solid #d15b47;
+}
+/*overlay样式*/
+.pw-tooltip{
+	display: none;
+	position: absolute;
+	left: 100px;
+	top: 200px;
+	min-width: 15px;
+	min-height: 15px;
+	box-shadow: 0 0 2px -1px #333333;
+	border: 1px solid #F1D031;
+	background: #FFFFA3;
+}
+.pw-tooltip .tip-arrow{
+	display: block;
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: url(../img/arrow.png) left bottom no-repeat;
+}
+.pw-tooltip .tl{
+	top: -8px;
+	left: 0;
+	background-position: 0 0 ;
+}
+.pw-tooltip .tc{
+	top: -8px;
+	left: 0;
+	background-position: 0 -10px;
+}
+.pw-tooltip .tr{
+	top: -8px;
+	right: 0;
+	background-position: 0 -20px;
+}
+
+.pw-tooltip .rt{
+	background-position: -10px 0;
+}
+.pw-tooltip .rc{
+	background-position: -10px -10px;
+}
+.pw-tooltip .rb{
+	background-position: -10px -20px;
+}
+.pw-tooltip .bl{
+	background-position: -20px 0;
+}
+.pw-tooltip .bc{
+	background-position: -20px -10px;
+}
+.pw-tooltip .br{
+	background-position: -20px -20px;
+}
+.pw-tooltip .lt{
+	background-position: -30px 0;
+}
+.pw-tooltip .lc{
+	background-position: -30px -10px;
+}
+.pw-tooltip .lb{
+	background-position: -30px -20px;
+}
+
+.pw-tooltip .tip-content{
+	margin: 3px;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.questiontype.entity.QuestionType" table="questiontype">
+ 		<id name="qtid" column="qtid">
+ 			<generator class="native"></generator>
+ 		</id>
+ 		<property name="qtname" column="qtname"/>
+ 		<property name="score" column="score"/>
+ 		<set name="questions" lazy="false" cascade="save-update,delete">
+ 			<key column="qtid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.question.entity.Question"/>
+ 		</set>
+ 	</class>
+ </hibernate-mapping>

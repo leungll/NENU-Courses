@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.question.entity.Question" table="question">
+ 		<id name="qid" column="qid">
+ 			<generator class="native"/>
+ 		</id>
+ 		<property name="qcontent" column="qcontent"/>
+ 		<property name="aoption" column="aoption"/>
+ 		<property name="boption" column="boption"/>
+ 		<property name="coption" column="coption"/>
+ 		<property name="doption" column="doption"/>
+ 		<property name="qanswer" column="qanswer"/>
+ 		<property name="qanalysis" column="qanalysis"/>
+ 		<property name="oword" column="oword"/>
+ 		<property name="qscope" column="qscope"/>
+ 		<property name="qdifficulty" column="qdifficulty"/>
+ 		<property name="qdate" column="qdate"/>
+ 		<many-to-one name="questionType" class="edu.nenu.onlineExam.questiontype.entity.QuestionType" column="qtid"></many-to-one>
+ 		<many-to-one name="teacher" class="edu.nenu.onlineExam.teacheruser.entity.Teacher" column="tid"></many-to-one>
+ 		
+ 		<set name="qpRelationq" lazy="false" cascade="save-update,delete">
+ 			<key column="qid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.qprelationq.entity.QpRelationq"/>
+ 		</set>
+ 		<set name="answerState" lazy="false" cascade="save-update,delete">
+ 			<key column="qid"></key>
+ 			<one-to-many class="edu.nenu.onlineExam.answerstate.entity.AnswerState"/>
+ 		</set>
+ 	</class>
+ </hibernate-mapping>

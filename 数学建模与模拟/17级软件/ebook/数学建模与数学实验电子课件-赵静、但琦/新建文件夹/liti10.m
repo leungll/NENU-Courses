@@ -1,0 +1,6 @@
+x=-3:0.1:3;
+    y=1:0.1:5;
+    [X,Y]=meshgrid(x,y);
+    Z=(X+Y).^2;
+    surf(X,Y,Z)
+    shading  flat    %将当前图形变得平滑

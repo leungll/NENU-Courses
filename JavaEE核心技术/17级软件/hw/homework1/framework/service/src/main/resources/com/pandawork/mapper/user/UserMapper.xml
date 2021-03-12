@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pandawork.mapper.user.UserMapper">
+
+    <resultMap id="user" type="com.pandawork.common.entity.user.User" >
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="power" column="power"/>
+        <result property="sig" column="sig"/>
+    </resultMap>
+
+    <!--<select id="selectById" resultMap="user">-->
+        <!--SELECT *-->
+        <!--FROM `t_user`-->
+        <!--WHERE `id` = #{id}-->
+    <!--</select>-->
+
+    <select id="selectByName" resultMap="user">
+        SELECT *
+        FROM `t_user`
+        WHERE `username`= #{username}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO `t_user`
+        (`username`, `password`,`sig`)
+        VALUES (#{user.username},#{user.password},
+          #{user.sig})
+    </insert>
+
+    <update id="update">
+        UPDATE `t_user`
+        SET `username` = #{user.username},
+            `password` = #{user.password},
+            `sig` = #{user.sig}
+        WHERE `id` = #{user.id}
+    </update>
+
+    <update id="update2">
+        UPDATE `t_user`
+        SET `power` = 1
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="delById">
+        DELETE FROM `t_user`
+        WHERE `id` = #{id}
+    </delete>
+
+    <select id="listAll" resultMap="user">
+        SELECT *
+        FROM `t_user`
+    </select>
+
+    <select id="pswIsTrue" resultMap="user">
+        SELECT * FROM `t_user`
+        WHERE`username`=#{username} and  `password`=#{password}
+    </select>
+
+</mapper>

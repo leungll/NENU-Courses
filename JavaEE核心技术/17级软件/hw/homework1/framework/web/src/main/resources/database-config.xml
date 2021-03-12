@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	"
+       default-autowire="byName" default-lazy-init="false">
+
+    <tx:annotation-driven></tx:annotation-driven>
+
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <property name="username" value="root"/>
+        <property name="password" value="mysql"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_javaee?defaultFetchSize=25&amp;useLocalSessionState=true&amp;elideSetAutoCommit=true&amp;useUsageAdvisor=false&amp;useReadAheadInput=false&amp;useUnbufferedInput=false&amp;cacheServerConfiguration=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull" />
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <property name="idleMaxAge" value="240"/>
+        <property name="maxConnectionsPerPartition" value="60"/>
+        <property name="minConnectionsPerPartition" value="20"/>
+        <property name="partitionCount" value="3"/>
+        <property name="acquireIncrement" value="10"/>
+        <property name="statementCacheSize" value="50"/>
+        <property name="releaseHelperThreads" value="3"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="com.pandawork.core.framework.dao.mybatis.SqlSessionFactoryBean">
+        <!-- db datasource -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 实体目录 -->
+
+        <property name="typeAliasesPackage" value="com.pandawork.common.entity;com.pandawork.common.common.dto;" />
+        <property name="mapperLocations">
+            <list>
+                <!--这个要配置 例如 classpath:com/pandawork/test/mapper/*Mapper.xml-->
+                <value>classpath:com/pandawork/mapper/*Mapper.xml</value>
+            </list>
+        </property>
+        <!-- 非接口实现的配置文件 -->
+        <property name="useTag" value="false" />
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="com.pandawork.core.framework.dao.mybatis.dataBaseSharing.template.RWSqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="mapper" class="com.pandawork.core.framework.dao.mybatis.dataBaseSharing.template.RWMapperScannerConfigurer">
+        <property name="basePackage" value="com.pandawork.mapper"></property>
+        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+    </bean>
+
+</beans>

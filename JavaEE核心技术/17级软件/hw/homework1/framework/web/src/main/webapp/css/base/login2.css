@@ -1,0 +1,248 @@
+@charset "utf-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	background: url(../../img/background/login.jpg);
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-attachment: fixed;
+}
+
+/*万能清除浮动开始*/
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-table;
+}
+/* Hides from IE-mac */
+
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+ul {
+	list-style: none;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+/*左边部分 导航*/
+.index_left {
+	width:22%;
+	height: 100%;
+	position: fixed;
+	background: #080808;
+}
+
+.logo img {
+	width:100%;
+}
+
+#nav_01 {
+	background: #787878;
+}
+
+.nav {
+	text-align: center;
+	height:300px;
+	overflow:hidden;
+}
+
+.nav ul li {
+	height: 50px;
+	line-height: 50px;
+	overflow:hidden;
+}
+
+.nav ul li:hover {
+	background: #787878;
+}
+
+.tel {
+	margin-left:8px;
+	font-size:12px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.tel ul li{
+	float:left;
+	padding:0px 8px;
+}
+
+.tel a{
+	color:#b3b5b8;
+}
+
+.tel a:hover{
+	color:#fff;
+}
+
+.tel_con {
+	color:#b3b5b8; font-size:14px;
+}
+
+
+/*登陆注册模块*/
+.transbox {
+	width:600px;
+	height:520px;
+	margin:7% 40%;
+	background-color:#ffffff;
+	border:1px solid black;
+	opacity:0.7;
+	filter:alpha(opacity=60);
+	box-shadow: 1px 5px 5px 1px #888888;
+}
+
+.form {
+	width: 460px;
+	margin: 0 auto;
+	height: 30px;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.form a {
+	color: #7b7f81;
+}
+
+.form a:hover {
+	color: #666;
+}
+
+.form-head {
+	padding: 5px 0;
+	text-align: center;
+}
+
+.form-head h2 {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.form-head p {
+	margin-top: 10px;
+	color: #7b7f81;
+}
+
+.form-head p a {
+	text-decoration: underline;
+}
+
+.form .narrow-input input {
+	width: 290px;
+	margin-right: 10px;
+}
+
+.form .sms-button {
+	display: inline-block;
+	width: 80px;
+	font-size: 14px;
+	text-align: right;
+	color: #22d18e;
+}
+
+.form .sms-button:hover {
+	color: #56e9b2;
+}
+
+.form .ui-button {
+	width: 100%;
+	margin: 50px 0 20px 0;
+}
+
+.form-body {
+	padding: 20px 40px;
+	color: #222;
+}
+
+.form-body .err-msg {
+	text-align: center;
+	color: #fc5c5c;
+}
+
+.ui-input {
+	position: relative;
+	padding: 8px 0;
+	border-bottom: 1px solid #dfe6e5;
+	font-size: 0;
+}
+
+.ui-input input {
+	width: 100%;
+	height: 30px;
+	border: 0;
+	font-size: 14px;
+	outline: none;
+}
+
+.forget-password {
+	margin-top: 10px;
+	text-align: right;
+}
+
+.ui-button {
+	height: 40px;
+	border: 0;
+	font-size: 14px;
+	outline: none;
+	cursor: pointer;
+}
+
+.ui-button--primary {
+	color: #fff;
+	background-color: #a6aaad;
+}
+.code {
+	font-family: Arial;
+	font-style: italic;
+	font-weight: bold;
+	border: 0;
+	letter-spacing: 3px;
+	color: blue;
+}
+.if_sure{
+	margin: 364px 180px;
+	text-align: center;
+}
+.if_sure h3{
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}

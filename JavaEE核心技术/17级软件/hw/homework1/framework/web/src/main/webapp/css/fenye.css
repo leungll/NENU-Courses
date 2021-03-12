@@ -1,0 +1,246 @@
+@charset "utf-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+}
+
+/*万能清除浮动开始*/
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-table;
+}
+/* Hides from IE-mac */
+
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+ul {
+	list-style: none;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	color: #e2dcdc;
+	text-decoration: none;
+	font-size: xx-small;
+}
+
+img {
+	border: none;
+}
+
+.main { width:96%;padding:0 2%;}
+/*左边部分 导航*/
+.index_left {
+	width:22%;
+	height: 100%;
+	position: fixed;
+	background: #080808;
+}
+
+.logo img {
+	width:100%;
+}
+
+#nav_01 {
+	background: #787878;
+}
+
+.nav {
+	text-align: center;
+	height:300px;
+	overflow:hidden;
+}
+
+.nav ul li {
+	height: 50px;
+	line-height: 50px;
+	overflow:hidden;
+}
+
+.nav ul li:hover {
+	background: #787878;
+}
+
+.tel {
+	margin-left:8px;
+	font-size:12px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.tel ul li{
+	float:left;
+	padding:0px 8px;
+}
+
+.tel a{
+	color:#b3b5b8;
+}
+
+.tel a:hover{
+	color:#fff;
+}
+
+.tel_con {
+	color:#b3b5b8; font-size:14px;
+}
+
+/*右边部分*/
+.index_right {
+	width:78%;
+}
+
+.banner img ,.banner_n img{
+	width:100%;
+}
+
+/*文字介绍*/
+.Introduce {
+	padding-top: 40px;
+}
+
+.title {
+	font-size: 18px;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+.Introduce_con {
+	line-height:34px;
+	text-indent:2em;
+}
+
+/*浮动框*/
+#mySidenav div {
+	position: fixed;
+	margin: 0 auto;
+	right: -235px;
+	transition: 0.3s;
+	padding: 15px;
+	width: 180px;
+	height: 623px;
+	text-decoration: none;
+	font-size: 20px;
+	color: black;
+	border-radius: 5px 0 0 5px;
+	border-width: 25px;
+	border-style: solid;
+	border-color: transparent transparent transparent black;
+	opacity: 0.5;
+}
+
+#mySidenav div:hover {
+	right: 0;
+}
+
+.float h4 {
+	top: 20px;
+	background-color: #F0F8FF;
+}
+
+#BUTTON{
+	background-image: url(../img/delete.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	height: 30px;
+	width: 30px;
+	margin-left: 220px;
+}
+
+/*----------关于我们------------------------*/
+.show_right{
+	width:78%;
+}
+/*  保持右边不被覆盖*/
+.newslist{
+	width:100%;
+}
+.newslist a{
+	color:#333;
+}
+.bor_bot{
+	clear:both;
+	border-bottom:solid 1px #e7e7e7;
+	overflow:hidden;padding-top:30px;
+	margin-bottom:25px;
+}
+.newslist_img {
+	width:30%;
+}
+.newslist_img img{
+	width:100%; height:180px;
+}
+.newslist ul{
+	overflow:hidden; clear:both; padding:0px; margin:0px;
+}
+.newslist ul li{
+	float:left; width:100%; margin:10px 0px;
+}
+.newslist_txt {
+	padding:10px;width:66%;
+}
+.newslist_txt h4, .newslist_txt h5{
+	margin:0px;
+	font-weight:normal;
+}
+.newslist_txt h4{
+	font-size:16px;
+	width:100%;
+	height:28px;
+	line-height:28px;
+	overflow:hidden;
+}
+.newslist_txt h4 a:hover{
+	color:#5f6d7e;
+}
+.newslist_txt h5{
+	color:#686868;
+	font-size:12px;
+	margin:5px 0px;}
+.newslist_txt_con {
+	line-height:24px;
+	height:120px;
+	overflow:hidden;
+	color:#666;
+}
+/*---------------收藏---------------------*/
+.love_button{
+	margin:2% 20% -3% 90%;
+	font-size: 30px;
+	padding: 0px -15px 0px 10px;
+	height:50px;
+	width: 38px;
+	border-color: white;
+	background-size: auto;
+	background-repeat: no-repeat;
+}
+.love_value{
+	display:none;
+}

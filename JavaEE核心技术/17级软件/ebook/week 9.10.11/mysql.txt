@@ -1,0 +1,35 @@
+create database spring;
+
+create table tbl_employee (
+id int (11) primary key auto_increment,
+last_name varchar(50),
+email varchar(50),
+gender char(1)
+);
+
+insert into tbl_employee values (1001, "Tom", "tom@sina.com","1");
+
+create table book (
+isbn varchar(50) primary key,
+book_name varchar(100),
+price INT
+);
+
+create table book_stock (
+isbn varchar(50) primary key,
+stock INT
+);
+
+create table account (
+username varchar(50) primary key,
+balance int,
+check (balance >=0)
+);
+
+insert into book values ("1001", "Java EE",100);
+insert into book values ("1002", "C#",50);
+
+insert into book_stock values ("1001", 10);
+insert into book_stock values ("1002",2);
+
+insert into account values ("tom", 160);

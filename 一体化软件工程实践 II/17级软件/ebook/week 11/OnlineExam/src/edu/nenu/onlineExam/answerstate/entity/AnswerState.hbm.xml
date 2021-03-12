@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.answerstate.entity.AnswerState" table="answerstate">
+ 		<id name="anid" column="anid">
+ 			<generator class="native"/>
+ 		</id>
+ 		<property name="state" column="state"/>
+ 		<many-to-one name="question" class="edu.nenu.onlineExam.question.entity.Question" column="qid"></many-to-one>
+ 		<many-to-one name="testNote" class="edu.nenu.onlineExam.testnote.entity.TestNote" column="tnid"></many-to-one>
+ 	</class>
+ </hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ 	<class name="edu.nenu.onlineExam.bj.entity.BJ" table="bj">
+ 		<id name="bjid" column="bjid">
+ 		  <generateor class="native"></generateor>
+ 		</id>
+ 		<property name="bjname" column="bjname"/>
+ 		<many-to-one name="teacher" class="edu.cn.teacheruser.enity.Teacher" column="tid">
+ 		</many-to-one>
+ 	</class>
+ </hibernate-mapping>
