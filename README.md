@@ -124,7 +124,7 @@ Guidance for courses in School of Information Science and Technology, NENU
 - Issue、PR、纠错、资料、选课/考试攻略，完全欢迎！
 - 来自大家的关注、维护和贡献，才是让这个项目继续存在的动力
 - 如果您有更好的建议，请在 Issues 中发表您的看法并加以讨论；如果您想直接联系我们，请向我们发送邮件：leungll0316@gmail.com ，您的建议是对我们的最好帮助！
-- 感谢对本项目贡献的同学（排名按照 commit 先后顺序）：[leungll](https://github.com/leungll)（17级软件） …… 以及在电脑前的您！
+- 感谢对本项目贡献的同学（排名按照 commit 先后顺序）：[leungll](https://github.com/leungll)（17级软件）、[Kongyy](https://github.com/2420795001)（17级软件） …… 以及在电脑前的您！
 
 ## 许可
 由贡献者编写部分的许可：
