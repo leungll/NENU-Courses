@@ -69,7 +69,7 @@ Guidance for courses in School of Information Science and Technology, NENU
 - 盗版/破解版/绿色版付费软件及其安装包
 - 课程/教师主页上列出的内容（请在获得教师许可后上传）
 
-如果您认为本仓库的一些文件侵犯了您的权益，请想我们发送邮件：leungll0316@gmail.com ，确认属实后将即刻予以删除。
+如果您认为本仓库的一些文件侵犯了您的权益，请向我们发送邮件：leungll0316@gmail.com ，确认属实后将即刻予以删除。
 
 ## 相关说明
 ### 命名说明
