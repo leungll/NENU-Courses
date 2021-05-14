@@ -75,7 +75,7 @@ Guidance for courses in School of Information Science and Technology, NENU
 ### 命名说明
 - 请避免在文件中出现老师的具体名字，请用您 **所在年级** 指代，比如您是 17级软件 上 编译原理 的 `leungll`，请在 `编译原理/17级软件/` 中上传对应资料
 - 如果可以，请在 `README.md` 文件中添加自己的想法（可选）
-- 对于老师的评价可写在对应课程的 `README.md` 中，老师的名字请用拼音指代
+- 对于老师的评价可写在对应课程的 `README.md` 中，老师的名字请用 **拼音** 指代
 - 如果想上传课件（请确保无版权问题），推荐使用 `pdf` 格式，避免系统差
 
 ### Watch、Star、Fork的说明
