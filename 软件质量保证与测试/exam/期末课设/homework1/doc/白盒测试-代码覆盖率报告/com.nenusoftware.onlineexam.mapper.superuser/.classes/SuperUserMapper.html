@@ -1,0 +1,79 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SuperUserMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.superuser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SuperUserMapper (com.nenusoftware.onlineexam.mapper.superuser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SuperUserMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.superuser;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>5</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * @Author:Kongyy
+<i>9</i>&nbsp; * @Description: ScoreMapper的接口层
+<i>10</i>&nbsp; * @Date: 12:40 2020/6/16
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;@Mapper
+<i>13</i>&nbsp;@Repository
+<i>14</i>&nbsp;public interface SuperUserMapper {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * 修改用户权限
+<i>18</i>&nbsp;     * @param userId 用户编号
+<i>19</i>&nbsp;     * @return 是否修改成功
+<i>20</i>&nbsp;     * @throws Exception 报错信息
+<i>21</i>&nbsp;     */
+<i>22</i>&nbsp;    public boolean updateUserPower(@Param(&quot;userId&quot;) int userId) throws Exception;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    /**
+<i>25</i>&nbsp;     * 删除用户
+<i>26</i>&nbsp;     * @param userId 用户编号
+<i>27</i>&nbsp;     * @return 是否修改成功
+<i>28</i>&nbsp;     * @throws Exception 报错信息
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    public boolean deleteUser(@Param(&quot;userId&quot;) int userId) throws Exception;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

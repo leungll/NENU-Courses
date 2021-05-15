@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDetailServiceTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.paperdetail</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDetailServiceTest (com.nenusoftware.onlineexam.paperdetail)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaperDetailServiceTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.1%
+  </span>
+  <span class="absValue">
+    (68/ 70)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.paperdetail;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.alibaba.fastjson.JSONArray;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.entity.paperdetail.PaperDetail;
+<i>6</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>7</i>&nbsp;import com.nenusoftware.onlineexam.service.paperdetail.PaperDetailService;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import org.junit.Test;
+<i>10</i>&nbsp;import org.junit.runner.RunWith;
+<i>11</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>12</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+<i>13</i>&nbsp;import org.springframework.test.context.junit4.SpringRunner;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * @Author:Liangll
+<i>19</i>&nbsp; * @Description: 测试PaperDetailService的各类方法
+<i>20</i>&nbsp; * @Date: 13:13 2020/6/21
+<i>21</i>&nbsp; */
+<b class="fc"><i>22</i>&nbsp;@RunWith(SpringRunner.class)</b>
+<i>23</i>&nbsp;@SpringBootTest
+<b class="fc"><i>24</i>&nbsp;public class PaperDetailServiceTest {</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    @Autowired
+<i>27</i>&nbsp;    PaperService paperService;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Autowired
+<i>30</i>&nbsp;    PaperDetailService paperDetailService;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Test
+<i>33</i>&nbsp;    public void testListAllPaperDetail() throws Exception{
+<b class="fc"><i>34</i>&nbsp;        System.out.println(paperDetailService.listAllPaperDetail());</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Test
+<i>38</i>&nbsp;    public void testListPaperDetailByPaperId() throws Exception{
+<b class="fc"><i>39</i>&nbsp;        String paperName = &quot;新增一张软件质量保证期末考试试卷&quot;;</b>
+<b class="fc"><i>40</i>&nbsp;        Paper paper = new Paper();</b>
+<b class="fc"><i>41</i>&nbsp;        paper.setPaperName(paperName);</b>
+<b class="fc"><i>42</i>&nbsp;        paperService.addPaper(paper);</b>
+<b class="fc"><i>43</i>&nbsp;        int paperId = paperService.queryPaperIdByName(paperName).getPaperId();</b>
+<b class="fc"><i>44</i>&nbsp;        System.out.println(paperId);</b>
+<b class="fc"><i>45</i>&nbsp;        System.out.println(paperDetailService.listPaperDetailByPaperId(paperId));</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    @Test
+<i>49</i>&nbsp;    public void testAddPaperDetail() throws Exception {
+<b class="fc"><i>50</i>&nbsp;        PaperDetail paperDetail = new PaperDetail();</b>
+<i>51</i>&nbsp;//        paperDetail.setPaperDetailId(2);
+<i>52</i>&nbsp;//        paperDetail.setPaperId(2);
+<b class="fc"><i>53</i>&nbsp;        paperDetail.setExerciseId(1);</b>
+<b class="fc"><i>54</i>&nbsp;        paperDetail.setContent(&quot;增加题目内容test&quot;);</b>
+<b class="fc"><i>55</i>&nbsp;        paperDetail.setTypeA(&quot;&quot;);</b>
+<b class="fc"><i>56</i>&nbsp;        paperDetail.setTypeB(&quot;&quot;);</b>
+<b class="fc"><i>57</i>&nbsp;        paperDetail.setTypeC(&quot;&quot;);</b>
+<b class="fc"><i>58</i>&nbsp;        paperDetail.setTypeD(&quot;&quot;);</b>
+<b class="fc"><i>59</i>&nbsp;        paperDetail.setAnswer(&quot;测试增加正确答案&quot;);</b>
+<b class="fc"><i>60</i>&nbsp;        paperDetail.setAnswer2(&quot;这个字段为空&quot;);</b>
+<b class="fc"><i>61</i>&nbsp;        paperDetail.setAnswer3(&quot;这个字段为空&quot;);</b>
+<b class="fc"><i>62</i>&nbsp;        paperDetail.setExerciseType(&quot;简答题&quot;);</b>
+<b class="fc"><i>63</i>&nbsp;        paperDetail.setScore(120);</b>
+<b class="fc"><i>64</i>&nbsp;        paperDetailService.addPaperDetail(paperDetail);</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    @Test
+<i>68</i>&nbsp;    public void testDeletePaperDetail() throws Exception{
+<b class="fc"><i>69</i>&nbsp;        System.out.println(paperDetailService.deletePaperDetail(1));</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    @Test
+<i>73</i>&nbsp;    public void testUpdatePaper() throws Exception{
+<b class="fc"><i>74</i>&nbsp;        PaperDetail paperDetail = new PaperDetail();</b>
+<b class="fc"><i>75</i>&nbsp;        paperDetail.setPaperDetailId(36);</b>
+<b class="fc"><i>76</i>&nbsp;        paperDetail.setContent(&quot;测试修改题目内容test&quot;);</b>
+<b class="fc"><i>77</i>&nbsp;        paperDetail.setTypeA(&quot;测试A&quot;);</b>
+<b class="fc"><i>78</i>&nbsp;        paperDetail.setTypeB(&quot;测试B&quot;);</b>
+<b class="fc"><i>79</i>&nbsp;        paperDetail.setTypeC(&quot;测试C&quot;);</b>
+<b class="fc"><i>80</i>&nbsp;        paperDetail.setTypeD(&quot;测试D&quot;);</b>
+<b class="fc"><i>81</i>&nbsp;        paperDetail.setAnswer(&quot;测试修改正确答案&quot;);</b>
+<b class="fc"><i>82</i>&nbsp;        paperDetail.setAnswer2(&quot;得分点2&quot;);</b>
+<b class="fc"><i>83</i>&nbsp;        paperDetail.setAnswer3(&quot;得分点3&quot;);</b>
+<b class="fc"><i>84</i>&nbsp;        paperDetail.setScore(120);</b>
+<b class="fc"><i>85</i>&nbsp;        paperDetailService.updatePaperDetail(paperDetail);</b>
+<b class="fc"><i>86</i>&nbsp;        System.out.println(&quot;修改题目信息成功!&quot;);</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Test
+<i>90</i>&nbsp;    public void testQueryPaperDetail() throws Exception{
+<b class="fc"><i>91</i>&nbsp;        String keyWord = &quot;一&quot;;</b>
+<b class="fc"><i>92</i>&nbsp;        System.out.println(paperDetailService.queryPaperDetail(keyWord));</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    @Test
+<i>96</i>&nbsp;    public void testQueryExerciseByTypes(){
+<b class="fc"><i>97</i>&nbsp;        String choiceType = &quot;选择题&quot;;</b>
+<b class="fc"><i>98</i>&nbsp;        String judgeType = &quot;判断题&quot;;</b>
+<b class="fc"><i>99</i>&nbsp;        String completionType = &quot;填空题&quot;;</b>
+<b class="fc"><i>100</i>&nbsp;        String shortAnswerType = &quot;简答题&quot;;</b>
+<b class="fc"><i>101</i>&nbsp;        List&lt;PaperDetail&gt; choiceList = null;</b>
+<b class="fc"><i>102</i>&nbsp;        List&lt;PaperDetail&gt; judgeList = null;</b>
+<b class="fc"><i>103</i>&nbsp;        List&lt;PaperDetail&gt; completionList = null;</b>
+<b class="fc"><i>104</i>&nbsp;        List&lt;PaperDetail&gt; shortAnswerList = null;</b>
+<i>105</i>&nbsp;        try {
+<b class="fc"><i>106</i>&nbsp;            choiceList = paperDetailService.queryExerciseByTypes(choiceType);</b>
+<b class="fc"><i>107</i>&nbsp;            judgeList = paperDetailService.queryExerciseByTypes(judgeType);</b>
+<b class="fc"><i>108</i>&nbsp;            completionList = paperDetailService.queryExerciseByTypes(completionType);</b>
+<b class="fc"><i>109</i>&nbsp;            shortAnswerList = paperDetailService.queryExerciseByTypes(shortAnswerType);</b>
+<b class="nc"><i>110</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>111</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>112</i>&nbsp;        }</b>
+<b class="pc"><i>113</i>&nbsp;        assert judgeList != null;</b>
+<b class="fc"><i>114</i>&nbsp;        choiceList.addAll(judgeList);</b>
+<b class="pc"><i>115</i>&nbsp;        assert completionList != null;</b>
+<b class="fc"><i>116</i>&nbsp;        choiceList.addAll(completionList);</b>
+<b class="pc"><i>117</i>&nbsp;        assert shortAnswerList != null;</b>
+<b class="fc"><i>118</i>&nbsp;        choiceList.addAll(shortAnswerList);</b>
+<b class="fc"><i>119</i>&nbsp;        System.out.println(choiceList);</b>
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    @Test
+<i>123</i>&nbsp;    public void testQueryExerciseItemsById() throws Exception{
+<b class="fc"><i>124</i>&nbsp;        int paperId = 2;</b>
+<b class="fc"><i>125</i>&nbsp;        System.out.println(paperDetailService.queryExerciseItemsById(paperId));</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @Test
+<i>129</i>&nbsp;    public void testJudgeQuestion() throws Exception{
+<b class="fc"><i>130</i>&nbsp;        String jsonString = &quot;[{\&quot;solution\&quot;:\&quot;后置双摄\&quot;,\&quot;paperDetailId\&quot;:\&quot;31\&quot;,\&quot;paperId\&quot;:\&quot;2\&quot;}, {\&quot;solution\&quot;:\&quot;A\&quot;,\&quot;paperDetailId\&quot;:\&quot;11\&quot;,\&quot;paperId\&quot;:\&quot;2\&quot;},{\&quot;solution\&quot;:\&quot;A\&quot;,\&quot;paperDetailId\&quot;:\&quot;4\&quot;,\&quot;paperId\&quot;:\&quot;2\&quot;}]&quot;;</b>
+<b class="fc"><i>131</i>&nbsp;        JSONArray jsonArray = JSONArray.parseArray(jsonString);</b>
+<b class="fc"><i>132</i>&nbsp;        int result = paperDetailService.judgeQuestion(jsonArray, 1);</b>
+<b class="fc"><i>133</i>&nbsp;        System.out.println(result);</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    @Test
+<i>137</i>&nbsp;    public void testQueryIdByContent() throws Exception{
+<b class="fc"><i>138</i>&nbsp;        String content = &quot;请解释什么是性能测试。&quot;;</b>
+<b class="fc"><i>139</i>&nbsp;        System.out.println(paperDetailService.queryIdByContent(content).getPaperDetailId());</b>
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    @Test
+<i>143</i>&nbsp;    public void testQueryQuestion() throws Exception{
+<b class="fc"><i>144</i>&nbsp;        System.out.println(paperDetailService.queryQuestion(2));</b>
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

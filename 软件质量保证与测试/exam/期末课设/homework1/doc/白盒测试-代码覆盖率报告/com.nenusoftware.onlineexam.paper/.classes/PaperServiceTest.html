@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperServiceTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.paper</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperServiceTest (com.nenusoftware.onlineexam.paper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaperServiceTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/ 29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.paper;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>5</i>&nbsp;import org.junit.Test;
+<i>6</i>&nbsp;import org.junit.runner.RunWith;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+<i>9</i>&nbsp;import org.springframework.test.context.junit4.SpringRunner;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;/**
+<i>12</i>&nbsp; * @Author:Liangll
+<i>13</i>&nbsp; * @Description: 测试PaperService的各类方法
+<i>14</i>&nbsp; * @Date: 12:21 2020/6/21
+<i>15</i>&nbsp; */
+<i>16</i>&nbsp;@RunWith(SpringRunner.class)
+<i>17</i>&nbsp;@SpringBootTest
+<b class="fc"><i>18</i>&nbsp;public class PaperServiceTest {</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Autowired
+<i>21</i>&nbsp;    PaperService paperService;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @Test
+<i>24</i>&nbsp;    public void testListAllPaper() throws Exception{
+<b class="fc"><i>25</i>&nbsp;        System.out.println(paperService.listAllPaper());</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Test
+<i>29</i>&nbsp;    public void testListPublishPaper() throws Exception{
+<b class="fc"><i>30</i>&nbsp;        System.out.println(paperService.listPublishPaper(1));</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Test
+<i>34</i>&nbsp;    public void testAddPaper() throws Exception {
+<b class="fc"><i>35</i>&nbsp;        String paperName = &quot;新增一张试卷&quot;;</b>
+<b class="fc"><i>36</i>&nbsp;        Paper paper = new Paper();</b>
+<b class="fc"><i>37</i>&nbsp;        paper.setPaperName(paperName);</b>
+<b class="fc"><i>38</i>&nbsp;        paper.setStatus(0);</b>
+<b class="fc"><i>39</i>&nbsp;        paper.setBeginTime(null);</b>
+<b class="fc"><i>40</i>&nbsp;        paper.setDuration(null);</b>
+<b class="fc"><i>41</i>&nbsp;        paperService.addPaper(paper);</b>
+<b class="fc"><i>42</i>&nbsp;        System.out.println(paperService.queryPaperIdByName(paperName).getPaperId());</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Test
+<i>46</i>&nbsp;    public void testDeletePaper() throws Exception{
+<b class="fc"><i>47</i>&nbsp;        paperService.deletePaper(1);</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    @Test
+<i>51</i>&nbsp;    public void testUpdatePaper() throws Exception{
+<b class="fc"><i>52</i>&nbsp;        Paper paper = new Paper();</b>
+<b class="fc"><i>53</i>&nbsp;        paper.setPaperId(3);</b>
+<b class="fc"><i>54</i>&nbsp;        paper.setPaperName(&quot;测试修改试卷&quot;);</b>
+<b class="fc"><i>55</i>&nbsp;        paperService.updatePaper(paper);</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    @Test
+<i>59</i>&nbsp;    public void testQueryPaperName() throws Exception{
+<b class="fc"><i>60</i>&nbsp;        String keyWord = &quot;试卷&quot;;</b>
+<b class="fc"><i>61</i>&nbsp;        System.out.println(paperService.queryPaperName(keyWord));</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Test
+<i>65</i>&nbsp;    public void testQueryPaperNameById() throws Exception{
+<b class="fc"><i>66</i>&nbsp;        int paperId = 2;</b>
+<b class="fc"><i>67</i>&nbsp;        System.out.println(paperService.queryPaperNameById(paperId).getPaperName());</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @Test
+<i>71</i>&nbsp;    public void testQueryPaperIdByName() throws Exception{
+<b class="fc"><i>72</i>&nbsp;        String paperName = &quot;2020年春季学期软件质量保证与测试期末考试&quot;;</b>
+<b class="fc"><i>73</i>&nbsp;        System.out.println(paperService.queryPaperIdByName(paperName).getPaperId());</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Test
+<i>77</i>&nbsp;    public void testPublishPaper() throws Exception{
+<b class="fc"><i>78</i>&nbsp;        Paper paper = new Paper();</b>
+<b class="fc"><i>79</i>&nbsp;        paper.setPaperId(2);</b>
+<b class="fc"><i>80</i>&nbsp;        paper.setStatus(1);</b>
+<b class="fc"><i>81</i>&nbsp;        paper.setBeginTime(&quot;开始:2020年6月8日15时0分0秒&quot;);</b>
+<b class="fc"><i>82</i>&nbsp;        paper.setDuration(&quot;120&quot;);</b>
+<b class="fc"><i>83</i>&nbsp;        paper.setEndTime(&quot;结束:2020年6月30日23时59分59秒&quot;);</b>
+<b class="fc"><i>84</i>&nbsp;        paperService.publishPaper(paper);</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;//    @Test
+<i>88</i>&nbsp;//    public void testConvertTime() throws Exception{
+<i>89</i>&nbsp;//        String str = &quot;开始:1999年10月21日7时32分20秒&quot;;
+<i>90</i>&nbsp;//        int time[] = new int[6];
+<i>91</i>&nbsp;//        time = paperService.extractTime(str);
+<i>92</i>&nbsp;//        for(int i=0;i&lt;6;i++){
+<i>93</i>&nbsp;//            System.out.println(time[i]);
+<i>94</i>&nbsp;//        }
+<i>95</i>&nbsp;//    }
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

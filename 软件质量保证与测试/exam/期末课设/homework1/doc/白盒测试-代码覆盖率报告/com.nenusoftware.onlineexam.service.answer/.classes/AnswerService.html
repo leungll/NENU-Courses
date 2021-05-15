@@ -1,0 +1,86 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AnswerService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.answer</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AnswerService (com.nenusoftware.onlineexam.service.answer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AnswerService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.answer;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.answer.Answer;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * @Author:kongyy
+<i>9</i>&nbsp; * @Description: AnswerService的接口层
+<i>10</i>&nbsp; * @Date: 20:06 2020/6/15
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface AnswerService {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * 列出所有答题信息
+<i>16</i>&nbsp;     * @return 返回List形式的答题信息
+<i>17</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    public List&lt;Answer&gt; listAllAnswer() throws Exception;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * 添加答题信息
+<i>24</i>&nbsp;     * @param answer answer实体
+<i>25</i>&nbsp;     * @return 添加成功，返回true，添加失败则返回false
+<i>26</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    public boolean addAnswer(Answer answer) throws Exception;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * 删除某条答题信息
+<i>33</i>&nbsp;     * @param answerId 答案的id
+<i>34</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>35</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public boolean deleteAnswer(int answerId) throws Exception;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

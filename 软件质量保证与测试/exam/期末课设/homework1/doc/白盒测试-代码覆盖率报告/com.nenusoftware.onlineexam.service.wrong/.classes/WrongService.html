@@ -1,0 +1,83 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WrongService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.wrong</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WrongService (com.nenusoftware.onlineexam.service.wrong)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">WrongService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.wrong;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.wrong.Wrong;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * @Author:kongyy
+<i>9</i>&nbsp; * @Description: WrongService的接口层
+<i>10</i>&nbsp; * @Date: 23:49 2020/6/16
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface WrongService {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * 添加错题
+<i>16</i>&nbsp;     * @param wrong 要添加的wrong对象
+<i>17</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    public void addWrong(Wrong wrong) throws Exception;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * 列出用户错题
+<i>23</i>&nbsp;     * @param userId 用户id
+<i>24</i>&nbsp;     * @return 返回通过用户id查找对应该用户的错题
+<i>25</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    public List&lt;Wrong&gt; listWrongByUserId(int userId) throws Exception;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * 删除错题
+<i>31</i>&nbsp;     * @param wrongId 错题id
+<i>32</i>&nbsp;     * @return 如果删除成功，则返回true，否则返回false
+<i>33</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    public boolean deleteWrong(int wrongId) throws Exception;
+<i>36</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

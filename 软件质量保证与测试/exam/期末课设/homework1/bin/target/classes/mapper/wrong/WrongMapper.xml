@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.wrong.WrongMapper">
+
+    <resultMap id="wrong" type="com.nenusoftware.onlineexam.entity.wrong.Wrong">
+        <id property="wrongId" column="wrongId"/>
+        <result property="userId" column="userId"/>
+        <result property="paperId" column="paperId"/>
+        <result property="paperDetailId" column="paperDetailId"/>
+        <result property="answer" column="answer"/>
+        <result property="right" column="right"/>
+        <result property="score" column="score"/>
+        <result property="nowScore" column="nowScore"/>
+    </resultMap>
+
+    <insert id="addWrong">
+        INSERT INTO `t_wrong`
+        (`userId`,`paperId`,`paperDetailId`, `answer`, `right`, `score`, `nowScore`)
+        VALUES (#{wrong.userId}, #{wrong.paperId},#{wrong.paperDetailId},#{wrong.answer} ,#{wrong.right},#{wrong.score},#{wrong.nowScore})
+    </insert>
+
+    <select id="listWrongByUserId" resultMap="wrong">
+        SELECT *
+        FROM t_wrong
+        WHERE userId=#{userId}
+    </select>
+
+    <delete id="deleteWrong">
+        DELETE FROM t_wrong
+        WHERE wrongId = #{wrongId}
+    </delete>
+
+</mapper>

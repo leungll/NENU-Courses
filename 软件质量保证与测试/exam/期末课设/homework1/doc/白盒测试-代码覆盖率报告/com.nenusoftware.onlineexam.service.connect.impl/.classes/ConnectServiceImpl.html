@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ConnectServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.connect.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ConnectServiceImpl (com.nenusoftware.onlineexam.service.connect.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.1%
+  </span>
+  <span class="absValue">
+    (52/ 53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.connect.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.connect.Connect;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.mapper.connect.ConnectMapper;
+<i>6</i>&nbsp;import com.nenusoftware.onlineexam.service.connect.ConnectService;
+<i>7</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>8</i>&nbsp;import org.springframework.stereotype.Service;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import javax.annotation.Resource;
+<i>11</i>&nbsp;import java.text.SimpleDateFormat;
+<i>12</i>&nbsp;import java.util.Calendar;
+<i>13</i>&nbsp;import java.util.Collections;
+<i>14</i>&nbsp;import java.util.Date;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * @Author:Liangll
+<i>19</i>&nbsp; * @Description: ConnectService的底层实现方法
+<i>20</i>&nbsp; * @Date: 22:53 2020/6/17
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;@Service
+<b class="fc"><i>23</i>&nbsp;public class ConnectServiceImpl implements ConnectService {</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    @Resource
+<i>26</i>&nbsp;    ConnectMapper connectMapper;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Resource
+<i>29</i>&nbsp;    PaperService paperService;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * 通过试卷编号列出试卷详细信息
+<i>33</i>&nbsp;     * @param paperId 试卷编号
+<i>34</i>&nbsp;     * @param exerciseType 试题类型
+<i>35</i>&nbsp;     * @return 返回 List形式的试卷详细信息
+<i>36</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public List&lt;Connect&gt; listAllConnect(int paperId, String exerciseType) throws Exception{
+<b class="fc"><i>40</i>&nbsp;        List&lt;Connect&gt; connectList = Collections.emptyList();</b>
+<b class="fc"><i>41</i>&nbsp;        connectList = connectMapper.listAllConnect(paperId, exerciseType);</b>
+<b class="fc"><i>42</i>&nbsp;        return connectList;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    /**
+<i>46</i>&nbsp;     * 增加试卷详细信息
+<i>47</i>&nbsp;     * @param connect 试卷详细信息实体
+<i>48</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    @Override
+<i>51</i>&nbsp;    public void addConnect(Connect connect) throws Exception {
+<b class="fc"><i>52</i>&nbsp;        connectMapper.addConnect(connect);</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * 判断当前时间是否在答题时间内
+<i>57</i>&nbsp;     * @param paperId 试卷id
+<i>58</i>&nbsp;     * @return 如果在时间段内，则返回true；如果不在时间段内则返回false
+<i>59</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    @Override
+<i>62</i>&nbsp;    public boolean isInTheTime(int paperId) throws Exception{
+<b class="fc"><i>63</i>&nbsp;        Paper paper = paperService.queryPaperNameById(paperId);</b>
+<b class="fc"><i>64</i>&nbsp;        Date date1 = new Date();</b>
+<b class="fc"><i>65</i>&nbsp;        Date date2 = new Date();</b>
+<b class="fc"><i>66</i>&nbsp;        Date date3 = new Date();</b>
+<b class="fc"><i>67</i>&nbsp;        String str1 = paper.getBeginTime();</b>
+<b class="fc"><i>68</i>&nbsp;        String str2 = paper.getEndTime();</b>
+<b class="fc"><i>69</i>&nbsp;        String[] begin = paperService.extractTime(str1);</b>
+<b class="fc"><i>70</i>&nbsp;        String[] end = paperService.extractTime(str2);</b>
+<b class="fc"><i>71</i>&nbsp;        String[] now = new String[6];</b>
+<b class="fc"><i>72</i>&nbsp;        Calendar calendar=Calendar.getInstance();</b>
+<b class="fc"><i>73</i>&nbsp;        now[0] = String.valueOf(calendar.get(Calendar.YEAR));</b>
+<b class="fc"><i>74</i>&nbsp;        now[1] = String.valueOf(calendar.get(Calendar.MONTH)+1);</b>
+<b class="fc"><i>75</i>&nbsp;        now[2] = String.valueOf(calendar.get(Calendar.DATE));</b>
+<b class="fc"><i>76</i>&nbsp;        now[3] = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));</b>
+<b class="fc"><i>77</i>&nbsp;        now[4] = String.valueOf(calendar.get(Calendar.MINUTE));</b>
+<b class="fc"><i>78</i>&nbsp;        now[5] = String.valueOf(calendar.get(Calendar.SECOND));</b>
+<b class="fc"><i>79</i>&nbsp;        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd-HH-mm-ss&quot;);</b>
+<b class="fc"><i>80</i>&nbsp;        String beginTime = begin[0]+&quot;-&quot;+begin[1]+&quot;-&quot;+begin[2]+&quot;-&quot;+begin[3]+&quot;-&quot;+begin[4]+&quot;-&quot;+begin[5];</b>
+<b class="fc"><i>81</i>&nbsp;        String endTime = end[0]+&quot;-&quot;+end[1]+&quot;-&quot;+end[2]+&quot;-&quot;+end[3]+&quot;-&quot;+end[4]+&quot;-&quot;+end[5];</b>
+<b class="fc"><i>82</i>&nbsp;        String nowTime = now[0]+&quot;-&quot;+now[1]+&quot;-&quot;+now[2]+&quot;-&quot;+now[3]+&quot;-&quot;+now[4]+&quot;-&quot;+now[5];</b>
+<b class="fc"><i>83</i>&nbsp;        date1 = sdf.parse(beginTime);</b>
+<b class="fc"><i>84</i>&nbsp;        date2 = sdf.parse(endTime);</b>
+<b class="fc"><i>85</i>&nbsp;        date3 = sdf.parse(nowTime);</b>
+<b class="pc"><i>86</i>&nbsp;        return date3.after(date1) &amp;&amp; date3.before(date2);</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    /**
+<i>90</i>&nbsp;     * 如果在考试时间内，则返回剩余考试时间
+<i>91</i>&nbsp;     * @param paperId 试卷的id
+<i>92</i>&nbsp;     * @return 返回剩余考试时间
+<i>93</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>94</i>&nbsp;     */
+<i>95</i>&nbsp;    @Override
+<i>96</i>&nbsp;    public long leftoverTime(int paperId) throws Exception{
+<b class="fc"><i>97</i>&nbsp;        Paper paper = paperService.queryPaperNameById(paperId);</b>
+<b class="fc"><i>98</i>&nbsp;        String durationStr = paper.getDuration();</b>
+<b class="fc"><i>99</i>&nbsp;        int duration = Integer.parseInt(durationStr)*60;</b>
+<b class="fc"><i>100</i>&nbsp;        String str = paper.getEndTime();</b>
+<b class="fc"><i>101</i>&nbsp;        String[] end = paperService.extractTime(str);</b>
+<b class="fc"><i>102</i>&nbsp;        String[] now = new String[6];</b>
+<b class="fc"><i>103</i>&nbsp;        Calendar calendar=Calendar.getInstance();</b>
+<b class="fc"><i>104</i>&nbsp;        now[0] = String.valueOf(calendar.get(Calendar.YEAR));</b>
+<b class="fc"><i>105</i>&nbsp;        now[1] = String.valueOf(calendar.get(Calendar.MONTH)+1);</b>
+<b class="fc"><i>106</i>&nbsp;        now[2] = String.valueOf(calendar.get(Calendar.DATE));</b>
+<b class="fc"><i>107</i>&nbsp;        now[3] = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));</b>
+<b class="fc"><i>108</i>&nbsp;        now[4] = String.valueOf(calendar.get(Calendar.MINUTE));</b>
+<b class="fc"><i>109</i>&nbsp;        now[5] = String.valueOf(calendar.get(Calendar.SECOND));</b>
+<b class="fc"><i>110</i>&nbsp;        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH-mm-ss&quot;);</b>
+<b class="fc"><i>111</i>&nbsp;        String endTime = end[0]+&quot;-&quot;+end[1]+&quot;-&quot;+end[2]+&quot; &quot;+end[3]+&quot;-&quot;+end[4]+&quot;-&quot;+end[5];</b>
+<b class="fc"><i>112</i>&nbsp;        String nowTime = now[0]+&quot;-&quot;+now[1]+&quot;-&quot;+now[2]+&quot; &quot;+now[3]+&quot;-&quot;+now[4]+&quot;-&quot;+now[5];</b>
+<b class="fc"><i>113</i>&nbsp;        Date date1 = new Date();</b>
+<b class="fc"><i>114</i>&nbsp;        Date date2 = new Date();</b>
+<b class="fc"><i>115</i>&nbsp;        date1 = sdf.parse(endTime);</b>
+<b class="fc"><i>116</i>&nbsp;        date2 = sdf.parse(nowTime);</b>
+<b class="fc"><i>117</i>&nbsp;        long diff = (date1.getTime() - date2.getTime())/1000;</b>
+<b class="pc"><i>118</i>&nbsp;        if(diff &gt;= duration){</b>
+<b class="nc"><i>119</i>&nbsp;            return duration;</b>
+<i>120</i>&nbsp;        }
+<b class="fc"><i>121</i>&nbsp;        return diff;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

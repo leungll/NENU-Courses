@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.user</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.nenusoftware.onlineexam.service.user)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.user;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.user.User;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * @Author:Liangll
+<i>10</i>&nbsp; * @Description: UserService的接口层
+<i>11</i>&nbsp; * @Date: 10:52 2020/6/13
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public interface UserService {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * 判断用户输入密码是否正确
+<i>17</i>&nbsp;     * @param username 用户名
+<i>18</i>&nbsp;     * @param password 用户密码
+<i>19</i>&nbsp;    * @return 返回根据用户名与用户密码查询后的信息
+<i>20</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>21</i>&nbsp;     */
+<i>22</i>&nbsp;    public List&lt;User&gt; checkPassword(String username, String password) throws Exception;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    /**
+<i>25</i>&nbsp;     * 列出所有用户信息
+<i>26</i>&nbsp;     * @return 返回List形式的用户信息
+<i>27</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    public ArrayList&lt;User&gt; listAllUser() throws Exception;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * 增加用户（注册方法）
+<i>33</i>&nbsp;     * @param user 用户实体
+<i>34</i>&nbsp;     * @return 注册成功返回true，注册失败返回false
+<i>35</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public boolean addUser(User user) throws Exception;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;//    /**
+<i>40</i>&nbsp;//     * 删除用户
+<i>41</i>&nbsp;//     * @param userId 用户编号
+<i>42</i>&nbsp;//     * @return 删除成功返回true，删除失败返回false
+<i>43</i>&nbsp;//     * @throws Exception
+<i>44</i>&nbsp;//     */
+<i>45</i>&nbsp;//    public boolean deleteUser(int userId) throws Exception;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * 修改用户
+<i>49</i>&nbsp;     * @param user 用户实体
+<i>50</i>&nbsp;     * @return 修改成功返回true，修改失败返回false
+<i>51</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    public boolean updateUser(User user) throws Exception;
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;//    /**
+<i>56</i>&nbsp;//     * 修改用户权限（用于后台管理）
+<i>57</i>&nbsp;//     * @param userId 用户编号
+<i>58</i>&nbsp;//     * @return 修改成功返回true，修改失败返回false
+<i>59</i>&nbsp;//     * @throws Exception
+<i>60</i>&nbsp;//     */
+<i>61</i>&nbsp;//    public boolean updatePower(int userId) throws Exception;
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * 根据用户名查询数据信息
+<i>65</i>&nbsp;     * @param username 用户名
+<i>66</i>&nbsp;     * @return 返回根据用户名查询后的信息
+<i>67</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    public User queryByName(String username) throws Exception;
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * 根据用户名得到用户唯一编号
+<i>73</i>&nbsp;     * @param username 用户名
+<i>74</i>&nbsp;     * @return 返回User实体
+<i>75</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    public User queryIdByUsername(String username) throws Exception;
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    /**
+<i>80</i>&nbsp;     * 根据用户编号列出用户所有信息
+<i>81</i>&nbsp;     * @param userId 用户编号
+<i>82</i>&nbsp;     * @return 返回List形式的用户信息
+<i>83</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>84</i>&nbsp;     */
+<i>85</i>&nbsp;    public ArrayList&lt;User&gt; listUserById(int userId) throws Exception;
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

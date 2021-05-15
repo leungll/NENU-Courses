@@ -1,0 +1,4108 @@
+﻿[General]
+TableCount=19
+
+[Table_0]
+FactTableName=Breakdown_meter
+DimensionCount=23
+
+[Breakdown_meter_Dim0]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Breakdown_map
+NumValues=6
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=6
+Dim_0=APPLICATION
+Dim_1=FONT
+Dim_2=IMAGE
+Dim_3=Page
+Dim_4=Resource
+Dim_5=TEXT
+LikeMode=0
+
+[Breakdown_meter_Dim1]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Breakdown_map
+NumValues=37
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=37
+Dim_0=120.26...:8080/user/login
+Dim_1=120.26...:8080/user/login (主要 URL)
+Dim_2=120.26...ce/listAllNotice
+Dim_3=120.26...ce/listAllNotice (主要 URL)
+Dim_4=120.26...notice/addNotice
+Dim_5=120.26...notice/addNotice (主要 URL)
+Dim_6=120.26...per/listAllPaper
+Dim_7=120.26...per/listAllPaper (主要 URL)
+Dim_8=120.26...r/queryPaperName
+Dim_9=120.26...r/queryPaperName (主要 URL)
+Dim_10=120.26...ser/listUserById
+Dim_11=120.26...ser/listUserById (主要 URL)
+Dim_12=120.26...user/listAllUser
+Dim_13=120.26...user/listAllUser (主要 URL)
+Dim_14=120.26.1...AllPaperDetail
+Dim_15=120.26.1...AllPaperDetail (主要 URL)
+Dim_16=120.26.1...ryScoreByPaper
+Dim_17=120.26.1...ryScoreByPaper (主要 URL)
+Dim_18=120.26.1...stScoreByMark1
+Dim_19=120.26.1...stScoreByMark1 (主要 URL)
+Dim_20=at.alicd...rifwizjidd.css
+Dim_21=cdn.boot...rial-icons.css
+Dim_22=localh.../animate.min.css
+Dim_23=localh...g/js.f38f3a7.png
+Dim_24=localh...ic/css/reset.css
+Dim_25=localh...mg/3.b06e831.jpg
+Dim_26=localhos...=1593652554450
+Dim_27=localhos...=1593652574359
+Dim_28=localhos...=1593653069191
+Dim_29=localhos...er.641aa10.jpg
+Dim_30=localhos...in.49233f6.jpg
+Dim_31=localhos...s.535877f.woff
+Dim_32=localhost:8090
+Dim_33=localhost:8090 (主要 URL)
+Dim_34=localhost:8090/app.js
+Dim_35=update.g...ba9783507a0b49
+Dim_36=update.g...ba9783507a0b49 (主要 URL)
+LikeMode=0
+
+[Breakdown_meter_Dim2]
+InternalDimName=DNS Resolution
+Dimension=DNS Resolution
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.062000
+
+[Breakdown_meter_Dim3]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Breakdown_meter_Dim4]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Breakdown_meter_Dim5]
+InternalDimName=FTP Authentication
+Dimension=FTP Authentication
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Breakdown_meter_Dim6]
+InternalDimName=Connection
+Dimension=Connection
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=1.253000
+
+[Breakdown_meter_Dim7]
+InternalDimName=First Buffer
+Dimension=First Buffer
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=2.789000
+
+[Breakdown_meter_Dim8]
+InternalDimName=Client
+Dimension=Client
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.070000
+
+[Breakdown_meter_Dim9]
+InternalDimName=SSL Handshaking
+Dimension=SSL Handshaking
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.045000
+
+[Breakdown_meter_Dim10]
+InternalDimName=Network
+Dimension=Network
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.158000
+
+[Breakdown_meter_Dim11]
+InternalDimName=Server
+Dimension=Server
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=2.631000
+
+[Breakdown_meter_Dim12]
+InternalDimName=Size
+Dimension=Size
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=2515.309570
+
+[Breakdown_meter_Dim13]
+InternalDimName=Error
+Dimension=Error
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Breakdown_meter_Dim14]
+InternalDimName=Receive
+Dimension=Receive
+EqualFlag=1
+DimensionTableName=Breakdown_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.565000
+
+[Breakdown_meter_Dim15]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Breakdown_meter_Dim16]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Breakdown_meter_Dim17]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=50
+Dim_0=1
+Dim_1=2
+Dim_2=3
+Dim_3=4
+Dim_4=5
+Dim_5=6
+Dim_6=7
+Dim_7=8
+Dim_8=9
+Dim_9=10
+Dim_10=11
+Dim_11=12
+Dim_12=13
+Dim_13=14
+Dim_14=16
+Dim_15=17
+Dim_16=18
+Dim_17=19
+Dim_18=20
+Dim_19=21
+Dim_20=22
+Dim_21=23
+Dim_22=24
+Dim_23=25
+Dim_24=26
+Dim_25=27
+Dim_26=28
+Dim_27=29
+Dim_28=30
+Dim_29=31
+Dim_30=32
+Dim_31=33
+Dim_32=34
+Dim_33=35
+Dim_34=36
+Dim_35=37
+Dim_36=38
+Dim_37=39
+Dim_38=40
+Dim_39=41
+Dim_40=43
+Dim_41=44
+Dim_42=47
+Dim_43=48
+Dim_44=49
+Dim_45=50
+Dim_46=52
+Dim_47=53
+Dim_48=54
+Dim_49=55
+AsParent=1
+BasedOnTableName=
+
+[Breakdown_meter_Dim18]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Breakdown_meter_Dim19]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Breakdown_meter_Dim20]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Breakdown_meter_Dim21]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[Breakdown_meter_Dim22]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Table_1]
+FactTableName=DataPoint_meter
+DimensionCount=11
+
+[DataPoint_meter_Dim0]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=DataPoint_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[DataPoint_meter_Dim1]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[DataPoint_meter_Dim2]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=DataPoint_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Event Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+
+[DataPoint_meter_Dim3]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[DataPoint_meter_Dim4]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[DataPoint_meter_Dim5]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[DataPoint_meter_Dim6]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[DataPoint_meter_Dim7]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[DataPoint_meter_Dim8]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[DataPoint_meter_Dim9]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[DataPoint_meter_Dim10]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_2]
+FactTableName=Diagnostic_meter
+DimensionCount=8
+
+[Diagnostic_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[Diagnostic_meter_Dim1]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Diagnostic_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Diagnostic_meter_Dim2]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=Diagnostic_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Event Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+
+[Diagnostic_meter_Dim3]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[Diagnostic_meter_Dim4]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Diagnostic_meter_Dim5]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Diagnostic_meter_Dim6]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Diagnostic_meter_Dim7]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Table_3]
+FactTableName=Error_meter
+DimensionCount=14
+
+[Error_meter_Dim0]
+InternalDimName=Father ID
+Dimension=Father ID
+EqualFlag=1
+DimensionTableName=Error_meter
+NumValues=2
+DimensionType=DiscreteNumber
+UseEscapeSequence=1
+DimCount=2
+Dim_0=5
+Dim_1=22
+LikeMode=0
+
+[Error_meter_Dim1]
+InternalDimName=Line Number
+Dimension=Line Number
+EqualFlag=1
+DimensionTableName=Error_meter
+NumValues=2
+DimensionType=DiscreteNumber
+UseEscapeSequence=1
+DimCount=2
+Dim_0=22
+Dim_1=43
+LikeMode=0
+
+[Error_meter_Dim2]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Error_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Error_meter_Dim3]
+InternalDimName=Error Message
+Dimension=Error Message
+EqualFlag=1
+DimensionTableName=ErrorMessage
+NumValues=2
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=2
+Dim_0=Action.c(22) 错误 -27726 已经超过步骤下载超时(120 秒)   [发出于 Action2.c(43)]
+Dim_1=Action.c(22) 错误 -35165 ID 为“0”的  WebSocket 已存在
+LikeMode=0
+
+[Error_meter_Dim4]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[Error_meter_Dim5]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[Error_meter_Dim6]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Error_meter_Dim7]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Error_meter_Dim8]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Error_meter_Dim9]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Error_meter_Dim10]
+InternalDimName=Action Name
+Dimension=Action Name
+EqualFlag=1
+DimensionTableName=ScriptActions
+NumValues=2
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=2
+Dim_0=Action
+Dim_1=Action2
+LikeMode=0
+
+[Error_meter_Dim11]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Error_meter_Dim12]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Error_meter_Dim13]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_4]
+FactTableName=Event_meter
+DimensionCount=13
+
+[Event_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[Event_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[Event_meter_Dim2]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=Event_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Event Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+
+[Event_meter_Dim3]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Event_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Event_meter_Dim4]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Event_meter_Dim5]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Event_meter_Dim6]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=8
+Dim_0=0
+Dim_1=15
+Dim_2=42
+Dim_3=45
+Dim_4=46
+Dim_5=51
+Dim_6=56
+Dim_7=57
+AsParent=1
+BasedOnTableName=
+
+[Event_meter_Dim7]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Event_meter_Dim8]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Event_meter_Dim9]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Event_meter_Dim10]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[Event_meter_Dim11]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Event_meter_Dim12]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_5]
+FactTableName=J2EETBD_meter
+DimensionCount=7
+
+[J2EETBD_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[J2EETBD_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[J2EETBD_meter_Dim2]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=J2EETBD_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[J2EETBD_meter_Dim3]
+InternalDimName=Num Exception
+Dimension=Num Exception
+EqualFlag=1
+DimensionTableName=J2EETBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[J2EETBD_meter_Dim4]
+InternalDimName=Num Timeout
+Dimension=Num Timeout
+EqualFlag=1
+DimensionTableName=J2EETBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[J2EETBD_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[J2EETBD_meter_Dim6]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[Table_6]
+FactTableName=J2EETBD_Net_meter
+DimensionCount=6
+
+[J2EETBD_Net_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[J2EETBD_Net_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[J2EETBD_Net_meter_Dim2]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=J2EETBD_Net_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[J2EETBD_Net_meter_Dim3]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[J2EETBD_Net_meter_Dim4]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[J2EETBD_Net_meter_Dim5]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[Table_7]
+FactTableName=Monitor_meter
+DimensionCount=8
+
+[Monitor_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[Monitor_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[Monitor_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Monitor_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Monitor_meter_Dim4]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Monitor_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Monitor_meter_Dim5]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=Monitor_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Event Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+
+[Monitor_meter_Dim6]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Monitor_meter_Dim7]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Table_8]
+FactTableName=Sap_osm_meter
+DimensionCount=6
+
+[Sap_osm_meter_Dim0]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Sap_osm_meter_Dim1]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Sap_osm_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Sap_osm_meter_Dim2]
+InternalDimName=PageOutKB
+Dimension=PageOutKB
+EqualFlag=1
+DimensionTableName=Sap_osm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_osm_meter_Dim3]
+InternalDimName=PageInKB
+Dimension=PageInKB
+EqualFlag=1
+DimensionTableName=Sap_osm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_osm_meter_Dim4]
+InternalDimName=Disks
+Dimension=Disks
+EqualFlag=1
+DimensionTableName=Sap_osm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_osm_meter_Dim5]
+InternalDimName=CPU
+Dimension=CPU
+EqualFlag=1
+DimensionTableName=Sap_osm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Table_9]
+FactTableName=Sap_sr_meter
+DimensionCount=34
+
+[Sap_sr_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[Sap_sr_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[Sap_sr_meter_Dim2]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[Sap_sr_meter_Dim3]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Sap_sr_meter_Dim4]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[Sap_sr_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Sap_sr_meter_Dim6]
+InternalDimName=Roll In Time
+Dimension=Roll In Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim7]
+InternalDimName=Output Len
+Dimension=Output Len
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim8]
+InternalDimName=Input Len
+Dimension=Input Len
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim9]
+InternalDimName=Queue Time
+Dimension=Queue Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim10]
+InternalDimName=Cpu Time
+Dimension=Cpu Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim11]
+InternalDimName=Resp Time
+Dimension=Resp Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim12]
+InternalDimName=Lock Time
+Dimension=Lock Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim13]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Sap_sr_meter_Dim14]
+InternalDimName=Database Time
+Dimension=Database Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim15]
+InternalDimName=Start Time
+Dimension=Start Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim16]
+InternalDimName=Rfc Time
+Dimension=Rfc Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim17]
+InternalDimName=Network Time
+Dimension=Network Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim18]
+InternalDimName=End-User Time
+Dimension=End-User Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim19]
+InternalDimName=GuiNet Time
+Dimension=GuiNet Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim20]
+InternalDimName=Roll Out Time
+Dimension=Roll Out Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim21]
+InternalDimName=Roll Wait Time
+Dimension=Roll Wait Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim22]
+InternalDimName=Cuaload Time
+Dimension=Cuaload Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim23]
+InternalDimName=Dynpload Time
+Dimension=Dynpload Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim24]
+InternalDimName=Repload Time
+Dimension=Repload Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim25]
+InternalDimName=Generate Time
+Dimension=Generate Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim26]
+InternalDimName=Commit Time
+Dimension=Commit Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim27]
+InternalDimName=DB Time to Record
+Dimension=DB Time to Record
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim28]
+InternalDimName=Database Records
+Dimension=Database Records
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim29]
+InternalDimName=Gui Time
+Dimension=Gui Time
+EqualFlag=1
+DimensionTableName=Sap_sr_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_sr_meter_Dim30]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Sap_sr_meter_Dim31]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[Sap_sr_meter_Dim32]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[Sap_sr_meter_Dim33]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_10]
+FactTableName=Sap_wpm_meter
+DimensionCount=8
+
+[Sap_wpm_meter_Dim0]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[Sap_wpm_meter_Dim1]
+InternalDimName=StoppedOther
+Dimension=StoppedOther
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_wpm_meter_Dim2]
+InternalDimName=StoppedPRIV
+Dimension=StoppedPRIV
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_wpm_meter_Dim3]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[Sap_wpm_meter_Dim4]
+InternalDimName=Ended
+Dimension=Ended
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_wpm_meter_Dim5]
+InternalDimName=StoppedCPIC
+Dimension=StoppedCPIC
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_wpm_meter_Dim6]
+InternalDimName=Running
+Dimension=Running
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Sap_wpm_meter_Dim7]
+InternalDimName=Waiting
+Dimension=Waiting
+EqualFlag=1
+DimensionTableName=Sap_wpm_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[Table_11]
+FactTableName=SARM_meter
+DimensionCount=12
+
+[SARM_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[SARM_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[SARM_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[SARM_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[SARM_meter_Dim4]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[SARM_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[SARM_meter_Dim6]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=SARM_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[SARM_meter_Dim7]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SARM_meter_Dim8]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[SARM_meter_Dim9]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[SARM_meter_Dim10]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SARM_meter_Dim11]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_12]
+FactTableName=SARM_Net_meter
+DimensionCount=11
+
+[SARM_Net_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[SARM_Net_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[SARM_Net_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[SARM_Net_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[SARM_Net_meter_Dim4]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[SARM_Net_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[SARM_Net_meter_Dim6]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=SARM_Net_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[SARM_Net_meter_Dim7]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SARM_Net_meter_Dim8]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[SARM_Net_meter_Dim9]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SARM_Net_meter_Dim10]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_13]
+FactTableName=SQLBD_meter
+DimensionCount=13
+
+[SQLBD_meter_Dim0]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[SQLBD_meter_Dim1]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[SQLBD_meter_Dim2]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[SQLBD_meter_Dim3]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SQLBD_meter_Dim4]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[SQLBD_meter_Dim5]
+InternalDimName=Other Time
+Dimension=Other Time
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[SQLBD_meter_Dim6]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[SQLBD_meter_Dim7]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Element Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+
+[SQLBD_meter_Dim8]
+InternalDimName=Prepare
+Dimension=Prepare
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[SQLBD_meter_Dim9]
+InternalDimName=Execute
+Dimension=Execute
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[SQLBD_meter_Dim10]
+InternalDimName=Initial Fetch
+Dimension=Initial Fetch
+EqualFlag=1
+DimensionTableName=SQLBD_meter
+NumValues=1
+DimensionType=ContinuousNumber
+DimCount=2
+Dim_0=0.000000
+Dim_1=0.000000
+
+[SQLBD_meter_Dim11]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[SQLBD_meter_Dim12]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_14]
+FactTableName=TruClientBreakDown_meter
+DimensionCount=11
+
+[TruClientBreakDown_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim4]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[TruClientBreakDown_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim6]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim7]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim8]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=TruClientBreakDown_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[TruClientBreakDown_meter_Dim9]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[TruClientBreakDown_meter_Dim10]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_15]
+FactTableName=TruClientJsBreakdown_meter
+DimensionCount=11
+
+[TruClientJsBreakdown_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim4]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[TruClientJsBreakdown_meter_Dim5]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim6]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim7]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim8]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=TruClientJsBreakdown_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[TruClientJsBreakdown_meter_Dim9]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[TruClientJsBreakdown_meter_Dim10]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_16]
+FactTableName=URL_meter
+DimensionCount=10
+
+[URL_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[URL_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[URL_meter_Dim2]
+InternalDimName=Tree Path ID
+Dimension=Tree Path ID
+EqualFlag=1
+DimensionTableName=MsrsTreePath
+NumValues=0
+DimensionType=IdsDimension
+DimCount=58
+Dim_0=0
+Dim_1=1
+Dim_2=2
+Dim_3=3
+Dim_4=4
+Dim_5=5
+Dim_6=6
+Dim_7=7
+Dim_8=8
+Dim_9=9
+Dim_10=10
+Dim_11=11
+Dim_12=12
+Dim_13=13
+Dim_14=14
+Dim_15=15
+Dim_16=16
+Dim_17=17
+Dim_18=18
+Dim_19=19
+Dim_20=20
+Dim_21=21
+Dim_22=22
+Dim_23=23
+Dim_24=24
+Dim_25=25
+Dim_26=26
+Dim_27=27
+Dim_28=28
+Dim_29=29
+Dim_30=30
+Dim_31=31
+Dim_32=32
+Dim_33=33
+Dim_34=34
+Dim_35=35
+Dim_36=36
+Dim_37=37
+Dim_38=38
+Dim_39=39
+Dim_40=40
+Dim_41=41
+Dim_42=42
+Dim_43=43
+Dim_44=44
+Dim_45=45
+Dim_46=46
+Dim_47=47
+Dim_48=48
+Dim_49=49
+Dim_50=50
+Dim_51=51
+Dim_52=52
+Dim_53=53
+Dim_54=54
+Dim_55=55
+Dim_56=56
+Dim_57=57
+AsParent=1
+BasedOnTableName=
+
+[URL_meter_Dim3]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[URL_meter_Dim4]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[URL_meter_Dim5]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[URL_meter_Dim6]
+InternalDimName=Transaction End Status
+Dimension=Transaction End Status
+EqualFlag=1
+DimensionTableName=TransactionEndStatus
+NumValues=3
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=3
+Dim_0=Fail
+Dim_1=Pass
+Dim_2=Stop
+LikeMode=0
+
+[URL_meter_Dim7]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=URL_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[URL_meter_Dim8]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[URL_meter_Dim9]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[Table_17]
+FactTableName=VuserEvent_meter
+DimensionCount=10
+
+[VuserEvent_meter_Dim0]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[VuserEvent_meter_Dim1]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[VuserEvent_meter_Dim2]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[VuserEvent_meter_Dim3]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[VuserEvent_meter_Dim4]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[VuserEvent_meter_Dim5]
+InternalDimName=Vuser End Status Name
+Dimension=Vuser End Status Name
+EqualFlag=1
+DimensionTableName=VuserEndStatus
+NumValues=4
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=4
+Dim_0=Error
+Dim_1=Failed
+Dim_2=Passed
+Dim_3=Stopped
+LikeMode=0
+
+[VuserEvent_meter_Dim6]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=VuserEvent_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[VuserEvent_meter_Dim7]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[VuserEvent_meter_Dim8]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[VuserEvent_meter_Dim9]
+InternalDimName=Vuser Status Name
+Dimension=Vuser Status Name
+EqualFlag=1
+DimensionTableName=VuserStatus
+NumValues=5
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=5
+Dim_0=Load
+Dim_1=Pause
+Dim_2=Quit
+Dim_3=Ready
+Dim_4=Run
+LikeMode=0
+
+[Table_18]
+FactTableName=WebEvent_meter
+DimensionCount=11
+
+[WebEvent_meter_Dim0]
+InternalDimName=Event Name
+Dimension=Event Name
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=24
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=24
+Dim_0=1_transaction
+Dim_1=2_transaction
+Dim_2=3_transaction
+Dim_3=4_transaction
+Dim_4=5_transaction
+Dim_5=Action_Transaction
+Dim_6=Action2_Transaction
+Dim_7=Error -27726
+Dim_8=Error -35165
+Dim_9=Hits
+Dim_10=HTTP_101
+Dim_11=HTTP_200
+Dim_12=HTTP_304
+Dim_13=Throughput
+Dim_14=vuser_end_Transaction
+Dim_15=vuser_init_Transaction
+Dim_16=新连接数
+Dim_17=每秒关闭连接数
+Dim_18=每秒发送字节数
+Dim_19=每秒接收字节数
+Dim_20=每秒接收消息数
+Dim_21=每秒新连接数
+Dim_22=连接关闭数
+Dim_23=连接数
+LikeMode=0
+
+[WebEvent_meter_Dim1]
+InternalDimName=Event Type
+Dimension=Event Type
+EqualFlag=1
+DimensionTableName=Event_map
+NumValues=8
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=8
+Dim_0=Error
+Dim_1=Transaction
+Dim_2=Web
+Dim_3=WebSocketsBytes
+Dim_4=WebSocketsConnections
+Dim_5=WebSocketsMessages
+Dim_6=每秒连接数
+Dim_7=连接数
+LikeMode=0
+
+[WebEvent_meter_Dim2]
+InternalDimName=Host Location
+Dimension=Host Location
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[WebEvent_meter_Dim3]
+InternalDimName=Host Name
+Dimension=Host Name
+EqualFlag=1
+DimensionTableName=Host
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=localhost
+LikeMode=0
+
+[WebEvent_meter_Dim4]
+InternalDimName=Result Name
+Dimension=Result Name
+EqualFlag=1
+DimensionTableName=Result
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=res.lrr
+LikeMode=0
+
+[WebEvent_meter_Dim5]
+InternalDimName=Script Name
+Dimension=Script Name
+EqualFlag=1
+DimensionTableName=Script
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[WebEvent_meter_Dim6]
+InternalDimName=Location name
+Dimension=Location name
+EqualFlag=1
+DimensionTableName=Shunra_Location
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=暂缺
+LikeMode=0
+
+[WebEvent_meter_Dim7]
+InternalDimName=Group Name
+Dimension=Group Name
+EqualFlag=1
+DimensionTableName=VuserGroup
+NumValues=1
+DimensionType=Discrete
+UseEscapeSequence=1
+DimCount=1
+Dim_0=WebHttpHtml3
+LikeMode=0
+
+[WebEvent_meter_Dim8]
+InternalDimName=VuserID
+Dimension=VuserID
+EqualFlag=1
+DimensionTableName=VuserId
+NumValues=2
+DimensionType=Sequential
+UseEscapeSequence=1
+DimCount=2
+Dim_0=1 - 15
+Dim_1=Dummy2
+LikeMode=0
+
+[WebEvent_meter_Dim9]
+InternalDimName=End Time
+Dimension=End Time
+EqualFlag=1
+DimensionTableName=WebEvent_meter
+NumValues=1
+DimensionType=Continuous
+DimCount=2
+Dim_0=0.000000
+Dim_1=156.000000
+
+[WebEvent_meter_Dim10]
+InternalDimName=Value
+Dimension=Value
+EqualFlag=1
+DimensionTableName=WebEvent_meter
+NumValues=24
+DimensionType=RelatedContinuous
+BaseDimension=Event Name
+DimCount=72
+Dim_0=1.000000
+Dim_1=1.000000
+Dim_2=HTTP_101
+Dim_3=1.000000
+Dim_4=22.000000
+Dim_5=Hits
+Dim_6=-35165.000000
+Dim_7=-35165.000000
+Dim_8=Error -35165
+Dim_9=0.745669
+Dim_10=1.430963
+Dim_11=vuser_init_Transaction
+Dim_12=1.000000
+Dim_13=1.000000
+Dim_14=HTTP_304
+Dim_15=0.030459
+Dim_16=11.334854
+Dim_17=Action_Transaction
+Dim_18=4.000000
+Dim_19=22.000000
+Dim_20=HTTP_200
+Dim_21=-4.000000
+Dim_22=3.000000
+Dim_23=连接数
+Dim_24=3.000000
+Dim_25=8.000000
+Dim_26=新连接数
+Dim_27=1.000000
+Dim_28=7.000000
+Dim_29=连接关闭数
+Dim_30=1.000000
+Dim_31=1.000000
+Dim_32=每秒新连接数
+Dim_33=1.000000
+Dim_34=1.000000
+Dim_35=每秒关闭连接数
+Dim_36=7.000000
+Dim_37=7.000000
+Dim_38=每秒接收消息数
+Dim_39=2.000000
+Dim_40=412.000000
+Dim_41=每秒接收字节数
+Dim_42=6.000000
+Dim_43=573.000000
+Dim_44=每秒发送字节数
+Dim_45=0.080880
+Dim_46=0.153816
+Dim_47=1_transaction
+Dim_48=0.000003
+Dim_49=0.000009
+Dim_50=2_transaction
+Dim_51=0.085965
+Dim_52=0.243168
+Dim_53=3_transaction
+Dim_54=2.000000
+Dim_55=5246304.000000
+Dim_56=Throughput
+Dim_57=0.083557
+Dim_58=0.107231
+Dim_59=4_transaction
+Dim_60=0.000003
+Dim_61=0.000009
+Dim_62=5_transaction
+Dim_63=-27726.000000
+Dim_64=-27726.000000
+Dim_65=Error -27726
+Dim_66=0.076161
+Dim_67=21.425350
+Dim_68=Action2_Transaction
+Dim_69=0.000025
+Dim_70=0.000062
+Dim_71=vuser_end_Transaction
+

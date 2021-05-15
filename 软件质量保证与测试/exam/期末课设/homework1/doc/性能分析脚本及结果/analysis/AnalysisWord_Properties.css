@@ -1,0 +1,75 @@
+.750WidthClass { width: 600px}
+.750WidthClassScroll { width: 580px}
+.150WidthClass { width: 150px}
+.150WidthClassScroll { width: 130px}
+.250WidthClass { width: 250px}
+.250WidthClassScroll { width: 230px}
+.300WidthClass { width: 300px}
+.300WidthClassScroll { width: 280px}
+.40WidthClass { width: 40px}
+.90WidthClass { width: 90px}
+.230WidthClass { width: 230px}
+.gridcellCursorHand { width: 20px; height: 25px; font-family: SimSun, 'Arial', monospace; font-size: 12px; cursor: hand}
+.gridcell { width: 20px; height: 25px; font-family: SimSun, 'Arial', monospace; font-size: 12px}
+.bordergridcell { width: 20px; height: 25px; font-family: SimSun, 'Arial', monospace; font-size: 12px}
+.timegridcell { font-size: 12px; font-family: SimSun, Arial; writing-mode: tb-rl; mso-rotate: -90; width: 20px; height: 60px}
+.tabledata_plainrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.basic_selection_component { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial}
+.left_time_component { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; width: 23px; height: 18px; border-left-width: thin; border-right-width: 0; border-bottom-width: thin; border-top-width: thin; line-height: 90%}
+.right_time_component { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; width: 20px; height: 18px; border-left-width: 0; border-right-width: thin; border-top-width: thin; border-bottom-width: thin; line-height: 90%}
+.mid_time_component { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; width: 16px; height: 18px; border-left-width: 0; border-right-width: 0; border-top-width: thin; border-bottom-width: thin; line-height: 90%}
+.seperator_time_component { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; width: 4px; height: 18px; border-left-width: 0; border-right-width: 0; border-top-width: thin; border-bottom-width: thin; line-height: 90%}
+.up_down_btn { height: 10px; width: 16px}
+.teaser_line { color: #003366; font-size: 12px; font-weight: normal; text-align: left; list-style-position: outside; height: 20px; vertical-align: middle}
+td { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial}
+ul { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial}
+a:hover { color: black; text-decoration: none}
+a { color: black; text-decoration: none}
+a.tab_dis { color: black; text-decoration: none}
+a.tab_dis:hover { color: black; text-decoration: none}
+.header_page { color: black; font-size: 20px; font-family: SimSun, Helvetica, Arial, SunSans-Regular, sans-serif; font-weight: normal; text-align: left; letter-spacing: 1px; height: 25px; vertical-align: middle; border-bottom: 1px solid #003366}
+.header_timerange { color: black; font-size: 12px; font-weight: normal; text-align: right; height: 25px; vertical-align: middle; border-bottom: 1px solid #003366}
+.text_em { font-weight: bold}
+.header_second { color: #003366; font-size: 12px; font-weight: normal; text-align: left; list-style-position: outside; height: 20px; vertical-align: middle; border-bottom: 2px dotted #b6bbc1}
+.table_header { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: white; padding-left: 4px; height: 18px; vertical-align: middle; border-top: 2px solid #485464; border-right: #485464; border-bottom: 2px solid #485464; border-left: #485464; title: Sort by Me}
+.tabledata_lightrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #f3f3f3; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.tabledata_darkrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #e6e6e6; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.tabledata_end { height: 3px; border-top: 2px solid #485464}
+.treelink { padding: 2px 2px 2px 3px; height: 13px}
+.sp_2px_row { height: 2px}
+.sp_5px_row { height: 5px}
+.sp_10px_row { height: 10px}
+.bu_toexcel { background: #dadde0 url("tbic_toexcel.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.sp_h_line { height: 1px; border-bottom: 1px solid #7f8792}
+body { font-family: SimSun, Verdana, Arial; background-color: white; scrollbar-arrow-color: #485464; scrollbar-base-color: #A3A9B1; scrollbar-darkshadow-color: #A3A9B1; scrollbar-face-color: #C8CBD0; scrollbar-highlight-color: #ffffff; scrollbar-shadow-color: #ffffff; scrollbar-track-color: #DADDE0; word-break: keep-all}
+body.main { font-family: SimSun, Verdana, Arial; margin: 5px 15px 15px}
+body.main_navtab { font-family: SimSun, Verdana, Arial; background-color: #dadde0; margin: 5px 15px 15px}
+body.top { background-color: #d4d4d4; background-image: url("top_bg.gif"); background-repeat: repeat-x; text-align: left; margin: 0}
+div.pane_full td.border { background-color: white; padding: 1px; height: 100%; border: solid 1px #485464}
+div.pane_full td.top { vertical-align: top}
+div.pane_full td.body { background-color: white; padding: 8px 5px 5px; height: 100%; vertical-align: top}
+div.pane_full td.panin_cell { vertical-align: top; padding: 5px}
+div.pane_full td.header { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-image: url(Images/gui/pane_bg.png); background-repeat: repeat-x; padding-right: 5px; padding-left: 10px; width: 40%; height: 20px; vertical-align: middle; border-bottom: 1px solid #485464}
+div.pane_full td.tabs { background-color: #a9b2c5; vertical-align: bottom; width: 60%; height: 20px}
+div.pane_full td.tab_emp { text-align: center; width: 1%; height: 15px; border-bottom: 1px solid #485464}
+div.pane_full td.tab_sel { color: black; font-size: 12px; font-weight: bold; background-color: white; text-align: center; width: 10%; height: 15px; vertical-align: bottom; border-style: solid solid none; border-width: 1px; border-color: #485464}
+div.pane_full td.tab_dis { font-size: 12px; font-weight: bold; text-align: center; width: 10%; height: 15px; vertical-align: middle; border-bottom: 1px solid #485464}
+div.pane_full td.tabs a { color: #485464; font-size: 12px; text-decoration: none; width: 100%; height: 100%}
+div.pane_full td.tabs a:hover { color: #8e001d; font-size: 12px; text-decoration: underline; width: 100%; height: 100%}
+div.error td.border { background-color: #faeaea; padding: 1px; width: 100%; border: solid 1px #c33}
+div.error td.header { color: white; font-size: 12px; font-weight: bold; line-height: 13px; background-color: #c33; background-image: url('../%22Images/gui/pane_errorbg.png%22'); background-repeat: repeat-x; padding-right: 10px; padding-left: 10px; height: 20px; border-bottom: 1px solid #c33}
+div.error td.icon { background: url(Images/gui/ic_error.gif) no-repeat; width: 60px; vertical-align: top}
+div.error td.footer { text-align: center; padding-top: 5px; vertical-align: middle; border-top: 1px solid #c33}
+div.warning td.border { background-color: #fbf7ea; padding: 1px; width: 100%; border: solid 1px #dcae2e}
+div.warning td.header { color: white; font-size: 12px; font-weight: bold; line-height: 13px; background-color: #dcae2e; background-image: url("Images/gui/pane_warnbg.png"); background-repeat: repeat-x; padding-right: 10px; padding-left: 10px; height: 20px; border-bottom: 1px solid #dcae2e}
+div.warning td.icon { background: url(Images/gui/ic_warn.gif) no-repeat; width: 60px; vertical-align: top}
+div.warning td.footer { text-align: center; padding-top: 5px; vertical-align: middle; border-top: 1px solid #dcae2e}
+div.info td.border { background-color: #f3f3f3; padding: 1px; width: 100%; border: solid 1px #485464}
+div.info td.header { color: white; font-size: 12px; font-weight: bold; line-height: 13px; background-image: url("Images/gui/pane_bg.png"); background-repeat: repeat-x; padding-right: 10px; padding-left: 10px; height: 20px; border-bottom: 1px solid #485464}
+div.info td.icon { background: url(Images/gui/ic_info.gif) no-repeat; width: 60px; vertical-align: top}
+div.info td.footer { text-align: center; padding-top: 5px; vertical-align: middle; border-top: 1px solid #485464}
+div.error td.body, div.warning td.body, div.info td.body { padding: 10px}
+div.error td.body_naked, div.warning td.body_naked, div.info td.body_naked { padding: 2px 5px 3px}
+.pane_body { background-color: white; padding: 5px}
+.pane_header { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-image: url(pane_bg.png); background-repeat: repeat-x; padding-right: 5px; padding-left: 10px; height: 20px; vertical-align: middle; border-bottom: 1px solid #485464}
+.pane_border { background-color: white; padding: 1px; border: solid 1px #485464}

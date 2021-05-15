@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDetailService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.paperdetail</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDetailService (com.nenusoftware.onlineexam.service.paperdetail)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PaperDetailService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.paperdetail;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.alibaba.fastjson.JSONArray;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.entity.paperdetail.PaperDetail;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * @Author:kongyy
+<i>11</i>&nbsp; * @Description: PaperDetailService的接口层
+<i>12</i>&nbsp; * @Date: 10:02 2020/6/16
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public interface PaperDetailService {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * 列出所有试卷详细信息
+<i>18</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>19</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>20</i>&nbsp;     */
+<i>21</i>&nbsp;    public List&lt;PaperDetail&gt; listAllPaperDetail() throws Exception;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    /**
+<i>24</i>&nbsp;     * 根据试卷编号列出试卷详细信息
+<i>25</i>&nbsp;     * @param paperId 试卷编号
+<i>26</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>27</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    public List&lt;PaperDetail&gt; listPaperDetailByPaperId(int paperId) throws Exception;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * 增加试卷详细信息
+<i>33</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>34</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    public void addPaperDetail(PaperDetail paperDetail) throws Exception;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * 删除试卷详细信息
+<i>40</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>41</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>42</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    public boolean deletePaperDetail(int paperDetailId) throws Exception;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * 修改试卷详细信息
+<i>48</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>49</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    public void updatePaperDetail(PaperDetail paperDetail) throws Exception;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * 模糊查询（查询试卷题目的内容或类型）
+<i>55</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>56</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>57</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>58</i>&nbsp;     */
+<i>59</i>&nbsp;    public List&lt;PaperDetail&gt; queryPaperDetail(String keyWord) throws Exception;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    /**
+<i>62</i>&nbsp;     * 根据题目类型列出试卷详细信息
+<i>63</i>&nbsp;     * @param exerciseType 题目类型
+<i>64</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>65</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>66</i>&nbsp;     */
+<i>67</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseByTypes(String exerciseType) throws Exception;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    /**
+<i>70</i>&nbsp;     * 根据试卷Id查询题目选项
+<i>71</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>72</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>73</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>74</i>&nbsp;     */
+<i>75</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseItemsById(int paperDetailId) throws Exception;
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    /**
+<i>78</i>&nbsp;     * 根据题目id查找某道题的答案以及分值
+<i>79</i>&nbsp;     * @param paperDetailId 题目id
+<i>80</i>&nbsp;     * @return 某道题的答案以及分值
+<i>81</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    public PaperDetail queryQuestion(int paperDetailId) throws Exception;
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    /**
+<i>86</i>&nbsp;     * 前端传回做题信息，进行判分，并将错误的题目存入错题集中
+<i>87</i>&nbsp;     * @param jsonArray 学生做题信息，其中包含两项信息，学生答案：answer和这道题目的id：paperDetailId
+<i>88</i>&nbsp;     * @param userId 学生的id
+<i>89</i>&nbsp;     * @return 返回学生的分数
+<i>90</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>91</i>&nbsp;     */
+<i>92</i>&nbsp;    public int judgeQuestion(JSONArray jsonArray, int userId) throws Exception;
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    /**
+<i>95</i>&nbsp;     * 根据试题内容获取题目编号
+<i>96</i>&nbsp;     * @param content 试题内容
+<i>97</i>&nbsp;     * @return 题目编号
+<i>98</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>99</i>&nbsp;     */
+<i>100</i>&nbsp;    public PaperDetail queryIdByContent(@Param(&quot;content&quot;) String content) throws Exception;
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;//    /**
+<i>103</i>&nbsp;//     * 根据试卷编号列出已发布试卷详细信息
+<i>104</i>&nbsp;//     * @param paperId 试卷编号
+<i>105</i>&nbsp;//     * @param status 是否发布
+<i>106</i>&nbsp;//     * @return 返回 List形式的试卷详细信息
+<i>107</i>&nbsp;//     * @throws Exception
+<i>108</i>&nbsp;//     */
+<i>109</i>&nbsp;//    public List&lt;PaperDetail&gt; listPublishPaperByPaperId(int paperId, int status) throws Exception;
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

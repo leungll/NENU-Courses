@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录界面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/demo.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/component.css}"/>
+    <style type="text/css">
+        .register{
+            position: absolute;
+            right: 30px;
+            bottom:135px;
+        }
+    </style>
+</head>
+<body>
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+<!--            <img src="../static/img/logo.png" alt="logo_img" id="teacher"/>-->
+            <canvas id="demo-canvas"></canvas>
+            <div class="logo_box">
+                <h3 style="font-size: 25px;">东北师范大学在线考试系统</h3>
+                <h3>欢迎登录</h3>
+                <form action="login" name="f" method="post">
+                    <div class="input_outer">
+                        <span class="u_user"></span>
+                        <input name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                    </div>
+                    <div class="input_outer">
+                        <span class="us_uer"></span>
+                        <input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+                    </div>
+                    <div class="mb2">
+                        <button class="act-but submit" id="a_submit" style="color: #FFFFFF">登录</button>
+                    </div>
+                    <h3 th:text="${msg}"></h3>
+                </form>
+                <div class="register">
+                    <a href="/toRegister">
+                        <h3 style="font-size: 15px;">没有账号?点此注册</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /container -->
+<script th:src="@{/js/TweenLite.min.js}"></script>
+<script th:src="@{/js/EasePack.min.js}"></script>
+<script th:src="@{/js/trAF.js}"></script>
+<script th:src="@{/js/demo-1.js}"></script>
+</body>
+</html>

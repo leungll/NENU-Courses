@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.user.UserMapper">
+
+    <resultMap id="User" type="com.nenusoftware.onlineexam.entity.user.User">
+        <id property="userId" column="userId"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="power" column="power"/>
+        <result property="image" column="image"/>
+    </resultMap>
+
+    <select id="checkPassword" resultMap="User">
+        SELECT *
+        FROM t_user
+        WHERE t_user.username = #{username} and t_user.password = #{password}
+    </select>
+
+    <select id="listAllUser" resultMap="User">
+        SELECT `userId`, `username`, `password`, `birthday`, `sex`, `power`, `image`
+        FROM `t_user`
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO t_user
+        (userId, username, password, birthday, sex, power, image)
+        VALUES
+        (#{user.userId}, #{user.username}, #{user.password}, #{user.birthday}, #{user.sex}, #{user.power}, #{user.image})
+    </insert>
+
+<!--    <delete id="deleteUser">-->
+<!--        DELETE FROM t_user-->
+<!--        WHERE userId = #{userId}-->
+<!--    </delete>-->
+
+    <update id="updateUser">
+        update t_user
+        SET username = #{user.username}, birthday = #{user.birthday}, sex = #{user.sex}, image = #{user.image}
+        WHERE userId = #{user.userId}
+    </update>
+
+<!--    <update id="updatePower">-->
+<!--        update t_user-->
+<!--        set power = 1-->
+<!--        WHERE userId = #{userId}-->
+<!--    </update>-->
+
+    <select id="querytByName" resultMap="User">
+        SELECT *
+        FROM t_user
+        WHERE t_user.username = #{username}
+    </select>
+
+    <select id="queryIdByUsername" resultMap="User">
+        SELECT `userId`
+        FROM t_user
+        WHERE username = #{username}
+    </select>
+
+    <select id="listUserById" resultMap="User">
+          SELECT *
+          FROM `t_user`
+          WHERE userId = #{userId}
+    </select>
+
+</mapper>

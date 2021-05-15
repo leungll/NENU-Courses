@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.paper.PaperMapper">
+
+    <resultMap id="Paper" type="com.nenusoftware.onlineexam.entity.paper.Paper">
+        <id property="paperId" column="paperId"/>
+        <result property="paperName" column="paperName"/>
+        <result property="status" column="status"/>
+        <result property="beginTime" column="beginTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="duration" column="duration"/>
+    </resultMap>
+
+    <select id="listAllPaper" resultMap="Paper">
+        SELECT `paperId`, `paperName`, `beginTime`, `duration`
+        FROM `t_paper`
+    </select>
+
+    <select id="listPublishPaper" resultMap="Paper">
+        SELECT `paperId`, `paperName`, `beginTime`, `duration`
+        FROM `t_paper`
+        WHERE status = #{status}
+    </select>
+
+    <insert id="addPaper">
+        INSERT INTO t_paper
+        (paperName, status, beginTime, duration)
+        VALUES
+        (#{paper.paperName}, #{paper.status}, #{paper.beginTime}, #{paper.duration})
+    </insert>
+
+    <delete id="deletePaper">
+        DELETE FROM t_paper
+        WHERE paperId = #{paperId}
+    </delete>
+
+    <update id="updatePaper">
+        update t_paper
+        SET paperName = #{paper.paperName}
+        WHERE paperId = #{paper.paperId}
+    </update>
+
+    <select id="queryPaperName" resultMap="Paper">
+        SELECT *
+        FROM t_paper
+        WHERE `paperName` LIKE #{keyWord}
+    </select>
+
+    <select id="queryPaperNameById" resultMap="Paper">
+        SELECT *
+        FROM t_paper
+        WHERE `paperId` LIKE #{paperId}
+    </select>
+
+    <select id="queryPaperIdByName" resultMap="Paper">
+        SELECT paperId
+        FROM t_paper
+        WHERE `paperName` LIKE #{paperName}
+    </select>
+
+    <update id="publishPaper">
+        update t_paper
+        SET status = #{paper.status}, beginTime = #{paper.beginTime}, duration = #{paper.duration}, endTime = #{paper.endTime}
+        WHERE paperId = #{paper.paperId}
+    </update>
+</mapper>

@@ -1,0 +1,89 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AnswerMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.answer</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AnswerMapper (com.nenusoftware.onlineexam.mapper.answer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AnswerMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.answer;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.answer.Answer;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * @Author:Liangll
+<i>12</i>&nbsp; * @Description: AnswerMapper的接口层
+<i>13</i>&nbsp; * @Date: 22:08 2020/6/18
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;@Mapper
+<i>16</i>&nbsp;@Repository
+<i>17</i>&nbsp;public interface AnswerMapper {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * 列出所有答题信息
+<i>21</i>&nbsp;     * @return 返回List形式的答题信息
+<i>22</i>&nbsp;     * @throws Exception 报错信息
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    public List&lt;Answer&gt; listAllAnswer() throws Exception;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * 增加答题信息
+<i>28</i>&nbsp;     * @param answer 答题信息实体
+<i>29</i>&nbsp;     * @return 增加成功返回true，增加失败返回false
+<i>30</i>&nbsp;     * @throws Exception 报错信息
+<i>31</i>&nbsp;     */
+<i>32</i>&nbsp;    public boolean addAnswer(@Param(&quot;answer&quot;) Answer answer) throws Exception;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * 删除某条答题信息
+<i>36</i>&nbsp;     * @param answerId 答案编号
+<i>37</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>38</i>&nbsp;     * @throws Exception 报错信息
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    public boolean deleteAnswer(@Param(&quot;answerId&quot;) int answerId) throws Exception;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

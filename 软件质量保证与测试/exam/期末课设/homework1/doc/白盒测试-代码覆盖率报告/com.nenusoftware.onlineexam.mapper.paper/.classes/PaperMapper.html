@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.paper</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperMapper (com.nenusoftware.onlineexam.mapper.paper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PaperMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.paper;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.lang.reflect.Array;
+<i>9</i>&nbsp;import java.util.ArrayList;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * @Author:Liangll
+<i>14</i>&nbsp; * @Description: PaperMapper的接口层
+<i>15</i>&nbsp; * @Date: 17:29 2020/6/15
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;@Mapper
+<i>18</i>&nbsp;@Repository
+<i>19</i>&nbsp;public interface PaperMapper {
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * 列出所有试卷
+<i>23</i>&nbsp;     * @return 返回List形式的试卷信息
+<i>24</i>&nbsp;     * @throws Exception 报错信息
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    public ArrayList&lt;Paper&gt; listAllPaper() throws Exception;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    /**
+<i>29</i>&nbsp;     * 列出所有已发布试卷
+<i>30</i>&nbsp;     * @param status 1：发布；0：不发布
+<i>31</i>&nbsp;     * @return 返回 List形式的试卷信息
+<i>32</i>&nbsp;     * @throws Exception 报错信息
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public ArrayList&lt;Paper&gt; listPublishPaper(@Param(&quot;status&quot;) int status) throws Exception;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    /**
+<i>37</i>&nbsp;     * 增加试卷
+<i>38</i>&nbsp;     * @param paper 试卷实体
+<i>39</i>&nbsp;     * @return 增加成功返回 true，增加失败返回 false
+<i>40</i>&nbsp;     * @throws Exception 报错信息
+<i>41</i>&nbsp;     */
+<i>42</i>&nbsp;    public boolean addPaper(@Param(&quot;paper&quot;) Paper paper) throws Exception;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * 删除试卷
+<i>46</i>&nbsp;     * @param paperId 试卷编号
+<i>47</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>48</i>&nbsp;     * @throws Exception 报错信息
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    public boolean deletePaper(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * 修改试卷
+<i>54</i>&nbsp;     * @param paper 试卷实体
+<i>55</i>&nbsp;     * @return 修改成功返回true，修改失败返回false
+<i>56</i>&nbsp;     * @throws Exception 报错信息
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    public boolean updatePaper(@Param(&quot;paper&quot;) Paper paper) throws Exception;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    /**
+<i>61</i>&nbsp;     * 模糊查询（查询试卷名称）
+<i>62</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>63</i>&nbsp;     * @return 返回List形式的试卷信息
+<i>64</i>&nbsp;     * @throws Exception 报错信息
+<i>65</i>&nbsp;     */
+<i>66</i>&nbsp;    public List&lt;Paper&gt; queryPaperName(@Param(&quot;keyWord&quot;) String keyWord) throws Exception;
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * 根据 Id查询试卷名称
+<i>70</i>&nbsp;     * @param paperId 试卷编号
+<i>71</i>&nbsp;     * @return 返回Paper形式的试卷信息
+<i>72</i>&nbsp;     * @throws Exception 报错信息
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    public Paper queryPaperNameById(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * 根据试卷名称查询试卷编号
+<i>78</i>&nbsp;     * @param paperName 试卷名称
+<i>79</i>&nbsp;     * @return 返回 Paper形式的试卷信息
+<i>80</i>&nbsp;     * @throws Exception 报错信息
+<i>81</i>&nbsp;     */
+<i>82</i>&nbsp;    public Paper queryPaperIdByName(@Param(&quot;paperName&quot;) String paperName) throws Exception;
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    /**
+<i>85</i>&nbsp;     * 发布试卷
+<i>86</i>&nbsp;     * @param paper 试卷实体
+<i>87</i>&nbsp;     * @return 发布成功返回true，发布失败返回false
+<i>88</i>&nbsp;     * @throws Exception 报错信息
+<i>89</i>&nbsp;     */
+<i>90</i>&nbsp;    public boolean publishPaper(@Param(&quot;paper&quot;) Paper paper) throws Exception;
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

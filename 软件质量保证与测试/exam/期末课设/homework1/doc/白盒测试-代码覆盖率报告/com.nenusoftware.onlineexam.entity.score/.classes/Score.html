@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Score</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.entity.score</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Score (com.nenusoftware.onlineexam.entity.score)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Score</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/ 14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.entity.score;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * @Author:kongyy
+<i>5</i>&nbsp; * @Description: 成绩的实体
+<i>6</i>&nbsp; * @Date: 20:23 2020/6/18
+<i>7</i>&nbsp; */
+<b class="fc"><i>8</i>&nbsp;public class Score {</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * 成绩编号
+<i>12</i>&nbsp;     */
+<i>13</i>&nbsp;    private Integer scoreId;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * 用户编号
+<i>17</i>&nbsp;     */
+<i>18</i>&nbsp;    private Integer userId;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * 试卷编号
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    private Integer paperId;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * 分数
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    private Integer mark;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * 用户名
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    private String username;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * 试卷名称
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    private String paperName;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public Integer getScoreId() {
+<b class="fc"><i>41</i>&nbsp;        return scoreId;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public void setScoreId(Integer scoreId) {
+<b class="fc"><i>45</i>&nbsp;        this.scoreId = scoreId;</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public Integer getUserId() {
+<b class="fc"><i>49</i>&nbsp;        return userId;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public void setUserId(Integer userId) {
+<b class="fc"><i>53</i>&nbsp;        this.userId = userId;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public Integer getPaperId() {
+<b class="fc"><i>57</i>&nbsp;        return paperId;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public void setPaperId(Integer paperId) {
+<b class="fc"><i>61</i>&nbsp;        this.paperId = paperId;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public Integer getMark() {
+<b class="fc"><i>65</i>&nbsp;        return mark;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public void setMark(Integer mark) {
+<b class="fc"><i>69</i>&nbsp;        this.mark = mark;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public String getUsername() {
+<b class="nc"><i>73</i>&nbsp;        return username;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public void setUsername(String username) {
+<b class="fc"><i>77</i>&nbsp;        this.username = username;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    public String getPaperName() {
+<b class="fc"><i>81</i>&nbsp;        return paperName;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public void setPaperName(String paperName) {
+<b class="fc"><i>85</i>&nbsp;        this.paperName = paperName;</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    @Override
+<i>89</i>&nbsp;    public String toString() {
+<b class="fc"><i>90</i>&nbsp;        return &quot;Score{&quot; +</b>
+<i>91</i>&nbsp;                &quot;scoreId=&quot; + scoreId +
+<i>92</i>&nbsp;                &quot;, userId=&quot; + userId +
+<i>93</i>&nbsp;                &quot;, paperId=&quot; + paperId +
+<i>94</i>&nbsp;                &quot;, mark=&quot; + mark +
+<i>95</i>&nbsp;                &quot;, username=&#39;&quot; + username + &#39;\&#39;&#39; +
+<i>96</i>&nbsp;                &quot;, paperName=&#39;&quot; + paperName + &#39;\&#39;&#39; +
+<i>97</i>&nbsp;                &#39;}&#39;;
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDetailServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.paperdetail.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDetailServiceImpl (com.nenusoftware.onlineexam.service.paperdetail.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaperDetailServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.1%
+  </span>
+  <span class="absValue">
+    (95/ 113)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.paperdetail.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.alibaba.fastjson.JSONArray;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.entity.answer.Answer;
+<i>6</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>7</i>&nbsp;import com.nenusoftware.onlineexam.entity.paperdetail.PaperDetail;
+<i>8</i>&nbsp;import com.nenusoftware.onlineexam.entity.score.Score;
+<i>9</i>&nbsp;import com.nenusoftware.onlineexam.entity.wrong.Wrong;
+<i>10</i>&nbsp;import com.nenusoftware.onlineexam.mapper.paperdetail.PaperDetailMapper;
+<i>11</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>12</i>&nbsp;import com.nenusoftware.onlineexam.service.paperdetail.PaperDetailService;
+<i>13</i>&nbsp;import com.nenusoftware.onlineexam.service.score.ScoreService;
+<i>14</i>&nbsp;import com.nenusoftware.onlineexam.service.wrong.WrongService;
+<i>15</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>16</i>&nbsp;import org.springframework.stereotype.Service;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;import javax.annotation.Resource;
+<i>19</i>&nbsp;import java.util.Collections;
+<i>20</i>&nbsp;import java.util.List;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;/**
+<i>23</i>&nbsp; * @Author:kongyy
+<i>24</i>&nbsp; * @Description: PaperDetailService的底层实现方法
+<i>25</i>&nbsp; * @Date: 10:33 2020/6/16
+<i>26</i>&nbsp; */
+<i>27</i>&nbsp;@Service
+<b class="fc"><i>28</i>&nbsp;public class PaperDetailServiceImpl implements PaperDetailService {</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Resource
+<i>31</i>&nbsp;    PaperDetailMapper paperDetailMapper;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Resource
+<i>34</i>&nbsp;    PaperService paperService;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @Resource
+<i>37</i>&nbsp;    ScoreService scoreService;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Resource
+<i>40</i>&nbsp;    WrongService wrongService;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * 列出所有试卷详细信息
+<i>44</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>45</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    @Override
+<i>48</i>&nbsp;    public List&lt;PaperDetail&gt; listAllPaperDetail() throws Exception{
+<b class="fc"><i>49</i>&nbsp;        List&lt;PaperDetail&gt; paperDetailList = Collections.emptyList();</b>
+<b class="fc"><i>50</i>&nbsp;        paperDetailList = paperDetailMapper.listAllPaperDetail();</b>
+<b class="fc"><i>51</i>&nbsp;        for (PaperDetail detail : paperDetailList) {</b>
+<b class="fc"><i>52</i>&nbsp;            PaperDetail paperDetail = new PaperDetail();</b>
+<b class="fc"><i>53</i>&nbsp;            paperDetail = detail;</b>
+<b class="fc"><i>54</i>&nbsp;            if(&quot;简答题&quot;.equals(paperDetail.getExerciseType())){</b>
+<i>55</i>&nbsp;                String str, str1, str2, str3;
+<b class="fc"><i>56</i>&nbsp;                str1 = paperDetail.getAnswer();</b>
+<b class="fc"><i>57</i>&nbsp;                str2 = paperDetail.getAnswer2();</b>
+<b class="fc"><i>58</i>&nbsp;                str3 = paperDetail.getAnswer3();</b>
+<b class="fc"><i>59</i>&nbsp;                str = &quot;得分点为：&quot; + str1 + &quot; &quot; + str2 + &quot; &quot; + str3;</b>
+<b class="fc"><i>60</i>&nbsp;                paperDetail.setAnswer(str);</b>
+<i>61</i>&nbsp;            }
+<b class="fc"><i>62</i>&nbsp;        }</b>
+<b class="fc"><i>63</i>&nbsp;        return paperDetailList;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * 根据试卷编号列出试卷详细信息
+<i>68</i>&nbsp;     * @param paperId 试卷编号
+<i>69</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>70</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    @Override
+<i>73</i>&nbsp;    public List&lt;PaperDetail&gt; listPaperDetailByPaperId(int paperId) throws Exception{
+<b class="fc"><i>74</i>&nbsp;        List&lt;PaperDetail&gt; paperDetailList = Collections.emptyList();</b>
+<b class="fc"><i>75</i>&nbsp;        paperDetailList = paperDetailMapper.listPaperDetailByPaperId(paperId);</b>
+<b class="pc"><i>76</i>&nbsp;        for (PaperDetail detail : paperDetailList) {</b>
+<b class="nc"><i>77</i>&nbsp;            PaperDetail paperDetail = new PaperDetail();</b>
+<b class="nc"><i>78</i>&nbsp;            paperDetail = detail;</b>
+<i>79</i>&nbsp;            String str, str1, str2, str3;
+<b class="nc"><i>80</i>&nbsp;            str1 = paperDetail.getAnswer();</b>
+<b class="nc"><i>81</i>&nbsp;            str2 = paperDetail.getAnswer2();</b>
+<b class="nc"><i>82</i>&nbsp;            str3 = paperDetail.getAnswer3();</b>
+<b class="nc"><i>83</i>&nbsp;            str = &quot;关键字为：&quot; + str1 + &quot; &quot; + str2 + &quot; &quot; + str3;</b>
+<b class="nc"><i>84</i>&nbsp;            paperDetail.setAnswer(str);</b>
+<b class="nc"><i>85</i>&nbsp;        }</b>
+<b class="fc"><i>86</i>&nbsp;        return paperDetailList;</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    /**
+<i>90</i>&nbsp;     * 增加试卷详细信息
+<i>91</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>92</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>93</i>&nbsp;     */
+<i>94</i>&nbsp;    @Override
+<i>95</i>&nbsp;    public void addPaperDetail(PaperDetail paperDetail) throws Exception {
+<b class="fc"><i>96</i>&nbsp;        paperDetailMapper.addPaperDetail(paperDetail);</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    /**
+<i>100</i>&nbsp;     * 删除试卷详细信息
+<i>101</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>102</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>103</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>104</i>&nbsp;     */
+<i>105</i>&nbsp;    @Override
+<i>106</i>&nbsp;    public boolean deletePaperDetail(int paperDetailId) throws Exception{
+<b class="fc"><i>107</i>&nbsp;        return paperDetailMapper.deletePaperDetail(paperDetailId);</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    /**
+<i>111</i>&nbsp;     * 修改试卷详细信息
+<i>112</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>113</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    @Override
+<i>116</i>&nbsp;    public void updatePaperDetail(PaperDetail paperDetail) throws Exception{
+<b class="fc"><i>117</i>&nbsp;        paperDetailMapper.updatePaperDetail(paperDetail);</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    /**
+<i>121</i>&nbsp;     * 模糊查询（查询试卷题目的内容或类型）
+<i>122</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>123</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>124</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>125</i>&nbsp;     */
+<i>126</i>&nbsp;    @Override
+<i>127</i>&nbsp;    public List&lt;PaperDetail&gt; queryPaperDetail(String keyWord) throws Exception{
+<b class="fc"><i>128</i>&nbsp;        List&lt;PaperDetail&gt; paperDetaillist = Collections.emptyList();</b>
+<b class="fc"><i>129</i>&nbsp;        keyWord = &quot;%&quot; + keyWord + &quot;%&quot;;</b>
+<b class="fc"><i>130</i>&nbsp;        paperDetaillist = paperDetailMapper.queryPaperDetail(keyWord);</b>
+<b class="fc"><i>131</i>&nbsp;        return paperDetaillist;</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    /**
+<i>135</i>&nbsp;     * 根据题目类型列出试卷详细信息
+<i>136</i>&nbsp;     * @param exerciseType 题目类型
+<i>137</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>138</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>139</i>&nbsp;     */
+<i>140</i>&nbsp;    @Override
+<i>141</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseByTypes(String exerciseType) throws Exception{
+<b class="fc"><i>142</i>&nbsp;        List&lt;PaperDetail&gt; paperDetailList = Collections.emptyList();</b>
+<b class="fc"><i>143</i>&nbsp;        paperDetailList = paperDetailMapper.queryExerciseByTypes(exerciseType);</b>
+<b class="fc"><i>144</i>&nbsp;        for (PaperDetail detail : paperDetailList) {</b>
+<b class="fc"><i>145</i>&nbsp;            PaperDetail paperDetail = new PaperDetail();</b>
+<b class="fc"><i>146</i>&nbsp;            paperDetail = detail;</b>
+<b class="fc"><i>147</i>&nbsp;            if(&quot;简答题&quot;.equals(paperDetail.getExerciseType())){</b>
+<i>148</i>&nbsp;                String str, str1, str2, str3;
+<b class="fc"><i>149</i>&nbsp;                str1 = paperDetail.getAnswer();</b>
+<b class="fc"><i>150</i>&nbsp;                str2 = paperDetail.getAnswer2();</b>
+<b class="fc"><i>151</i>&nbsp;                str3 = paperDetail.getAnswer3();</b>
+<b class="fc"><i>152</i>&nbsp;                str = &quot;得分点为：&quot; + str1 + &quot; &quot; + str2 + &quot; &quot; + str3;</b>
+<b class="fc"><i>153</i>&nbsp;                paperDetail.setAnswer(str);</b>
+<i>154</i>&nbsp;            }
+<b class="fc"><i>155</i>&nbsp;        }</b>
+<b class="fc"><i>156</i>&nbsp;        return paperDetailList;</b>
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    /**
+<i>160</i>&nbsp;     * 根据试卷Id查询题目选项
+<i>161</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>162</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>163</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>164</i>&nbsp;     */
+<i>165</i>&nbsp;    @Override
+<i>166</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseItemsById(int paperDetailId) throws Exception{
+<b class="fc"><i>167</i>&nbsp;        List&lt;PaperDetail&gt; paperDetailItemsList = Collections.emptyList();</b>
+<b class="fc"><i>168</i>&nbsp;        paperDetailItemsList = paperDetailMapper.queryExerciseItemsById(paperDetailId);</b>
+<b class="fc"><i>169</i>&nbsp;        return paperDetailItemsList;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    /**
+<i>173</i>&nbsp;     * 根据试题内容获取题目编号
+<i>174</i>&nbsp;     * @param content 试题内容
+<i>175</i>&nbsp;     * @return 题目编号
+<i>176</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>177</i>&nbsp;     */
+<i>178</i>&nbsp;    @Override
+<i>179</i>&nbsp;    public PaperDetail queryIdByContent(@Param(&quot;content&quot;) String content) throws Exception{
+<b class="fc"><i>180</i>&nbsp;        return paperDetailMapper.queryIdByContent(content);</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;    /**
+<i>184</i>&nbsp;     * 根据题目的id来查找题目
+<i>185</i>&nbsp;     * @param paperDetailId 题目id
+<i>186</i>&nbsp;     * @return 返回查找到的PaperDetail对象
+<i>187</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>188</i>&nbsp;     */
+<i>189</i>&nbsp;    @Override
+<i>190</i>&nbsp;    public PaperDetail queryQuestion(int paperDetailId) throws Exception{
+<b class="fc"><i>191</i>&nbsp;        List&lt;PaperDetail&gt; paperDetailItemsList = Collections.emptyList();</b>
+<b class="fc"><i>192</i>&nbsp;        PaperDetail paperDetail = new PaperDetail();</b>
+<b class="fc"><i>193</i>&nbsp;        paperDetailItemsList = paperDetailMapper.queryQuestion(paperDetailId);</b>
+<b class="fc"><i>194</i>&nbsp;        paperDetail = paperDetailItemsList.get(0);</b>
+<b class="fc"><i>195</i>&nbsp;        return paperDetail;</b>
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    /**
+<i>199</i>&nbsp;     *根据学生做题信息，计算学生得了多少分
+<i>200</i>&nbsp;     * @param jsonArray 学生做题信息，其中包含两项信息，学生答案：answer和这道题目的id：paperDetailId
+<i>201</i>&nbsp;     * @param userId 学生的id
+<i>202</i>&nbsp;     * @return 返回学生得的分数
+<i>203</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>204</i>&nbsp;     */
+<i>205</i>&nbsp;    @Override
+<i>206</i>&nbsp;    public int judgeQuestion(JSONArray jsonArray, int userId) throws Exception{
+<b class="fc"><i>207</i>&nbsp;        int result = 0;</b>
+<b class="fc"><i>208</i>&nbsp;        String paperIdStr = jsonArray.getJSONObject(0).getString(&quot;paperId&quot;);</b>
+<b class="fc"><i>209</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<i>210</i>&nbsp;        try{
+<b class="fc"><i>211</i>&nbsp;            for(int i=0;i&lt;jsonArray.size();i++){</b>
+<b class="fc"><i>212</i>&nbsp;                Answer answer = new Answer();</b>
+<b class="fc"><i>213</i>&nbsp;                PaperDetail paperDetail = new PaperDetail();</b>
+<b class="fc"><i>214</i>&nbsp;                String paperDetailIdStr = jsonArray.getJSONObject(i).getString(&quot;paperDetailId&quot;);</b>
+<b class="fc"><i>215</i>&nbsp;                String solution = jsonArray.getJSONObject(i).getString(&quot;solution&quot;);</b>
+<b class="fc"><i>216</i>&nbsp;                int paperDetailId = Integer.parseInt(paperDetailIdStr);</b>
+<b class="fc"><i>217</i>&nbsp;                paperDetail = queryQuestion(paperDetailId);</b>
+<b class="fc"><i>218</i>&nbsp;                String type = paperDetail.getExerciseType();</b>
+<b class="fc"><i>219</i>&nbsp;                answer.setUserId(userId);answer.setSolution(solution);answer.setRight(paperDetail.getAnswer());answer.setScore(paperDetail.getScore());</b>
+<b class="fc"><i>220</i>&nbsp;                int score = paperDetail.getScore();</b>
+<b class="fc"><i>221</i>&nbsp;                if(&quot;简答题&quot;.equals(type)){</b>
+<b class="fc"><i>222</i>&nbsp;                    int index1 = solution.indexOf(paperDetail.getAnswer());</b>
+<b class="fc"><i>223</i>&nbsp;                    int index2 = solution.indexOf(paperDetail.getAnswer2());</b>
+<b class="fc"><i>224</i>&nbsp;                    int index3 = solution.indexOf(paperDetail.getAnswer3());</b>
+<b class="fc"><i>225</i>&nbsp;                    int cont = 0;</b>
+<b class="fc"><i>226</i>&nbsp;                    int keycont = 1;</b>
+<b class="pc"><i>227</i>&nbsp;                    if(!&quot;&quot;.equals(paperDetail.getAnswer2())){</b>
+<b class="fc"><i>228</i>&nbsp;                        keycont++;</b>
+<i>229</i>&nbsp;                    }
+<b class="pc"><i>230</i>&nbsp;                    if(!&quot;&quot;.equals(paperDetail.getAnswer3())){</b>
+<b class="fc"><i>231</i>&nbsp;                        keycont++;</b>
+<i>232</i>&nbsp;                    }
+<b class="pc"><i>233</i>&nbsp;                    if(index1 != -1){</b>
+<b class="nc"><i>234</i>&nbsp;                        cont++;</b>
+<i>235</i>&nbsp;                    }
+<b class="pc"><i>236</i>&nbsp;                    if(index2 != -1 &amp;&amp; !&quot;&quot;.equals(paperDetail.getAnswer2())){</b>
+<b class="nc"><i>237</i>&nbsp;                        cont++;</b>
+<i>238</i>&nbsp;                    }
+<b class="pc"><i>239</i>&nbsp;                    if(index3 != -1 &amp;&amp; !&quot;&quot;.equals(paperDetail.getAnswer3())){</b>
+<b class="nc"><i>240</i>&nbsp;                        cont++;</b>
+<i>241</i>&nbsp;                    }
+<b class="fc"><i>242</i>&nbsp;                    int nowScore = (cont * score / keycont);</b>
+<b class="fc"><i>243</i>&nbsp;                    result += nowScore;</b>
+<b class="pc"><i>244</i>&nbsp;                    if(nowScore &lt; score){</b>
+<b class="fc"><i>245</i>&nbsp;                        Wrong wrong = new Wrong();</b>
+<b class="fc"><i>246</i>&nbsp;                        wrong.setUserId(userId);</b>
+<b class="fc"><i>247</i>&nbsp;                        wrong.setPaperId(paperId);</b>
+<b class="fc"><i>248</i>&nbsp;                        wrong.setPaperDetailId(paperDetailId);</b>
+<b class="fc"><i>249</i>&nbsp;                        wrong.setAnswer(solution);</b>
+<b class="fc"><i>250</i>&nbsp;                        wrong.setScore(score);</b>
+<b class="fc"><i>251</i>&nbsp;                        wrong.setNowScore(nowScore);</b>
+<b class="fc"><i>252</i>&nbsp;                        wrong.setRight(&quot;关键字为：&quot;+paperDetail.getAnswer()+&quot; &quot;+paperDetail.getAnswer2()+&quot; &quot;+paperDetail.getAnswer3());</b>
+<b class="fc"><i>253</i>&nbsp;                        wrongService.addWrong(wrong);</b>
+<i>254</i>&nbsp;                    }
+<b class="fc"><i>255</i>&nbsp;                }</b>
+<i>256</i>&nbsp;                else{
+<b class="pc"><i>257</i>&nbsp;                    if(&quot;判断题&quot;.equals(type)){</b>
+<b class="nc"><i>258</i>&nbsp;                        if(&quot;A&quot;.equals(answer.getSolution())){</b>
+<b class="nc"><i>259</i>&nbsp;                            answer.setSolution(&quot;对&quot;);</b>
+<i>260</i>&nbsp;                        }
+<i>261</i>&nbsp;                        else{
+<b class="nc"><i>262</i>&nbsp;                            answer.setSolution(&quot;错&quot;);</b>
+<i>263</i>&nbsp;                        }
+<i>264</i>&nbsp;
+<i>265</i>&nbsp;                    }
+<b class="pc"><i>266</i>&nbsp;                    if(answer.getSolution().equals(answer.getRight())){</b>
+<b class="fc"><i>267</i>&nbsp;                        result += score;</b>
+<i>268</i>&nbsp;                    }
+<i>269</i>&nbsp;                    else{
+<b class="nc"><i>270</i>&nbsp;                        Wrong wrong = new Wrong();wrong.setUserId(userId);wrong.setPaperId(paperId);wrong.setPaperDetailId(paperDetailId);wrong.setAnswer(solution);wrong.setRight(paperDetail.getAnswer());wrong.setScore(score);wrong.setNowScore(0);</b>
+<b class="nc"><i>271</i>&nbsp;                        wrongService.addWrong(wrong);</b>
+<i>272</i>&nbsp;                    }
+<i>273</i>&nbsp;                }
+<i>274</i>&nbsp;            }
+<b class="fc"><i>275</i>&nbsp;            Paper paper = paperService.queryPaperNameById(paperId);</b>
+<b class="fc"><i>276</i>&nbsp;            String paperName = paper.getPaperName();</b>
+<b class="fc"><i>277</i>&nbsp;            Score score = new Score();score.setUserId(userId);score.setMark(result);score.setPaperId(paperId);score.setPaperName(paperName);</b>
+<b class="fc"><i>278</i>&nbsp;            scoreService.addScore(score);</b>
+<b class="nc"><i>279</i>&nbsp;        }catch (Exception ex){</b>
+<b class="nc"><i>280</i>&nbsp;            ex.printStackTrace();</b>
+<b class="fc"><i>281</i>&nbsp;        }</b>
+<b class="fc"><i>282</i>&nbsp;        return result;</b>
+<i>283</i>&nbsp;    }
+<i>284</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

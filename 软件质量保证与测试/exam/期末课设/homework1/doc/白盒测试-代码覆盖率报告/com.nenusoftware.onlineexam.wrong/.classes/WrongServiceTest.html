@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WrongServiceTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.wrong</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WrongServiceTest (com.nenusoftware.onlineexam.wrong)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WrongServiceTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.wrong;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.wrong.Wrong;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.service.wrong.WrongService;
+<i>5</i>&nbsp;import org.junit.Test;
+<i>6</i>&nbsp;import org.junit.runner.RunWith;
+<i>7</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>8</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+<i>9</i>&nbsp;import org.springframework.test.context.junit4.SpringRunner;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.util.Calendar;
+<i>12</i>&nbsp;import java.util.Date;
+<i>13</i>&nbsp;import java.util.LinkedList;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;/**
+<i>17</i>&nbsp; * @Author:Liangll
+<i>18</i>&nbsp; * @Description: 测试WrongService的各类方法
+<i>19</i>&nbsp; * @Date: 16:25 2020/6/22
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;@RunWith(SpringRunner.class)
+<i>22</i>&nbsp;@SpringBootTest
+<b class="fc"><i>23</i>&nbsp;public class WrongServiceTest {</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    @Autowired
+<i>26</i>&nbsp;    WrongService wrongService;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Test
+<i>29</i>&nbsp;    public void testListWrongById() throws Exception{
+<b class="fc"><i>30</i>&nbsp;        System.out.println(wrongService.listWrongByUserId(1));</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Test
+<i>34</i>&nbsp;    public void testDeleteWrong() throws Exception{
+<b class="fc"><i>35</i>&nbsp;        System.out.println(wrongService.deleteWrong(4));</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Test
+<i>39</i>&nbsp;    public void testFunc(){
+<b class="fc"><i>40</i>&nbsp;        Calendar calendar=Calendar.getInstance();</b>
+<b class="fc"><i>41</i>&nbsp;        System.out.println(calendar.get(Calendar.YEAR));</b>
+<b class="fc"><i>42</i>&nbsp;        System.out.println(calendar.get(Calendar.MONTH) + 1);</b>
+<b class="fc"><i>43</i>&nbsp;        System.out.println(calendar.get(Calendar.DATE));</b>
+<b class="fc"><i>44</i>&nbsp;        System.out.println(calendar.get(Calendar.HOUR_OF_DAY));</b>
+<b class="fc"><i>45</i>&nbsp;        System.out.println(calendar.get(Calendar.MINUTE));</b>
+<b class="fc"><i>46</i>&nbsp;        System.out.println(calendar.get(Calendar.SECOND));</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Test
+<i>50</i>&nbsp;    public void testSplitData(){
+<i>51</i>&nbsp;//        String str = &quot;开始:1999年10月21日7时32分20秒&quot;;
+<i>52</i>&nbsp;//        String year = str.substring(str.indexOf(&quot;:&quot;)+1, str.lastIndexOf(&quot;年&quot;));
+<i>53</i>&nbsp;//        System.out.println(year);
+<i>54</i>&nbsp;//        String month = str.substring(str.indexOf(&quot;年&quot;)+1, str.lastIndexOf(&quot;月&quot;));
+<i>55</i>&nbsp;//        System.out.println(month);
+<i>56</i>&nbsp;//        String day = str.substring(str.indexOf(&quot;月&quot;)+1, str.lastIndexOf(&quot;日&quot;));
+<i>57</i>&nbsp;//        System.out.println(day);
+<i>58</i>&nbsp;//        String hour = str.substring(str.indexOf(&quot;日&quot;)+1, str.lastIndexOf(&quot;时&quot;));
+<i>59</i>&nbsp;//        System.out.println(hour);
+<i>60</i>&nbsp;//        String minute = str.substring(str.indexOf(&quot;时&quot;)+1, str.lastIndexOf(&quot;分&quot;));
+<i>61</i>&nbsp;//        System.out.println(minute);
+<i>62</i>&nbsp;//        String second = str.substring(str.indexOf(&quot;分&quot;)+1, str.lastIndexOf(&quot;秒&quot;));
+<i>63</i>&nbsp;//        System.out.println(second);
+<b class="fc"><i>64</i>&nbsp;        Date date = new Date();</b>
+<b class="fc"><i>65</i>&nbsp;        System.out.println(date);</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    @Test
+<i>69</i>&nbsp;    public void testList(){
+<b class="fc"><i>70</i>&nbsp;        List&lt;Wrong&gt; wrongList = new LinkedList&lt;&gt;();</b>
+<b class="fc"><i>71</i>&nbsp;        Wrong wrong = new Wrong();</b>
+<b class="fc"><i>72</i>&nbsp;        wrong.setRight(&quot;a&quot;);</b>
+<b class="fc"><i>73</i>&nbsp;        wrongList.add(wrong);</b>
+<b class="fc"><i>74</i>&nbsp;        System.out.println(wrongList);</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

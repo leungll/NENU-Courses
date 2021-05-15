@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.notice.NoticeMapper">
+
+    <resultMap id="Notice" type="com.nenusoftware.onlineexam.entity.notice.Notice">
+        <id property="noticeId" column="noticeId"/>
+        <result property="userId" column="userId"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+    <select id="listAllNotice" resultMap="Notice">
+        SELECT *
+        FROM `t_notice`
+    </select>
+
+    <insert id="addNotice">
+        INSERT INTO t_notice
+        (noticeId, userId, title, content, createTime)
+        VALUES
+        (#{notice.noticeId}, #{notice.userId}, #{notice.title}, #{notice.content}, #{notice.createTime})
+    </insert>
+
+    <delete id="deleteNotice">
+        DELETE FROM t_notice
+        WHERE noticeId = #{noticeId}
+    </delete>
+
+    <update id="updateNotice">
+        update t_notice
+        SET userId = #{notice.userId}, title = #{notice.title}, content = #{notice.content}, createTime = #{notice.createTime}
+        WHERE noticeId = #{notice.noticeId}
+    </update>
+
+    <select id="queryNotice" resultMap="Notice">
+        SELECT *
+        FROM t_notice
+        WHERE `title` LIKE #{keyWord} OR `content` LIKE #{keyWord}
+    </select>
+
+</mapper>

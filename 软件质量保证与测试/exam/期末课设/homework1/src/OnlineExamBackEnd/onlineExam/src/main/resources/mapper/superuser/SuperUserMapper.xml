@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.superuser.SuperUserMapper">
+
+    <resultMap id="User" type="com.nenusoftware.onlineexam.entity.user.User">
+        <id property="userId" column="userId"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="power" column="power"/>
+        <result property="image" column="image"/>
+    </resultMap>
+
+    <update id="updateUserPower">
+        UPDATE `t_user`
+        SET power = CASE
+            WHEN power = 1 THEN 2
+            WHEN power = 2 THEN 1
+        ELSE 0
+        END
+        WHERE userId = #{userId};
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM t_user
+        WHERE userId = #{userId}
+    </delete>
+
+
+</mapper>

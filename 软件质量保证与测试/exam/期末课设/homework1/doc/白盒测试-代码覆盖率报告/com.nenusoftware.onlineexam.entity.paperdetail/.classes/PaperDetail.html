@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDetail</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.entity.paperdetail</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDetail (com.nenusoftware.onlineexam.entity.paperdetail)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaperDetail</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (26/ 30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (26/ 30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.entity.paperdetail;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * @Author:kongyy
+<i>5</i>&nbsp; * @Description: 试卷详细信息的实体
+<i>6</i>&nbsp; * @Date: 21:43 2020/6/15
+<i>7</i>&nbsp; */
+<b class="fc"><i>8</i>&nbsp;public class PaperDetail {</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * 试卷详细信息的编号
+<i>12</i>&nbsp;     */
+<i>13</i>&nbsp;    private Integer paperDetailId;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * 试卷编号
+<i>17</i>&nbsp;     */
+<i>18</i>&nbsp;    private Integer paperId;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * 练习题号
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    private Integer exerciseId;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * 题目内容
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    private String content;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * 选项A
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    private String typeA;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * 选项B
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    private String typeB;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * 选项C
+<i>42</i>&nbsp;     */
+<i>43</i>&nbsp;    private String typeC;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    /**
+<i>46</i>&nbsp;     * 选项D
+<i>47</i>&nbsp;     */
+<i>48</i>&nbsp;    private String typeD;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    /**
+<i>51</i>&nbsp;     * 题目答案或关键字段1
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    private String answer;
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * 关键字段2
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    private String answer2;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    /**
+<i>61</i>&nbsp;     * 关键字段3
+<i>62</i>&nbsp;     */
+<i>63</i>&nbsp;    private String answer3;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * 题目类型
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    private String exerciseType;
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * 题目分值
+<i>72</i>&nbsp;     */
+<i>73</i>&nbsp;    private Integer score;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    private String solution;
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public Integer getPaperDetailId() {
+<b class="fc"><i>78</i>&nbsp;        return paperDetailId;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public void setPaperDetailId(Integer paperDetailId) {
+<b class="fc"><i>82</i>&nbsp;        this.paperDetailId = paperDetailId;</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public Integer getPaperId() {
+<b class="nc"><i>86</i>&nbsp;        return paperId;</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public void setPaperId(Integer paperId) {
+<b class="fc"><i>90</i>&nbsp;        this.paperId = paperId;</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    public Integer getExerciseId() {
+<b class="nc"><i>94</i>&nbsp;        return exerciseId;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    public void setExerciseId(Integer exerciseId) {
+<b class="fc"><i>98</i>&nbsp;        this.exerciseId = exerciseId;</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public String getContent() {
+<b class="fc"><i>102</i>&nbsp;        return content;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    public void setContent(String content) {
+<b class="fc"><i>106</i>&nbsp;        this.content = content;</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    public String getTypeA() {
+<b class="fc"><i>110</i>&nbsp;        return typeA;</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    public void setTypeA(String typeA) {
+<b class="fc"><i>114</i>&nbsp;        this.typeA = typeA;</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public String getTypeB() {
+<b class="fc"><i>118</i>&nbsp;        return typeB;</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public void setTypeB(String typeB) {
+<b class="fc"><i>122</i>&nbsp;        this.typeB = typeB;</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    public String getTypeC() {
+<b class="fc"><i>126</i>&nbsp;        return typeC;</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    public void setTypeC(String typeC) {
+<b class="fc"><i>130</i>&nbsp;        this.typeC = typeC;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public String getTypeD() {
+<b class="fc"><i>134</i>&nbsp;        return typeD;</b>
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public void setTypeD(String typeD) {
+<b class="fc"><i>138</i>&nbsp;        this.typeD = typeD;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public String getAnswer() {
+<b class="fc"><i>142</i>&nbsp;        return answer;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public void setAnswer(String answer) {
+<b class="fc"><i>146</i>&nbsp;        this.answer = answer;</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    public String getExerciseType() {
+<b class="fc"><i>150</i>&nbsp;        return exerciseType;</b>
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    public void setExerciseType(String exerciseType) {
+<b class="fc"><i>154</i>&nbsp;        this.exerciseType = exerciseType;</b>
+<i>155</i>&nbsp;    }
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;    public Integer getScore() {
+<b class="fc"><i>158</i>&nbsp;        return score;</b>
+<i>159</i>&nbsp;    }
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    public void setScore(Integer score) {
+<b class="fc"><i>162</i>&nbsp;        this.score = score;</b>
+<i>163</i>&nbsp;    }
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    public String getAnswer2() {
+<b class="fc"><i>166</i>&nbsp;        return answer2;</b>
+<i>167</i>&nbsp;    }
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    public void setAnswer2(String answer2) {
+<b class="fc"><i>170</i>&nbsp;        this.answer2 = answer2;</b>
+<i>171</i>&nbsp;    }
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;    public String getAnswer3() {
+<b class="fc"><i>174</i>&nbsp;        return answer3;</b>
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    public void setAnswer3(String answer3) {
+<b class="fc"><i>178</i>&nbsp;        this.answer3 = answer3;</b>
+<i>179</i>&nbsp;    }
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;    public String getSolution() {
+<b class="nc"><i>182</i>&nbsp;        return solution;</b>
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    public void setSolution(String solution) {
+<b class="nc"><i>186</i>&nbsp;        this.solution = solution;</b>
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    @Override
+<i>190</i>&nbsp;    public String toString() {
+<b class="fc"><i>191</i>&nbsp;        return &quot;PaperDetail{&quot; +</b>
+<i>192</i>&nbsp;                &quot;paperDetailId=&quot; + paperDetailId +
+<i>193</i>&nbsp;                &quot;, paperId=&quot; + paperId +
+<i>194</i>&nbsp;                &quot;, exerciseId=&quot; + exerciseId +
+<i>195</i>&nbsp;                &quot;, content=&#39;&quot; + content + &#39;\&#39;&#39; +
+<i>196</i>&nbsp;                &quot;, typeA=&#39;&quot; + typeA + &#39;\&#39;&#39; +
+<i>197</i>&nbsp;                &quot;, typeB=&#39;&quot; + typeB + &#39;\&#39;&#39; +
+<i>198</i>&nbsp;                &quot;, typeC=&#39;&quot; + typeC + &#39;\&#39;&#39; +
+<i>199</i>&nbsp;                &quot;, typeD=&#39;&quot; + typeD + &#39;\&#39;&#39; +
+<i>200</i>&nbsp;                &quot;, answer=&#39;&quot; + answer + &#39;\&#39;&#39; +
+<i>201</i>&nbsp;                &quot;, answer2=&#39;&quot; + answer2 + &#39;\&#39;&#39; +
+<i>202</i>&nbsp;                &quot;, answer3=&#39;&quot; + answer3 + &#39;\&#39;&#39; +
+<i>203</i>&nbsp;                &quot;, exerciseType=&#39;&quot; + exerciseType + &#39;\&#39;&#39; +
+<i>204</i>&nbsp;                &quot;, score=&quot; + score +
+<i>205</i>&nbsp;                &quot;, solution=&#39;&quot; + solution + &#39;\&#39;&#39; +
+<i>206</i>&nbsp;                &#39;}&#39;;
+<i>207</i>&nbsp;    }
+<i>208</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

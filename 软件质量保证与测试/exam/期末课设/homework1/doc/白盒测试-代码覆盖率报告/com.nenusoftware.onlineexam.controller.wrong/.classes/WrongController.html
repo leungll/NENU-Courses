@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WrongController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.controller.wrong</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WrongController (com.nenusoftware.onlineexam.controller.wrong)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WrongController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.controller.wrong;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.wrong.Wrong;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.service.user.UserService;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.wrong.WrongService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>7</i>&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.ResponseBody;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.annotation.Resource;
+<i>12</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>13</i>&nbsp;import javax.servlet.http.HttpSession;
+<i>14</i>&nbsp;import java.util.Collections;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * @Author:Kongyy
+<i>19</i>&nbsp; * @Description: WrongController层（与前端页面进行交互）
+<i>20</i>&nbsp; * @Date: 10:38 2020/6/16
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;@CrossOrigin(allowCredentials = &quot;true&quot;)
+<i>23</i>&nbsp;@Controller
+<i>24</i>&nbsp;@RequestMapping(&quot;/wrong&quot;)
+<b class="fc"><i>25</i>&nbsp;public class WrongController {</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @Resource
+<i>28</i>&nbsp;    WrongService wrongService;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Resource
+<i>31</i>&nbsp;    UserService userService;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * 根据Id列出错题本
+<i>35</i>&nbsp;     * @param request Http请求
+<i>36</i>&nbsp;     * @return 错题信息
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    @ResponseBody
+<i>39</i>&nbsp;    @RequestMapping(&quot;/listWrongById&quot;)
+<i>40</i>&nbsp;    public List&lt;Wrong&gt; listWrongById(HttpServletRequest request){
+<b class="nc"><i>41</i>&nbsp;        HttpSession session = request.getSession();</b>
+<b class="nc"><i>42</i>&nbsp;        String username = String.valueOf(session.getAttribute(&quot;usernameSession&quot;));</b>
+<b class="nc"><i>43</i>&nbsp;        List&lt;Wrong&gt; wrongList = Collections.emptyList();</b>
+<i>44</i>&nbsp;        try{
+<b class="nc"><i>45</i>&nbsp;            int userId = userService.queryIdByUsername(username).getUserId();</b>
+<b class="nc"><i>46</i>&nbsp;            wrongList = wrongService.listWrongByUserId(userId);</b>
+<b class="nc"><i>47</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>48</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>49</i>&nbsp;        }</b>
+<b class="nc"><i>50</i>&nbsp;        return wrongList;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * 删除错题
+<i>55</i>&nbsp;     * @param wrongIdStr 错题编号
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    @ResponseBody
+<i>58</i>&nbsp;    @RequestMapping(&quot;/deleteWrong&quot;)
+<i>59</i>&nbsp;    public void deleteWrong(String wrongIdStr){
+<b class="nc"><i>60</i>&nbsp;        int wrongId = Integer.parseInt(wrongIdStr);</b>
+<i>61</i>&nbsp;        try {
+<b class="nc"><i>62</i>&nbsp;            wrongService.deleteWrong(wrongId);</b>
+<b class="nc"><i>63</i>&nbsp;            System.out.println(&quot;删除错题成功&quot;);</b>
+<b class="nc"><i>64</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>65</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>66</i>&nbsp;            System.out.println(&quot;删除错题失败&quot;);</b>
+<b class="nc"><i>67</i>&nbsp;        }</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WrongServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.wrong.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WrongServiceImpl (com.nenusoftware.onlineexam.service.wrong.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WrongServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.wrong.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.wrong.Wrong;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.mapper.wrong.WrongMapper;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.wrong.WrongService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.annotation.Resource;
+<i>9</i>&nbsp;import java.util.LinkedList;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * @Author:kongyy
+<i>14</i>&nbsp; * @Description: WrongService的底层实现方法
+<i>15</i>&nbsp; * @Date: 23:49 2020/6/16
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;@Service
+<b class="fc"><i>18</i>&nbsp;public class WrongServiceImpl implements WrongService {</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Resource
+<i>21</i>&nbsp;    WrongMapper wrongMapper;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    /**
+<i>24</i>&nbsp;     * 添加错题
+<i>25</i>&nbsp;     * @param wrong 要添加的wrong对象
+<i>26</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public void addWrong(Wrong wrong) throws Exception{
+<b class="fc"><i>30</i>&nbsp;        wrongMapper.addWrong(wrong);</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * 列出用户错题
+<i>35</i>&nbsp;     * @param userId 用户id
+<i>36</i>&nbsp;     * @return 列出这个用户的错题
+<i>37</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public List&lt;Wrong&gt; listWrongByUserId(int userId) throws Exception{
+<b class="fc"><i>41</i>&nbsp;        List&lt;Wrong&gt; wrongList = new LinkedList&lt;&gt;();</b>
+<b class="fc"><i>42</i>&nbsp;        wrongList = wrongMapper.listWrongByUserId(userId);</b>
+<b class="fc"><i>43</i>&nbsp;        return  wrongList;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * 删除错题
+<i>48</i>&nbsp;     * @param wrongId 错题id
+<i>49</i>&nbsp;     * @return 如果删除成功，则返回true，否则返回false
+<i>50</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    @Override
+<i>53</i>&nbsp;    public boolean deleteWrong(int wrongId) throws Exception{
+<b class="fc"><i>54</i>&nbsp;        return wrongMapper.deleteWrong(wrongId);</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

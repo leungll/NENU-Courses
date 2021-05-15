@@ -1,0 +1,137 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.paper</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperService (com.nenusoftware.onlineexam.service.paper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PaperService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.paper;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * @Author:Liangll
+<i>10</i>&nbsp; * @Description: PaperService的接口层
+<i>11</i>&nbsp; * @Date: 10:52 2020/6/15
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public interface PaperService {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * 列出所有试卷
+<i>17</i>&nbsp;     * @return 返回 List形式的试卷信息
+<i>18</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    public ArrayList&lt;Paper&gt; listAllPaper() throws Exception;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * 列出所有已发布试卷
+<i>24</i>&nbsp;     * @param status 1：发布；0：不发布
+<i>25</i>&nbsp;     * @return 返回 List形式的试卷信息
+<i>26</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    public ArrayList&lt;Paper&gt; listPublishPaper(int status) throws Exception;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * 增加试卷
+<i>32</i>&nbsp;     * @param paper 试卷实体
+<i>33</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    public void addPaper(Paper paper) throws Exception;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * 删除试卷
+<i>39</i>&nbsp;     * @param paperId 试卷编号
+<i>40</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>41</i>&nbsp;     */
+<i>42</i>&nbsp;    public void deletePaper(int paperId) throws Exception;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * 修改试卷
+<i>46</i>&nbsp;     * @param paper 试卷实体
+<i>47</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>48</i>&nbsp;     */
+<i>49</i>&nbsp;    public void updatePaper(Paper paper) throws Exception;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * 模糊查询（查询试卷名称）
+<i>53</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>54</i>&nbsp;     * @return 返回 List形式的试卷信息
+<i>55</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public List&lt;Paper&gt; queryPaperName(String keyWord) throws Exception;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * 根据Id查询试卷名称
+<i>61</i>&nbsp;     * @param paperId 试卷编号
+<i>62</i>&nbsp;     * @return 返回 Paper形式的试卷信息
+<i>63</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>64</i>&nbsp;     */
+<i>65</i>&nbsp;    public Paper queryPaperNameById(int paperId) throws Exception;
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    /**
+<i>68</i>&nbsp;     * 根据试卷名称查询试卷编号
+<i>69</i>&nbsp;     * @param paperName 试卷名称
+<i>70</i>&nbsp;     * @return 返回 Paper形式的试卷信息
+<i>71</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>72</i>&nbsp;     */
+<i>73</i>&nbsp;    public Paper queryPaperIdByName(String paperName) throws Exception;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * 发布试卷
+<i>77</i>&nbsp;     * @param paper 试卷实体
+<i>78</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public void publishPaper(Paper paper) throws Exception;
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    /**
+<i>83</i>&nbsp;     * 提取字符串中的年月日时分秒并存入数组
+<i>84</i>&nbsp;     * @param time 待提取的时间字符串
+<i>85</i>&nbsp;     * @return 返回一个长度为6的string类型数组，里面的值分别是年月日时分秒
+<i>86</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>87</i>&nbsp;     */
+<i>88</i>&nbsp;    public String[] extractTime(String time) throws Exception;
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

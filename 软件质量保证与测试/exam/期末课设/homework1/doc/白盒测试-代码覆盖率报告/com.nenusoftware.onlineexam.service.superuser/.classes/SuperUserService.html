@@ -1,0 +1,71 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SuperUserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.superuser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SuperUserService (com.nenusoftware.onlineexam.service.superuser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">SuperUserService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.superuser;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * @Author:kongyy
+<i>5</i>&nbsp; * @Description: SuperUserService的接口层
+<i>6</i>&nbsp; * @Date: 21:39 2020/6/16
+<i>7</i>&nbsp; */
+<i>8</i>&nbsp;public interface SuperUserService {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * 修改用户权限
+<i>12</i>&nbsp;     * @param userId 用户id
+<i>13</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>14</i>&nbsp;     */
+<i>15</i>&nbsp;    public void updateUserPower(int userId) throws Exception;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    /**
+<i>18</i>&nbsp;     * 删除用户
+<i>19</i>&nbsp;     * @param userId 用户id
+<i>20</i>&nbsp;     * @return 如果删除成功，则返回true，否则返回false
+<i>21</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public boolean deleteUser(int userId) throws Exception;
+<i>24</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

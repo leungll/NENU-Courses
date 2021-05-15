@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ConnectController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.controller.connect</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ConnectController (com.nenusoftware.onlineexam.controller.connect)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/ 46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.controller.connect;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.controller.user.UserController;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.entity.connect.Connect;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.connect.ConnectService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>7</i>&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.ResponseBody;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.annotation.Resource;
+<i>12</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>13</i>&nbsp;import java.util.LinkedList;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;/**
+<i>17</i>&nbsp; * @Author:Liangll
+<i>18</i>&nbsp; * @Description: ConnectController层（与前端页面进行交互）
+<i>19</i>&nbsp; * @Date: 15:54 2020/6/18
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;@CrossOrigin(allowCredentials = &quot;true&quot;)
+<i>22</i>&nbsp;@Controller
+<i>23</i>&nbsp;@RequestMapping(&quot;/connect&quot;)
+<b class="fc"><i>24</i>&nbsp;public class ConnectController {</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    @Resource
+<i>27</i>&nbsp;    ConnectService connectService;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Resource
+<i>30</i>&nbsp;    UserController userController;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * 通过试卷编号列出试卷详细信息
+<i>34</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>35</i>&nbsp;     * @param exerciseTypeStr 题目类型
+<i>36</i>&nbsp;     * @param request HTTP请求
+<i>37</i>&nbsp;     * @return 返回 List形式的试卷详细信息
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    @RequestMapping(&quot;/listAllConnect&quot;)
+<i>40</i>&nbsp;    @ResponseBody
+<i>41</i>&nbsp;    public List&lt;Connect&gt; listAllConnect(String paperIdStr, String exerciseTypeStr, HttpServletRequest request){
+<b class="nc"><i>42</i>&nbsp;        int result = userController.judgePower(request);</b>
+<b class="nc"><i>43</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<b class="nc"><i>44</i>&nbsp;        String exerciseType = null;</b>
+<b class="nc"><i>45</i>&nbsp;        if(&quot;0&quot;.equals(exerciseTypeStr)){</b>
+<b class="nc"><i>46</i>&nbsp;            exerciseType = &quot;选择题&quot;;</b>
+<b class="nc"><i>47</i>&nbsp;        }else if(&quot;1&quot;.equals(exerciseTypeStr)){</b>
+<b class="nc"><i>48</i>&nbsp;            exerciseType = &quot;判断题&quot;;</b>
+<b class="nc"><i>49</i>&nbsp;        }else if(&quot;2&quot;.equals(exerciseTypeStr)){</b>
+<b class="nc"><i>50</i>&nbsp;            exerciseType = &quot;填空题&quot;;</b>
+<b class="nc"><i>51</i>&nbsp;        }else if(&quot;3&quot;.equals(exerciseTypeStr)){</b>
+<b class="nc"><i>52</i>&nbsp;            exerciseType = &quot;简答题&quot;;</b>
+<i>53</i>&nbsp;        }
+<b class="nc"><i>54</i>&nbsp;        List&lt;Connect&gt; connectList = new LinkedList&lt;&gt;();</b>
+<b class="nc"><i>55</i>&nbsp;        if(result == 1){</b>
+<i>56</i>&nbsp;            try {
+<b class="nc"><i>57</i>&nbsp;                connectList = connectService.listAllConnect(paperId, exerciseType);</b>
+<b class="nc"><i>58</i>&nbsp;                return connectList;</b>
+<b class="nc"><i>59</i>&nbsp;            }catch (Exception e){</b>
+<b class="nc"><i>60</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>61</i>&nbsp;            }</b>
+<i>62</i>&nbsp;        }
+<b class="nc"><i>63</i>&nbsp;        else if(result != -1){</b>
+<i>64</i>&nbsp;            try {
+<b class="nc"><i>65</i>&nbsp;                if(connectService.isInTheTime(paperId)){</b>
+<b class="nc"><i>66</i>&nbsp;                    connectList = connectService.listAllConnect(paperId, exerciseType);</b>
+<b class="nc"><i>67</i>&nbsp;                    long leftover = connectService.leftoverTime(paperId);</b>
+<b class="nc"><i>68</i>&nbsp;                    Connect connect = new Connect();</b>
+<b class="nc"><i>69</i>&nbsp;                    connect.setLeftover(leftover);</b>
+<b class="nc"><i>70</i>&nbsp;                    connectList.add(connect);</b>
+<b class="nc"><i>71</i>&nbsp;                    System.out.println(&quot;通过试卷编号列出试卷详细信息成功！&quot;);</b>
+<b class="nc"><i>72</i>&nbsp;                }else{</b>
+<b class="nc"><i>73</i>&nbsp;                    Connect connect = new Connect();</b>
+<b class="nc"><i>74</i>&nbsp;                    connect.setLog(&quot;考试时间未到或您已过了考试时间&quot;);</b>
+<b class="nc"><i>75</i>&nbsp;                    connectList.add(connect);</b>
+<i>76</i>&nbsp;                }
+<b class="nc"><i>77</i>&nbsp;            }catch (Exception e){</b>
+<b class="nc"><i>78</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>79</i>&nbsp;            }</b>
+<i>80</i>&nbsp;        }
+<b class="nc"><i>81</i>&nbsp;        return connectList;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    /**
+<i>85</i>&nbsp;     * 增加试卷详细信息
+<i>86</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>87</i>&nbsp;     * @param paperDetailIdStr 试题编号
+<i>88</i>&nbsp;     */
+<i>89</i>&nbsp;    @ResponseBody
+<i>90</i>&nbsp;    @RequestMapping(&quot;/addConnect&quot;)
+<i>91</i>&nbsp;    public void addConnect(String paperIdStr, String paperDetailIdStr){
+<b class="nc"><i>92</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<b class="nc"><i>93</i>&nbsp;        int paperDetailId = Integer.parseInt(paperDetailIdStr);</b>
+<i>94</i>&nbsp;        try {
+<b class="nc"><i>95</i>&nbsp;            Connect connect = new Connect();</b>
+<b class="nc"><i>96</i>&nbsp;            connect.setPaperId(paperId);</b>
+<b class="nc"><i>97</i>&nbsp;            connect.setPaperDetailId(paperDetailId);</b>
+<b class="nc"><i>98</i>&nbsp;            connectService.addConnect(connect);</b>
+<b class="nc"><i>99</i>&nbsp;            System.out.println(&quot;增加试卷详细信息成功！&quot;);</b>
+<b class="nc"><i>100</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>101</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>102</i>&nbsp;            System.out.println(&quot;增加试卷详细信息！&quot;);</b>
+<b class="nc"><i>103</i>&nbsp;        }</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

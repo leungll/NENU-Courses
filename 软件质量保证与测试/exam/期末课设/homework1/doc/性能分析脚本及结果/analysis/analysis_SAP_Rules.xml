@@ -1,0 +1,667 @@
+<alerts version="1.0">
+	<rule>
+		<enabled>1</enabled>
+		<name>平均对话步骤响应时间</name>
+		<view>SapTx_VirtualTx</view>
+		<series>全部</series>
+		<condition>[avr_ds_time] &gt; [const_2_sec]</condition>
+		<ismajor>1</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>avr_ds_time</id>
+				<type>msr</type>
+				<value>
+					<name>平均对话步骤响应时间</name>
+					<deffile>SapTx_BD</deffile>
+					<measurement>服务器响应时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_2_sec</id>
+				<type>const</type>
+				<value>2</value>
+				<units>秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>搜索至对话步骤组件细分。</recommendation>
+		<description>平均对话步骤响应时间已超过 [const_2_sec] 秒。</description>
+		<graph>SapTx_BD</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>数据库时间</name>
+		<view>SapTx_DsCompBd</view>
+		<series>数据库时间</series>
+		<condition>[db_time] * [sec_to_msec] &gt; [const_400_ms]</condition>
+		<ismajor>1</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>db_time</id>
+				<type>msr</type>
+				<value>
+					<name>数据库时间</name>
+					<deffile>SapTx_DsCompBd</deffile>
+					<measurement>数据库时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_400_ms</id>
+				<type>const</type>
+				<value>400</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>向下搜索至数据库细分。</recommendation>
+		<description>单个对话步骤的数据库时间已超过 [const_400_ms] 毫秒。</description>
+		<graph>SapTx_DbBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>应用程序时间</name>
+		<view>SapTx_DsCompBd</view>
+		<series>应用程序处理时间</series>
+		<condition>[app_time] * [sec_to_msec] &gt; [const_400_ms]</condition>
+		<ismajor>1</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>app_time</id>
+				<type>msr</type>
+				<value>
+					<name>应用程序处理时间</name>
+					<deffile>SapTx_DsCompBd</deffile>
+					<measurement>应用程序处理时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_400_ms</id>
+				<type>const</type>
+				<value>400</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>向下搜索至应用程序细分。</recommendation>
+		<description>单个对话步骤的应用程序处理时间已超过 [const_400_ms] 毫秒。</description>
+		<graph>SapTx_AppBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>每条记录的访问时间</name>
+		<view>SapTx_DbBd</view>
+		<series>一条记录的访问时间(毫秒)</series>
+		<condition>[time_per_record] &gt; [const_10_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>time_per_record</id>
+				<type>msr</type>
+				<value>
+					<name>每条记录的数据库时间</name>
+					<deffile>SapTx_DbBd</deffile>
+					<measurement>一条记录的访问时间(毫秒)</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_10_ms</id>
+				<type>const</type>
+				<value>10</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的数据库管理员联系。</recommendation>
+		<description>平均数据库访问时间已超过 [const_10_ms] 毫秒。</description>
+		<graph>SapTx_DbBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>每个对话步骤的记录数</name>
+		<view>SapTx_DbBd</view>
+		<series>每个对话步骤访问的记录数</series>
+		<condition>[records_per_DS] &gt; [const_500]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>records_per_DS</id>
+				<type>msr</type>
+				<value>
+					<name>每个对话步骤的记录数</name>
+					<deffile>SapTx_DbBd</deffile>
+					<measurement>每个对话步骤访问的记录数</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_500</id>
+				<type>const</type>
+				<value>500</value>
+				<units/>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的数据库管理员联系。</recommendation>
+		<description>每个对话步骤的平均记录数已超过 [const_500]。</description>
+		<graph>SapTx_DbBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>ABAP 和 CPU 时间</name>
+		<view>SapTx_AppBd</view>
+		<series>ABAP 时间</series>
+		<condition>[abap_time] &gt; [cpu_time] * [const_2]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>abap_time</id>
+				<type>msr</type>
+				<value>
+					<name>ABAP 时间</name>
+					<deffile>SapTx_AppBd</deffile>
+					<measurement>ABAP 时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>cpu_time</id>
+				<type>msr</type>
+				<value>
+					<name>CPU 时间</name>
+					<deffile>SapTx_AppBd</deffile>
+					<measurement>CPU 时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_2</id>
+				<type>const</type>
+				<value>2</value>
+				<units/>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>ABAP 处理时间大大长于 CPU 时间。</description>
+		<graph>SapTx_AppBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>系统时间</name>
+		<view>SapTx_DsCompBd</view>
+		<series>系统时间</series>
+		<condition>[system_time] * [sec_to_msec] &gt; [const_150_ms]</condition>
+		<ismajor>1</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>system_time</id>
+				<type>msr</type>
+				<value>
+					<name>系统时间</name>
+					<deffile>SapTx_DsCompBd</deffile>
+					<measurement>系统时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_150_ms</id>
+				<type>const</type>
+				<value>150</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>向下搜索至系统细分。</recommendation>
+		<description>单个对话步骤的系统时间已超过 [const_150_ms] 毫秒。</description>
+		<graph>SapTx_SystemBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>调度程序等待时间</name>
+		<view>SapTx_SystemBd</view>
+		<series>调度程序等待时间</series>
+		<condition>[dispatcher_time] * [sec_to_msec] &gt; [const_50_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>dispatcher_time</id>
+				<type>msr</type>
+				<value>
+					<name>调度程序等待时间</name>
+					<deffile>SapTx_SystemBd</deffile>
+					<measurement>调度程序等待时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_50_ms</id>
+				<type>const</type>
+				<value>50</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请检查工作进程的状态并与您的 WAS 管理员联系。</recommendation>
+		<description>调度程序等待时间已超过 [const_50_ms] 毫秒。</description>
+		<graph>SapTx_SystemBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>加载和生成时间</name>
+		<view>SapTx_SystemBd</view>
+		<series>加载 + 生成时间</series>
+		<condition>[load_gen_time] * [sec_to_msec] &gt; [const_50_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>load_gen_time</id>
+				<type>msr</type>
+				<value>
+					<name>加载 + 生成时间</name>
+					<deffile>SapTx_SystemBd</deffile>
+					<measurement>加载 + 生成时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_50_ms</id>
+				<type>const</type>
+				<value>50</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>加载和生成时间已超过 [const_50_ms] 毫秒。</description>
+		<graph>SapTx_SystemBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>转入时间</name>
+		<view>SapTx_SystemBd</view>
+		<series>转入时间</series>
+		<condition>[roll_in_time] * [sec_to_msec] &gt; [const_20_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>roll_in_time</id>
+				<type>msr</type>
+				<value>
+					<name>转入时间</name>
+					<deffile>SapTx_SystemBd</deffile>
+					<measurement>转入时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_20_ms</id>
+				<type>const</type>
+				<value>20</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>转入时间已超过 [const_20_ms] 毫秒。</description>
+		<graph>SapTx_SystemBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>转出时间</name>
+		<view>SapTx_SystemBd</view>
+		<series>转出时间</series>
+		<condition>[roll_out_time] * [sec_to_msec] &gt; [const_20_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>roll_out_time</id>
+				<type>msr</type>
+				<value>
+					<name>转出时间</name>
+					<deffile>SapTx_SystemBd</deffile>
+					<measurement>转出时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_20_ms</id>
+				<type>const</type>
+				<value>20</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>转出时间已超过 [const_20_ms] 毫秒。</description>
+		<graph>SapTx_SystemBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>接口时间</name>
+		<view>SapTx_DsCompBd</view>
+		<series>接口时间</series>
+		<condition>[interface_time] * [sec_to_msec] &gt; [const_200_ms]</condition>
+		<ismajor>1</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>interface_time</id>
+				<type>msr</type>
+				<value>
+					<name>接口时间</name>
+					<deffile>SapTx_DsCompBd</deffile>
+					<measurement>接口时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_200_ms</id>
+				<type>const</type>
+				<value>200</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>向下搜索至接口细分。</recommendation>
+		<description>单个对话步骤的转入转出等待时间已超过 [const_200_ms] 毫秒。</description>
+		<graph>SapTx_InterfaceBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>GUI 时间</name>
+		<view>SapTx_InterfaceBd</view>
+		<series>GUI 时间</series>
+		<condition>[gui_time] * [sec_to_msec] &gt; [const_200_ms]</condition>
+		<ismajor>0</ismajor>
+		<context>3</context>
+		<conditionmap>
+			<exp>
+				<id>gui_time</id>
+				<type>msr</type>
+				<value>
+					<name>GUI 时间</name>
+					<deffile>SapTx_InterfaceBd</deffile>
+					<measurement>GUI 时间</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>sec_to_msec</id>
+				<type>const</type>
+				<value>1000</value>
+				<units/>
+			</exp>
+			<exp>
+				<id>const_200_ms</id>
+				<type>const</type>
+				<value>200</value>
+				<units>毫秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>GUI 时间已超过 [const_200_ms] 毫秒。</description>
+		<graph>SapTx_InterfaceBd</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>CPU 利用率</name>
+		<view>SapOSMonitor</view>
+		<series>CPU 利用率(%)</series>
+		<condition>[cpu_util] &gt; [const_80_per]</condition>
+		<ismajor>1</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>cpu_util</id>
+				<type>msr</type>
+				<value>
+					<name>CPU 利用率</name>
+					<deffile>SapOSMonitor</deffile>
+					<measurement>CPU 利用率(%)</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_80_per</id>
+				<type>const</type>
+				<value>80</value>
+				<units>百分比</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>CPU 利用率已超过 [const_80_per]%。</description>
+		<graph>SapOSMonitor</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>硬盘利用率(%)</name>
+		<view>SapOSMonitor</view>
+		<series>硬盘利用率(%)</series>
+		<condition>[hd_util] &gt; [const_50_per]</condition>
+		<ismajor>0</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>hd_util</id>
+				<type>msr</type>
+				<value>
+					<name>硬盘利用率</name>
+					<deffile>SapOSMonitor</deffile>
+					<measurement>硬盘利用率(%)</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_50_per</id>
+				<type>const</type>
+				<value>50</value>
+				<units>百分比</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>硬盘利用率已超过 [const_50_per]%。</description>
+		<graph>SapOSMonitor</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>换入分页</name>
+		<view>SapOSMonitor</view>
+		<series>Kb 换入分页 / 秒</series>
+		<condition>[paging_kb] / [page_size] &gt; [const_200]</condition>
+		<ismajor>0</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>paging_kb</id>
+				<type>msr</type>
+				<value>
+					<name>KB 换入分页</name>
+					<deffile>SapOSMonitor</deffile>
+					<measurement>Kb 换入分页 / 秒</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>page_size</id>
+				<type>const</type>
+				<value>4</value>
+				<units>(页面大小，单位 KB)</units>
+			</exp>
+			<exp>
+				<id>const_200</id>
+				<type>const</type>
+				<value>200</value>
+				<units>页/秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>换入分页率已超过 [const_200] 页/秒。</description>
+		<graph>SapOSMonitor</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>换出分页</name>
+		<view>SapOSMonitor</view>
+		<series>Kb 换出分页 / 秒</series>
+		<condition>[paging_kb] / [page_size] &gt; [const_200]</condition>
+		<ismajor>0</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>paging_kb</id>
+				<type>msr</type>
+				<value>
+					<name>KB 换出分页</name>
+					<deffile>SapOSMonitor</deffile>
+					<measurement>Kb 换出分页 / 秒</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>page_size</id>
+				<type>const</type>
+				<value>4</value>
+				<units>(页面大小，单位 KB)</units>
+			</exp>
+			<exp>
+				<id>const_200</id>
+				<type>const</type>
+				<value>200</value>
+				<units>页/秒</units>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>换出分页率已超过 [const_200] 页/秒。</description>
+		<graph>SapOSMonitor</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>等待工作进程</name>
+		<view>SapWPMonitor</view>
+		<series>等待</series>
+		<condition>[waiting_wp] &lt; [const_1]</condition>
+		<ismajor>1</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>waiting_wp</id>
+				<type>msr</type>
+				<value>
+					<name>等待工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>等待</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>const_1</id>
+				<type>const</type>
+				<value>1</value>
+				<units/>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>不存在处于等待状态的工作进程。</description>
+		<graph>SapWPMonitor</graph>
+	</rule>
+	<rule>
+		<enabled>1</enabled>
+		<name>已停止的工作进程</name>
+		<view>SapWPMonitor</view>
+		<series>停止 CPIC</series>
+		<condition>[stopped_cpic] + [stopped_priv] + [stopped_other] &gt; [waiting_wp] + [running_wp] + [finished_wp]</condition>
+		<ismajor>0</ismajor>
+		<context>2</context>
+		<conditionmap>
+			<exp>
+				<id>stopped_cpic</id>
+				<type>msr</type>
+				<value>
+					<name>CPIC 已停止的工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>停止 CPIC</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>stopped_priv</id>
+				<type>msr</type>
+				<value>
+					<name>PRIV 模式中已停止的工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>停止 PRIV</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>stopped_other</id>
+				<type>msr</type>
+				<value>
+					<name>由于其他原因而停止的工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>停止其它</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>waiting_wp</id>
+				<type>msr</type>
+				<value>
+					<name>等待工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>等待</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>running_wp</id>
+				<type>msr</type>
+				<value>
+					<name>正在运行的工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>正在运行</measurement>
+				</value>
+			</exp>
+			<exp>
+				<id>finished_wp</id>
+				<type>msr</type>
+				<value>
+					<name>已完成的工作进程数</name>
+					<deffile>SapWPMonitor</deffile>
+					<measurement>完成</measurement>
+				</value>
+			</exp>
+		</conditionmap>
+		<recommendation>请与您的 WAS 管理员联系。</recommendation>
+		<description>停止的工作进程数已超过工作进程总数的 50%。</description>
+		<graph>SapWPMonitor</graph>
+	</rule>
+</alerts>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.score.ScoreMapper">
+
+    <resultMap id="Score" type="com.nenusoftware.onlineexam.entity.score.Score">
+        <id property="scoreId" column="scoreId"/>
+        <result property="userId" column="userId"/>
+        <result property="paperId" column="paperId"/>
+        <result property="mark" column="mark"/>
+        <result property="username" column="username"/>
+        <result property="paperName" column="paperName"/>
+    </resultMap>
+
+    <insert id="addScore">
+        INSERT INTO t_score
+        (scoreId, userId, paperId, mark, paperName)
+        VALUES
+        (#{score.scoreId}, #{score.userId}, #{score.paperId}, #{score.mark}, #{score.paperName})
+    </insert>
+
+    <delete id="deleteScore">
+        DELETE FROM t_score
+        WHERE scoreId = #{scoreId}
+    </delete>
+
+    <select id="queryScoreByUser" resultMap="Score">
+        SELECT *
+        FROM t_score, t_user
+        WHERE t_score.userId = #{userId} AND t_score.userId = t_user.userId
+    </select>
+
+    <select id="queryScoreByPaper" resultMap="Score">
+        SELECT t_score.scoreId, t_score.paperId, t_score.userId, t_score.mark, t_user.username, t_paper.paperName
+        FROM t_score, t_user, t_paper
+        WHERE t_score.paperId = #{paperId} AND t_score.userId = t_user.userId AND t_paper.paperId = #{paperId}
+    </select>
+
+    <select id="listScoreByMark1" resultMap="Score">
+        SELECT scoreId, paperId, t_score.userId, mark, username, paperName
+        FROM t_score, t_user
+        WHERE t_score.paperId = #{paperId} AND t_score.mark &gt;= 60 AND t_score.userId = t_user.userId
+    </select>
+
+    <select id="listScoreByMark2" resultMap="Score">
+        SELECT scoreId, paperId, t_score.userId, mark, username, paperName
+        FROM t_score, t_user
+        WHERE t_score.paperId = #{paperId} AND t_score.mark &lt; 60 AND t_score.userId = t_user.userId
+    </select>
+
+</mapper>

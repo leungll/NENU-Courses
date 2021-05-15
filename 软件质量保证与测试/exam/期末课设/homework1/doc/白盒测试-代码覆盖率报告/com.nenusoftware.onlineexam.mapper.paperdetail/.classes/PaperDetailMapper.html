@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDetailMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.paperdetail</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDetailMapper (com.nenusoftware.onlineexam.mapper.paperdetail)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PaperDetailMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.paperdetail;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.paperdetail.PaperDetail;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * @Author:Liangll
+<i>12</i>&nbsp; * @Description: PaperDetailMapper的接口层
+<i>13</i>&nbsp; * @Date: 11:29 2020/6/18
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;@Mapper
+<i>16</i>&nbsp;@Repository
+<i>17</i>&nbsp;public interface PaperDetailMapper {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * 列出所有试卷详细信息
+<i>21</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>22</i>&nbsp;     * @throws Exception 报错信息
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    public List&lt;PaperDetail&gt; listAllPaperDetail() throws Exception;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * 根据试卷编号列出试卷详细信息
+<i>28</i>&nbsp;     * @param paperId 试卷编号
+<i>29</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>30</i>&nbsp;     * @throws Exception 报错信息
+<i>31</i>&nbsp;     */
+<i>32</i>&nbsp;    public List&lt;PaperDetail&gt; listPaperDetailByPaperId(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * 增加试卷详细信息
+<i>36</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>37</i>&nbsp;     * @throws Exception 报错信息
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    public void addPaperDetail(@Param(&quot;paperDetail&quot;) PaperDetail paperDetail) throws Exception;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * 删除试卷详细信息
+<i>43</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>44</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>45</i>&nbsp;     * @throws Exception 报错信息
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    public boolean deletePaperDetail(@Param(&quot;paperDetailId&quot;) int paperDetailId) throws Exception;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    /**
+<i>50</i>&nbsp;     * 修改试卷详细信息
+<i>51</i>&nbsp;     * @param paperDetail 试卷详细信息实体
+<i>52</i>&nbsp;     * @throws Exception 报错信息
+<i>53</i>&nbsp;     */
+<i>54</i>&nbsp;    public void updatePaperDetail(@Param(&quot;paperDetail&quot;) PaperDetail paperDetail) throws Exception;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * 模糊查询（查询试卷题目的内容或类型）
+<i>58</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>59</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>60</i>&nbsp;     * @throws Exception 报错信息
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public List&lt;PaperDetail&gt; queryPaperDetail(@Param(&quot;keyWord&quot;) String keyWord) throws Exception;
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * 根据题目类型列出试卷详细信息
+<i>66</i>&nbsp;     * @param exerciseType 题目类型
+<i>67</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>68</i>&nbsp;     * @throws Exception 报错信息
+<i>69</i>&nbsp;     */
+<i>70</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseByTypes(@Param(&quot;exerciseType&quot;) String exerciseType) throws Exception;
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * 根据试卷Id查询题目选项
+<i>74</i>&nbsp;     * @param paperDetailId 试卷详细信息编号
+<i>75</i>&nbsp;     * @return 返回List形式的试卷详细信息
+<i>76</i>&nbsp;     * @throws Exception 报错信息
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    public List&lt;PaperDetail&gt; queryExerciseItemsById(@Param(&quot;paperDetailId&quot;) int paperDetailId) throws Exception;
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    /**
+<i>81</i>&nbsp;     * 根据试题内容获取题目编号
+<i>82</i>&nbsp;     * @param content 试题内容
+<i>83</i>&nbsp;     * @return 题目编号
+<i>84</i>&nbsp;     * @throws Exception 报错信息
+<i>85</i>&nbsp;     */
+<i>86</i>&nbsp;    public PaperDetail queryIdByContent(@Param(&quot;content&quot;) String content) throws Exception;
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    /**
+<i>89</i>&nbsp;     * 根据题目id查找某道题的答案以及分值
+<i>90</i>&nbsp;     * @param paperDetailId 题目id
+<i>91</i>&nbsp;     * @return 某道题的答案以及分值
+<i>92</i>&nbsp;     * @throws Exception 报错信息
+<i>93</i>&nbsp;     */
+<i>94</i>&nbsp;    public List&lt;PaperDetail&gt; queryQuestion(@Param(&quot;paperDetailId&quot;) int paperDetailId) throws Exception;
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

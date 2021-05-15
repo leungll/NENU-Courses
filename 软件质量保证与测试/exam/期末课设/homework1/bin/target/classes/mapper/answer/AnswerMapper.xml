@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.answer.AnswerMapper">
+
+    <resultMap id="Answer" type="com.nenusoftware.onlineexam.entity.answer.Answer">
+        <id property="answerId" column="answerId"/>
+        <result property="userId" column="userId"/>
+        <result property="exerciseId" column="exerciseId"/>
+        <result property="value" column="value"/>
+        <result property="checked" column="checked"/>
+    </resultMap>
+
+    <select id="listAllAnswer" resultMap="Answer">
+        SELECT *
+        FROM `t_answer`
+    </select>
+
+    <insert id="addAnswer">
+        INSERT INTO t_answer
+        (answerId, userId, exerciseId, score, checked)
+        VALUES
+        (#{answer.answerId}, #{answer.userId}, #{answer.exerciseId}, #{answer.score}, #{answer.checked})
+    </insert>
+
+    <delete id="deleteAnswer">
+        DELETE FROM t_answer
+        WHERE answerId = #{answerId}
+    </delete>
+
+</mapper>

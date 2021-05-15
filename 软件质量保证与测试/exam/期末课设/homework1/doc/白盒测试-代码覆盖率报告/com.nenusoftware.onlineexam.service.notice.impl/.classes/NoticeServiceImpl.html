@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NoticeServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.notice.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NoticeServiceImpl (com.nenusoftware.onlineexam.service.notice.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NoticeServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.notice.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.notice.Notice;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.mapper.notice.NoticeMapper;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.notice.NoticeService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.annotation.Resource;
+<i>9</i>&nbsp;import java.util.Collections;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * @Author:Liangll
+<i>14</i>&nbsp; * @Description: NoticeService的底层实现方法
+<i>15</i>&nbsp; * @Date: 20:30 2020/6/15
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;@Service
+<b class="fc"><i>18</i>&nbsp;public class NoticeServiceImpl implements NoticeService {</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    @Resource
+<i>21</i>&nbsp;    NoticeMapper noticeMapper;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    /**
+<i>24</i>&nbsp;     * 列出所有公告信息
+<i>25</i>&nbsp;     * @return 返回List形式的公告信息
+<i>26</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public List&lt;Notice&gt; listAllNotice() throws Exception{
+<b class="fc"><i>30</i>&nbsp;        List&lt;Notice&gt; noticeList = Collections.emptyList();</b>
+<b class="fc"><i>31</i>&nbsp;        noticeList = noticeMapper.listAllNotice();</b>
+<b class="fc"><i>32</i>&nbsp;        return noticeList;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * 增加公告
+<i>37</i>&nbsp;     * @param notice 公告实体
+<i>38</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public void addNotice(Notice notice) throws Exception {
+<b class="fc"><i>42</i>&nbsp;        noticeMapper.addNotice(notice);</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    /**
+<i>46</i>&nbsp;     * 删除公告
+<i>47</i>&nbsp;     * @param noticeId 公告编号
+<i>48</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>49</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public boolean deleteNotice(int noticeId) throws Exception{
+<b class="fc"><i>53</i>&nbsp;        return noticeMapper.deleteNotice(noticeId);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * 修改公告
+<i>58</i>&nbsp;     * @param notice 公告实体
+<i>59</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    @Override
+<i>62</i>&nbsp;    public void updateNotice(Notice notice) throws Exception{
+<b class="fc"><i>63</i>&nbsp;        noticeMapper.updateNotice(notice);</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * 公告的模糊查询（可查询公告标题和公告内容）
+<i>68</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>69</i>&nbsp;     * @return 返回List形式的公告信息
+<i>70</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    @Override
+<i>73</i>&nbsp;    public List&lt;Notice&gt; queryNotice(String keyWord) throws Exception{
+<b class="fc"><i>74</i>&nbsp;        List&lt;Notice&gt; noticelist = Collections.emptyList();</b>
+<b class="fc"><i>75</i>&nbsp;        keyWord = &quot;%&quot; + keyWord + &quot;%&quot;;</b>
+<b class="fc"><i>76</i>&nbsp;        noticelist = noticeMapper.queryNotice(keyWord);</b>
+<b class="fc"><i>77</i>&nbsp;        return noticelist;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

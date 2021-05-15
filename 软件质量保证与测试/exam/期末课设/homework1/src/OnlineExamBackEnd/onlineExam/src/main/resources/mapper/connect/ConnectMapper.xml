@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.onlineexam.mapper.connect.ConnectMapper">
+
+    <resultMap id="PaperDetail" type="com.nenusoftware.onlineexam.entity.paperdetail.PaperDetail">
+        <id property="paperDetailId" column="paperDetailId"/>
+        <result property="exerciseId" column="exerciseId"/>
+        <result property="content" column="content"/>
+        <result property="typeA" column="typeA"/>
+        <result property="typeB" column="typeB"/>
+        <result property="typeC" column="typeC"/>
+        <result property="typeD" column="typeD"/>
+        <result property="answer" column="answer"/>
+        <result property="answer2" column="answer2"/>
+        <result property="answer3" column="answer3"/>
+        <result property="exerciseType" column="exerciseType"/>
+        <result property="score" column="score"/>
+        <result property="paperName" column="paperName"/>
+    </resultMap>
+
+    <select id="listAllConnect" resultMap="PaperDetail">
+        SELECT *
+        FROM t_connect, t_paperdetail
+        WHERE t_connect.paperId=#{paperId} AND t_paperdetail.exerciseType=#{exerciseType}
+        AND t_connect.paperDetailId = t_paperdetail.paperDetailId
+    </select>
+
+<!--    <select id="listPublishPaperByPaperId" resultMap="PaperDetail">-->
+<!--        SELECT *-->
+<!--        FROM t_connect, t_paperdetail-->
+<!--        WHERE t_connect.paperId = #{paperId} AND t_paperdetail.exerciseType=#{exerciseType}-->
+<!--        AND t_connect.paperDetailId = t_paperdetail.paperDetailId AND t_paper.status = #{status}-->
+<!--    </select>-->
+
+    <insert id="addConnect">
+        INSERT INTO t_connect
+        (paperId, paperDetailId)
+        VALUES
+        (#{connect.paperId}, #{connect.paperDetailId})
+    </insert>
+</mapper>

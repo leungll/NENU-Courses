@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NoticeController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.controller.notice</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NoticeController (com.nenusoftware.onlineexam.controller.notice)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NoticeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2%
+  </span>
+  <span class="absValue">
+    (1/ 51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.controller.notice;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.notice.Notice;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.service.notice.NoticeService;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.user.UserService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>7</i>&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.ResponseBody;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import javax.annotation.Resource;
+<i>12</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>13</i>&nbsp;import javax.servlet.http.HttpSession;
+<i>14</i>&nbsp;import java.util.Date;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * @Author:Kongyy
+<i>19</i>&nbsp; * @Description: NoticeController层（与前端页面进行交互）
+<i>20</i>&nbsp; * @Date: 15:54 2020/6/11
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;@CrossOrigin(allowCredentials = &quot;true&quot;)
+<i>23</i>&nbsp;@Controller
+<i>24</i>&nbsp;@RequestMapping(&quot;/notice&quot;)
+<b class="fc"><i>25</i>&nbsp;public class NoticeController {</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    @Resource
+<i>28</i>&nbsp;    NoticeService noticeService;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Resource
+<i>31</i>&nbsp;    UserService userService;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * 列出所有公告信息
+<i>35</i>&nbsp;     * @return 返回List形式的公告信息
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    @ResponseBody
+<i>38</i>&nbsp;    @RequestMapping(&quot;/listAllNotice&quot;)
+<i>39</i>&nbsp;    public List&lt;Notice&gt; listAllNotice(){
+<b class="nc"><i>40</i>&nbsp;        List&lt;Notice&gt; noticeList = null;</b>
+<i>41</i>&nbsp;        try {
+<b class="nc"><i>42</i>&nbsp;            noticeList = noticeService.listAllNotice();</b>
+<b class="nc"><i>43</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>44</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>45</i>&nbsp;        }</b>
+<b class="nc"><i>46</i>&nbsp;        return noticeList;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    /**
+<i>50</i>&nbsp;     * 增加公告
+<i>51</i>&nbsp;     * @param title 公告标题
+<i>52</i>&nbsp;     * @param content 公告内容
+<i>53</i>&nbsp;     * @param request Http请求
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    @ResponseBody
+<i>56</i>&nbsp;    @RequestMapping(&quot;/addNotice&quot;)
+<i>57</i>&nbsp;    public void addNotice(String title, String content, HttpServletRequest request){
+<i>58</i>&nbsp;        try {
+<b class="nc"><i>59</i>&nbsp;            HttpSession session = request.getSession();</b>
+<b class="nc"><i>60</i>&nbsp;            String username = String.valueOf(session.getAttribute(&quot;usernameSession&quot;));</b>
+<b class="nc"><i>61</i>&nbsp;            int userId = userService.queryIdByUsername(username).getUserId();</b>
+<i>62</i>&nbsp;
+<b class="nc"><i>63</i>&nbsp;            Notice notice = new Notice();</b>
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;            notice.setUserId(userId);</b>
+<b class="nc"><i>66</i>&nbsp;            notice.setTitle(title);</b>
+<b class="nc"><i>67</i>&nbsp;            notice.setContent(content);</b>
+<b class="nc"><i>68</i>&nbsp;            Date date = new Date();</b>
+<b class="nc"><i>69</i>&nbsp;            String createTimeStr = date.toString();</b>
+<b class="nc"><i>70</i>&nbsp;            notice.setCreateTime(createTimeStr);</b>
+<i>71</i>&nbsp;
+<b class="nc"><i>72</i>&nbsp;            noticeService.addNotice(notice);</b>
+<b class="nc"><i>73</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>74</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>75</i>&nbsp;            System.out.println(&quot;增加公告失败！&quot;);</b>
+<b class="nc"><i>76</i>&nbsp;        }</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    /**
+<i>80</i>&nbsp;     * 删除公告
+<i>81</i>&nbsp;     * @param noticeIdStr 公告编号
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    @ResponseBody
+<i>84</i>&nbsp;    @RequestMapping(&quot;/deleteNotice&quot;)
+<i>85</i>&nbsp;    public void deleteNotice(String noticeIdStr) {
+<b class="nc"><i>86</i>&nbsp;        int noticeId = Integer.parseInt(noticeIdStr);</b>
+<i>87</i>&nbsp;        try {
+<b class="nc"><i>88</i>&nbsp;            noticeService.deleteNotice(noticeId);</b>
+<b class="nc"><i>89</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>90</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>91</i>&nbsp;            System.out.println(&quot;删除公告失败！&quot;);</b>
+<b class="nc"><i>92</i>&nbsp;        }</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    /**
+<i>96</i>&nbsp;     * 修改公告
+<i>97</i>&nbsp;     * @param noticeIdStr 公告编号
+<i>98</i>&nbsp;     * @param title 公告标题
+<i>99</i>&nbsp;     * @param content 公告内容
+<i>100</i>&nbsp;     * @param request Http请求
+<i>101</i>&nbsp;     */
+<i>102</i>&nbsp;    @ResponseBody
+<i>103</i>&nbsp;    @RequestMapping(&quot;/updateNotice&quot;)
+<i>104</i>&nbsp;    public void updateNotice(String noticeIdStr, String title, String content, HttpServletRequest request) {
+<b class="nc"><i>105</i>&nbsp;        int noticeId = Integer.parseInt(noticeIdStr);</b>
+<i>106</i>&nbsp;        try {
+<b class="nc"><i>107</i>&nbsp;            HttpSession session = request.getSession();</b>
+<b class="nc"><i>108</i>&nbsp;            String username = String.valueOf(session.getAttribute(&quot;usernameSession&quot;));</b>
+<b class="nc"><i>109</i>&nbsp;            int userId = userService.queryIdByUsername(username).getUserId();</b>
+<i>110</i>&nbsp;
+<b class="nc"><i>111</i>&nbsp;            Notice notice = new Notice();</b>
+<i>112</i>&nbsp;
+<b class="nc"><i>113</i>&nbsp;            notice.setNoticeId(noticeId);</b>
+<b class="nc"><i>114</i>&nbsp;            notice.setUserId(userId);</b>
+<b class="nc"><i>115</i>&nbsp;            notice.setTitle(title);</b>
+<b class="nc"><i>116</i>&nbsp;            notice.setContent(content);</b>
+<b class="nc"><i>117</i>&nbsp;            Date date = new Date();</b>
+<b class="nc"><i>118</i>&nbsp;            String createTimeStr = date.toString();</b>
+<b class="nc"><i>119</i>&nbsp;            notice.setCreateTime(createTimeStr);</b>
+<b class="nc"><i>120</i>&nbsp;            noticeService.updateNotice(notice);</b>
+<b class="nc"><i>121</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>122</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>123</i>&nbsp;            System.out.println(&quot;修改公告失败！&quot;);</b>
+<b class="nc"><i>124</i>&nbsp;        }</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    /**
+<i>128</i>&nbsp;     * 公告的模糊查询（可查询公告标题和公告内容）
+<i>129</i>&nbsp;     * @param keyStr 输入查询的关键字
+<i>130</i>&nbsp;     * @return 返回公告完整信息
+<i>131</i>&nbsp;     */
+<i>132</i>&nbsp;    @ResponseBody
+<i>133</i>&nbsp;    @RequestMapping(&quot;/queryNotice&quot;)
+<i>134</i>&nbsp;    public List&lt;Notice&gt; queryNotice(String keyStr){
+<b class="nc"><i>135</i>&nbsp;        List&lt;Notice&gt; noticeList = null;</b>
+<i>136</i>&nbsp;        try {
+<b class="nc"><i>137</i>&nbsp;            noticeList = noticeService.queryNotice(keyStr);</b>
+<b class="nc"><i>138</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>139</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>140</i>&nbsp;        }</b>
+<b class="nc"><i>141</i>&nbsp;        return noticeList;</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

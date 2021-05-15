@@ -1,0 +1,19 @@
+.750WidthClass { width: 750px}
+.750WidthClassScroll { width: 730px}
+.150WidthClass { width: 150px}
+.150WidthClassScroll { width: 130px}
+.250WidthClass { width: 250px}
+.250WidthClassScroll { width: 230px}
+.300WidthClass { width: 300px}
+.280WidthClassScroll { width: 280px}
+.40WidthClass { width: 40px}
+.90WidthClass { width: 90px}
+.230WidthClass { width: 230px}
+.gridcellCursorHand { width: 31px; height: 25px; font-family: SimSun, 'Arial', monospace; font-size: 12px; cursor: hand}
+.gridcell { width: 31px; height: 25px; font-family: SimSun, 'Arial', monospace; font-size: 12px}
+.bordergridcell { width: 31px; height: 25px; border: 1px solid #485464; font-family: SimSun, 'Arial', monospace; font-size: 12px}
+.timegridcell { font-size: 12px; font-family: SimSun, Verdana, Arial; writing-mode: tb-rl; width: 31px; height: 60px}
+a:hover { color: #8e001d; text-decoration: underline}
+a { color: #669; text-decoration: underline}
+a.tab_dis { color: #485464; font-size: 12px; text-decoration: none; width: 100%; height: 100%}
+a.tab_dis:hover { color: #8e001d; font-size: 12px; text-decoration: underline; width: 100%; height: 100%}

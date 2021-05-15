@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ScoreService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.score</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ScoreService (com.nenusoftware.onlineexam.service.score)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ScoreService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.score;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.score.Score;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * @Author:Liangll
+<i>9</i>&nbsp; * @Description: ScoreService的接口层
+<i>10</i>&nbsp; * @Date: 10:52 2020/6/16
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface ScoreService {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * 增加成绩信息
+<i>16</i>&nbsp;     * @param score 成绩信息实体
+<i>17</i>&nbsp;     * @return 增加成功返回true，增加失败返回false
+<i>18</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    public boolean addScore(Score score) throws Exception;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * 删除成绩
+<i>24</i>&nbsp;     * @param scoreId 成绩编号
+<i>25</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>26</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    public boolean deleteScore(int scoreId) throws Exception;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * 根据用户编号列出该用户对应的成绩
+<i>32</i>&nbsp;     * @param userId 用户编号
+<i>33</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>34</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    public List&lt;Score&gt; queryScoreByUser(int userId) throws Exception;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * 根据试卷编号列出所有学生做该试卷的成绩
+<i>40</i>&nbsp;     * @param paperId 试卷编号
+<i>41</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>42</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    public List&lt;Score&gt; queryScoreByPaper(int paperId) throws Exception;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * 根据试卷编号列出该试卷所有成绩在60分及以上的学生
+<i>48</i>&nbsp;     * @param paperId 试卷的id
+<i>49</i>&nbsp;     * @return 返回一个list（成绩在60分以上的信息）
+<i>50</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    public List&lt;Score&gt; listScoreByMark1(int paperId) throws Exception;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * 根据试卷编号列出该试卷所有成绩在60分以下的学生
+<i>56</i>&nbsp;     * @param paperId 试卷id
+<i>57</i>&nbsp;     * @return 返回一个list（成绩在60分以下的信息）
+<i>58</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public List&lt;Score&gt; listScoreByMark2(int paperId) throws Exception;
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ScoreMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.score</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ScoreMapper (com.nenusoftware.onlineexam.mapper.score)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ScoreMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.score;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.score.Score;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * @Author:Kongyy
+<i>12</i>&nbsp; * @Description: ScoreMapper的接口层
+<i>13</i>&nbsp; * @Date: 12:08 2020/6/16
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;@Mapper
+<i>16</i>&nbsp;@Repository
+<i>17</i>&nbsp;public interface ScoreMapper {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * 增加成绩信息
+<i>21</i>&nbsp;     * @param score 成绩信息实体
+<i>22</i>&nbsp;     * @return 增加成功返回true，增加失败返回false
+<i>23</i>&nbsp;     * @throws Exception 报错信息
+<i>24</i>&nbsp;     */
+<i>25</i>&nbsp;    public boolean addScore(@Param(&quot;score&quot;) Score score) throws Exception;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * 删除成绩
+<i>29</i>&nbsp;     * @param scoreId 成绩编号
+<i>30</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>31</i>&nbsp;     * @throws Exception 报错信息
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    public boolean deleteScore(@Param(&quot;scoreId&quot;) int scoreId) throws Exception;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * 根据用户编号列出该用户对应的成绩
+<i>37</i>&nbsp;     * @param userId 用户编号
+<i>38</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>39</i>&nbsp;     * @throws Exception 报错信息
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    public List&lt;Score&gt; queryScoreByUser(@Param(&quot;userId&quot;) int userId) throws Exception;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    /**
+<i>44</i>&nbsp;     * 根据试卷编号列出所有学生做该试卷的成绩
+<i>45</i>&nbsp;     * @param paperId 试卷编号
+<i>46</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>47</i>&nbsp;     * @throws Exception 报错信息
+<i>48</i>&nbsp;     */
+<i>49</i>&nbsp;    public List&lt;Score&gt; queryScoreByPaper(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * 列出某张卷子及格的学生
+<i>53</i>&nbsp;     * @param paperId 试卷编号
+<i>54</i>&nbsp;     * @return 成绩信息
+<i>55</i>&nbsp;     * @throws Exception 报错信息
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public List&lt;Score&gt; listScoreByMark1(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * 列出某张卷子未及格的学生
+<i>61</i>&nbsp;     * @param paperId 时间编号
+<i>62</i>&nbsp;     * @return 成绩信息
+<i>63</i>&nbsp;     * @throws Exception 报错信息
+<i>64</i>&nbsp;     */
+<i>65</i>&nbsp;    public List&lt;Score&gt; listScoreByMark2(@Param(&quot;paperId&quot;) int paperId) throws Exception;
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

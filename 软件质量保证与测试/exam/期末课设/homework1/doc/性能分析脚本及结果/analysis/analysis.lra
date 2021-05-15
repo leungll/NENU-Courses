@@ -1,0 +1,70 @@
+﻿[Workspace]
+SessionStartTime=0
+SessionEndTime=156
+VerNo=13
+IsSummaryData=0
+TimeFormat=3
+SesLang=CHS
+ABuild=0
+DataBaseName=resl46943831DB
+DBType=1
+CurrServer=DESKTOP-GR0T749
+CurrUser=sa
+CurrPswd===
+StorageLoc=\\DESKTOP-GR0T749\Data\
+PhStorageLoc=C:\MSSQL7\Data
+LocStorageLoc=
+LocPhStorageLoc=
+WinIntSec=0
+UseNetworkMode=0
+UseParallel=1
+UseManagedIndexes=1
+UseSpecMSSQLParams=1
+NumResults=1
+
+[Data Config]
+CollectionMode=2
+IngnoreFlds=Vuser ID
+IngnoreUIFlds=VuserID
+AggSecGran=1
+TransAgg=1
+DataPointAgg=1
+WebAgg=1
+MonAgg=0
+ErrAgg=0
+FilterEdge=0
+FSartTime=0
+FEndTime=0
+
+[Result0]
+LRRID=
+ResultPath=C:\Users\dell\Documents\VuGen\Scripts\WebHttpHtml3\res\res.lrr
+ResultTDPath=
+NumFilters=0
+ScenarioTimeZone=-28800
+DaylightSavingSecsAddition=0
+ScenarioStartTime=1593654603
+ScenarioEndTime=1593654759
+ResInSD=0
+WebGran=5
+FilterEdge=0
+FSartTime=0
+FEndTime=0
+TDTestID=-1
+TDRunID=-1
+IsProTuneResult=0
+Scenario Type=Manual
+Schedule Name=计划 1
+Mode=场景计划
+Load Behavior=在每个 Vuser 运行之前将其初始化
+Scenario Duration=启动 15 (个) Vuser: 每隔 00:00:15 (HH:MM:SS) 启动 2 个; 运行00:05:00 (HH:MM:SS); 停止 全部 (个) Vuser: 每 00:00:30 (HH:MM:SS) 停止 5 个
+NumGraphs=5
+
+[DimensionFunctions]
+DimeFuncCount=1
+DimeFuncType0=FuncFragment
+FunctionName_UI0=思考时间
+DimensionName_UI0=事务响应时间,Aminimum,Amaximum
+FunctionFragmentValues_UI0=-包括思考时间
+DimensionFragmentValues_UI0=!([Value]-[Think Time])!
+

@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/db_onlineexam?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: mysql
+server:
+  port: 8080
+
+mybatis:
+  configuration:
+    cache-enabled: true
+  #实体类所做包
+  type-aliases-package: com.nenusoftware.onlineexam.entity
+  #mapper.xml所在位置
+  mapper-locations: classpath:mapper/*/*.xml
+
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://120.26.186.88/db_onlineexam?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: mysql

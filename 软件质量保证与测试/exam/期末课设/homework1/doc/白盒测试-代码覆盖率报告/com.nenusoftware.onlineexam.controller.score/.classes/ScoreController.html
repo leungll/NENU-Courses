@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ScoreController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.controller.score</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ScoreController (com.nenusoftware.onlineexam.controller.score)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScoreController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.3%
+  </span>
+  <span class="absValue">
+    (1/ 44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.controller.score;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.score.Score;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.score.ScoreService;
+<i>6</i>&nbsp;import com.nenusoftware.onlineexam.service.user.UserService;
+<i>7</i>&nbsp;import org.springframework.stereotype.Controller;
+<i>8</i>&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+<i>9</i>&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+<i>10</i>&nbsp;import org.springframework.web.bind.annotation.ResponseBody;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import javax.annotation.Resource;
+<i>13</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>14</i>&nbsp;import javax.servlet.http.HttpSession;
+<i>15</i>&nbsp;import java.util.Collections;
+<i>16</i>&nbsp;import java.util.List;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; * @Author:Kongyy
+<i>20</i>&nbsp; * @Description: ScoreController层（与前端页面进行交互）
+<i>21</i>&nbsp; * @Date: 10:54 2020/6/18
+<i>22</i>&nbsp; */
+<i>23</i>&nbsp;@CrossOrigin(allowCredentials = &quot;true&quot;)
+<i>24</i>&nbsp;@Controller
+<i>25</i>&nbsp;@RequestMapping(&quot;/score&quot;)
+<b class="fc"><i>26</i>&nbsp;public class ScoreController {</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Resource
+<i>29</i>&nbsp;    ScoreService scoreService;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Resource
+<i>32</i>&nbsp;    UserService userService;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @Resource
+<i>35</i>&nbsp;    PaperService paperService;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * 增加成绩信息
+<i>39</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>40</i>&nbsp;     * @param markStr 分数
+<i>41</i>&nbsp;     * @param request Http请求
+<i>42</i>&nbsp;     * @throws Exception 报错信息
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    @ResponseBody
+<i>45</i>&nbsp;    @RequestMapping(&quot;/addScore&quot;)
+<i>46</i>&nbsp;    public void addExam(String paperIdStr, String markStr, HttpServletRequest request) throws Exception {
+<b class="nc"><i>47</i>&nbsp;        HttpSession session = request.getSession();</b>
+<b class="nc"><i>48</i>&nbsp;        String username = String.valueOf(session.getAttribute(&quot;usernameSession&quot;));</b>
+<b class="nc"><i>49</i>&nbsp;        int userId = userService.queryIdByUsername(username).getUserId();</b>
+<i>50</i>&nbsp;
+<b class="nc"><i>51</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<b class="nc"><i>52</i>&nbsp;        int mark = Integer.parseInt(markStr);</b>
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        String paperName = paperService.queryPaperNameById(paperId).getPaperName();</b>
+<b class="nc"><i>55</i>&nbsp;        Score score = new Score();</b>
+<b class="nc"><i>56</i>&nbsp;        score.setUserId(userId);</b>
+<b class="nc"><i>57</i>&nbsp;        score.setPaperId(paperId);</b>
+<b class="nc"><i>58</i>&nbsp;        score.setMark(mark);</b>
+<b class="nc"><i>59</i>&nbsp;        score.setPaperName(paperName);</b>
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;        scoreService.addScore(score);</b>
+<b class="nc"><i>62</i>&nbsp;        System.out.println(&quot;增加学生答题成绩信息成功！&quot;);</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * 根据试卷编号列出所有学生做该试卷的成绩
+<i>67</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>68</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>69</i>&nbsp;     */
+<i>70</i>&nbsp;    @ResponseBody
+<i>71</i>&nbsp;    @RequestMapping(&quot;/queryScoreByPaper&quot;)
+<i>72</i>&nbsp;    public List&lt;Score&gt; queryScoreByPaper(String paperIdStr) {
+<b class="nc"><i>73</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<b class="nc"><i>74</i>&nbsp;        List&lt;Score&gt; scoreList = null;</b>
+<i>75</i>&nbsp;        try {
+<b class="nc"><i>76</i>&nbsp;            scoreList = scoreService.queryScoreByPaper(paperId);</b>
+<b class="nc"><i>77</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>78</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>79</i>&nbsp;        }</b>
+<b class="nc"><i>80</i>&nbsp;        return scoreList;</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    /**
+<i>84</i>&nbsp;     * 根据用户编号列出该用户对应的成绩
+<i>85</i>&nbsp;     * @param request Http请求，用户需登录
+<i>86</i>&nbsp;     * @return 返回List形式的成绩信息
+<i>87</i>&nbsp;     * @throws Exception 报错信息
+<i>88</i>&nbsp;     */
+<i>89</i>&nbsp;    @ResponseBody
+<i>90</i>&nbsp;    @RequestMapping(&quot;/queryScoreByUser&quot;)
+<i>91</i>&nbsp;    public List&lt;Score&gt; queryScoreByUser(HttpServletRequest request) throws Exception {
+<b class="nc"><i>92</i>&nbsp;        HttpSession session = request.getSession();</b>
+<b class="nc"><i>93</i>&nbsp;        String username = String.valueOf(session.getAttribute(&quot;usernameSession&quot;));</b>
+<b class="nc"><i>94</i>&nbsp;        int userId = userService.queryIdByUsername(username).getUserId();</b>
+<b class="nc"><i>95</i>&nbsp;        List&lt;Score&gt; scoreList = null;</b>
+<i>96</i>&nbsp;        try {
+<b class="nc"><i>97</i>&nbsp;            scoreList = scoreService.queryScoreByUser(userId);</b>
+<b class="nc"><i>98</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>99</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>100</i>&nbsp;        }</b>
+<b class="nc"><i>101</i>&nbsp;        return scoreList;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    /**
+<i>105</i>&nbsp;     * 列出该试卷60分及以上的分数
+<i>106</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>107</i>&nbsp;     * @return 成绩信息
+<i>108</i>&nbsp;     */
+<i>109</i>&nbsp;    @ResponseBody
+<i>110</i>&nbsp;    @RequestMapping(&quot;/listScoreByMark1&quot;)
+<i>111</i>&nbsp;    public List&lt;Score&gt; listScoreByMark1(String paperIdStr){
+<b class="nc"><i>112</i>&nbsp;        List&lt;Score&gt; scoreList = Collections.emptyList();</b>
+<b class="nc"><i>113</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<i>114</i>&nbsp;        try {
+<b class="nc"><i>115</i>&nbsp;            scoreList = scoreService.listScoreByMark1(paperId);</b>
+<b class="nc"><i>116</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>117</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>118</i>&nbsp;        }</b>
+<b class="nc"><i>119</i>&nbsp;        return scoreList;</b>
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    /**
+<i>123</i>&nbsp;     * 列出该试卷 60分及以下的分数
+<i>124</i>&nbsp;     * @param paperIdStr 试卷编号
+<i>125</i>&nbsp;     * @return 成绩信息
+<i>126</i>&nbsp;     */
+<i>127</i>&nbsp;    @ResponseBody
+<i>128</i>&nbsp;    @RequestMapping(&quot;/listScoreByMark2&quot;)
+<i>129</i>&nbsp;    public List&lt;Score&gt; listScoreByMark2(String paperIdStr){
+<b class="nc"><i>130</i>&nbsp;        List&lt;Score&gt; scoreList = Collections.emptyList();</b>
+<b class="nc"><i>131</i>&nbsp;        int paperId = Integer.parseInt(paperIdStr);</b>
+<i>132</i>&nbsp;        try {
+<b class="nc"><i>133</i>&nbsp;            scoreList = scoreService.listScoreByMark2(paperId);</b>
+<b class="nc"><i>134</i>&nbsp;        }catch (Exception e){</b>
+<b class="nc"><i>135</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>136</i>&nbsp;        }</b>
+<b class="nc"><i>137</i>&nbsp;        return scoreList;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

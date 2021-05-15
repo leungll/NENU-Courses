@@ -1,0 +1,223 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperServiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.service.paper.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperServiceImpl (com.nenusoftware.onlineexam.service.paper.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaperServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.service.paper.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.paper.Paper;
+<i>4</i>&nbsp;import com.nenusoftware.onlineexam.mapper.paper.PaperMapper;
+<i>5</i>&nbsp;import com.nenusoftware.onlineexam.service.paper.PaperService;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.annotation.Resource;
+<i>9</i>&nbsp;import java.util.ArrayList;
+<i>10</i>&nbsp;import java.util.Collections;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; * @Author:Liangll
+<i>15</i>&nbsp; * @Description: PaperService的底层实现方法
+<i>16</i>&nbsp; * @Date: 10:53 2020/6/15
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;@Service
+<b class="fc"><i>19</i>&nbsp;public class PaperServiceImpl implements PaperService {</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    @Resource
+<i>22</i>&nbsp;    PaperMapper paperMapper;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    /**
+<i>25</i>&nbsp;     * 列出所有试卷
+<i>26</i>&nbsp;     * @return 返回List形式的试卷信息
+<i>27</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public ArrayList&lt;Paper&gt; listAllPaper() throws Exception{
+<b class="fc"><i>31</i>&nbsp;        ArrayList&lt;Paper&gt; paperList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>32</i>&nbsp;        paperList = paperMapper.listAllPaper();</b>
+<b class="fc"><i>33</i>&nbsp;        return paperList;</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    /**
+<i>37</i>&nbsp;     * 列出所有已发布试卷
+<i>38</i>&nbsp;     * @param status 1：发布；0：不发布
+<i>39</i>&nbsp;     * @return 返回 List形式的试卷信息
+<i>40</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>41</i>&nbsp;     */
+<i>42</i>&nbsp;    @Override
+<i>43</i>&nbsp;    public ArrayList&lt;Paper&gt; listPublishPaper(int status) throws Exception{
+<b class="fc"><i>44</i>&nbsp;        return paperMapper.listPublishPaper(status);</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * 增加试卷
+<i>49</i>&nbsp;     * @param paper 试卷实体
+<i>50</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    @Override
+<i>53</i>&nbsp;    public void addPaper(Paper paper) throws Exception {
+<b class="fc"><i>54</i>&nbsp;        paperMapper.addPaper(paper);</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * 删除试卷
+<i>59</i>&nbsp;     * @param paperId 试卷编号
+<i>60</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    @Override
+<i>63</i>&nbsp;    public void deletePaper(int paperId) throws Exception{
+<b class="fc"><i>64</i>&nbsp;        paperMapper.deletePaper(paperId);</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    /**
+<i>68</i>&nbsp;     * 修改试卷
+<i>69</i>&nbsp;     * @param paper 试卷实体
+<i>70</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    @Override
+<i>73</i>&nbsp;    public void updatePaper(Paper paper) throws Exception{
+<b class="fc"><i>74</i>&nbsp;        paperMapper.updatePaper(paper);</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    /**
+<i>78</i>&nbsp;     * 模糊查询（查询试卷名称）
+<i>79</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>80</i>&nbsp;     * @return 返回List形式的试卷信息
+<i>81</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>82</i>&nbsp;     */
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public List&lt;Paper&gt; queryPaperName(String keyWord) throws Exception{
+<b class="fc"><i>85</i>&nbsp;        List&lt;Paper&gt; paperlist = Collections.emptyList();</b>
+<b class="fc"><i>86</i>&nbsp;        keyWord = &quot;%&quot; + keyWord + &quot;%&quot;;</b>
+<b class="fc"><i>87</i>&nbsp;        paperlist = paperMapper.queryPaperName(keyWord);</b>
+<b class="fc"><i>88</i>&nbsp;        return paperlist;</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    /**
+<i>92</i>&nbsp;     * 根据Id查询试卷名称
+<i>93</i>&nbsp;     * @param paperId 试卷编号
+<i>94</i>&nbsp;     * @return 返回Paper形式的试卷信息
+<i>95</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>96</i>&nbsp;     */
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public Paper queryPaperNameById(int paperId) throws Exception{
+<b class="fc"><i>99</i>&nbsp;        return paperMapper.queryPaperNameById(paperId);</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    /**
+<i>103</i>&nbsp;     * 根据试卷名称查询试卷编号
+<i>104</i>&nbsp;     * @param paperName 试卷名称
+<i>105</i>&nbsp;     * @return 返回 Paper形式的试卷信息
+<i>106</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>107</i>&nbsp;     */
+<i>108</i>&nbsp;    @Override
+<i>109</i>&nbsp;    public Paper queryPaperIdByName(String paperName) throws Exception{
+<b class="fc"><i>110</i>&nbsp;        return paperMapper.queryPaperIdByName(paperName);</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    /**
+<i>114</i>&nbsp;     * 发布试卷
+<i>115</i>&nbsp;     * @param paper 试卷实体
+<i>116</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>117</i>&nbsp;     */
+<i>118</i>&nbsp;    @Override
+<i>119</i>&nbsp;    public void publishPaper(Paper paper) throws Exception{
+<b class="fc"><i>120</i>&nbsp;        paperMapper.publishPaper(paper);</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    /**
+<i>124</i>&nbsp;     * 从字符串中提取时间
+<i>125</i>&nbsp;     * @param str 待提取的字符串
+<i>126</i>&nbsp;     * @return 返回一个长度为6的string类型数组，里面的值分别是年月日时分秒
+<i>127</i>&nbsp;     * @throws Exception 抛出错误类型
+<i>128</i>&nbsp;     */
+<i>129</i>&nbsp;    @Override
+<i>130</i>&nbsp;    public String[] extractTime(String str) throws Exception{
+<b class="fc"><i>131</i>&nbsp;        String[] time = new String[6];</b>
+<b class="fc"><i>132</i>&nbsp;        time[0] = str.substring(str.indexOf(&quot;:&quot;)+1, str.lastIndexOf(&quot;年&quot;));</b>
+<b class="fc"><i>133</i>&nbsp;        time[1] = str.substring(str.indexOf(&quot;年&quot;)+1, str.lastIndexOf(&quot;月&quot;));</b>
+<b class="fc"><i>134</i>&nbsp;        time[2] = str.substring(str.indexOf(&quot;月&quot;)+1, str.lastIndexOf(&quot;日&quot;));</b>
+<b class="fc"><i>135</i>&nbsp;        time[3] = str.substring(str.indexOf(&quot;日&quot;)+1, str.lastIndexOf(&quot;时&quot;));</b>
+<b class="fc"><i>136</i>&nbsp;        time[4] = str.substring(str.indexOf(&quot;时&quot;)+1, str.lastIndexOf(&quot;分&quot;));</b>
+<b class="fc"><i>137</i>&nbsp;        time[5] = str.substring(str.indexOf(&quot;分&quot;)+1, str.lastIndexOf(&quot;秒&quot;));</b>
+<b class="fc"><i>138</i>&nbsp;        return time;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>

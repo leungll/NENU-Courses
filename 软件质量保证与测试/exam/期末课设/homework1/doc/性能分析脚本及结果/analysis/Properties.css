@@ -1,0 +1,363 @@
+tr { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial}
+ul { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial}
+a:hover { color: #8e001d}
+a { color: #669}
+a.tab_dis { color: #485464; font-size: 12px; text-decoration: none; width: 100%; height: 100%}
+a.tab_dis:hover { color: #8e001d; font-size: 12px; text-decoration: underline; width: 100%; height: 100%}
+.textsmall { font-size: 12px; line-height: 12px; font-family: SimSun, "Trebuchet MS", Verdana}
+.textlarge { font-size: 12px; line-height: 14px; font-family: SimSun, Verdana, Arial}
+.text_9 { font-size: 11px; line-height: 11px; font-family: SimSun, Verdana, Arial}
+.textTopazsmall { color: black; font-size: 12px; line-height: 14px; font-family: SimSun, "Trebuchet MS", Verdana}
+.text_aligntop { vertical-align: top}
+.text_em { font-weight: bold; vertical-align: top}
+.textHighlight { color: white; font-size: 8.5pt; font-family: SimSun, Verdana, Arial; background-color: #669}
+.header_page { color: black; font-size: 20px; font-family: SimSun, Helvetica, Arial, SunSans-Regular, sans-serif; font-weight: normal; text-align: left; letter-spacing: 1px; height: 25px; vertical-align: middle; border-bottom: 1px solid #003366}
+.header_timerange { color: black; font-size: 12px; font-weight: normal; text-align: right; height: 25px; vertical-align: middle; border-bottom: 1px solid #003366}
+.header_sub_page { color: black; font-size: 12px; font-weight: normal; text-align: right; height: 25px; vertical-align: middle; border-bottom: 1px solid #003366}
+.header_second { color: #003366; font-size: 12px; font-weight: normal; text-align: left; list-style-position: outside; height: 20px; vertical-align: middle; border-bottom: 2px dotted #b6bbc1}
+.header_group { font-weight: bold}
+.help_section { padding-top: 5px; border-top: 1px solid #9198a2}
+.help_icon { width: 40px}
+a.list:hover { text-decoration: underline}
+a.list { text-decoration: none}
+a.tree:hover { text-decoration: none}
+a.tree { text-decoration: none}
+a.dialog:hover { cursor: url("HandNewBrowser.cur")}
+a.dialog { cursor: url("HandNewBrowser.cur")}
+a.filter:hover { text-decoration: underline; cursor: url("HandFilter2.cur")}
+a.filter { text-decoration: none; cursor: url("HandFilter2.cur")}
+a.menu { color: #336}
+a.menu:hover { color: #336}
+.treelink { padding: 2px 2px 2px 3px; height: 13px; font-size: 12px}
+.treelink_hover { color: white; background-color: #a3a9b1; padding: 2px 2px 2px 3px; height: 13px}
+.treelink_active { color: white; background-color: #485464; padding: 2px 2px 2px 3px; height: 13px}
+a.treelink { color: #485464; text-decoration: none}
+a.treelink:hover { color: #8e001d; text-decoration: none; background-color: #eceeef; width: 100%}
+a.treelink:active { color: white; text-decoration: none; background-color: #7f8792; width: 100%; border: #bec5d4}
+.sp_2px_row { height: 2px}
+.sp_5px_row { height: 5px}
+.sp_10px_row { height: 10px}
+.sp_h_line { height: 1px; border-bottom: 1px solid #7f8792}
+.top_color { background-color: #036}
+.filter_bg { color: #f0f2f1; background-color: #f0f2f1}
+select { font-size: 11px; font-family: SimSun, Verdana, Arial}
+.combo { font-size: 11px; font-family: SimSun, Verdana, Arial; height: 18px}
+input { font-size: 11px; font-family: SimSun, Verdana, Arial; height: 18px}
+button { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-image: url(Images/gui/bu_bg.png); background-repeat: repeat-x; cursor: pointer; height: 23px; vertical-align: middle; border-style: solid; border-width: 1px; border-color: #eceeef #485464 #485464 #eceeef}
+.button_default { font-family: SimSun, Verdana, Arial; background-repeat: repeat-x; text-align: center; cursor: pointer; width: 70px; vertical-align: middle; border-width: 1px}
+.button_action { font-size: 11px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 9px; cursor: pointer; height: 17px; vertical-align: baseline}
+.pane_border { background-color: white; padding: 1px; border: solid 1px #485464}
+.pane_header { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-image: url(Images/gui/pane_bg.png); background-repeat: repeat-x; padding-right: 5px; padding-left: 10px; height: 20px; vertical-align: middle; border-bottom: 1px solid #485464}
+.pane_tabs_header { background-color: #a9b2c5}
+.tab_contain_left { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-image: url(Images/gui/pane_bg.png); padding-right: 5px; padding-left: 10px; height: 20px; vertical-align: middle; border-bottom: 1px solid #485464}
+.tab_contain_right { background-image: url(Images/gui/pane_bg.png); height: 20px; vertical-align: bottom}
+.tab_selected { color: black; font-size: 12px; font-weight: bold; background-color: white; text-align: center; width: 10%; height: 15px; vertical-align: bottom; border-style: solid solid none; border-width: 1px; border-color: #485464}
+.tab_disel { font-size: 12px; font-weight: bold; text-align: center; width: 10%; height: 15px; vertical-align: middle; border-bottom: 1px solid #485464}
+.tab_empty { color: black; font-size: 12px; font-weight: bold; text-align: center; width: 10%; height: 15px; vertical-align: bottom; border-style: solid solid none; border-width: 1px; border-color: #485464}
+.pane_body { background-color: white; padding: 5px}
+.pane_form_border { background-color: #f3f3f3; padding: 1px; width: 100%; border: solid 1px #485464}
+.pane_form_border_small { background-color: #f3f3f3; padding: 1px; width: 400px; border: solid 1px #485464}
+.pane_form_body { background-color: #f3f3f3; padding: 5px}
+.pane_form_footer { text-align: center; padding: 7px 5px 0; vertical-align: middle; border-top: 1px solid #485464}
+.table_header { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: white; padding-left: 4px; height: 18px; vertical-align: middle; border-top: 2px solid #485464; border-right: #485464; border-bottom: 2px solid #485464; border-left: #485464; title: Sort by Me}
+.table_header_sort { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: #f3f3f3; cursor: pointer; padding-left: 4px; height: 18px; vertical-align: middle; border-top: 2px solid #485464; border-right: #485464; border-bottom: 2px solid #485464; border-left: #485464}
+.table_header2line_top { color: #485464; font-size: 12px; font-weight: bold; background-color: white; padding-left: 4px; vertical-align: middle; border-top: 2px solid #485464; title: Sort by Me}
+.table_header2line_bot { color: #485464; font-size: 12px; font-weight: bold; background-color: white; padding-left: 4px; vertical-align: middle; border-bottom: 2px solid #485464; title: Sort by Me}
+.table_header_not_sorted { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: white; padding-left: 4px; height: 18px; vertical-align: middle; border-top: 2px solid #485464; border-right: #485464; border-bottom: 2px solid #485464; border-left: #485464; title: Sort by Me}
+.table_end { height: 10px; border-top: 2px solid #485464}
+.table_seperator { height: 2px; border-top: 2px solid #485464}
+.tabledata_end { height: 3px; border-top: 2px solid #485464}
+.table_lightrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #f3f3f3; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 26px}
+.table_darkrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #e6e6e6; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 26px}
+.table_whiterow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: white; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 26px}
+.tabledata_whiterow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: white; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.tabledata_lightrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #f3f3f3; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.tabledata_darkrow { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #e6e6e6; vertical-align: middle; padding-right: 4px; padding-left: 4px; height: 18px}
+.error_border { background-color: #faeaea; padding: 1px; width: 100%; border: solid 1px #c33}
+.error_body { background-color: #faeaea; padding: 10px}
+.error_text_body { background-color: #faeaea; padding: 2px 5px 3px}
+.error_header { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-color: #c33; background-image: url("Images/gui/pane_errorbg.png"); background-repeat: repeat-x; padding-right: 10px; padding-left: 10px; height: 20px; border-bottom: 1px solid #c33; vertical-align: middle}
+.error_footer { text-align: center; padding-top: 5px; vertical-align: middle; border-top: 1px solid #c33}
+.info_text_body { background-color: #f3f3f3; padding: 2px 5px 3px}
+.warn_border { background-color: #fbf7ea; padding: 1px; width: 100%; border: solid 1px #dcae2e}
+.warn_header { color: white; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 13px; background-color: #dcae2e; background-image: url("Images/gui/pane_warnbg.png"); padding-right: 10px; padding-left: 10px; height: 20px; border-bottom: 1px solid #dcae2e; vertical-align: middle}
+.warn_body { background-color: #fbf7ea; padding: 10px; border-right: }
+.warn_text_body { background-color: #fbf7ea; padding: 2px 5px 3px}
+.warn_footer { text-align: center; padding-top: 5px; vertical-align: middle; border-top: 1px solid #dcae2e}
+body { font-family: SimSun, Verdana, Arial; background-color: white; margin: 0; scrollbar-arrow-color: #485464; scrollbar-base-color: #A3A9B1; scrollbar-darkshadow-color: #A3A9B1; scrollbar-face-color: #C8CBD0; scrollbar-highlight-color: #ffffff; scrollbar-shadow-color: #ffffff; scrollbar-track-color: #DADDE0; word-break: keep-all}
+body.main { font-family: SimSun, Verdana, Arial; margin: 5px 15px 15px}
+body.main_navtab { font-family: SimSun, Verdana, Arial; background-color: #dadde0; margin: 5px 15px 15px}
+body.top { background-color: #d4d4d4; background-image: url("top_bg.gif"); background-repeat: repeat-x; text-align: left; margin: 0}
+table.menutop { background-color: #d4d4d4; text-align: left; margin: 0}
+.streched_hv { width: 100%; height: 100%}
+.streched_hv_scroll { width: 100%; height: 100%; overflow: auto}
+.hiera_table_header { color: #485464; font-size: 12px; font-weight: bold; padding-left: 4px; height: 14px; vertical-align: middle; border-top: 2px solid #485464; border-bottom: 1px solid #485464}
+.hiera_table_icheader { color: #485464; font-size: 12px; font-weight: bold; text-align: center; padding-left: 4px; width: 62px; height: 14px; vertical-align: middle}
+.hiera_table_father { color: black; font-size: 12px; background-color: #eceeef; padding-top: 1px; padding-bottom: 1px; padding-left: 4px; height: 20px; vertical-align: middle; border-top: 1px solid #6d7683; border-right: #6d7683; border-bottom: 1px solid #6d7683; border-left: #6d7683}
+.hiera_table_son { color: black; font-size: 12px; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; padding-left: 4px; height: 20px}
+.hiera_table_son_more { color: black; font-size: 12px; background: url(Images/gui/table_son_more.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_son_none { color: black; font-size: 12px; background: url(Images/gui/table_son_none.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_end { border-top: 1px solid #7f8ca9; height: 10px}
+.hiera_table_indic { text-align: center; vertical-align: baseline; width: 62px}
+.hiera_table_son_rak { color: black; font-size: 12px; background: url(Images/gui/table_son_rak.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_son_more_plus { color: black; font-size: 12px; background: url(Images/gui/table_son_more_plus.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_son_none_plus { color: black; font-size: 12px; background: url(Images/gui/table_son_none_plus.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_son_more_minus { color: black; font-size: 12px; background: url(Images/gui/table_son_more_minus.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.hiera_table_son_none_minus { color: black; font-size: 12px; background: url(Images/gui/table_son_none_minus.gif) no-repeat; vertical-align: middle; padding-top: 1px; padding-bottom: 1px; width: 20px; height: 20px}
+.text_align_center { text-align: center}
+.bargraph_cell { text-align: center; padding-top: 10px; padding-bottom: 10px; width: 33%; height: 100%; vertical-align: top; border-bottom: 1px solid #485464}
+.bargraph { width: 15px; height: 200px}
+.navig_tab_container { width: 100%; height: 16px; vertical-align: bottom}
+.navig_tab_unselected { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: white; background-image: url("Images/gui/navtab_bg.png"); background-repeat: repeat-x; text-align: center; padding-right: 10px; padding-left: 10px; width: 100px; height: 16px; border-style: solid; border-width: 1px; border-color: white #918f90 #003366 white}
+.navig_tab_empty { font-size: 12px; text-align: center; padding-right: 10px; padding-left: 10px; height: 16px; border-bottom: 1px solid #003366}
+.navig_tab_selected { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-color: white; text-align: center; padding-right: 10px; padding-left: 10px; width: 100px; height: 16px; border-top: 1px solid #003366; border-right: 1px solid #003366; border-left: 1px solid #003366}
+.navig_tab_body { background-color: white; padding: 7px 10px 8px; border-right: 1px solid #003366; border-bottom: 1px solid #003366; border-left: 1px solid #003366}
+.navig_tab_body_rep { background-color: white; padding: 7px 10px 8px; height: 100%; border-style: none solid solid; border-width: medium 1px 1px; border-color: #003366}
+.navig_tab_body_tree { background-color: white; padding: 7px 10px 8px; height: 100%; border: solid 1px #003366}
+.table_scroll { height: 100%; overflow: auto; border-bottom: 1px solid #485464}
+.table_scroll4 { padding-right: 2px; padding-left: 2px; height: 100%; overflow: auto; border: solid 1px #485464}
+.table_noscroll { height: 100%; overflow: auto}
+.table_tree_scroll { height: 100%; overflow: auto; border-top: 1px solid #485464; border-right: none #485464; border-bottom: 1px solid #485464; border-left: none #485464}
+.two_columns_col { vertical-align: top; width: 50%; height: 100%}
+a.navig_tab { color: #485464; text-decoration: none}
+a.navig_tab:hover { color: #8e001d; text-decoration: none}
+.event_locator { width: 150px; height: 15px}
+.event_locator_left { background-image: url("Images/gui/bars/bar_loc1.gif"); height: 15px; border-style: none solid; border-width: medium 1px medium 2px; border-color: #485464}
+.event_locator_right { background-image: url("Images/gui/bars/bar_loc2.gif"); height: 15px; border-style: none none none solid; border-width: medium medium medium 1px; border-color: #485464}
+.two_columns_space { width: 30px}
+.navig_tab_views { background-color: #f4f5f8; padding: 1px 5px 2px; width: 100%; height: 16px; border: solid 1px #a3a9b1}
+.hour_cell_small { color: black; font-size: 12px; font-family: SimSun, "Trebuchet MS", Verdana; text-align: center; padding: 2px}
+td.hour_cell_green { background-color: #9c9; border-right: 1px solid #f3f3f3; border-bottom: 1px solid #f3f3f3}
+td.hour_cell_red { background-color: #f33; border-right: 1px solid #f3f3f3; border-bottom: 1px solid #f3f3f3}
+td.hour_cell_orange { background-color: #fa0; border-right: 1px solid #f3f3f3; border-bottom: 1px solid #f3f3f3}
+td.hour_cell_yellow { background-color: #fd6; border-right: 1px solid #f3f3f3; border-bottom: 1px solid #f3f3f3}
+td.hour_cell_ud { background-color: #f3f3f3; border-right: 1px solid #f3f3f3; border-bottom: 1px solid #f3f3f3}
+.folding { color: black; font-weight: bold; font-size: 12px; line-height: 15px; font-family: SimSun, Verdana, Arial}
+.padding_tree { vertical-align: top; padding: 2px 8px 7px 10px; width: 100%; height: 100%}
+.width_1 { width: 30px}
+.width_15 { width: 45px}
+.width_2 { width: 60px}
+.width_3 { width: 120px}
+.width_35 { width: 180px}
+.width_4 { width: 240px}
+.width_full { width: 100%}
+input.radio_check { position: relative; top: 2px; left: -3px}
+.obligatory { color: #c33}
+.rullerline_first { border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; height: 8px}
+textarea { font-size: 11px; font-family: SimSun, Verdana, Arial; width: 100%; overflow: auto}
+.rullerline_big { border-top: 1px solid #293f6f; border-right: 1px solid #293f6f; height: 8px}
+.rullerline_small { border-right: 1px solid #293f6f; height: 4px}
+.ruller_text { color: black; font-size: 12px; line-height: 12px; font-family: SimSun, "Trebuchet MS", Verdana; text-align: right}
+p { color: black; font-size: 12px; line-height: 14px; font-family: SimSun, Verdana, Arial}
+.bread_pad { vertical-align: middle; padding: 0px 0px 5px}
+.bread_zone { background-color: #e9ebf0; padding: 0px 6px 1px; border: 1px #a9b2c5; width: 100%; height: 16px}
+.tree_body { background-color: white; padding: 5px}
+.applic_name_cell { width: 70%; height: 35px; vertical-align: top}
+.applic_name { color: #54658c; font-weight: bold; font-size: 14px; font-family: SimSun, "Arial Narrow", Arial, Verdana; text-align: left; text-transform: uppercase; text-indent: 10px; vertical-align: middle; border-top: 1px solid #7f8ca9; border-bottom: 1px solid #7f8ca9}
+.info_cell { padding-right: 8px; width: 300px; height: 35px; vertical-align: top}
+.info_user { font-size: 11px; line-height: 13px; text-align: center; vertical-align: middle; height: 14px}
+.info_area { text-align: center; height: 16px}
+.info_message_good { font-size: 12px; font-weight: bold; background-color: white; text-align: center; padding: 1px 2px 2px; height: 16px; border: solid 1px #485464}
+.info_message_error { font-size: 12px; font-weight: bold; background-color: #faeaea; text-align: center; padding: 1px 2px 2px; height: 16px; border: solid 1px #c33}
+.info_message_warn { font-size: 12px; font-weight: bold; background-color: #fbf7ea; text-align: center; padding: 1px 2px 2px; height: 16px; border: solid 1px #dcae2e}
+h1 { color: black; font-size: 20px; font-family: SimSun, Helvetica, Arial, SunSans-Regular, sans-serif; font-weight: normal; text-align: left; letter-spacing: 1px; height: 25px; vertical-align: middle; margin-top: 0px; margin-bottom: 0px; border-bottom: 1px solid #003366}
+h2 { color: #003366; font-size: 12px; font-weight: normal; text-align: left; margin-top: 0; margin-bottom: 0; height: 20px; vertical-align: middle; border-bottom: 2px dotted #b6bbc1}
+h6 { font-weight: bold; margin-top: 0px; margin-bottom: 0px}
+.timebar { font-size: 11px; line-height: 11px; padding: 4px 5px 3px; height: 18px}
+.bg_light { background-color: #f3f3f3}
+.bg_dark { background-color: #e6e6e6}
+.bg_gray204 { background-color: #ccc}
+.bg_white { background-color: white}
+.bg_black { background-color: black}
+.bg_red { background-color: #f33}
+.bg_yellow { background-color: #fc3}
+.bg_green { background-color: #0c0}
+.bar_working { background: url(Images/gui/prog2.gif) repeat-x; border: solid 1px #293f6f; width: 100%; height: 8px}
+.bar_stop { background: #bec5d4 repeat-x; border: solid 1px #293f6f; width: 100%; height: 8px}
+.hand { CURSOR: hand; CURSOR: pointer}
+.number_title { color: white; font-size: 14px; font-weight: bold; background-color: #485464; text-align: center; width: 35px; height: 20px; vertical-align: middle}
+.bu_left { background: #dadde0 url("Images/gui/buttons/tbic_left.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_left_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_left.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_right { background: #dadde0 url("Images/gui/buttons/tbic_right.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_right_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_right.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_movedown { background: #dadde0 url("Images/gui/buttons/tbic_down.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_movedown_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_down.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveup { background: #dadde0 url("Images/gui/buttons/tbic_up.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveup_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_up.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveleft { background: #dadde0 url("Images/gui/buttons/tbic_moveleft.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveleft_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_moveleft.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveright { background: #dadde0 url("Images/gui/buttons/tbic_moveright.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveright_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_moveright.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveright_all { background: #dadde0 url("Images/gui/buttons/tbic_moveall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_moveright_all_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_moveall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_selall { background: #dadde0 url("Images/gui/buttons/tbic_selall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_selall_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_selall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_selnone { background: #dadde0 url("Images/gui/buttons/tbic_selnone.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Clear All}
+.bu_selnone_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_selnone.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Clear All}
+.bu_selinv { background: #dadde0 url("Images/gui/buttons/tbic_selinvert.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Invert Selection}
+.bu_selinv_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_selinvert.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Invert Selection}
+.bu_makestatic { background: #dadde0 url("Images/gui/buttons/tbic_makestatic.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_makestatic_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_makestatic.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_edit { background: #dadde0 url("Images/gui/buttons/tbic_edit.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Edit}
+.bu_edit_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_edit.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px; alt: Edit}
+.bu_filter { background: #dadde0 url("Images/gui/buttons/tbic_filter.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_filter_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_filter.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_aggreg { background: #dadde0 url("Images/gui/buttons/tbic_aggregation.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_aggreg_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_aggregation.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_randez { background: #dadde0 url("Images/gui/buttons/tbic_randez.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_randez_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_randez.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_init { background: #dadde0 url("Images/gui/buttons/tbic_selall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_init_dis { background: #dadde0 url("Images/gui/buttons/tbic_selall.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_runset { background: #dadde0 url("Images/gui/buttons/tbic_runtime-settings.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_runset_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_runtime-settings.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_publish { background: #dadde0 url("Images/gui/buttons/tbic_publish.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_publish_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_publish.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_unpublish { background: #dadde0 url("Images/gui/buttons/tbic_unpublish.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_unpublish_dis { background: #dadde0 url("Images/gui/buttons/dis_unpublish.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_commline { background: #dadde0 url("Images/gui/buttons/tbic_command-line.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_commline_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_command-line.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_hostdetails { background: #dadde0 url("Images/gui/buttons/tbic_host-details.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_hostdetails_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_host-details.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_selecthost { background: #dadde0 url("Images/gui/buttons/tbic_select-host.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_selecthost_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_select-host.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_sched { background: #dadde0 url("Images/gui/buttons/tbic_scheduler.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_sched_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_scheduler.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_vuserprocent { background: #dadde0 url("Images/gui/buttons/tbic_viewno.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_vuserprocent_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_viewno.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_vusernumber { background: #dadde0 url("Images/gui/buttons/tbic_viewprec.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_vusernumber_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_viewprec.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_download { background: #dadde0 url("Images/gui/buttons/tbic_download.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_download_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_download.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_viewscript { background: #dadde0 url("Images/gui/buttons/view-script.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_viewscript_dis { background: #dadde0 url("Images/gui/buttons/dis_view-script.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_dlscript { background: #dadde0 url("Images/gui/buttons/tbic_download-script.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_dlscript_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_download-script.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_setcont { background: #dadde0 url("Images/gui/buttons/tbic_set-control.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_setcont_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_set-control.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_conrun { background: #dadde0 url("Images/gui/buttons/tbic_connect-run.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_conrun_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_connect-run.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_refresh { background: #dadde0 url("Images/gui/buttons/tbic_rfresh.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_refresh_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_rfresh.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_exandsons { background: #dadde0 url("Images/gui/buttons/tbic_expsons.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_exandsons_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_expsons.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_delete { background: #dadde0 url("Images/gui/buttons/tbic_delete.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_delete_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_delete.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_paste { background: #dadde0 url("Images/gui/buttons/tbic_paste.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_paste_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_paste.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_copy { background: #dadde0 url("Images/gui/buttons/tbic_copy.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_copy_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_copy.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_log { background: #dadde0 url("Images/gui/buttons/tbic_log.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_log_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_log.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_help { background: #dadde0 url("Images/gui/buttons/tbic_help.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_help_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_help.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_duplicate { background: #dadde0 url("Images/gui/buttons/tbic_duplicate.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_duplicate_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_duplicate.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_category { background: #dadde0 url("Images/gui/buttons/tbic_category.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_category_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_category.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_properties { background: #dadde0 url("Images/gui/buttons/tbic_properties.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_properties_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_properties.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_editname { background: #dadde0 url("Images/gui/buttons/tbic_editname.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_editname_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_editname.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_editpass { background: #dadde0 url("Images/gui/buttons/tbic_editpass.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_editpass_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_editpass.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_totext { background: #dadde0 url("Images/gui/buttons/tbic_totext.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_totext_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_totext.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_toexcel { background: #dadde0 url("tbic_toexcel.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_toexcel_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_toexcel.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_toprintfriend { background: #dadde0 url("Images/gui/buttons/tbic_printfr.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_toprintfriend_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_printfr.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_tomail { background: #dadde0 url("Images/gui/buttons/tbic_send.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_tomail_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_send.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_torepository { background: #dadde0 url("Images/gui/buttons/tbic_torepos.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_torepository_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_torepos.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_save { background: #dadde0 url("Images/gui/buttons/tbic_save.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_save_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_save.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rule { background: #dadde0 url("Images/gui/buttons/tbic_rule.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rule_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_rule.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_new { background: #dadde0 url("Images/gui/buttons/tbic_new.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_new_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_new.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_name { background: #dadde0 url("Images/gui/buttons/tbic_name.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_name_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_name.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_cut { background: #dadde0 url("Images/gui/buttons/tbic_cut.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_cut_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_cut.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_sync { background: #dadde0 url("Images/gui/buttons/tbic_sync.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_sync_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_sync.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_stop { background: #dadde0 url("Images/gui/buttons/tbic_stop.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_stop_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_stop.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_play { background: #dadde0 url("Images/gui/buttons/tbic_play.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_play_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_play.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_pause { background: #dadde0 url("Images/gui/buttons/tbic_pause.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_pause_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_pause.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rca { background: #dadde0 url("Images/gui/buttons/tbic_rca.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rca_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_rca.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rcasumm { background: #dadde0 url("Images/gui/buttons/tbic_rcasummary.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_rcasumm_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_rcasummary.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_pdf { background: #dadde0 url("Images/gui/buttons/tbic_pdf.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_pdf_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_pdf.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_user { background: #dadde0 url("Images/gui/buttons/tbic_pdf.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_user_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_pdf.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_graph { background: #dadde0 url("Images/gui/buttons/tbic_graph.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_graph_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_graph.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_event_details { background: #dadde0 url("Images/gui/buttons/tbic_eventdetails.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_event_details_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_eventdetails.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_event_history { background: #dadde0 url("Images/gui/buttons/tbic_eventhistory.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_event_history_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_eventhistory.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_expand { background: #dadde0 url("Images/gui/buttons/tbic_expand.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_expand_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_expand.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_collapse { background: #dadde0 url("Images/gui/buttons/tbic_collapse.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_collapse_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_collapse.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_user_customer { background: #dadde0 url("Images/gui/buttons/tbic_ass_user_customer.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_user_customer_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_ass_user_customer.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_xml { background: #dadde0 url("Images/gui/buttons/tbic_xml.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_xml_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_xml.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_lock { background: #dadde0 url("Images/gui/buttons/tbic_lock.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_lock_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_lock.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_unlock { background: #dadde0 url("Images/gui/buttons/tbic_unlock.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_unlock_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_unlock.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_host { background: #dadde0 url("Images/gui/buttons/tbic_host.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_host_dis { background: #dadde0 url("Images/gui/buttons/dis_tbic_host.png") no-repeat; width: 23px; height: 22px; vertical-align: top; border-width: 1px}
+.bu_form { position: relative; top: -4px; width: 20px; height: 18px; border-width: 1px; border-color: white #54658c #54658c white}
+.bus_left { background: #dadde0 url("Images/gui/buttons/stbic_left.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_left_end { background: #dadde0 url("Images/gui/buttons/stbic_left_end.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_right { background: #dadde0 url("Images/gui/buttons/stbic_right.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_right_end { background: #dadde0 url("Images/gui/buttons/stbic_right_end.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_properties { background: #dadde0 url("Images/gui/buttons/stbic_properties.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_properties_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_properties.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_play { background: #dadde0 url("Images/gui/buttons/stbic_play.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_play_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_play.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_left_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_left.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_left_end_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_left_end.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_right_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_right.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_right_end_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_right_end.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_delete { background: #dadde0 url("Images/gui/buttons/stbic_delete.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_delete_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_delete.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_comline { background: #dadde0 url("Images/gui/buttons/stbic_command-line.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_comline_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_command-line.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_selecthost { background: #dadde0 url("Images/gui/buttons/stbic_select-host.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_selecthost_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_select-host.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_publish { background: #dadde0 url("Images/gui/buttons/stbic_publish.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_publish_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_publish.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_unpublish { background: #dadde0 url("Images/gui/buttons/stbic_unpublish.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_unpublish_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_unpublish.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_goal { background: #dadde0 url("Images/gui/buttons/stbic_goal.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_goal_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_goal.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_runset { background: #dadde0 url("Images/gui/buttons/stbic_runtime-settings.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.bus_runset_dis { background: #dadde0 url("Images/gui/buttons/dis_stbic_runtime-settings.png") no-repeat; width: 18px; height: 17px; vertical-align: top; border-width: 1px}
+.popupmenu_div { color: black; background-color: #e8e7e6; visibility: hidden; position: absolute; top: 10px; left: 10px; width: 40px; height: 2px; border: solid 0 white}
+.popupmenu_table { font-size: 12px; font-family: SimSun, Verdana, Arial; padding-right: 0; padding-left: 0; width: 100%; border-style: solid; border-width: 1px 2px 2px 1px; border-color: #625e57}
+.popupmenu_title { color: white; font-size: 11px; font-family: SimSun, Verdana, Arial; font-weight: bold; line-height: 12px; background-color: #a19e9a; text-align: left; padding-left: 7px; height: 15px; vertical-align: top}
+.popupmenu_space { background-color: #c0bfbc; height: 1px; overflow: hidden; vertical-align: middle; border-right: 3px solid #e8e7e6; border-left: 3px solid #e8e7e6}
+.popupmenu_cell { height: 20px}
+.popupmenu_cell_dis { color: #949292; font-size: 12px; font-family: SimSun, Verdana, Arial; height: 20px}
+.popupmenu_row { color: black; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #e8e7e6; cursor: pointer}
+.popupmenu_selected { color: #003366; font-size: 12px; font-family: SimSun, Verdana, Arial; background-color: #f7f7f6; cursor: pointer}
+.popupmenu_left_image { background-position: center; width: 21px; height: 19px; vertical-align: middle}
+.popupmenu_sub_menu_cell { background: url("Images/gui/arrow_r.png") no-repeat center; width: 10px; height: 20px; vertical-align: middle}
+.menu_cont { padding-right: 5px; padding-left: 5px; width: 100%; border-style: solid; border-width: 1px 2px 2px 1px; border-color: #625e57}
+.menu_command { color: #293f6f; background-color: #e8e7e6; width: 100%; height: 20px}
+.menu_command_sel { color: #293f6f; background-color: #f7f7f6; width: 100%; height: 20px}
+.button_attention { color: #485464; font-size: 12px; font-family: SimSun, Verdana, Arial; font-weight: bold; background-image: url("Images/gui/bgani_update.gif"); background-repeat: repeat-x; cursor: pointer; height: 23px; vertical-align: middle; border-style: solid; border-width: 1px; border-color: #eceeef #485464 #485464 #eceeef}
+.legendTable { border: solid 2px #485464; border-color: #485464; padding: 1px 1px 1px 1px; color: #000000; border-collapse: collapse; font-weight: normal; text-decoration: none; font-family: SimSun, Verdana, Arial; font-size: 24px}
+.legendHeader { color: #000000; background-color: #cccccc; font-weight: bold; text-decoration: none; text-align: left; font-family: SimSun, Verdana, Arial; font-size: 12px}
+.legendRow { border-color: #485464; padding: 1px 1px 1px 1px; color: #000000; border-collapse: collapse; font-weight: normal; text-decoration: none; font-family: SimSun, Verdana, Arial; font-size: 12px; text-align: left}
+table.TableSummary { width: 100%; table-layout: fixed; overflow: hidden; word-wrap: break-word}

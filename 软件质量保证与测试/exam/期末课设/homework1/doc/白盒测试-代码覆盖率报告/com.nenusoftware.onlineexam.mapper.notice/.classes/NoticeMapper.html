@@ -1,0 +1,105 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NoticeMapper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.nenusoftware.onlineexam.mapper.notice</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NoticeMapper (com.nenusoftware.onlineexam.mapper.notice)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">NoticeMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.nenusoftware.onlineexam.mapper.notice;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.nenusoftware.onlineexam.entity.notice.Notice;
+<i>4</i>&nbsp;import org.apache.ibatis.annotations.Mapper;
+<i>5</i>&nbsp;import org.apache.ibatis.annotations.Param;
+<i>6</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * @Author:Kongyy
+<i>12</i>&nbsp; * @Description: NoticeMapper的接口层
+<i>13</i>&nbsp; * @Date: 22:08 2020/6/19
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;@Mapper
+<i>16</i>&nbsp;@Repository
+<i>17</i>&nbsp;public interface NoticeMapper {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * 列出所有公告信息
+<i>21</i>&nbsp;     * @return 返回List形式的公告信息
+<i>22</i>&nbsp;     * @throws Exception 报错信息
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    public List&lt;Notice&gt; listAllNotice() throws Exception;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * 增加公告
+<i>28</i>&nbsp;     * @param notice 公告实体
+<i>29</i>&nbsp;     * @return 增加成功返回true，增加失败返回false
+<i>30</i>&nbsp;     * @throws Exception 报错信息
+<i>31</i>&nbsp;     */
+<i>32</i>&nbsp;    public boolean addNotice(@Param(&quot;notice&quot;) Notice notice) throws Exception;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * 删除公告
+<i>36</i>&nbsp;     * @param noticeId 公告编号
+<i>37</i>&nbsp;     * @return 删除成功返回true，删除失败返回false
+<i>38</i>&nbsp;     * @throws Exception 报错信息
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    public boolean deleteNotice(@Param(&quot;noticeId&quot;) int noticeId) throws Exception;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * 修改公告
+<i>44</i>&nbsp;     * @param notice 公告实体
+<i>45</i>&nbsp;     * @return 修改成功返回true，修改失败返回false
+<i>46</i>&nbsp;     * @throws Exception 报错信息
+<i>47</i>&nbsp;     */
+<i>48</i>&nbsp;    public boolean updateNotice(@Param(&quot;notice&quot;) Notice notice) throws Exception;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    /**
+<i>51</i>&nbsp;     * 公告的模糊查询（可查询公告标题和公告内容）
+<i>52</i>&nbsp;     * @param keyWord 输入查询的关键字
+<i>53</i>&nbsp;     * @return 返回List形式的公告信息
+<i>54</i>&nbsp;     * @throws Exception 报错信息
+<i>55</i>&nbsp;     */
+<i>56</i>&nbsp;    public List&lt;Notice&gt; queryNotice(@Param(&quot;keyWord&quot;) String keyWord) throws Exception;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 09:58</div>
+</div>
+</body>
+</html>
