@@ -1,0 +1,9 @@
+g=imread('pout.tif');
+g1=histeq(g);
+g2=histeq(g,256);
+subplot(2,3,1),imshow(g);
+subplot(2,3,2),imshow(g1);
+subplot(2,3,3),imshow(g2);
+subplot(2,3,4),imhist(g);
+subplot(2,3,5),imhist(g1);
+subplot(2,3,6),imhist(g2);
