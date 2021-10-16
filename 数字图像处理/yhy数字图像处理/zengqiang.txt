@@ -1,8 +1,0 @@
-g=imread('pout.tif');
-subplot(1,6,1),imshow(g);
-g1=imadjust(g,[0 1],[1 0]);
-subplot(1,6,2),imshow(g1);
-g2=imadjust(g,[ ],[ ],1);
-subplot(1,6,3),imshow(g2);
-g3=imadjust(g,[0.3 0.6],[0.1 1]);
-subplot(1,6,4),imshow(g3);

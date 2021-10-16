@@ -1,0 +1,32 @@
+   import java.sql.*;
+        public class testjdbc{
+            public static void main(String[] args){
+                try{
+                    //load the Driver
+                    Class.forName("org.mariadb.jdbc.Driver").newInstance();
+                    System.out.println("pass forName()!!!");
+                    //connecte to the server
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/StuCou","root","");
+                    System.out.println("Establish a connection!!");
+                    //send the SQL command
+                    Statement stmt = conn.createStatement();
+                    String query = "SELECT * FROM Student";
+                    ResultSet rs = stmt.executeQuery(query);
+                    //output the results
+                    System.out.println("=====SELECT * FROM Student=====");
+                    System.out.println("Sno\t\tSname");
+                    while(rs.next())
+                        System.out.println(rs.getString("Sno")+ "\t\t" +rs.getString("Sname"));
+                    //close the connection
+                    conn.close();
+                }
+                catch(SQLException e){
+                    System.out.println("SQL State :" +e.getSQLState());
+                    System.out.println("SQL Error Code :" +e.getErrorCode());
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+

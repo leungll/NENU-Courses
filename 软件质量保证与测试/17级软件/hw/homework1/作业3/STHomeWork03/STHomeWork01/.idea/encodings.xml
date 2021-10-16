@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/database/DatabaseConnection.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/manager/AddStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/manager/DelStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/manager/StudentManagement.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/manager/UpdateStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/AddStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/DelStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/ListAllStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/SelectStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/StudentManagement.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/service/UpdateStudent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/nenu/student/test/StudentManagementTest.java" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>
