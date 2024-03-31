@@ -69,7 +69,7 @@ Guidance for courses in School of Information Science and Technology, NENU
 - 盗版/破解版/绿色版付费软件及其安装包
 - 课程/教师主页上列出的内容（请在获得教师许可后上传）
 
-如果您认为本仓库的一些文件侵犯了您的权益，请向我们发送邮件：leungll0316@gmail.com ，确认属实后将即刻予以删除。
+如果您认为本仓库的一些文件侵犯了您的权益，请向我们发送邮件：l.liang0316@gmail.com，确认属实后将即刻予以删除。
 
 ## 相关说明
 ### 命名说明
@@ -118,12 +118,12 @@ Guidance for courses in School of Information Science and Technology, NENU
 
 - 也可直接附加在 `Issue` 中，由维护者进行添加
 
-如果希望匿名贡献，可以 Email 至邮箱：leungll0316@gmail.com ，注明 "NENU-Courses" 即可。
+如果希望匿名贡献，可以 Email 至邮箱：l.liang0316@gmail.com，注明 "NENU-Courses" 即可。
 
 ## 开源力量
 - Issue、PR、纠错、资料、选课/考试攻略，完全欢迎！
 - 来自大家的关注、维护和贡献，才是让这个项目继续存在的动力
-- 如果您有更好的建议，请在 Issues 中发表您的看法并加以讨论；如果您想直接联系我们，请向我们发送邮件：leungll0316@gmail.com ，您的建议是对我们的最好帮助！
+- 如果您有更好的建议，请在 Issues 中发表您的看法并加以讨论；如果您想直接联系我们，请向我们发送邮件：l.liang0316@gmail.com，您的建议是对我们的最好帮助！
 - 感谢对本项目贡献的同学（排名按照 commit 先后顺序）：[leungll](https://github.com/leungll)（17级软件）、[Kongyy](https://github.com/2420795001)（17级软件）、[lyfer233](https://github.com/lyfer233)（19级计科）…… 以及在电脑前的您！
 
 ## 许可
