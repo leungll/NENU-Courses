@@ -1,10 +1,11 @@
 <!--
  * @Author: YiFan Li
  * @Date: 2021-10-07 19:37:54
- * @LastEditTime: 2021-10-07 19:37:54
- * @LastEditors: YiFan Li
- * @Description: In User Settings Edit
+ * @LastEditors: Lili Liang
+ * @LastEditTime: 2024-03-31 23:20:56
+ * @Description: Please set description
 -->
+
 ## 数字图像处理
 ### 19级计科（普班/中美）
-- 任课老师是 Qi M 老师
+- 任课老师: Qi M

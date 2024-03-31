@@ -1,11 +1,11 @@
 <!--
  * @Author: Lili Liang
  * @Date: 2021-03-12 12:36:57
- * @LastEditTime: 2021-03-12 18:33:04
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \NENU-Courses\数据结构\README.md
+ * @LastEditors: Lili Liang
+ * @LastEditTime: 2024-03-31 23:33:43
+ * @Description: Please set description
 -->
 ## 数据结构
 ### 17级软件
-- 任课老师是 Zhou ZG 老师
+- 任课老师：Zhou ZG
+- 上课时间：2018 Fall

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<script src="js/matter.js"></script>
+	<head>
+		<meta charset="UTF-8">
+		<title>球</title>
+	</head>
+
+	<body>
+		<script>
+			var throwball = throwball || {};
+			throwball.go = function() {
+				var Engine = Matter.Engine,
+					Render = Matter.Render,
+					Runner = Matter.Runner,
+					Composites = Matter.Composites,
+					Events = Matter.Events,
+					Constraint = Matter.Constraint,
+					MouseConstraint = Matter.MouseConstraint,
+					Mouse = Matter.Mouse,
+					World = Matter.World,
+					Bodies = Matter.Bodies,
+					Body = Matter.Body;
+				Vector = Matter.Vector;
+				// create engine
+				var engine = Engine.create(),
+					world = engine.world;
+
+				// create renderer
+				var render = Render.create({
+					element: document.body,
+					engine: engine,
+					options: {
+						width: 1500,
+						height: 800,
+						showAngleIndicator: true,
+						wireframes: false,
+						background: '#00ffff'
+					}
+				});
+				Render.run(render);
+
+				// create runner
+				var runner = Runner.create();
+				Runner.run(runner, engine);
+
+				// add bodies
+				var rockOptions = {
+						density: 0.001
+					},
+					rock = Bodies.polygon(170, 450, 10 * Math.random() + 1, 15, rockOptions),
+					anchor = {
+						x: 170,
+						y: 450
+					},
+					elastic = Constraint.create({
+						pointA: anchor,
+						bodyB: rock,
+						stiffness: 0.05
+					}),
+					ground = Bodies.rectangle(350, 600, 700, 50, {
+						isStatic: true
+					}),
+					floor = Bodies.rectangle(400, 0, 850, 50, {
+						isStatic: true
+					}),
+					leftbound = Bodies.rectangle(0, 300, 50, 600, {
+						isStatic: true
+					}),
+					rightbound = Bodies.rectangle(800, 350, 50, 500, {
+						isStatic: true
+					}),
+					collider = Bodies.rectangle(737, 600, 75, 50, {
+						isSensor: true,
+						isStatic: true,
+						render: {
+							strokeStyle: '#ff0000',
+							fillStyle: 'transparent',
+							lineWidth: 1
+						}
+					}),
+					collider2 = Bodies.rectangle(800, 63, 50, 75, {
+						isSensor: true,
+						isStatic: true,
+						render: {
+							strokeStyle: '#00ff00',
+							fillStyle: 'transparent',
+							lineWidth: 1
+						}
+					}),
+					obstacle = Bodies.rectangle(675, 400, 50, 350, {
+						isStatic: true
+					});
+				var group = Body.nextGroup(true),
+					particleOptions = {
+						friction: 0.00001,
+						collisionFilter: {
+							group: group
+						},
+						render: {
+							visible: false
+						}
+					},
+					constraintOptions = {
+						stiffness: 0.05
+					},
+					cloth = Composites.softBody(450, 200, 10, 5, 2, 2, false, 8, particleOptions, constraintOptions);
+
+				for(var i = 0; i < 4; i++) {
+					cloth.bodies[i * 3].isStatic = true;
+				}
+				World.add(engine.world, [ground, cloth, floor, leftbound, rightbound, collider, collider2, obstacle, rock, elastic]);
+				Events.on(engine, 'afterUpdate', function() {
+					if(mouseConstraint.mouse.button === -1 && (rock.position.x > 190 || rock.position.y < 430)) {
+						var x = document.getElementById("sco");
+
+						var val = x.innerHTML * 1 - 1;
+						if(val <= 0) {
+							alert("You lose");
+							val = 10;
+						}
+						x.innerHTML = val;
+
+						var n = 10 * Math.random() + 1;
+						rock = Bodies.polygon(170, 450, n, 15, rockOptions);
+						World.add(engine.world, rock);
+						elastic.bodyB = rock;
+					}
+				});
+				Events.on(engine, 'collisionStart', function(event) {
+					var pairs = event.pairs;
+					for(var i = 0, j = pairs.length; i != j; ++i) {
+						var pair = pairs[i];
+						if(pair.bodyA === collider || pair.bodyB === collider) {
+							var x = document.getElementById("sco");
+							var val = x.innerHTML * 1 + 10;
+							if(val >= 50) {
+								alert("You win");
+								val = 10;
+							}
+							x.innerHTML = val;
+						}
+						if(pair.bodyA === collider2 || pair.bodyB === collider2) {
+							var x = document.getElementById("sco");
+							var val = x.innerHTML * 1 - 5;
+							if(val <= 0) {
+								alert("You lose");
+								val = 10;
+							}
+							x.innerHTML = val;
+						}
+					}
+				});
+				// add mouse control
+				var mouse = Mouse.create(render.canvas),
+					mouseConstraint = MouseConstraint.create(engine, {
+						mouse: mouse,
+						constraint: {
+							stiffness: 0.3,
+							render: {
+								visible: false
+							}
+						}
+					});
+
+				World.add(world, mouseConstraint);
+
+				// keep the mouse in sync with rendering
+				render.mouse = mouse;
+
+				// fit the render viewport to the scene
+				Render.lookAt(render, {
+					min: {
+						x: 0,
+						y: 0
+					},
+					max: {
+						x: 800,
+						y: 600
+					}
+				});
+				// context for MatterTools.Demo
+				return {
+					engine: engine,
+					runner: runner,
+					render: render,
+					canvas: render.canvas,
+					stop: function() {
+						Matter.Render.stop(render);
+						Matter.Runner.stop(runner);
+					}
+				};
+			};
+			throwball.go();
+			increase = function() {
+				var x = document.getElementById("sco");
+				var val = x.innerHTML * 1 + 10;
+				x.innerHTML = val;
+			}
+			decrease = function() {
+				var x = document.getElementById("sco");
+				var val = x.innerHTML * 1 - 10;
+				x.innerHTML = val;
+			}
+		</script>
+		<div>
+			<a>Score：</a>
+			<a id="sco">10</a>
+			<button onclick="increase()">金手指：加十分！！！</button>
+			<button onclick="decrease()">金手指：减十分！！！</button>
+			<p>初始分数为十分，将球击入红色区域加十分，击入绿色区域减五分，每次击球需要花费一分，获得五十分则获得胜利，分数小于等于零则失败</p>
+			<p>by:陈瑜 吴渊博 赵梦宇</p>
+		</div>
+	</body>
+
+</html>

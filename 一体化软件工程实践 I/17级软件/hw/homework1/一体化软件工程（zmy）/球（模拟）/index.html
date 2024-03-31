@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>球</title>
+		<script>
+			//盒子
+			var box_x = 0;//盒子左上角横坐标
+			var box_y = 0;//盒子左上角总坐标
+			var box_width = 1500;//盒子宽度
+			var box_height = 600;//盒子高度
+			//小球
+			var ball_x;//小球横坐标
+			var ball_y;//小球纵坐标
+			var ball_radius = 10;//小球半径
+			var ball_vx;//小球横向速度
+			var ball_vy;//小球纵向速度
+			//一些常量
+			var g = 10;//重力加速度
+			var rate = 0.9;//碰撞速度损失系数
+			//边界（判断碰撞）
+			var bound_left = box_x + ball_radius;
+			var bound_right = box_x + box_width - ball_radius;
+			var bound_top = box_y + ball_radius;
+			var bound_bottom = box_y + box_height - ball_radius;
+			//内容
+			var ctx;
+			var interval;//间隔
+			function fristInit() {//最初的初始化函数，没有小球
+				ctx = document.getElementById('canvas').getContext('2d');
+				ctx.lineWidth = 5;
+				ctx.strokeRect(box_x, box_y, box_width, box_height);
+			}
+			function init() {//鼠标点击后的初始化函数
+				ctx = document.getElementById('canvas').getContext('2d');
+				ctx.lineWidth = 5;
+				var x1 = Math.random() * 255;
+				var x2 = Math.random() * 255;
+				var x3 = Math.random() * 255;
+				ctx.fillStyle = "rgb(" + x1 + "," + x2 + "," + x3 + ")";
+				move_ball();
+				interval = setInterval(move_ball, 80);
+			}
+
+			function move_ball() {//绘出小球
+				ctx.clearRect(box_x, box_y, box_width, box_height);//清空盒子
+				move_and_check();//根据速度移动并处理碰撞
+				ctx.beginPath();//重置当前路径
+				ctx.arc(ball_x, ball_y, ball_radius, 0, Math.PI * 2, true);
+				ctx.fill();//绘出小球并填充
+				ctx.strokeRect(box_x, box_y, box_width, box_height);//绘出盒子边界
+			}
+
+			function move_and_check() {//判断碰撞边界函数
+				var cur_ball_x = ball_x + ball_vx;//计算移动后小球横坐标
+				ball_vy = ball_vy + g;//计算小球速度
+				var cur_ball_y = ball_y + ball_vy + g/2;
+				//判断是否碰撞边界
+				if(cur_ball_x < bound_left) {
+					cur_ball_x = bound_left;
+					ball_vx = -ball_vx * rate;
+					ball_vy = ball_vy * rate;
+				}
+				if(cur_ball_x > bound_right) {
+					cur_ball_x = bound_right;
+					ball_vx = -ball_vx * rate;
+					ball_vy = ball_vy * rate;
+				}
+				if(cur_ball_y < bound_top) {
+					cur_ball_y = bound_top;
+					ball_vy = -ball_vy * rate;
+					ball_vx = ball_vx * rate;
+				}
+				if(cur_ball_y > bound_bottom) {
+					cur_ball_y = bound_bottom;
+					ball_vy = -ball_vy * rate;
+					ball_vx = ball_vx * rate;
+				}
+				ball_x = cur_ball_x;
+				ball_y = cur_ball_y;
+			}
+			document.onclick = function(ev){                
+                var oEvent = ev||event;//兼容各个浏览器
+                ball_vx = Math.random()*300 - 150;//随机生成小球速度
+				ball_vy = Math.random()*80 - 60;
+                ball_x = oEvent.clientX - 10 - ball_vx;//根据鼠标位置初始化小球坐标
+                ball_y = oEvent.clientY - 25 - ball_vy;
+                clearInterval(interval);//没次点击都需
+                init();
+        	};
+		</script>
+	</head>
+
+	<body onload = "fristInit()">
+		<canvas id="canvas" width="1600" height="600"></canvas>
+		 <div>
+		 	<p>点击框内任意一点，小球将在鼠标处以任意速度抛出</p>
+		 	<p>by:陈瑜 吴渊博 赵梦宇</p>
+		 </div>
+	</body>
+
+<ml>
