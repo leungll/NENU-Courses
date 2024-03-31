@@ -2,14 +2,14 @@
  * @Author: Lili Liang
  * @Date: 2024-03-31 21:41:08
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-03-31 22:19:48
+ * @LastEditTime: 2024-04-01 00:09:11
  * @Description: Please set description
 -->
 
 # Course Guide Sharing Plan, School of Information Science and Technology, NENU 
-Guidance for courses in School of Information Science and Technology, NENU
+**Guidance for courses in School of Information Science and Technology, NENU**
 
-**Read this in other languages: [English](README.md), [简体中文](README_zh.md).**
+**Languages: [English](README.md), [简体中文](README_zh.md)**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/leungll/NENU-Courses?color=red&style=flat-square) 
 ![GitHub repo size](https://img.shields.io/github/repo-size/leungll/NENU-Courses?style=flat-square) 
