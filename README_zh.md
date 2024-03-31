@@ -2,12 +2,14 @@
  * @Author: Lili Liang
  * @Date: 2021-03-12 12:12:18
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-03-31 22:14:23
+ * @LastEditTime: 2024-03-31 22:19:54
  * @Description: Please set description
 -->
 
 # 东北师范大学信息科学与技术学院课程攻略 共享计划
 Guidance for courses in School of Information Science and Technology, NENU
+
+**Read this in other languages: [English](README.md), [简体中文](README_zh.md).**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/leungll/NENU-Courses?color=red&style=flat-square) 
 ![GitHub repo size](https://img.shields.io/github/repo-size/leungll/NENU-Courses?style=flat-square) 
@@ -18,8 +20,6 @@ Guidance for courses in School of Information Science and Technology, NENU
 ![GitHub Repo stars](https://img.shields.io/github/stars/leungll/NENU-Courses?style=social) 
 ![GitHub forks](https://img.shields.io/github/forks/leungll/NENU-Courses?style=social) 
 ![GitHub watchers](https://img.shields.io/github/watchers/leungll/NENU-Courses?style=social)
-
-**Read this in other languages: [English](README.md), [简体中文](README_zh.md).**
 
 ## 介绍
 > 受 [浙江大学课程攻略共享计划](https://github.com/QSCTech/zju-icicles)、[清华大学计算机系课程攻略](https://github.com/Salensoft/thu-cst-cracker) 的启发，创立了本项目。
