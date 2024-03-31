@@ -7,7 +7,7 @@
 -->
 
 # 东北师范大学信息科学与技术学院课程攻略 共享计划
-> **Guidance for courses in School of Information Science and Technology, NENU**
+> **Guidance for courses in School of Information Science and Technology, NENU** <br>
 > **Language: [English](README.md), [简体中文](README_zh.md)**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/leungll/NENU-Courses?color=red&style=flat-square) 
