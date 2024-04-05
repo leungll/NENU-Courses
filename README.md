@@ -2,7 +2,7 @@
  * @Author: Lili Liang
  * @Date: 2024-03-31 21:41:08
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-05 22:19:11
+ * @LastEditTime: 2024-04-05 22:30:16
  * @Description: Please set description
 -->
 
@@ -102,7 +102,7 @@ If you think that some files in this warehouse infringe upon your rights, please
   
     - Enter any of the following tools: [DownGit](https://minhaskamal.github.io/DownGit/#/home), [DownGit domestic version](http://zhoudaxiaa.gitee.io/downgit/#/home), [GitZip](https://kinolien.github.io/gitzip/), [GitHub File Acceleration](https://shrill-pond-3e81.hunsh.workers.dev/), `Paste URL` and select `Download`.
   
-    - Chromium browsers and Firefox browsers can choose to install the `GitZip` plug-in: [Chrome](https://chrome.google.com/webstore/detail/gitzip-for-github/ffabmkklhbepgcgfonabamgnfafbdlkn) download, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) download
+    - Chromium browsers and Firefox browsers can choose to install the `GitZip` plug-ins: [Chrome](https://chrome.google.com/webstore/detail/gitzip-for-github/ffabmkklhbepgcgfonabamgnfafbdlkn) download, [Firefox](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) download
 
 - Download the complete project：
   
@@ -113,7 +113,7 @@ If you think that some files in this warehouse infringe upon your rights, please
 - At the same time, we have also added [Gitee](https://gitee.com/LL_Leung/NENU-Courses) synchronization repository, you can download it in [Gitee](https://gitee.com/LL_Leung/NENU-Courses) to get all the resources of this project (this method can avoid being blocked).
 
 ### Contribution methods
-> This repository does not use `git-lfs`, please be careful not to upload a single file exceeding `100M`, otherwise `Commit` will be invalid
+> This repository does not use `git-lfs`, please be careful not to upload a single file exceeding `100M`, otherwise `Commit` will be invalid.
 
 Due to the large size of this project, you can upload it directly on the Github Web side. The specific operations are as follows:
 - Fork this project: Open [this project](https://github.com/leungll/NENU-Courses) in your computer browser, and then click the `Fork button` in the upper right corner.
@@ -148,17 +148,17 @@ The copyright of other parts belongs to their respective authors.
 ## Appendix
 ### Implementation Rules for the Construction of Academic Style of Northeast Normal University
 #### Chapter 6 Regulations and Punishments (Students)
-> Article 26: Students who engage in the following circumstances during scientific research and academic activities are in violation of academic ethics:
+> Article 26: Students who engage in the following circumstances during scientific research and academic activities are in violation of academic ethics.
  
-  - Misappropriation, plagiarism, plagiarism, and misappropriation of other people’s academic results, including unpublished research materials and methods, thesis results, technical reports, software programs, and research data, etc.;
+  - Misappropriation, plagiarism, plagiarism, and misappropriation of other people’s academic results, including unpublished research materials and methods, thesis results, technical reports, software programs, and research data, etc.
   
-  - Quoting other people's data, information, and opinions constitutes the main or substantive part of my results; citing other people's research results without citing the source;
+  - Quoting other people's data, information, and opinions constitutes the main or substantive part of my results; citing other people's research results without citing the source.
 
-  - Ghostwriting or writing academic or dissertation papers on behalf of others, or engaging in unfair transactions in writing various papers;
+  - Ghostwriting or writing academic or dissertation papers on behalf of others, or engaging in unfair transactions in writing various papers.
   
-  - Tampering with other people's research results, falsifying experimental data or information, concealing unfavorable data, and falsifying innovative results and new discoveries in order to draw some conclusion that conforms to one's own subjective wishes;
+  - Tampering with other people's research results, falsifying experimental data or information, concealing unfavorable data, and falsifying innovative results and new discoveries in order to draw some conclusion that conforms to one's own subjective wishes.
   
-  - Duplicate publication of research results;
+  - Duplicate publication of research results.
   
   - Other violations of generally accepted academic ethics.
 
