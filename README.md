@@ -2,13 +2,13 @@
  * @Author: Lili Liang
  * @Date: 2024-03-31 21:41:08
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-01 14:06:52
+ * @LastEditTime: 2024-04-05 22:01:47
  * @Description: Please set description
 -->
 
 # Course Guide Sharing Plan, School of Information Science and Technology, NENU 
-**Guidance for courses in School of Information Science and Technology, NENU** <br>
-**Language: [English](README.md), [简体中文](README_zh.md)**
+- **Guidance for courses in School of Information Science and Technology, NENU** <br>
+- **Language**: [English](README.md), [简体中文](README_zh.md)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/leungll/NENU-Courses?color=red&style=flat-square) 
 ![GitHub repo size](https://img.shields.io/github/repo-size/leungll/NENU-Courses?style=flat-square) 
@@ -141,9 +141,9 @@ License for parts written by contributors:
 
 [CC-BY-NC-SA: Attribution-NonCommercial-ShareAlike](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
 
-> The information is for reference only, please judge its applicability by yourself
+> The information is for reference only, please judge its applicability by yourself.
 
-The copyright of other parts belongs to their respective authors
+The copyright of other parts belongs to their respective authors.
 
 ## Appendix
 ### Implementation Rules for the Construction of Academic Style of Northeast Normal University

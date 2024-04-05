@@ -2,13 +2,13 @@
  * @Author: Lili Liang
  * @Date: 2021-03-12 12:12:18
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-01 14:02:26
+ * @LastEditTime: 2024-04-05 22:02:01
  * @Description: Please set description
 -->
 
 # 东北师范大学信息科学与技术学院课程攻略 共享计划
-**Guidance for courses in School of Information Science and Technology, NENU** <br>
-**Language: [English](README.md), [简体中文](README_zh.md)**
+- **Guidance for courses in School of Information Science and Technology, NENU** <br>
+- **Language**: [English](README.md), [简体中文](README_zh.md)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/leungll/NENU-Courses?color=red&style=flat-square) 
 ![GitHub repo size](https://img.shields.io/github/repo-size/leungll/NENU-Courses?style=flat-square) 
