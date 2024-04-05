@@ -2,12 +2,13 @@
  * @Author: Lili Liang
  * @Date: 2021-03-12 22:15:31
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-03-31 23:46:20
+ * @LastEditTime: 2024-04-05 22:54:24
  * @Description: Please set description
 -->
 ## 计算机图形学
 ### 17级软件
 - 任课老师：Wang WY
+- 期末考前会划重点，主要以记忆为主
 
 ### 19级计科
 - 任课老师：Zhang HJ
