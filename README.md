@@ -2,7 +2,7 @@
  * @Author: Lili Liang
  * @Date: 2024-03-31 21:41:08
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-05 22:01:47
+ * @LastEditTime: 2024-04-05 22:19:11
  * @Description: Please set description
 -->
 
@@ -26,7 +26,7 @@
 ## Preface
 > As mentioned in the course guide of Zhejiang University, when we come to a university, from the first contact with many courses until we complete them one by one, we often collect a lot of information and intelligence in the process.
 
-Some are e-books that need to be searched online, every time you see a new course, Google the name of the textbook. Some can be found immediately, while others require a lot of eyesight. Some are past test papers or A4 papers, which have been carefully compiled by predecessors. Collecting and making, with the idea that it can be useful to others, is made public, but it needs to be explored in various groups or privately and passed down from generation to generation from seniors. Some skills are suddenly understood after taking a course, which turns out to be the focus of this course, could have been done better and easier.
+Some are e-books that need to be searched online, every time you see a new course, Google the name of the textbook. Some can be found immediately, while others require a lot of eyesight. Some are past test papers or A4 papers, which have been carefully compiled by predecessors, collecting and making, with the idea that it can be useful to others, is made public, but it needs to be explored in various groups or privately and passed down from generation to generation from seniors. Some skills are suddenly understood after taking a course, which turns out to be the focus of this course, could have been done better and easier.
 
 I have also worked very hard to collect various course materials, but in the end, the acquisition of some important information is often purely accidental. This state often makes me feel scared and uneasy. I also finally had some methods and conclusions after the course, but these ideas had no place to express. In the end, I could only dissipate the experience gained by spending time and energy in the long oblivion.
 
@@ -59,7 +59,7 @@ We hope that as long as **it is a detour taken by our predecessors, future gener
     ```
 
 ## Platform
-### Why use GitHub projects as a platform?
+### Why use GitHub projects as the platform?
 - Most QQ/WeChat groups are separated by grade and major, which cannot be maintained together for a long time, and group files are also lack of organization.
 - GitHub projects can use directories to organize files, and each directory can display a `README` while displaying the file list, which is very suitable for the needs of this project.
 - GitHub comes with convenient `Issue` and `Pull Request` collaboration functions, and we can easily monitor and adjust the quality of your contributions.
@@ -82,7 +82,7 @@ If you think that some files in this warehouse infringe upon your rights, please
 
 ## Related instructions
 ### Naming instructions
-- Please avoid the specific name of the teacher appearing in the file. Please use your **grade** to refer to it. For example, if you are a `leungll` of Compilation Principles on 17 Software, please upload it in `编译原理/17级软件/` Corresponding information
+- Please avoid the specific name of the teacher appearing in the file. Please use your **grade** to refer to it. For example, if you are `leungll` of `Compiling and Running of Program` on `17 Software`, please upload it in `程序编译与运行/17级软件/` Corresponding information
 - If possible, add your own ideas in the `README.md` file (optional)
 - Evaluations of teachers can be written in the `README.md` of the corresponding course. Please use **Pinyin** to refer to the teacher’s name.
 - If you want to upload courseware (please make sure there are no copyright issues), it is recommended to use the `pdf` format to avoid system errors.
@@ -90,7 +90,7 @@ If you think that some files in this warehouse infringe upon your rights, please
 ### Instructions for Watch, Star, and Fork
 - The function of `star` is to collect it so that you can find it later.
 - The function of `watch` is to pay attention. When this repository is updated, you will receive a notification.
-- The role of `fork` is to participate. When you add new content and then `Pull Request`, we will consider merging your modifications with the original content of the warehouse.
+- The function of `fork` is to participate. When you add new content and then `Pull Request`, we will consider merging your modifications with the original content of the warehouse.
   
 ## User's guidance
 ### Find search files
