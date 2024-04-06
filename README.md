@@ -2,7 +2,7 @@
  * @Author: Lili Liang
  * @Date: 2024-03-31 21:41:08
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-05 22:30:16
+ * @LastEditTime: 2024-04-06 13:05:28
  * @Description: Please set description
 -->
 
@@ -110,7 +110,7 @@ If you think that some files in this warehouse infringe upon your rights, please
   
     - Command download: `git clone https://github.com/leungll/NENU-Courses.git`
 
-- At the same time, we have also added [Gitee](https://gitee.com/LL_Leung/NENU-Courses) synchronization repository, you can download it in [Gitee](https://gitee.com/LL_Leung/NENU-Courses) to get all the resources of this project (this method can avoid being blocked).
+- At the same time, we have also added [Gitee](https://gitee.com/l2liang/nenu-courses) synchronization repository, you can download it in [Gitee](https://gitee.com/l2liang/nenu-courses) to get all the resources of this project (this method can avoid being blocked).
 
 ### Contribution methods
 > This repository does not use `git-lfs`, please be careful not to upload a single file exceeding `100M`, otherwise `Commit` will be invalid.

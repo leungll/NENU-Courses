@@ -2,7 +2,7 @@
  * @Author: Lili Liang
  * @Date: 2021-03-12 12:12:18
  * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-05 22:17:39
+ * @LastEditTime: 2024-04-06 13:05:08
  * @Description: Please set description
 -->
 
@@ -110,7 +110,7 @@
 
     - 命令行下载：`git clone https://github.com/leungll/NENU-Courses.git`
 
-- 与此同时，我们也添加了 [Gitee](https://gitee.com/LL_Leung/NENU-Courses) 同步仓库，您可以在 [Gitee](https://gitee.com/LL_Leung/NENU-Courses) 中获取此项目的所有资源（此方法可以避免被墙）
+- 与此同时，我们也添加了 [Gitee](https://gitee.com/l2liang/nenu-courses) 同步仓库，您可以在 [Gitee](https://gitee.com/l2liang/nenu-courses) 中获取此项目的所有资源（此方法可以避免被墙）
 
 ### 贡献方法
 > 本仓库未采用 `git-lfs`，请注意不要上传超过 `100M` 的单个文件，否则 `Commit` 无效
