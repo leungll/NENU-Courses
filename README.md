@@ -36,7 +36,7 @@ We hope to turn these obscure, uncertain, and word-of-mouth information and expe
 
 We hope that as long as **it is a detour taken by our predecessors, future generations will not have to take it again**. Everyone's energy and time should be wasted on areas worth wasting.
 
-## Characteristic
+## Feature
 - This project has included the following content so far：
 
     - Course strategy：`README.md`
@@ -92,7 +92,7 @@ If you think that some files in this warehouse infringe upon your rights, please
 - The function of `watch` is to pay attention. When this repository is updated, you will receive a notification.
 - The function of `fork` is to participate. When you add new content and then `Pull Request`, we will consider merging your modifications with the original content of the warehouse.
   
-## User's guidance
+## Usage
 ### Find search files
 - After using the browser to enter the homepage of the warehouse, press the shortcut key `t` to enter the `file search mode`, enter the file name or folder name you want to find, and the search results will be displayed in real time.
 - `Firefox browser` can use extension plug-ins: [Octotree](https://addons.mozilla.org/zh-CN/firefox/addon/octotree/) or [GiteeTree](https://addons.mozilla.org/zh-CN/firefox/addon/giteetree/) to facilitate browsing project folders and files on the web page.
