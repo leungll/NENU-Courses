@@ -1,11 +1,3 @@
-<!--
- * @Author: Lili Liang
- * @Date: 2021-03-12 12:12:18
- * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-06 13:05:08
- * @Description: Please set description
--->
-
 # 东北师范大学信息科学与技术学院课程攻略 共享计划
 - **Guidance for courses in School of Information Science and Technology, NENU** <br>
 - **Language**: [English](README.md), [简体中文](README_zh.md)
@@ -46,17 +38,15 @@
 
 - 文件的排布规则：
     ```
-    ├─学科/      (e.g. Java语言与面向对象设计)
-        ├─年级/  (e.g. 17级软件)
-        │   ├─ebook/
-        │   │      README.md
-        │   ├─exam/
-        │   │      README.md
-        │   ├─hw/
-        │   │      README.md
-        │      
-        └─README.md
+    ├─学科/           (e.g. 数据库系统概论)
+    │   ├─年级/       (e.g. 17级软件、19级计科 —— 同一门课可涵盖多个年级)
+    │   │   ├─ebook/  教学课件和参考教材
+    │   │   ├─exam/   历年试卷和复习资料
+    │   │   └─hw/     平时作业与参考答案
+    │   └─...
+    └─...
     ```
+    > 任意目录下均可放置 `README.md`，用于补充课程攻略、心得或教师评价（用拼音指代），可选。
 
 ## 平台
 ### 为什么采用 GitHub 项目作为平台？

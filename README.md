@@ -1,11 +1,3 @@
-<!--
- * @Author: Lili Liang
- * @Date: 2024-03-31 21:41:08
- * @LastEditors: Lili Liang
- * @LastEditTime: 2024-04-06 13:05:28
- * @Description: Please set description
--->
-
 # Course Guide Sharing Plan, School of Information Science and Technology, NENU 
 - **Guidance for courses in School of Information Science and Technology, NENU** <br>
 - **Language**: [English](README.md), [简体中文](README_zh.md)
@@ -21,42 +13,40 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/leungll/NENU-Courses?style=social)
 
 ## Introduction
-> Inspired by [Zhejiang University course guide sharing plan](https://github.com/QSCTech/zju-icicles) and [Tsinghua University Computer Science Department course guide](https://github.com/Salensoft/thu-cst-cracker), this project was created.
+> This project was inspired by the [Zhejiang University course guide sharing plan](https://github.com/QSCTech/zju-icicles) and the [Tsinghua University Computer Science Department course guide](https://github.com/Salensoft/thu-cst-cracker).
 
 ## Preface
-> As mentioned in the course guide of Zhejiang University, when we come to a university, from the first contact with many courses until we complete them one by one, we often collect a lot of information and intelligence in the process.
+> As Zhejiang University's course guide puts it: when we arrive at university, from our first encounter with a course until we finish it, we accumulate a great deal of material and know-how along the way.
 
-Some are e-books that need to be searched online, every time you see a new course, Google the name of the textbook. Some can be found immediately, while others require a lot of eyesight. Some are past test papers or A4 papers, which have been carefully compiled by predecessors, collecting and making, with the idea that it can be useful to others, is made public, but it needs to be explored in various groups or privately and passed down from generation to generation from seniors. Some skills are suddenly understood after taking a course, which turns out to be the focus of this course, could have been done better and easier.
+Some of it is e-books you have to hunt for online — every time you start a new course, you Google the textbook's name; some turn up right away, while others take real effort to track down. Some of it is past exam papers or cheat sheets, carefully compiled by those who came before, made public in the hope of helping others, yet often passed down from senior to junior only through scattered group chats and private messages. Some of it is a technique you only grasp after finishing a course — so *that* was the point all along, and the whole thing could have been done more easily.
 
-I have also worked very hard to collect various course materials, but in the end, the acquisition of some important information is often purely accidental. This state often makes me feel scared and uneasy. I also finally had some methods and conclusions after the course, but these ideas had no place to express. In the end, I could only dissipate the experience gained by spending time and energy in the long oblivion.
+I too worked hard to collect course materials, but in the end, getting hold of the important pieces still came down to sheer luck. That left me uneasy more often than not. I also arrived at a few methods and takeaways once a course was over, but had nowhere to share them — so the experience I'd paid for in time and effort simply faded into oblivion.
 
-Every time I come across information from my seniors, it is like finding a treasure. Every time after the exam, my summary and hard work are thrown away like worn out shoes.
+Every time I stumbled on a senior's materials, it felt like striking gold. And every time an exam ended, my own notes and hard-won summaries were tossed aside like worn-out shoes.
 
-We hope to turn these obscure, uncertain, and word-of-mouth information and experiences into open, easily accessible and shared information that everyone can improve and accumulate together.
+We hope to turn this obscure, uncertain, word-of-mouth material and experience into open, easily accessible resources that everyone can refine and build on together.
 
-We hope that as long as **it is a detour taken by our predecessors, future generations will not have to take it again**. Everyone's energy and time should be wasted on areas worth wasting.
+We hope that **once a wrong turn has been taken by those before us, no one after them needs to take it again**. Everyone's energy and time should be spent where it is truly worth spending.
 
 ## Feature
-- This project has included the following content so far：
+- So far this project includes the following:
 
-    - Course strategy：`README.md`
-    - Educational electronic book and reference materials：`ebook/`
-    - Homework and reference answers：`hw/`
-    - Past exam papers and review materials：`exam/`
+    - Course guides: `README.md`
+    - Textbooks and reference materials: `ebook/`
+    - Homework and reference answers: `hw/`
+    - Past exam papers and review materials: `exam/`
 
-- File layout rules：
+- File layout rules:
     ```
-    ├─Subject/      (e.g. Java语言与面向对象设计)
-        ├─Grade/    (e.g. 17级软件)
-        │   ├─ebook/
-        │   │      README.md
-        │   ├─exam/
-        │   │      README.md
-        │   ├─hw/
-        │   │      README.md
-        │      
-        └─README.md
+    ├─Subject/          (e.g. 数据库系统概论)
+    │   ├─Grade/        (e.g. 17级软件, 19级计科 — a course may cover multiple grades)
+    │   │   ├─ebook/    textbooks and reference materials
+    │   │   ├─exam/     past exam papers and review materials
+    │   │   └─hw/       homework and reference answers
+    │   └─...
+    └─...
     ```
+    > A `README.md` may be placed in any directory to add course guides, tips, or teacher evaluations (in Pinyin). It is optional.
 
 ## Platform
 ### Why use GitHub projects as the platform?
